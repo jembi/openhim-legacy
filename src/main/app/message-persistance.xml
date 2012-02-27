@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.2.1" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
+http://www.mulesoft.org/schema/mule/jdbc http://www.mulesoft.org/schema/mule/jdbc/current/mule-jdbc.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+	<context:property-placeholder xmlns:context="http://www.springframework.org/schema/context" location="classpath:my.properties"></context:property-placeholder>
+    <spring:beans>
+        <spring:bean id="jdbcDataSource" name="jdbcDataSource" class="org.enhydra.jdbc.standard.StandardDataSource" doc:name="jdbcDataSource">
+            <spring:property name="password" value="${db.password}"/>
+            <spring:property name="user" value="${db.user}"/>
+            <spring:property name="url" value="${db.url}"/>
+            <spring:property name="driverName" value="${db.driverName}"/>
+        </spring:bean>
+    </spring:beans>
+    <jdbc:connector name="JDBCConnector" dataSource-ref="jdbcDataSource" validateConnections="true" queryTimeout="-1" pollingFrequency="0" doc:name="JDBCConnector"/>
+    <flow name="message-persistanceFlow1" doc:name="message-persistanceFlow1">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="messagePersistanceQueue" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
+        <logger message="Persisting Transaction" level="INFO" doc:name="Logger"/>
+        <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="insertMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message">
+            <jdbc:query key="insertMsg" value="insert into inbound_messages (payload, timestamp) values (#[groovy: return message.payload.toString();], now());"/>
+        </jdbc:outbound-endpoint>
+        <choice doc:name="Choice">
+            <when expression="message.getInboundProperty('X-SENDING-APP') != null" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Propagating sending app header" level="INFO" doc:name="Log propagate sending app header"/>
+                    <message-properties-transformer doc:name="Propagate sending app header">
+                        <add-message-property key="X-SENDING-APP" value="#[header:inbound:X-SENDING-APP]"/>
+                    </message-properties-transformer>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="No sending app header detected" level="INFO" doc:name="Log no sending app header"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+        <vm:outbound-endpoint exchange-pattern="request-response" path="normalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
+    </flow>
+</mule>
