@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="message-persistance">
+    <global-unknown entity-id="e9bc0078-f4f2-4837-ab89-41743618ca34">
+        <content>&lt;context:property-placeholder xmlns:context=&quot;http://www.springframework.org/schema/context&quot; location=&quot;classpath:my.properties&quot;&gt;&lt;/context:property-placeholder&gt;</content>
+    </global-unknown>
+    <global-element type="http://www.springframework.org/schema/beans/bean" name="jdbcDataSource" entity-id="64279640-3522-489d-becc-7c6fecf8cc0e">
+        <properties>
+            <property value="jdbcDataSource" name="id"/>
+            <property value="jdbcDataSource" name="name"/>
+            <property value="org.enhydra.jdbc.standard.StandardDataSource" name="class"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;0">
+                <property value="password" name="name"/>
+                <property value="${db.password}" name="value"/>
+            </property-collection>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;1">
+                <property value="user" name="name"/>
+                <property value="${db.user}" name="value"/>
+            </property-collection>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;2">
+                <property value="url" name="name"/>
+                <property value="${db.url}" name="value"/>
+            </property-collection>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;3">
+                <property value="driverName" name="name"/>
+                <property value="${db.driverName}" name="value"/>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-element type="org.mule.tooling.ui.modules.core.global.jdbcConnector" name="JDBCConnector" entity-id="8b6f7401-919c-4bc5-b9aa-4c2a9203238c">
+        <properties>
+            <property value="JDBCConnector" name="name"/>
+            <property value="jdbcDataSource" name="dataSource-ref to JDBC DataSource"/>
+            <property value="jdbcDataSource" name="dataSource-ref to Bean"/>
+            <property name="dispatcherPoolFactory-ref"/>
+            <property name="queryRunner-ref"/>
+            <property name="resultSetHandler-ref"/>
+            <property name="dynamicNotification"/>
+            <property value="true" name="validateConnections"/>
+            <property name="transactionPerMessage"/>
+            <property value="-1" name="queryTimeout"/>
+            <property value="0" name="pollingFrequency"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="message-persistanceFlow1">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane entity-id="51c1d4ec-1956-4e56-9854-3b586af48384">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="5dbda250-85c0-47df-9160-c41cb3b485fb">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="messagePersistanceQueue" name="path"/>
+                    <property name="address"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="text/plain" name="mimeType"/>
+                    <property name="ref"/>
+                    <property name="connector-ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                </properties>
+            </endpoint>
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="3e0c77e8-3a1d-4d83-bedf-431ade1e5b5d">
+                <properties>
+                    <property value="Persisting Transaction" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw message" entity-id="34c9a9c7-2f09-43e7-9451-319fc64c9f54">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="insertMsg" name="queryKey"/>
+                    <property name="address"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property value="-1" name="queryTimeout"/>
+                    <property name="pollingFrequency"/>
+                    <property name="ref"/>
+                    <property value="JDBCConnector" name="connector-ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/jdbc/query;0">
+                        <property value="insert into inbound_messages (payload, timestamp) values (#[groovy: return message.payload.toString();], now());" name="value"/>
+                        <property value="insertMsg" name="key"/>
+                    </property-collection>
+                </properties>
+            </endpoint>
+            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="f74d19c4-5a24-400a-972b-e91284fb4389">
+                <properties>
+                    <property-collection name="125503ae-5f4b-4041-9288-4a1a859b9026">
+                        <property value="true" name="choice.otherwise"/>
+                    </property-collection>
+                    <property-collection name="affd578d-e8c5-4372-a1fc-46b3b62d7199">
+                        <property value="message.getInboundProperty('X-SENDING-APP') != null" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                </properties>
+                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="4fbdb99a-895c-448b-8a69-8917f1403161"/>
+                <compartment entity-id="b07a2186-6c1a-4251-8096-cb39c27fccc3">
+                    <lane entity-id="affd578d-e8c5-4372-a1fc-46b3b62d7199">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log propagate sending app header" entity-id="0bd37e8a-af4b-4455-8a08-b7224878b547">
+                            <properties>
+<property value="Propagating sending app header" name="message"/>
+<property value="INFO" name="level"/>
+<property name="category"/>
+                            </properties>
+                        </pattern>
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Propagate sending app header" entity-id="f267591e-5f38-4aba-9dc7-e625ac7736f0">
+                            <properties>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="encoding"/>
+<property name="mimeType"/>
+<property name="overwrite"/>
+<property name="scope"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+    <property value="#[header:inbound:X-SENDING-APP]" name="value"/>
+    <property value="X-SENDING-APP" name="key"/>
+</property-collection>
+                            </properties>
+                        </pattern>
+                    </lane>
+                    <lane entity-id="125503ae-5f4b-4041-9288-4a1a859b9026">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log no sending app header" entity-id="9432280b-4596-4894-8fbf-904aa878d785">
+                            <properties>
+<property value="No sending app header detected" name="message"/>
+<property value="INFO" name="level"/>
+<property name="category"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </splitter>
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="6e152da6-9dd2-4867-b93d-a314a23612aa">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="normalizationQueue" name="path"/>
+                    <property name="address"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="text/plain" name="mimeType"/>
+                    <property name="ref"/>
+                    <property name="connector-ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                </properties>
+            </endpoint>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

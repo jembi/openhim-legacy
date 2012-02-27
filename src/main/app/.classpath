@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry exported="true" kind="con" path="MULE_RUNTIME"/>
+	<classpathentry kind="lib" path="/home/ryan/Programs/MuleStudio/plugins/org.mule.tooling.ui.contribution.mongodb_1.0.0.201112201453/mule-module-mongo-2.0.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Programs/MuleStudio/plugins/org.mule.tooling.ui.contribution.twitter_1.0.0.201112201453/mule-module-twitter-2.4.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Programs/MuleStudio/plugins/org.mule.tooling.ui.contribution.salesforce_1.0.0.201112201453/mule-module-sfdc-4.1.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Programs/MuleStudio/plugins/org.mule.tooling.ui.contribution.magento_1.0.0.201112201453/mule-module-magento-1.4.1.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Programs/MuleStudio/plugins/org.mule.tooling.ui.contribution.cmis_1.0.0.201112201453/mule-module-cmis-1.5.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Programs/MuleStudio/plugins/org.mule.tooling.ui.contribution.twilio_1.0.0.201112201453/mule-module-twilio-1.1.jar"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/resources"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/mysql-connector-java-5.1.18/mysql-connector-java-5.1.18-bin.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

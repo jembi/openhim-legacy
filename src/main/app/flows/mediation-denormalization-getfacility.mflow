@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mediation-denormalization-sacepatientencounter-serviceprovider1">
+    <flow SubFlow="false" name="mediation-denormalization-getfacilityFlow">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane entity-id="70b59d3c-f766-4f77-8c44-e6b285b5b881">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="a9484f7d-0812-4e4d-b5b3-5ca22c75b451">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="getFacilityDe-NormalizationQueue" name="path"/>
+                    <property name="address"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="text/plain" name="mimeType"/>
+                    <property name="ref"/>
+                    <property name="connector-ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                </properties>
+            </endpoint>
+            <splitter name="Choice" entity-id="f1d4ad98-e0ff-43d0-981d-6853fd0ec498">
+                <properties>
+                    <property-collection name="ee7153b4-241b-440e-9f03-93c996e1dee7">
+                        <property value="return true;" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="b56b0057-2bd1-474c-ad19-f01247af7688">
+                    <properties>
+                        <property-collection name="ee7153b4-241b-440e-9f03-93c996e1dee7">
+                            <property value="return true;" name="choice.expression"/>
+                            <property value="groovy" name="choice.evaluator"/>
+                        </property-collection>
+                    </properties>
+                    <description></description>
+                </pattern>
+                <compartment entity-id="42044b78-f3b0-43e5-b128-9be1dd838364">
+                    <lane entity-id="ee7153b4-241b-440e-9f03-93c996e1dee7">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log De-normailize for mock service provider" entity-id="03fd8a91-d363-4bfb-8d71-4f2a81c04448">
+                            <properties>
+<property value="De-normailize for mock service provider" name="message"/>
+<property value="INFO" name="level"/>
+<property name="category"/>
+                            </properties>
+                        </pattern>
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryPatientDemographics-De-normailization-MockServiceProvider" entity-id="54615058-4105-4e99-8d1d-0f1f54c0505f">
+                            <properties>
+<property value="" name="ref"/>
+<property value="" name="transformer-refs"/>
+<property value="" name="address"/>
+<property value="" name="encoding"/>
+<property value="getFacility-De-normailization-MockServiceProvider" name="path"/>
+<property value="" name="responseTransformer-refs"/>
+<property value="false" name="disableTransportTransformer"/>
+<property value="text/plain" name="mimeType"/>
+<property value="10000" name="responseTimeout"/>
+<property value="request-response" name="exchange-pattern"/>
+<property value="" name="connector-ref"/>
+                            </properties>
+                            <description></description>
+                        </endpoint>
+                    </lane>
+                </compartment>
+            </splitter>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>
