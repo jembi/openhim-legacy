@@ -1,15 +1,26 @@
 package org.jembi.rhea;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public class RestfulHttpResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	private String uuid = UUID.randomUUID().toString();
 
 	private RestfulHttpRequest originalRequest;
 	
 	private int httpStatus;
 	private String body;
+	
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 	
 	public RestfulHttpRequest getOriginalRequest() {
 		return originalRequest;
@@ -47,5 +58,5 @@ public class RestfulHttpResponse implements Serializable {
 
 		return sb.toString();
 	}
-	
+
 }

@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.UUID;
 
 public class RestfulHttpRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	private String uuid = UUID.randomUUID().toString();
+	
 	private String url;
-	private String body;
+	private String body = "";
 	private String httpMethod;
 
 	// automatically extracted when a url is set
@@ -21,6 +24,14 @@ public class RestfulHttpRequest implements Serializable {
 	public static String HTTP_POST = "POST";
 	public static String HTTP_PUT = "PUT";
 	public static String HTTP_DELETE = "DELETE";
+	
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 
 	public String getUrl() {
 		return url;
@@ -52,6 +63,22 @@ public class RestfulHttpRequest implements Serializable {
 
 	public Map<String, String> getRequestParams() {
 		return requestParams;
+	}
+	
+	public String getRequestParamsAsString() {
+		StringBuffer sb = new StringBuffer();
+
+		if (requestParams.size() > 0) {
+			for (String key : requestParams.keySet()) {
+				if (sb.length() > 0) {
+					sb.append("&");
+				}
+				String val = requestParams.get(key);
+				sb.append(key + "=" + val);
+			}
+		}
+
+		return sb.toString();
 	}
 
 	public void setRequestParams(Map<String, String> requestParams) {
@@ -112,19 +139,6 @@ public class RestfulHttpRequest implements Serializable {
 	}
 
 	public String buildUrlWithRequestParams() {
-		StringBuffer sb = new StringBuffer(url);
-
-		if (requestParams.size() > 0) {
-			sb.append("?");
-			for (String key : requestParams.keySet()) {
-				if (sb.charAt(sb.length() - 1) != '?') {
-					sb.append("&");
-				}
-				String val = requestParams.get(key);
-				sb.append(key + "=" + val);
-			}
-		}
-
-		return sb.toString();
+		return getUrl() + '?' + getRequestParamsAsString();
 	}
 }

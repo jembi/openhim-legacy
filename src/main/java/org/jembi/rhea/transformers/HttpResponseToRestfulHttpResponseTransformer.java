@@ -19,6 +19,8 @@ public class HttpResponseToRestfulHttpResponseTransformer extends
 		try {
 			String body = msg.getPayloadAsString();
 			restRes.setBody(body);
+			String uuid = msg.getSessionProperty("uuid");
+			restRes.setUuid(uuid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
