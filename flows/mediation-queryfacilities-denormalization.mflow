@@ -5,8 +5,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="c1e9ded7-c02a-4169-b0ca-88ef64e4b468">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="90a6a209-c0f1-4e3c-b4ab-45ccfa4fd527">
+        <lane entity-id="8d952972-ff89-4951-8af3-222d30d5039e">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="dbcf2cf6-ce84-4923-b8b1-b1e9a2ac53dc">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -16,30 +16,34 @@
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
                     <property value="text/plain" name="mimeType"/>
-                    <property name="ref"/>
                     <property name="connector-ref"/>
+                    <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="f259ef35-e481-4a85-b40e-1efafc883f6a">
+            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="018f9b4a-aaa3-4889-8bf1-0f5dae262775">
                 <properties>
-                    <property-collection name="476d8f8c-698c-4180-86af-274350aedf64">
+                    <property-collection name="c51b1578-63ac-472f-b76d-48245451d3c8">
+                        <property value="return false;" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                    <property-collection name="c7c3ac2c-9dae-44b3-b3b5-0e5438173fd8">
                         <property value="return true;" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
                 </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="97b66b20-1ab2-4a9f-9d68-c41da17d87fd"/>
-                <compartment entity-id="d86ee1bc-cafd-4841-8696-3e627547820a">
-                    <lane entity-id="476d8f8c-698c-4180-86af-274350aedf64">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log De-normailize for mock service provider" entity-id="194e0391-8b13-401c-9b58-ec2052de25f5">
+                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="2de08a5f-9b7d-4fb1-b217-cc971515c216"/>
+                <compartment entity-id="f34c8de2-fed7-456c-8755-363c450d61f9">
+                    <lane entity-id="c51b1578-63ac-472f-b76d-48245451d3c8">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log De-normailize for mock service provider" entity-id="c5a0c55c-3562-4b35-bea5-b996a2fae712">
                             <properties>
 <property value="De-normailize for mock service provider" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryPatientDemographics-De-normailization-MockServiceProvider" entity-id="baf4cde1-7a1f-47d6-8ce4-09ad955c3465">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryPatientDemographics-De-normailization-MockServiceProvider" entity-id="330a0150-4407-4ba0-949e-7a4f5d281073">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -49,8 +53,33 @@
 <property name="encoding"/>
 <property name="disableTransportTransformer"/>
 <property value="text/plain" name="mimeType"/>
-<property name="ref"/>
 <property name="connector-ref"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                    <lane entity-id="c7c3ac2c-9dae-44b3-b3b5-0e5438173fd8">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log De-normailize for Resource Map" entity-id="54195a27-dc4e-4419-a803-108466bc1ae1">
+                            <properties>
+<property value="De-normailize for Resource Map" name="message"/>
+<property value="INFO" name="level"/>
+<property name="category"/>
+                            </properties>
+                        </pattern>
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryFacilities-De-normailization-ResourceMap" entity-id="c6e49b78-a9ca-4c58-8eb9-32b7fdb9c055">
+                            <properties>
+<property value="one-way" name="exchange-pattern"/>
+<property value="request-response" name="exchange-pattern"/>
+<property value="queryFacilities-De-normailization-ResourceMap" name="path"/>
+<property name="address"/>
+<property value="10000" name="responseTimeout"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property value="text/plain" name="mimeType"/>
+<property name="connector-ref"/>
+<property name="ref"/>
 <property name="transformer-refs"/>
 <property name="responseTransformer-refs"/>
                             </properties>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="entrypoint">
-    <global-unknown entity-id="ff39d8ab-eb64-4f88-a27d-3e40936b2bfb">
+    <global-unknown entity-id="b8f36b89-5ff6-4a84-8083-8cbc2375c92f">
         <content>&lt;mule-ss:security-manager xmlns:mule-ss=&quot;http://www.mulesoft.org/schema/mule/spring-security&quot;&gt;  
         &lt;mule-ss:delegate-security-provider name=&quot;memory-provider&quot; delegate-ref=&quot;authenticationManager&quot;/&gt; 
     &lt;/mule-ss:security-manager&gt;</content>
     </global-unknown>
-    <global-unknown wrapNSURL="http://www.springframework.org/schema/beans" wrapNSPref="spring" wrapIn="beans" entity-id="de6d49ea-fe72-46c7-b5f6-ba0c26131b05">
+    <global-unknown wrapNSURL="http://www.springframework.org/schema/beans" wrapNSPref="spring" wrapIn="beans" entity-id="fb6ed105-5ef7-40e2-83ef-d055a2bf62c7">
         <content>&lt;ss:authentication-manager xmlns:ss=&quot;http://www.springframework.org/schema/security&quot; alias=&quot;authenticationManager&quot;&gt;  
             &lt;ss:authentication-provider&gt; 
                 &lt;ss:user-service id=&quot;userService&quot;&gt; 
@@ -14,8 +14,15 @@
             &lt;/ss:authentication-provider&gt; 
         &lt;/ss:authentication-manager&gt;</content>
     </global-unknown>
-    <global-element type="http://www.mulesoft.org/schema/mule/https/connector" name="HTTPSConnector" entity-id="4f0fad8b-ca77-45f2-b576-f1f46fb54329">
+    <global-element type="org.mule.tooling.ui.modules.core.global.httpsConnector" name="HTTPSConnector" entity-id="3bfc27be-4b14-49c3-942d-bf618c4785b9">
         <properties>
+            <property value="HTTPSConnector" name="name"/>
+            <property name="enableCookies"/>
+            <property value="netscape" name="cookieSpec"/>
+            <property name="dispatcherPoolFactory-ref"/>
+            <property name="dynamicNotification"/>
+            <property value="true" name="validateConnections"/>
+            <property value="http://www.mulesoft.org/schema/mule/https/connector" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
             <property value="HTTPSConnector" name="name"/>
             <property name="enableCookies"/>
             <property value="netscape" name="cookieSpec"/>
@@ -37,6 +44,25 @@
             <property value="80" name="proxyPort"/>
             <property name="proxyUsername"/>
             <property name="proxyPassword"/>
+            <property value="0" name="sendBufferSize"/>
+            <property value="0" name="receiveBufferSize"/>
+            <property value="0" name="receiveBacklog"/>
+            <property name="sendTcpNoDelay"/>
+            <property name="reuseAddress"/>
+            <property name="keepSendSocketOpen"/>
+            <property name="keepAlive"/>
+            <property value="10000" name="clientSoTimeout"/>
+            <property value="10000" name="serverSoTimeout"/>
+            <property value="0" name="socketSoLinger"/>
+            <property value="localhost" name="proxyHostname"/>
+            <property value="80" name="proxyPort"/>
+            <property name="proxyUsername"/>
+            <property name="proxyPassword"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/https/tls-key-store;0">
+                <property value="Jembi#123" name="storePassword"/>
+                <property value="keystore.jks" name="path"/>
+                <property value="Jembi#123" name="keyPassword"/>
+            </property-collection>
             <property-collection name="@http://www.mulesoft.org/schema/mule/https/tls-key-store;0">
                 <property value="Jembi#123" name="storePassword"/>
                 <property value="keystore.jks" name="path"/>
@@ -44,7 +70,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <global-element type="http://www.mulesoft.org/schema/mule/https/connector" name="HTTP\HTTPS" entity-id="e03e9bad-3aaf-4bce-9f57-22f51cc9b5f0">
+    <global-element type="org.mule.tooling.ui.modules.core.global.httpConnector" name="HTTP\HTTPS" entity-id="8d92e473-baae-4545-9beb-821f531c2531">
         <properties>
             <property value="NoSessionConnector" name="name"/>
             <property name="enableCookies"/>
@@ -52,27 +78,6 @@
             <property name="dispatcherPoolFactory-ref"/>
             <property name="dynamicNotification"/>
             <property name="validateConnections"/>
-            <property value="http://www.mulesoft.org/schema/mule/http/connector" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
-            <property value="NoSessionConnector" name="name"/>
-            <property name="enableCookies"/>
-            <property name="cookieSpec"/>
-            <property name="dispatcherPoolFactory-ref"/>
-            <property name="dynamicNotification"/>
-            <property name="validateConnections"/>
-            <property name="sendBufferSize"/>
-            <property name="receiveBufferSize"/>
-            <property name="receiveBacklog"/>
-            <property name="sendTcpNoDelay"/>
-            <property name="reuseAddress"/>
-            <property name="keepSendSocketOpen"/>
-            <property name="keepAlive"/>
-            <property name="clientSoTimeout"/>
-            <property name="serverSoTimeout"/>
-            <property name="socketSoLinger"/>
-            <property name="proxyHostname"/>
-            <property name="proxyPort"/>
-            <property name="proxyUsername"/>
-            <property name="proxyPassword"/>
             <property name="sendBufferSize"/>
             <property name="receiveBufferSize"/>
             <property name="receiveBacklog"/>
@@ -94,8 +99,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="c0773bcb-e978-425a-b130-d666044498c8">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="727f12da-b8ca-498e-8379-dfe4128de65e">
+        <lane entity-id="a59efba1-99e1-41c3-80a5-bac0cf54e91d">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="8fc24e49-87ff-4dec-a2a5-904b6228aa0f">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -108,14 +113,14 @@
                     <property name="path"/>
                     <property name="method"/>
                     <property name="address"/>
-                    <property name="responseTimeout"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
                     <property name="mimeType"/>
+                    <property name="responseTimeout"/>
                     <property name="followRedirects"/>
-                    <property name="ref"/>
                     <property value="HTTPSConnector" name="connector-ref"/>
                     <property value="HTTPSConnector" name="connector-ref-outbound"/>
+                    <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
                     <property name="user"/>
@@ -128,13 +133,13 @@
                     <property name="path"/>
                     <property name="method"/>
                     <property name="address"/>
-                    <property name="responseTimeout"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
                     <property name="mimeType"/>
+                    <property name="responseTimeout"/>
                     <property name="followRedirects"/>
-                    <property name="ref"/>
                     <property value="HTTPSConnector" name="connector-ref"/>
+                    <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
                     <property name="user"/>
@@ -143,10 +148,10 @@
                     <property name="keep-alive"/>
                 </properties>
             </endpoint>
-            <response entity-id="a9d81138-12df-420c-9fbc-ef5de243b026">
-                <compartment entity-id="e1818d44-4c22-491d-b58c-9e2f3ff33f02">
-                    <lane entity-id="fa61bffa-ead1-4b22-8f6d-4bfb8f1fa533">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="RestfulHttpResponseToHttpResponseTransformer" entity-id="ccbd9342-0166-4eec-9ede-f7c5f61060da">
+            <response entity-id="9fdf4434-ceba-46b8-a06c-2466fcfc7c77">
+                <compartment entity-id="65b1e14c-b561-4ddf-bafd-af12015e085f">
+                    <lane entity-id="59d639f4-e167-4779-acd9-f08b549e4102">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="RestfulHttpResponseToHttpResponseTransformer" entity-id="12e48e6c-2329-4657-80d4-6549d5f3e166">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
@@ -155,7 +160,7 @@
 <property value="org.jembi.rhea.transformers.RestfulHttpResponseToHttpResponseTransformer" name="class"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="9417a468-63fd-432e-af66-e5ed6908bc51">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="499be870-eb20-4701-af29-ed7423dcffcc">
                             <properties>
 <property value="Transaction responce sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" name="message"/>
 <property value="INFO" name="level"/>
@@ -165,14 +170,14 @@
                     </lane>
                 </compartment>
             </response>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log raw message" entity-id="917a5ad8-a563-4efc-bada-51834642bfd7">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log raw message" entity-id="697cd12e-2f7e-454c-822c-e25911edb3aa">
                 <properties>
                     <property value="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="HttpRequestToRestfulHttpRequestTransformer" entity-id="070ffe00-336b-4260-88e1-bc5ccea753f3">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="HttpRequestToRestfulHttpRequestTransformer" entity-id="64fdba40-c242-4610-8650-ea191baa04c6">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -181,34 +186,34 @@
                     <property value="org.jembi.rhea.transformers.HttpRequestToRestfulHttpRequestTransformer" name="class"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log Structured Message" entity-id="f7eb29c9-d00b-460b-9dec-a9929d71d5dd">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log Structured Message" entity-id="8c9c01cb-e2ee-4a10-addd-565dd614bdc2">
                 <properties>
                     <property value="Structured message: #[groovy: message.payload.toString();]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="952e15e0-e608-46c0-9422-6bcc131bbd0e">
+            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="4503f2b3-7501-4834-9a31-da58d3234bbe">
                 <properties>
-                    <property-collection name="159850b4-8304-443d-a526-853ca47412b8">
+                    <property-collection name="d23ab33f-05f2-498d-b3c4-800558ea9f8b">
                         <property value="true" name="choice.otherwise"/>
                     </property-collection>
-                    <property-collection name="75efaa73-6c12-4d59-9622-9729c36fc6c7">
+                    <property-collection name="987029d8-4d3f-43a6-8ade-e3a976e61557">
                         <property value="message.getInboundProperty('X-SENDING-APP') != null" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
                 </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="de0144fa-e82c-41e6-bd77-c24f89c413fd"/>
-                <compartment entity-id="61e2aac7-b3ad-4ef8-8946-1468473a3695">
-                    <lane entity-id="75efaa73-6c12-4d59-9622-9729c36fc6c7">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log propagate sending app header" entity-id="72309c9a-6d11-4a98-b9ef-841df8cc6806">
+                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="b78403e4-4a98-4551-b3f6-8166d939b9a5"/>
+                <compartment entity-id="693e4048-850f-4701-8550-234f0ddc7caf">
+                    <lane entity-id="987029d8-4d3f-43a6-8ade-e3a976e61557">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log propagate sending app header" entity-id="7de65148-9487-4116-87f3-cbb2b37696a4">
                             <properties>
 <property value="Propagating sending app header" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Propagate sending app header" entity-id="05a98014-1690-4196-9758-53d1fe3c2632">
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Propagate sending app header" entity-id="4794c4fc-1365-462d-86e4-9021ba9af03b">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
@@ -223,8 +228,8 @@
                             </properties>
                         </pattern>
                     </lane>
-                    <lane entity-id="159850b4-8304-443d-a526-853ca47412b8">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log no sending app header" entity-id="5490c086-a84a-47ce-888a-ad631fd003ae">
+                    <lane entity-id="d23ab33f-05f2-498d-b3c4-800558ea9f8b">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log no sending app header" entity-id="65ffdaac-295c-48f7-ae8c-c799f11f801e">
                             <properties>
 <property value="No sending app header detected" name="message"/>
 <property value="INFO" name="level"/>
@@ -234,14 +239,14 @@
                     </lane>
                 </compartment>
             </splitter>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log Structured Message" entity-id="00ce3b54-1ed9-4476-b246-1eb1194c2323">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log Structured Message" entity-id="2554834d-0779-4256-9285-5ef2d92432d0">
                 <properties>
                     <property value="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Queue message" entity-id="aa374ec1-3678-456e-9185-3899a92e8cde">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Queue message" entity-id="3c5fccd7-9c9e-420f-a821-ccbaa031a41c">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -251,8 +256,8 @@
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
                     <property value="text/plain" name="mimeType"/>
-                    <property name="ref"/>
                     <property name="connector-ref"/>
+                    <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
                 </properties>
