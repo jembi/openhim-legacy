@@ -30,12 +30,12 @@
 				<xsl:element name="updatedSince">
 					<xsl:value-of select="pubDate"/>
 				</xsl:element>
-				<xsl:for-each select="rm:property">
+				<xsl:for-each select="rm:properties/*">
 					<xsl:variable name="elementName">
-						<xsl:value-of select="rm:code"/>
+						<xsl:value-of select="local-name(.)"/>
 					</xsl:variable>
 					<xsl:element name="{$elementName}">
-						<xsl:value-of select="rm:value" />
+						<xsl:value-of select="." />
 					</xsl:element>
 				</xsl:for-each>
 			</xsl:element>
