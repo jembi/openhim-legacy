@@ -42,7 +42,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
             <when expression="message.getInboundProperty('X-SENDING-APP') != null" evaluator="groovy">
                 <processor-chain>
                     <logger message="Propagating sending app header" level="INFO" doc:name="Log propagate sending app header"/>
-                    <message-properties-transformer doc:name="Propagate sending app header">
+                    <message-properties-transformer scope="session" doc:name="Propagate sending app header">
                         <add-message-property key="X-SENDING-APP" value="#[header:inbound:X-SENDING-APP]"/>
                     </message-properties-transformer>
                 </processor-chain>

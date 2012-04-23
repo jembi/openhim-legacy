@@ -12,7 +12,7 @@ public class RestfulHttpRequest implements Serializable {
 	
 	private String uuid = UUID.randomUUID().toString();
 	
-	private String url;
+	private String path;
 	private String body = "";
 	private String httpMethod;
 
@@ -33,23 +33,23 @@ public class RestfulHttpRequest implements Serializable {
 		this.uuid = uuid;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getPath() {
+		return path;
 	}
 
-	public void setUrl(String url) {
+	public void setPath(String path) {
 		// remove leading '/'
-		if (url.charAt(0) == '/') {
-			url = url.substring(1);
+		if (path.charAt(0) == '/') {
+			path = path.substring(1);
 		}
 
 		// extract request params
-		int indexOfQuestionMark = url.indexOf("?");
+		int indexOfQuestionMark = path.indexOf("?");
 		if (indexOfQuestionMark >= 0) {
-			extractRequestParams(url);
-			this.url = url.substring(0, indexOfQuestionMark);
+			extractRequestParams(path);
+			this.path = path.substring(0, indexOfQuestionMark);
 		} else {
-			this.url = url;
+			this.path = path;
 		}
 	}
 
@@ -98,7 +98,7 @@ public class RestfulHttpRequest implements Serializable {
 		StringBuffer sb = new StringBuffer();
 
 		sb.append("RestfulHttpRequest {\n");
-		sb.append("	url: " + url + "\n");
+		sb.append("	path: " + path + "\n");
 		sb.append("	body: " + body + "\n");
 
 		if (requestParams == null || requestParams.size() < 1) {
@@ -139,6 +139,6 @@ public class RestfulHttpRequest implements Serializable {
 	}
 
 	public String buildUrlWithRequestParams() {
-		return getUrl() + '?' + getRequestParamsAsString();
+		return getPath() + '?' + getRequestParamsAsString();
 	}
 }

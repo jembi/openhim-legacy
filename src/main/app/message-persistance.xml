@@ -19,37 +19,26 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <vm:inbound-endpoint exchange-pattern="request-response" path="messagePersistanceQueue" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
         <logger message="Persisting Transaction" level="INFO" doc:name="Logger"/>
         <response>
-        	<choice doc:name="Choice">
-        		<when expression="payload instanceof org.jembi.rhea.RestfulHttpResponse" evaluator="groovy">
-		            <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="updateMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response">
-		                <jdbc:query key="updateMsg" value="UPDATE transaction_log SET status='2', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"/>
-		            </jdbc:outbound-endpoint>
-	            </when>
-	            <otherwise>
-	            	<jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="errorMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response">
-		                <jdbc:query key="errorMsg" value="UPDATE transaction_log SET status='3', error_description=#[groovy: return message.getExceptionPayload().getMessage();], error_stacktrace=#[groovy: return message.getExceptionPayload().getRootException().toString();], responded_timestamp=now() WHERE uuid=#[header:SESSION:uuid];"/>
-		            </jdbc:outbound-endpoint>
-	            </otherwise>
+            <choice doc:name="Choice">
+                <when expression="payload instanceof org.jembi.rhea.RestfulHttpResponse" evaluator="groovy">
+                    <processor-chain>
+                        <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="updateMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response">
+                            <jdbc:query key="updateMsg" value="UPDATE transaction_log SET status='2', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"/>
+                        </jdbc:outbound-endpoint>
+                    </processor-chain>
+                </when>
+                <otherwise>
+                    <processor-chain>
+                        <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="errorMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response">
+                            <jdbc:query key="errorMsg" value="UPDATE transaction_log SET status='3', error_description=#[groovy: return message.getExceptionPayload().getMessage();], error_stacktrace=#[groovy: return message.getExceptionPayload().getRootException().toString();], responded_timestamp=now() WHERE uuid=#[header:SESSION:uuid];"/>
+                        </jdbc:outbound-endpoint>
+                    </processor-chain>
+                </otherwise>
             </choice>
         </response>
         <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="insertMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message">
-            <jdbc:query key="insertMsg" value="insert into transaction_log (uuid, path, request_params, body, http_method, recieved_timestamp, authorized_username, status) values (#[groovy: return message.payload.getUuid();], #[groovy: return message.payload.getUrl();], #[groovy: return message.payload.getRequestParamsAsString();], #[groovy: return message.payload.getBody();], #[groovy: return message.payload.getHttpMethod();], now(), '', 1);"/>
+            <jdbc:query key="insertMsg" value="insert into transaction_log (uuid, path, request_params, body, http_method, recieved_timestamp, authorized_username, status) values (#[groovy: return message.payload.getUuid();], #[groovy: return message.payload.getPath();], #[groovy: return message.payload.getRequestParamsAsString();], #[groovy: return message.payload.getBody();], #[groovy: return message.payload.getHttpMethod();], now(), '', 1);"/>
         </jdbc:outbound-endpoint>
-        <choice doc:name="Choice">
-            <when expression="message.getInboundProperty('X-SENDING-APP') != null" evaluator="groovy">
-                <processor-chain>
-                    <logger message="Propagating sending app header" level="INFO" doc:name="Log propagate sending app header"/>
-                    <message-properties-transformer doc:name="Propagate sending app header">
-                        <add-message-property key="X-SENDING-APP" value="#[header:inbound:X-SENDING-APP]"/>
-                    </message-properties-transformer>
-                </processor-chain>
-            </when>
-            <otherwise>
-                <processor-chain>
-                    <logger message="No sending app header detected" level="INFO" doc:name="Log no sending app header"/>
-                </processor-chain>
-            </otherwise>
-        </choice>
         <message-properties-transformer scope="session" doc:name="Set message uuid in session">
             <add-message-property key="uuid" value="#[groovy: return message.payload.getUuid();]"/>
         </message-properties-transformer>

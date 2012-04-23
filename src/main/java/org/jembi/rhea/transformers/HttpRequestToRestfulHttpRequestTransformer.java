@@ -14,7 +14,7 @@ public class HttpRequestToRestfulHttpRequestTransformer extends
 		RestfulHttpRequest restMsg = new RestfulHttpRequest();
 		
 		String url = (String) msg.getInboundProperty("http.request");
-		restMsg.setUrl(url);
+		restMsg.setPath(url);
 		String httpMethod = (String) msg.getInboundProperty("http.method");
 		restMsg.setHttpMethod(httpMethod);
 		
