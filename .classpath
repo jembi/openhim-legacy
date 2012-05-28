@@ -7,5 +7,22 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="lib" path="/home/ryan/Downloads/mysql-connector-java-5.1.18/mysql-connector-java-5.1.18-bin.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/commons-cli-1.0.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/hapi-base-1.2.jar" sourcepath="/home/ryan/Downloads/hapi-dist-1.2-all/src/hapi-base-1.2-sources.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/hapi-base-1.2-jdk14.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/hapi-examples-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/hapi-structures-v21-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/hapi-structures-v22-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/hapi-structures-v23-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/hapi-structures-v24-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/hapi-structures-v25-1.2.jar" sourcepath="/home/ryan/Downloads/hapi-dist-1.2-all/src/hapi-structures-v25-1.2-sources.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/hapi-structures-v26-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/hapi-structures-v231-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/hapi-structures-v251-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/jdom-1.1.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/log4j-1.2.9.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/xalan-2.7.0.jar"/>
+	<classpathentry kind="lib" path="/home/ryan/Downloads/hapi-dist-1.2-all/lib/xercesImpl-2.4.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
