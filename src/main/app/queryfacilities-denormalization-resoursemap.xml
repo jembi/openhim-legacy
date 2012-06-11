@@ -20,8 +20,6 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <logger message="Recieved responce from Resource Map: #[groovy: message.toString();]]" level="INFO" doc:name="Logger"/>
             <custom-transformer class="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer" doc:name="HttpResponseToRestfulHttpResponseTransformer"/>
             <logger message="Responce normalization" level="INFO" doc:name="Logger"/>
-            <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Validation Transformer"/>
-            <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Enrichment Tranformer"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Translation Transformer"/>
         </response>
         <http:outbound-endpoint exchange-pattern="request-response" method="GET" address="http://resmap-stg.instedd.org/api/collections/26.rss?#[header:outbound:reqParams]" doc:name="Deliver message to Resource Map"/>

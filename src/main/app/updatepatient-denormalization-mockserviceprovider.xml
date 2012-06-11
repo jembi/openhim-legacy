@@ -18,8 +18,6 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <custom-transformer class="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer" doc:name="HttpResponseToRestfulHttpResponseTransformer"/>
             <logger message="Responce normalization" level="INFO" doc:name="Logger"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="On-ramp Transformer"/>
-            <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Validation Transformer"/>
-            <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Enrichment Tranformer"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Translation Transformer"/>
         </response>
         <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="8002" path="#[header:OUTBOUND:path]" method="PUT" doc:name="Deliver message to mock service provider"/>
