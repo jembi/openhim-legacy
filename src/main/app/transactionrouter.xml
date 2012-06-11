@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.2.1" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+    <flow name="MediationFlow" doc:name="MediationFlow">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="transactionRouterQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Read queue"/>
+        <logger message="Starting normalization on structured message: #[groovy: message.payload.toString();]" level="INFO" doc:name="Logger"/>
+        <choice doc:name="Choice">
+            <when expression="message.payload.path.contains('ws/rest/v1/facilities')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Transaction type: query facilities" level="INFO" doc:name="Log query facilities"/>
+                    <flow-ref name="QueryFacilitiesFlow" doc:name="Send to QueryFacilitiesFlow"/>
+                </processor-chain>
+            </when>
+            <when expression="message.payload.path.contains('ws/rest/v1/facility/')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Transaction type: get facility" level="INFO" doc:name="Log get facility"/>
+                    <flow-ref name="GetFacilityFlow" doc:name="Send to GetFacilityFlow"/>
+                </processor-chain>
+            </when>
+            <when expression="message.payload.path.contains('ws/rest/v1/professional/')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Transaction type: get professional" level="INFO" doc:name="Log get professional"/>
+                    <flow-ref name="GetProfessionalFlow" doc:name="Send to GetProfessionalFlow"/>
+                </processor-chain>
+            </when>
+            <when expression="message.payload.path.contains('ws/rest/v1/professionals')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Transaction type: query professionals" level="INFO" doc:name="Log query professionals"/>
+                    <flow-ref name="QueryProfessionalsFlow" doc:name="Send to QueryProfessionalsFlow"/>
+                </processor-chain>
+            </when>
+            <when expression="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounters') &amp;&amp; message.payload.httpMethod.equals('GET')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Transaction type: query encounters" level="INFO" doc:name="Log query encounters"/>
+                    <flow-ref name="QueryEncountersFlow" doc:name="Send to QueryEncountersFlow"/>
+                </processor-chain>
+            </when>
+            <when expression="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounters') &amp;&amp; message.payload.httpMethod.equals('POST')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Transaction type: save encounters" level="INFO" doc:name="Log save encounters"/>
+                    <flow-ref name="SaveEncountersFlow" doc:name="Send to SaveEncountersFlow"/>
+                </processor-chain>
+            </when>
+            <when expression="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounter/') &amp;&amp; message.payload.httpMethod.equals('GET')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Transaction type: get encounter" level="INFO" doc:name="Log get encounter"/>
+                    <flow-ref name="GetEncounterFlow" doc:name="Send to GetEncounterFlow"/>
+                </processor-chain>
+            </when>
+            <when expression="message.payload.path.contains('ws/rest/v1/patients') &amp;&amp; message.payload.httpMethod.equals('POST')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Transaction type: save patient" level="INFO" doc:name="Log save patient"/>
+                    <flow-ref name="SavePatientFlow" doc:name="Send to SavePatientFlow"/>
+                </processor-chain>
+            </when>
+            <when expression="message.payload.path.contains('ws/rest/v1/patients') &amp;&amp; message.payload.httpMethod.equals('GET')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Transaction type: query patients" level="INFO" doc:name="Log query patients"/>
+                    <flow-ref name="QueryPatientsFlow" doc:name="Send to QueryPatientsFlow"/>
+                </processor-chain>
+            </when>
+            <when expression="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.httpMethod.equals('GET')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Transaction type: get patients" level="INFO" doc:name="Log get patients"/>
+                    <flow-ref name="GetPatientFlow" doc:name="Send to GetPatientFlow"/>
+                </processor-chain>
+            </when>
+            <when expression="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.httpMethod.equals('PUT')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Transaction type: update patients" level="INFO" doc:name="Log update patients"/>
+                    <flow-ref name="UpdatePatientFlow" doc:name="Send to UpdatePatientFlow"/>
+                </processor-chain>
+            </when>
+            <when expression="message.payload.path.contains('ws/rest/v1/alerts') &amp;&amp; message.payload.httpMethod.equals('POST')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Transaction type: receive alert" level="INFO" doc:name="Log receive alert"/>
+                    <flow-ref name="ReceiveAlertFlow" doc:name="Send to ReceiveAlertFlow"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="Could not route message with path: #[groovy: return message.payload.getPath();]" level="ERROR" doc:name="Error Logged"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="QueryFacilitiesFlow" doc:name="QueryFacilitiesFlow">
+        <choice doc:name="Choice">
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an OpenMRS specific transaction" level="INFO" doc:name="Log OpenMRS specific transaction"/>
+                    <logger message="Unimplemented Operation" level="ERROR" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an RapidSMS specific transaction" level="INFO" doc:name="Log RapidSMS specific transcation"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="This is a generic  transaction" level="INFO" doc:name="Log generic transaction"/>
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="queryFacilities-Generic-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Send to queryFacilities-Generic-NormalizationQueue"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="GetFacilityFlow" doc:name="GetFacilityFlow">
+        <choice doc:name="Choice">
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an OpenMRS specific transaction" level="INFO" doc:name="Log OpenMRS specific transaction"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an RapidSMS specific transaction" level="INFO" doc:name="Log RapidSMS specific transcation"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="This is a generic  transaction" level="INFO" doc:name="Log generic transaction"/>
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="getFacility-Generic-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Send to getFacility-Generic-NormalizationQueue"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="GetProfessionalFlow" doc:name="GetProfessionalFlow">
+        <choice doc:name="Choice">
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an OpenMRS specific transaction" level="INFO" doc:name="Log OpenMRS specific transaction"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an RapidSMS specific transaction" level="INFO" doc:name="Log RapidSMS specific transcation"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="This is a generic  transaction" level="INFO" doc:name="Log generic transaction"/>
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="getProfessional-Generic-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Send to getProfessional-Generic-NormalizationQueue"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="QueryProfessionalsFlow" doc:name="QueryProfessionalsFlow">
+        <choice doc:name="Choice">
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an OpenMRS specific transaction" level="INFO" doc:name="Log OpenMRS specific transaction"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an RapidSMS specific transaction" level="INFO" doc:name="Log RapidSMS specific transcation"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="This is a generic  transaction" level="INFO" doc:name="Log generic transaction"/>
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="queryProfessionals-Generic-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Send to queryProfessionals-Generic-NormalizationQueue"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="QueryEncountersFlow" doc:name="QueryEncountersFlow">
+        <choice doc:name="Choice">
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an OpenMRS specific transaction" level="INFO" doc:name="Log OpenMRS specific transaction"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an RapidSMS specific transaction" level="INFO" doc:name="Log RapidSMS specific transcation"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="This is a generic  transaction" level="INFO" doc:name="Log generic transaction"/>
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="queryEncounters-Generic-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Send to queryEncounters-Generic-NormalizationQueue"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="SaveEncountersFlow" doc:name="SaveEncountersFlow">
+        <choice doc:name="Choice">
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an OpenMRS specific transaction" level="INFO" doc:name="Log OpenMRS specific transaction"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an RapidSMS specific transaction" level="INFO" doc:name="Log RapidSMS specific transcation"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="This is a generic  transaction" level="INFO" doc:name="Log generic transaction"/>
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="saveEncounters-Generic-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Send to saveEncounters-Generic-NormalizationQueue"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="GetEncounterFlow" doc:name="GetEncounterFlow">
+        <choice doc:name="Choice">
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an OpenMRS specific transaction" level="INFO" doc:name="Log OpenMRS specific transaction"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an RapidSMS specific transaction" level="INFO" doc:name="Log RapidSMS specific transcation"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="This is a generic  transaction" level="INFO" doc:name="Log generic transaction"/>
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="getEncounter-Generic-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Send to getEncounter-Generic-NormalizationQueue"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="SavePatientFlow" doc:name="SavePatientFlow">
+        <choice doc:name="Choice">
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an OpenMRS specific transaction" level="INFO" doc:name="Log OpenMRS specific transaction"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an RapidSMS specific transaction" level="INFO" doc:name="Log RapidSMS specific transcation"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="This is a generic  transaction" level="INFO" doc:name="Log generic transaction"/>
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="savePatient-Generic-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Send to savePatient-Generic-NormalizationQueue"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="QueryPatientsFlow" doc:name="QueryPatientsFlow">
+        <choice doc:name="Choice">
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an OpenMRS specific transaction" level="INFO" doc:name="Log OpenMRS specific transaction"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an RapidSMS specific transaction" level="INFO" doc:name="Log RapidSMS specific transcation"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="This is a generic  transaction" level="INFO" doc:name="Log generic transaction"/>
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="queryPatients-Generic-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Send to queryPatients-Generic-NormalizationQueue"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="GetPatientFlow" doc:name="GetPatientFlow">
+        <choice doc:name="Choice">
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an OpenMRS specific transaction" level="INFO" doc:name="Log OpenMRS specific transaction"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an RapidSMS specific transaction" level="INFO" doc:name="Log RapidSMS specific transcation"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="This is a generic  transaction" level="INFO" doc:name="Log generic transaction"/>
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="getPatient-Generic-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Send to getPatient-Generic-NormalizationQueue"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="UpdatePatientFlow" doc:name="UpdatePatientFlow">
+        <choice doc:name="Choice">
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an OpenMRS specific transaction" level="INFO" doc:name="Log OpenMRS specific transaction"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an RapidSMS specific transaction" level="INFO" doc:name="Log RapidSMS specific transcation"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="This is a generic  transaction" level="INFO" doc:name="Log generic transaction"/>
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="updatePatient-Generic-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Send to updatePatient-Generic-NormalizationQueue"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="ReceiveAlertFlow" doc:name="ReceiveAlertFlow">
+        <choice doc:name="Choice">
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an OpenMRS specific transaction" level="INFO" doc:name="Log OpenMRS specific transaction"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <when expression="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" evaluator="groovy">
+                <processor-chain>
+                    <logger message="This is an RapidSMS specific transaction" level="INFO" doc:name="Log RapidSMS specific transcation"/>
+                    <logger message="Unimplemented Operation" level="INFO" doc:name="Unimplemented Operation"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="This is a generic  transaction" level="INFO" doc:name="Log generic transaction"/>
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="receiveAlert-Generic-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Send to receiveAlert-Generic-NormalizationQueue"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+</mule>
