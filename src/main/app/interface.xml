@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:https="http://www.mulesoft.org/schema/mule/https" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:mule-ss="http://www.mulesoft.org/schema/mule/spring-security" xmlns:ss="http://www.springframework.org/schema/security" version="CE-3.2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/spring-security http://www.mulesoft.org/schema/mule/spring-security/3.1/mule-spring-security.xsd 
+http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd ">
+    <mule-ss:security-manager xmlns:mule-ss="http://www.mulesoft.org/schema/mule/spring-security">  
+        <mule-ss:delegate-security-provider name="memory-provider" delegate-ref="authenticationManager"/> 
+    </mule-ss:security-manager>
+    <spring:beans>
+        <ss:authentication-manager xmlns:ss="http://www.springframework.org/schema/security" alias="authenticationManager">  
+            <ss:authentication-provider> 
+                <ss:user-service id="userService"> 
+                    <ss:user name="test" password="test" authorities="ROLE_ADMIN"/> 
+                </ss:user-service> 
+            </ss:authentication-provider> 
+        </ss:authentication-manager>
+    </spring:beans>
+    <https:connector name="HTTPSConnector" cookieSpec="netscape" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" proxyHostname="localhost" proxyPort="80" doc:name="HTTPSConnector">
+        <https:tls-key-store path="keystore.jks" keyPassword="Jembi#123" storePassword="Jembi#123"/>
+    </https:connector>
+    <http:connector name="NoSessionConnector" doc:name="HTTP\HTTPS"/>
+    <flow name="RESTEntryPoint" doc:name="RESTEntryPoint">
+        <https:inbound-endpoint exchange-pattern="request-response" host="localhost" port="5000" connector-ref="HTTPSConnector" doc:name="HTTP"/>
+        <response>
+            <custom-transformer class="org.jembi.rhea.transformers.RestfulHttpResponseToHttpResponseTransformer" doc:name="RestfulHttpResponseToHttpResponseTransformer"/>
+            <logger message="Transaction responce sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Logger"/>
+        </response>
+        <logger message="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Log raw message"/>
+        <custom-transformer class="org.jembi.rhea.transformers.HttpRequestToRestfulHttpRequestTransformer" doc:name="HttpRequestToRestfulHttpRequestTransformer"/>
+        <logger message="Structured message: #[groovy: message.payload.toString();]" level="INFO" doc:name="Log Structured Message"/>
+        <choice doc:name="Choice">
+            <when expression="message.getInboundProperty('X-SENDING-APP') != null" evaluator="groovy">
+                <processor-chain>
+                    <logger message="Propagating sending app header" level="INFO" doc:name="Log propagate sending app header"/>
+                    <message-properties-transformer scope="session" doc:name="Propagate sending app header">
+                        <add-message-property key="X-SENDING-APP" value="#[header:inbound:X-SENDING-APP]"/>
+                    </message-properties-transformer>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <logger message="No sending app header detected" level="INFO" doc:name="Log no sending app header"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+        <logger message="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]" level="INFO" doc:name="Log Structured Message"/>
+        <vm:outbound-endpoint exchange-pattern="request-response" path="messagePersistanceQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Queue message"/>
+    </flow>
+</mule>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="CE-3.2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+    <flow name="mediation-cretepatientinshr-denormalization-mockserviceproviderFlow1" doc:name="mediation-cretepatientinshr-denormalization-mockserviceproviderFlow1">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="createPatientInSHRDe-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
+        <logger message="In createpatientinshr de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
+        <response>
+            <logger message="Exiting createpatientinshr de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
+        </response>
+        <component class="org.jembi.rhea.orchestration.RHEAADT_A28Generator" doc:name="Create patient in SHR"/>
+    </flow>
+</mule>
