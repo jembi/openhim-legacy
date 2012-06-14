@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mediation-getecid-denormalization-mockserviceprovider">
+    <flow SubFlow="false" name="validatetfacility-denormalization-mockserviceproviderFlow1">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane entity-id="8d095563-244e-4af8-8281-2e10f9eabaf6">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="ed7ef0c7-fe08-4fce-8050-00449732f16a">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="validateFacility" name="path"/>
+                    <property name="address"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="text/plain" name="mimeType"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                </properties>
+            </endpoint>
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="138b8bd5-010c-4244-a90d-0ec2dcb9ca60">
+                <properties>
+                    <property value="In validateFacility de-normalization" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/echo-component" name="Echo" entity-id="0acdb8e4-fa12-4f3f-a83f-95b952cfc3dc"/>
+            <response entity-id="bbf66631-ae22-40a1-a677-8541ac1c963f">
+                <compartment entity-id="65a8658d-d18d-44c5-89bf-c7f7415473a3">
+                    <lane entity-id="802213a2-196b-4382-bf3b-e5137ef2cff4">
+                        <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="f843b49f-bac2-427e-91dd-6ed4d43b3d46">
+                            <properties>
+<property-collection name="59e34fae-b43e-407b-ac57-4c0e724da3e5">
+    <property value="message.getInboundProperty('http.status').equals('200')" name="choice.expression"/>
+    <property value="groovy" name="choice.evaluator"/>
+</property-collection>
+<property-collection name="111d9646-7ab8-4992-a3b6-388e3f0353a6">
+    <property value="true" name="choice.otherwise"/>
+</property-collection>
+                            </properties>
+                            <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="745ea2a5-ab4a-4335-8520-097adb2e0b06"/>
+                            <compartment entity-id="e450aca0-aa66-4844-a4d5-38e8253fdf86">
+<lane entity-id="59e34fae-b43e-407b-ac57-4c0e724da3e5">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set transaction success" entity-id="3b57789d-be81-49e6-a895-d93a83409436">
+        <properties>
+            <property name="returnClass"/>
+            <property name="ignoreBadInput"/>
+            <property name="encoding"/>
+            <property name="mimeType"/>
+            <property name="overwrite"/>
+            <property name="scope"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+                <property value="true" name="value"/>
+                <property value="success" name="key"/>
+            </property-collection>
+        </properties>
+    </pattern>
+</lane>
+<lane entity-id="111d9646-7ab8-4992-a3b6-388e3f0353a6">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set transaction success" entity-id="aa474d6a-75f0-4afa-bab5-e74e19e6294c">
+        <properties>
+            <property name="returnClass"/>
+            <property name="ignoreBadInput"/>
+            <property name="encoding"/>
+            <property name="mimeType"/>
+            <property name="overwrite"/>
+            <property name="scope"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+                <property value="false" name="value"/>
+                <property value="success" name="key"/>
+            </property-collection>
+        </properties>
+    </pattern>
+</lane>
+                            </compartment>
+                        </splitter>
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="ad5b0516-4f38-4568-9a92-0b7444e438f5">
+                            <properties>
+<property value="Exitting validteFacility de-normalization" name="message"/>
+<property value="INFO" name="level"/>
+<property name="category"/>
+                            </properties>
+                        </pattern>
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/echo-component" name="Echo" entity-id="f348f801-8d90-43ca-a3cd-a2761c5332b1"/>
+                    </lane>
+                </compartment>
+            </response>
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="3d132778-3122-4f6c-a4c6-1102a5af43de">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property value="localhost" name="host"/>
+                    <property value="8000" name="port"/>
+                    <property value="ws/rest/v1/facility/#[groovy: return message.payload]" name="path"/>
+                    <property value="GET" name="method"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>
