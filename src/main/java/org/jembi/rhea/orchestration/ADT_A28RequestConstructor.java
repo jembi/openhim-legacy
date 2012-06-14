@@ -2,6 +2,7 @@ package org.jembi.rhea.orchestration;
 
 import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpRequest;
+import org.jembi.rhea.RestfulHttpResponse;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEventContext;
 import org.mule.api.MuleMessage;
@@ -15,9 +16,9 @@ import ca.uhn.hl7v2.model.v25.segment.PID;
 import ca.uhn.hl7v2.parser.GenericParser;
 import ca.uhn.hl7v2.parser.Parser;
 
-public class RHEAADT_A28Generator implements Callable {
+public class ADT_A28RequestConstructor implements Callable {
 
-	private MuleMessage generateADT_A28(String oru_r01_str, MuleContext muleContext) throws Exception {
+	private String fetchADT_A28(String oru_r01_str, MuleContext muleContext) throws Exception {
 		MuleClient client = new MuleClient(muleContext);
 		
 		Parser parser = new GenericParser();
@@ -55,7 +56,9 @@ public class RHEAADT_A28Generator implements Callable {
 		req.setPath("ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid);
 		
 		MuleMessage responce = client.send("vm://queryPatients-De-normailization-MockServiceProvider", req, null);
-
+		
+		RestfulHttpResponse restRes = (RestfulHttpResponse) responce.getPayload();
+		
 		/**
 		String id = "";
 		String givenName = "";
@@ -88,7 +91,7 @@ public class RHEAADT_A28Generator implements Callable {
 		pid.getPatientIdentifierList(0).getIdentifierTypeCode()
 				.setValue("ECID");
 		**/
-		return responce;
+		return restRes.getBody();
 	}
 
 	@Override
@@ -97,8 +100,18 @@ public class RHEAADT_A28Generator implements Callable {
 		MuleMessage msg = eventContext.getMessage();
 		Object payload = msg.getPayload();
 		RestfulHttpRequest restReq = (RestfulHttpRequest) payload;
+		
+		String adt_A28 = fetchADT_A28(restReq.getBody(), muleContext);
 
-		return generateADT_A28(restReq.getBody(), muleContext);
+		RestfulHttpRequest req = new RestfulHttpRequest();
+		req.setHttpMethod(RestfulHttpRequest.HTTP_POST);
+		// TODO FIX THIS HARD CODING
+		req.setPath("ws/rest/v1/patient/123/shrpatient");
+		req.setBody(adt_A28);
+		
+		msg.setPayload(req);
+		
+		return msg;
 	}
 
 }

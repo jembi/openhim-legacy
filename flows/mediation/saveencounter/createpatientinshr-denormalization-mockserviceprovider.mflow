@@ -5,8 +5,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="1fd163c6-304e-4a7c-8884-655a5844f64e">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="2510fd2f-fb69-4799-84f3-65328d7bc7c2">
+        <lane entity-id="680d901b-870c-4398-89c2-55072dc8eb92">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="2f091b83-63b1-4b40-9bc2-7ebc72e05e3a">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -22,17 +22,45 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="d55247ef-1f13-4d3c-9de9-728cdf01eaff">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="ec51ae99-bb89-4d66-b96e-c4979e653d50">
                 <properties>
-                    <property value="In createpatientinshr de-normalization #[groovy: message.toString()]" name="message"/>
+                    <property value="In createpatientinshr de-normalization" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <response entity-id="cec1dd4f-c929-4be1-be5b-356cfd0cd197">
-                <compartment entity-id="0162abc0-99cb-44ac-878f-dd0393fddaf8">
-                    <lane entity-id="c8a58229-9767-4d66-aad0-3f9d99b282d0">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="7bb2759c-0a31-4b35-a84c-401159cd8120">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/echo-component" name="Echo" entity-id="97c30076-5113-43eb-9231-735f6236c3f2"/>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Store current payload" entity-id="0c37aab3-e407-456c-a5a6-99f32f0a93d5">
+                <properties>
+                    <property value="" name="returnClass"/>
+                    <property value="false" name="ignoreBadInput"/>
+                    <property value="session" name="scope"/>
+                    <property value="false" name="overwrite"/>
+                    <property value="" name="encoding"/>
+                    <property value="" name="mimeType"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+                        <property value="#[groovy: return message.payload;]" name="value"/>
+                        <property value="original_payload" name="key"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+            <response entity-id="a683ea97-1984-4fb4-a5f1-1e849d27f1b5">
+                <compartment entity-id="fb93b0d3-f4d3-4fd0-a03c-973eb73e86b6">
+                    <lane entity-id="150c4a3a-1126-4c13-bff5-d6f9e160d8e8">
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="Restore original message" entity-id="8f0d0425-65db-48d6-89a6-a1405dcbad55">
+                            <properties>
+<property value="message.payload = message.getSessionProperty('original_payload');" name="expression"/>
+<property value="" name="returnClass"/>
+<property value="false" name="ignoreBadInput"/>
+<property value="false" name="returnSourceIfNull"/>
+<property value="" name="encoding"/>
+<property value="groovy" name="evaluator"/>
+<property value="" name="mimeType"/>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="65b5f402-be82-408b-ac9b-a9a5c53bcf68">
                             <properties>
 <property value="Exiting createpatientinshr de-normalization #[groovy: message.toString()]" name="message"/>
 <property value="INFO" name="level"/>
@@ -42,11 +70,69 @@
                     </lane>
                 </compartment>
             </response>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="Create patient in SHR" entity-id="e50be444-1712-48f7-84cf-1e676cf969d7">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="Construct ADT_A28 request" entity-id="547a884d-79f5-45db-8503-c4077eed05bd">
                 <properties>
-                    <property value="org.jembi.rhea.orchestration.RHEAADT_A28Generator" name="class"/>
+                    <property value="" name="ref"/>
+                    <property value="org.jembi.rhea.orchestration.ADT_A28RequestConstructor" name="class"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;1272940158">
+                        <property value="" name="ref"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/echo-component" name="Echo" entity-id="8e159101-fdc0-4ebb-a0a8-afd3485861ff"/>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set Path Property" entity-id="aaba31b5-c223-4a1c-a3c9-1c5dc7ad6ba1">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property name="overwrite"/>
+                    <property name="scope"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+                        <property value="#[groovy: return message.payload.buildUrlWithRequestParams();]" name="value"/>
+                        <property value="path" name="key"/>
+                    </property-collection>
                 </properties>
             </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="Transfor HTTPRestfulMessage to HTTP Body" entity-id="65054202-3ffe-489c-b5e7-8ec57762bfc1">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property value="groovy" name="evaluator"/>
+                    <property value="return message.payload.body;" name="expression"/>
+                    <property name="custom-evaluator"/>
+                    <property name="returnSourceIfNull"/>
+                </properties>
+            </pattern>
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="Deliver message to mock service provider" entity-id="ac28ba0d-ae82-47d8-89d2-3038a87d4f4f">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property value="localhost" name="host"/>
+                    <property value="8003" name="port"/>
+                    <property value="#[header:OUTBOUND:path]" name="path"/>
+                    <property name="method"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
         </lane>
     </flow>
     <description></description>

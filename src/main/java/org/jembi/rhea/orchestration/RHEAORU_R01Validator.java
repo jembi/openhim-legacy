@@ -3,6 +3,7 @@ package org.jembi.rhea.orchestration;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEventContext;
@@ -18,6 +19,7 @@ import ca.uhn.hl7v2.model.v25.message.ORU_R01;
 import ca.uhn.hl7v2.model.v25.segment.OBR;
 import ca.uhn.hl7v2.model.v25.segment.ORC;
 import ca.uhn.hl7v2.model.v25.segment.PID;
+import ca.uhn.hl7v2.model.v25.segment.PV1;
 import ca.uhn.hl7v2.parser.GenericParser;
 import ca.uhn.hl7v2.parser.Parser;
 import ca.uhn.hl7v2.validation.impl.DefaultValidation;
@@ -39,18 +41,10 @@ public class RHEAORU_R01Validator implements Callable {
 		
 		PID pid = oru_r01.getPATIENT_RESULT().getPATIENT().getPID();
 		
-		CX patientID = pid.getPatientID();
-		String testID = patientID.getIDNumber().getValue();
-		String testType = patientID.getIdentifierTypeCode().getValue();
-		
-		int patientIdentifierListReps = pid.getPatientIdentifierListReps();
-		
 		CX[] patientIdentifierList = pid.getPatientIdentifierList();
-		int j = patientIdentifierList.length;
 		
 		String ecid = null;
-		/**
-		if (j < 1) {
+		if (patientIdentifierList.length < 1) {
 			throw new Exception("Invalid client ID");
 		}
 		
@@ -65,12 +59,12 @@ public class RHEAORU_R01Validator implements Callable {
 			
 			MuleMessage responce = client.send("vm://getecid", idMap, null, 5000);
 			
-			String respStatus = responce.getInboundProperty("http.status");
-			if (respStatus.equals("200")) {
+			String success = responce.getInboundProperty("success");
+			if (success.equals("true")) {
 				ecid = responce.getPayloadAsString();
 			}
 		}
-		**/
+		/**
 		// ===TESTING CODE===
 		Map<String, String> idMap = new HashMap<String, String>();
 		idMap.put("id", "0123456789");
@@ -83,6 +77,7 @@ public class RHEAORU_R01Validator implements Callable {
 			ecid = responce.getPayloadAsString();
 		}
 		// ===END TESTING CODE===
+		**/
 		
 		if (ecid == null) {
 			throw new Exception("Invalid client ID");
@@ -131,38 +126,56 @@ public class RHEAORU_R01Validator implements Callable {
 			}
 		}
 		**/
+		PV1 pv1 = oru_r01.getPATIENT_RESULT().getPATIENT().getVISIT().getPV1();
+		String proID = pv1.getAttendingDoctor(0).getIDNumber().getValue();
+		String proIDType = pv1.getAttendingDoctor(0).getIdentifierTypeCode().getValue();
 		
+		Map<String, String> ProIdMap = new HashMap<String, String>();
+		ProIdMap.put("id", proID);
+		ProIdMap.put("idType", proIDType);
+		
+		MuleMessage responce = client.send("vm://getepid", ProIdMap, null, 5000);
+		
+		String success = responce.getInboundProperty("success");
+		if (success.equals("true")) {
+			epid = responce.getPayloadAsString();
+			
+			// Enrich message
+			int reps = pv1.getAttendingDoctorReps();
+			pv1.getAttendingDoctor(reps).getIDNumber().setValue(epid);
+			pv1.getAttendingDoctor(reps).getIdentifierTypeCode().setValue(Constants.EPID_ID_TYPE);
+		}
+		
+		/**
 		// ===TESTING CODE===
 		Map<String, String> ProIdMap = new HashMap<String, String>();
 		ProIdMap.put("id", "0123456789");
 		ProIdMap.put("idType", "NID");
 		
-		responce = client.send("vm://getepid", ProIdMap, null, 5000);
+		MuleMessage responce = client.send("vm://getepid", ProIdMap, null, 5000);
 		
-		success = responce.getInboundProperty("success");
+		String success = responce.getInboundProperty("success");
 		if (success.equals("true")) {
 			epid = responce.getPayloadAsString();
 		}
 		// ===END TESTING CODE===
-		
+		**/
 		
 		if (epid == null) {
 			throw new Exception("Invalid client ID");
 		}
 		
 		// Validate location ID is correct - sending facility
-		/**
 		String elid = oru_r01.getMSH().getSendingFacility().getHd1_NamespaceID().getValue();
 		
-		responce = client.send("vm://", elid, null, 5000);
+		responce = client.send("vm://validateFacility", elid, null, 5000);
 		
-		String success = responce.getInboundProperty("success");
+		success = responce.getInboundProperty("success");
 		if (!success.equals("true")) {
 			throw new Exception("Invalid location ID");
 		}
-		**/
 		
-		return parser.encode(oru_r01);
+		return parser.encode(oru_r01, "XML");
 	}
 
 	@Override
