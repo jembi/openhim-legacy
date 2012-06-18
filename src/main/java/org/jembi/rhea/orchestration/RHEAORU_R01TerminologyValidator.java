@@ -36,6 +36,10 @@ public class RHEAORU_R01TerminologyValidator implements Callable {
 			String id = obs.getOBX().getObservationIdentifier().getIdentifier().getValue();
 			String namespace = obs.getOBX().getObservationIdentifier().getCe3_NameOfCodingSystem().getValue();
 			
+			if (id == null || id.equals("") || namespace == null || namespace.equals("")) {
+				throw new Exception("No code or namespace set in ORU_R01, these are required.");
+			}
+			
 			Map<String, String> idMap = new HashMap<String, String>();
 			idMap.put("id", id);
 			idMap.put("namespace", namespace);
