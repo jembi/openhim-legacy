@@ -5,8 +5,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="73d3377c-bda1-4fa3-9375-29977ff4548d">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="356a3ddb-d75c-4dcc-8769-e74e89876005">
+        <lane entity-id="3bddb85a-4c03-431d-88f7-f3d40df88ac2">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="0ae6a6be-e19e-4520-948c-ad6b186f16c4">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -22,14 +22,14 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="34a9ad5f-98cf-498a-9d0f-9e9200740557">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="b4744495-5aa2-47f8-82cc-9121e0b99716">
                 <properties>
                     <property value="Orchestrating a save encounters transaction" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Store current payload" entity-id="131478b1-587f-45d8-82d7-3764f4af7bbe">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Store current payload" entity-id="611c10a2-88b3-4d11-9d38-9be777d59766">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -43,22 +43,32 @@
                     </property-collection>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="Validate ORU_R01" entity-id="cadf8f43-1096-4be8-9804-c562c919edfd">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="Validate ORU_R01" entity-id="c228d195-c88e-424d-bfb8-75ad7fbfdce9">
                 <properties>
                     <property value="org.jembi.rhea.orchestration.RHEAORU_R01Validator" name="class"/>
                 </properties>
             </pattern>
-            <response entity-id="6b1105d1-dfbd-48f2-bf64-14196f910462">
-                <compartment entity-id="297a5cb9-16c9-4f0d-8c25-9022d3fc2c10">
-                    <lane entity-id="09530ace-fdc2-4f53-bf17-4ee577a5451c">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="7d28def0-f6d5-4736-adb3-3191fe361702">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="Validate Terminology" entity-id="2a9c9373-7663-4014-aeca-d00b84c478ef">
+                <properties>
+                    <property value="" name="ref"/>
+                    <property value="org.jembi.rhea.orchestration.RHEAORU_R01TerminologyValidator" name="class"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;95438441">
+                        <property value="" name="ref"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+            <response entity-id="61ba63b9-dc10-4b1d-9258-4c62e392cf8c">
+                <compartment entity-id="1c07a8d4-5092-474e-a570-2178d70dcc64">
+                    <lane entity-id="a9af5f94-1e7b-479f-a6bc-6cb737237658">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="f4d76400-8af3-4836-9986-d4764b576aad">
                             <properties>
 <property value="Responce orchestration" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Java" entity-id="ad0f9d64-8221-44fd-8def-7a9d19468157">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Java" entity-id="353c1672-95a2-40ce-8045-0356746edc02">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
@@ -70,7 +80,7 @@
                     </lane>
                 </compartment>
             </response>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to saveEncountersDe-NormalizationQueue" entity-id="17f52f1c-d1ec-476e-b1cd-6962952f557a">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to saveEncountersDe-NormalizationQueue" entity-id="0a746d82-ef0f-4512-802f-1d2aa8521b4c">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -86,44 +96,38 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/echo-component" name="Echo" entity-id="a6d9ed82-d5b7-473a-92e4-292d6c579e34"/>
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="b71851f9-fccf-42eb-9236-68f4c0288e18">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/echo-component" name="Echo" entity-id="b12d93f1-2bdc-4abc-8625-9e92272f2a1f"/>
+            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="932113a8-13f4-4311-8b87-d8ee1d82eed3">
                 <properties>
-                    <property-collection name="09ac0b5b-dd47-48f5-822c-fe5de1ce1202">
+                    <property-collection name="21a62b6a-3b60-4bfd-bf7a-18ea28e36748">
                         <property value="message.payload.getHttpStatus() != 201" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
-                    <property-collection name="b87e3dba-2b74-47aa-8d7c-cab7ef6a64e8">
+                    <property-collection name="66488a25-abe3-46e3-8412-acf29fc344ba">
                         <property value="true" name="choice.otherwise"/>
-                        <property value="" name="choice.expression"/>
-                        <property value="" name="choice.evaluator"/>
                     </property-collection>
                 </properties>
-                <description></description>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="01fbdc13-af38-4c37-9030-06822fd9ec47">
+                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="d3176d35-d746-4a40-9058-1732e2d51fb6">
                     <properties>
-                        <property-collection name="09ac0b5b-dd47-48f5-822c-fe5de1ce1202">
+                        <property-collection name="21a62b6a-3b60-4bfd-bf7a-18ea28e36748">
                             <property value="message.payload.getHttpStatus() != 201" name="choice.expression"/>
                             <property value="groovy" name="choice.evaluator"/>
                         </property-collection>
-                        <property-collection name="b87e3dba-2b74-47aa-8d7c-cab7ef6a64e8">
+                        <property-collection name="66488a25-abe3-46e3-8412-acf29fc344ba">
                             <property value="true" name="choice.otherwise"/>
-                            <property value="" name="choice.expression"/>
-                            <property value="" name="choice.evaluator"/>
                         </property-collection>
                     </properties>
-                    <description></description>
                 </pattern>
-                <compartment entity-id="0b1bb640-5124-4af8-a946-bc5ae81093b1">
-                    <lane entity-id="09ac0b5b-dd47-48f5-822c-fe5de1ce1202">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="c14df96f-5ddd-4b70-bced-808b14d41bea">
+                <compartment entity-id="f96a6e98-b678-4bde-bca3-8532ec396f0a">
+                    <lane entity-id="21a62b6a-3b60-4bfd-bf7a-18ea28e36748">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="cd9262b9-173b-4391-8ee5-5c501686b4ca">
                             <properties>
 <property value="Patient Encounter NOT Saved - patient doesn't exist" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="Restore original message" entity-id="f50258e1-0041-4658-bfbd-1f03338bc4e3">
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="Restore original message" entity-id="2d5910b1-ed38-42b9-86fb-aac4ba8b04d8">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
@@ -135,8 +139,8 @@
 <property name="returnSourceIfNull"/>
                             </properties>
                         </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/echo-component" name="Echo" entity-id="cc460b26-a9ab-462f-90f8-0c516e977916"/>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Create patient in SHR" entity-id="ab7b258f-c36d-42cb-bb10-554dca7b1217">
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/echo-component" name="Echo" entity-id="753c1165-74e9-4a85-becf-5a85b7932c5c"/>
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Create patient in SHR" entity-id="e2d0ede7-e52f-4d1f-8c4e-2b65885259ee">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -152,7 +156,7 @@
 <property name="responseTransformer-refs"/>
                             </properties>
                         </endpoint>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to saveEncountersDe-NormalizationQueue" entity-id="e1a30520-f76b-4ed4-934a-e3492ba8fdf3">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to saveEncountersDe-NormalizationQueue" entity-id="3056a8dc-7bb0-4f4b-bd00-754528563e67">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -169,15 +173,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane entity-id="b87e3dba-2b74-47aa-8d7c-cab7ef6a64e8">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="e255f71e-e602-4dd1-bc41-467bfaef7a9f">
+                    <lane entity-id="66488a25-abe3-46e3-8412-acf29fc344ba">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="20f549d3-6bd3-443e-a9a4-a6a6ff4ce42f">
                             <properties>
 <property value="Patient Encounter Saved - patient existed" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/echo-component" name="Echo" entity-id="d0770a79-3394-422a-b56f-4dd7c98dd78c"/>
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/echo-component" name="Echo" entity-id="9ce64a65-567f-4489-9a39-3d58b2c87ac0"/>
                     </lane>
                 </compartment>
             </splitter>

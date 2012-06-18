@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.2.1" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+    <flow name="mediation-validateterm-denormalization-apelonFlow1" doc:name="mediation-validateterm-denormalization-apelonFlow1">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="validateterm" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
+        <logger message="In validateterm de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
+        <response>
+            <scripting:transformer doc:name="Groovy">
+                <scripting:script engine="Groovy">
+                    <scripting:text><![CDATA[payload = message.getPayloadAsString();
+return payload;]]></scripting:text>
+                </scripting:script>
+            </scripting:transformer>
+            <echo-component doc:name="Echo"/>
+            <expression-transformer evaluator="xpath" expression="/tsvalidate/result" doc:name="Expression"/>
+            <echo-component doc:name="Echo"/>
+            <choice doc:name="Choice">
+                <when expression="message.payload.equals('1');" evaluator="groovy">
+                    <processor-chain>
+                        <message-properties-transformer doc:name="Set transaction success">
+                            <add-message-property key="success" value="true"/>
+                        </message-properties-transformer>
+                    </processor-chain>
+                </when>
+                <otherwise>
+                    <processor-chain>
+                        <message-properties-transformer doc:name="Set transaction success">
+                            <add-message-property key="success" value="false"/>
+                        </message-properties-transformer>
+                    </processor-chain>
+                </otherwise>
+            </choice>
+            <logger message="Exitting validateterm de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
+        </response>
+        <http:outbound-endpoint exchange-pattern="request-response" host="ts.jembi.org" port="80" path="validate.php?namespaceCode=#[groovy: return message.payload.get('namespace')]&amp;conceptCode=#[groovy: return message.payload.get('id')]" method="GET" doc:name="HTTP"/>
+    </flow>
+</mule>

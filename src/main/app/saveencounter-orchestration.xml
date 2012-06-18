@@ -11,6 +11,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <add-message-property key="original_payload" value="#[groovy: return message.payload;]"/>
         </message-properties-transformer>
         <component class="org.jembi.rhea.orchestration.RHEAORU_R01Validator" doc:name="Validate ORU_R01"/>
+        <component class="org.jembi.rhea.orchestration.RHEAORU_R01TerminologyValidator" doc:name="Validate Terminology"/>
         <response>
             <logger message="Responce orchestration" level="INFO" doc:name="Logger"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Java"/>
