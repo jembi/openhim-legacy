@@ -5,8 +5,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="c66ffd83-1210-498d-82db-ee77e61e54b9">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="3eaea756-2a25-403f-baf6-f7f92ce63c93">
+        <lane entity-id="9aa24205-4165-43a9-8de0-cbfbb7f1f3b1">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="b02bba77-e30a-48bc-a15e-77692886a385">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -22,28 +22,57 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="8212dbe9-7b6b-45ea-9fa2-161670e846f1">
+            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="88525c99-28f1-4054-8641-a3e42168ae3a">
                 <properties>
-                    <property-collection name="cea8806f-f18f-4fb1-8851-c58d9a8bab89">
+                    <property-collection name="2ee54d32-015a-4cbd-ad4b-052dbdbeba2a">
+                        <property value="return false;" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                    <property-collection name="656be81c-5f7e-4b5f-9bd5-581ca040c7b8">
                         <property value="return true;" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
                 </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="93a4fd8d-21da-42a8-84e0-75574d645655"/>
-                <compartment entity-id="deafcab8-7c02-47a5-b4df-c1466e9089fd">
-                    <lane entity-id="cea8806f-f18f-4fb1-8851-c58d9a8bab89">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log De-normailize for mock service provider" entity-id="b2c00ed2-73d0-46ae-a38d-cdbcd4b88fec">
+                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="7e71dc3d-7576-4121-9171-e0fef4a79cd8"/>
+                <compartment entity-id="f699723c-89ca-4770-bd90-e66852a4885a">
+                    <lane entity-id="2ee54d32-015a-4cbd-ad4b-052dbdbeba2a">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log De-normailize for mock service provider" entity-id="85aa60bd-424f-4ef5-985d-38b48b4b476a">
                             <properties>
 <property value="De-normailize for mock service provider" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryPatientDemographics-De-normailization-MockServiceProvider" entity-id="d7f8753f-24b6-4a8f-baa4-5ef4c8553179">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryPatientDemographics-De-normailization-MockServiceProvider" entity-id="efa96875-27a2-4ec0-8501-2ca7dcfdb820">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
 <property value="getFacility-De-normailization-MockServiceProvider" name="path"/>
+<property name="address"/>
+<property value="10000" name="responseTimeout"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property value="text/plain" name="mimeType"/>
+<property name="connector-ref"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                    <lane entity-id="656be81c-5f7e-4b5f-9bd5-581ca040c7b8">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log De-normailize for Resource Map" entity-id="783e5346-cf37-460c-ac6f-b0df86357e7a">
+                            <properties>
+<property value="De-normailize for Resource Map" name="message"/>
+<property value="INFO" name="level"/>
+<property name="category"/>
+                            </properties>
+                        </pattern>
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getFacility-De-normailization-ResourceMap" entity-id="4b8334ae-1fa9-4927-bf84-d7a905ea3a8d">
+                            <properties>
+<property value="one-way" name="exchange-pattern"/>
+<property value="request-response" name="exchange-pattern"/>
+<property value="getFacility-De-normailization-ResourceMap" name="path"/>
 <property name="address"/>
 <property value="10000" name="responseTimeout"/>
 <property name="encoding"/>
