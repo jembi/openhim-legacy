@@ -134,7 +134,7 @@ public class RHEAORU_R01Validator implements Callable {
 		ProIdMap.put("id", proID);
 		ProIdMap.put("idType", proIDType);
 		
-		MuleMessage responce = client.send("vm://getepid", ProIdMap, null, 5000);
+		MuleMessage responce = client.send("vm://getepid-openldap", ProIdMap, null, 5000);
 		
 		String success = responce.getInboundProperty("success");
 		if (success.equals("true")) {
