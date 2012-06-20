@@ -168,7 +168,7 @@ public class RHEAORU_R01Validator implements Callable {
 		// Validate location ID is correct - sending facility
 		String elid = oru_r01.getMSH().getSendingFacility().getHd1_NamespaceID().getValue();
 		
-		responce = client.send("vm://validateFacility", elid, null, 5000);
+		responce = client.send("vm://validateFacility-resourcemap", elid, null, 5000);
 		
 		success = responce.getInboundProperty("success");
 		if (!success.equals("true")) {
