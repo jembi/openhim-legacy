@@ -5,398 +5,95 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="f9dfb6e6-88dc-4aee-ba2c-e53ce339966f">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read queue" entity-id="d770d1c0-2b61-42e1-ba5f-8c5237cdce62">
+        <lane entity-id="46f39b94-9b16-4dbc-abe4-eeb993a15f4f">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read queue" entity-id="5fe57267-fe15-4411-8ceb-5dc99b05c62b">
                 <properties>
-                    <property value="" name="ref"/>
-                    <property value="" name="transformer-refs"/>
-                    <property value="" name="address"/>
-                    <property value="" name="encoding"/>
-                    <property value="transactionRouterQueue" name="path"/>
-                    <property value="" name="responseTransformer-refs"/>
-                    <property value="false" name="disableTransportTransformer"/>
-                    <property value="text/plain" name="mimeType"/>
-                    <property value="10000" name="responseTimeout"/>
+                    <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
-                    <property value="" name="connector-ref"/>
+                    <property value="transactionRouterQueue" name="path"/>
+                    <property name="address"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="text/plain" name="mimeType"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
                 </properties>
-                <description></description>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="e1fe330b-6df6-4dba-8a4d-491b5a968e6b">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="ec6913af-ca75-4e95-83a8-8c61fc539873">
                 <properties>
                     <property value="Starting normalization on structured message: #[groovy: message.payload.toString();]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="e4874af3-003a-4984-96a4-3a30f0009bd3">
+            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="b3834c91-f8cc-490a-b477-794d53fb2f44">
                 <properties>
-                    <property-collection name="a3df9b87-19e9-43ac-adc8-3212753dc66c">
-                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounters') &amp;&amp; message.payload.httpMethod.equals('POST')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="8b0e76e9-cec7-42ee-9f8d-1750ca0d5ea3">
-                        <property value="message.payload.path.contains('ws/rest/v1/facilities')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="349f283a-8e06-4c04-91be-e74b9e4093a1">
-                        <property value="message.payload.path.contains('ws/rest/v1/facility/')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="fab09c6a-1014-4727-81b5-e7b4000b5d8d">
-                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounters') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="1a44bba7-458f-4303-997f-868877de7533">
-                        <property value="message.payload.path.contains('ws/rest/v1/patients') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="fbd57144-0a6c-4825-aebd-267cd68a376a">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                    <property-collection name="31a39efa-48e2-4fbf-bb6a-2e6ada90cf7d">
-                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.httpMethod.equals('PUT')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="8d63a66e-47b2-4b2a-a27e-105880100e84">
-                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounter/') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="c9e986f4-c79a-49d1-b5db-320e43dd927a">
+                    <property-collection name="65e7edc5-fa3e-40d0-ac8a-b46871e178a5">
                         <property value="message.payload.path.contains('ws/rest/v1/professional/')" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
-                    <property-collection name="5a369f74-e32b-44d3-b835-d23dd061bcad">
-                        <property value="message.payload.path.contains('ws/rest/v1/professionals')" name="choice.expression"/>
+                    <property-collection name="eda49ebf-8044-483f-92b3-31894a18958c">
+                        <property value="message.payload.path.contains('ws/rest/v1/facility/')" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
-                    <property-collection name="9921aeb6-96b2-4cd1-ae10-d91ab80eeb05">
+                    <property-collection name="64ac3ba1-9cba-4fa1-a500-9702c72190c8">
                         <property value="message.payload.path.contains('ws/rest/v1/patients') &amp;&amp; message.payload.httpMethod.equals('POST')" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
-                    <property-collection name="2499b8ba-41ca-4657-90e0-25a1d13c508e">
-                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
+                    <property-collection name="fc8e1344-bf2c-4cbf-bfda-daf208a0075f">
+                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounters') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
-                    <property-collection name="79df5be0-b7fa-4e0b-82f0-50f28f166327">
+                    <property-collection name="63161a20-416e-4661-b78a-4935c089c7d9">
+                        <property value="message.payload.path.contains('ws/rest/v1/patients') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                    <property-collection name="45d0fdeb-8ca0-45e6-9597-06a1e1701e58">
+                        <property value="message.payload.path.contains('ws/rest/v1/facilities')" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                    <property-collection name="3b07d237-056d-493b-a108-a9f6ca3fb713">
+                        <property value="message.payload.path.contains('ws/rest/v1/professionals')" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                    <property-collection name="676f5b9f-5a5e-48bb-b9bf-95e206b30b09">
+                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.httpMethod.equals('PUT')" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                    <property-collection name="acb49f57-30dc-4340-a94d-fc7f5d3940b3">
+                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounters') &amp;&amp; message.payload.httpMethod.equals('POST')" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                    <property-collection name="b7ff1df3-7844-437c-bd90-8fd26f03d3a8">
+                        <property value="true" name="choice.otherwise"/>
+                    </property-collection>
+                    <property-collection name="5fa8edcc-6633-4f09-829c-a7fd8c45f05e">
                         <property value="message.payload.path.contains('ws/rest/v1/alerts') &amp;&amp; message.payload.httpMethod.equals('POST')" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
+                    <property-collection name="db763a3a-7978-443c-a2b1-0ac0853fa965">
+                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounter/') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                    <property-collection name="b702b7d7-8101-4b6c-bf27-385fdd451220">
+                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
                 </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="d1bfaf6f-9126-4baa-9e5a-adec0673349e">
-                    <properties>
-                        <property-collection name="a3df9b87-19e9-43ac-adc8-3212753dc66c">
-                            <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounters') &amp;&amp; message.payload.httpMethod.equals('POST')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="8b0e76e9-cec7-42ee-9f8d-1750ca0d5ea3">
-                            <property value="message.payload.path.contains('ws/rest/v1/facilities')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="349f283a-8e06-4c04-91be-e74b9e4093a1">
-                            <property value="message.payload.path.contains('ws/rest/v1/facility/')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="fab09c6a-1014-4727-81b5-e7b4000b5d8d">
-                            <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounters') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="1a44bba7-458f-4303-997f-868877de7533">
-                            <property value="message.payload.path.contains('ws/rest/v1/patients') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="fbd57144-0a6c-4825-aebd-267cd68a376a">
-                            <property value="true" name="choice.otherwise"/>
-                        </property-collection>
-                        <property-collection name="31a39efa-48e2-4fbf-bb6a-2e6ada90cf7d">
-                            <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.httpMethod.equals('PUT')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="8d63a66e-47b2-4b2a-a27e-105880100e84">
-                            <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounter/') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="c9e986f4-c79a-49d1-b5db-320e43dd927a">
-                            <property value="message.payload.path.contains('ws/rest/v1/professional/')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="5a369f74-e32b-44d3-b835-d23dd061bcad">
-                            <property value="message.payload.path.contains('ws/rest/v1/professionals')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="9921aeb6-96b2-4cd1-ae10-d91ab80eeb05">
-                            <property value="message.payload.path.contains('ws/rest/v1/patients') &amp;&amp; message.payload.httpMethod.equals('POST')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="2499b8ba-41ca-4657-90e0-25a1d13c508e">
-                            <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="79df5be0-b7fa-4e0b-82f0-50f28f166327">
-                            <property value="message.payload.path.contains('ws/rest/v1/alerts') &amp;&amp; message.payload.httpMethod.equals('POST')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                    </properties>
-                </pattern>
-                <compartment entity-id="3a36c213-588e-4ceb-b6a8-f8dfc52c94ff">
-                    <lane entity-id="8b0e76e9-cec7-42ee-9f8d-1750ca0d5ea3">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query facilities" entity-id="6f2331d0-8ab7-40e7-afc8-7214d048988e">
+                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="02798904-8ddd-40b7-ac75-a11da009c68a"/>
+                <compartment entity-id="00b46385-9010-4363-aeae-674d0dbd8d5f">
+                    <lane entity-id="45d0fdeb-8ca0-45e6-9597-06a1e1701e58">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query facilities" entity-id="e3db2a2e-a1fb-425c-af39-c6c3c4656884">
                             <properties>
 <property value="Transaction type: query facilities" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Send to QueryFacilitiesFlow" entity-id="c2ae1adf-b1a5-4002-a735-79c40f12f6ae">
-                            <properties>
-<property value="QueryFacilitiesFlow" name="name"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="349f283a-8e06-4c04-91be-e74b9e4093a1">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get facility" entity-id="5fcf3237-0099-40a2-9df8-b5c79a036b55">
-                            <properties>
-<property value="Transaction type: get facility" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Send to GetFacilityFlow" entity-id="01d6a244-5405-40c3-8830-5d363e9a35ee">
-                            <properties>
-<property value="GetFacilityFlow" name="name"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="c9e986f4-c79a-49d1-b5db-320e43dd927a">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get professional" entity-id="d31dcf7e-b6a7-4c1d-b8f5-22b35bd5405d">
-                            <properties>
-<property value="Transaction type: get professional" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Send to GetProfessionalFlow" entity-id="f5e11fd0-ce0e-4b14-9488-de789c17908d">
-                            <properties>
-<property value="GetProfessionalFlow" name="name"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="5a369f74-e32b-44d3-b835-d23dd061bcad">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query professionals" entity-id="afb659e2-0059-4d59-8d40-5a1127a49f1a">
-                            <properties>
-<property value="Transaction type: query professionals" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Send to QueryProfessionalsFlow" entity-id="836effe4-d61f-4a64-b2ab-1c97df734880">
-                            <properties>
-<property value="QueryProfessionalsFlow" name="name"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="fab09c6a-1014-4727-81b5-e7b4000b5d8d">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query encounters" entity-id="6a54e035-b69e-4185-9907-3766898e8d52">
-                            <properties>
-<property value="Transaction type: query encounters" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Send to QueryEncountersFlow" entity-id="59317487-02f8-49c2-a3f5-e9e99f0b08d4">
-                            <properties>
-<property value="QueryEncountersFlow" name="name"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="a3df9b87-19e9-43ac-adc8-3212753dc66c">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log save encounters" entity-id="21505d8d-5f3c-4601-b977-bd7d7420c69c">
-                            <properties>
-<property value="Transaction type: save encounters" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Send to SaveEncountersFlow" entity-id="cf7b0f1f-4ec8-4f05-85f6-9397c55e4b01">
-                            <properties>
-<property value="SaveEncountersFlow" name="name"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="8d63a66e-47b2-4b2a-a27e-105880100e84">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get encounter" entity-id="838fc1fc-bb96-401a-8a2c-294b6fbe452e">
-                            <properties>
-<property value="Transaction type: get encounter" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Send to GetEncounterFlow" entity-id="3c4f6bb3-2491-4d44-9571-0e26897cee4f">
-                            <properties>
-<property value="GetEncounterFlow" name="name"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="9921aeb6-96b2-4cd1-ae10-d91ab80eeb05">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log save patient" entity-id="e92243e8-a51a-4c0d-9b99-d2a0747bd378">
-                            <properties>
-<property value="Transaction type: save patient" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Send to SavePatientFlow" entity-id="205be47f-77c4-4abd-b528-73594e22f872">
-                            <properties>
-<property value="SavePatientFlow" name="name"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="1a44bba7-458f-4303-997f-868877de7533">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query patients" entity-id="81131640-68d7-494d-896a-74e5f7080e61">
-                            <properties>
-<property value="Transaction type: query patients" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Send to QueryPatientsFlow" entity-id="a003c056-e648-4468-af6d-54a7c4d3ee6a">
-                            <properties>
-<property value="QueryPatientsFlow" name="name"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="2499b8ba-41ca-4657-90e0-25a1d13c508e">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get patients" entity-id="e3551aad-13ad-4c7a-95b6-ffa4e6ab86b7">
-                            <properties>
-<property value="Transaction type: get patients" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Send to GetPatientFlow" entity-id="febbeb1a-82b8-4c98-86a6-83645421301c">
-                            <properties>
-<property value="GetPatientFlow" name="name"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="31a39efa-48e2-4fbf-bb6a-2e6ada90cf7d">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log update patients" entity-id="d30a6b54-a8cc-44ed-8ee4-b61014968228">
-                            <properties>
-<property value="Transaction type: update patients" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Send to UpdatePatientFlow" entity-id="9168d221-558a-4cd6-815f-3fd5ea7c342f">
-                            <properties>
-<property value="UpdatePatientFlow" name="name"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="79df5be0-b7fa-4e0b-82f0-50f28f166327">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log receive alert" entity-id="60ef84e3-88e9-4a06-afea-17c2a3adf13a">
-                            <properties>
-<property value="Transaction type: receive alert" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Send to ReceiveAlertFlow" entity-id="0151af31-33c8-4f76-9d0a-d294aeedf3be">
-                            <properties>
-<property value="ReceiveAlertFlow" name="name"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="fbd57144-0a6c-4825-aebd-267cd68a376a">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Error Logged" entity-id="1b4ce396-5704-4da2-b0ba-acf0d73b74bc">
-                            <properties>
-<property value="Could not route message with path: #[groovy: return message.payload.getPath();]" name="message"/>
-<property value="ERROR" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                </compartment>
-            </splitter>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="QueryFacilitiesFlow">
-        <properties>
-            <property name="processingStrategy2"/>
-            <property name="processingStrategy"/>
-        </properties>
-        <lane entity-id="c714fae7-9747-4a63-8058-9be0c8f45ba8">
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="e6ab60c5-8891-454d-986a-fe168af00fe8">
-                <properties>
-                    <property-collection name="4005686f-c256-4b12-b729-147adac456bd">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                    <property-collection name="e1de89df-e315-4084-9695-7268c3a7a4b0">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="67a97629-4e43-4d3f-8d8c-f082def4a8b6">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="72d69a23-f212-40eb-a245-173cb7badbda">
-                    <properties>
-                        <property-collection name="4005686f-c256-4b12-b729-147adac456bd">
-                            <property value="true" name="choice.otherwise"/>
-                        </property-collection>
-                        <property-collection name="e1de89df-e315-4084-9695-7268c3a7a4b0">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="67a97629-4e43-4d3f-8d8c-f082def4a8b6">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                    </properties>
-                </pattern>
-                <compartment entity-id="dd020329-8484-4f49-83b0-6109bdb5e63e">
-                    <lane entity-id="67a97629-4e43-4d3f-8d8c-f082def4a8b6">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log OpenMRS specific transaction" entity-id="cfe8eee1-fc39-424a-bb55-f5d6312e0271">
-                            <properties>
-<property value="This is an OpenMRS specific transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="f5843de4-3d3e-4256-ac95-de88a40664c9">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="ERROR" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="e1de89df-e315-4084-9695-7268c3a7a4b0">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log RapidSMS specific transcation" entity-id="1b83cef8-0982-4de9-a20e-55fecad2715e">
-                            <properties>
-<property value="This is an RapidSMS specific transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="4b4c3bbe-b77f-4f65-8d73-7624a148e15a">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="4005686f-c256-4b12-b729-147adac456bd">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log generic transaction" entity-id="ad80461d-6b87-414a-90db-33acc7b70a88">
-                            <properties>
-<property value="This is a generic  transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryFacilities-Generic-NormalizationQueue" entity-id="32231094-3adc-49fe-883d-30379badc657">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryFacilities-Generic-NormalizationQueue" entity-id="1edd3bca-8994-4537-af4e-d72e293fc2ac">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -413,87 +110,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                </compartment>
-            </splitter>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="GetFacilityFlow">
-        <properties>
-            <property name="processingStrategy2"/>
-            <property name="processingStrategy"/>
-        </properties>
-        <lane entity-id="a65dcb0d-647f-443d-9004-5e10a64e9517">
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="b9acdffb-fd91-4e2d-a85a-9805d430edf8">
-                <properties>
-                    <property-collection name="00b80e6f-26ab-4135-98dd-7e649b98025c">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                    <property-collection name="2f8addf2-5df5-4612-8dbd-cf7fb508d535">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="98456fd3-a790-494e-a75f-cb9f63645699">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="f3cd382f-391b-4875-a7d6-dc113164f91b">
-                    <properties>
-                        <property-collection name="00b80e6f-26ab-4135-98dd-7e649b98025c">
-                            <property value="true" name="choice.otherwise"/>
-                        </property-collection>
-                        <property-collection name="2f8addf2-5df5-4612-8dbd-cf7fb508d535">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="98456fd3-a790-494e-a75f-cb9f63645699">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                    </properties>
-                </pattern>
-                <compartment entity-id="dcfd53df-f8c6-4584-8654-275ee7122ac0">
-                    <lane entity-id="2f8addf2-5df5-4612-8dbd-cf7fb508d535">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log OpenMRS specific transaction" entity-id="e873778f-64c8-42c2-9bae-f6e9f03fcde5">
+                    <lane entity-id="eda49ebf-8044-483f-92b3-31894a18958c">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get facility" entity-id="9fdea08e-4ef5-4fc9-9ef9-4af487ba35ab">
                             <properties>
-<property value="This is an OpenMRS specific transaction" name="message"/>
+<property value="Transaction type: get facility" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="0444dbec-4d2e-49f5-9593-344a18248716">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="98456fd3-a790-494e-a75f-cb9f63645699">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log RapidSMS specific transcation" entity-id="4b184d02-7d75-4e04-b05f-eeae66d4509b">
-                            <properties>
-<property value="This is an RapidSMS specific transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="96ce5d4b-3a2b-4d76-b9ee-c84fa6112730">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="00b80e6f-26ab-4135-98dd-7e649b98025c">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log generic transaction" entity-id="4195201c-6772-473f-9ccb-741bf63aa5b3">
-                            <properties>
-<property value="This is a generic  transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getFacility-Generic-NormalizationQueue" entity-id="c2738dda-0e81-47e9-9770-f06013803112">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getFacility-Generic-NormalizationQueue" entity-id="7ccc56a8-6f91-4a9a-bdf4-a3100e8aef0e">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -510,87 +135,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                </compartment>
-            </splitter>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="GetProfessionalFlow">
-        <properties>
-            <property name="processingStrategy2"/>
-            <property name="processingStrategy"/>
-        </properties>
-        <lane entity-id="2342a505-fbde-4421-99e9-ae91eba2641f">
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="2f73e88c-bb50-4591-ba72-8323d0ed6953">
-                <properties>
-                    <property-collection name="74323e2a-c5d9-471d-8e04-e25dee919c73">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                    <property-collection name="efd33b2a-071f-4469-807c-cdc915b5c5b2">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="6dbdbff3-4fe0-4938-bd8c-6d70f7219f29">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="737ab979-7fa9-4f8b-baf6-d00253afed88">
-                    <properties>
-                        <property-collection name="74323e2a-c5d9-471d-8e04-e25dee919c73">
-                            <property value="true" name="choice.otherwise"/>
-                        </property-collection>
-                        <property-collection name="efd33b2a-071f-4469-807c-cdc915b5c5b2">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="6dbdbff3-4fe0-4938-bd8c-6d70f7219f29">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                    </properties>
-                </pattern>
-                <compartment entity-id="88ceaf21-69ef-4cb5-a9d9-70af62688f1f">
-                    <lane entity-id="6dbdbff3-4fe0-4938-bd8c-6d70f7219f29">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log OpenMRS specific transaction" entity-id="e37b5bb3-ae6f-414a-a464-3fe48e390221">
+                    <lane entity-id="65e7edc5-fa3e-40d0-ac8a-b46871e178a5">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get professional" entity-id="6f7e1d97-7010-4ec1-aa83-c9af89b04633">
                             <properties>
-<property value="This is an OpenMRS specific transaction" name="message"/>
+<property value="Transaction type: get professional" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="e50a284d-3e36-4c8e-ac7a-491d31da8104">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="efd33b2a-071f-4469-807c-cdc915b5c5b2">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log RapidSMS specific transcation" entity-id="8292d9c2-2117-4046-9619-15ff7dafeeed">
-                            <properties>
-<property value="This is an RapidSMS specific transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="5dc454b1-fecc-4390-a3f8-93f54692937b">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="74323e2a-c5d9-471d-8e04-e25dee919c73">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log generic transaction" entity-id="c59d259d-fc13-4c79-a037-0c579fb2d2d5">
-                            <properties>
-<property value="This is a generic  transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getProfessional-Generic-NormalizationQueue" entity-id="178b8de5-9833-4137-a790-82ed20d6afe9">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getProfessional-Generic-NormalizationQueue" entity-id="a82b85ea-2a1a-43d0-abe8-80051b317084">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -607,87 +160,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                </compartment>
-            </splitter>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="QueryProfessionalsFlow">
-        <properties>
-            <property name="processingStrategy2"/>
-            <property name="processingStrategy"/>
-        </properties>
-        <lane entity-id="69b549c4-4c66-44ba-8ecd-8d14ca560f10">
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="203ac84e-bdf7-4fba-9e2d-6bf659e47858">
-                <properties>
-                    <property-collection name="e961b40d-a01e-474e-a0db-028439507caa">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                    <property-collection name="29604b2b-c5d9-4c6f-9003-714edb8a7e2d">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="d34fe87a-5cc6-4059-8643-30eadcf32491">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="78afff9e-9f81-427f-936e-d43af64f4918">
-                    <properties>
-                        <property-collection name="e961b40d-a01e-474e-a0db-028439507caa">
-                            <property value="true" name="choice.otherwise"/>
-                        </property-collection>
-                        <property-collection name="29604b2b-c5d9-4c6f-9003-714edb8a7e2d">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="d34fe87a-5cc6-4059-8643-30eadcf32491">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                    </properties>
-                </pattern>
-                <compartment entity-id="f13b0125-7e8a-4338-8d78-7eee55f0849f">
-                    <lane entity-id="29604b2b-c5d9-4c6f-9003-714edb8a7e2d">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log OpenMRS specific transaction" entity-id="f2a3e719-4d31-4921-b609-0f909b4136c4">
+                    <lane entity-id="3b07d237-056d-493b-a108-a9f6ca3fb713">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query professionals" entity-id="3eb38778-5ca6-49fc-9065-6aac2d48af97">
                             <properties>
-<property value="This is an OpenMRS specific transaction" name="message"/>
+<property value="Transaction type: query professionals" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="ee9e4e63-ae94-49af-af4f-c69ebf8e058d">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="d34fe87a-5cc6-4059-8643-30eadcf32491">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log RapidSMS specific transcation" entity-id="1c62320c-80a2-4f03-93b8-9d0c2370ffbc">
-                            <properties>
-<property value="This is an RapidSMS specific transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="0f36ab56-1a72-4cfa-bc1a-464fa4aa4d75">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="e961b40d-a01e-474e-a0db-028439507caa">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log generic transaction" entity-id="47e7c95a-5d20-4f80-9409-93da254de2ed">
-                            <properties>
-<property value="This is a generic  transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryProfessionals-Generic-NormalizationQueue" entity-id="4bb424ea-ab0f-4b7e-b968-2de2c8e8c4c8">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryProfessionals-Generic-NormalizationQueue" entity-id="db83967d-d0d3-47e2-ac92-8d6657644199">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -704,87 +185,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                </compartment>
-            </splitter>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="QueryEncountersFlow">
-        <properties>
-            <property name="processingStrategy2"/>
-            <property name="processingStrategy"/>
-        </properties>
-        <lane entity-id="77bd0e44-f30a-4063-8bb3-ea460b8962a0">
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="885ccbf7-7005-4b01-95ee-0b7403fdee7b">
-                <properties>
-                    <property-collection name="a03e44b2-f2ca-4595-aefa-58d906061084">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                    <property-collection name="2f4b128a-4de5-4695-89db-9043e1b08732">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="20f04536-dbd9-43bc-8366-debf2d28afa3">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="cee7beae-9fea-49fa-a3bc-a221a9a4c27c">
-                    <properties>
-                        <property-collection name="a03e44b2-f2ca-4595-aefa-58d906061084">
-                            <property value="true" name="choice.otherwise"/>
-                        </property-collection>
-                        <property-collection name="2f4b128a-4de5-4695-89db-9043e1b08732">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="20f04536-dbd9-43bc-8366-debf2d28afa3">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                    </properties>
-                </pattern>
-                <compartment entity-id="c9a23aa9-902b-4d92-bee7-f947cef8f2a0">
-                    <lane entity-id="2f4b128a-4de5-4695-89db-9043e1b08732">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log OpenMRS specific transaction" entity-id="883cde9b-a2b4-4d85-9414-cd072e1d3156">
+                    <lane entity-id="fc8e1344-bf2c-4cbf-bfda-daf208a0075f">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query encounters" entity-id="19a53b6b-81c7-4e12-8c6d-85a34f131924">
                             <properties>
-<property value="This is an OpenMRS specific transaction" name="message"/>
+<property value="Transaction type: query encounters" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="ff26a3e6-2bbd-41cd-9b6f-b891e0ca8c1f">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="20f04536-dbd9-43bc-8366-debf2d28afa3">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log RapidSMS specific transcation" entity-id="33ecb0cb-944d-49f3-9297-a248f837bff3">
-                            <properties>
-<property value="This is an RapidSMS specific transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="7898ab35-0da6-49bf-bef7-55018134ea31">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="a03e44b2-f2ca-4595-aefa-58d906061084">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log generic transaction" entity-id="a8345815-b2e3-4554-bac3-369ef1e05bf4">
-                            <properties>
-<property value="This is a generic  transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryEncounters-Generic-NormalizationQueue" entity-id="dd9e1a1d-6166-4a3c-9bc5-a2485edb5421">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryEncounters-Generic-NormalizationQueue" entity-id="774dbfa2-1552-4f93-a53d-6ed900594a13">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -801,87 +210,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                </compartment>
-            </splitter>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="SaveEncountersFlow">
-        <properties>
-            <property name="processingStrategy2"/>
-            <property name="processingStrategy"/>
-        </properties>
-        <lane entity-id="b1510318-93f9-40ec-9298-e203a786dab5">
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="cf17f80a-97f3-4969-ac3f-722cf48d5ba5">
-                <properties>
-                    <property-collection name="e71fc5d9-fec4-4ab9-a911-65d7789801f0">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="952261a6-090d-4fba-9018-2a227e2d8a02">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                    <property-collection name="80742268-55db-4b7f-bc32-f29a52e44ba6">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="25d3480d-cd7c-4ec3-b1e5-109be6754be2">
-                    <properties>
-                        <property-collection name="e71fc5d9-fec4-4ab9-a911-65d7789801f0">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="952261a6-090d-4fba-9018-2a227e2d8a02">
-                            <property value="true" name="choice.otherwise"/>
-                        </property-collection>
-                        <property-collection name="80742268-55db-4b7f-bc32-f29a52e44ba6">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                    </properties>
-                </pattern>
-                <compartment entity-id="0293b9bc-5025-47ef-9c01-2ae4dca22cea">
-                    <lane entity-id="e71fc5d9-fec4-4ab9-a911-65d7789801f0">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log OpenMRS specific transaction" entity-id="508cf0e7-39fb-4492-81d1-056bbb875dff">
+                    <lane entity-id="acb49f57-30dc-4340-a94d-fc7f5d3940b3">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log save encounters" entity-id="fca6e3af-cc55-46f0-8b07-55c28855ab2d">
                             <properties>
-<property value="This is an OpenMRS specific transaction" name="message"/>
+<property value="Transaction type: save encounters" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="4fb14fa0-79cd-4f76-ae71-531efea0f4e6">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="80742268-55db-4b7f-bc32-f29a52e44ba6">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log RapidSMS specific transcation" entity-id="8dbbe1dc-6a99-4c0a-9815-aa6ce608aa66">
-                            <properties>
-<property value="This is an RapidSMS specific transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="a3731d8d-899f-4b75-b890-80930188091e">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="952261a6-090d-4fba-9018-2a227e2d8a02">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log generic transaction" entity-id="8d164c00-fd0d-4eaf-8a39-81fecacd178b">
-                            <properties>
-<property value="This is a generic  transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to saveEncounters-Generic-NormalizationQueue" entity-id="ce42d4b6-69d0-47e3-b472-494cf76f224d">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to saveEncounters-Generic-NormalizationQueue" entity-id="91824414-054c-4c9b-aede-3b76f650d5fa">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -898,87 +235,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                </compartment>
-            </splitter>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="GetEncounterFlow">
-        <properties>
-            <property name="processingStrategy2"/>
-            <property name="processingStrategy"/>
-        </properties>
-        <lane entity-id="04e59e6b-39f2-47b0-aa14-139d594f0957">
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="6f5f4b79-6481-46a2-91c6-8953a152dbde">
-                <properties>
-                    <property-collection name="bd8965a5-75eb-4eb7-81ad-7960e9ee9df7">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="e6d41f8b-c806-46ab-a1af-df91b57ce4f1">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                    <property-collection name="59be5770-dfdc-46f1-8d07-c83966873b1c">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="a6e02efd-4b54-4e07-8c76-8be5704941cd">
-                    <properties>
-                        <property-collection name="bd8965a5-75eb-4eb7-81ad-7960e9ee9df7">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="e6d41f8b-c806-46ab-a1af-df91b57ce4f1">
-                            <property value="true" name="choice.otherwise"/>
-                        </property-collection>
-                        <property-collection name="59be5770-dfdc-46f1-8d07-c83966873b1c">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                    </properties>
-                </pattern>
-                <compartment entity-id="acd1030b-c780-48a9-8613-4e3e0b95e822">
-                    <lane entity-id="bd8965a5-75eb-4eb7-81ad-7960e9ee9df7">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log OpenMRS specific transaction" entity-id="8746b290-6710-4175-8f50-9653a48da16b">
+                    <lane entity-id="db763a3a-7978-443c-a2b1-0ac0853fa965">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get encounter" entity-id="f90a02d6-cb90-481c-b601-390454c8e391">
                             <properties>
-<property value="This is an OpenMRS specific transaction" name="message"/>
+<property value="Transaction type: get encounter" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="eb92e47e-1da6-47ac-934e-30d39137c76a">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="59be5770-dfdc-46f1-8d07-c83966873b1c">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log RapidSMS specific transcation" entity-id="e1f28325-e74f-45be-8ad8-284d2ac25770">
-                            <properties>
-<property value="This is an RapidSMS specific transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="2890346b-f659-43c1-81f1-d6d4661255dd">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="e6d41f8b-c806-46ab-a1af-df91b57ce4f1">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log generic transaction" entity-id="56dc716e-c5eb-4419-a899-a9008bea0e06">
-                            <properties>
-<property value="This is a generic  transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getEncounter-Generic-NormalizationQueue" entity-id="9ab3d1ec-8106-40b8-b640-cd9a52731415">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getEncounter-Generic-NormalizationQueue" entity-id="e349dca3-12d1-4c96-a5f7-7b97c4cf638a">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -995,87 +260,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                </compartment>
-            </splitter>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="SavePatientFlow">
-        <properties>
-            <property name="processingStrategy2"/>
-            <property name="processingStrategy"/>
-        </properties>
-        <lane entity-id="2e476772-026e-4148-b39b-a10802b3162e">
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="5cb96b6c-53e9-4315-81b8-054c2579108a">
-                <properties>
-                    <property-collection name="c3d76561-bf45-4a24-9b64-ac1fe7d21c3e">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                    <property-collection name="1382decf-253c-43c1-ac9a-c8c3fc19d34a">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="9a3f603c-b210-4c03-a3e4-1b6e3a7aa4e0">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="70f61926-f2dc-414b-8739-29d5011919ae">
-                    <properties>
-                        <property-collection name="c3d76561-bf45-4a24-9b64-ac1fe7d21c3e">
-                            <property value="true" name="choice.otherwise"/>
-                        </property-collection>
-                        <property-collection name="1382decf-253c-43c1-ac9a-c8c3fc19d34a">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="9a3f603c-b210-4c03-a3e4-1b6e3a7aa4e0">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                    </properties>
-                </pattern>
-                <compartment entity-id="81381df0-6101-4ac6-8e60-f9f661c56e08">
-                    <lane entity-id="1382decf-253c-43c1-ac9a-c8c3fc19d34a">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log OpenMRS specific transaction" entity-id="4d8cb450-e3bf-4fca-b5e4-34d040624b9a">
+                    <lane entity-id="64ac3ba1-9cba-4fa1-a500-9702c72190c8">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log save patient" entity-id="3d87f1c0-ed38-499f-811d-6f6fcac8b647">
                             <properties>
-<property value="This is an OpenMRS specific transaction" name="message"/>
+<property value="Transaction type: save patient" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="5fec9b3c-28c1-4753-8afc-77ac9dc2e8b2">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="9a3f603c-b210-4c03-a3e4-1b6e3a7aa4e0">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log RapidSMS specific transcation" entity-id="e3d826c2-a00d-43f6-993e-2a41ce47c9a5">
-                            <properties>
-<property value="This is an RapidSMS specific transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="c317fc71-dfd1-4730-840a-42a58e5768dc">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="c3d76561-bf45-4a24-9b64-ac1fe7d21c3e">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log generic transaction" entity-id="18e75285-0e68-432e-85fd-b091030c180b">
-                            <properties>
-<property value="This is a generic  transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to savePatient-Generic-NormalizationQueue" entity-id="4e85e20f-ffcc-442a-8388-8b174aab475c">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to savePatient-Generic-NormalizationQueue" entity-id="82697624-01ad-4411-85e9-d8737a547e07">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -1092,87 +285,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                </compartment>
-            </splitter>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="QueryPatientsFlow">
-        <properties>
-            <property name="processingStrategy2"/>
-            <property name="processingStrategy"/>
-        </properties>
-        <lane entity-id="d2c753d0-755f-4d51-a822-da8467a0e3be">
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="a31f58a9-2cad-4309-853e-6416475a24fb">
-                <properties>
-                    <property-collection name="f5b82773-a5fc-4da8-b98e-544d1aae3f82">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                    <property-collection name="936badb1-aaa2-48d3-863f-ad2ea364c28d">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="e47716ca-c807-4264-9b2c-5e3227fcc8ed">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="10e4b0c1-b220-4910-9af9-e93f8225e151">
-                    <properties>
-                        <property-collection name="f5b82773-a5fc-4da8-b98e-544d1aae3f82">
-                            <property value="true" name="choice.otherwise"/>
-                        </property-collection>
-                        <property-collection name="936badb1-aaa2-48d3-863f-ad2ea364c28d">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="e47716ca-c807-4264-9b2c-5e3227fcc8ed">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                    </properties>
-                </pattern>
-                <compartment entity-id="5d256763-4a3e-42a6-832d-58cf36c6bee5">
-                    <lane entity-id="e47716ca-c807-4264-9b2c-5e3227fcc8ed">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log OpenMRS specific transaction" entity-id="4f17d737-06d2-4641-9964-9c0b90e544ba">
+                    <lane entity-id="63161a20-416e-4661-b78a-4935c089c7d9">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query patients" entity-id="7f5d45bb-a542-44c4-9e7a-9eea9804acdf">
                             <properties>
-<property value="This is an OpenMRS specific transaction" name="message"/>
+<property value="Transaction type: query patients" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="68217011-760c-4ed6-b5ab-e40a6997a733">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="936badb1-aaa2-48d3-863f-ad2ea364c28d">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log RapidSMS specific transcation" entity-id="07e82eb8-3959-49d9-b9b4-831c7a3ccff3">
-                            <properties>
-<property value="This is an RapidSMS specific transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="564c64a8-d655-4722-9b3e-e4dc9dbbdcd6">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="f5b82773-a5fc-4da8-b98e-544d1aae3f82">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log generic transaction" entity-id="2e15e372-d591-48e8-80c4-78eae9899abd">
-                            <properties>
-<property value="This is a generic  transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryPatients-Generic-NormalizationQueue" entity-id="c24b55ba-aa4c-483e-97a7-a3905e603f09">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryPatients-Generic-NormalizationQueue" entity-id="bb432128-2b89-4ee1-b788-661d355ffd0c">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -1189,87 +310,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                </compartment>
-            </splitter>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="GetPatientFlow">
-        <properties>
-            <property name="processingStrategy2"/>
-            <property name="processingStrategy"/>
-        </properties>
-        <lane entity-id="facef928-be02-40d7-b77d-50783c42606c">
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="ff7d50df-93cf-46fb-b6fc-b787de76c6eb">
-                <properties>
-                    <property-collection name="cb8fae10-8025-44f8-9578-f8e4e72fe5a0">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="12294f0a-7c06-460f-a86e-e7c2e1916a6b">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="51e96be0-f4dc-4326-a48c-2e3639158e8e">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="5be649f9-8944-49fd-b4d4-ce35f6849d46">
-                    <properties>
-                        <property-collection name="cb8fae10-8025-44f8-9578-f8e4e72fe5a0">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="12294f0a-7c06-460f-a86e-e7c2e1916a6b">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="51e96be0-f4dc-4326-a48c-2e3639158e8e">
-                            <property value="true" name="choice.otherwise"/>
-                        </property-collection>
-                    </properties>
-                </pattern>
-                <compartment entity-id="35b0d4de-8c18-4121-b233-389d562adb1e">
-                    <lane entity-id="cb8fae10-8025-44f8-9578-f8e4e72fe5a0">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log OpenMRS specific transaction" entity-id="7d9ab002-c825-4c4f-a336-e754b0da7c09">
+                    <lane entity-id="b702b7d7-8101-4b6c-bf27-385fdd451220">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get patients" entity-id="1aa627cc-e9a9-4c18-a081-b26af88a21b1">
                             <properties>
-<property value="This is an OpenMRS specific transaction" name="message"/>
+<property value="Transaction type: get patients" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="d553dae7-0111-4a86-8071-951bf1c295ab">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="12294f0a-7c06-460f-a86e-e7c2e1916a6b">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log RapidSMS specific transcation" entity-id="80a08f0f-e403-4a90-9a58-0509987df2bf">
-                            <properties>
-<property value="This is an RapidSMS specific transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="95229ca9-f1a4-446c-bfb8-fba9f7aa840d">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="51e96be0-f4dc-4326-a48c-2e3639158e8e">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log generic transaction" entity-id="ac9859f3-e633-43c9-8d06-7ea3c6b420ce">
-                            <properties>
-<property value="This is a generic  transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getPatient-Generic-NormalizationQueue" entity-id="3c2af592-bfac-498a-a9b4-4ebdd5c92e1e">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getPatient-Generic-NormalizationQueue" entity-id="3144c7e0-a783-44f3-8b0a-02403270e66b">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -1286,87 +335,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                </compartment>
-            </splitter>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="UpdatePatientFlow">
-        <properties>
-            <property name="processingStrategy2"/>
-            <property name="processingStrategy"/>
-        </properties>
-        <lane entity-id="be2c91c7-57f7-4c88-bb55-44239ed490ae">
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="2c9e0397-40ed-4965-9ca5-14d02f33ac4b">
-                <properties>
-                    <property-collection name="ac2d3457-a0b4-49a4-b719-88238fcee814">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                    <property-collection name="72842301-ebdb-418e-bcb1-9caa415ac11a">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="3cac0d3d-db2e-4feb-a0d6-6b30e36b9c78">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="c5a14de9-0ec4-4f92-a5ec-fdb04518d12e">
-                    <properties>
-                        <property-collection name="ac2d3457-a0b4-49a4-b719-88238fcee814">
-                            <property value="true" name="choice.otherwise"/>
-                        </property-collection>
-                        <property-collection name="72842301-ebdb-418e-bcb1-9caa415ac11a">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="3cac0d3d-db2e-4feb-a0d6-6b30e36b9c78">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                    </properties>
-                </pattern>
-                <compartment entity-id="15f7ed8f-0586-4388-8d9c-db3b177680bb">
-                    <lane entity-id="3cac0d3d-db2e-4feb-a0d6-6b30e36b9c78">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log OpenMRS specific transaction" entity-id="388c8b30-28b9-4403-8dbf-a6365c08049b">
+                    <lane entity-id="676f5b9f-5a5e-48bb-b9bf-95e206b30b09">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log update patients" entity-id="2241ab1f-5577-42e9-b707-aa2c3d7cc1aa">
                             <properties>
-<property value="This is an OpenMRS specific transaction" name="message"/>
+<property value="Transaction type: update patients" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="9ce8469d-bca5-4402-ba2f-33b869425340">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="72842301-ebdb-418e-bcb1-9caa415ac11a">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log RapidSMS specific transcation" entity-id="5313add3-1013-4979-937a-89d263eb94fb">
-                            <properties>
-<property value="This is an RapidSMS specific transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="ce024613-8c04-4a3c-93ca-9758c23e37e9">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="ac2d3457-a0b4-49a4-b719-88238fcee814">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log generic transaction" entity-id="c4afcf14-d581-4e79-b31e-b5dbf4a99a7e">
-                            <properties>
-<property value="This is a generic  transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to updatePatient-Generic-NormalizationQueue" entity-id="5d2542e6-e476-4b6c-b1f5-a34111fe3481">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to updatePatient-Generic-NormalizationQueue" entity-id="140104f5-d519-4f61-bd13-ca61ad1f072c">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -1383,87 +360,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                </compartment>
-            </splitter>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="ReceiveAlertFlow">
-        <properties>
-            <property name="processingStrategy2"/>
-            <property name="processingStrategy"/>
-        </properties>
-        <lane entity-id="93488ed4-3c2b-4891-bc2c-2425a407b4c0">
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="632258c9-1c9c-4c3e-ab9d-9c13e615b854">
-                <properties>
-                    <property-collection name="1fa408dd-060c-479c-a0e9-85a09b5ba2a5">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                    <property-collection name="b53ce3c6-e194-4564-858d-21422b2e6bea">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="0e0ca03b-fcc0-416b-bc0c-a86bff5241c7">
-                        <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="efc47ae2-6e29-42e4-8f86-c6cdc6abc649">
-                    <properties>
-                        <property-collection name="1fa408dd-060c-479c-a0e9-85a09b5ba2a5">
-                            <property value="true" name="choice.otherwise"/>
-                        </property-collection>
-                        <property-collection name="b53ce3c6-e194-4564-858d-21422b2e6bea">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('OpenMRS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                        <property-collection name="0e0ca03b-fcc0-416b-bc0c-a86bff5241c7">
-                            <property value="message.getSessionProperty('X-SENDING-APP').equals('RapidSMS')" name="choice.expression"/>
-                            <property value="groovy" name="choice.evaluator"/>
-                        </property-collection>
-                    </properties>
-                </pattern>
-                <compartment entity-id="c7a5a447-5518-462f-ad34-e680b495354f">
-                    <lane entity-id="b53ce3c6-e194-4564-858d-21422b2e6bea">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log OpenMRS specific transaction" entity-id="aaa57414-f016-4f60-9694-02573a12e402">
+                    <lane entity-id="5fa8edcc-6633-4f09-829c-a7fd8c45f05e">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log receive alert" entity-id="a46f6c64-3080-4de0-aa95-601cb54ffddc">
                             <properties>
-<property value="This is an OpenMRS specific transaction" name="message"/>
+<property value="Transaction type: receive alert" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="2c3fadfb-bfae-47c1-8b07-65e8fee00ff3">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="0e0ca03b-fcc0-416b-bc0c-a86bff5241c7">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log RapidSMS specific transcation" entity-id="6bf220e2-dbb0-49f4-b802-6839025b692d">
-                            <properties>
-<property value="This is an RapidSMS specific transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Unimplemented Operation" entity-id="044382c7-7dc2-4ab4-8407-42147320f14d">
-                            <properties>
-<property value="Unimplemented Operation" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                    </lane>
-                    <lane entity-id="1fa408dd-060c-479c-a0e9-85a09b5ba2a5">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log generic transaction" entity-id="7138e76b-2357-44a9-b0db-b8ec58ff35d4">
-                            <properties>
-<property value="This is a generic  transaction" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to receiveAlert-Generic-NormalizationQueue" entity-id="1a053c33-fee8-480a-9ddc-adbd23a38791">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to receiveAlert-Generic-NormalizationQueue" entity-id="e74cac44-77f1-43c4-b3c3-f10dea492ab1">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -1479,6 +384,15 @@
 <property name="responseTransformer-refs"/>
                             </properties>
                         </endpoint>
+                    </lane>
+                    <lane entity-id="b7ff1df3-7844-437c-bd90-8fd26f03d3a8">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Error Logged" entity-id="104fe50a-6988-4613-824f-e8d6ba593e43">
+                            <properties>
+<property value="Could not route message with path: #[groovy: return message.payload.getPath();]" name="message"/>
+<property value="ERROR" name="level"/>
+<property name="category"/>
+                            </properties>
+                        </pattern>
                     </lane>
                 </compartment>
             </splitter>
