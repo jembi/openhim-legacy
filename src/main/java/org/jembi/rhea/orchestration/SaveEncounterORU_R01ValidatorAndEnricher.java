@@ -7,24 +7,26 @@ import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEventContext;
+import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.lifecycle.Callable;
 import org.mule.module.client.MuleClient;
 
+import ca.uhn.hl7v2.model.DataTypeException;
 import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.model.v25.datatype.CX;
-import ca.uhn.hl7v2.model.v25.datatype.XCN;
-import ca.uhn.hl7v2.model.v25.group.ORU_R01_PATIENT_RESULT;
 import ca.uhn.hl7v2.model.v25.message.ORU_R01;
-import ca.uhn.hl7v2.model.v25.segment.OBR;
-import ca.uhn.hl7v2.model.v25.segment.ORC;
 import ca.uhn.hl7v2.model.v25.segment.PID;
 import ca.uhn.hl7v2.model.v25.segment.PV1;
 import ca.uhn.hl7v2.parser.GenericParser;
 import ca.uhn.hl7v2.parser.Parser;
 import ca.uhn.hl7v2.validation.impl.DefaultValidation;
 
-public class RHEAORU_R01Validator implements Callable {
+public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
+	
+	private static boolean validateClient = true;
+	private static boolean validateProvider = true;
+	private static boolean validateLocation = true;
 	
 	private String validateAndEnrichORU_R01(RestfulHttpRequest request, MuleContext muleContext) throws Exception {
 		MuleClient client = new MuleClient(muleContext);
@@ -39,8 +41,27 @@ public class RHEAORU_R01Validator implements Callable {
 		
 		ORU_R01 oru_r01 = (ORU_R01) msg;
 		
-		PID pid = oru_r01.getPATIENT_RESULT().getPATIENT().getPID();
+		if (validateClient) {
+			validateAndEnrichClient(request, client, oru_r01);
+		}
 		
+		if (validateProvider) {
+			validateAndEnrichProvider(client, oru_r01);
+		}
+		
+		if (validateLocation) {
+			validateAndEnrichLocation(client, oru_r01);
+		}
+		
+		return parser.encode(oru_r01, "XML");
+		
+	}
+
+	private void validateAndEnrichClient(RestfulHttpRequest request,
+			MuleClient client, ORU_R01 oru_r01) throws Exception,
+			MuleException, DataTypeException {
+		// Validate that one of the patient ID's is correct
+		PID pid = oru_r01.getPATIENT_RESULT().getPATIENT().getPID();
 		CX[] patientIdentifierList = pid.getPatientIdentifierList();
 		
 		String ecid = null;
@@ -49,7 +70,6 @@ public class RHEAORU_R01Validator implements Callable {
 		}
 		
 		for (int i = 0 ; i < patientIdentifierList.length ; i++) {
-			// Validate that one of the patient ID's is correct
 			String id = patientIdentifierList[i].getIDNumber().getValue();
 			String idType = patientIdentifierList[i].getIdentifierTypeCode().getValue();
 			
@@ -64,20 +84,6 @@ public class RHEAORU_R01Validator implements Callable {
 				ecid = responce.getPayloadAsString();
 			}
 		}
-		/**
-		// ===TESTING CODE===
-		Map<String, String> idMap = new HashMap<String, String>();
-		idMap.put("id", "0123456789");
-		idMap.put("idType", "NID");
-		
-		MuleMessage responce = client.send("vm://getecid", idMap, null, 5000);
-		
-		String success = responce.getInboundProperty("success");
-		if (success.equals("true")) {
-			ecid = responce.getPayloadAsString();
-		}
-		// ===END TESTING CODE===
-		**/
 		
 		if (ecid == null) {
 			throw new Exception("Invalid client ID");
@@ -86,8 +92,13 @@ public class RHEAORU_R01Validator implements Callable {
 			CX id = pid.getPatientIdentifierList(pid.getPatientIdentifierListReps());
 			id.getIdentifierTypeCode().setValue("ECID");
 			id.getIDNumber().setValue(ecid);
+			
+			request.setPath("ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid + "/encounters");
 		}
-		
+	}
+
+	private void validateAndEnrichProvider(MuleClient client, ORU_R01 oru_r01)
+			throws MuleException, Exception, DataTypeException {
 		// Validate provider ID and location ID is correct
 		String epid = null;
 		/**
@@ -146,36 +157,22 @@ public class RHEAORU_R01Validator implements Callable {
 			pv1.getAttendingDoctor(reps).getIdentifierTypeCode().setValue(Constants.EPID_ID_TYPE);
 		}
 		
-		/**
-		// ===TESTING CODE===
-		Map<String, String> ProIdMap = new HashMap<String, String>();
-		ProIdMap.put("id", "0123456789");
-		ProIdMap.put("idType", "NID");
-		
-		MuleMessage responce = client.send("vm://getepid", ProIdMap, null, 5000);
-		
-		String success = responce.getInboundProperty("success");
-		if (success.equals("true")) {
-			epid = responce.getPayloadAsString();
-		}
-		// ===END TESTING CODE===
-		**/
-		
 		if (epid == null) {
 			throw new Exception("Invalid client ID");
 		}
-		
+	}
+
+	private void validateAndEnrichLocation(MuleClient client, ORU_R01 oru_r01)
+			throws MuleException, Exception {
 		// Validate location ID is correct - sending facility
 		String elid = oru_r01.getMSH().getSendingFacility().getHd1_NamespaceID().getValue();
 		
-		responce = client.send("vm://validateFacility-resourcemap", elid, null, 5000);
+		MuleMessage responce = client.send("vm://validateFacility-resourcemap", elid, null, 5000);
 		
-		success = responce.getInboundProperty("success");
+		String success = responce.getInboundProperty("success");
 		if (!success.equals("true")) {
 			throw new Exception("Invalid location ID");
 		}
-		
-		return parser.encode(oru_r01, "XML");
 	}
 
 	@Override

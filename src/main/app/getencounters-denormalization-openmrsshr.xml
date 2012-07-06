@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.2.1" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+    <flow name="mediation-denormalization-getncounter-openmrsshrFlow" doc:name="mediation-denormalization-getncounter-openmrsshrFlow">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="getEncounters-De-normailization-OpenMRSSHR" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
+        <logger message="De-normalizing a query encounters transaction to OpenMRS SHR" level="INFO" doc:name="Logger"/>
+        <custom-transformer class="org.jembi.rhea.transformers.OpenMRSSHROfframpTransformer" doc:name="Off-ramp Transformer"/>
+        <message-properties-transformer doc:name="Add basic auth">
+            <add-message-property key="Authorization" value="Basic YWRtaW46SmVtYmkjMTIz"/>
+        </message-properties-transformer>
+        <logger message="Message to be sent to OpenMRS SHR #[groovy: message.toString();]" level="INFO" doc:name="Logger"/>
+        <response>
+            <logger message="Recieved responce from OpenMRS SHR: #[groovy: message.toString();]]" level="INFO" doc:name="Logger"/>
+            <custom-transformer class="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer" doc:name="HttpResponseToRestfulHttpResponseTransformer"/>
+            <logger message="Responce normalization" level="INFO" doc:name="Logger"/>
+            <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="On-ramp Transformer"/>
+            <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Translation Transformer"/>
+        </response>
+        <http:outbound-endpoint exchange-pattern="request-response" host="shr.jembi.org" port="8080" path="#[groovy: return message.payload.buildUrlWithRequestParams();]" method="GET" doc:name="Deliver message to mock service provider"/>
+    </flow>
+</mule>
