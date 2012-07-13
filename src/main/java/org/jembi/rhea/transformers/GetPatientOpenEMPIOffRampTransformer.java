@@ -20,12 +20,6 @@ public class GetPatientOpenEMPIOffRampTransformer extends AbstractMessageTransfo
 		String id = id_str.substring(index + 1);
 		String domainId = idType;
 		
-		//TODO remove TESTING code
-		id = "7f3efef0-b6e0-11e1-a6f8-1231392d2383";
-		idType = "hl7";
-		domainId = "2.16.840.1.113883.4.357";
-		// END TESTING code
-		
 		String body = "<personIdentifier>\n" +
 					  "   <identifier>" + id + "</identifier>\n" +
                       "   <identifierDomain>\n" +
