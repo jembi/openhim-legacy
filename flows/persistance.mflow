@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="message-persistance">
-    <global-unknown entity-id="4e7e8faf-dd1a-4cd4-b295-1faf289fa042">
+    <global-unknown entity-id="f2c304b4-86b5-4b88-a0b6-46584c60e500">
         <content>&lt;context:property-placeholder xmlns:context=&quot;http://www.springframework.org/schema/context&quot; location=&quot;classpath:my.properties&quot;&gt;&lt;/context:property-placeholder&gt;</content>
     </global-unknown>
-    <global-element type="http://www.springframework.org/schema/beans/bean" name="jdbcDataSource" entity-id="fe89cd42-4939-4f0e-8481-7c5b5df3a9f8">
+    <global-element type="http://www.springframework.org/schema/beans/bean" name="jdbcDataSource" entity-id="da727db0-c39c-42df-90b3-edfd9164a558">
         <properties>
             <property value="jdbcDataSource" name="id"/>
             <property value="jdbcDataSource" name="name"/>
@@ -38,7 +38,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <global-element type="org.mule.tooling.ui.modules.core.global.jdbcConnector" name="JDBCConnector" entity-id="a6f858d2-998d-4562-a92d-bcdb9cbe1de7">
+    <global-element type="org.mule.tooling.ui.modules.core.global.jdbcConnector" name="JDBCConnector" entity-id="58f5db75-9f36-4466-a0d7-992aa67cbde2">
         <properties>
             <property value="JDBCConnector" name="name"/>
             <property value="jdbcDataSource" name="dataSource-ref to JDBC DataSource"/>
@@ -58,57 +58,47 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="9efd099a-19d0-4cfa-92b5-701e67fab7da">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="31ff838a-417d-47c9-b4e9-e90e6e7d31b4">
+        <lane entity-id="4fde2d15-c44d-4b2d-a9bb-89e0c2e3b203">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="747c8213-f25a-48e7-894c-c2aca89f649a">
                 <properties>
-                    <property value="" name="ref"/>
-                    <property value="" name="transformer-refs"/>
-                    <property value="" name="address"/>
-                    <property value="" name="encoding"/>
-                    <property value="messagePersistanceQueue" name="path"/>
-                    <property value="" name="responseTransformer-refs"/>
-                    <property value="false" name="disableTransportTransformer"/>
-                    <property value="text/plain" name="mimeType"/>
-                    <property value="10000" name="responseTimeout"/>
+                    <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
-                    <property value="" name="connector-ref"/>
+                    <property value="messagePersistanceQueue" name="path"/>
+                    <property name="address"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="text/plain" name="mimeType"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
                 </properties>
-                <description></description>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="3bbc0a5d-4bf1-41ae-b892-99f06af56108">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="c489c1c8-dcf0-44ec-ae7b-97f3bb424bde">
                 <properties>
                     <property value="Persisting Transaction" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <response entity-id="602ae26e-0a7a-4e08-9b32-ee8f78f7696e">
-                <compartment entity-id="ec474688-2c61-410a-bbcd-b1bebb28be2f">
-                    <lane entity-id="08dcc30e-f073-4e78-bbe1-03a0ac3b4502">
-                        <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="512dc5cb-01ed-4f0b-8d8c-29eadcc38893">
+            <response entity-id="c2eb22c7-112f-4632-9e1f-478f0d096b83">
+                <compartment entity-id="190421d0-fe30-4542-8369-7514a1977476">
+                    <lane entity-id="6e58716e-c6a6-4240-8e76-6d8cd17d5631">
+                        <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="8d9f1eb6-d1c8-4dcf-8ae4-030149d8c8c1">
                             <properties>
-<property-collection name="5318b337-e5a2-4ce7-836d-bb860295aa6c">
-    <property value="true" name="choice.otherwise"/>
-</property-collection>
-<property-collection name="d104d801-2958-4d0c-90e3-beab33f1db5b">
+<property-collection name="c1f6ff4e-0b63-4b08-bf09-b200b6ee9289">
     <property value="payload instanceof org.jembi.rhea.RestfulHttpResponse" name="choice.expression"/>
     <property value="groovy" name="choice.evaluator"/>
 </property-collection>
+<property-collection name="d0ae8749-fd19-4cdc-869d-063de0dbaf24">
+    <property value="true" name="choice.otherwise"/>
+</property-collection>
                             </properties>
-                            <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="1080d70d-319a-44f6-8522-1c932e4d7244">
-<properties>
-    <property-collection name="5318b337-e5a2-4ce7-836d-bb860295aa6c">
-        <property value="true" name="choice.otherwise"/>
-    </property-collection>
-    <property-collection name="d104d801-2958-4d0c-90e3-beab33f1db5b">
-        <property value="payload instanceof org.jembi.rhea.RestfulHttpResponse" name="choice.expression"/>
-        <property value="groovy" name="choice.evaluator"/>
-    </property-collection>
-</properties>
-                            </pattern>
-                            <compartment entity-id="590fd7c9-0ab3-4e17-928e-62a33324bd0b">
-<lane entity-id="d104d801-2958-4d0c-90e3-beab33f1db5b">
-    <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw message response" entity-id="df54380e-4efc-4657-87e5-90e36ab1577a">
+                            <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="822bcad4-00f1-4bb0-91e4-b34b633fd3e9"/>
+                            <compartment entity-id="4c8d8411-bb8f-4844-a67e-b548ebedb8bf">
+<lane entity-id="c1f6ff4e-0b63-4b08-bf09-b200b6ee9289">
+    <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw message response" entity-id="64823003-5d8d-4f39-a7b9-69b667d387e2">
         <properties>
             <property value="one-way" name="exchange-pattern"/>
             <property value="request-response" name="exchange-pattern"/>
@@ -127,13 +117,20 @@
             <property-collection name="@http://www.mulesoft.org/schema/mule/jdbc/query;0">
                 <property value="UPDATE transaction_log SET status='2', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];" name="value"/>
                 <property value="updateMsg" name="key"/>
-                <property value="true" name="isProcessed$$$$"/>
             </property-collection>
         </properties>
     </endpoint>
 </lane>
-<lane entity-id="5318b337-e5a2-4ce7-836d-bb860295aa6c">
-    <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw message response" entity-id="18504044-3aee-4329-a5f9-ed9acf392a26">
+<lane entity-id="d0ae8749-fd19-4cdc-869d-063de0dbaf24">
+    <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" name="Groovy" entity-id="8e3c54ba-d0dd-4575-9b72-75582265ef7d">
+        <properties>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
+                <property value="StringWriter sw = new StringWriter();&#xA;message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));&#xA;message.setOutboundProperty(&quot;stacktrace&quot;, sw.toString());" name="text"/>
+                <property value="Groovy" name="engine"/>
+            </property-collection>
+        </properties>
+    </pattern>
+    <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw message response" entity-id="a1a03009-4abf-40cd-8cd0-ae2161479f72">
         <properties>
             <property value="one-way" name="exchange-pattern"/>
             <property value="request-response" name="exchange-pattern"/>
@@ -150,9 +147,8 @@
             <property name="transformer-refs"/>
             <property name="responseTransformer-refs"/>
             <property-collection name="@http://www.mulesoft.org/schema/mule/jdbc/query;0">
-                <property value="UPDATE transaction_log SET status='3', error_description=#[groovy: return message.getExceptionPayload().getMessage();], error_stacktrace=#[groovy: return message.getExceptionPayload().getRootException().toString();], responded_timestamp=now() WHERE uuid=#[header:SESSION:uuid];" name="value"/>
+                <property value="UPDATE transaction_log SET status='3', error_description=#[groovy: return message.getExceptionPayload().getMessage();], error_stacktrace=#[header:OUTBOUND:stacktrace], responded_timestamp=now() WHERE uuid=#[header:SESSION:uuid];" name="value"/>
                 <property value="errorMsg" name="key"/>
-                <property value="true" name="isProcessed$$$$"/>
             </property-collection>
         </properties>
     </endpoint>
@@ -162,7 +158,7 @@
                     </lane>
                 </compartment>
             </response>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw message" entity-id="a14a5f61-c5e3-49fb-b3be-4027b36b4604">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw message" entity-id="329707df-893a-4e3c-ac76-1fb1fa1f05d3">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -184,7 +180,7 @@
                     </property-collection>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set message uuid in session" entity-id="b1e54b3b-a1f7-4fbc-90de-8ffe86dcf7f7">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set message uuid in session" entity-id="d32938c5-5fcc-4051-bf14-f0829f4ca7c2">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -198,21 +194,21 @@
                     </property-collection>
                 </properties>
             </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="69fa5ccc-8286-4a46-9d38-e7c999a35a62">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="bb07cdef-3e80-41fe-bd96-0e677b2f1240">
                 <properties>
-                    <property value="" name="ref"/>
-                    <property value="" name="transformer-refs"/>
-                    <property value="" name="address"/>
-                    <property value="" name="encoding"/>
-                    <property value="transactionRouterQueue" name="path"/>
-                    <property value="" name="responseTransformer-refs"/>
-                    <property value="false" name="disableTransportTransformer"/>
-                    <property value="text/plain" name="mimeType"/>
-                    <property value="10000" name="responseTimeout"/>
+                    <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
-                    <property value="" name="connector-ref"/>
+                    <property value="transactionRouterQueue" name="path"/>
+                    <property name="address"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="text/plain" name="mimeType"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
                 </properties>
-                <description></description>
             </endpoint>
         </lane>
     </flow>
