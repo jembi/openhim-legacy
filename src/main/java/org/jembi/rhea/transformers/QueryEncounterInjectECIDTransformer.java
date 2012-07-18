@@ -37,7 +37,7 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 			idMap.put("id", id);
 			idMap.put("idType", idType);
 			
-			MuleMessage responce = client.send("vm://getecid", idMap, null, 5000);
+			MuleMessage responce = client.send("vm://getecid-openempi", idMap, null, 5000);
 			
 			String success = responce.getInboundProperty("success");
 			

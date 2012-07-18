@@ -7,7 +7,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
     <flow name="mediation-orchestration-queryencountersFlow" doc:name="mediation-orchestration-queryencountersFlow">
         <vm:inbound-endpoint exchange-pattern="request-response" path="queryEncountersOrchestrationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
         <logger message="Orchestrating a query encounters transaction" level="INFO" doc:name="Logger"/>
-        <custom-transformer class="org.jembi.rhea.transformers.QueryEncounterInjectECIDTransformer" doc:name="Java"/>
+        <custom-transformer class="org.jembi.rhea.transformers.QueryEncounterInjectECIDTransformer" doc:name="Inject ECID from CR"/>
         <response>
             <logger message="Responce orchestration" level="INFO" doc:name="Logger"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Java"/>
