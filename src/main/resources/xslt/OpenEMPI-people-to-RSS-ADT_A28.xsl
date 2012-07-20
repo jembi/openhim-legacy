@@ -77,6 +77,32 @@
                     <xsl:element name="PID.8">
                         <xsl:value-of select="gender/genderCode"/>
                     </xsl:element>
+                    <xsl:element name="PID.11">
+                        <!-- District -->
+                        <xsl:element name="XAD.3">
+                            <xsl:value-of select="city"/>
+                        </xsl:element>
+                        <!-- Province -->
+                        <xsl:element name="XAD.4">
+                            <xsl:value-of select="state"/>
+                        </xsl:element>
+                        <!-- Country -->
+                        <xsl:element name="XAD.6">
+                            <xsl:value-of select="country"/>
+                        </xsl:element>
+                        <!-- Cell -->
+                        <xsl:element name="XAD.8">
+                            <xsl:value-of select="address1"/>
+                        </xsl:element>
+                        <!-- Sector -->
+                        <xsl:element name="XAD.9">
+                            <xsl:value-of select="address2"/>
+                        </xsl:element>
+                        <!-- Village -->
+                        <xsl:element name="XAD.10">
+                            <xsl:value-of select="village"/>
+                        </xsl:element>
+                    </xsl:element>
                 </xsl:element>
             </xsl:element>
         </xsl:element>
