@@ -16,6 +16,22 @@
                 <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.5/hl7:XPN.1/hl7:FN.1"/>
             </xsl:element>
             
+            <xsl:element name="country">
+                <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.11/hl7:XAD.6"></xsl:value-of>
+            </xsl:element>
+            <xsl:element name="state">
+                <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.11/hl7:XAD.4"></xsl:value-of>
+            </xsl:element>
+            <xsl:element name="city">
+                <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.11/hl7:XAD.3"></xsl:value-of>
+            </xsl:element>
+            <xsl:element name="address2">
+                <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.11/hl7:XAD.9"></xsl:value-of>
+            </xsl:element>
+            <xsl:element name="address1">
+                <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.11/hl7:XAD.8"></xsl:value-of>
+            </xsl:element>
+            
             <xsl:apply-templates select="hl7:ADT_A05/hl7:PID/hl7:PID.3"></xsl:apply-templates>
             
         </xsl:element>
