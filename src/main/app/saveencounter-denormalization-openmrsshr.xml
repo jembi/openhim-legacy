@@ -23,6 +23,6 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="On-ramp Transformer"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Translation Transformer"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="shr.jembi.org" port="8080" path="#[header:OUTBOUND:path]" contentType="text/xml" doc:name="Deliver message to mock service provider"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="shr.jembi.org" port="8080" path="#[header:OUTBOUND:path]" responseTimeout="120000" contentType="text/xml" doc:name="Deliver message to mock service provider"/>
     </flow>
 </mule>
