@@ -20,6 +20,6 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="On-ramp Transformer"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Translation Transformer"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="shr.jembi.org" port="8080" path="#[groovy: return message.payload.buildUrlWithRequestParams();]" method="GET" user="him" password="HIM-password123" contentType="text/xml" doc:name="Deliver message to OpenMRS SHR"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="shr.jembi.org" port="8080" path="#[groovy: return message.payload.buildUrlWithRequestParams();]" method="GET" responseTimeout="60000" user="him" password="HIM-password123" contentType="text/xml" doc:name="Deliver message to OpenMRS SHR"/>
     </flow>
 </mule>
