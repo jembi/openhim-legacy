@@ -9,11 +9,18 @@
                     <xsl:with-param name="date" select="hl7:ADT_A05/hl7:PID/hl7:PID.7/hl7:TS.1"></xsl:with-param>
                 </xsl:call-template>
             </xsl:element>
+            
             <xsl:element name="givenName">
                 <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.5/hl7:XPN.2"/>
             </xsl:element>
             <xsl:element name="familyName">
                 <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.5/hl7:XPN.1/hl7:FN.1"/>
+            </xsl:element>
+            
+            <xsl:element name="gender">
+                <xsl:element name="genderCode">
+                    <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.8"></xsl:value-of>
+                </xsl:element>
             </xsl:element>
             
             <xsl:element name="country">
