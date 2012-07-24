@@ -31,6 +31,6 @@ return message;]]></scripting:text>
             </scripting:component>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Translation Transformer"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="cr.jembi.org" port="8080" path="openempi/openempi-ws-rest/person-manager-resource/addPerson" method="PUT" mimeType="text/xml" doc:name="Deliver message to mock service provider"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="cr.jembi.org" port="8080" path="openempi/openempi-ws-rest/person-manager-resource/addPerson" method="PUT" mimeType="text/xml" responseTimeout="60000" doc:name="Deliver message to mock service provider"/>
     </flow>
 </mule>

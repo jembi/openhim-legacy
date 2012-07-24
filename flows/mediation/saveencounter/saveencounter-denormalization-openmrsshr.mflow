@@ -128,29 +128,29 @@
             </response>
             <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="Deliver message to mock service provider" entity-id="9db71715-bb44-45e5-90f7-5a42f8cc1aee">
                 <properties>
-                    <property value="one-way" name="exchange-pattern"/>
-                    <property value="request-response" name="exchange-pattern"/>
-                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
-                    <property name="httpLabel"/>
-                    <property value="shr.jembi.org" name="host"/>
                     <property value="8080" name="port"/>
-                    <property value="#[header:OUTBOUND:path]" name="path"/>
-                    <property name="method"/>
-                    <property name="address"/>
-                    <property name="encoding"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="mimeType"/>
-                    <property value="120000" name="responseTimeout"/>
-                    <property name="followRedirects"/>
-                    <property name="connector-ref"/>
-                    <property name="ref"/>
-                    <property name="transformer-refs"/>
-                    <property name="responseTransformer-refs"/>
-                    <property name="user"/>
-                    <property name="password"/>
+                    <property value="shr.jembi.org" name="host"/>
+                    <property value="false" name="followRedirects"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="false" name="keep-alive"/>
                     <property value="text/xml" name="contentType"/>
-                    <property name="keep-alive"/>
+                    <property value="false" name="disableTransportTransformer"/>
+                    <property value="" name="password"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="" name="ref"/>
+                    <property value="" name="transformer-refs"/>
+                    <property value="" name="httpLabel"/>
+                    <property value="" name="address"/>
+                    <property value="#[header:OUTBOUND:path]" name="path"/>
+                    <property value="" name="encoding"/>
+                    <property value="" name="responseTransformer-refs"/>
+                    <property value="" name="method"/>
+                    <property value="" name="user"/>
+                    <property value="120000" name="responseTimeout"/>
+                    <property value="" name="mimeType"/>
+                    <property value="" name="connector-ref"/>
                 </properties>
+                <description></description>
             </endpoint>
         </lane>
     </flow>
