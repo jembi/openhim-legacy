@@ -21,9 +21,9 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
             <logger message="Responce normalization" level="INFO" doc:name="Logger"/>
             <scripting:component doc:name="On-ramp transformer">
                 <scripting:script engine="Groovy">
-                    <scripting:text><![CDATA[if (message.payload.httpStatus == 200) {
+                    <scripting:text><![CDATA[if (message.payload.httpStatus == 204) {
 	message.payload.body = '';
-	message.payload.httpStatus = 201;
+	message.payload.httpStatus = 200;
 }
 return message;]]></scripting:text>
                 </scripting:script>
