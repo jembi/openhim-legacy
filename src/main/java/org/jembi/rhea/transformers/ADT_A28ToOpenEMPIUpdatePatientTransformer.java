@@ -59,7 +59,7 @@ public class ADT_A28ToOpenEMPIUpdatePatientTransformer extends AbstractMessageTr
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			Date date = sdf.parse(dob);
-			sdf = new SimpleDateFormat("yyyy-MM-dd'T'mm:hh:ss'Z'");
+			sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 			dob = sdf.format(date);
 			
 			// Gender
