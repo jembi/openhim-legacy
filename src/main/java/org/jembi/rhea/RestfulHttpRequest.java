@@ -1,6 +1,8 @@
 package org.jembi.rhea;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -134,6 +136,13 @@ public class RestfulHttpRequest implements Serializable {
 			String param = paramAndVal.substring(0, indexOfEquals);
 			String val = paramAndVal.substring(indexOfEquals + 1);
 
+			try {
+				param = URLDecoder.decode(param, "UTF-8");
+				val = URLDecoder.decode(val, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			
 			requestParams.put(param, val);
 		}
 	}

@@ -1,5 +1,8 @@
 package org.jembi.rhea.transformers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -33,12 +36,38 @@ public class OpenMRSSHROfframpTransformer extends AbstractMessageTransformer {
 			patientId = id_str.substring(index + 1);
 		}
 		
+		Map<String, String> origRequestParams = request.getRequestParams();
+		String startDate = origRequestParams.get("encounter_start_date");
+		String endDate = origRequestParams.get("encounter_end_date");
+		
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
+		
 		request.setPath("openmrs/ws/rest/RHEA/patient/encounters");
 		
-		Map<String, String> requestParams = new HashMap<String, String>();
-		requestParams.put("patientId", patientId);
-		requestParams.put("idType", idType);
-		request.setRequestParams(requestParams);
+		Map<String, String> newRequestParams = new HashMap<String, String>();
+		
+		try {
+			if (startDate != null) {
+				Date date = sdf1.parse(startDate);
+				startDate = sdf2.format(date);
+				
+				newRequestParams.put("dateStart", startDate);
+			}
+			
+			if (endDate != null) {
+				Date date = sdf1.parse(endDate);
+				endDate = sdf2.format(date);
+				
+				newRequestParams.put("dateEnd", endDate);
+			}
+		} catch (ParseException e) {
+			throw new TransformerException(this, e);
+		}
+		
+		newRequestParams.put("patientId", patientId);
+		newRequestParams.put("idType", idType);
+		request.setRequestParams(newRequestParams);
 		
 		return msg;
 	}
