@@ -27,7 +27,9 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         <service-overrides sessionHandler="org.mule.session.NullSessionHandler"/>
     </http:connector>
     <flow name="RESTEntryPoint-HTTPS" doc:name="RESTEntryPoint-HTTPS">
-        <https:inbound-endpoint exchange-pattern="request-response" host="localhost" port="5000" connector-ref="HTTPSConnector" doc:name="HTTP"/>
+        <https:inbound-endpoint exchange-pattern="request-response" host="localhost" port="5000" connector-ref="HTTPSConnector" doc:name="HTTP">
+        	<mule-ss:http-security-filter realm="mule-realm"/>
+        </https:inbound-endpoint>
         <response>
             <custom-transformer class="org.jembi.rhea.transformers.RestfulHttpResponseToHttpResponseTransformer" doc:name="RestfulHttpResponseToHttpResponseTransformer"/>
             <logger message="Transaction responce sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Logger"/>
