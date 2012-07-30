@@ -37,6 +37,10 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 			idMap.put("id", id);
 			idMap.put("idType", idType);
 			
+			if (id == null || idType == null) {
+				throw new Exception("Invalid Client: id or id type is null");
+			}
+			
 			MuleMessage responce = client.send("vm://getecid-openempi", idMap, null, 5000);
 			
 			String success = responce.getInboundProperty("success");
@@ -45,7 +49,7 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 			if (success.equals("true")) {
 				ecid = responce.getPayloadAsString();
 			} else {
-				throw new Exception();
+				throw new Exception("Invalid Client: ECID for NID:" + id + " could not be found in Client Registry");
 			}
 			
 			path = "ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid + "/encounters";  
@@ -53,7 +57,7 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 			req.setPath(path);
 			
 		} catch (Exception e) {
-			throw new TransformerException((Message) msg, e);
+			throw new TransformerException(this, e);
 		}
 		
 		return msg;

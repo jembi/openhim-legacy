@@ -10,7 +10,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <custom-transformer class="org.jembi.rhea.transformers.QueryEncounterInjectECIDTransformer" doc:name="Inject ECID from CR"/>
         <response>
             <logger message="Responce orchestration" level="INFO" doc:name="Logger"/>
-            <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Java"/>
+            <custom-transformer class="org.jembi.rhea.transformers.QueryEncounterInjectNIDTransformer" doc:name="Inject NID from PR"/>
         </response>
         <vm:outbound-endpoint exchange-pattern="request-response" path="queryEncountersDe-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Send to queryPatientDemographicsDe-NormalizationQueue"/>
     </flow>
