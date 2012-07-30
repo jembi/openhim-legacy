@@ -16,9 +16,9 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <add-message-property key="OPENEMPI_SESSION_KEY" value="6EC7C83CAD160FF2DA850676812A7A4C"/>
         </message-properties-transformer>
         <response>
-            <logger message="Recieved responce from OpenEMPI: #[groovy: message.toString();]]" level="INFO" doc:name="Logger"/>
+            <logger message="Recieved responce from OpenEMPI: #[groovy: message.toString();] with payload: #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
             <choice doc:name="Choice">
-                <when expression="(message.getPayloadAsString() != NULL) &amp;&amp; (message.getPayloadAsString() != '')" evaluator="groovy">
+                <when expression="true" evaluator="groovy">
                     <processor-chain>
                         <logger message="Performing XSLT transform" level="INFO" doc:name="Logger"/>
                         <mulexml:xslt-transformer maxIdleTransformers="2" maxActiveTransformers="5" xsl-file="xslt/OpenEMPI-person-to-ADT_A28.xsl" doc:name="On-ramp transformer - XSLT"/>

@@ -5,8 +5,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="141646c8-22f2-452f-931d-4decd577a54e">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="6c4141f9-3700-4825-b0ab-81628a1ff6cb">
+        <lane entity-id="a9d6b405-8138-4285-996b-abe8e1f093a1">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="f2494dd9-b613-4631-8d6d-eb7e8031a726">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -22,14 +22,14 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="a1ff3773-3a49-4e8f-b81e-68fa069b8900">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="77519ae0-f436-43b7-87a4-3fa6508d0a57">
                 <properties>
                     <property value="De-normalizing a get patient transaction to OpenEMPI" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Off-ramp Transformer" entity-id="5095dfe0-d1a2-45a6-9c97-1232adf59e2c">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Off-ramp Transformer" entity-id="de81aacd-a8a0-4ab9-ac35-94b0d4e5a92a">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -38,7 +38,7 @@
                     <property value="org.jembi.rhea.transformers.GetPatientOpenEMPIOffRampTransformer" name="class"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="Expression" entity-id="86f457c4-bf4c-43a3-8fe8-7e99c1bc7b94">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="Expression" entity-id="fc77ff9b-5ba9-45cd-8859-29b529caffc3">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -50,7 +50,7 @@
                     <property name="returnSourceIfNull"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Message Properties" entity-id="660d0002-7215-4a42-8c70-4b30a1d2340f">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Message Properties" entity-id="766b7548-b59b-4f1f-9a55-57793e6fd38f">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -64,47 +64,37 @@
                     </property-collection>
                 </properties>
             </pattern>
-            <response entity-id="ea03a94c-fbd4-47d8-9f72-5b7cd0cfc4ae">
-                <compartment entity-id="f255d518-ec18-435f-87f4-9d21a43eff60">
-                    <lane entity-id="94f65cdd-4557-4091-8e2a-65159286e615">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="109003cf-14b0-4dbe-97c7-6baf8d87ad2a">
+            <response entity-id="630d84f7-6ec9-4c05-98ca-263098412d10">
+                <compartment entity-id="fa0871f2-2b78-4c4d-b89c-751bb842e74a">
+                    <lane entity-id="956584d3-d2a4-4b3c-88e9-9cad757fbb6c">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="06bb72be-4d11-4b80-939f-8fbd63a80fcf">
                             <properties>
-<property value="Recieved responce from OpenEMPI: #[groovy: message.toString();]]" name="message"/>
+<property value="Recieved responce from OpenEMPI: #[groovy: message.toString();] with payload: #[groovy: message.getPayloadAsString();]" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="76415421-f103-4507-8174-2f38c4c5b808">
+                        <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="5b5877b2-575e-48d2-aa3b-14b6c54b6bec">
                             <properties>
-<property-collection name="6affd22a-8818-4ad2-a176-320b652179fa">
-    <property value="true" name="choice.otherwise"/>
-</property-collection>
-<property-collection name="3ad3cb82-1975-4b0e-9bbe-ed78890bbd15">
-    <property value="(message.getPayloadAsString() != NULL) &amp;&amp; (message.getPayloadAsString() != '')" name="choice.expression"/>
+<property-collection name="3bf7a31d-42c4-488b-ab83-90a323222c66">
+    <property value="true" name="choice.expression"/>
     <property value="groovy" name="choice.evaluator"/>
 </property-collection>
+<property-collection name="8fd5f531-f200-4a9f-b694-f67c84b14bc3">
+    <property value="true" name="choice.otherwise"/>
+</property-collection>
                             </properties>
-                            <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="d71ba7b5-002e-4314-bc9a-bea377eab5ab">
-<properties>
-    <property-collection name="6affd22a-8818-4ad2-a176-320b652179fa">
-        <property value="true" name="choice.otherwise"/>
-    </property-collection>
-    <property-collection name="3ad3cb82-1975-4b0e-9bbe-ed78890bbd15">
-        <property value="(message.getPayloadAsString() != NULL) &amp;&amp; (message.getPayloadAsString() != '')" name="choice.expression"/>
-        <property value="groovy" name="choice.evaluator"/>
-    </property-collection>
-</properties>
-                            </pattern>
-                            <compartment entity-id="9c7f58b0-9a04-43c5-b4b3-a102f5fe158d">
-<lane entity-id="3ad3cb82-1975-4b0e-9bbe-ed78890bbd15">
-    <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="fe457484-9a61-4942-bbaa-e0ddbc0a6fc0">
+                            <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="7f8764a7-653f-4f7b-b7a7-d7d9622d49fe"/>
+                            <compartment entity-id="7e616423-6003-410b-a177-fb1f1abd50be">
+<lane entity-id="3bf7a31d-42c4-488b-ab83-90a323222c66">
+    <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="aa23bab8-020b-46ff-89ba-c06eec3fe0a1">
         <properties>
             <property value="Performing XSLT transform" name="message"/>
             <property value="INFO" name="level"/>
             <property name="category"/>
         </properties>
     </pattern>
-    <pattern type="http://www.mulesoft.org/schema/mule/xml/xslt-transformer" name="On-ramp transformer - XSLT" entity-id="51921066-6407-4963-815e-57b1e76e0e63">
+    <pattern type="http://www.mulesoft.org/schema/mule/xml/xslt-transformer" name="On-ramp transformer - XSLT" entity-id="f9ccdfb8-041c-46a6-bf75-7bb5bbf59c03">
         <properties>
             <property name="returnClass"/>
             <property name="ignoreBadInput"/>
@@ -119,8 +109,8 @@
         </properties>
     </pattern>
 </lane>
-<lane entity-id="6affd22a-8818-4ad2-a176-320b652179fa">
-    <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="3539f3bf-f244-433a-8929-49ba90ad30a3">
+<lane entity-id="8fd5f531-f200-4a9f-b694-f67c84b14bc3">
+    <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="9bae56b1-536e-4882-9d29-9a312f19a84e">
         <properties>
             <property value="Response empty, skipping XSLT transform" name="message"/>
             <property value="INFO" name="level"/>
@@ -130,7 +120,7 @@
 </lane>
                             </compartment>
                         </splitter>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="HttpResponseToRestfulHttpResponseTransformer" entity-id="d9099531-274d-470d-8ddb-075c8b971f5e">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="HttpResponseToRestfulHttpResponseTransformer" entity-id="65531d5c-7060-4e4a-ae02-ab0910652215">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
@@ -139,28 +129,26 @@
 <property value="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer" name="class"/>
                             </properties>
                         </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyTransformer" name="Groovy" entity-id="2e8fd737-d43e-44ce-925d-2b3a6aa9549c">
+                        <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyTransformer" name="Groovy" entity-id="25207a29-67fe-43f7-8e16-f4d190ea9338">
                             <properties>
-<property value="" name="returnClass"/>
-<property value="false" name="ignoreBadInput"/>
-<property value="if (message.payload.httpStatus == 204) {&#xA;&#x9;message.payload.body = '';&#xA;&#x9;message.payload.httpStatus = 400;&#xA;}&#xA;return message;" name="text"/>
-<property value="" name="encoding"/>
-<property value="" name="mimeType"/>
-<property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;2049122018">
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="encoding"/>
+<property name="mimeType"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
     <property value="if (message.payload.httpStatus == 204) {&#xA;&#x9;message.payload.body = '';&#xA;&#x9;message.payload.httpStatus = 400;&#xA;}&#xA;return message;" name="text"/>
-    <property value="true" name="isProcessed$$$$"/>
+    <property value="Groovy" name="engine"/>
 </property-collection>
                             </properties>
-                            <description></description>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="3d7b62ef-a47d-4bae-8143-af34f72ff6ae">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="009827ca-dea8-4c33-af9c-0251162d0a3b">
                             <properties>
 <property value="Responce normalization" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Translation Transformer" entity-id="d54a9125-8804-43e7-9433-d7e80fb00e40">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Translation Transformer" entity-id="1c136207-c897-4d22-b4f1-bf49fc0254ed">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
@@ -172,7 +160,7 @@
                     </lane>
                 </compartment>
             </response>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="Deliver message to mock service provider" entity-id="63c1b012-e1f1-4c16-84a0-2e00ee054536">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="Deliver message to mock service provider" entity-id="c13fd081-2ab5-4e95-ac8a-80516462a052">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
