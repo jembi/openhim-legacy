@@ -28,6 +28,6 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             </choice>
             <logger message="Exitting getnid de-normalization for OpenLDAP #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="ec2-23-20-99-105.compute-1.amazonaws.com" port="80" path="webservices/lookupbyid/nid/?id_type=#[groovy: return message.payload.get('idType')]&amp;id_number=#[groovy: return message.payload.get('id')]" method="GET" doc:name="HTTP"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="pr.jembi.org" port="80" path="webservices/lookupbyid/nid/?id_type=#[groovy: return message.payload.get('idType')]&amp;id_number=#[groovy: return message.payload.get('id')]" method="GET" doc:name="HTTP"/>
     </flow>
 </mule>

@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <logger message="Length: #[groovy: message.getPayloadAsString().length()]" level="INFO" doc:name="Logger"/>
         <response>
             <choice doc:name="Choice">
-                <when expression="message.getInboundProperty('http.status').equals('200') &amp;&amp; (message.getPayloadAsString().length() > 0)" evaluator="groovy">
+                <when expression="message.getInboundProperty('http.status').equals('200') &amp;&amp; (message.getPayloadAsString().length() &gt; 0)" evaluator="groovy">
                     <processor-chain>
                         <message-properties-transformer doc:name="Set transaction success">
                             <add-message-property key="success" value="true"/>
@@ -28,6 +28,6 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             </choice>
             <logger message="Exitting getepid de-normalization for OpenLDAP #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="ec2-23-20-99-105.compute-1.amazonaws.com" port="80" path="webservices/lookupbyid/epid/?id_type=#[groovy: return message.payload.get('idType')]&amp;id_number=#[groovy: return message.payload.get('id')]" method="GET" doc:name="HTTP"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="pr.jembi.org" port="80" path="webservices/lookupbyid/epid/?id_type=#[groovy: return message.payload.get('idType')]&amp;id_number=#[groovy: return message.payload.get('id')]" method="GET" doc:name="HTTP"/>
     </flow>
 </mule>
