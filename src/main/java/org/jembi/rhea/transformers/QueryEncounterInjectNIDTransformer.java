@@ -33,6 +33,10 @@ public class QueryEncounterInjectNIDTransformer extends
 			
 			String ORU_R01_str = res.getBody();
 			
+			if (ORU_R01_str == null || ORU_R01_str.equals("")) {
+				return msg;
+			}
+			
 			Parser parser = new GenericParser();
 			DefaultValidation defaultValidation = new DefaultValidation();
 			parser.setValidationContext(defaultValidation);
