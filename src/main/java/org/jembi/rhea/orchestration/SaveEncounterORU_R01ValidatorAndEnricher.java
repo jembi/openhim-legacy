@@ -158,7 +158,7 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		}
 		
 		if (epid == null) {
-			throw new Exception("Invalid client ID");
+			throw new Exception("Invalid provider ID");
 		}
 	}
 
