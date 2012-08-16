@@ -84,13 +84,34 @@ public class ADT_A28ToOpenEMPIUpdatePatientTransformer extends AbstractMessageTr
 			Node sectorNode = (Node) expression.evaluate(document, XPathConstants.NODE);
 			String sector = sectorNode.getTextContent();
 			
-			expression = xpath.compile("/ADT_A05/PID/PID.11/XAD.9");
+			expression = xpath.compile("/ADT_A05/PID/PID.11/XAD.8");
 			Node cellNode = (Node) expression.evaluate(document, XPathConstants.NODE);
 			String cell = cellNode.getTextContent();
 			
-			expression = xpath.compile("/ADT_A05/PID/PID.11/XAD.9");
+			expression = xpath.compile("/ADT_A05/PID/PID.11/XAD.10");
 			Node villageNode = (Node) expression.evaluate(document, XPathConstants.NODE);
 			String village = villageNode.getTextContent();
+			
+			// Phone Number
+			expression = xpath.compile("/ADT_A05/PID/PID.13/XTN.1");
+			Node phoneNumberNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+			String phoneNumber = phoneNumberNode.getTextContent();
+			
+			// Marital Status
+			/*
+			expression = xpath.compile("/ADT_A05/PID/PID.16/CE.1");
+			Node maritalStatusCodeNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+			String maritalStatusCode = maritalStatusCodeNode.getTextContent();
+			*/
+			
+			// Parents Names
+			expression = xpath.compile("/ADT_A05/NK1[NK1.3/CE.1='MTH']/NK1.2/XPN.1/FN.1");
+			Node motherNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+			String motherName = motherNameNode.getTextContent();
+			
+			expression = xpath.compile("/ADT_A05/NK1[NK1.3/CE.1='FTH']/NK1.2/XPN.1/FN.1");
+			Node fatherNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+			String fatherName = fatherNameNode.getTextContent();
 			
 			// Fetch current person record in OpenEMPI
 			String path = request.getPath();
@@ -179,11 +200,11 @@ public class ADT_A28ToOpenEMPIUpdatePatientTransformer extends AbstractMessageTr
 				countryNode.setTextContent(country);
 			}
 			
-			expression = xpath.compile("/person/state");
+			expression = xpath.compile("/person/province");
 			provinceNode = (Node) expression.evaluate(document, XPathConstants.NODE);
 			if (provinceNode == null) {
 				// Create node
-				Element newElement = document.createElement("state");
+				Element newElement = document.createElement("province");
 				newElement.setTextContent(province);
 				personNode.appendChild(newElement);
 			} else {
@@ -191,11 +212,11 @@ public class ADT_A28ToOpenEMPIUpdatePatientTransformer extends AbstractMessageTr
 				provinceNode.setTextContent(province);
 			}
 			
-			expression = xpath.compile("/person/city");
+			expression = xpath.compile("/person/district");
 			districtNode = (Node) expression.evaluate(document, XPathConstants.NODE);
 			if (districtNode == null) {
 				// Create node
-				Element newElement = document.createElement("city");
+				Element newElement = document.createElement("district");
 				newElement.setTextContent(district);
 				personNode.appendChild(newElement);
 			} else {
@@ -203,11 +224,11 @@ public class ADT_A28ToOpenEMPIUpdatePatientTransformer extends AbstractMessageTr
 				districtNode.setTextContent(district);
 			}
 			
-			expression = xpath.compile("/person/address2");
+			expression = xpath.compile("/person/sector");
 			sectorNode = (Node) expression.evaluate(document, XPathConstants.NODE);
 			if (sectorNode == null) {
 				// Create node
-				Element newElement = document.createElement("address2");
+				Element newElement = document.createElement("sector");
 				newElement.setTextContent(sector);
 				personNode.appendChild(newElement);
 			} else {
@@ -215,16 +236,81 @@ public class ADT_A28ToOpenEMPIUpdatePatientTransformer extends AbstractMessageTr
 				sectorNode.setTextContent(sector);
 			}
 			
-			expression = xpath.compile("/person/address1");
+			expression = xpath.compile("/person/cell");
 			cellNode = (Node) expression.evaluate(document, XPathConstants.NODE);
 			if (cellNode == null) {
 				// Create node
-				Element newElement = document.createElement("address1");
+				Element newElement = document.createElement("cell");
 				newElement.setTextContent(cell);
 				personNode.appendChild(newElement);
 			} else {
 				// update node
 				cellNode.setTextContent(cell);
+			}
+			
+			expression = xpath.compile("/person/village");
+			villageNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+			if (villageNode == null) {
+				// Create node
+				Element newElement = document.createElement("village");
+				newElement.setTextContent(village);
+				personNode.appendChild(newElement);
+			} else {
+				// update node
+				villageNode.setTextContent(village);
+			}
+			
+			// Phone number
+			expression = xpath.compile("/person/phoneNumber");
+			phoneNumberNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+			if (phoneNumberNode == null) {
+				// Create node
+				Element newElement = document.createElement("phoneNumber");
+				newElement.setTextContent(phoneNumber);
+				personNode.appendChild(newElement);
+			} else {
+				// update node
+				phoneNumberNode.setTextContent(phoneNumber);
+			}
+			
+			// Marital Status
+			/*
+			expression = xpath.compile("/person/maritalStatusCode");
+			maritalStatusCodeNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+			if (maritalStatusCodeNode == null) {
+				// Create node
+				Element newElement = document.createElement("maritalStatusCode");
+				newElement.setTextContent(maritalStatusCode);
+				personNode.appendChild(newElement);
+			} else {
+				// update node
+				maritalStatusCodeNode.setTextContent(maritalStatusCode);
+			}
+			*/
+			
+			// Parents Names
+			expression = xpath.compile("/person/motherName");
+			motherNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+			if (motherNameNode == null) {
+				// Create node
+				Element newElement = document.createElement("motherName");
+				newElement.setTextContent(motherName);
+				personNode.appendChild(newElement);
+			} else {
+				// update node
+				motherNameNode.setTextContent(motherName);
+			}
+			
+			expression = xpath.compile("/person/fatherName");
+			fatherNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+			if (fatherNameNode == null) {
+				// Create node
+				Element newElement = document.createElement("fatherName");
+				newElement.setTextContent(fatherName);
+				personNode.appendChild(newElement);
+			} else {
+				// update node
+				fatherNameNode.setTextContent(fatherName);
 			}
 			
 			// Return full updated person xml

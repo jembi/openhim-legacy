@@ -13,7 +13,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <expression-transformer evaluator="groovy" expression="return message.payload.getBody();" doc:name="Expression"/>
         <mulexml:xslt-transformer maxIdleTransformers="2" maxActiveTransformers="5" xsl-file="xslt/ADT_A28-to-OpenEMPI-person.xsl" doc:name="Off-ramp XSLT Transformer"/>
         <message-properties-transformer doc:name="Message Properties">
-            <add-message-property key="OPENEMPI_SESSION_KEY" value="6EC7C83CAD160FF2DA850676812A7A4C"/>
+            <add-message-property key="OPENEMPI_SESSION_KEY" value="19598DBC81B09C2303E851AD660DBAF1"/>
         </message-properties-transformer>
         <logger message="Body: [groovy: return message.payload.getBody()]" level="INFO" doc:name="Logger"/>
         <response>
@@ -31,6 +31,6 @@ return message;]]></scripting:text>
             </scripting:component>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Translation Transformer"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="cr.jembi.org" port="8080" path="openempi/openempi-ws-rest/person-manager-resource/addPerson" method="PUT" mimeType="text/xml" responseTimeout="60000" doc:name="Deliver message to mock service provider"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="ec2-50-19-146-97.compute-1.amazonaws.com" port="8080" path="openempi-admin/openempi-ws-rest/person-manager-resource/addPerson" method="PUT" mimeType="text/xml" responseTimeout="60000" doc:name="Deliver message to mock service provider"/>
     </flow>
 </mule>

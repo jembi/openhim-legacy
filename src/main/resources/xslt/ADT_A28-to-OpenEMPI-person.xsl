@@ -26,20 +26,40 @@
             <xsl:element name="country">
                 <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.11/hl7:XAD.6"></xsl:value-of>
             </xsl:element>
-            <xsl:element name="state">
+            <xsl:element name="province">
                 <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.11/hl7:XAD.4"></xsl:value-of>
             </xsl:element>
-            <xsl:element name="city">
+            <xsl:element name="district">
                 <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.11/hl7:XAD.3"></xsl:value-of>
             </xsl:element>
-            <xsl:element name="address2">
+            <xsl:element name="sector">
                 <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.11/hl7:XAD.9"></xsl:value-of>
             </xsl:element>
-            <xsl:element name="address1">
+            <xsl:element name="cell">
                 <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.11/hl7:XAD.8"></xsl:value-of>
+            </xsl:element>
+            <xsl:element name="village">
+                <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.11/hl7:XAD.10"></xsl:value-of>
             </xsl:element>
             
             <xsl:apply-templates select="hl7:ADT_A05/hl7:PID/hl7:PID.3"></xsl:apply-templates>
+            
+            <xsl:element name="motherName">
+                <xsl:value-of select="hl7:ADT_A05/hl7:NK1[hl7:NK1.3/hl7:CE.1='MTH']/hl7:NK1.2/hl7:XPN.1/hl7:FN.1"></xsl:value-of>
+            </xsl:element>
+            <xsl:element name="fatherName">
+                <xsl:value-of select="hl7:ADT_A05/hl7:NK1[hl7:NK1.3/hl7:CE.1='FTH']/hl7:NK1.2/hl7:XPN.1/hl7:FN.1"></xsl:value-of>
+            </xsl:element>
+            
+            <!-- 
+            <xsl:element name="maritalStatusCode">
+                <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.16/hl7:CE.1"></xsl:value-of>
+            </xsl:element>
+            -->
+            
+            <xsl:element name="phoneNumber">
+                <xsl:value-of select="hl7:ADT_A05/hl7:PID/hl7:PID.13/hl7:XTN.1"></xsl:value-of>
+            </xsl:element>
             
         </xsl:element>
         
@@ -70,12 +90,6 @@
                 <xsl:value-of select="hl7:CX.1"></xsl:value-of>
             </xsl:element>
             <xsl:element name="identifierDomain">
-                <xsl:element name="identifierDomainName">
-                    <xsl:value-of select="hl7:CX.5"></xsl:value-of>
-                </xsl:element>
-                <xsl:element name="identifierDomainDescription">
-                    <xsl:value-of select="hl7:CX.5"></xsl:value-of>
-                </xsl:element>
                 <xsl:element name="namespaceIdentifier">
                     <xsl:value-of select="hl7:CX.5"></xsl:value-of>
                 </xsl:element>
