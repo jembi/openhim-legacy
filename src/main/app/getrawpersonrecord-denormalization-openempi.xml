@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
         <vm:inbound-endpoint exchange-pattern="request-response" path="getRawPersonRecordPatient-De-normailization-OpenEMPI" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
         <logger message="De-normalizing a get raw person record transaction to OpenEMPI" level="INFO" doc:name="Logger"/>
         <message-properties-transformer doc:name="Message Properties">
-            <add-message-property key="OPENEMPI_SESSION_KEY" value="6EC7C83CAD160FF2DA850676812A7A4C"/>
+            <add-message-property key="OPENEMPI_SESSION_KEY" value="19598DBC81B09C2303E851AD660DBAF1"/>
         </message-properties-transformer>
         <logger message="Payload: #[groovy: return message.payload.toString();]" level="INFO" doc:name="Logger"/>
         <response>
@@ -19,6 +19,6 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
             <logger message="Responce normalization" level="INFO" doc:name="Logger"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Translation Transformer"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="cr.jembi.org" port="8080" path="openempi/openempi-ws-rest/person-query-resource/findPersonById" mimeType="text/xml" doc:name="Deliver message to mock service provider"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="ec2-50-19-146-97.compute-1.amazonaws.com" port="8080" path="openempi-admin/openempi-ws-rest/person-query-resource/findPersonById" mimeType="text/xml" doc:name="Deliver message to mock service provider"/>
     </flow>
 </mule>

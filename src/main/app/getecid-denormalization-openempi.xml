@@ -27,10 +27,10 @@ return body;]]></scripting:text>
             </scripting:script>
         </scripting:transformer>
         <message-properties-transformer doc:name="Message Properties">
-            <add-message-property key="OPENEMPI_SESSION_KEY" value="6EC7C83CAD160FF2DA850676812A7A4C"/>
+            <add-message-property key="OPENEMPI_SESSION_KEY" value="19598DBC81B09C2303E851AD660DBAF1"/>
         </message-properties-transformer>
         <response>
-        	<echo-component doc:name="Echo"/>
+            <echo-component doc:name="Echo"/>
             <mulexml:xslt-transformer maxIdleTransformers="2" maxActiveTransformers="5" xsl-file="xslt/OpenEMPI-person-to-ECID.xsl" doc:name="On-ramp transformer XSLT"/>
             <choice doc:name="Choice">
                 <when expression="message.getInboundProperty('http.status').equals('200')" evaluator="groovy">
@@ -50,6 +50,6 @@ return body;]]></scripting:text>
             </choice>
             <logger message="Exitting getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="cr.jembi.org" port="8080" path="openempi/openempi-ws-rest/person-query-resource/findPersonById" mimeType="application/xml" doc:name="HTTP"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="ec2-50-19-146-97.compute-1.amazonaws.com" port="8080" path="openempi-admin/openempi-ws-rest/person-query-resource/findPersonById" mimeType="application/xml" doc:name="HTTP"/>
     </flow>
 </mule>

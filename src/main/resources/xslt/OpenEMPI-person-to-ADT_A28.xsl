@@ -59,11 +59,11 @@
                 <xsl:element name="PID.11">
                     <!-- District -->
                     <xsl:element name="XAD.3">
-                        <xsl:value-of select="/person/city"/>
+                        <xsl:value-of select="/person/district"/>
                     </xsl:element>
                     <!-- Province -->
                     <xsl:element name="XAD.4">
-                        <xsl:value-of select="/person/state"/>
+                        <xsl:value-of select="/person/province"/>
                     </xsl:element>
                     <!-- Country -->
                     <xsl:element name="XAD.6">
@@ -71,15 +71,73 @@
                     </xsl:element>
                     <!-- Cell -->
                     <xsl:element name="XAD.8">
-                        <xsl:value-of select="/person/address1"/>
+                        <xsl:value-of select="/person/cell"/>
                     </xsl:element>
                     <!-- Sector -->
                     <xsl:element name="XAD.9">
-                        <xsl:value-of select="/person/address2"/>
+                        <xsl:value-of select="/person/sector"/>
                     </xsl:element>
                     <!-- Village -->
                     <xsl:element name="XAD.10">
                         <xsl:value-of select="/person/village"/>
+                    </xsl:element>
+                </xsl:element>
+                <xsl:element name="PID.13">
+                    <xsl:element name="XTN.1">
+                        <xsl:value-of select="/person/phoneNumber"/>
+                    </xsl:element>
+                </xsl:element>
+                <!-- 
+                <xsl:element name="PID.16">
+                    <xsl:element name="CE.1">
+                        <xsl:value-of select="/person/maritalStatusCode"/>
+                    </xsl:element>
+                </xsl:element>
+                -->
+            </xsl:element>
+            <xsl:element name="NK1">
+                <xsl:element name="NK1.1">
+                    <xsl:value-of select="'1'"/>
+                </xsl:element>
+                <xsl:element name="NK1.2">
+                    <xsl:element name="XPN.1">
+                        <xsl:element name="FN.1">
+                            <xsl:value-of select="/person/motherName"/>
+                        </xsl:element>
+                    </xsl:element>
+                </xsl:element>
+                <xsl:element name="NK1.3">
+                    <xsl:element name="CE.1">
+                        <xsl:value-of select="'MTH'"/>
+                    </xsl:element>
+                    <xsl:element name="CE.2">
+                        <xsl:value-of select="'mother'"/>
+                    </xsl:element>
+                    <xsl:element name="CE.3">
+                        <xsl:value-of select="'REL_RTS'"/>
+                    </xsl:element>
+                </xsl:element>
+            </xsl:element>
+            <xsl:element name="NK1">
+                <xsl:element name="NK1.1">
+                    <xsl:value-of select="'2'"/>
+                </xsl:element>
+                <xsl:element name="NK1.2">
+                    <xsl:element name="XPN.1">
+                        <xsl:element name="FN.1">
+                            <xsl:value-of select="/person/fatherName"/>
+                        </xsl:element>
+                    </xsl:element>
+                </xsl:element>
+                <xsl:element name="NK1.3">
+                    <xsl:element name="CE.1">
+                        <xsl:value-of select="'FTH'"/>
+                    </xsl:element>
+                    <xsl:element name="CE.2">
+                        <xsl:value-of select="'father'"/>
+                    </xsl:element>
+                    <xsl:element name="CE.3">
+                        <xsl:value-of select="'REL_RTS'"/>
                     </xsl:element>
                 </xsl:element>
             </xsl:element>

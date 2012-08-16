@@ -13,7 +13,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <custom-transformer class="org.jembi.rhea.transformers.GetPatientOpenEMPIOffRampTransformer" doc:name="Off-ramp Transformer"/>
         <expression-transformer evaluator="groovy" expression="return message.payload.getBody();" doc:name="Expression"/>
         <message-properties-transformer doc:name="Message Properties">
-            <add-message-property key="OPENEMPI_SESSION_KEY" value="6EC7C83CAD160FF2DA850676812A7A4C"/>
+            <add-message-property key="OPENEMPI_SESSION_KEY" value="19598DBC81B09C2303E851AD660DBAF1"/>
         </message-properties-transformer>
         <response>
             <logger message="Recieved responce from OpenEMPI: #[groovy: message.toString();] with payload: #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
@@ -43,6 +43,6 @@ return message;]]></scripting:text>
             <logger message="Responce normalization" level="INFO" doc:name="Logger"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Translation Transformer"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="cr.jembi.org" port="8080" path="openempi/openempi-ws-rest/person-query-resource/findPersonById" mimeType="application/xml" responseTimeout="60000" doc:name="Deliver message to mock service provider"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="ec2-50-19-146-97.compute-1.amazonaws.com" port="8080" path="openempi-admin/openempi-ws-rest/person-query-resource/findPersonById" mimeType="application/xml" responseTimeout="60000" doc:name="Deliver message to mock service provider"/>
     </flow>
 </mule>
