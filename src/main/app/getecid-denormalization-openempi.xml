@@ -50,6 +50,6 @@ return body;]]></scripting:text>
             </choice>
             <logger message="Exitting getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="ec2-50-19-146-97.compute-1.amazonaws.com" port="8080" path="openempi-admin/openempi-ws-rest/person-query-resource/findPersonById" mimeType="application/xml" doc:name="HTTP"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="cr.jembi.org" port="8080" path="openempi-admin/openempi-ws-rest/person-query-resource/findPersonById" mimeType="application/xml" doc:name="HTTP"/>
     </flow>
 </mule>

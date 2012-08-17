@@ -1,8 +1,5 @@
 package org.jembi.rhea.transformers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 import org.jembi.rhea.RestfulHttpRequest;
@@ -27,31 +24,10 @@ public class QueryPatientsOpenEMPIOffRampTransformer extends AbstractMessageTran
 		//dateofbirth
 		String dob_str = requestParams.get("dob");
 		if (dob_str != null) {
-			SimpleDateFormat sdf_input1 = new SimpleDateFormat("yyyy");
-			SimpleDateFormat sdf_input2 = new SimpleDateFormat("yyyy-MM");
-			SimpleDateFormat sdf_input3 = new SimpleDateFormat("yyyy-MM-dd");
-			SimpleDateFormat sdf_output = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-			try {
-				Date dob = null;
-				boolean skip = false;
-				if (dob_str.length() == 4) {
-					dob = sdf_input1.parse(dob_str);
-					skip = true;
-				} else if (dob_str.length() == 7) {
-					dob = sdf_input2.parse(dob_str);
-					skip = true;
-				} else if (dob_str.length() == 10) {
-					dob = sdf_input3.parse(dob_str);
-				}
-				
-				// TODO Need OpenEMPI to support partial dates, remove skip boolean when they do
-				if (dob != null && !skip) {
-					body += "<dateOfBirth>" + sdf_output.format(dob) + "</dateOfBirth>\n";
-				}
-				
-			} catch (ParseException e) {
-				throw new TransformerException(this, e);
+			if (dob_str.length() < 10) {
+				dob_str += "%";
 			}
+			body += "<dateOfBirth>" + dob_str + "</dateOfBirth>\n";
 		}
 		
 		//familyname
