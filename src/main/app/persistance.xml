@@ -23,9 +23,22 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <choice doc:name="Choice">
                 <when expression="payload instanceof org.jembi.rhea.RestfulHttpResponse" evaluator="groovy">
                     <processor-chain>
-                        <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="updateMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response">
-                            <jdbc:query key="updateMsg" value="UPDATE transaction_log SET status='2', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"/>
-                        </jdbc:outbound-endpoint>
+                        <choice doc:name="Choice">
+                        	<when expression="message.payload.httpStatus == 500" evaluator="groovy">
+                    			<processor-chain>
+                    				<jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="errorMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response">
+			                            <jdbc:query key="errorMsg" value="UPDATE transaction_log SET status='3', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"/>
+			                        </jdbc:outbound-endpoint>
+                    			</processor-chain>
+                   			</when>
+                   			<otherwise>
+                   				<processor-chain>
+                   					<jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="updateMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response">
+			                            <jdbc:query key="updateMsg" value="UPDATE transaction_log SET status='2', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"/>
+			                        </jdbc:outbound-endpoint>
+                    			</processor-chain>
+                   			</otherwise>
+                        </choice>
                     </processor-chain>
                 </when>
                 <otherwise>
@@ -37,8 +50,8 @@ message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw)
 message.setOutboundProperty("stacktrace", sw.toString());]]></scripting:text>
                             </scripting:script>
                         </scripting:component>
-                        <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="errorMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response">
-                            <jdbc:query key="errorMsg" value="UPDATE transaction_log SET status='3', error_description=#[groovy: return message.getExceptionPayload().getMessage();], error_stacktrace=#[header:OUTBOUND:stacktrace], responded_timestamp=now() WHERE uuid=#[header:SESSION:uuid];"/>
+                        <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="errorMsg2" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw error message response">
+                            <jdbc:query key="errorMsg2" value="UPDATE transaction_log SET status='3', error_description=#[groovy: return message.getExceptionPayload().getMessage();], error_stacktrace=#[header:OUTBOUND:stacktrace], responded_timestamp=now() WHERE uuid=#[header:SESSION:uuid];"/>
                         </jdbc:outbound-endpoint>
                     </processor-chain>
                 </otherwise>
