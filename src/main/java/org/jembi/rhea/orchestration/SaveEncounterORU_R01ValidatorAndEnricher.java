@@ -42,15 +42,27 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		ORU_R01 oru_r01 = (ORU_R01) msg;
 		
 		if (validateClient) {
-			validateAndEnrichClient(request, client, oru_r01);
+			try {
+				validateAndEnrichClient(request, client, oru_r01);
+			} catch (Exception e) {
+				throw new Exception("Could not validate client");
+			}
 		}
 		
 		if (validateProvider) {
+			try {
 			validateAndEnrichProvider(client, oru_r01);
+			} catch (Exception e) {
+				throw new Exception("Could not validate provider");
+			}
 		}
 		
 		if (validateLocation) {
+			try {
 			validateAndEnrichLocation(client, oru_r01);
+			} catch (Exception e) {
+				throw new Exception("Could not validate location");
+			}
 		}
 		
 		return parser.encode(oru_r01, "XML");

@@ -18,11 +18,18 @@ import ca.uhn.hl7v2.parser.Parser;
 
 public class RHEAORU_R01TerminologyValidator implements Callable {
 	
+	private static boolean VALIDATE_TERMINOLOGY = false;
+	
 	@Override
 	public Object onCall(MuleEventContext eventContext) throws Exception {
 		MuleContext muleContext = eventContext.getMuleContext();
 		MuleClient client = new MuleClient(muleContext);
 		MuleMessage msg = eventContext.getMessage();
+		
+		if (!VALIDATE_TERMINOLOGY) {
+			return msg;
+		}
+		
 		RestfulHttpRequest payload = (RestfulHttpRequest) msg.getPayload();
 		String oru_r01_str = payload.getBody();
 		
@@ -52,7 +59,7 @@ public class RHEAORU_R01TerminologyValidator implements Callable {
 				String success = responce.getInboundProperty("success");
 				
 				if (!success.equals("true")) {
-					throw new Exception("Unknown term used in ORU_R01, please use only RHEA codes");
+					throw new Exception("Unknown term used in ORU_R01, please use only RHEA codes. Unknown code: " + namespace + " " + id);
 				}
 			}
 		}
