@@ -18,7 +18,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <response>
             <logger message="Recieved responce from OpenEMPI: #[groovy: message.toString();] with payload: #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
             <choice doc:name="Choice">
-                <when expression="http.status=200" evaluator="header">
+                <when expression="message.getInboundProperty('http.status').equals('200')" evaluator="groovy">
                     <processor-chain>
                         <logger message="Performing XSLT transform" level="INFO" doc:name="Logger"/>
                         <mulexml:xslt-transformer maxIdleTransformers="2" maxActiveTransformers="5" xsl-file="xslt/OpenEMPI-person-to-ADT_A28.xsl" doc:name="On-ramp transformer - XSLT"/>
