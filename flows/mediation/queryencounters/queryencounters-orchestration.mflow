@@ -5,8 +5,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="b2f0814a-1204-43bd-a3ba-64cf3a773672">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="08313462-418e-4a0c-b836-3b20a2a86220">
+        <lane entity-id="1f0942d1-01a5-4593-88e0-1bc4d45a3fbe">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="79ff6ac5-07e4-4dc8-8c7d-efbc4d49897d">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -22,14 +22,14 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="325967f0-902a-4976-a626-f31ca19398db">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="ae160bc1-376c-4fcd-b5c7-ce8f30520c40">
                 <properties>
                     <property value="Orchestrating a query encounters transaction" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Inject ECID from CR" entity-id="c6819c78-44c9-430f-a08b-d373da699bfe">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Inject ECID from CR" entity-id="a6e68fa9-c1b2-4a84-94c2-24d2fc03d848">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -38,30 +38,71 @@
                     <property value="org.jembi.rhea.transformers.QueryEncounterInjectECIDTransformer" name="class"/>
                 </properties>
             </pattern>
-            <response entity-id="12094790-255e-44cf-b977-28e7b3f8fa32">
-                <compartment entity-id="cd7b2f4c-4e53-47f2-876e-bcdc97c74087">
-                    <lane entity-id="49a0adc1-7490-4610-8561-066af89bdda1">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="90a72d1b-04ef-4fbb-8d50-22ebeabe6da8">
+            <response entity-id="aad49020-120f-4d50-bcab-e93a4e1895a3">
+                <compartment entity-id="482513c1-6eae-4d50-81c2-4a9030795abb">
+                    <lane entity-id="9194f2f3-6deb-4c7e-a837-87c9cffc7caa">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="1ecdcdf7-d0c1-44da-b817-467d51a9d514">
                             <properties>
 <property value="Responce orchestration" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Inject NID from PR" entity-id="0cd60c5d-4f30-414b-8554-fe0e8852fdf8">
+                        <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="b143d7c8-c179-4c24-8174-ac96f8fd959c">
                             <properties>
-<property value="" name="returnClass"/>
-<property value="false" name="ignoreBadInput"/>
-<property value="" name="encoding"/>
-<property value="org.jembi.rhea.transformers.QueryEncounterInjectNIDTransformer" name="class"/>
-<property value="" name="mimeType"/>
+<property-collection name="3161be80-88c9-4a5b-aaea-653660d88f45">
+    <property value="true" name="choice.otherwise"/>
+    <property value="" name="choice.expression"/>
+    <property value="" name="choice.evaluator"/>
+</property-collection>
+<property-collection name="70b1f818-b844-4225-abce-b808b52c100e">
+    <property value="message.payload.httpStatus == 200" name="choice.expression"/>
+    <property value="groovy" name="choice.evaluator"/>
+</property-collection>
                             </properties>
                             <description></description>
-                        </pattern>
+                            <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="07c1ecd6-483a-4e85-90f4-f4c30a3904c0">
+<properties>
+    <property-collection name="3161be80-88c9-4a5b-aaea-653660d88f45">
+        <property value="true" name="choice.otherwise"/>
+        <property value="" name="choice.expression"/>
+        <property value="" name="choice.evaluator"/>
+    </property-collection>
+    <property-collection name="70b1f818-b844-4225-abce-b808b52c100e">
+        <property value="message.payload.httpStatus == 200" name="choice.expression"/>
+        <property value="groovy" name="choice.evaluator"/>
+    </property-collection>
+</properties>
+<description></description>
+                            </pattern>
+                            <compartment entity-id="5176b480-b14b-412a-97cf-0dc9f0b59989">
+<lane entity-id="70b1f818-b844-4225-abce-b808b52c100e">
+    <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Inject NID from PR" entity-id="e71a39ce-0b4e-4815-82a9-79640a843f89">
+        <properties>
+            <property name="returnClass"/>
+            <property name="ignoreBadInput"/>
+            <property name="encoding"/>
+            <property name="mimeType"/>
+            <property value="org.jembi.rhea.transformers.QueryEncounterInjectNIDTransformer" name="class"/>
+        </properties>
+    </pattern>
+</lane>
+<lane entity-id="3161be80-88c9-4a5b-aaea-653660d88f45">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="e76ef3df-dfc5-49f0-9429-34178e4add4f">
+        <properties>
+            <property value="Return SHR error" name="message"/>
+            <property value="" name="category"/>
+            <property value="INFO" name="level"/>
+        </properties>
+        <description></description>
+    </pattern>
+</lane>
+                            </compartment>
+                        </splitter>
                     </lane>
                 </compartment>
             </response>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryPatientDemographicsDe-NormalizationQueue" entity-id="731b68f3-3b5b-462c-a2da-77706f125729">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryPatientDemographicsDe-NormalizationQueue" entity-id="fc9d9d43-8fb0-4091-8a17-e25dc6e7610d">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
