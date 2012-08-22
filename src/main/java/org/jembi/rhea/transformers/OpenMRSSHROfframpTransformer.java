@@ -48,14 +48,14 @@ public class OpenMRSSHROfframpTransformer extends AbstractMessageTransformer {
 		Map<String, String> newRequestParams = new HashMap<String, String>();
 		
 		try {
-			if (startDate != null) {
+			if (startDate != null && !startDate.isEmpty()) {
 				Date date = sdf1.parse(startDate);
 				startDate = sdf2.format(date);
 				
 				newRequestParams.put("dateStart", startDate);
 			}
 			
-			if (endDate != null) {
+			if (endDate != null && !startDate.isEmpty()) {
 				Date date = sdf1.parse(endDate);
 				endDate = sdf2.format(date);
 				

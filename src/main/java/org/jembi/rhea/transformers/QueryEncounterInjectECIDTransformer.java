@@ -46,10 +46,10 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 			String success = responce.getInboundProperty("success");
 			
 			String ecid;
-			if (success.equals("true")) {
+			if (success != null && success.equals("true")) {
 				ecid = responce.getPayloadAsString();
 			} else {
-				throw new Exception("Invalid Client: ECID for NID:" + id + " could not be found in Client Registry");
+				throw new Exception("Invalid Client: ECID for id type: " + idType + " with ID: " + id + " could not be found in Client Registry");
 			}
 			
 			path = "ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid + "/encounters";  
