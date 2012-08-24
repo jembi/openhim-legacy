@@ -5,8 +5,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="46f39b94-9b16-4dbc-abe4-eeb993a15f4f">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read queue" entity-id="5fe57267-fe15-4411-8ceb-5dc99b05c62b">
+        <lane entity-id="014fb4c8-4d0d-4e5b-ba01-ccf28d646a29">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read queue" entity-id="fd80ef79-be7d-4157-9f15-265d7fe997d4">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -22,78 +22,78 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="ec6913af-ca75-4e95-83a8-8c61fc539873">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="580fb895-c2db-48ce-a899-c9b2162528f8">
                 <properties>
                     <property value="Starting normalization on structured message: #[groovy: message.payload.toString();]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="b3834c91-f8cc-490a-b477-794d53fb2f44">
+            <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="8d6b739c-4862-46ec-8a3e-2750c4e1f1cd">
                 <properties>
-                    <property-collection name="65e7edc5-fa3e-40d0-ac8a-b46871e178a5">
-                        <property value="message.payload.path.contains('ws/rest/v1/professional/')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="eda49ebf-8044-483f-92b3-31894a18958c">
-                        <property value="message.payload.path.contains('ws/rest/v1/facility/')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="64ac3ba1-9cba-4fa1-a500-9702c72190c8">
-                        <property value="message.payload.path.contains('ws/rest/v1/patients') &amp;&amp; message.payload.httpMethod.equals('POST')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="fc8e1344-bf2c-4cbf-bfda-daf208a0075f">
+                    <property-collection name="e5c3336e-8cf4-44d4-b18e-ff768a841c21">
                         <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounters') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
-                    <property-collection name="63161a20-416e-4661-b78a-4935c089c7d9">
-                        <property value="message.payload.path.contains('ws/rest/v1/patients') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
+                    <property-collection name="7759830c-516c-4af5-83d2-682e09b1f3e7">
+                        <property value="message.payload.path.contains('ws/rest/v1/facility/')" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
-                    <property-collection name="45d0fdeb-8ca0-45e6-9597-06a1e1701e58">
+                    <property-collection name="557195b7-12c4-4d60-989a-d6fb9e5789a6">
                         <property value="message.payload.path.contains('ws/rest/v1/facilities')" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
-                    <property-collection name="3b07d237-056d-493b-a108-a9f6ca3fb713">
+                    <property-collection name="80062034-185b-4da2-9c9f-830c46b622b6">
                         <property value="message.payload.path.contains('ws/rest/v1/professionals')" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
-                    <property-collection name="676f5b9f-5a5e-48bb-b9bf-95e206b30b09">
-                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.httpMethod.equals('PUT')" name="choice.expression"/>
+                    <property-collection name="da32056b-f163-4106-9044-6838eb9b5071">
+                        <property value="message.payload.path.contains('ws/rest/v1/patients') &amp;&amp; message.payload.httpMethod.equals('POST')" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
-                    <property-collection name="acb49f57-30dc-4340-a94d-fc7f5d3940b3">
-                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounters') &amp;&amp; message.payload.httpMethod.equals('POST')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="b7ff1df3-7844-437c-bd90-8fd26f03d3a8">
-                        <property value="true" name="choice.otherwise"/>
-                    </property-collection>
-                    <property-collection name="5fa8edcc-6633-4f09-829c-a7fd8c45f05e">
-                        <property value="message.payload.path.contains('ws/rest/v1/alerts') &amp;&amp; message.payload.httpMethod.equals('POST')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="db763a3a-7978-443c-a2b1-0ac0853fa965">
-                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounter/') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
-                        <property value="groovy" name="choice.evaluator"/>
-                    </property-collection>
-                    <property-collection name="b702b7d7-8101-4b6c-bf27-385fdd451220">
+                    <property-collection name="220f51e1-d1df-42c8-b3f8-2f87d46155a4">
                         <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
                         <property value="groovy" name="choice.evaluator"/>
                     </property-collection>
+                    <property-collection name="8ef7b856-412f-406e-a780-9a47b49995c3">
+                        <property value="true" name="choice.otherwise"/>
+                    </property-collection>
+                    <property-collection name="7f7ded40-9eae-462e-b0d7-14666ea24de6">
+                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.httpMethod.equals('PUT')" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                    <property-collection name="ab0a538b-ccb0-478c-b143-3a1ef3b95cdf">
+                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounters') &amp;&amp; message.payload.httpMethod.equals('POST')" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                    <property-collection name="d5ce9322-97ce-4f4e-bb3f-62aa2e8b4696">
+                        <property value="message.payload.path.contains('ws/rest/v1/patients') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                    <property-collection name="ea2dd174-4504-4d63-90a7-37ac07f02d32">
+                        <property value="message.payload.path.contains('ws/rest/v1/patient/') &amp;&amp; message.payload.path.contains('/encounter/') &amp;&amp; message.payload.httpMethod.equals('GET')" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                    <property-collection name="0970a105-c9be-4cf5-8d7e-15880fefbb51">
+                        <property value="message.payload.path.contains('ws/rest/v1/alerts') &amp;&amp; message.payload.httpMethod.equals('POST')" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
+                    <property-collection name="8be8cb55-89eb-4bf8-b2b5-04f873aef253">
+                        <property value="message.payload.path.contains('ws/rest/v1/professional/')" name="choice.expression"/>
+                        <property value="groovy" name="choice.evaluator"/>
+                    </property-collection>
                 </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="02798904-8ddd-40b7-ac75-a11da009c68a"/>
-                <compartment entity-id="00b46385-9010-4363-aeae-674d0dbd8d5f">
-                    <lane entity-id="45d0fdeb-8ca0-45e6-9597-06a1e1701e58">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query facilities" entity-id="e3db2a2e-a1fb-425c-af39-c6c3c4656884">
+                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="608bd214-3f90-42d5-a499-d4139ef41dfa"/>
+                <compartment entity-id="903f18f2-e971-4d45-b083-3edfdc09d3da">
+                    <lane entity-id="557195b7-12c4-4d60-989a-d6fb9e5789a6">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query facilities" entity-id="c63d1584-00c4-4130-b386-4fd49854c527">
                             <properties>
 <property value="Transaction type: query facilities" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryFacilities-Generic-NormalizationQueue" entity-id="1edd3bca-8994-4537-af4e-d72e293fc2ac">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryFacilities-Generic-NormalizationQueue" entity-id="504c0e42-5bd6-4356-9a9e-180b48dbc836">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -110,15 +110,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane entity-id="eda49ebf-8044-483f-92b3-31894a18958c">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get facility" entity-id="9fdea08e-4ef5-4fc9-9ef9-4af487ba35ab">
+                    <lane entity-id="7759830c-516c-4af5-83d2-682e09b1f3e7">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get facility" entity-id="ec266e5b-0297-4070-ac3e-468826e61754">
                             <properties>
 <property value="Transaction type: get facility" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getFacility-Generic-NormalizationQueue" entity-id="7ccc56a8-6f91-4a9a-bdf4-a3100e8aef0e">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getFacility-Generic-NormalizationQueue" entity-id="d18e75c8-1b45-4dfe-8168-0d8b57075f95">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -135,15 +135,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane entity-id="65e7edc5-fa3e-40d0-ac8a-b46871e178a5">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get professional" entity-id="6f7e1d97-7010-4ec1-aa83-c9af89b04633">
+                    <lane entity-id="8be8cb55-89eb-4bf8-b2b5-04f873aef253">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get professional" entity-id="6b1d3f0b-171e-435b-834b-c002066c7af0">
                             <properties>
 <property value="Transaction type: get professional" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getProfessional-Generic-NormalizationQueue" entity-id="a82b85ea-2a1a-43d0-abe8-80051b317084">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getProfessional-Generic-NormalizationQueue" entity-id="adf0de45-613c-4f92-bcaf-d206d5b2b4b9">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -160,15 +160,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane entity-id="3b07d237-056d-493b-a108-a9f6ca3fb713">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query professionals" entity-id="3eb38778-5ca6-49fc-9065-6aac2d48af97">
+                    <lane entity-id="80062034-185b-4da2-9c9f-830c46b622b6">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query professionals" entity-id="b8e01404-bb26-4db0-8117-c9a79e159e72">
                             <properties>
 <property value="Transaction type: query professionals" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryProfessionals-Generic-NormalizationQueue" entity-id="db83967d-d0d3-47e2-ac92-8d6657644199">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryProfessionals-Generic-NormalizationQueue" entity-id="9933138c-e7a0-47a4-8387-597c6365e70c">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -185,15 +185,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane entity-id="fc8e1344-bf2c-4cbf-bfda-daf208a0075f">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query encounters" entity-id="19a53b6b-81c7-4e12-8c6d-85a34f131924">
+                    <lane entity-id="e5c3336e-8cf4-44d4-b18e-ff768a841c21">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query encounters" entity-id="34b9d363-eb99-4121-9b96-f330c32b04f1">
                             <properties>
 <property value="Transaction type: query encounters" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryEncounters-Generic-NormalizationQueue" entity-id="774dbfa2-1552-4f93-a53d-6ed900594a13">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryEncounters-Generic-NormalizationQueue" entity-id="edf89b5e-eb7a-4a7e-8eb9-e06a9abe8e93">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -210,15 +210,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane entity-id="acb49f57-30dc-4340-a94d-fc7f5d3940b3">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log save encounters" entity-id="fca6e3af-cc55-46f0-8b07-55c28855ab2d">
+                    <lane entity-id="ab0a538b-ccb0-478c-b143-3a1ef3b95cdf">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log save encounters" entity-id="180bfea7-397e-48f7-b41d-a552c1f86663">
                             <properties>
 <property value="Transaction type: save encounters" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to saveEncounters-Generic-NormalizationQueue" entity-id="91824414-054c-4c9b-aede-3b76f650d5fa">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to saveEncounters-Generic-NormalizationQueue" entity-id="9cf2210d-527d-4ac2-ad3f-27bbe90d5d2a">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -235,15 +235,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane entity-id="db763a3a-7978-443c-a2b1-0ac0853fa965">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get encounter" entity-id="f90a02d6-cb90-481c-b601-390454c8e391">
+                    <lane entity-id="ea2dd174-4504-4d63-90a7-37ac07f02d32">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get encounter" entity-id="ef14ce38-7154-4073-955d-33c3b96ebfa0">
                             <properties>
 <property value="Transaction type: get encounter" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getEncounter-Generic-NormalizationQueue" entity-id="e349dca3-12d1-4c96-a5f7-7b97c4cf638a">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getEncounter-Generic-NormalizationQueue" entity-id="78cdf672-9f60-4998-b980-6ec10952639b">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -260,15 +260,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane entity-id="64ac3ba1-9cba-4fa1-a500-9702c72190c8">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log save patient" entity-id="3d87f1c0-ed38-499f-811d-6f6fcac8b647">
+                    <lane entity-id="da32056b-f163-4106-9044-6838eb9b5071">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log save patient" entity-id="1a0bdc89-4f70-402e-ac7d-92ca0ba9a06f">
                             <properties>
 <property value="Transaction type: save patient" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to savePatient-Generic-NormalizationQueue" entity-id="82697624-01ad-4411-85e9-d8737a547e07">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to savePatient-Generic-NormalizationQueue" entity-id="5b6a1784-9294-4534-ab32-4d18c595555e">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -285,15 +285,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane entity-id="63161a20-416e-4661-b78a-4935c089c7d9">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query patients" entity-id="7f5d45bb-a542-44c4-9e7a-9eea9804acdf">
+                    <lane entity-id="d5ce9322-97ce-4f4e-bb3f-62aa2e8b4696">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log query patients" entity-id="a8d2f5d6-03a8-4d73-aeb5-8d948f394885">
                             <properties>
 <property value="Transaction type: query patients" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryPatients-Generic-NormalizationQueue" entity-id="bb432128-2b89-4ee1-b788-661d355ffd0c">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryPatients-Generic-NormalizationQueue" entity-id="b0614175-826f-4b3b-9f07-754fea72f723">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -310,15 +310,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane entity-id="b702b7d7-8101-4b6c-bf27-385fdd451220">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get patients" entity-id="1aa627cc-e9a9-4c18-a081-b26af88a21b1">
+                    <lane entity-id="220f51e1-d1df-42c8-b3f8-2f87d46155a4">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log get patients" entity-id="b893fc85-4b48-4d25-b3c2-48c68a007bf5">
                             <properties>
 <property value="Transaction type: get patients" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getPatient-Generic-NormalizationQueue" entity-id="3144c7e0-a783-44f3-8b0a-02403270e66b">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getPatient-Generic-NormalizationQueue" entity-id="645e2449-0072-4593-b0a2-64a7edd006b4">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -335,15 +335,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane entity-id="676f5b9f-5a5e-48bb-b9bf-95e206b30b09">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log update patients" entity-id="2241ab1f-5577-42e9-b707-aa2c3d7cc1aa">
+                    <lane entity-id="7f7ded40-9eae-462e-b0d7-14666ea24de6">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log update patients" entity-id="2c2d8c17-e199-402e-8b70-15a00dfd24b6">
                             <properties>
 <property value="Transaction type: update patients" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to updatePatient-Generic-NormalizationQueue" entity-id="140104f5-d519-4f61-bd13-ca61ad1f072c">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to updatePatient-Generic-NormalizationQueue" entity-id="f0b6d62d-f027-4542-8052-776c143adefd">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -360,15 +360,15 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane entity-id="5fa8edcc-6633-4f09-829c-a7fd8c45f05e">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log receive alert" entity-id="a46f6c64-3080-4de0-aa95-601cb54ffddc">
+                    <lane entity-id="0970a105-c9be-4cf5-8d7e-15880fefbb51">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log receive alert" entity-id="72665bcf-f49f-402e-8678-90a2499055f6">
                             <properties>
 <property value="Transaction type: receive alert" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to receiveAlert-Generic-NormalizationQueue" entity-id="e74cac44-77f1-43c4-b3c3-f10dea492ab1">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to receiveAlert-Generic-NormalizationQueue" entity-id="e7930d28-7af4-4fb1-8cc3-17317f021679">
                             <properties>
 <property value="one-way" name="exchange-pattern"/>
 <property value="request-response" name="exchange-pattern"/>
@@ -385,8 +385,8 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane entity-id="b7ff1df3-7844-437c-bd90-8fd26f03d3a8">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Error Logged" entity-id="104fe50a-6988-4613-824f-e8d6ba593e43">
+                    <lane entity-id="8ef7b856-412f-406e-a780-9a47b49995c3">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Error Logged" entity-id="c7ffe819-d68a-44c0-bf75-3bd50ddd539d">
                             <properties>
 <property value="Could not route message with path: #[groovy: return message.payload.getPath();]" name="message"/>
 <property value="ERROR" name="level"/>

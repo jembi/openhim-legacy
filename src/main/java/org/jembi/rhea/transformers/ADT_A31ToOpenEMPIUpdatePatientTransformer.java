@@ -26,7 +26,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
-public class ADT_A28ToOpenEMPIUpdatePatientTransformer extends AbstractMessageTransformer {
+public class ADT_A31ToOpenEMPIUpdatePatientTransformer extends AbstractMessageTransformer {
 
 	@Override
 	public Object transformMessage(MuleMessage msg, String enc)
@@ -34,84 +34,125 @@ public class ADT_A28ToOpenEMPIUpdatePatientTransformer extends AbstractMessageTr
 		
 		try {
 			RestfulHttpRequest request = (RestfulHttpRequest) msg.getPayload();
-			String ADT_A28_xml = request.getBody();
+			String adt_a31_xml = request.getBody();
 			
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			Document document = dbf.newDocumentBuilder().parse(new InputSource(new StringReader(ADT_A28_xml)));
+			Document document = dbf.newDocumentBuilder().parse(new InputSource(new StringReader(adt_a31_xml)));
 
 			XPathFactory xpf = XPathFactory.newInstance();
 			XPath xpath = xpf.newXPath();
 			
-			// get fields to be updated out of ADT_A28
+			// get fields to be updated out of ADT_A31
 			// Names
 			XPathExpression expression = xpath.compile("/ADT_A05/PID/PID.5/XPN.2");
 			Node givenNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String givenName = givenNameNode.getTextContent();
+			String givenName = "";
+			if (givenNameNode != null) {
+				givenName = givenNameNode.getTextContent();
+			}
 			
 			expression = xpath.compile("/ADT_A05/PID/PID.5/XPN.1/FN.1");
 			Node familyNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String familyName = familyNameNode.getTextContent();
+			String familyName = "";
+			if (familyNameNode != null) {
+				familyName = familyNameNode.getTextContent();
+			}
 			
 			// DoB
 			expression = xpath.compile("/ADT_A05/PID/PID.7/TS.1");
 			Node dobNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String dob = dobNode.getTextContent();
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			Date date = sdf.parse(dob);
-			sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-			dob = sdf.format(date);
+			String dob = "";
+			if (dobNode != null) {
+				dob = dobNode.getTextContent();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+				Date date = sdf.parse(dob);
+				sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+				dob = sdf.format(date);
+			}
 			
 			// Gender
 			expression = xpath.compile("/ADT_A05/PID/PID.8");
 			Node genderCodeNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String genderCode = genderCodeNode.getTextContent();
+			String genderCode = "";
+			if (genderCodeNode != null) {
+				genderCode = genderCodeNode.getTextContent();
+			}
 			
 			// Address
 			expression = xpath.compile("/ADT_A05/PID/PID.11/XAD.6");
 			Node countryNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String country = countryNode.getTextContent();
+			String country = "";
+			if (countryNode != null) {
+				country = countryNode.getTextContent();
+			}
 			
 			expression = xpath.compile("/ADT_A05/PID/PID.11/XAD.4");
 			Node provinceNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String province = provinceNode.getTextContent();
+			String province = "";
+			if (provinceNode != null) {
+				province = provinceNode.getTextContent();
+			}
 			
 			expression = xpath.compile("/ADT_A05/PID/PID.11/XAD.3");
 			Node districtNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String district = districtNode.getTextContent();
+			String district = "";
+			if (districtNode != null) {
+				district = districtNode.getTextContent();
+			}
 			
 			expression = xpath.compile("/ADT_A05/PID/PID.11/XAD.9");
 			Node sectorNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String sector = sectorNode.getTextContent();
+			String sector = "";
+			if (sectorNode != null) {
+				sector = sectorNode.getTextContent();
+			}
 			
 			expression = xpath.compile("/ADT_A05/PID/PID.11/XAD.8");
 			Node cellNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String cell = cellNode.getTextContent();
+			String cell = "";
+			if (cellNode != null) {
+				cell = cellNode.getTextContent();
+			}
 			
 			expression = xpath.compile("/ADT_A05/PID/PID.11/XAD.10");
 			Node villageNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String village = villageNode.getTextContent();
+			String village = "";
+			if (villageNode != null) {
+				village = villageNode.getTextContent();
+			}
 			
 			// Phone Number
 			expression = xpath.compile("/ADT_A05/PID/PID.13/XTN.1");
 			Node phoneNumberNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String phoneNumber = phoneNumberNode.getTextContent();
+			String phoneNumber = "";
+			if (phoneNumberNode != null) {
+				phoneNumber = phoneNumberNode.getTextContent();
+			}
 			
 			// Marital Status
 			/*
 			expression = xpath.compile("/ADT_A05/PID/PID.16/CE.1");
 			Node maritalStatusCodeNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String maritalStatusCode = maritalStatusCodeNode.getTextContent();
+			String maritalStatusCode = "";
+			if (maritalStatusCodeNode != null) {
+				maritalStatusCode = maritalStatusCodeNode.getTextContent();
+			}
 			*/
 			
 			// Parents Names
 			expression = xpath.compile("/ADT_A05/NK1[NK1.3/CE.1='MTH']/NK1.2/XPN.1/FN.1");
 			Node motherNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String motherName = motherNameNode.getTextContent();
+			String motherName = "";
+			if (motherNameNode != null) {
+				motherName = motherNameNode.getTextContent();
+			}
 			
 			expression = xpath.compile("/ADT_A05/NK1[NK1.3/CE.1='FTH']/NK1.2/XPN.1/FN.1");
 			Node fatherNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String fatherName = fatherNameNode.getTextContent();
+			String fatherName = "";
+			if (fatherNameNode != null) {
+				fatherName = fatherNameNode.getTextContent();
+			}
 			
 			// Fetch current person record in OpenEMPI
 			String path = request.getPath();
