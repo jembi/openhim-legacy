@@ -18,7 +18,7 @@ import ca.uhn.hl7v2.parser.Parser;
 
 public class RHEAORU_R01TerminologyValidator implements Callable {
 	
-	private static boolean VALIDATE_TERMINOLOGY = false;
+	private static boolean VALIDATE_TERMINOLOGY = true;
 	
 	@Override
 	public Object onCall(MuleEventContext eventContext) throws Exception {
