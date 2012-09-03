@@ -40,6 +40,8 @@ public class OpenMRSSHROfframpTransformer extends AbstractMessageTransformer {
 		String startDate = origRequestParams.get("encounter_start_date");
 		String endDate = origRequestParams.get("encounter_end_date");
 		
+		String notificationType = origRequestParams.get("notificationType");
+		
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
 		
@@ -67,6 +69,10 @@ public class OpenMRSSHROfframpTransformer extends AbstractMessageTransformer {
 		
 		newRequestParams.put("patientId", patientId);
 		newRequestParams.put("idType", idType);
+		if (notificationType != null && !notificationType.isEmpty()) {
+			newRequestParams.put("notificationType", notificationType);
+		}
+		
 		request.setRequestParams(newRequestParams);
 		
 		return msg;
