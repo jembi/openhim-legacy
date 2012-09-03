@@ -124,8 +124,9 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 			MuleMessage responce = client.send("vm://getecid-openempi", idMap, null, 5000);
 			
 			String success = responce.getInboundProperty("success");
-			if (success.equals("true")) {
+			if (success != null && success.equals("true")) {
 				ecid = responce.getPayloadAsString();
+				break;
 			}
 		}
 		
