@@ -10,6 +10,7 @@ import org.mule.transformer.AbstractTransformer;
 
 public class ParamMapToUrlString extends AbstractTransformer{
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected Object doTransform(Object obj, String enc)
 			throws TransformerException {

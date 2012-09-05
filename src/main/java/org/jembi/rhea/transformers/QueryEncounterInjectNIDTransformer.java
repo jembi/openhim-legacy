@@ -7,7 +7,6 @@ import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpResponse;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
-import org.mule.config.i18n.Message;
 import org.mule.module.client.MuleClient;
 import org.mule.transformer.AbstractMessageTransformer;
 
@@ -55,10 +54,6 @@ public class QueryEncounterInjectNIDTransformer extends
 					XCN orderingProvider = obr.getObr16_OrderingProvider(0);
 					String proID = orderingProvider.getIDNumber().getValue();
 					String proIDType = orderingProvider.getIdentifierTypeCode().getValue();
-					
-					// TODO Remove testing code
-					proID = "e8597a14-436f-1031-8b61-8d373bf4f88f";
-					proIDType = "EPID";
 					
 					if (proID == null || proIDType == null) {
 						throw new Exception("Invalid Provider: id or id type is null");
