@@ -8,7 +8,6 @@ import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
-import org.mule.config.i18n.Message;
 import org.mule.module.client.MuleClient;
 import org.mule.transformer.AbstractMessageTransformer;
 

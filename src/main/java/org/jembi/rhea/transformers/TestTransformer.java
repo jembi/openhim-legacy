@@ -1,9 +1,7 @@
 package org.jembi.rhea.transformers;
 
-import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
-import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 
 public class TestTransformer extends AbstractMessageTransformer {

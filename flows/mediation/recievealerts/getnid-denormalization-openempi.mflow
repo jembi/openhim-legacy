@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mediation-getecid-denormalization-mockserviceprovider">
+    <flow SubFlow="false" name="mediation-getnid-denormalization-openempiFlow1">
+        <properties>
+            <property value="false" name="stopMessageProcessing"/>
+            <property value="" name="name"/>
+            <property value="true" name="enableNotifications"/>
+            <property value="" name="processingStrategy2"/>
+            <property value="" name="exception-pattern"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/core/default-exception-strategy;1071699405">
+                <property value="false" name="stopMessageProcessing"/>
+                <property value="" name="name"/>
+                <property value="true" name="enableNotifications"/>
+                <property value="" name="exception-pattern"/>
+                <property-collection name="@http://www.mulesoft.org/schema/mule/core/flow-ref;592164629">
+                    <property value="" name="name"/>
+                </property-collection>
+                <property-collection name="@http://www.mulesoft.org/schema/mule/core/commit-transaction;1208030335">
+                    <property value="" name="exception-pattern"/>
+                </property-collection>
+                <property-collection name="@http://www.mulesoft.org/schema/mule/core/rollback-transaction;1055441607">
+                    <property value="" name="exception-pattern"/>
+                </property-collection>
+            </property-collection>
+        </properties>
+        <description></description>
+        <lane entity-id="e90ff24c-5258-4c4b-b9af-f0403c7f5372">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="8636006a-e725-4686-be55-da843d79f83a">
+                <properties>
+                    <property value="" name="ref"/>
+                    <property value="" name="transformer-refs"/>
+                    <property value="" name="address"/>
+                    <property value="" name="encoding"/>
+                    <property value="getnid-openempi" name="path"/>
+                    <property value="" name="responseTransformer-refs"/>
+                    <property value="false" name="disableTransportTransformer"/>
+                    <property value="text/plain" name="mimeType"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="" name="connector-ref"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="33290846-b354-4f58-be93-2167448c7b4a">
+                <properties>
+                    <property value="In getecid de-normalization #[groovy: message.toString()]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyTransformer" name="Off-ramp transformer" entity-id="e76728fd-7996-4c48-b5e3-1fd7b5fd7519">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
+                        <property value="String id = message.payload.get(&quot;id&quot;);&#xA;String idType = message.payload.get(&quot;idType&quot;);&#xA;&#xA;String body = &quot;&quot;;&#xA;body += &quot;&lt;personIdentifier&gt;\n&quot;;&#xA;body += &quot;    &lt;identifier&gt;&quot; + id + &quot;&lt;/identifier&gt;\n&quot;;&#xA;body += &quot;    &lt;identifierDomain&gt;\n&quot;;&#xA;body += &quot;       &lt;universalIdentifier&gt;&quot; + idType + &quot;&lt;/universalIdentifier&gt;\n&quot;;&#xA;body += &quot;       &lt;universalIdentifierTypeCode&gt;&quot; + idType + &quot;&lt;/universalIdentifierTypeCode&gt;\n&quot;;&#xA;body += &quot;    &lt;/identifierDomain&gt;\n&quot;;&#xA;body += &quot;&lt;/personIdentifier&gt;\n&quot;;&#xA;return body;" name="text"/>
+                        <property value="Groovy" name="engine"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Message Properties" entity-id="9fb3dd47-638f-4a52-9a6c-7d73d2cabf8d">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property name="overwrite"/>
+                    <property name="scope"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+                        <property value="19598DBC81B09C2303E851AD660DBAF1" name="value"/>
+                        <property value="OPENEMPI_SESSION_KEY" name="key"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <response entity-id="7a7bdfbb-3778-4439-8569-ee55d02a235b">
+                <compartment entity-id="ac943c7a-2d92-4e01-9871-fdd639f033bb">
+                    <lane entity-id="e412ee16-469b-4b74-81ad-d57348a7733e">
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/echo-component" name="Echo" entity-id="2c7ffeb5-42fe-4867-949e-acee08a2485c"/>
+                        <pattern type="http://www.mulesoft.org/schema/mule/xml/xslt-transformer" name="On-ramp transformer XSLT" entity-id="b5b7f978-fa07-4fdc-8993-b8dcd30c82b4">
+                            <properties>
+<property value="" name="returnClass"/>
+<property value="false" name="ignoreBadInput"/>
+<property value="xslt/OpenEMPI-person-to-NID.xsl" name="xsl-file"/>
+<property value="5" name="maxActiveTransformers"/>
+<property value="" name="encoding"/>
+<property value="" name="transformerFactoryClass"/>
+<property value="" name="xslt-text"/>
+<property value="" name="outputEncoding"/>
+<property value="" name="uriResolver"/>
+<property value="" name="mimeType"/>
+<property value="2" name="maxIdleTransformers"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/xml/xslt-text;116409497">
+    <property value="" name="xslt-text"/>
+    <property value="true" name="isProcessed$$$$"/>
+</property-collection>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                        <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="d2ce376e-14d7-4507-8349-56d101848972">
+                            <properties>
+<property-collection name="281683d7-44f4-4d24-8004-bbe39f024638">
+    <property value="true" name="choice.otherwise"/>
+</property-collection>
+<property-collection name="2d00a780-1f19-4228-94a1-05ef00ef855b">
+    <property value="message.getInboundProperty('http.status').equals('200')" name="choice.expression"/>
+    <property value="groovy" name="choice.evaluator"/>
+</property-collection>
+                            </properties>
+                            <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="6aeee9a4-8b10-4ab4-9d28-a42b8f330853">
+<properties>
+    <property-collection name="281683d7-44f4-4d24-8004-bbe39f024638">
+        <property value="true" name="choice.otherwise"/>
+    </property-collection>
+    <property-collection name="2d00a780-1f19-4228-94a1-05ef00ef855b">
+        <property value="message.getInboundProperty('http.status').equals('200')" name="choice.expression"/>
+        <property value="groovy" name="choice.evaluator"/>
+    </property-collection>
+</properties>
+                            </pattern>
+                            <compartment entity-id="2c8713de-5bae-45a9-a884-522701a3fc2b">
+<lane entity-id="2d00a780-1f19-4228-94a1-05ef00ef855b">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set transaction success" entity-id="7fa22de8-73be-463b-967b-d76d4288fc91">
+        <properties>
+            <property name="returnClass"/>
+            <property name="ignoreBadInput"/>
+            <property name="encoding"/>
+            <property name="mimeType"/>
+            <property name="overwrite"/>
+            <property name="scope"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+                <property value="true" name="value"/>
+                <property value="success" name="key"/>
+                <property value="true" name="isProcessed$$$$"/>
+            </property-collection>
+        </properties>
+    </pattern>
+</lane>
+<lane entity-id="281683d7-44f4-4d24-8004-bbe39f024638">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set transaction success" entity-id="8f5a9e3c-642e-4d42-aebf-697d4a284eee">
+        <properties>
+            <property name="returnClass"/>
+            <property name="ignoreBadInput"/>
+            <property name="encoding"/>
+            <property name="mimeType"/>
+            <property name="overwrite"/>
+            <property name="scope"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+                <property value="false" name="value"/>
+                <property value="success" name="key"/>
+                <property value="true" name="isProcessed$$$$"/>
+            </property-collection>
+        </properties>
+    </pattern>
+</lane>
+                            </compartment>
+                        </splitter>
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="94a5aa73-5342-4492-83d4-846000aab979">
+                            <properties>
+<property value="Exitting getecid de-normalization #[groovy: message.toString()]" name="message"/>
+<property value="INFO" name="level"/>
+<property name="category"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </response>
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="81f4ea6e-7ec2-4045-9293-f9ba785a418a">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property value="cr.jembi.org" name="host"/>
+                    <property value="8080" name="port"/>
+                    <property value="openempi-admin/openempi-ws-rest/person-query-resource/findPersonById" name="path"/>
+                    <property name="method"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="application/xml" name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>
