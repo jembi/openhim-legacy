@@ -6,6 +6,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd 
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+	<context:property-placeholder xmlns:context="http://www.springframework.org/schema/context" location="classpath:HIM-core.properties, classpath:HIM-core-override.properties"></context:property-placeholder>
     <flow name="validatetfacility-denormalization-resourcemapFlow1" doc:name="validatetfacility-denormalization-resourcemapFlow1">
         <vm:inbound-endpoint exchange-pattern="request-response" path="validateFacility-resourcemap" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
         <logger message="In validateFacility de-normalization for resource map" level="INFO" doc:name="Logger"/>
@@ -34,8 +35,8 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <echo-component doc:name="Echo"/>
         </response>
         <message-properties-transformer doc:name="Message Properties">
-            <add-message-property key="Authorization" value="Basic ZGVtb0BpbnN0ZWRkLm9yZzpkZW1vZGVtbw=="/>
+            <add-message-property key="Authorization" value="${fr.auth}"/>
         </message-properties-transformer>
-        <http:outbound-endpoint exchange-pattern="request-response" host="facilities.moh.gov.rw" port="80" path="api/collections/26.rss?fosaid=#[groovy: return message.payload]" method="GET" doc:name="HTTP"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="${fr.host}" port="${fr.port}" path="api/collections/26.rss?fosaid=#[groovy: return message.payload]" method="GET" doc:name="HTTP"/>
     </flow>
 </mule>

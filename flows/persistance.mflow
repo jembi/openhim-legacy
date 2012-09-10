@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="message-persistance">
-    <global-unknown entity-id="81ead98e-64d9-4939-9793-e928b8dad27c">
-        <content>&lt;context:property-placeholder xmlns:context=&quot;http://www.springframework.org/schema/context&quot; location=&quot;classpath:my.properties&quot;&gt;&lt;/context:property-placeholder&gt;</content>
+    <global-unknown entity-id="c5948d3c-bc0d-4e12-b3cc-e0643be8615a">
+        <content>&lt;context:property-placeholder xmlns:context=&quot;http://www.springframework.org/schema/context&quot; location=&quot;classpath:HIM-core.properties, classpath:HIM-core-override.properties&quot;&gt;&lt;/context:property-placeholder&gt;</content>
     </global-unknown>
-    <global-element type="http://www.springframework.org/schema/beans/bean" name="jdbcDataSource" entity-id="ac33e820-8c16-41a0-abb7-fc52331a4546">
+    <global-element type="http://www.springframework.org/schema/beans/bean" name="jdbcDataSource" entity-id="c662a534-6367-4ee2-9150-af912beb0661">
         <properties>
             <property value="jdbcDataSource" name="id"/>
             <property value="jdbcDataSource" name="name"/>
@@ -38,7 +38,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <global-element type="org.mule.tooling.ui.modules.core.global.jdbcConnector" name="JDBCConnector" entity-id="614986d5-4c68-427b-9c84-c89db0e1bd57">
+    <global-element type="org.mule.tooling.ui.modules.core.global.jdbcConnector" name="JDBCConnector" entity-id="d1cbdcba-a477-488f-9518-9c49a104f5bf">
         <properties>
             <property value="JDBCConnector" name="name"/>
             <property value="jdbcDataSource" name="dataSource-ref to JDBC DataSource"/>
@@ -58,8 +58,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="a2ddaf96-381d-454e-967e-89e50282f6d5">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="f85f876d-3c48-4c29-aca5-09f6868bdda9">
+        <lane entity-id="5e7f8ce8-ac61-4156-97bf-2337244586a7">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="e3aff4fe-5c93-424e-878f-c507196f2113">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -75,43 +75,43 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="c20b6b2d-9cb9-403b-ae84-8f1f8f0fc049">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="9025b612-962c-4452-a8eb-167b48181eef">
                 <properties>
                     <property value="Persisting Transaction" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <response entity-id="b0456c9c-ba81-42e8-a2fb-1ce7d9a9e2fd">
-                <compartment entity-id="be815f8a-6655-4f11-9fb5-ca9130bb170d">
-                    <lane entity-id="e000fba1-bef3-440f-af8a-fe78a4ca16be">
-                        <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="4af71950-94af-40f2-afac-1c67533ce391">
+            <response entity-id="1d2dc8f3-2c62-4614-a444-1bdd4e14ad6c">
+                <compartment entity-id="48313fec-f36a-4046-b5eb-8952615259a9">
+                    <lane entity-id="2e3ba75c-71e6-413b-bd8b-0209c374a5a6">
+                        <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="7279d843-44e6-4e55-86f2-20879bba9326">
                             <properties>
-<property-collection name="ab671b60-4bf7-48ce-8cc4-264b54f288b5">
+<property-collection name="265ac64f-5a4d-4896-a87b-729b68a56951">
     <property value="true" name="choice.otherwise"/>
 </property-collection>
-<property-collection name="96c87d4f-014d-40bb-901c-83eb7a5ee5b9">
+<property-collection name="82bb8876-3659-4e44-a797-8373fd06ea90">
     <property value="payload instanceof org.jembi.rhea.RestfulHttpResponse" name="choice.expression"/>
     <property value="groovy" name="choice.evaluator"/>
 </property-collection>
                             </properties>
-                            <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="62e58ff2-6026-42dc-80c0-b8a897b6ab3c"/>
-                            <compartment entity-id="3d3c0c83-c8cf-4ed3-bcb4-cadf88ae5e06">
-<lane entity-id="96c87d4f-014d-40bb-901c-83eb7a5ee5b9">
-    <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="9c9d81fc-308c-4928-90ff-7d989a3bbecd">
+                            <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="06a258f9-2395-46df-b48a-2e987f649085"/>
+                            <compartment entity-id="bff6eab3-c718-463a-8366-89cb552ba1b9">
+<lane entity-id="82bb8876-3659-4e44-a797-8373fd06ea90">
+    <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="972897f8-08e2-41e6-9e40-7a528e2d1b8a">
         <properties>
-            <property-collection name="2f2f0874-76b3-4128-97a4-5f72700cb111">
+            <property-collection name="9c4a536c-5d34-472c-bbb4-c59147868b3c">
+                <property value="true" name="choice.otherwise"/>
+            </property-collection>
+            <property-collection name="e7213e63-2f76-4da3-b20a-bc08751be211">
                 <property value="message.payload.httpStatus == 500" name="choice.expression"/>
                 <property value="groovy" name="choice.evaluator"/>
             </property-collection>
-            <property-collection name="d7db5387-0cf6-4851-a70c-c8ec567544d5">
-                <property value="true" name="choice.otherwise"/>
-            </property-collection>
         </properties>
-        <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="128be52e-4923-404b-a247-b4ffa5c60d0f"/>
-        <compartment entity-id="9519c5f7-baba-49ab-a17d-3d1ec72a3eb0">
-            <lane entity-id="2f2f0874-76b3-4128-97a4-5f72700cb111">
-                <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw message response" entity-id="7cd43d9e-303a-423f-983c-a9054447eb88">
+        <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="dc0dcdac-b87d-4218-9349-850acf0d5959"/>
+        <compartment entity-id="b89c08fb-89b2-46de-ad0b-f4973cda21c4">
+            <lane entity-id="e7213e63-2f76-4da3-b20a-bc08751be211">
+                <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw message response" entity-id="3a8c730d-f1dc-47f0-9792-aa3b8e29bc9f">
                     <properties>
                         <property value="one-way" name="exchange-pattern"/>
                         <property value="request-response" name="exchange-pattern"/>
@@ -134,8 +134,8 @@
                     </properties>
                 </endpoint>
             </lane>
-            <lane entity-id="d7db5387-0cf6-4851-a70c-c8ec567544d5">
-                <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw message response" entity-id="f1f4c0bd-f1ac-4e35-8108-b110c58d7084">
+            <lane entity-id="9c4a536c-5d34-472c-bbb4-c59147868b3c">
+                <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw message response" entity-id="4544a3ee-fd37-4951-af0f-0b88c7ddb670">
                     <properties>
                         <property value="one-way" name="exchange-pattern"/>
                         <property value="request-response" name="exchange-pattern"/>
@@ -161,8 +161,8 @@
         </compartment>
     </splitter>
 </lane>
-<lane entity-id="ab671b60-4bf7-48ce-8cc4-264b54f288b5">
-    <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" name="Groovy" entity-id="8056ed09-f6a8-473d-926e-b8fee684c6f4">
+<lane entity-id="265ac64f-5a4d-4896-a87b-729b68a56951">
+    <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" name="Groovy" entity-id="62d7a6aa-742d-4f4c-bb84-2d3bf4d841ec">
         <properties>
             <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
                 <property value="StringWriter sw = new StringWriter();&#xA;message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));&#xA;message.setOutboundProperty(&quot;stacktrace&quot;, sw.toString());" name="text"/>
@@ -170,7 +170,7 @@
             </property-collection>
         </properties>
     </pattern>
-    <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw error message response" entity-id="3f3942ec-daf9-4a56-9f61-c47350ce9ed0">
+    <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw error message response" entity-id="c830e076-90c2-40d8-ae5c-310e54fdb05a">
         <properties>
             <property value="one-way" name="exchange-pattern"/>
             <property value="request-response" name="exchange-pattern"/>
@@ -198,7 +198,7 @@
                     </lane>
                 </compartment>
             </response>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw message" entity-id="7aec769d-5de5-4113-807e-89410177737d">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" name="Persist raw message" entity-id="193f14e1-fbb0-4173-a049-7c0edd304895">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -220,7 +220,7 @@
                     </property-collection>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set message uuid in session" entity-id="a33a57f6-93d5-45f0-a40b-910f093123ad">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set message uuid in session" entity-id="d792c344-d9ab-4448-a89d-fde37631ec67">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -234,7 +234,7 @@
                     </property-collection>
                 </properties>
             </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="a07106f8-d76f-4f69-8f84-e6422301678d">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="0201f462-1428-4dde-9f9c-4fa14f8b19ee">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
