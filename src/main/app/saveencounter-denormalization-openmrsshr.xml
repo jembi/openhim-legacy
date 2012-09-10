@@ -5,6 +5,7 @@ http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/cu
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+	<context:property-placeholder xmlns:context="http://www.springframework.org/schema/context" location="classpath:HIM-core.properties, classpath:HIM-core-override.properties"></context:property-placeholder>
     <flow name="mediation-denormalization-saveencounters-openmrsshrFlow" doc:name="mediation-denormalization-saveencounters-openmrsshrFlow">
         <vm:inbound-endpoint exchange-pattern="request-response" path="saveEncounters-De-normailization-OpenMRSSHR" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
         <logger message="De-normalizing a save encounters transaction to OpenMRS SHR" level="INFO" doc:name="Logger"/>
@@ -13,7 +14,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <add-message-property key="path" value="#[groovy: return message.payload.buildUrlWithRequestParams();]"/>
         </message-properties-transformer>
         <message-properties-transformer doc:name="Add basic auth">
-            <add-message-property key="Authorization" value="Basic YWRtaW46SmVtYmkjMTIz"/>
+            <add-message-property key="Authorization" value="${shr.auth}"/>
         </message-properties-transformer>
         <expression-transformer evaluator="groovy" expression="return message.payload.body;" doc:name="Transfor HTTPRestfulMessage to HTTP Body"/>
         <response>
@@ -23,6 +24,6 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="On-ramp Transformer"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Translation Transformer"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="shr.jembi.org" port="8080" path="#[header:OUTBOUND:path]" responseTimeout="120000" contentType="text/xml" doc:name="Deliver message to mock service provider"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="${shr.host}" port="${shr.port}" path="#[header:OUTBOUND:path]" responseTimeout="120000" contentType="text/xml" doc:name="Deliver message to mock service provider"/>
     </flow>
 </mule>

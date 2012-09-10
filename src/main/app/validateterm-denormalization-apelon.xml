@@ -6,6 +6,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd 
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+	<context:property-placeholder xmlns:context="http://www.springframework.org/schema/context" location="classpath:HIM-core.properties, classpath:HIM-core-override.properties"></context:property-placeholder>
     <flow name="mediation-validateterm-denormalization-apelonFlow1" doc:name="mediation-validateterm-denormalization-apelonFlow1">
         <vm:inbound-endpoint exchange-pattern="request-response" path="validateterm" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
         <logger message="In validateterm de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
@@ -37,6 +38,6 @@ return payload;]]></scripting:text>
             </choice>
             <logger message="Exitting validateterm de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="ts.jembi.org" port="80" path="validate.php?namespaceCode=#[groovy: return message.payload.get('namespace')]&amp;conceptCode=#[groovy: return message.payload.get('id')]" method="GET" doc:name="HTTP"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="${ts.host}" port="${ts.port}" path="validate.php?namespaceCode=#[groovy: return message.payload.get('namespace')]&amp;conceptCode=#[groovy: return message.payload.get('id')]" method="GET" doc:name="HTTP"/>
     </flow>
 </mule>

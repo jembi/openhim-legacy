@@ -5,6 +5,7 @@ http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/cu
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+	<context:property-placeholder xmlns:context="http://www.springframework.org/schema/context" location="classpath:HIM-core.properties, classpath:HIM-core-override.properties"></context:property-placeholder>
     <flow name="mediation-getnid-denormalization-openldapFlow1" doc:name="mediation-getnid-denormalization-openldapFlow1">
         <vm:inbound-endpoint exchange-pattern="request-response" path="getnid-openldap" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
         <logger message="In getnid de-normalization for OpenLDAP #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
@@ -28,6 +29,6 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             </choice>
             <logger message="Exitting getnid de-normalization for OpenLDAP #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="pr.jembi.org" port="80" path="webservices/lookupbyid/nid/?id_type=#[groovy: return message.payload.get('idType')]&amp;id_number=#[groovy: return message.payload.get('id')]" method="GET" doc:name="HTTP"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="${pr.host}" port="${pr.port}" path="webservices/lookupbyid/nid/?id_type=#[groovy: return message.payload.get('idType')]&amp;id_number=#[groovy: return message.payload.get('id')]" method="GET" doc:name="HTTP"/>
     </flow>
 </mule>

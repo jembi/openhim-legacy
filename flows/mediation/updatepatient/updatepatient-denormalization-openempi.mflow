@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mediation-denormalization-queryfacilities-mockserviceprovider">
+    <global-unknown entity-id="cedc9e36-2510-468b-92d1-8cd4d58d1f17">
+        <content>&lt;context:property-placeholder xmlns:context=&quot;http://www.springframework.org/schema/context&quot; location=&quot;classpath:HIM-core.properties, classpath:HIM-core-override.properties&quot;&gt;&lt;/context:property-placeholder&gt;</content>
+    </global-unknown>
     <flow SubFlow="false" name="mediation-denormalization-updatepatient-openempiFlow">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="03321117-3a7f-4a4e-963f-edf62be8904d">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="f52a06bb-7f77-4322-85bd-132bd32113f6">
+        <lane entity-id="20e30c09-525b-4fbd-ad96-d27bff156dcc">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="02b770f2-8ab3-43d1-a928-197f0481b8a4">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -22,24 +25,23 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="2db2cfa6-ccc0-46e5-9f42-9f71ca110a17">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="d6fa954c-2c93-4405-81db-9359b54ba14a">
                 <properties>
                     <property value="De-normalizing a update patient transaction to OpenEMPI" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Off-ramp transformer" entity-id="0fdbaa26-843e-487b-9074-e0e28ed1516a">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Off-ramp transformer" entity-id="45d6c090-0a0a-4292-8dac-01dfe1131e78">
                 <properties>
-                    <property value="" name="returnClass"/>
-                    <property value="false" name="ignoreBadInput"/>
-                    <property value="" name="encoding"/>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
                     <property value="org.jembi.rhea.transformers.ADT_A31ToOpenEMPIUpdatePatientTransformer" name="class"/>
-                    <property value="" name="mimeType"/>
                 </properties>
-                <description></description>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Message Properties" entity-id="625f3659-6857-4bc2-9589-d6643d231aee">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Message Properties" entity-id="e4138052-31d6-47ff-b420-ce341cbf0caa">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -48,29 +50,29 @@
                     <property name="overwrite"/>
                     <property name="scope"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
-                        <property value="19598DBC81B09C2303E851AD660DBAF1" name="value"/>
+                        <property value="${openempi.sessionkey}" name="value"/>
                         <property value="OPENEMPI_SESSION_KEY" name="key"/>
                     </property-collection>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="b881e89b-bbfe-432e-a7e1-883191bfa27c">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="b28329b3-4392-4671-ae48-57fc62b3199e">
                 <properties>
                     <property value="Body: [groovy: return message.payload.getBody()]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <response entity-id="f01ac0e7-15da-48f4-8f2f-b3d83b3a0bc7">
-                <compartment entity-id="f38b94f4-8116-4e11-a527-a83a67f54969">
-                    <lane entity-id="51796613-338d-4973-bf40-4bf316ff9743">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="c8eb5766-1232-44d4-ba6a-76cea5dab8e0">
+            <response entity-id="85a082ab-d156-42c9-a2fb-efc548bd9cb6">
+                <compartment entity-id="b7a6872c-ef72-43f4-adbe-f1651b549ef1">
+                    <lane entity-id="d673f3a9-96fd-432b-8559-82cd53ce41b2">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="f013812d-71f0-4312-b5c9-fab8451c31b7">
                             <properties>
 <property value="Recieved responce from OpenEMPI: #[groovy: message.toString();]]" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="HttpResponseToRestfulHttpResponseTransformer" entity-id="0fd5430b-64d4-4e63-99e5-18c6a1ac7ed6">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="HttpResponseToRestfulHttpResponseTransformer" entity-id="b5c5d1bc-a9b9-4559-aa09-ef22d30051ab">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
@@ -79,23 +81,22 @@
 <property value="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer" name="class"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="60c406e9-d094-4bed-82a7-7bf5736058a4">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="8c7bf238-79c8-4542-bd4d-057df8539ccf">
                             <properties>
 <property value="Responce normalization" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" name="On-ramp transformer" entity-id="d41af902-73f0-419f-922b-2dc85f39f03b">
+                        <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" name="On-ramp transformer" entity-id="618c9d99-5849-4203-811d-e13fa3d511e7">
                             <properties>
 <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
     <property value="if (message.payload.httpStatus == 204) {&#xA;&#x9;message.payload.body = '';&#xA;&#x9;message.payload.httpStatus = 200;&#xA;}&#xA;return message;" name="text"/>
     <property value="Groovy" name="engine"/>
-    <property value="true" name="isProcessed$$$$"/>
 </property-collection>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Translation Transformer" entity-id="5b5919d5-5d91-471a-8380-75189ff34ae4">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Translation Transformer" entity-id="8c16cdcf-fbd7-48e9-b4e1-05a1aaa452f4">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
@@ -107,14 +108,14 @@
                     </lane>
                 </compartment>
             </response>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="Deliver message to mock service provider" entity-id="a7314f51-82d0-4528-8064-cd6648a2d783">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="Deliver message to mock service provider" entity-id="eb6a8afa-d770-43ef-a634-c6101a2dca64">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
                     <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
                     <property name="httpLabel"/>
-                    <property value="cr.jembi.org" name="host"/>
-                    <property value="8080" name="port"/>
+                    <property value="${cr.host}" name="host"/>
+                    <property value="${cr.port}" name="port"/>
                     <property value="openempi-admin/openempi-ws-rest/person-manager-resource/updatePerson" name="path"/>
                     <property value="PUT" name="method"/>
                     <property name="address"/>

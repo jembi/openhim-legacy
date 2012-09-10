@@ -7,6 +7,7 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd 
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+	<context:property-placeholder xmlns:context="http://www.springframework.org/schema/context" location="classpath:HIM-core.properties, classpath:HIM-core-override.properties"></context:property-placeholder>
     <flow name="mediation-getnid-denormalization-openempiFlow1" doc:name="mediation-getnid-denormalization-openempiFlow1">
         <vm:inbound-endpoint exchange-pattern="request-response" path="getnid-openempi" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
         <logger message="In getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
@@ -27,7 +28,7 @@ return body;]]></scripting:text>
             </scripting:script>
         </scripting:transformer>
         <message-properties-transformer doc:name="Message Properties">
-            <add-message-property key="OPENEMPI_SESSION_KEY" value="19598DBC81B09C2303E851AD660DBAF1"/>
+            <add-message-property key="OPENEMPI_SESSION_KEY" value="${openempi.sessionkey}"/>
         </message-properties-transformer>
         <response>
             <echo-component doc:name="Echo"/>
@@ -50,6 +51,6 @@ return body;]]></scripting:text>
             </choice>
             <logger message="Exitting getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         </response>
-        <http:outbound-endpoint exchange-pattern="request-response" host="cr.jembi.org" port="8080" path="openempi-admin/openempi-ws-rest/person-query-resource/findPersonById" mimeType="application/xml" doc:name="HTTP"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="${cr.host}" port="${cr.port}" path="openempi-admin/openempi-ws-rest/person-query-resource/findPersonById" mimeType="application/xml" doc:name="HTTP"/>
     </flow>
 </mule>

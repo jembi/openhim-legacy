@@ -11,7 +11,7 @@
         <xsl:param name="idType">
             <xsl:value-of select="identifierDomain/universalIdentifierTypeCode"/>
         </xsl:param>
-        <xsl:if test="$idType = 'NID'">
+        <xsl:if test="$idType = 'ECID'">
             <xsl:value-of select="identifier"/>
         </xsl:if>
     </xsl:template>
