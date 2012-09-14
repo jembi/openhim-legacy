@@ -15,7 +15,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         <ss:authentication-manager alias="authenticationManager">  
             <ss:authentication-provider> 
                 <ss:user-service id="userService"> 
-                    <ss:user name="test" password="test" authorities="ROLE_ADMIN"/> 
+                    <ss:user name="${him.interface.user}" password="${him.interface.password}" authorities="ROLE_ADMIN"/> 
                 </ss:user-service> 
             </ss:authentication-provider> 
         </ss:authentication-manager>
