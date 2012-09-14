@@ -13,7 +13,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <custom-transformer class="org.jembi.rhea.transformers.QueryPatientsOpenEMPIOffRampTransformer" doc:name="Off-ramp Transformer"/>
         <expression-transformer evaluator="groovy" expression="return message.payload.getBody();" doc:name="Expression"/>
         <message-properties-transformer doc:name="Message Properties">
-            <add-message-property key="OPENEMPI_SESSION_KEY" value="19598DBC81B09C2303E851AD660DBAF1"/>
+            <add-message-property key="OPENEMPI_SESSION_KEY" value="${openempi.sessionkey}"/>
         </message-properties-transformer>
         <logger message="Message body after transformation: #[groovy: message.payload.toString();]" level="INFO" doc:name="Logger"/>
         <response>
