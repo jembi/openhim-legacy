@@ -55,6 +55,12 @@ public class QueryEncounterInjectNIDTransformer extends
 					String proID = orderingProvider.getIDNumber().getValue();
 					String proIDType = orderingProvider.getIdentifierTypeCode().getValue();
 					
+					// if this is an obs grouping OBR
+					if (proID == null && proIDType == null) {
+						break;
+					}
+					
+					// if one of the id values is missing
 					if (proID == null || proIDType == null) {
 						throw new Exception("Invalid Provider: id or id type is null");
 					}
