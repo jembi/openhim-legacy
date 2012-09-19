@@ -21,7 +21,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         </ss:authentication-manager>
     </spring:beans>
     <https:connector name="HTTPSConnector" cookieSpec="netscape" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" proxyHostname="localhost" proxyPort="80" doc:name="HTTPSConnector">
-        <https:tls-key-store path="keystore.jks" keyPassword="Jembi#123" storePassword="Jembi#123"/>
+        <https:tls-key-store path="${cert.keystore}" keyPassword="${cert.keypassword}" storePassword="${cert.storepassword}"/>
     </https:connector>
     <http:connector name="NoSessionConnector" doc:name="HTTP\HTTPS">
         <service-overrides sessionHandler="org.mule.session.NullSessionHandler"/>
