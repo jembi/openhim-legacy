@@ -50,6 +50,22 @@ public class QueryEncounterInjectNIDTransformer extends
 			
 			ORU_R01 oru_r01 = (ORU_R01) hl7_msg;
 			
+			// Replace ECID with original client ID
+			PID pid = oru_r01.getPATIENT_RESULT().getPATIENT().getPID();
+			CX idCX = pid.getPatientIdentifierList(0);
+			String id = msg.getSessionProperty("id");
+			String idType = msg.getSessionProperty("idType");
+			
+			String uuid = msg.getSessionProperty("uuid");
+			String[] id_arr = QueryEncounterInjectECIDTransformer.requestClientIds.get(uuid);
+			idType = id_arr[0];
+			id = id_arr[1];
+			QueryEncounterInjectECIDTransformer.requestClientIds.remove(uuid);
+			
+			idCX.getIdentifierTypeCode().setValue(idType);
+			idCX.getIDNumber().setValue(id);
+			
+			/*
 			// Replace ECID with Client NID
 			PID pid = oru_r01.getPATIENT_RESULT().getPATIENT().getPID();
 			CX[] patientIdentifierList = pid.getPatientIdentifierList();
@@ -83,6 +99,7 @@ public class QueryEncounterInjectNIDTransformer extends
 				
 				log.info("Validated Client and enriched message with Client NID");
 			}
+			*/
 			
 			// Validate and replace provider id's in each obr
 			for (int i = 0 ; i < oru_r01.getPATIENT_RESULTReps() ; i++) {
@@ -110,10 +127,10 @@ public class QueryEncounterInjectNIDTransformer extends
 					ProIdMap.put("id", proID);
 					ProIdMap.put("idType", proIDType);
 					
-					responce = client.send("vm://getnid-openldap", ProIdMap, null, 5000);
+					MuleMessage responce = client.send("vm://getnid-openldap", ProIdMap, null, 5000);
 					
-					nid = null;
-					success = responce.getInboundProperty("success");
+					String nid = null;
+					String success = responce.getInboundProperty("success");
 					if (success.equals("true")) {
 						nid = responce.getPayloadAsString();
 						

@@ -6,12 +6,15 @@ import java.util.StringTokenizer;
 
 import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpRequest;
+import org.jembi.rhea.Util;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.module.client.MuleClient;
 import org.mule.transformer.AbstractMessageTransformer;
 
 public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransformer {
+	
+	public static Map<String, String[]> requestClientIds = new HashMap<String, String[]>();
 
 	@Override
 	public Object transformMessage(MuleMessage msg, String enc)
@@ -27,10 +30,10 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 			int endIndex = path.indexOf("/encounters");
 			String id_str = path.substring(beginIndex, endIndex);
 			
-			StringTokenizer st = new StringTokenizer(id_str, "-");
+			String[] identifer = Util.splitIdentifer(id_str);
 			
-			String idType = st.nextToken();
-			String id = st.nextToken();
+			String idType = identifer[0];
+			String id = identifer[1];
 			
 			Map<String, String> idMap = new HashMap<String, String>();
 			idMap.put("id", id);
@@ -47,6 +50,13 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 			String ecid;
 			if (success != null && success.equals("true")) {
 				ecid = responce.getPayloadAsString();
+				// Save original ID for later use
+				msg.setSessionProperty("id", id);
+				msg.setSessionProperty("idType", idType);
+				
+				String uuid = req.getUuid();
+				
+				requestClientIds.put(uuid, new String[] {idType, id});
 			} else {
 				throw new Exception("Invalid Client: ECID for id type: " + idType + " with ID: " + id + " could not be found in Client Registry");
 			}
