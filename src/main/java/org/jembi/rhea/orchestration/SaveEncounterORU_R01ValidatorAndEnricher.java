@@ -197,9 +197,8 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 			epid = responce.getPayloadAsString();
 			
 			// Enrich message
-			int reps = pv1.getAttendingDoctorReps();
-			pv1.getAttendingDoctor(reps).getIDNumber().setValue(epid);
-			pv1.getAttendingDoctor(reps).getIdentifierTypeCode().setValue(Constants.EPID_ID_TYPE);
+			pv1.getAttendingDoctor(0).getIDNumber().setValue(epid);
+			pv1.getAttendingDoctor(0).getIdentifierTypeCode().setValue(Constants.EPID_ID_TYPE);
 		}
 		
 		if (epid == null) {
