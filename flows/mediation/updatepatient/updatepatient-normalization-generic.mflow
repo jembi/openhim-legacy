@@ -5,8 +5,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="c210ab2d-8463-4021-b90e-03029e6d9d46">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="c3cf7795-5ac8-4fda-952e-07c06904c64b">
+        <lane entity-id="92251c0f-5bbc-464f-a226-3ac656051f38">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="b489a1ac-a68c-42fa-aa8f-3d24ec8c90f4">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -22,14 +22,14 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="65ecbdb4-2946-4b47-a61d-321f83940b20">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="cb2d900d-157d-4cfa-bcef-04b91abb23d6">
                 <properties>
                     <property value="Normalizing a generic update patient transaction: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="On-ramp Transformer" entity-id="1db340f8-9dcf-4067-b863-0171b15c8c09">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="On-ramp Transformer" entity-id="e8e997d2-edc0-44fc-bb9f-6bd996303373">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -38,7 +38,7 @@
                     <property value="org.jembi.heal.DoNothingTransformer" name="class"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Translation Transformer" entity-id="c0293cf6-5ae9-465f-93aa-dfebb744974d">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Translation Transformer" entity-id="fbb933da-f8c6-475b-af35-3671e91b22c9">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -47,17 +47,17 @@
                     <property value="org.jembi.heal.DoNothingTransformer" name="class"/>
                 </properties>
             </pattern>
-            <response entity-id="81814777-209f-4d60-b3a4-422ed73d23e9">
-                <compartment entity-id="54846dbe-6f9a-4674-b066-9747c818eb41">
-                    <lane entity-id="886338dc-2a80-4019-968c-12e207e04930">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="3b838d12-5f83-43ca-82c8-f1a37c26678a">
+            <response entity-id="0e613f8f-4f97-4388-aea7-a2d4d743084b">
+                <compartment entity-id="8912136e-3af5-4582-9479-f44d4dfd42d3">
+                    <lane entity-id="5f4a58ec-b09f-4a25-9c10-7df1bb8dcdc0">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="9a4b2f8f-0354-429f-bbc6-f6cc4defe3ec">
                             <properties>
 <property value="Responce de-normalization" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Off-ramp Transformer" entity-id="c7eafaa3-a923-4481-92c8-475b29b9fae9">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Off-ramp Transformer" entity-id="f9682fbf-9c0d-4f51-84e8-b12e55745f56">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
@@ -69,7 +69,7 @@
                     </lane>
                 </compartment>
             </response>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to updatePatientOrchestrationQueue" entity-id="f6e50ec7-fbd7-48b8-8543-c7b8594cf805">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to updatePatientOrchestrationQueue" entity-id="8a5a0d64-d653-49ee-be63-07b51f3f162a">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>

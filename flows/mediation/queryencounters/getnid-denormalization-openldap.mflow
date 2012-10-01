@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mediation-getecid-denormalization-mockserviceprovider">
-    <global-unknown entity-id="863e2df9-5b4b-4c85-87fd-d2af43f88c86">
+    <global-unknown entity-id="0f519b56-4e11-4499-bff2-80bc78f29b9f">
         <content>&lt;context:property-placeholder xmlns:context=&quot;http://www.springframework.org/schema/context&quot; location=&quot;classpath:HIM-core.properties, classpath:HIM-core-override.properties&quot;&gt;&lt;/context:property-placeholder&gt;</content>
     </global-unknown>
     <flow SubFlow="false" name="mediation-getnid-denormalization-openldapFlow1">
@@ -8,8 +8,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="65908ad1-4ef1-4630-907b-d9142a86ef04">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="4106c5d3-7c0b-47c6-b48e-7f9f41a13f31">
+        <lane entity-id="9428aa96-85eb-4f75-9929-061cdacad645">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="4e3c204d-8de5-45af-be3f-2a31ba14f280">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -25,37 +25,37 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="a82485cb-4cc1-4a41-9ef7-ae298b5ebc17">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="cdbde12b-c0e9-4c1f-b78d-0f36d5134f8e">
                 <properties>
                     <property value="In getnid de-normalization for OpenLDAP #[groovy: message.toString()]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="db516d50-c999-4b4d-a267-5720a572b26c">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="a2c11f05-514f-4aca-a8ad-89410e6f669e">
                 <properties>
                     <property value="Length: #[groovy: message.getPayloadAsString().length()]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <response entity-id="b757a666-9fdf-4efb-8994-b23f1e1187c4">
-                <compartment entity-id="23a783cd-dffb-4001-9cb4-96f874704795">
-                    <lane entity-id="1c1086de-f5a5-41e5-aeeb-47da6438718c">
-                        <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="fe26ee1c-d2f9-42bd-bc01-9146055caa63">
+            <response entity-id="6e807790-6d01-4fb0-b1af-09731e40d63f">
+                <compartment entity-id="406a448f-bd6c-4032-a751-2db93b778c9f">
+                    <lane entity-id="9720ed03-b3e2-4e28-9b9b-0e110fa71b2d">
+                        <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="531c0ad0-597d-457f-a3d4-aa0ffde1c308">
                             <properties>
-<property-collection name="ca6aec8f-f5d2-4dd2-b597-35beba2a3d56">
-    <property value="true" name="choice.otherwise"/>
-</property-collection>
-<property-collection name="59f7dce1-74a6-412b-a390-3a4ea5d8c3ae">
+<property-collection name="0eea94df-6cff-4595-bba2-3e9642747720">
     <property value="message.getInboundProperty('http.status').equals('200') &amp;&amp; (message.getPayloadAsString().length() &gt; 0)" name="choice.expression"/>
     <property value="groovy" name="choice.evaluator"/>
 </property-collection>
+<property-collection name="888effe7-0ba2-4266-87e0-58dc36a2f930">
+    <property value="true" name="choice.otherwise"/>
+</property-collection>
                             </properties>
-                            <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="ffa57bba-d085-453a-806c-b3a18a211955"/>
-                            <compartment entity-id="0790be7f-144c-4698-8a4b-e572d1f32338">
-<lane entity-id="59f7dce1-74a6-412b-a390-3a4ea5d8c3ae">
-    <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set transaction success" entity-id="b465f972-dcfe-4f66-bc25-ea40e57ee9bb">
+                            <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="3738454f-091b-41d8-b8e8-f3fa62b927f6"/>
+                            <compartment entity-id="33adc7c8-b37a-4c52-bdfd-2cd53c641ad5">
+<lane entity-id="0eea94df-6cff-4595-bba2-3e9642747720">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set transaction success" entity-id="fcfddbc4-5fd5-4998-b10b-217b48232241">
         <properties>
             <property name="returnClass"/>
             <property name="ignoreBadInput"/>
@@ -70,8 +70,8 @@
         </properties>
     </pattern>
 </lane>
-<lane entity-id="ca6aec8f-f5d2-4dd2-b597-35beba2a3d56">
-    <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set transaction success" entity-id="9ce2a9e3-fe33-4097-9c54-3f9f79b0bed1">
+<lane entity-id="888effe7-0ba2-4266-87e0-58dc36a2f930">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set transaction success" entity-id="637420e4-88ec-427e-86ac-7beef184d235">
         <properties>
             <property name="returnClass"/>
             <property name="ignoreBadInput"/>
@@ -88,7 +88,7 @@
 </lane>
                             </compartment>
                         </splitter>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="2b6708ce-7921-4695-be19-25369628b849">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="1fc319f2-3687-4a0c-94a2-9f6362eb0b16">
                             <properties>
 <property value="Exitting getnid de-normalization for OpenLDAP #[groovy: message.toString()]" name="message"/>
 <property value="INFO" name="level"/>
@@ -98,7 +98,7 @@
                     </lane>
                 </compartment>
             </response>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="69b63624-0c8d-4225-9d59-f016a131fb35">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="aa50298d-b3ca-47d0-9369-e3499d426f70">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>

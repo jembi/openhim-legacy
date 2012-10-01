@@ -5,8 +5,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="3bddc5ac-a5f3-4fa0-b209-f7886bf6d63d">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="3536ccb8-63a6-4fc1-a612-fec714568f5a">
+        <lane entity-id="fcc1687d-2092-4271-a5d1-a56dfda1f058">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="3652b3a7-a130-476e-afcb-5860d0a70f27">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -22,14 +22,14 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="22bb831e-f32f-46bc-8177-4528a72ed7f9">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="bae43fee-61a9-4c95-9e34-5200ee75a789">
                 <properties>
                     <property value="Orchestrating a get professional transaction" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Java" entity-id="056ae643-c49c-42d6-b648-6a06e3f737cd">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Java" entity-id="c81fe771-83f9-4527-a07d-d1a2c5e740c9">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -38,17 +38,17 @@
                     <property value="org.jembi.heal.DoNothingTransformer" name="class"/>
                 </properties>
             </pattern>
-            <response entity-id="5615305b-b5c0-426f-8e0e-50029a663ee8">
-                <compartment entity-id="a6cf93c0-0309-43b8-a401-193e8a71866e">
-                    <lane entity-id="12b448dc-5f75-4a4b-9fb1-bbefb44f3290">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="c238fb32-dea1-4d85-9e54-1b63edffd036">
+            <response entity-id="9a6b3e2c-e173-4da2-b3c5-bd9491227d58">
+                <compartment entity-id="eec91ee6-94f0-44ae-bf5e-e1d79cfd044d">
+                    <lane entity-id="e9bbb15a-4fc9-4272-80a5-ce4e0e5211ad">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="1ab1d6fc-4deb-49db-8b14-41203ec4ca26">
                             <properties>
 <property value="Responce orchestration" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Java" entity-id="a56727cc-f7a4-4744-92a2-7e091cf1d792">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Java" entity-id="975f7967-cbe3-4465-a8ec-eb8d742345db">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
@@ -60,7 +60,7 @@
                     </lane>
                 </compartment>
             </response>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getProfessionalDe-NormalizationQueue" entity-id="81a286f2-ce64-467c-8c99-329fc8c4b148">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to getProfessionalDe-NormalizationQueue" entity-id="cf6bb103-f227-4a9f-9e63-74d570a48247">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
