@@ -1,20 +1,119 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="entrypoint">
-    <global-unknown entity-id="533b0213-af00-48ac-ae72-e1b9ae8cc521">
+    <global-unknown entity-id="19dabce2-ff52-4617-9b96-80b58787134f">
         <content>&lt;mule-ss:security-manager xmlns:mule-ss=&quot;http://www.mulesoft.org/schema/mule/spring-security&quot;&gt;  
-        &lt;mule-ss:delegate-security-provider name=&quot;memory-provider&quot; delegate-ref=&quot;authenticationManager&quot;/&gt; 
+        &lt;!-- &lt;mule-ss:delegate-security-provider name=&quot;memory-provider&quot; delegate-ref=&quot;authenticationManager&quot;/&gt; --&gt;
+        &lt;mule-ss:delegate-security-provider name=&quot;spring-security-ldap&quot; delegate-ref=&quot;authenticationManager&quot;/&gt;
     &lt;/mule-ss:security-manager&gt;</content>
     </global-unknown>
-    <global-unknown wrapNSURL="http://www.springframework.org/schema/beans" wrapNSPref="spring" wrapIn="beans" entity-id="2ac4be3d-97a0-4047-8b93-65874412ea05">
-        <content>&lt;ss:authentication-manager xmlns:ss=&quot;http://www.springframework.org/schema/security&quot; alias=&quot;authenticationManager&quot;&gt;  
-            &lt;ss:authentication-provider&gt; 
-                &lt;ss:user-service id=&quot;userService&quot;&gt; 
-                    &lt;ss:user name=&quot;${him.interface.user}&quot; password=&quot;${him.interface.password}&quot; authorities=&quot;ROLE_ADMIN&quot;/&gt; 
-                &lt;/ss:user-service&gt; 
-            &lt;/ss:authentication-provider&gt; 
-        &lt;/ss:authentication-manager&gt;</content>
-    </global-unknown>
-    <global-element type="org.mule.tooling.ui.modules.core.global.httpsConnector" name="HTTPSConnector" entity-id="a900f6d3-71ea-4da3-aa96-f96ac49c9d50">
+    <global-element type="http://www.springframework.org/schema/beans/bean" name="Bean" entity-id="0888b8b0-8969-44b5-96dc-ba1354bcc994">
+        <properties>
+            <property value="contextSource" name="id"/>
+            <property name="name"/>
+            <property value="org.springframework.security.ldap.DefaultSpringSecurityContextSource" name="class"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+            <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;0">
+                <property value="${ldap.url}" name="value"/>
+            </property-collection>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;1">
+                <property value="userDn" name="name"/>
+                <property value="${ldap.admin.userdn}" name="value"/>
+            </property-collection>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;2">
+                <property value="password" name="name"/>
+                <property value="${ldap.admin.password}" name="value"/>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-element type="http://www.springframework.org/schema/beans/bean" name="Bean" entity-id="a57a8ef1-62a6-42e5-a818-25110d2ea8a8">
+        <properties>
+            <property value="authenticationProvider" name="id"/>
+            <property name="name"/>
+            <property value="org.springframework.security.ldap.authentication.LdapAuthenticationProvider" name="class"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+            <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;0">
+                <property-collection name="@http://www.springframework.org/schema/beans/bean;1">
+                    <property value="org.springframework.security.ldap.authentication.BindAuthenticator" name="class"/>
+                    <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;1">
+                        <property value="contextSource" name="ref"/>
+                    </property-collection>
+                    <property-collection name="@http://www.springframework.org/schema/beans/property;2">
+                        <property value="userDnPatterns" name="name"/>
+                        <property-collection name="@http://www.springframework.org/schema/beans/list;1">
+                            <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+<property value="uid={0},ou=himusers" name=""/>
+                            </property-collection>
+                        </property-collection>
+                    </property-collection>
+                </property-collection>
+            </property-collection>
+            <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;1">
+                <property-collection name="@http://www.springframework.org/schema/beans/bean;1">
+                    <property value="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator" name="class"/>
+                    <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;2">
+                        <property value="ou=groups" name="value"/>
+                    </property-collection>
+                    <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;1">
+                        <property value="contextSource" name="ref"/>
+                    </property-collection>
+                    <property-collection name="@http://www.springframework.org/schema/beans/property;3">
+                        <property value="groupRoleAttribute" name="name"/>
+                        <property value="ou" name="value"/>
+                    </property-collection>
+                </property-collection>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-element type="http://www.springframework.org/schema/beans/bean" name="Bean" entity-id="e676fe13-5ee0-4d16-ae0e-ca30c8bcf3a7">
+        <properties>
+            <property value="authenticationManager" name="id"/>
+            <property name="name"/>
+            <property value="org.springframework.security.authentication.ProviderManager" name="class"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;0">
+                <property value="providers" name="name"/>
+                <property-collection name="@http://www.springframework.org/schema/beans/list;1">
+                    <property-collection name="@http://www.springframework.org/schema/beans/ref;1">
+                        <property value="authenticationProvider" name="local"/>
+                    </property-collection>
+                </property-collection>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-element type="org.mule.tooling.ui.modules.core.global.httpsConnector" name="HTTPSConnector" entity-id="711e2b31-164f-4d10-9f47-7394d17d7614">
         <properties>
             <property value="HTTPSConnector" name="name"/>
             <property name="enableCookies"/>
@@ -70,7 +169,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <global-element type="org.mule.tooling.ui.modules.core.global.httpConnector" name="HTTP\HTTPS" entity-id="8438f444-46f0-4c11-877a-5c85fb858e1a">
+    <global-element type="org.mule.tooling.ui.modules.core.global.httpConnector" name="HTTP\HTTPS" entity-id="19e3266a-8940-4689-b9e5-f0202ac22a6d">
         <properties>
             <property value="NoSessionConnector" name="name"/>
             <property name="enableCookies"/>
@@ -99,8 +198,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="5f912e93-b1dd-4e61-96c3-d8a0e6c00acf">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="958a6678-e4db-4a08-b370-f17e043bc6e5">
+        <lane entity-id="3b8eb768-a6ba-451e-96c1-db48bd9efada">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="9fc922bf-6e53-4071-b6ab-c2a70f74a76d">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -148,10 +247,10 @@
                     <property name="keep-alive"/>
                 </properties>
             </endpoint>
-            <response entity-id="4da1ac73-7476-45b9-aca8-559fc70f3708">
-                <compartment entity-id="2517bfe7-13a7-4e97-9115-2a4bff3b5357">
-                    <lane entity-id="e1b20904-28ca-4724-b345-1c30a531ece1">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="RestfulHttpResponseToHttpResponseTransformer" entity-id="7e194b86-4ee3-47fd-8526-d10f6e3f8e10">
+            <response entity-id="c6178e26-b574-4e8e-adea-8d793da69da1">
+                <compartment entity-id="61ed777e-ccdd-4081-b881-938042bf21e9">
+                    <lane entity-id="c70ede7e-9285-457c-b8c2-d5a6cf168adc">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="RestfulHttpResponseToHttpResponseTransformer" entity-id="eef2c612-38c7-4695-b894-e9d59db8627a">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
@@ -160,7 +259,7 @@
 <property value="org.jembi.rhea.transformers.RestfulHttpResponseToHttpResponseTransformer" name="class"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="56f6afed-497d-4d7b-a433-769070618c39">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="f2741766-e1c5-4edd-8dc7-bf1e20de8349">
                             <properties>
 <property value="Transaction responce sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" name="message"/>
 <property value="INFO" name="level"/>
@@ -170,14 +269,14 @@
                     </lane>
                 </compartment>
             </response>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log raw message" entity-id="5bd06e7c-4af7-426f-8dad-cc22cd67bb79">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log raw message" entity-id="58fed453-e160-410d-9faf-f6ea0b43a940">
                 <properties>
                     <property value="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="HttpRequestToRestfulHttpRequestTransformer" entity-id="f259a003-e47a-4dd1-9ae6-da219dc23b9e">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="HttpRequestToRestfulHttpRequestTransformer" entity-id="bbe6bc44-1478-4b65-9e07-83e7f6c7f491">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -186,14 +285,14 @@
                     <property value="org.jembi.rhea.transformers.HttpRequestToRestfulHttpRequestTransformer" name="class"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log Structured Message" entity-id="d425b719-c9b5-4db1-9553-21ce12b9ffb0">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log Structured Message" entity-id="960f6dc9-41d7-4fd5-b445-3868480234d6">
                 <properties>
                     <property value="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Queue message" entity-id="40d5e8e7-9d9a-4c6e-9f72-b30d0715c7f5">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Queue message" entity-id="35a1d226-85d6-4614-ad69-e5b949a300bc">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -216,8 +315,8 @@
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
         </properties>
-        <lane entity-id="7ae554d3-80f3-4434-8477-baec44d8d4de">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="14271eb8-62ee-4978-a09b-6583f3d92b4f">
+        <lane entity-id="939ce89f-fa10-4657-8d12-48e16987a7b3">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="09cd71b2-b796-4d82-a958-b39dcb5b90b9">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -243,17 +342,17 @@
                     <property name="keep-alive"/>
                 </properties>
             </endpoint>
-            <response entity-id="f1270019-2f97-42f4-aeef-c100844ab3ad">
-                <compartment entity-id="0aea6fba-30db-4ca1-9151-fb25c9a63eec">
-                    <lane entity-id="7e8f9e4e-e1fa-4668-9e09-9fdf2c4a76d4">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="07693a52-1c3e-4430-92e2-25c7edc5a12d">
+            <response entity-id="725244c4-0da0-451b-a672-7de9c4ce9de3">
+                <compartment entity-id="e865138d-3e0e-4d20-a977-b57caed39d05">
+                    <lane entity-id="21c0c9bd-1fa0-477f-8f92-8f2957726cfd">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="db0af787-a099-4a1b-9cbe-7d6dee24e3ff">
                             <properties>
 <property value="In response" name="message"/>
 <property value="INFO" name="level"/>
 <property name="category"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="RestfulHttpResponseToHttpResponseTransformer" entity-id="d2082dc9-0bab-4c00-9289-ff41cb871fef">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="RestfulHttpResponseToHttpResponseTransformer" entity-id="d937555a-d019-45f9-b39c-053911987438">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
@@ -262,7 +361,7 @@
 <property value="org.jembi.rhea.transformers.RestfulHttpResponseToHttpResponseTransformer" name="class"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="30be4446-fcd5-4d70-a0ba-d2cdbfdd4d81">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="28deab46-69e7-4964-bbdb-37f01383dd2f">
                             <properties>
 <property value="Transaction responce sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" name="message"/>
 <property value="INFO" name="level"/>
@@ -272,14 +371,14 @@
                     </lane>
                 </compartment>
             </response>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log raw message" entity-id="bed56d3d-5ecc-40ae-850d-1b052b53269e">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log raw message" entity-id="16b7873c-b16f-4990-9959-5b94ae42c1f9">
                 <properties>
                     <property value="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/and-filter" name="Filter out protected endpoints" entity-id="f6fe5a71-e5ef-456a-aadb-b9420c8dc218">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/and-filter" name="Filter out protected endpoints" entity-id="f536ed03-43d8-4e18-a0ad-ad310804c563">
                 <properties>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/message-property-filter;0">
                         <property value="inbound" name="scope"/>
@@ -299,7 +398,7 @@
                     </property-collection>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="HttpRequestToRestfulHttpRequestTransformer" entity-id="cbf5e892-5f4c-427b-af92-eaa213063171">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="HttpRequestToRestfulHttpRequestTransformer" entity-id="2cffef3c-ed7c-4917-8d5f-57b1296907d9">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -308,14 +407,14 @@
                     <property value="org.jembi.rhea.transformers.HttpRequestToRestfulHttpRequestTransformer" name="class"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log Structured Message" entity-id="0462e446-44fc-419a-8972-11de44332c58">
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log Structured Message" entity-id="cbb72454-4874-4bb9-bf51-29a40ec5171a">
                 <properties>
                     <property value="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Queue message" entity-id="49309b5d-94a0-4cde-862b-42ea13a4ea23">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Queue message" entity-id="523e2cf1-31d4-4bfb-bf51-5b34dc2964b5">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
