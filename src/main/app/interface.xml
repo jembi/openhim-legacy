@@ -11,9 +11,44 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 http://www.mulesoft.org/schema/mule/spring-security http://www.mulesoft.org/schema/mule/spring-security/3.1/mule-spring-security.xsd 
 http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd ">
     <mule-ss:security-manager>  
-        <mule-ss:delegate-security-provider name="memory-provider" delegate-ref="authenticationManager"/> 
+        <!-- <mule-ss:delegate-security-provider name="memory-provider" delegate-ref="authenticationManager"/> -->
+        <mule-ss:delegate-security-provider name="spring-security-ldap" delegate-ref="authenticationManager"/>
     </mule-ss:security-manager>
+    
     <spring:beans>
+    	<spring:bean id="contextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+	    	<spring:constructor-arg value="${ldap.url}"/>
+	    	<spring:property name="userDn" value="${ldap.admin.userdn}"/>
+	     	<spring:property name="password" value="${ldap.admin.password}"/>
+	  	</spring:bean>
+    
+	  	<spring:bean id="authenticationProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+	    	<spring:constructor-arg>
+		       	<spring:bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
+		        	<spring:constructor-arg ref="contextSource"/>
+		        	<spring:property name="userDnPatterns">
+		            	<spring:list><spring:value>uid={0},ou=himusers</spring:value></spring:list>
+	       			</spring:property>
+		       	</spring:bean>
+	     	</spring:constructor-arg>
+		    <spring:constructor-arg>
+		    	<spring:bean class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
+		        	<spring:constructor-arg ref="contextSource"/>
+		        	<spring:constructor-arg value="ou=groups"/>
+		        	<spring:property name="groupRoleAttribute" value="ou"/>
+		    	</spring:bean>
+			</spring:constructor-arg>
+     	</spring:bean>
+	  
+	  <spring:bean class="org.springframework.security.authentication.ProviderManager" id="authenticationManager">
+	      	<spring:property name="providers">
+	        	<spring:list>
+	                 <spring:ref local="authenticationProvider"/>
+	            </spring:list>
+	      	</spring:property>
+	   </spring:bean>
+    	
+    	<!--
         <ss:authentication-manager alias="authenticationManager">  
             <ss:authentication-provider> 
                 <ss:user-service id="userService"> 
@@ -21,7 +56,9 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
                 </ss:user-service> 
             </ss:authentication-provider> 
         </ss:authentication-manager>
+        -->
     </spring:beans>
+    
     <https:connector name="HTTPSConnector" cookieSpec="netscape" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" proxyHostname="localhost" proxyPort="80" doc:name="HTTPSConnector">
         <https:tls-key-store path="${cert.keystore}" keyPassword="${cert.keypassword}" storePassword="${cert.storepassword}"/>
     </https:connector>
