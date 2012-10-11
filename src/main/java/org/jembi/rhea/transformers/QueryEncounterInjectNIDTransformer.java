@@ -118,7 +118,7 @@ public class QueryEncounterInjectNIDTransformer extends
 					
 					// if this is an obs grouping OBR
 					if (proID == null && proIDType == null) {
-						break;
+						continue;
 					}
 					
 					// if one of the id values is missing
