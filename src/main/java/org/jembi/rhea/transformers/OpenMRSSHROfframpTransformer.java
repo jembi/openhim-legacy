@@ -5,6 +5,7 @@ package org.jembi.rhea.transformers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +57,14 @@ public class OpenMRSSHROfframpTransformer extends AbstractMessageTransformer {
 		try {
 			if (startDate != null && !startDate.isEmpty()) {
 				Date date = sdf1.parse(startDate);
-				startDate = sdf2.format(date);
+				
+				// Add 1 day to the date as the SHR doesn't support timestamps
+				// thus we need to make this the next day to prevent dupes
+				Calendar c = Calendar.getInstance();
+				c.setTime(date);
+				c.add(Calendar.DATE, 1);
+				
+				startDate = sdf2.format(c.getTime());
 				
 				newRequestParams.put("dateStart", startDate);
 			}
