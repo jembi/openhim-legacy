@@ -24,7 +24,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
     
 	  	<spring:bean id="authenticationProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
 	    	<spring:constructor-arg>
-		       	<spring:bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
+		       	<spring:bean id="BindAuthenticatorBean" class="org.springframework.security.ldap.authentication.BindAuthenticator">
 		        	<spring:constructor-arg ref="contextSource"/>
 		        	<spring:property name="userDnPatterns">
 		            	<spring:list><spring:value>uid={0},ou=himusers</spring:value></spring:list>
@@ -32,7 +32,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 		       	</spring:bean>
 	     	</spring:constructor-arg>
 		    <spring:constructor-arg>
-		    	<spring:bean class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
+		    	<spring:bean id="DefaultLdapAuthoritiesPopulatorBean" class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
 		        	<spring:constructor-arg ref="contextSource"/>
 		        	<spring:constructor-arg value="ou=groups"/>
 		        	<spring:property name="groupRoleAttribute" value="ou"/>
