@@ -85,7 +85,7 @@ public class OpenMRSSHROfframpTransformer extends AbstractMessageTransformer {
 			newRequestParams.put("notificationType", notificationType);
 		}
 		if (ELID != null && !ELID.isEmpty()) {
-			newRequestParams.put("ELID", ELID);
+			newRequestParams.put("elid", ELID);
 		}
 		
 		request.setRequestParams(newRequestParams);
