@@ -25,27 +25,27 @@ Database setup
 3.	Execute this sql script using mysql and it will create the database required for the RHEA HIM `$mysql -u root -p"<root_pwd>" < create_database.sql`
 4.	Create a new user for the database and grant access to them. Log into the mysql console: `$mysql -u -p"<root_pwd>"`
 5.	Then run: `grant all on interoperability_layer.* to 'himuser'@localhost identified by '<user_pwd>';`
-6.	Locate the my.properties file. Edit this file to contain the details of a mysql user (created above) that can read and write to the created database.
+6.	Locate the HIM-core.properties file in /src/main/resources. Edit this file to contain the details of a mysql user (created above) that can read and write to the created database.
 
 OpenLDAP setup
 --------------
 
 See https://help.ubuntu.com/12.04/serverguide/openldap-server.html for the source of alot of this material.
 
-1.	edit /etc/hosts and replace the domain name with one that will give you the suffix you desire `$cp hosts hosts.bak`
-2.	edit hosts file and change the 127.0.1.1 line to: "127.0.1.1          <hostname>.moh.gov.rw           <hostname>" Note: <hostname> must be the hostname of your machine, run the following command to find it out: `$hostname`
+1.	Edit /etc/hosts and replace the domain name with one that will give you the suffix you desire. First backup the original file: `$cp hosts hosts.bak`
+2.	Edit hosts file and change the 127.0.1.1 line to: "127.0.1.1          <hostname>.moh.gov.rw           <hostname>" Note: <hostname> must be the hostname of your machine, run the following command to find it out: `$hostname`
 3.	Install OpenLDAP `$sudo apt-get install slapd ldap-utils`
-4.	revert /etc/hosts back to normal `$cp hosts.bak hosts`
-5.	Test if the ldap server was setup and the default datbase was created correctly. Run the following command: `$ldapsearch -x -LLL -H ldap:/// -b dc=moh,dc=gov,dc=rw dn` You should see the following 2 line:
+4.	Revert /etc/hosts back to normal `$cp hosts.bak hosts`
+5.	Test if the ldap server was setup and the default database was created correctly. Run the following command: `$ldapsearch -x -LLL -H ldap:/// -b dc=moh,dc=gov,dc=rw dn` You should see the following 2 line:
 	dn: dc=moh,dc=gov,dc=rw
 	dn: cn=admin,dc=moh,dc=gov,dc=rw
 	If you see this the database was setup correctly!
-6.	Now we need to add some user to the LDAP server to do this you need to import a .ldif file. A pre-production ldif file comes packaged with the HIM source code. To import the LDIF file run: `$ldapadd -c -x -D cn=admin,dc=moh,dc=gov,dc=rw -W -f ldap-auth-pre-prod.ldif`
+6.	Now we need to add some user to the LDAP server to do this you need to import a .ldif file. A testing ldif file comes packaged with the HIM source code. To import the LDIF file run: `$ldapadd -c -x -D cn=admin,dc=moh,dc=gov,dc=rw -W -f ldap-auth-pre-prod.ldif`
 7.	To do a test search of the ldap database run: `$ldapsearch -x -LLL -b dc=moh,dc=gov,dc=rw 'uid=test'`. If the result of the search shows up positive you are set to go!
 
 Note: when creating your own ldap database of users have to be in OrganizationalUnit called himusers
 
-How to change a users password: $ldappasswd -D "cn=admin,dc=moh,dc=gov,dc=rw" -W -S "uid=test,ou=himusers,dc=moh,dc=gov,dc=rw"
+How to change a users password: `$ldappasswd -D "cn=admin,dc=moh,dc=gov,dc=rw" -W -S "uid=test,ou=himusers,dc=moh,dc=gov,dc=rw"`
 
 How to run the application
 --------------------------
