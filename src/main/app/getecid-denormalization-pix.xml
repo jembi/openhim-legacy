@@ -10,10 +10,14 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd 
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd ">
     <context:property-placeholder xmlns:context="http://www.springframework.org/schema/context" location="classpath:HIM-core.properties, classpath:HIM-core-override.properties"></context:property-placeholder>
+    <tcp:polling-connector name="TCP_Polling" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="TCP Polling">
+        <tcp:direct-protocol payloadOnly="true"/>
+    </tcp:polling-connector>
     <flow name="mediation-getecid-denormalization-pix" doc:name="mediation-getecid-denormalization-pix">
         <vm:inbound-endpoint exchange-pattern="request-response" path="getecid-pix" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
         <logger message="In getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         <custom-transformer class="org.jembi.rhea.transformers.PIXQueryGenerator" doc:name="Generate PIX Query"/>
+        <logger message="Generated PIX messgage: #[groovy: return message.payload;]" level="INFO" doc:name="Logger"/>
         <response>
             <echo-component doc:name="Echo"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Handle RSP response"/>
@@ -35,6 +39,6 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
             </choice>
             <logger message="Exitting getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         </response>
-        <tcp:outbound-endpoint exchange-pattern="request-response" host="cr.marc-hi.ca" port="2100" responseTimeout="10000" doc:name="TCP"/>
+        <tcp:outbound-endpoint exchange-pattern="request-response" host="cr.marc-hi.ca" port="2100" responseTimeout="10000" doc:name="TCP" connector-ref="TCP_Polling"/>
     </flow>
 </mule>
