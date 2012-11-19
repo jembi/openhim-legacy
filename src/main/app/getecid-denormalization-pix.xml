@@ -20,7 +20,7 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
         <logger message="Generated PIX messgage: #[groovy: return message.payload;]" level="INFO" doc:name="Logger"/>
         <response>
             <echo-component doc:name="Echo"/>
-            <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Handle RSP response"/>
+            <custom-transformer class="org.jembi.rhea.transformers.PIXQueryResponseTransformer" doc:name="Handle RSP response"/>
             <choice doc:name="Choice">
                 <when expression="message.getInboundProperty('http.status').equals('200')">
                     <processor-chain>
