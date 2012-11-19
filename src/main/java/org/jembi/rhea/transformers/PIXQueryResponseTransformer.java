@@ -20,7 +20,7 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
 		try {
-			String response = (String)message.getPayload();
+			String response = message.getPayloadAsString();
 			Parser parser = new GenericParser();
 			RSP_K23 msg = (RSP_K23)parser.parse(response);
 			
@@ -33,6 +33,8 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		} catch (EncodingNotSupportedException e) {
 			throw new TransformerException(this, e);
 		} catch (HL7Exception e) {
+			throw new TransformerException(this, e);
+		} catch (Exception e) { // Pokemon exception handling, when you just gotta catch them all!
 			throw new TransformerException(this, e);
 		}
 	}
