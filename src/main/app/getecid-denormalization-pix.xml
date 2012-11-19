@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:ssl="http://www.mulesoft.org/schema/mule/ssl" xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="CE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+<mule xmlns:tcp="http://www.mulesoft.org/schema/mule/tcp" xmlns:ssl="http://www.mulesoft.org/schema/mule/ssl" xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="CE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
-http://www.mulesoft.org/schema/mule/ssl http://www.mulesoft.org/schema/mule/ssl/current/mule-ssl.xsd 
+http://www.mulesoft.org/schema/mule/tcp http://www.mulesoft.org/schema/mule/tcp/current/mule-tcp.xsd 
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/ssl http://www.mulesoft.org/schema/mule/ssl/current/mule-ssl.xsd 
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
 http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd 
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd ">
@@ -12,10 +13,10 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
     <flow name="mediation-getecid-denormalization-pix" doc:name="mediation-getecid-denormalization-pix">
         <vm:inbound-endpoint exchange-pattern="request-response" path="getecid-pix" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
         <logger message="In getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
-        <component doc:name="Java"/>
+        <custom-transformer class="org.jembi.rhea.transformers.PIXQueryGenerator" doc:name="Generate PIX Query"/>
         <response>
             <echo-component doc:name="Echo"/>
-            <component doc:name="Java"/>
+            <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Handle RSP response"/>
             <choice doc:name="Choice">
                 <when expression="message.getInboundProperty('http.status').equals('200')">
                     <processor-chain>
@@ -34,6 +35,6 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
             </choice>
             <logger message="Exitting getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         </response>
-        <ssl:outbound-endpoint host="localhost" port="80" responseTimeout="10000" doc:name="SSL (TLS)" exchange-pattern="request-response"/>
+        <tcp:outbound-endpoint exchange-pattern="request-response" host="cr.marc-hi.ca" port="2100" responseTimeout="10000" doc:name="TCP"/>
     </flow>
 </mule>
