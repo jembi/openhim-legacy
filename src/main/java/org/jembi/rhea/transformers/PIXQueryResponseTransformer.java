@@ -5,11 +5,10 @@ import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
 
 import ca.uhn.hl7v2.HL7Exception;
-import ca.uhn.hl7v2.model.Message;
+import ca.uhn.hl7v2.model.v25.message.RSP_K23;
 import ca.uhn.hl7v2.parser.EncodingNotSupportedException;
 import ca.uhn.hl7v2.parser.GenericParser;
 import ca.uhn.hl7v2.parser.Parser;
-import ca.uhn.hl7v2.util.Terser;
 
 /**
  * Processes the response from an ITI-9 PIX Query request
@@ -23,20 +22,19 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		try {
 			String response = (String)message.getPayload();
 			Parser parser = new GenericParser();
-			Message msg = parser.parse(response);
-			Terser terser = new Terser(msg);
+			RSP_K23 msg = (RSP_K23)parser.parse(response);
 			
-			//TODO work in progress
-			System.out.println(terser.get("QAK-2-1"));
+			int numIds = msg.getQUERY_RESPONSE().getPID().getPid3_PatientIdentifierListReps();
+			if (numIds < 1)
+				return null;
+			
+			return msg.getQUERY_RESPONSE().getPID().getPatientIdentifierList(0).getCx1_IDNumber().getValue();
+			
 		} catch (EncodingNotSupportedException e) {
-			//TODO
-			e.printStackTrace();
+			throw new TransformerException(this, e);
 		} catch (HL7Exception e) {
-			//TODO
-			e.printStackTrace();
+			throw new TransformerException(this, e);
 		}
-		
-		return null;
 	}
 
 }

@@ -40,7 +40,7 @@ public class PIXQueryResponseTransformerTest {
 			return "MSH|^~\\&|CR|MOH_CAAT|PACS_FUJIFILM|FUJIFILM|201211191458||RSP^K23|84765234-07a8-4653-8a3c-51097dc81430||2.5\r" +
 				"MSA|AA|1235421946\r" +
 				"QAK|Q231235421946|OK\r" +
-				"PID|||3058035884^^^MOH_CAAT_MARC_HI&1.3.6.1.4.1.33349.3.1.2.1.0.1&ISO||~^^^^^^S";
+				"PID|||3058035884^^^MOH_CAAT_MARC_HI&1.3.6.1.4.1.33349.3.1.2.1.0.1&ISO||~^^^^^^S\r";
 		}
 
 		@Override
