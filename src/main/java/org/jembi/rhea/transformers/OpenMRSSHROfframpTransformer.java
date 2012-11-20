@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.jembi.rhea.RestfulHttpRequest;
+import org.jembi.rhea.Constants;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
@@ -41,11 +42,11 @@ public class OpenMRSSHROfframpTransformer extends AbstractMessageTransformer {
 		}
 		
 		Map<String, String> origRequestParams = request.getRequestParams();
-		String startDate = origRequestParams.get("encounter_start_date");
-		String endDate = origRequestParams.get("encounter_end_date");
+		String startDate = origRequestParams.get(Constants.QUERY_ENC_START_DATE_PARAM);
+		String endDate = origRequestParams.get(Constants.QUERY_ENC_END_DATE_PARAM);
 		
-		String notificationType = origRequestParams.get("notificationType");
-		String ELID = origRequestParams.get("ELID");
+		String notificationType = origRequestParams.get(Constants.QUERY_ENC_NOTIFICATION_TYPE_PARAM);
+		String ELID = origRequestParams.get(Constants.QUERY_ENC_ELID_PARAM);
 		
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");

@@ -46,7 +46,9 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 				throw new Exception("Invalid Client: id or id type is null");
 			}
 			
-			MuleMessage responce = client.send("vm://getecid-openempi", idMap, null, 5000);
+			// MuleMessage responce = client.send("vm://getecid-openempi", idMap, null, 5000);
+			// TODO make this configurable
+			MuleMessage responce = client.send("vm://getecid-pix", idMap, null, 5000);
 			
 			String success = responce.getInboundProperty("success");
 			
