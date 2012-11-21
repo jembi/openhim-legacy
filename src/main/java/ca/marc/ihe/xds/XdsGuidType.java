@@ -39,15 +39,15 @@ public class XdsGuidType {
 	/**
 	 *Submission set patient id
 	 */
-	public static final XdsGuidType XDSSubmissionSet_PatientId = new XdsGuidType("6b5aea1a-874d-4603-a4bc-96a0a7b38446");
+	public static final XdsGuidType XDSSubmissionSet_PatientId = new XdsGuidType("6b5aea1a-874d-4603-a4bc-96a0a7b38446", "XDSSubmissionSet.patientId");
 	/**
 	 * Submission set source id
 	 */
-	public static final XdsGuidType XDSSubmissionSet_SourceId = new XdsGuidType("554ac39e-e3fe-47fe-b233-965d2a147832");
+	public static final XdsGuidType XDSSubmissionSet_SourceId = new XdsGuidType("554ac39e-e3fe-47fe-b233-965d2a147832", "XDSSubmissionSet.sourceId");
 	/**
 	 * Submission set unique id
 	 */
-	public static final XdsGuidType XDSSubmissionSet_UniqueId = new XdsGuidType("96fdda7c-d067-4183-912e-bf5ee74998a8");
+	public static final XdsGuidType XDSSubmissionSet_UniqueId = new XdsGuidType("96fdda7c-d067-4183-912e-bf5ee74998a8", "XDSSubmissionSet.uniqueId");
 	/**
 	 * Limited meta data classification node
 	 */
@@ -79,7 +79,7 @@ public class XdsGuidType {
 	/**
 	 * XDS document entry patient id
 	 */
-	public static final XdsGuidType XDSDocumentEntry_PatientId = new XdsGuidType("58a6f841-87b3-4a3e-92fd-a8ffeff98427");
+	public static final XdsGuidType XDSDocumentEntry_PatientId = new XdsGuidType("58a6f841-87b3-4a3e-92fd-a8ffeff98427", "XDSDocumentEntry.patientId");
 	/**
 	 * XDS document entry practice setting
 	 */
@@ -91,7 +91,7 @@ public class XdsGuidType {
 	/**
 	 * XDS document entry unique identifier
 	 */
-	public static final XdsGuidType XDSDocumentEntry_UniqueId = new XdsGuidType("2e82c1f6-a085-4c72-9da3-8640a32e42ab");
+	public static final XdsGuidType XDSDocumentEntry_UniqueId = new XdsGuidType("2e82c1f6-a085-4c72-9da3-8640a32e42ab","XDSDocumentEntry.uniqueId");
 	/**
 	 * XDS limited meta data classification
 	 */
@@ -111,6 +111,8 @@ public class XdsGuidType {
 	
 	// The guid of the spec type
 	private final String m_queryGuid;
+	// Name
+	private final String m_name;
 	
 	/**
 	 * Creates a new instance of the XDS query specification guid
@@ -118,6 +120,18 @@ public class XdsGuidType {
 	public XdsGuidType(String queryGuid)
 	{
 		this.m_queryGuid = queryGuid;
+		this.m_name = "";
+	}
+	
+	/**
+	 * Creates a new instance of the query guid type
+	 * @param queryGuid
+	 * @param name
+	 */
+	public XdsGuidType(String queryGuid, String name)
+	{
+		this.m_queryGuid = queryGuid;
+		this.m_name = name;
 	}
 	
 	/**
@@ -128,6 +142,15 @@ public class XdsGuidType {
 	{
 		return this.m_queryGuid;
 	}
+	
+	/**
+	 * Get the name of the guid
+	 * @return
+	 */
+	public String getName()
+	{
+		return this.m_name;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
@@ -135,9 +158,20 @@ public class XdsGuidType {
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof String)
-			return String.format("urn:uuid:%s", this.m_queryGuid).equals(obj);
+			return this.toString().equals(obj.toString());
 		return super.equals(obj);
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return String.format("urn:uuid:%s", this.m_queryGuid);
+
+	}
+	
+	
 	
 	
 }
