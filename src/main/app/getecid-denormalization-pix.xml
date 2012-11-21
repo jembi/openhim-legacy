@@ -22,7 +22,7 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
             <echo-component doc:name="Echo"/>
             <custom-transformer class="org.jembi.rhea.transformers.PIXQueryResponseTransformer" doc:name="Handle RSP response"/>
             <choice doc:name="Choice">
-                <when expression="message.getInboundProperty('http.status').equals('200')">
+                <when expression="#[groovy: return message.payload != null; ]">
                     <processor-chain>
                         <message-properties-transformer doc:name="Set transaction success">
                             <add-message-property key="success" value="true"/>

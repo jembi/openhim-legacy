@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mediation-getecid-denormalization-mockserviceprovider">
-    <global-element type="http://www.springframework.org/schema/context/property-placeholder" name="Property Placeholder" entity-id="Property Placeholder#1">
+    <global-element name="Property Placeholder" type="http://www.springframework.org/schema/context/property-placeholder" entity-id="Property Placeholder#1">
         <properties>
-            <property value="classpath:HIM-core.properties, classpath:HIM-core-override.properties" name="location"/>
-            <property value="1" name="auxiliary;index"/>
-            <property value="1" name="auxiliary;index"/>
-            <property value="1" name="auxiliary;index"/>
+            <property name="location" value="classpath:HIM-core.properties, classpath:HIM-core-override.properties"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
         </properties>
     </global-element>
-<<<<<<< HEAD
     <global-element name="TCP Polling" type="http://www.mulesoft.org/schema/mule/tcp/polling-connector" entity-id="TCP Polling#1">
         <properties>
             <property name="name" value="TCP_Polling"/>
@@ -51,34 +50,20 @@
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mediation-getecid-denormalization-pix" entity-id="7f5363cf-9aa9-45d6-ba6b-4fc52aa3c37d">
-=======
-    <flow SubFlow="false" name="mediation-getecid-denormalization-pix" entity-id="3f89f402-65f7-42b2-a2ef-0a6158a373b0">
->>>>>>> refs/remotes/origin/ihe-pix-profile
+    <flow SubFlow="false" name="mediation-getecid-denormalization-pix" entity-id="4b6b7180-0ae8-4bc1-a962-8c0abfbaa0bf">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
-<<<<<<< HEAD
             <property name="auxiliary;index" value="4"/>
-=======
-            <property value="2" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
-<<<<<<< HEAD
             <property name="auxiliary;index" value="4"/>
             <property name="auxiliary;index" value="4"/>
             <property name="auxiliary;index" value="4"/>
-=======
-            <property value="2" name="auxiliary;index"/>
-            <property value="2" name="auxiliary;index"/>
-            <property value="2" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
         </properties>
-        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#1">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="VM" entity-id="VM#1">
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="VM" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
                 <properties>
-<<<<<<< HEAD
                     <property name="exchange-pattern" value="one-way"/>
                     <property name="exchange-pattern" value="request-response"/>
                     <property name="auxiliary;index" value="5"/>
@@ -86,92 +71,48 @@
                     <property name="auxiliary;index" value="5"/>
                     <property name="auxiliary;index" value="5"/>
                     <property name="auxiliary;index" value="5"/>
-=======
-                    <property value="one-way" name="exchange-pattern"/>
-                    <property value="request-response" name="exchange-pattern"/>
-                    <property value="3" name="auxiliary;index"/>
-                    <property value="getecid-pix" name="path"/>
-                    <property value="3" name="auxiliary;index"/>
-                    <property value="3" name="auxiliary;index"/>
-                    <property value="3" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
                     <property name="businessEventsLabel"/>
                     <property name="tracking:enable-default-events"/>
-<<<<<<< HEAD
                     <property name="auxiliary;index" value="5"/>
-=======
-                    <property value="3" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
                     <property name="address"/>
-                    <property value="10000" name="responseTimeout"/>
+                    <property name="responseTimeout" value="10000"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
-<<<<<<< HEAD
                     <property name="mimeType" value="text/plain"/>
                     <property name="auxiliary;index" value="5"/>
                     <property name="auxiliary;index" value="5"/>
-=======
-                    <property value="text/plain" name="mimeType"/>
-                    <property value="3" name="auxiliary;index"/>
-                    <property value="3" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
                     <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
-<<<<<<< HEAD
                     <property name="auxiliary;index" value="5"/>
                     <property name="auxiliary;index" value="5"/>
                     <property name="auxiliary;index" value="5"/>
-=======
-                    <property value="3" name="auxiliary;index"/>
-                    <property value="3" name="auxiliary;index"/>
-                    <property value="3" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#1">
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
                 <properties>
-                    <property value="In getecid de-normalization #[groovy: message.toString()]" name="message"/>
-                    <property value="INFO" name="level"/>
+                    <property name="message" value="In getecid de-normalization #[groovy: message.toString()]"/>
+                    <property name="level" value="INFO"/>
                     <property name="category"/>
-<<<<<<< HEAD
                     <property name="auxiliary;index" value="6"/>
                     <property name="auxiliary;index" value="6"/>
                     <property name="auxiliary;index" value="6"/>
-=======
-                    <property value="4" name="auxiliary;index"/>
-                    <property value="4" name="auxiliary;index"/>
-                    <property value="4" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Generate PIX Query" entity-id="Java#1">
+            <pattern name="Generate PIX Query" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#1">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
-<<<<<<< HEAD
                     <property name="auxiliary;index" value="7"/>
-=======
-                    <property value="5" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
                     <property name="mimeType"/>
-<<<<<<< HEAD
                     <property name="auxiliary;index" value="7"/>
                     <property name="auxiliary;index" value="7"/>
                     <property name="class" value="org.jembi.rhea.transformers.PIXQueryGenerator"/>
                     <property name="auxiliary;index" value="7"/>
                     <property name="auxiliary;index" value="7"/>
                     <property name="auxiliary;index" value="7"/>
-=======
-                    <property value="5" name="auxiliary;index"/>
-                    <property value="5" name="auxiliary;index"/>
-                    <property value="org.jembi.rhea.transformers.PIXQueryGenerator" name="class"/>
-                    <property value="5" name="auxiliary;index"/>
-                    <property value="5" name="auxiliary;index"/>
-                    <property value="5" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
                 </properties>
             </pattern>
             <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
@@ -186,25 +127,17 @@
             </pattern>
             <response index="9" entity-id="response#1">
                 <compartment entity-id="compartment#1">
-                    <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#2">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.echo" name="Echo" entity-id="Echo#1">
+                    <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
+                        <pattern name="Echo" type="org.mule.tooling.ui.modules.core.pattern.echo" entity-id="Echo#1">
                             <properties>
-<<<<<<< HEAD
 <property name="auxiliary;index" value="10"/>
 <property name="auxiliary;index" value="10"/>
 <property name="auxiliary;index" value="10"/>
 <property name="auxiliary;index" value="10"/>
-=======
-<property value="7" name="auxiliary;index"/>
-<property value="7" name="auxiliary;index"/>
-<property value="7" name="auxiliary;index"/>
-<property value="7" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Handle RSP response" entity-id="Java#2">
+                        <pattern name="Handle RSP response" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#2">
                             <properties>
-<<<<<<< HEAD
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
 <property name="encoding"/>
@@ -212,234 +145,121 @@
 <property name="mimeType"/>
 <property name="auxiliary;index" value="11"/>
 <property name="auxiliary;index" value="11"/>
-<property name="class" value="org.jembi.heal.DoNothingTransformer"/>
+<property name="class" value="org.jembi.rhea.transformers.PIXQueryResponseTransformer"/>
 <property name="auxiliary;index" value="11"/>
 <property name="auxiliary;index" value="11"/>
 <property name="auxiliary;index" value="11"/>
-=======
-<property value="true" name="auxiliary;erased;mimeType"/>
-<property value="" name="returnClass"/>
-<property value="false" name="ignoreBadInput"/>
-<property value="true" name="auxiliary;erased;encoding"/>
-<property value="" name="encoding"/>
-<property value="org.jembi.rhea.transformers.PIXQueryResponseTransformer" name="class"/>
-<property value="" name="mimeType"/>
-<property value="8" name="auxiliary;index"/>
-<property name="updated"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
                             </properties>
                         </pattern>
-<<<<<<< HEAD
                         <splitter index="12" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
-=======
-                        <splitter index="9" type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="Choice#1">
->>>>>>> refs/remotes/origin/ihe-pix-profile
                             <properties>
-<<<<<<< HEAD
-<property-collection name="55967a99-19e2-4fef-b2b3-829fa943615f">
+<property name="updated"/>
+<property name=";INDEX" value="12"/>
+<property-collection name="0f4c573d-a84c-49a2-b13a-f96aecc7b4fa">
     <property name="choice.otherwise" value="true"/>
+    <property name="choice.expression" value=""/>
     <property-collection name="choice.attributes"/>
 </property-collection>
-<property-collection name="24d9b4ca-2035-420f-9399-cb5491f41800">
-    <property name="choice.expression" value="message.getInboundProperty('http.status').equals('200')"/>
+<property-collection name="61198598-d253-4bf5-82dc-51b9512b5432">
+    <property name="choice.expression" value="#[groovy: return message.payload != null; ]"/>
     <property-collection name="choice.attributes">
         <property name="expression" value="message.getInboundProperty('http.status').equals('200')"/>
     </property-collection>
 </property-collection>
                             </properties>
-                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
-=======
-<property value="9" name=";INDEX"/>
-<property value="9" name=";INDEX"/>
-<property value="9" name=";INDEX"/>
-<property value="9" name=";INDEX"/>
-<property value="9" name=";INDEX"/>
-<property value="9" name=";INDEX"/>
-<property value="9" name=";INDEX"/>
-<property value="9" name=";INDEX"/>
-<property-collection name="9256b51b-67ba-4ec9-abd9-3d8571f4586a">
-    <property value="true" name="choice.otherwise"/>
-    <property-collection name="choice.attributes"/>
-</property-collection>
-<property-collection name="8aa31e83-4e67-4d56-8d93-71554f484ca1">
-    <property value="message.getInboundProperty('http.status').equals('200')" name="choice.expression"/>
-    <property-collection name="choice.attributes">
-        <property value="message.getInboundProperty('http.status').equals('200')" name="expression"/>
-    </property-collection>
-</property-collection>
-                            </properties>
-                            <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="Choice#2">
+                            <description></description>
+                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
 <properties>
-    <property value="9" name=";INDEX"/>
-    <property value="9" name=";INDEX"/>
-    <property value="9" name=";INDEX"/>
-    <property value="9" name=";INDEX"/>
-    <property value="9" name=";INDEX"/>
-    <property value="9" name=";INDEX"/>
-    <property value="9" name=";INDEX"/>
-    <property value="9" name=";INDEX"/>
-    <property-collection name="9256b51b-67ba-4ec9-abd9-3d8571f4586a">
-        <property value="true" name="choice.otherwise"/>
+    <property name="updated"/>
+    <property name=";INDEX" value="12"/>
+    <property-collection name="0f4c573d-a84c-49a2-b13a-f96aecc7b4fa">
+        <property name="choice.otherwise" value="true"/>
+        <property name="choice.expression" value=""/>
         <property-collection name="choice.attributes"/>
     </property-collection>
-    <property-collection name="8aa31e83-4e67-4d56-8d93-71554f484ca1">
-        <property value="message.getInboundProperty('http.status').equals('200')" name="choice.expression"/>
+    <property-collection name="61198598-d253-4bf5-82dc-51b9512b5432">
+        <property name="choice.expression" value="#[groovy: return message.payload != null; ]"/>
         <property-collection name="choice.attributes">
-            <property value="message.getInboundProperty('http.status').equals('200')" name="expression"/>
+            <property name="expression" value="message.getInboundProperty('http.status').equals('200')"/>
         </property-collection>
     </property-collection>
 </properties>
+<description></description>
                             </pattern>
->>>>>>> refs/remotes/origin/ihe-pix-profile
                             <compartment entity-id="compartment#2">
-<<<<<<< HEAD
-<lane hadOnlyOneElement="false" index="14" isChoiceOtherwiseLane="false" entity-id="24d9b4ca-2035-420f-9399-cb5491f41800">
+<lane hadOnlyOneElement="false" index="14" isChoiceOtherwiseLane="false" entity-id="61198598-d253-4bf5-82dc-51b9512b5432">
     <pattern name="Set transaction success" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="Message Properties#1">
-=======
-<lane isChoiceOtherwiseLane="false" index="11" hadOnlyOneElement="false" entity-id="8aa31e83-4e67-4d56-8d93-71554f484ca1">
-    <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set transaction success" entity-id="Message Properties#1">
->>>>>>> refs/remotes/origin/ihe-pix-profile
         <properties>
             <property name="returnClass"/>
             <property name="ignoreBadInput"/>
             <property name="encoding"/>
-<<<<<<< HEAD
             <property name="auxiliary;index" value="15"/>
-=======
-            <property value="12" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
             <property name="mimeType"/>
-<<<<<<< HEAD
             <property name="auxiliary;index" value="15"/>
             <property name="auxiliary;index" value="15"/>
-=======
-            <property value="12" name="auxiliary;index"/>
-            <property value="12" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
             <property name="overwrite"/>
             <property name="scope"/>
-<<<<<<< HEAD
             <property name="auxiliary;index" value="15"/>
             <property name="auxiliary;index" value="15"/>
             <property name="auxiliary;index" value="15"/>
             <property name="auxiliary;index" value="15"/>
             <property name="auxiliary;index" value="15"/>
             <property name="auxiliary;index" value="15"/>
-=======
-            <property value="12" name="auxiliary;index"/>
-            <property value="12" name="auxiliary;index"/>
-            <property value="12" name="auxiliary;index"/>
-            <property value="12" name="auxiliary;index"/>
-            <property value="12" name="auxiliary;index"/>
-            <property value="12" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
             <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
-<<<<<<< HEAD
                 <property name="value" value="true"/>
                 <property name="auxiliary;wrapIn" value="16"/>
                 <property name="auxiliary;index" value="16"/>
                 <property name="key" value="success"/>
-=======
-                <property value="true" name="value"/>
-                <property value="13" name="auxiliary;wrapIn"/>
-                <property value="13" name="auxiliary;index"/>
-                <property value="success" name="key"/>
-                <property value="true" name="isProcessed$$$$"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
+                <property name="isProcessed$$$$" value="true"/>
             </property-collection>
         </properties>
     </pattern>
 </lane>
-<<<<<<< HEAD
-<lane hadOnlyOneElement="false" index="18" isChoiceOtherwiseLane="true" entity-id="55967a99-19e2-4fef-b2b3-829fa943615f">
+<lane hadOnlyOneElement="false" index="18" isChoiceOtherwiseLane="true" entity-id="0f4c573d-a84c-49a2-b13a-f96aecc7b4fa">
     <pattern name="Set transaction success" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="Message Properties#2">
-=======
-<lane isChoiceOtherwiseLane="true" index="15" hadOnlyOneElement="false" entity-id="9256b51b-67ba-4ec9-abd9-3d8571f4586a">
-    <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set transaction success" entity-id="Message Properties#2">
->>>>>>> refs/remotes/origin/ihe-pix-profile
         <properties>
             <property name="returnClass"/>
             <property name="ignoreBadInput"/>
             <property name="encoding"/>
-<<<<<<< HEAD
             <property name="auxiliary;index" value="19"/>
-=======
-            <property value="16" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
             <property name="mimeType"/>
-<<<<<<< HEAD
             <property name="auxiliary;index" value="19"/>
             <property name="auxiliary;index" value="19"/>
-=======
-            <property value="16" name="auxiliary;index"/>
-            <property value="16" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
             <property name="overwrite"/>
             <property name="scope"/>
-<<<<<<< HEAD
             <property name="auxiliary;index" value="19"/>
             <property name="auxiliary;index" value="19"/>
             <property name="auxiliary;index" value="19"/>
             <property name="auxiliary;index" value="19"/>
             <property name="auxiliary;index" value="19"/>
             <property name="auxiliary;index" value="19"/>
-=======
-            <property value="16" name="auxiliary;index"/>
-            <property value="16" name="auxiliary;index"/>
-            <property value="16" name="auxiliary;index"/>
-            <property value="16" name="auxiliary;index"/>
-            <property value="16" name="auxiliary;index"/>
-            <property value="16" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
             <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
-<<<<<<< HEAD
                 <property name="value" value="false"/>
                 <property name="auxiliary;wrapIn" value="20"/>
                 <property name="auxiliary;index" value="20"/>
                 <property name="key" value="success"/>
-=======
-                <property value="false" name="value"/>
-                <property value="17" name="auxiliary;wrapIn"/>
-                <property value="17" name="auxiliary;index"/>
-                <property value="success" name="key"/>
-                <property value="true" name="isProcessed$$$$"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
+                <property name="isProcessed$$$$" value="true"/>
             </property-collection>
         </properties>
     </pattern>
 </lane>
                             </compartment>
                         </splitter>
-<<<<<<< HEAD
                         <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#3">
-=======
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#2">
->>>>>>> refs/remotes/origin/ihe-pix-profile
                             <properties>
-<property value="Exitting getecid de-normalization #[groovy: message.toString()]" name="message"/>
-<property value="INFO" name="level"/>
+<property name="message" value="Exitting getecid de-normalization #[groovy: message.toString()]"/>
+<property name="level" value="INFO"/>
 <property name="category"/>
-<<<<<<< HEAD
 <property name="auxiliary;index" value="21"/>
 <property name="auxiliary;index" value="21"/>
 <property name="auxiliary;index" value="21"/>
-=======
-<property value="18" name="auxiliary;index"/>
-<property value="18" name="auxiliary;index"/>
-<property value="18" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
                             </properties>
                         </pattern>
                     </lane>
                 </compartment>
             </response>
-<<<<<<< HEAD
             <endpoint direction="Outbound" message-exchange-pattern="RequestResponse" name="TCP" type="http://www.mulesoft.org/schema/mule/tcp/endpoint" entity-id="TCP#1">
-=======
-            <endpoint message-exchange-pattern="RequestResponse" direction="Outbound" type="http://www.mulesoft.org/schema/mule/tcp/endpoint" name="TCP" entity-id="TCP#1">
->>>>>>> refs/remotes/origin/ihe-pix-profile
                 <properties>
-<<<<<<< HEAD
                     <property name="exchange-pattern" value="request-response"/>
                     <property name="exchange-pattern" value="request-response"/>
                     <property name="auxiliary;index" value="22"/>
@@ -464,32 +284,6 @@
                     <property name="auxiliary;index" value="22"/>
                     <property name="auxiliary;index" value="22"/>
                     <property name="auxiliary;index" value="22"/>
-=======
-                    <property value="request-response" name="exchange-pattern"/>
-                    <property value="request-response" name="exchange-pattern"/>
-                    <property value="19" name="auxiliary;index"/>
-                    <property value="cr.marc-hi.ca" name="host"/>
-                    <property value="2100" name="port"/>
-                    <property value="19" name="auxiliary;index"/>
-                    <property value="19" name="auxiliary;index"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="tracking:enable-default-events"/>
-                    <property value="19" name="auxiliary;index"/>
-                    <property name="address"/>
-                    <property value="10000" name="responseTimeout"/>
-                    <property name="encoding"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="mimeType"/>
-                    <property value="19" name="auxiliary;index"/>
-                    <property value="19" name="auxiliary;index"/>
-                    <property name="connector-ref"/>
-                    <property name="ref"/>
-                    <property name="transformer-refs"/>
-                    <property name="responseTransformer-refs"/>
-                    <property value="19" name="auxiliary;index"/>
-                    <property value="19" name="auxiliary;index"/>
-                    <property value="19" name="auxiliary;index"/>
->>>>>>> refs/remotes/origin/ihe-pix-profile
                 </properties>
             </endpoint>
         </lane>
