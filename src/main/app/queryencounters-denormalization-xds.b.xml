@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:context="http://www.springframework.org/schema/context" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="CE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+    <context:property-placeholder xmlns:context="http://www.springframework.org/schema/context" location="classpath:HIM-core.properties, classpath:HIM-core-override.properties"></context:property-placeholder>
+    <flow name="mediation-denormalization-queryencounters-xds.bFlow" doc:name="mediation-denormalization-queryencounters-xds.bFlow">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="queryEncounters-De-normailization-XDS.b" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
+        <logger message="De-normalizing a query encounters transaction to OpenMRS SHR" level="INFO" doc:name="Logger"/>
+        <custom-transformer class="org.jembi.rhea.transformers.ConstructAdhocQueryRequestTransformer" doc:name="Construct AdhocQueryRequest"/>
+        <response>
+            <logger message="Recieved responce from OpenMRS SHR: #[groovy: message.toString();]" level="INFO" doc:name="Logger"/>
+        </response>
+        <cxf:jaxws-client doc:name="SOAP" mtomEnabled="true" />
+        <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP"/>
+    </flow>
+</mule>

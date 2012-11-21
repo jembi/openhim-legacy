@@ -11,4 +11,10 @@ public class Constants {
 	public static final String RAM_ID_TYPE = "RAM";
 	public static final String MUT_ID_TYPE = "MUT";
 	
+	// external api: get encounter request params
+	public static final String QUERY_ENC_START_DATE_PARAM = "encounter_start_date";
+	public static final String QUERY_ENC_END_DATE_PARAM = "encounter_end_date";
+	public static final String QUERY_ENC_NOTIFICATION_TYPE_PARAM = "notificationType";
+	public static final String QUERY_ENC_ELID_PARAM = "ELID";
+	
 }
