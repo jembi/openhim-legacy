@@ -21,6 +21,11 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 			throws TransformerException {
 		try {
 			String response = message.getPayloadAsString();
+			
+			// Strip MLLP chars
+			response = response.replace("\013", "");
+			response = response.replace("\034", "");
+			
 			Parser parser = new GenericParser();
 			RSP_K23 msg = (RSP_K23)parser.parse(response);
 			
