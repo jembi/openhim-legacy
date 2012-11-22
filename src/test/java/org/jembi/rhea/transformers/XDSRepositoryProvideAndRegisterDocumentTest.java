@@ -21,9 +21,14 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 		try {
 			XDSRepositoryProvideAndRegisterDocument.EncounterInfo enc =
 				XDSRepositoryProvideAndRegisterDocument.parseEncounterRequest(TEST_ORU_R01_MSG);
-			assertEquals("2552234100", enc.pid);
-			assertEquals("Mary", enc.firstName);
-			assertEquals("Patient", enc.lastName);
+			assertEquals(TEST_ENC.pid, enc.pid);
+			assertEquals(TEST_ENC.firstName, enc.firstName);
+			assertEquals(TEST_ENC.lastName, enc.lastName);
+			assertEquals(TEST_ENC.encounterDateTime, enc.encounterDateTime);
+			assertEquals(TEST_ENC.location, enc.location);
+			assertEquals(TEST_ENC.attendingDoctorID, enc.attendingDoctorID);
+			assertEquals(TEST_ENC.attendingDoctorFirstName, enc.attendingDoctorFirstName);
+			assertEquals(TEST_ENC.attendingDoctorLastName, enc.attendingDoctorLastName);
 		} catch (HL7Exception e) {
 			fail("Failed due to exception: " + e);
 		}
@@ -31,12 +36,8 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 	
 	@Test
 	public void testBuildRegisterRequest() {
-		XDSRepositoryProvideAndRegisterDocument.EncounterInfo enc =
-			new XDSRepositoryProvideAndRegisterDocument.EncounterInfo();
-		enc.pid = "2552234100";
-		enc.firstName = "Mary"; enc.lastName = "Patient";
 		ProvideAndRegisterDocumentSetRequestType request =
-			XDSRepositoryProvideAndRegisterDocument.buildRegisterRequest(enc);
+			XDSRepositoryProvideAndRegisterDocument.buildRegisterRequest(TEST_ENC);
 		
 		try {
 			JAXBContext jc = JAXBContext.newInstance("ihe.iti.xds_b._2007");
@@ -49,6 +50,20 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 		}
 			
 		fail("Oh no!");
+	}
+	
+	private static XDSRepositoryProvideAndRegisterDocument.EncounterInfo TEST_ENC;
+	
+	static {
+		TEST_ENC = new XDSRepositoryProvideAndRegisterDocument.EncounterInfo();
+		TEST_ENC.pid = "2552234100";
+		TEST_ENC.encounterDateTime = "201211150855";
+		TEST_ENC.firstName = "Mary"; TEST_ENC.lastName = "Patient";
+		TEST_ENC.encounterDateTime = "201211150855";
+		TEST_ENC.location = "Simbi MU";
+		TEST_ENC.attendingDoctorID = "3525410";
+		TEST_ENC.attendingDoctorFirstName = "John";
+		TEST_ENC.attendingDoctorLastName = "Doctor";
 	}
 
 	private static final String TEST_ORU_R01_MSG =
@@ -124,7 +139,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 		"			    <FN.1>Doctor</FN.1>" +
 		"			</XCN.2>" +
 		"			<XCN.3>John</XCN.3>" +
-		"			<XCN.13>NID</XCN.13>" +
+		"			<XCN.13>EPID</XCN.13>" +
 		"		    </PV1.7>" +
 		"		    <PV1.44>" +
 		"			<TS.1>201211150855</TS.1>" +

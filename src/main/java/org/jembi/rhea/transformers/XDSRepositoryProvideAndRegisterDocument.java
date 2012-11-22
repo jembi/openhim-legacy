@@ -31,13 +31,12 @@ import org.mule.transformer.AbstractMessageTransformer;
 
 import ca.marc.ihe.xds.XdsGuidType;
 import ca.uhn.hl7v2.HL7Exception;
-import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.model.v25.datatype.CX;
 import ca.uhn.hl7v2.model.v25.message.ORU_R01;
 import ca.uhn.hl7v2.model.v25.segment.PID;
+import ca.uhn.hl7v2.model.v25.segment.PV1;
 import ca.uhn.hl7v2.parser.GenericParser;
 import ca.uhn.hl7v2.parser.Parser;
-import ca.uhn.hl7v2.util.Terser;
 
 public class XDSRepositoryProvideAndRegisterDocument extends
 		AbstractMessageTransformer {
@@ -71,11 +70,20 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		// To add slots
 		document.getSlot().add(createSlot("creationTime", formatter_yyyyMMdd.format(now)));
 		document.getSlot().add(createSlot("languageCode", "en-us"));
+		document.getSlot().add(createSlot("serviceStartTime", enc.getEncounterDateTime()));
+		document.getSlot().add(createSlot("serviceStopTime", enc.getEncounterDateTime()));
+		document.getSlot().add(createSlot("sourcePatientId", enc.getPID()));
 		document.getSlot().add(createSlot("sourcePatientInfo", "PID-3|" + enc.getPID(), "PID-5|" + enc.getName()));
 		
 		// To add classifications
+		SlotType1[] authorSlots = new SlotType1[] {
+			createSlot("authorPerson", enc.getAttendingDoctor()),
+			createSlot("authorInstitution", enc.getLocation()),
+		};
+		document.getClassification().add(createClassification(document, XdsGuidType.XDSDocumentEntry_Author, null, null, authorSlots));
+		
 		SlotType1[] confidentialitySlots = new SlotType1[] {
-				createSlot("codingScheme", "Connect-a-thon confidentialityCodes")
+			createSlot("codingScheme", "Connect-a-thon confidentialityCodes")
 		};
 		document.getClassification().add(createClassification(document, XdsGuidType.XDSDocumentEntry_ConfidentialityCode, "1.3.6.1.4.1.21367.2006.7.107", "Normal", confidentialitySlots));
 		
@@ -147,6 +155,15 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 			res.firstName = pid.getPatientName(0).getXpn2_GivenName().getValue();
 		}
 		
+		PV1 pv1 = msg.getPATIENT_RESULT().getPATIENT().getVISIT().getPV1();
+		if (pv1.getAttendingDoctorReps()>0) {
+			res.attendingDoctorID = pv1.getAttendingDoctor(0).getIDNumber().getValue();
+			res.attendingDoctorFirstName = pv1.getAttendingDoctor(0).getGivenName().getValue();
+			res.attendingDoctorLastName = pv1.getAttendingDoctor(0).getFamilyName().getFn1_Surname().getValue();
+		}
+		res.location = pv1.getPv13_AssignedPatientLocation().getPl4_Facility().getHd1_NamespaceID().getValue();
+		res.encounterDateTime = pv1.getPv144_AdmitDateTime().getTime().getValue();
+		
 		return res;
 	}
 	
@@ -217,14 +234,16 @@ public class XDSRepositoryProvideAndRegisterDocument extends
     	retClass.setId(String.format("urn:uuid:%s", UUID.randomUUID().toString()));
     	retClass.setClassificationScheme(scheme.toString());
     	retClass.setClassifiedObject(classifiedObject.getId());
-    	retClass.setNodeRepresentation(nodeRepresentation);
+    	if (nodeRepresentation!=null) retClass.setNodeRepresentation(nodeRepresentation);
     	retClass.getSlot().addAll(Arrays.asList(slots));
     	
-    	InternationalStringType localName = new InternationalStringType();
-		LocalizedStringType stringValue = new LocalizedStringType();
-		stringValue.setValue(name);
-		localName.getLocalizedString().add(stringValue);
-		retClass.setName(localName);
+    	if (name!=null) {
+	    	InternationalStringType localName = new InternationalStringType();
+			LocalizedStringType stringValue = new LocalizedStringType();
+			stringValue.setValue(name);
+			localName.getLocalizedString().add(stringValue);
+			retClass.setName(localName);
+    	}
 		
     	return retClass;
     }
@@ -270,6 +289,10 @@ public class XDSRepositoryProvideAndRegisterDocument extends
     protected static class EncounterInfo {
     	protected String pid;
     	protected String firstName, lastName;
+    	protected String encounterDateTime;
+    	protected String attendingDoctorFirstName, attendingDoctorLastName;
+    	protected String attendingDoctorID;
+    	protected String location;
     	
 	    public String getPID() {
 	    	return pid + "^^^&ECID&ISO";
@@ -277,6 +300,18 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 	    
 	    public String getName() {
 	    	return lastName + "^" + firstName + "^^^";
+	    }
+	    
+	    public String getEncounterDateTime() {
+	    	return encounterDateTime;
+	    }
+	    
+	    public String getAttendingDoctor() {
+	    	return String.format("%s %s (%s)", attendingDoctorFirstName, attendingDoctorLastName, attendingDoctorID);
+	    }
+	    
+	    public String getLocation() {
+	    	return location;
 	    }
     }
 }
