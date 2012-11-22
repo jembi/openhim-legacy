@@ -1,23 +1,6 @@
-/* 
- * Copyright 2012 Mohawk College of Applied Arts and Technology
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you 
- * may not use this file except in compliance with the License. You may 
- * obtain a copy of the License at 
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the 
- * License for the specific language governing permissions and limitations under 
- * the License.
- * 
- */
 
 package ihe.iti.xds_b._2007;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
@@ -33,7 +16,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "DocumentRegistry_Service", targetNamespace = "urn:ihe:iti:xds-b:2007", wsdlLocation = "file:/C:/Users/Mohamed/Documents/NetBeansProjects/SharedHealthComponents/XDS/src/ca/marc/ihe/xds/resources/ihe/wsdl/XDS.b_DocumentRegistry.wsdl")
+@WebServiceClient(name = "DocumentRegistry_Service", targetNamespace = "urn:ihe:iti:xds-b:2007", wsdlLocation = "../../../../../resources/ihe/wsdl/XDS.b_DocumentRegistry.wsdl")
 public class DocumentRegistryService
     extends Service
 {
@@ -43,14 +26,11 @@ public class DocumentRegistryService
     private final static QName DOCUMENTREGISTRYSERVICE_QNAME = new QName("urn:ihe:iti:xds-b:2007", "DocumentRegistry_Service");
 
     static {
-        URL url = null;
+        DOCUMENTREGISTRYSERVICE_WSDL_LOCATION = ihe.iti.xds_b._2007.DocumentRegistryService.class.getResource("../../../../../resources/ihe/wsdl/XDS.b_DocumentRegistry.wsdl");
         WebServiceException e = null;
-        try {
-            url = new URL("file:/C:/Users/Mohamed/Documents/NetBeansProjects/SharedHealthComponents/XDS/src/ca/marc/ihe/xds/resources/ihe/wsdl/XDS.b_DocumentRegistry.wsdl");
-        } catch (MalformedURLException ex) {
-            e = new WebServiceException(ex);
+        if (DOCUMENTREGISTRYSERVICE_WSDL_LOCATION == null) {
+            e = new WebServiceException("Cannot find '../../../../../resources/ihe/wsdl/XDS.b_DocumentRegistry.wsdl' wsdl. Place the resource correctly in the classpath.");
         }
-        DOCUMENTREGISTRYSERVICE_WSDL_LOCATION = url;
         DOCUMENTREGISTRYSERVICE_EXCEPTION = e;
     }
 

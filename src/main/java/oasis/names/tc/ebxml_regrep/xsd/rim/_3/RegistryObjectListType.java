@@ -1,19 +1,3 @@
-/* 
- * Copyright 2012 Mohawk College of Applied Arts and Technology
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you 
- * may not use this file except in compliance with the License. You may 
- * obtain a copy of the License at 
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the 
- * License for the specific language governing permissions and limitations under 
- * the License.
- * 
- */
 
 package oasis.names.tc.ebxml_regrep.xsd.rim._3;
 
@@ -72,28 +56,28 @@ public class RegistryObjectListType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link ExtrinsicObjectType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AuditableEventType }{@code >}
+     * {@link JAXBElement }{@code <}{@link UserType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AssociationType1 }{@code >}
+     * {@link JAXBElement }{@code <}{@link ClassificationSchemeType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ClassificationNodeType }{@code >}
      * {@link JAXBElement }{@code <}{@link RegistryPackageType }{@code >}
      * {@link JAXBElement }{@code <}{@link FederationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link OrganizationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link PersonType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ObjectRefType }{@code >}
-     * {@link JAXBElement }{@code <}{@link SubscriptionType }{@code >}
-     * {@link JAXBElement }{@code <}{@link RegistryObjectType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AssociationType1 }{@code >}
-     * {@link JAXBElement }{@code <}{@link ServiceBindingType }{@code >}
-     * {@link JAXBElement }{@code <}{@link SpecificationLinkType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ClassificationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ExternalLinkType }{@code >}
-     * {@link JAXBElement }{@code <}{@link IdentifiableType }{@code >}
-     * {@link JAXBElement }{@code <}{@link RegistryType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ClassificationNodeType }{@code >}
-     * {@link JAXBElement }{@code <}{@link UserType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ServiceType }{@code >}
      * {@link JAXBElement }{@code <}{@link AdhocQueryType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ClassificationSchemeType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ExternalLinkType }{@code >}
+     * {@link JAXBElement }{@code <}{@link RegistryType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ServiceBindingType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AuditableEventType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ServiceType }{@code >}
+     * {@link JAXBElement }{@code <}{@link IdentifiableType }{@code >}
+     * {@link JAXBElement }{@code <}{@link SubscriptionType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ExtrinsicObjectType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ClassificationType }{@code >}
      * {@link JAXBElement }{@code <}{@link ExternalIdentifierType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ObjectRefType }{@code >}
+     * {@link JAXBElement }{@code <}{@link PersonType }{@code >}
+     * {@link JAXBElement }{@code <}{@link SpecificationLinkType }{@code >}
+     * {@link JAXBElement }{@code <}{@link OrganizationType }{@code >}
+     * {@link JAXBElement }{@code <}{@link RegistryObjectType }{@code >}
      * 
      * 
      */

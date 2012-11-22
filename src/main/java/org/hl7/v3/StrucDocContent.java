@@ -1,19 +1,3 @@
-/* 
- * Copyright 2012 Mohawk College of Applied Arts and Technology
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you 
- * may not use this file except in compliance with the License. You may 
- * obtain a copy of the License at 
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the 
- * License for the specific language governing permissions and limitations under 
- * the License.
- * 
- */
 
 package org.hl7.v3;
 
@@ -78,13 +62,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class StrucDocContent {
 
     @XmlElementRefs({
+        @XmlElementRef(name = "content", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "br", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "footnoteRef", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "footnote", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "sup", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "linkHtml", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "renderMultiMedia", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "footnote", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "br", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "sup", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "content", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "footnoteRef", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "sub", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)
     })
     @XmlMixed
@@ -123,14 +107,14 @@ public class StrucDocContent {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
-     * {@link JAXBElement }{@code <}{@link StrucDocLinkHtml }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocRenderMultiMedia }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocFootnote }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocBr }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocSup }{@code >}
      * {@link JAXBElement }{@code <}{@link StrucDocContent }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocBr }{@code >}
      * {@link JAXBElement }{@code <}{@link StrucDocFootnoteRef }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocFootnote }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocSup }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocLinkHtml }{@code >}
+     * {@link String }
+     * {@link JAXBElement }{@code <}{@link StrucDocRenderMultiMedia }{@code >}
      * {@link JAXBElement }{@code <}{@link StrucDocSub }{@code >}
      * 
      * 

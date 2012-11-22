@@ -1,19 +1,3 @@
-/* 
- * Copyright 2012 Mohawk College of Applied Arts and Technology
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you 
- * may not use this file except in compliance with the License. You may 
- * obtain a copy of the License at 
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the 
- * License for the specific language governing permissions and limitations under 
- * the License.
- * 
- */
 
 package org.hl7.v3;
 
@@ -70,10 +54,10 @@ public class IVLTS
 {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "high", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "center", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "width", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "low", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "low", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "high", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)
     })
     protected List<JAXBElement<? extends QTY>> rest;
 
@@ -83,8 +67,8 @@ public class IVLTS
      * <p>
      * You are getting this "catch-all" property because of the following reason: 
      * The field name "High" is used by two different parts of a schema. See: 
-     * line 1757 of file:/C:/Users/fyfej/workspace/SharedHealthComponents/XDS/xml-resources/web-service-references/XDS.b_DocumentRegistry/schema/HL7V3/coreschemas/datatypes-base.xsd
-     * line 1748 of file:/C:/Users/fyfej/workspace/SharedHealthComponents/XDS/xml-resources/web-service-references/XDS.b_DocumentRegistry/schema/HL7V3/coreschemas/datatypes-base.xsd
+     * line 1757 of file:/home/ryan/git/openhim/src/main/resources/ihe/schema/HL7V3/coreschemas/datatypes-base.xsd
+     * line 1748 of file:/home/ryan/git/openhim/src/main/resources/ihe/schema/HL7V3/coreschemas/datatypes-base.xsd
      * <p>
      * To get rid of this property, apply a property customization to one 
      * of both of the following declarations to change their names: 
@@ -106,9 +90,9 @@ public class IVLTS
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link IVXBTS }{@code >}
-     * {@link JAXBElement }{@code <}{@link IVXBTS }{@code >}
-     * {@link JAXBElement }{@code <}{@link TS }{@code >}
      * {@link JAXBElement }{@code <}{@link PQ }{@code >}
+     * {@link JAXBElement }{@code <}{@link TS }{@code >}
+     * {@link JAXBElement }{@code <}{@link IVXBTS }{@code >}
      * 
      * 
      */
