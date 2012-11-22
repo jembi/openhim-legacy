@@ -35,8 +35,8 @@ public class ObjectFactory {
     private final static QName _StringFilter_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0", "StringFilter");
     private final static QName _FloatFilter_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0", "FloatFilter");
     private final static QName _PersonQuery_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0", "PersonQuery");
-    private final static QName _RegistryObjectQuery_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0", "RegistryObjectQuery");
     private final static QName _CompoundFilter_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0", "CompoundFilter");
+    private final static QName _RegistryObjectQuery_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0", "RegistryObjectQuery");
     private final static QName _SubscriptionQuery_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0", "SubscriptionQuery");
     private final static QName _FederationQuery_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0", "FederationQuery");
     private final static QName _IntegerFilter_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0", "IntegerFilter");
@@ -433,21 +433,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RegistryObjectQueryType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0", name = "RegistryObjectQuery")
-    public JAXBElement<RegistryObjectQueryType> createRegistryObjectQuery(RegistryObjectQueryType value) {
-        return new JAXBElement<RegistryObjectQueryType>(_RegistryObjectQuery_QNAME, RegistryObjectQueryType.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CompoundFilterType }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0", name = "CompoundFilter")
     public JAXBElement<CompoundFilterType> createCompoundFilter(CompoundFilterType value) {
         return new JAXBElement<CompoundFilterType>(_CompoundFilter_QNAME, CompoundFilterType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RegistryObjectQueryType }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0", name = "RegistryObjectQuery")
+    public JAXBElement<RegistryObjectQueryType> createRegistryObjectQuery(RegistryObjectQueryType value) {
+        return new JAXBElement<RegistryObjectQueryType>(_RegistryObjectQuery_QNAME, RegistryObjectQueryType.class, null, value);
     }
 
     /**

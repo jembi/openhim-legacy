@@ -25,12 +25,12 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _Description_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "Description");
-    private final static QName _RegistryPackage_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "RegistryPackage");
     private final static QName _PostalAddress_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "PostalAddress");
+    private final static QName _RegistryPackage_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "RegistryPackage");
     private final static QName _LocalizedString_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "LocalizedString");
     private final static QName _InternationalString_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "InternationalString");
-    private final static QName _SpecificationLink_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "SpecificationLink");
     private final static QName _Name_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "Name");
+    private final static QName _SpecificationLink_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "SpecificationLink");
     private final static QName _RegistryObject_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "RegistryObject");
     private final static QName _AuditableEvent_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "AuditableEvent");
     private final static QName _ExternalIdentifier_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "ExternalIdentifier");
@@ -59,8 +59,8 @@ public class ObjectFactory {
     private final static QName _ExtrinsicObject_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "ExtrinsicObject");
     private final static QName _NotifyAction_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "NotifyAction");
     private final static QName _UsageDescription_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "UsageDescription");
-    private final static QName _Organization_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "Organization");
     private final static QName _ObjectRefList_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "ObjectRefList");
+    private final static QName _Organization_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "Organization");
     private final static QName _Classification_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "Classification");
     private final static QName _Slot_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "Slot");
     private final static QName _EmailAddress_QNAME = new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "EmailAddress");
@@ -76,11 +76,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link UserType }
+     * Create an instance of {@link SlotListType }
      * 
      */
-    public UserType createUserType() {
-        return new UserType();
+    public SlotListType createSlotListType() {
+        return new SlotListType();
+    }
+
+    /**
+     * Create an instance of {@link RegistryObjectListType }
+     * 
+     */
+    public RegistryObjectListType createRegistryObjectListType() {
+        return new RegistryObjectListType();
+    }
+
+    /**
+     * Create an instance of {@link AdhocQueryType }
+     * 
+     */
+    public AdhocQueryType createAdhocQueryType() {
+        return new AdhocQueryType();
+    }
+
+    /**
+     * Create an instance of {@link RegistryObjectType }
+     * 
+     */
+    public RegistryObjectType createRegistryObjectType() {
+        return new RegistryObjectType();
     }
 
     /**
@@ -89,6 +113,14 @@ public class ObjectFactory {
      */
     public IdentifiableType createIdentifiableType() {
         return new IdentifiableType();
+    }
+
+    /**
+     * Create an instance of {@link UserType }
+     * 
+     */
+    public UserType createUserType() {
+        return new UserType();
     }
 
     /**
@@ -164,35 +196,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SlotListType }
-     * 
-     */
-    public SlotListType createSlotListType() {
-        return new SlotListType();
-    }
-
-    /**
      * Create an instance of {@link OrganizationType }
      * 
      */
     public OrganizationType createOrganizationType() {
         return new OrganizationType();
-    }
-
-    /**
-     * Create an instance of {@link AdhocQueryType }
-     * 
-     */
-    public AdhocQueryType createAdhocQueryType() {
-        return new AdhocQueryType();
-    }
-
-    /**
-     * Create an instance of {@link RegistryObjectType }
-     * 
-     */
-    public RegistryObjectType createRegistryObjectType() {
-        return new RegistryObjectType();
     }
 
     /**
@@ -233,14 +241,6 @@ public class ObjectFactory {
      */
     public EmailAddressType createEmailAddressType() {
         return new EmailAddressType();
-    }
-
-    /**
-     * Create an instance of {@link RegistryObjectListType }
-     * 
-     */
-    public RegistryObjectListType createRegistryObjectListType() {
-        return new RegistryObjectListType();
     }
 
     /**
@@ -389,21 +389,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RegistryPackageType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", name = "RegistryPackage", substitutionHeadNamespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", substitutionHeadName = "Identifiable")
-    public JAXBElement<RegistryPackageType> createRegistryPackage(RegistryPackageType value) {
-        return new JAXBElement<RegistryPackageType>(_RegistryPackage_QNAME, RegistryPackageType.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link PostalAddressType }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", name = "PostalAddress")
     public JAXBElement<PostalAddressType> createPostalAddress(PostalAddressType value) {
         return new JAXBElement<PostalAddressType>(_PostalAddress_QNAME, PostalAddressType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RegistryPackageType }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", name = "RegistryPackage", substitutionHeadNamespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", substitutionHeadName = "Identifiable")
+    public JAXBElement<RegistryPackageType> createRegistryPackage(RegistryPackageType value) {
+        return new JAXBElement<RegistryPackageType>(_RegistryPackage_QNAME, RegistryPackageType.class, null, value);
     }
 
     /**
@@ -425,21 +425,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SpecificationLinkType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", name = "SpecificationLink", substitutionHeadNamespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", substitutionHeadName = "Identifiable")
-    public JAXBElement<SpecificationLinkType> createSpecificationLink(SpecificationLinkType value) {
-        return new JAXBElement<SpecificationLinkType>(_SpecificationLink_QNAME, SpecificationLinkType.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link InternationalStringType }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", name = "Name")
     public JAXBElement<InternationalStringType> createName(InternationalStringType value) {
         return new JAXBElement<InternationalStringType>(_Name_QNAME, InternationalStringType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SpecificationLinkType }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", name = "SpecificationLink", substitutionHeadNamespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", substitutionHeadName = "Identifiable")
+    public JAXBElement<SpecificationLinkType> createSpecificationLink(SpecificationLinkType value) {
+        return new JAXBElement<SpecificationLinkType>(_SpecificationLink_QNAME, SpecificationLinkType.class, null, value);
     }
 
     /**
@@ -695,21 +695,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link OrganizationType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", name = "Organization", substitutionHeadNamespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", substitutionHeadName = "Identifiable")
-    public JAXBElement<OrganizationType> createOrganization(OrganizationType value) {
-        return new JAXBElement<OrganizationType>(_Organization_QNAME, OrganizationType.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ObjectRefListType }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", name = "ObjectRefList")
     public JAXBElement<ObjectRefListType> createObjectRefList(ObjectRefListType value) {
         return new JAXBElement<ObjectRefListType>(_ObjectRefList_QNAME, ObjectRefListType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link OrganizationType }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", name = "Organization", substitutionHeadNamespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", substitutionHeadName = "Identifiable")
+    public JAXBElement<OrganizationType> createOrganization(OrganizationType value) {
+        return new JAXBElement<OrganizationType>(_Organization_QNAME, OrganizationType.class, null, value);
     }
 
     /**

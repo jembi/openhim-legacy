@@ -47,13 +47,13 @@ import javax.xml.bind.annotation.XmlType;
     "externalIdentifier"
 })
 @XmlSeeAlso({
+    AdhocQueryType.class,
     ClassificationSchemeType.class,
     ServiceType.class,
     ClassificationNodeType.class,
     AssociationType1 .class,
     ExtrinsicObjectType.class,
     OrganizationType.class,
-    AdhocQueryType.class,
     RegistryType.class,
     ClassificationType.class,
     FederationType.class,

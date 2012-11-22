@@ -16,7 +16,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "DocumentRepository_Service", targetNamespace = "urn:ihe:iti:xds-b:2007", wsdlLocation = "../../../../../resources/ihe/wsdl/XDS.b_DocumentRepository.wsdl")
+@WebServiceClient(name = "DocumentRepository_Service", targetNamespace = "urn:ihe:iti:xds-b:2007", wsdlLocation = "/ihe/wsdl/XDS.b_DocumentRepository.wsdl")
 public class DocumentRepositoryService
     extends Service
 {
@@ -26,10 +26,10 @@ public class DocumentRepositoryService
     private final static QName DOCUMENTREPOSITORYSERVICE_QNAME = new QName("urn:ihe:iti:xds-b:2007", "DocumentRepository_Service");
 
     static {
-        DOCUMENTREPOSITORYSERVICE_WSDL_LOCATION = ihe.iti.xds_b._2007.DocumentRepositoryService.class.getResource("../../../../../resources/ihe/wsdl/XDS.b_DocumentRepository.wsdl");
+        DOCUMENTREPOSITORYSERVICE_WSDL_LOCATION = ihe.iti.xds_b._2007.DocumentRepositoryService.class.getResource("/ihe/wsdl/XDS.b_DocumentRepository.wsdl");
         WebServiceException e = null;
         if (DOCUMENTREPOSITORYSERVICE_WSDL_LOCATION == null) {
-            e = new WebServiceException("Cannot find '../../../../../resources/ihe/wsdl/XDS.b_DocumentRepository.wsdl' wsdl. Place the resource correctly in the classpath.");
+            e = new WebServiceException("Cannot find '/ihe/wsdl/XDS.b_DocumentRepository.wsdl' wsdl. Place the resource correctly in the classpath.");
         }
         DOCUMENTREPOSITORYSERVICE_EXCEPTION = e;
     }

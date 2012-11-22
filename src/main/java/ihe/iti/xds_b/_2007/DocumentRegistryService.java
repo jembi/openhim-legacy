@@ -16,7 +16,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "DocumentRegistry_Service", targetNamespace = "urn:ihe:iti:xds-b:2007", wsdlLocation = "../../../../../resources/ihe/wsdl/XDS.b_DocumentRegistry.wsdl")
+@WebServiceClient(name = "DocumentRegistry_Service", targetNamespace = "urn:ihe:iti:xds-b:2007", wsdlLocation = "/ihe/wsdl/XDS.b_DocumentRegistry.wsdl")
 public class DocumentRegistryService
     extends Service
 {
@@ -26,10 +26,10 @@ public class DocumentRegistryService
     private final static QName DOCUMENTREGISTRYSERVICE_QNAME = new QName("urn:ihe:iti:xds-b:2007", "DocumentRegistry_Service");
 
     static {
-        DOCUMENTREGISTRYSERVICE_WSDL_LOCATION = ihe.iti.xds_b._2007.DocumentRegistryService.class.getResource("../../../../../resources/ihe/wsdl/XDS.b_DocumentRegistry.wsdl");
+        DOCUMENTREGISTRYSERVICE_WSDL_LOCATION = ihe.iti.xds_b._2007.DocumentRegistryService.class.getResource("/ihe/wsdl/XDS.b_DocumentRegistry.wsdl");
         WebServiceException e = null;
         if (DOCUMENTREGISTRYSERVICE_WSDL_LOCATION == null) {
-            e = new WebServiceException("Cannot find '../../../../../resources/ihe/wsdl/XDS.b_DocumentRegistry.wsdl' wsdl. Place the resource correctly in the classpath.");
+            e = new WebServiceException("Cannot find '/ihe/wsdl/XDS.b_DocumentRegistry.wsdl' wsdl. Place the resource correctly in the classpath.");
         }
         DOCUMENTREGISTRYSERVICE_EXCEPTION = e;
     }

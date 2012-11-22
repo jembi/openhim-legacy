@@ -35,6 +35,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link RegistryResponseType }
+     * 
+     */
+    public RegistryResponseType createRegistryResponseType() {
+        return new RegistryResponseType();
+    }
+
+    /**
      * Create an instance of {@link RegistryErrorList }
      * 
      */
@@ -48,14 +56,6 @@ public class ObjectFactory {
      */
     public RegistryError createRegistryError() {
         return new RegistryError();
-    }
-
-    /**
-     * Create an instance of {@link RegistryResponseType }
-     * 
-     */
-    public RegistryResponseType createRegistryResponseType() {
-        return new RegistryResponseType();
     }
 
     /**
