@@ -39,14 +39,14 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 			response = response.replace("\013", "");
 			response = response.replace("\034", "");
 			
-			Parser parser = new GenericParser();
-			RSP_K23 msg = (RSP_K23)parser.parse(response);
+			String pid = parseResponse(response);
 			
-			int numIds = msg.getQUERY_RESPONSE().getPID().getPid3_PatientIdentifierListReps();
-			if (numIds < 1)
-				return null;
+			// send auditing message
+			String request = (String)message.getSessionProperty("PIX Request");
+			String at = generateATNAMessage(request, pid);
+			//TODO send
 			
-			return msg.getQUERY_RESPONSE().getPID().getPatientIdentifierList(0).getCx1_IDNumber().getValue();
+			return pid;
 			
 		} catch (EncodingNotSupportedException e) {
 			throw new TransformerException(this, e);
@@ -58,7 +58,18 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 	}
 
 	
-	protected String generateATNAMessage(MuleMessage message, String patientId) throws JAXBException {
+	protected String parseResponse(String response) throws EncodingNotSupportedException, HL7Exception {
+		Parser parser = new GenericParser();
+		RSP_K23 msg = (RSP_K23)parser.parse(response);
+		
+		int numIds = msg.getQUERY_RESPONSE().getPID().getPid3_PatientIdentifierListReps();
+		if (numIds < 1)
+			return null;
+		
+		return msg.getQUERY_RESPONSE().getPID().getPatientIdentifierList(0).getCx1_IDNumber().getValue();
+	}
+	
+	protected String generateATNAMessage(String request, String patientId) throws JAXBException {
 		AuditMessage res = new AuditMessage();
 		
 		EventIdentificationType eid = new EventIdentificationType();
@@ -78,7 +89,7 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		);
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(
-				UUID.randomUUID().toString(), (short)2, (short)24, "IHE Transactions", "ITI-21", "ITI21", (String)message.getSessionProperty("PIX Request")
+				UUID.randomUUID().toString(), (short)2, (short)24, "IHE Transactions", "ITI-21", "ITI21", request
 			)
 		);
 		
