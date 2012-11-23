@@ -1,12 +1,14 @@
 package org.jembi.rhea.transformers;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.activation.DataHandler;
+import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 import org.mule.api.ExceptionPayload;
@@ -33,6 +35,12 @@ public class PIXQueryResponseTransformerTest {
 		}
 	}
 
+
+	@Test
+	public void testGenerateATNAMessage() throws JAXBException {
+		PIXQueryResponseTransformer rt = new PIXQueryResponseTransformer();
+		System.out.println(rt.generateATNAMessage(new TestMuleMessage(), "3058035884"));
+	}
 	
 	private static class TestMuleMessage implements MuleMessage {
 		@Override
@@ -46,6 +54,11 @@ public class PIXQueryResponseTransformerTest {
 		@Override
 		public String getPayloadAsString() throws Exception {
 			return (String)getPayload();
+		}
+		
+		@Override
+		public <T> T getSessionProperty(String name) {
+			return (T) "Some sample message";
 		}
 
 		@Override public void addProperties(Map<String, Object> properties) {}
@@ -126,9 +139,8 @@ public class PIXQueryResponseTransformerTest {
 		@Override public String getPayloadForLogging(String encoding) { return null; }
 		@Override public MuleContext getMuleContext() { return null; }
 		@Override public DataType<?> getDataType() { return null; }
-		@Override public <T> T getSessionProperty(String name, T defaultValue) { return null; }
-		@Override public <T> T getSessionProperty(String name) { return null; }
 		@Override public void setSessionProperty(String key, Object value) {}
 		@Override public MuleMessage createInboundMessage() throws Exception { return null; }
+		@Override public <T> T getSessionProperty(String name, T defaultValue) { return null; }
 	}
 }

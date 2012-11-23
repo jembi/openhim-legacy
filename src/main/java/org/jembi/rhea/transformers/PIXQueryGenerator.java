@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.mule.api.MuleMessage;
+import org.mule.api.MuleSession;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
 
@@ -32,6 +33,10 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		} catch (HL7Exception e) {
 			throw new TransformerException(this, e);
 		}
+		
+		// add request to session prop so that we can access it when
+		// processing the response in PIXQueryResponseTransformer
+		message.setSessionProperty("PIX Request", pix_query);
 		
 		// add MLLP header and footer chars
 		pix_query = "\013" + pix_query + "\034\r";
@@ -72,5 +77,4 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		Parser p = new GenericParser();
 		return p.encode(qbp_q21);
 	}
-
 }

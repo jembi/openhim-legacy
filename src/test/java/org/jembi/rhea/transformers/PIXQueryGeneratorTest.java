@@ -1,5 +1,7 @@
 package org.jembi.rhea.transformers;
 
+import javax.xml.bind.JAXBException;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -16,5 +18,4 @@ public class PIXQueryGeneratorTest {
 		Assert.assertNotNull(result);
 		// Other more useful asserts?
 	}
-
 }
