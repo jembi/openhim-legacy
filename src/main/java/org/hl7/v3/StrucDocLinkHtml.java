@@ -53,8 +53,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class StrucDocLinkHtml {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "footnoteRef", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "footnote", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "footnote", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "footnoteRef", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -99,9 +99,9 @@ public class StrucDocLinkHtml {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
-     * {@link JAXBElement }{@code <}{@link StrucDocFootnote }{@code >}
      * {@link JAXBElement }{@code <}{@link StrucDocFootnoteRef }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocFootnote }{@code >}
+     * {@link String }
      * 
      * 
      */

@@ -34,7 +34,7 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		}
 		
 		// add MLLP header and footer chars
-		pix_query = "\013" + pix_query + "\034\r";
+		//pix_query = "\013" + pix_query + "\034\r";
 		
 		return pix_query;
 	}

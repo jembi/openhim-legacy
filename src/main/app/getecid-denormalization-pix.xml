@@ -3,16 +3,20 @@
 <mule xmlns:tcp="http://www.mulesoft.org/schema/mule/tcp" xmlns:ssl="http://www.mulesoft.org/schema/mule/ssl" xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="CE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
 http://www.mulesoft.org/schema/mule/tcp http://www.mulesoft.org/schema/mule/tcp/current/mule-tcp.xsd 
+http://www.mulesoft.org/schema/mule/ssl http://www.mulesoft.org/schema/mule/ssl/current/mule-ssl.xsd 
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
-http://www.mulesoft.org/schema/mule/ssl http://www.mulesoft.org/schema/mule/ssl/current/mule-ssl.xsd 
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
 http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd 
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd ">
     <context:property-placeholder xmlns:context="http://www.springframework.org/schema/context" location="classpath:HIM-core.properties, classpath:HIM-core-override.properties"></context:property-placeholder>
-    <tcp:polling-connector name="TCP_Polling" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="TCP Polling">
-        <tcp:direct-protocol payloadOnly="true"/>
-    </tcp:polling-connector>
+    <tcp:connector name="tcpConnector" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="TCP connector">
+        <tcp:custom-protocol class="org.jembi.openhim.connector.MLLPByteProtocol"/>
+    </tcp:connector>
+    <ssl:connector name="tlsConnector" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="SSL (TLS)">
+        <tcp:custom-protocol class="org.jembi.openhim.connector.MLLPByteProtocol"/>
+        <ssl:key-store path="/ihe/na/keystore.jks" class="java.security.KeyStore" keyPassword="Jembi#123" storePassword="Jembi#123" algorithm="TLS_RSA_WITH_AES_128_CBC_SHA"/>
+    </ssl:connector>
     <flow name="mediation-getecid-denormalization-pix" doc:name="mediation-getecid-denormalization-pix">
         <vm:inbound-endpoint exchange-pattern="request-response" path="getecid-pix" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
         <logger message="In getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
@@ -39,6 +43,17 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
             </choice>
             <logger message="Exitting getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         </response>
-        <tcp:outbound-endpoint exchange-pattern="request-response" host="cr.marc-hi.ca" port="2100" responseTimeout="10000" doc:name="TCP" connector-ref="TCP_Polling"/>
+        <choice doc:name="Choice">
+            <when expression="#[groovy: return false;]">
+                <processor-chain>
+                    <ssl:outbound-endpoint host="131.254.209.12" port="10051" responseTimeout="10000" doc:name="SSL (TLS)" connector-ref="tlsConnector" exchange-pattern="request-response"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <tcp:outbound-endpoint exchange-pattern="request-response" host="cr.marc-hi.ca" port="2100" responseTimeout="10000" connector-ref="tcpConnector" doc:name="TCP"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
     </flow>
 </mule>

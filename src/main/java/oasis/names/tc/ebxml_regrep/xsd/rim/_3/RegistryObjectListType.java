@@ -56,28 +56,28 @@ public class RegistryObjectListType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link AssociationType1 }{@code >}
-     * {@link JAXBElement }{@code <}{@link RegistryObjectType }{@code >}
-     * {@link JAXBElement }{@code <}{@link SpecificationLinkType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ExternalIdentifierType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdhocQueryType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ServiceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ExternalLinkType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ObjectRefType }{@code >}
-     * {@link JAXBElement }{@code <}{@link PersonType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ClassificationNodeType }{@code >}
      * {@link JAXBElement }{@code <}{@link FederationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AuditableEventType }{@code >}
-     * {@link JAXBElement }{@code <}{@link UserType }{@code >}
-     * {@link JAXBElement }{@code <}{@link IdentifiableType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ExtrinsicObjectType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ClassificationSchemeType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ServiceBindingType }{@code >}
-     * {@link JAXBElement }{@code <}{@link RegistryPackageType }{@code >}
      * {@link JAXBElement }{@code <}{@link SubscriptionType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ClassificationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link OrganizationType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ServiceBindingType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AdhocQueryType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ExternalIdentifierType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ObjectRefType }{@code >}
+     * {@link JAXBElement }{@code <}{@link RegistryPackageType }{@code >}
+     * {@link JAXBElement }{@code <}{@link UserType }{@code >}
+     * {@link JAXBElement }{@code <}{@link SpecificationLinkType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AuditableEventType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AssociationType1 }{@code >}
+     * {@link JAXBElement }{@code <}{@link ServiceType }{@code >}
+     * {@link JAXBElement }{@code <}{@link RegistryObjectType }{@code >}
      * {@link JAXBElement }{@code <}{@link RegistryType }{@code >}
+     * {@link JAXBElement }{@code <}{@link OrganizationType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ClassificationType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ClassificationNodeType }{@code >}
+     * {@link JAXBElement }{@code <}{@link IdentifiableType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ClassificationSchemeType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ExternalLinkType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ExtrinsicObjectType }{@code >}
+     * {@link JAXBElement }{@code <}{@link PersonType }{@code >}
      * 
      * 
      */
