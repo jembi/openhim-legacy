@@ -1,15 +1,12 @@
 package org.jembi.rhea.transformers;
 
+import ihe.iti.atna.ATNAUtil;
 import ihe.iti.atna.AuditMessage;
-import ihe.iti.atna.AuditMessage.ActiveParticipant;
-import ihe.iti.atna.CodedValueType;
 import ihe.iti.atna.EventIdentificationType;
-import ihe.iti.atna.ParticipantObjectIdentificationType;
 
 import java.io.StringWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Random;
 import java.util.UUID;
 
 import javax.xml.bind.JAXBContext;
@@ -65,22 +62,22 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		AuditMessage res = new AuditMessage();
 		
 		EventIdentificationType eid = new EventIdentificationType();
-		eid.setEventID( buildCodedValueType("DCM", "110112", "Query") );
+		eid.setEventID( ATNAUtil.buildCodedValueType("DCM", "110112", "Query") );
 		eid.setEventActionCode("E");
-		eid.getEventTypeCode().add( buildCodedValueType("IHE Transactions", "ITI-9", "PIX Query") );
+		eid.getEventTypeCode().add( ATNAUtil.buildCodedValueType("IHE Transactions", "ITI-9", "PIX Query") );
 		res.setEventIdentification(eid);
 		
 		String ip = "";
 		try {
 			ip = InetAddress.getLocalHost().getHostAddress();
 		} catch (UnknownHostException e) { /* shouldn't happen since we're referencing localhost */ }
-		res.getActiveParticipant().add( buildActiveParticipant("SOME_FACILITY|OpenHIM", true, ip, (short)2, "DCM", "110153", "Source"));
-		res.getActiveParticipant().add( buildActiveParticipant("CR1|MOH_CAAT", true, "shr", (short)1, "DCM", "110152", "Destination"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("SOME_FACILITY|OpenHIM", true, ip, (short)2, "DCM", "110153", "Source"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("CR1|MOH_CAAT", true, "shr", (short)1, "DCM", "110152", "Destination"));
 		res.getParticipantObjectIdentification().add(
-			buildParticipantObjectIdentificationType(patientId +  "^^^&ECID&ISO", (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null)
+			ATNAUtil.buildParticipantObjectIdentificationType(patientId +  "^^^&ECID&ISO", (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null)
 		);
 		res.getParticipantObjectIdentification().add(
-			buildParticipantObjectIdentificationType(
+			ATNAUtil.buildParticipantObjectIdentificationType(
 				UUID.randomUUID().toString(), (short)2, (short)24, "IHE Transactions", "ITI-21", "ITI21", (String)message.getSessionProperty("PIX Request")
 			)
 		);
@@ -92,45 +89,5 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		return sw.toString();
 	}
 	
-	//TODO move to a utils class
-	
-	public static ActiveParticipant buildActiveParticipant(String userID, boolean userIsRequestor, String networkAccessPointID,
-			short networkAccessPointTypeCode, String roleIDCode_CodeSystemName, String roleIDCode_Code, String roleIDCodeDisplayName) {
-		ActiveParticipant ap = new ActiveParticipant();
-		ap.setUserID(userID);
-		ap.setUserIsRequestor(userIsRequestor);
-		ap.setNetworkAccessPointID(networkAccessPointID);
-		ap.setNetworkAccessPointTypeCode(networkAccessPointTypeCode);
-		ap.getRoleIDCode().add( buildCodedValueType(roleIDCode_CodeSystemName, roleIDCode_Code, roleIDCodeDisplayName) );
-		return ap;
-	}
-	
-	public static ParticipantObjectIdentificationType buildParticipantObjectIdentificationType(
-			String participantObjectId, short participantObjectTypeCode, short participantObjectTypeCodeRole,
-			String participantObjectIDTypeCode_CodeSystemName, String participantObjectIDTypeCode_Code,
-			String participantObjectIDTypeCode_DisplayName, String participantObjectQuery) {
-		ParticipantObjectIdentificationType res = new ParticipantObjectIdentificationType();
-		res.setParticipantObjectID(participantObjectId);
-		res.setParticipantObjectTypeCode(participantObjectTypeCode);
-		res.setParticipantObjectTypeCodeRole(participantObjectTypeCodeRole);
-		res.setParticipantObjectIDTypeCode(
-			buildCodedValueType(
-				participantObjectIDTypeCode_CodeSystemName,
-				participantObjectIDTypeCode_Code,
-				participantObjectIDTypeCode_DisplayName
-			)
-		);
-		System.out.println(participantObjectQuery);
-		if (participantObjectQuery!=null) res.setParticipantObjectQuery(participantObjectQuery.getBytes());
-		return res;
-	}
-	
-	public static CodedValueType buildCodedValueType(String codeSystemName, String code, String displayName) {
-		CodedValueType cvt = new CodedValueType();
-		cvt.setCodeSystemName(codeSystemName);
-		cvt.setCode(code);
-		cvt.setDisplayName(displayName);
-		return cvt;
-	}
 
 }
