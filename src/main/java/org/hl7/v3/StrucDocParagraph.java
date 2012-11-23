@@ -106,9 +106,9 @@ public class StrucDocParagraph {
      * {@link JAXBElement }{@code <}{@link StrucDocFootnoteRef }{@code >}
      * {@link JAXBElement }{@code <}{@link StrucDocRenderMultiMedia }{@code >}
      * {@link JAXBElement }{@code <}{@link StrucDocBr }{@code >}
-     * {@link String }
      * {@link JAXBElement }{@code <}{@link StrucDocSub }{@code >}
      * {@link JAXBElement }{@code <}{@link StrucDocFootnote }{@code >}
+     * {@link String }
      * {@link JAXBElement }{@code <}{@link StrucDocContent }{@code >}
      * 
      * 

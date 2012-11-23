@@ -60,18 +60,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class StrucDocItem {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "list", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "renderMultiMedia", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "sub", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "table", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "paragraph", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "caption", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "linkHtml", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "br", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "sup", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "footnoteRef", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "br", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "content", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "footnote", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "paragraph", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "caption", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "list", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "footnote", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "table", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "content", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -106,19 +106,19 @@ public class StrucDocItem {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link StrucDocRenderMultiMedia }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocLinkHtml }{@code >}
-     * {@link String }
-     * {@link JAXBElement }{@code <}{@link StrucDocSup }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocBr }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocContent }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocFootnote }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocList }{@code >}
      * {@link JAXBElement }{@code <}{@link StrucDocSub }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocTable }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocLinkHtml }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocFootnoteRef }{@code >}
      * {@link JAXBElement }{@code <}{@link StrucDocParagraph }{@code >}
      * {@link JAXBElement }{@code <}{@link StrucDocCaption }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocFootnoteRef }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocList }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocFootnote }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocTable }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocContent }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocRenderMultiMedia }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocBr }{@code >}
+     * {@link JAXBElement }{@code <}{@link StrucDocSup }{@code >}
+     * {@link String }
      * 
      * 
      */

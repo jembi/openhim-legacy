@@ -39,7 +39,7 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		message.setSessionProperty("PIX Request", pix_query);
 		
 		// add MLLP header and footer chars
-		pix_query = "\013" + pix_query + "\034\r";
+		//pix_query = "\013" + pix_query + "\034\r";
 		
 		return pix_query;
 	}
