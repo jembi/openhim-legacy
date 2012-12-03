@@ -29,6 +29,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 			assertEquals(TEST_ENC.attendingDoctorID, enc.attendingDoctorID);
 			assertEquals(TEST_ENC.attendingDoctorFirstName, enc.attendingDoctorFirstName);
 			assertEquals(TEST_ENC.attendingDoctorLastName, enc.attendingDoctorLastName);
+			assertEquals(TEST_ENC.encounterType, enc.encounterType);
 		} catch (HL7Exception e) {
 			fail("Failed due to exception: " + e);
 		}
@@ -64,6 +65,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 		TEST_ENC.attendingDoctorID = "3525410";
 		TEST_ENC.attendingDoctorFirstName = "John";
 		TEST_ENC.attendingDoctorLastName = "Doctor";
+		TEST_ENC.encounterType = "ANC Referral";
 	}
 
 	private static final String TEST_ORU_R01_MSG =

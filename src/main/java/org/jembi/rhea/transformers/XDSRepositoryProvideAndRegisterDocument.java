@@ -82,6 +82,11 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		};
 		document.getClassification().add(createClassification(document, XdsGuidType.XDSDocumentEntry_Author, null, null, authorSlots));
 		
+		//TODO the class code needs to be set correctly according to the document type
+		SlotType1[] classCodeSlots = new SlotType1[] {
+			createSlot("codingScheme", "1.3.6.1.4.1.19376.1.5.3.1.1.10")
+		};
+		document.getClassification().add(createClassification(document, XdsGuidType.XDSDocumentEntry_ClassCode, "", enc.getEncounterType(), classCodeSlots));
 		SlotType1[] confidentialitySlots = new SlotType1[] {
 			createSlot("codingScheme", "Connect-a-thon confidentialityCodes")
 		};
@@ -163,6 +168,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		}
 		res.location = pv1.getPv13_AssignedPatientLocation().getPl4_Facility().getHd1_NamespaceID().getValue();
 		res.encounterDateTime = pv1.getPv144_AdmitDateTime().getTime().getValue();
+		res.encounterType = pv1.getPv14_AdmissionType().getValue();
 		
 		return res;
 	}
@@ -293,6 +299,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
     	protected String attendingDoctorFirstName, attendingDoctorLastName;
     	protected String attendingDoctorID;
     	protected String location;
+    	protected String encounterType;
     	
 	    public String getPID() {
 	    	return pid + "^^^&ECID&ISO";
@@ -312,6 +319,10 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 	    
 	    public String getLocation() {
 	    	return location;
+	    }
+	    
+	    public String getEncounterType() {
+	    	return encounterType;
 	    }
     }
 }
