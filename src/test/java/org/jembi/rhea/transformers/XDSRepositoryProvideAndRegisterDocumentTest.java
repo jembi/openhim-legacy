@@ -1,3 +1,6 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.jembi.rhea.transformers;
 
 import static org.junit.Assert.assertEquals;
@@ -29,6 +32,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 			assertEquals(TEST_ENC.attendingDoctorID, enc.attendingDoctorID);
 			assertEquals(TEST_ENC.attendingDoctorFirstName, enc.attendingDoctorFirstName);
 			assertEquals(TEST_ENC.attendingDoctorLastName, enc.attendingDoctorLastName);
+			assertEquals(TEST_ENC.encounterType, enc.encounterType);
 		} catch (HL7Exception e) {
 			fail("Failed due to exception: " + e);
 		}
@@ -37,7 +41,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 	@Test
 	public void testBuildRegisterRequest() {
 		ProvideAndRegisterDocumentSetRequestType request =
-			XDSRepositoryProvideAndRegisterDocument.buildRegisterRequest(TEST_ENC);
+			new XDSRepositoryProvideAndRegisterDocument().buildRegisterRequest(TEST_ENC);
 		
 		try {
 			JAXBContext jc = JAXBContext.newInstance("ihe.iti.xds_b._2007");
@@ -64,6 +68,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 		TEST_ENC.attendingDoctorID = "3525410";
 		TEST_ENC.attendingDoctorFirstName = "John";
 		TEST_ENC.attendingDoctorLastName = "Doctor";
+		TEST_ENC.encounterType = "ANC Referral";
 	}
 
 	private static final String TEST_ORU_R01_MSG =

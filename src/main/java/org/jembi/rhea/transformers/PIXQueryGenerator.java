@@ -1,3 +1,6 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.jembi.rhea.transformers;
 
 import java.util.Date;
@@ -5,6 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.mule.api.MuleMessage;
+import org.mule.api.MuleSession;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
 
@@ -17,6 +21,8 @@ import ca.uhn.hl7v2.util.Terser;
 
 public class PIXQueryGenerator  extends AbstractMessageTransformer {
 
+	private String _msh10;
+	
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
@@ -33,6 +39,11 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		} catch (HL7Exception e) {
 			throw new TransformerException(this, e);
 		}
+		
+		// add request to session prop so that we can access it when
+		// processing the response in PIXQueryResponseTransformer
+		message.setSessionProperty("PIX-ITI-9", pix_query);
+		message.setSessionProperty("PIX-ITI-9_MSH-10", _msh10);
 		
 		return pix_query;
 	}
@@ -53,7 +64,8 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		t.set("MSH-9-1", "QBP");
 		t.set("MSH-9-2", "Q23");
 		t.set("MSH-9-3", "QBP_Q21");
-		t.set("MSH-10", "123"); // check
+		_msh10 = "123";
+		t.set("MSH-10", _msh10); // check
 		t.set("MSH-11-1", "P");
 		t.set("MSH-12-1-1", "2.5");
 		
@@ -75,5 +87,4 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		Parser p = new GenericParser();
 		return p.encode(qbp_q21);
 	}
-
 }
