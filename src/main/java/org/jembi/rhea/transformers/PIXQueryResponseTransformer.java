@@ -4,18 +4,10 @@ import ihe.iti.atna.ATNAUtil;
 import ihe.iti.atna.AuditMessage;
 import ihe.iti.atna.EventIdentificationType;
 
-import java.io.StringWriter;
 import java.math.BigInteger;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.GregorianCalendar;
 import java.util.UUID;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,7 +15,6 @@ import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.module.client.MuleClient;
 import org.mule.transformer.AbstractMessageTransformer;
-import org.springframework.beans.factory.annotation.Value;
 
 import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.model.v25.message.RSP_K23;
@@ -91,21 +82,12 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		EventIdentificationType eid = new EventIdentificationType();
 		eid.setEventID( ATNAUtil.buildCodedValueType("DCM", "110112", "Query") );
 		eid.setEventActionCode("E");
-		GregorianCalendar gc = new GregorianCalendar();
-		try {
-			eid.setEventDateTime( DatatypeFactory.newInstance().newXMLGregorianCalendar(gc) );
-		} catch (DatatypeConfigurationException ex) {
-			throw new JAXBException(ex);
-		}
+		eid.setEventDateTime( ATNAUtil.newXMLGregorianCalendar() );
 		eid.getEventTypeCode().add( ATNAUtil.buildCodedValueType("IHE Transactions", "ITI-9", "PIX Query") );
 		eid.setEventOutcomeIndicator(patientId!=null ? BigInteger.ONE : BigInteger.ZERO);
 		res.setEventIdentification(eid);
 		
-		String ip = "";
-		try {
-			ip = InetAddress.getLocalHost().getHostAddress();
-		} catch (UnknownHostException e) { /* shouldn't happen since we're referencing localhost */ }
-		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("OpenHIM", true, ip, (short)2, "DCM", "110153", "Source"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("OpenHIM", true, ATNAUtil.getHostIP(), (short)2, "DCM", "110153", "Source"));
 		//TODO reference the CR from the configuration
 		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("localhost", true, "localhost", (short)1, "DCM", "110152", "Destination"));
 		
@@ -120,13 +102,6 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 			)
 		);
 		
-		JAXBContext jc = JAXBContext.newInstance("ihe.iti.atna");
-		Marshaller marshaller = jc.createMarshaller();
-		marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
-		StringWriter sw = new StringWriter();
-		marshaller.marshal(res, sw);
-		return sw.toString();
+		return ATNAUtil.marshall(res);
 	}
-	
-
 }

@@ -1,10 +1,21 @@
 package ihe.iti.atna;
 
+import ihe.iti.atna.AuditMessage.ActiveParticipant;
+
+import java.io.StringWriter;
 import java.lang.management.ManagementFactory;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
-import ihe.iti.atna.AuditMessage.ActiveParticipant;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 public class ATNAUtil {
 	
@@ -65,5 +76,31 @@ public class ATNAUtil {
 		String runtime = ManagementFactory.getRuntimeMXBean().getName();
 		res.setAuditSourceID(runtime.split("@")[1]);
 		return res;
+	}
+	
+	public static String marshall(AuditMessage am) throws JAXBException {
+		JAXBContext jc = JAXBContext.newInstance("ihe.iti.atna");
+		Marshaller marshaller = jc.createMarshaller();
+		marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
+		StringWriter sw = new StringWriter();
+		marshaller.marshal(am, sw);
+		return sw.toString();
+	}
+	
+	public static XMLGregorianCalendar newXMLGregorianCalendar() throws JAXBException {
+		GregorianCalendar gc = new GregorianCalendar();
+		try {
+			return DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
+		} catch (DatatypeConfigurationException ex) {
+			throw new JAXBException(ex);
+		}
+	}
+	
+	public static String getHostIP() {
+		try {
+			return InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) { /* shouldn't happen since we're referencing localhost */ }
+		
+		return null;
 	}
 }
