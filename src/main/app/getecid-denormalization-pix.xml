@@ -15,7 +15,8 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
     </tcp:connector>
     <ssl:connector name="tlsConnector" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="SSL (TLS)">
         <tcp:custom-protocol class="org.jembi.openhim.connector.MLLPByteProtocol"/>
-        <ssl:key-store path="/ihe/na/keystore.jks" class="java.security.KeyStore" keyPassword="Jembi#123" storePassword="Jembi#123" algorithm="TLS_RSA_WITH_AES_128_CBC_SHA"/>
+        <ssl:client path="/ihe/na/keystore.jks" storePassword="Jembi#123"/>
+        <ssl:key-store path="/ihe/na/keystore.jks" storePassword="Jembi#123"/>
     </ssl:connector>
     <flow name="mediation-getecid-denormalization-pix" doc:name="mediation-getecid-denormalization-pix">
         <vm:inbound-endpoint exchange-pattern="request-response" path="getecid-pix" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
@@ -44,9 +45,9 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
             <logger message="Exitting getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         </response>
         <choice doc:name="Choice">
-            <when expression="#[groovy: return false;]">
+            <when expression="#[groovy: return true;]">
                 <processor-chain>
-                    <ssl:outbound-endpoint host="131.254.209.12" port="10051" responseTimeout="10000" doc:name="SSL (TLS)" connector-ref="tlsConnector" exchange-pattern="request-response"/>
+                    <ssl:outbound-endpoint host="131.254.209.16" port="10071" responseTimeout="10000" doc:name="SSL (TLS)" connector-ref="tlsConnector" exchange-pattern="request-response"/>
                 </processor-chain>
             </when>
             <otherwise>

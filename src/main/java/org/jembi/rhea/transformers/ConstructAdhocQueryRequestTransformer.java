@@ -83,7 +83,9 @@ public class ConstructAdhocQueryRequestTransformer extends AbstractMessageTransf
         adhocQuery.setId(String.format("urn:uuid:%s", "14d4debf-8f97-4251-9a74-a90016b0af0d"));
         
         // Slots, first setup slot for patient ID
-        String srcPatientId = String.format("%s^^^%s", id, idType);
+        // TODO get this from the PIX query
+        String idOid = "1.3.6.1.4.1.33349.3.1.2.1.0.1";
+        String srcPatientId = String.format("%s^^^&%s&ISO", id, idOid);
         adhocQuery.getSlot().add(createQuerySlot("$XDSDocumentEntryPatientId", srcPatientId));
         
         // Setup status slot 

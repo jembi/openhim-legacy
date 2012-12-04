@@ -46,15 +46,19 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 				throw new Exception("Invalid Client: id or id type is null");
 			}
 			
-			MuleMessage responce = client.send("vm://getecid-openempi", idMap, null, 5000);
+			//MuleMessage responce = client.send("vm://getecid-openempi", idMap, null, 5000);
 			// TODO make this configurable
-			// MuleMessage responce = client.send("vm://getecid-pix", idMap, null, 5000);
+			MuleMessage responce = client.send("vm://getecid-pix", idMap, null, 5000);
 			
 			String success = responce.getInboundProperty("success");
 			
 			String ecid;
+			String enterpriseIdType;
 			if (success != null && success.equals("true")) {
 				ecid = responce.getPayloadAsString();
+				// TODO the pix query need to return the idType (assigningAuthority) as well
+				enterpriseIdType = "MOH_CAAT_MARC_HI";
+				
 				// Save original ID for later use
 				msg.setSessionProperty("id", id);
 				msg.setSessionProperty("idType", idType);
@@ -66,7 +70,7 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 				throw new Exception("Invalid Client: ECID for id type: " + idType + " with ID: " + id + " could not be found in Client Registry");
 			}
 			
-			path = "ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid + "/encounters";  
+			path = "ws/rest/v1/patient/" + enterpriseIdType + "-" + ecid + "/encounters";  
 			
 			req.setPath(path);
 			

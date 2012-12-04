@@ -11,10 +11,11 @@ public class PIXQueryGeneratorTest {
 	@Test
 	public void constructPIXQueryTest() throws HL7Exception {
 		PIXQueryGenerator gen = new PIXQueryGenerator();
-		String result = gen.constructPIXQuery("496945-000306-1987W", "GHHS", "1.2.840.114350.1.13.99998.8734");
+		String result = gen.constructPIXQuery("496945-000306-1987W", "GHHS", "1.2.840.114350.1.13.99998.8734",  "MOH_CAAT_MARC_HI", "1.3.6.1.4.1.33349.3.1.2.1.0.1");
 		
 		Assert.assertNotNull(result);
 		// Other more useful asserts?
+		System.out.println(result);
 	}
 
 }

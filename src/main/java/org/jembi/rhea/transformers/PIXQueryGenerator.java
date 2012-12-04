@@ -28,18 +28,16 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		
 		String pix_query;
 		try {
-			pix_query = constructPIXQuery(id, idType, null);
+			//TODO externalise these strings
+			pix_query = constructPIXQuery(id, idType, null, "MOH_CAAT_MARC_HI", "1.3.6.1.4.1.33349.3.1.2.1.0.1");
 		} catch (HL7Exception e) {
 			throw new TransformerException(this, e);
 		}
 		
-		// add MLLP header and footer chars
-		//pix_query = "\013" + pix_query + "\034\r";
-		
 		return pix_query;
 	}
 
-	public String constructPIXQuery(String id, String assigningAuthority, String assigningAuthorityId) throws HL7Exception {
+	public String constructPIXQuery(String id, String assigningAuthority, String assigningAuthorityId, String requestedAssigningAuthority, String requestedAssigningAuthorityId) throws HL7Exception {
 		
 		QBP_Q21 qbp_q21 = new QBP_Q21();
 		Terser t = new Terser(qbp_q21);
@@ -60,12 +58,17 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		t.set("MSH-12-1-1", "2.5");
 		
 		t.set("QPD-1-1", "IHE PIX Query");
-		t.set("QPD-1-2", UUID.randomUUID().toString());
+		t.set("QPD-2", UUID.randomUUID().toString());
 		t.set("QPD-3-1", id);
 		t.set("QPD-3-4", assigningAuthority);
 		t.set("QPD-3-4-2", assigningAuthorityId);
 		t.set("QPD-3-4-3", "ISO");
 		t.set("QPD-3-5", "PI");
+		
+		t.set("QPD-4-4", requestedAssigningAuthority);
+		t.set("QPD-4-4-2", requestedAssigningAuthorityId);
+		t.set("QPD-4-4-3", "ISO");
+		t.set("QPD-4-5", "PI");
 		
 		t.set("RCP-1", "I");
 		
