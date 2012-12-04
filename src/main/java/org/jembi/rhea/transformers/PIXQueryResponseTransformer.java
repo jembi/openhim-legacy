@@ -46,8 +46,9 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 			String pid = parseResponse(response);
 			
 			// send auditing message
-			String request = (String)message.getSessionProperty("PIX Request");
-			String at = generateATNAMessage(request, pid);
+			String request = (String)message.getSessionProperty("PIX-ITI-9");
+			String msh10 = (String)message.getSessionProperty("PIX-ITI-9_MSH-10");
+			String at = generateATNAMessage(request, pid, msh10);
 			MuleClient client = new MuleClient(muleContext);
 			at = ATNAUtil.build_TCP_Msg_header() + at;
 			client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
@@ -79,7 +80,7 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		return msg.getQUERY_RESPONSE().getPID().getPatientIdentifierList(0).getCx1_IDNumber().getValue();
 	}
 	
-	protected String generateATNAMessage(String request, String patientId) throws JAXBException {
+	protected String generateATNAMessage(String request, String patientId, String msh10) throws JAXBException {
 		AuditMessage res = new AuditMessage();
 		
 		EventIdentificationType eid = new EventIdentificationType();
@@ -97,11 +98,11 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
 		res.getParticipantObjectIdentification().add(
-			ATNAUtil.buildParticipantObjectIdentificationType(patientId +  "^^^&ECID&ISO", (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null)
+			ATNAUtil.buildParticipantObjectIdentificationType(patientId +  "^^^&ECID&ISO", (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
 		);
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(
-				UUID.randomUUID().toString(), (short)2, (short)24, "IHE Transactions", "ITI-21", "ITI21", request
+				UUID.randomUUID().toString(), (short)2, (short)24, "IHE Transactions", "ITI-9", "PIX Query", request, "MSH-10", msh10.getBytes()
 			)
 		);
 		

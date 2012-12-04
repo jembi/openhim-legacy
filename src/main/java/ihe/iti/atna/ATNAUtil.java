@@ -38,8 +38,17 @@ public class ATNAUtil {
 	
 	public static ActiveParticipant buildActiveParticipant(String userID, boolean userIsRequestor, String networkAccessPointID,
 			short networkAccessPointTypeCode, String roleIDCode_CodeSystemName, String roleIDCode_Code, String roleIDCodeDisplayName) {
+		return buildActiveParticipant(
+			userID, null, userIsRequestor, networkAccessPointID,
+			networkAccessPointTypeCode, roleIDCode_CodeSystemName, roleIDCode_Code, roleIDCodeDisplayName
+		);
+	}
+	
+	public static ActiveParticipant buildActiveParticipant(String userID, String alternativeUserID, boolean userIsRequestor, String networkAccessPointID,
+			short networkAccessPointTypeCode, String roleIDCode_CodeSystemName, String roleIDCode_Code, String roleIDCodeDisplayName) {
 		ActiveParticipant ap = new ActiveParticipant();
 		ap.setUserID(userID);
+		if (alternativeUserID!=null) ap.setAlternativeUserID(alternativeUserID);
 		ap.setUserIsRequestor(userIsRequestor);
 		ap.setNetworkAccessPointID(networkAccessPointID);
 		ap.setNetworkAccessPointTypeCode(networkAccessPointTypeCode);
@@ -50,11 +59,14 @@ public class ATNAUtil {
 	public static ParticipantObjectIdentificationType buildParticipantObjectIdentificationType(
 			String participantObjectId, short participantObjectTypeCode, short participantObjectTypeCodeRole,
 			String participantObjectIDTypeCode_CodeSystemName, String participantObjectIDTypeCode_Code,
-			String participantObjectIDTypeCode_DisplayName, String participantObjectQuery) {
+			String participantObjectIDTypeCode_DisplayName, String participantObjectQuery,
+			String participantObjectDetailType, byte[] participantObjectDetailValue) {
+		
 		ParticipantObjectIdentificationType res = new ParticipantObjectIdentificationType();
 		res.setParticipantObjectID(participantObjectId);
 		res.setParticipantObjectTypeCode(participantObjectTypeCode);
 		res.setParticipantObjectTypeCodeRole(participantObjectTypeCodeRole);
+		
 		res.setParticipantObjectIDTypeCode(
 			buildCodedValueType(
 				participantObjectIDTypeCode_CodeSystemName,
@@ -62,7 +74,16 @@ public class ATNAUtil {
 				participantObjectIDTypeCode_DisplayName
 			)
 		);
+		
 		if (participantObjectQuery!=null) res.setParticipantObjectQuery(participantObjectQuery.getBytes());
+		
+		if (participantObjectDetailType!=null) {
+			TypeValuePairType tvpt = new TypeValuePairType();
+			tvpt.setType(participantObjectDetailType);
+			tvpt.setValue(participantObjectDetailValue);
+			res.getParticipantObjectDetail().add(tvpt);
+		}
+		
 		return res;
 	}
 	
@@ -105,5 +126,10 @@ public class ATNAUtil {
 		} catch (UnknownHostException e) { /* shouldn't happen since we're referencing localhost */ }
 		
 		return null;
+	}
+	
+	public static String getProcessID() {
+		String runtime = ManagementFactory.getRuntimeMXBean().getName();
+		return runtime.split("@")[0];
 	}
 }

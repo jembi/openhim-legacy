@@ -6,11 +6,15 @@ package org.jembi.rhea.transformers;
 import ihe.iti.xds_b._2007.ProvideAndRegisterDocumentSetRequestType;
 import ihe.iti.xds_b._2007.ProvideAndRegisterDocumentSetRequestType.Document;
 
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 
 import oasis.names.tc.ebxml_regrep.xsd.lcm._3.SubmitObjectsRequest;
@@ -44,17 +48,29 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 
 	private static SimpleDateFormat formatter_yyyyMMdd = new SimpleDateFormat("yyyyMMdd");
 	
+	private String _uniqueId;
+	
 	/* Transform ORU_R01 and generate register request */
 	
 	@Override
-	public Object transformMessage(MuleMessage src, String encoding)
+	public Object transformMessage(MuleMessage message, String encoding)
 			throws TransformerException {
 		
 		try {
-			RestfulHttpRequest request = (RestfulHttpRequest)src.getPayload();
+			RestfulHttpRequest request = (RestfulHttpRequest)message.getPayload();
 			EncounterInfo enc = parseEncounterRequest(request.getBody());
-			return buildRegisterRequest(enc);
+			ProvideAndRegisterDocumentSetRequestType prRequest = buildRegisterRequest(enc);
+			
+			// add request to session prop so that we can access it when
+			// processing the response in PIXQueryResponseTransformer
+			message.setSessionProperty("XDS-ITI-41", marshall(prRequest));
+			message.setSessionProperty("XDS-ITI-41_uniqueId", _uniqueId);
+			message.setSessionProperty("XDS-ITI-41_patientId", enc.getPID());
+			
+			return prRequest;
 		} catch (HL7Exception ex) {
+			throw new TransformerException(this, ex);
+		} catch (JAXBException ex) {
 			throw new TransformerException(this, ex);
 		}
 	}
@@ -65,7 +81,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 	 * (http://www.apache.org/licenses/LICENSE-2.0)
 	 */
 	
-	protected static ProvideAndRegisterDocumentSetRequestType buildRegisterRequest(EncounterInfo enc) {
+	protected ProvideAndRegisterDocumentSetRequestType buildRegisterRequest(EncounterInfo enc) {
 		ProvideAndRegisterDocumentSetRequestType xdsRequest = new ProvideAndRegisterDocumentSetRequestType();
 		SubmitObjectsRequest submissionRequest = new SubmitObjectsRequest();
 		RegistryObjectListType registryObjects = new RegistryObjectListType();
@@ -103,7 +119,8 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		
 		// To add external ids
 		document.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSDocumentEntry_PatientId, enc.getPID()));
-		document.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSDocumentEntry_UniqueId, String.format("urn:uuid:%s", UUID.randomUUID())));
+		_uniqueId = String.format("urn:uuid:%s", UUID.randomUUID());
+		document.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSDocumentEntry_UniqueId, _uniqueId));
 
 		// Add to list of objects
 		registryObjects.getIdentifiable().add(new JAXBElement<ExtrinsicObjectType>(
@@ -156,9 +173,6 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 	
 	/* */
 	
-    
-    /* Auditing */
-    /* */
     
     /* Parse ORU_R01 */
     
@@ -226,4 +240,13 @@ public class XDSRepositoryProvideAndRegisterDocument extends
     }
     
     /* */
+    
+	private static String marshall(ProvideAndRegisterDocumentSetRequestType prRequest) throws JAXBException {
+		JAXBContext jc = JAXBContext.newInstance("ihe.iti.xds_b._2007");
+		Marshaller marshaller = jc.createMarshaller();
+		marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
+		StringWriter sw = new StringWriter();
+		marshaller.marshal(prRequest, sw);
+		return sw.toString();
+	}
 }

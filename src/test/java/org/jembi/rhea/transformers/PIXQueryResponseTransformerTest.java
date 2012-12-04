@@ -24,7 +24,7 @@ public class PIXQueryResponseTransformerTest {
 	@Test
 	public void testGenerateATNAMessage() throws JAXBException {
 		PIXQueryResponseTransformer rt = new PIXQueryResponseTransformer();
-		System.out.println(rt.generateATNAMessage("Some sample message", "3058035884"));
+		System.out.println(rt.generateATNAMessage("Some sample message", "3058035884", "123"));
 	}
 	
 	private static final String TEST_RSP =

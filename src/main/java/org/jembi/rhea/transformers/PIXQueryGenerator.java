@@ -21,6 +21,8 @@ import ca.uhn.hl7v2.util.Terser;
 
 public class PIXQueryGenerator  extends AbstractMessageTransformer {
 
+	private String _msh10;
+	
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
@@ -39,7 +41,8 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		
 		// add request to session prop so that we can access it when
 		// processing the response in PIXQueryResponseTransformer
-		message.setSessionProperty("PIX Request", pix_query);
+		message.setSessionProperty("PIX-ITI-9", pix_query);
+		message.setSessionProperty("PIX-ITI-9_MSH-10", _msh10);
 		
 		// add MLLP header and footer chars
 		//pix_query = "\013" + pix_query + "\034\r";
@@ -63,7 +66,8 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		t.set("MSH-9-1", "QBP");
 		t.set("MSH-9-2", "Q23");
 		t.set("MSH-9-3", "QBP_Q21");
-		t.set("MSH-10", "123"); // check
+		_msh10 = "123";
+		t.set("MSH-10", _msh10); // check
 		t.set("MSH-11-1", "P");
 		t.set("MSH-12-1-1", "2.5");
 		
