@@ -15,8 +15,8 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
     </tcp:connector>
     <ssl:connector name="tlsConnector" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="SSL (TLS)">
         <tcp:custom-protocol class="org.jembi.openhim.connector.MLLPByteProtocol"/>
-        <ssl:client path="/ihe/na/keystore.jks" storePassword="Jembi#123"/>
-        <ssl:key-store path="/ihe/na/keystore.jks" storePassword="Jembi#123"/>
+        <ssl:client path="${ihe.keystore}" storePassword="${ihe.storepassword}"/>
+        <ssl:key-store path="${ihe.keystore}" keyPassword="${ihe.keypassword}" storePassword="${ihe.storepassword}"/>
     </ssl:connector>
     <flow name="mediation-getecid-denormalization-pix" doc:name="mediation-getecid-denormalization-pix">
         <vm:inbound-endpoint exchange-pattern="request-response" path="getecid-pix" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
