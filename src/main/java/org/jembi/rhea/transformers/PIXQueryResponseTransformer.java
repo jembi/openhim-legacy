@@ -88,12 +88,12 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		eid.setEventActionCode("E");
 		eid.setEventDateTime( ATNAUtil.newXMLGregorianCalendar() );
 		eid.getEventTypeCode().add( ATNAUtil.buildCodedValueType("IHE Transactions", "ITI-9", "PIX Query") );
-		eid.setEventOutcomeIndicator(patientId!=null ? BigInteger.ONE : BigInteger.ZERO);
+		eid.setEventOutcomeIndicator(patientId!=null ? BigInteger.ZERO : new BigInteger("4"));
 		res.setEventIdentification(eid);
 		
-		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("OpenHIM", true, ATNAUtil.getHostIP(), (short)2, "DCM", "110153", "Source"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(ATNAUtil.getSystemName() + "|openhim", ATNAUtil.getProcessID(), true, ATNAUtil.getHostIP(), (short)2, "DCM", "110153", "Source"));
 		//TODO reference the CR from the configuration
-		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("localhost", true, "localhost", (short)1, "DCM", "110152", "Destination"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("cr.marc-hi.ca|pixmanager", false, "cr.marc-hi.ca", (short)1, "DCM", "110152", "Destination"));
 		
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		

@@ -25,12 +25,11 @@ public class ATNAUtil {
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
 	public static String build_TCP_Msg_header() {
-		String runtime = ManagementFactory.getRuntimeMXBean().getName();
 		StringBuilder res = new StringBuilder("<13>1 ");
 		res.append(dateFormat.format(new Date()) + " ");
-		res.append(runtime.split("@")[1] + " ");
-		res.append("java ");
-		res.append(runtime.split("@")[0] + " ");
+		res.append(getSystemName() + " ");
+		res.append(getProcessName() + " ");
+		res.append(getProcessID() + " ");
 		res.append("- ");
 		res.append("- ");
 		return res.toString();
@@ -131,5 +130,14 @@ public class ATNAUtil {
 	public static String getProcessID() {
 		String runtime = ManagementFactory.getRuntimeMXBean().getName();
 		return runtime.split("@")[0];
+	}
+	
+	public static String getSystemName() {
+		String runtime = ManagementFactory.getRuntimeMXBean().getName();
+		return runtime.split("@")[1];
+	}
+	
+	public static String getProcessName() {
+		return "java";
 	}
 }
