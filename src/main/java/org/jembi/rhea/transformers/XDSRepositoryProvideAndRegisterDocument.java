@@ -61,8 +61,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 			EncounterInfo enc = parseEncounterRequest(request.getBody());
 			ProvideAndRegisterDocumentSetRequestType prRequest = buildRegisterRequest(enc);
 			
-			// add request to session prop so that we can access it when
-			// processing the response in PIXQueryResponseTransformer
+			// add request to session prop so that we can access it when processing the response
 			message.setSessionProperty("XDS-ITI-41", marshall(prRequest));
 			message.setSessionProperty("XDS-ITI-41_uniqueId", _uniqueId);
 			message.setSessionProperty("XDS-ITI-41_patientId", enc.getPID());

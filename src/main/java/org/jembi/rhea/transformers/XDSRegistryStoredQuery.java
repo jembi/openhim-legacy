@@ -16,6 +16,13 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
 		// TODO Auto-generated method stub
+		
+		//TODO
+		// add request to session prop so that we can access it when processing the response
+		message.setSessionProperty("XDS-ITI-18", null);
+		message.setSessionProperty("XDS-ITI-18_uniqueId", null);
+		message.setSessionProperty("XDS-ITI-18_patientId", null);
+			
 		return null;
 	}
 
