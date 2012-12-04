@@ -17,6 +17,13 @@ public class XDSRepositoryRetrieveDocumentSet extends
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
 		// TODO Auto-generated method stub
+		
+		//TODO
+		// add request to session prop so that we can access it when processing the response
+		message.setSessionProperty("XDS-ITI-43", null);
+		message.setSessionProperty("XDS-ITI-43_uniqueId", null);
+		message.setSessionProperty("XDS-ITI-43_patientId", null);
+		
 		return null;
 	}
 
