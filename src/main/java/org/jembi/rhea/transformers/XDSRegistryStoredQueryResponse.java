@@ -11,6 +11,8 @@ import java.math.BigInteger;
 
 import javax.xml.bind.JAXBException;
 
+import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryResponse;
+
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -26,7 +28,10 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
 		try {
-			//TODO process response
+			AdhocQueryResponse response = (AdhocQueryResponse) message.getPayload();
+			//TODO process response - ^^ for retrieving document sets you will also have
+			//							 to do this sort of casting to the correct XML binding class
+			
 			boolean outcome = false;
 		
 			//generate audit message
