@@ -3,7 +3,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.jembi.rhea.transformers;
 
-import ihe.iti.atna.ATNAUtil;
 import ihe.iti.atna.AuditMessage;
 import ihe.iti.atna.EventIdentificationType;
 
@@ -14,6 +13,7 @@ import javax.xml.bind.JAXBException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jembi.ihe.atna.ATNAUtil;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.module.client.MuleClient;

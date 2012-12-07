@@ -41,7 +41,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 	@Test
 	public void testBuildRegisterRequest() {
 		ProvideAndRegisterDocumentSetRequestType request =
-			new XDSRepositoryProvideAndRegisterDocument().buildRegisterRequest(TEST_ENC);
+			new XDSRepositoryProvideAndRegisterDocument().buildRegisterRequest(TEST_ORU_R01_MSG, TEST_ENC);
 		
 		try {
 			JAXBContext jc = JAXBContext.newInstance("ihe.iti.xds_b._2007");

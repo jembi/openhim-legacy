@@ -1,9 +1,14 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-package ihe.iti.atna;
+package org.jembi.ihe.atna;
 
+import ihe.iti.atna.AuditMessage;
 import ihe.iti.atna.AuditMessage.ActiveParticipant;
+import ihe.iti.atna.AuditSourceIdentificationType;
+import ihe.iti.atna.CodedValueType;
+import ihe.iti.atna.ParticipantObjectIdentificationType;
+import ihe.iti.atna.TypeValuePairType;
 
 import java.io.StringWriter;
 import java.lang.management.ManagementFactory;

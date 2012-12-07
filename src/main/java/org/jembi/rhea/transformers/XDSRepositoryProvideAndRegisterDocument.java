@@ -59,7 +59,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		try {
 			RestfulHttpRequest request = (RestfulHttpRequest)message.getPayload();
 			EncounterInfo enc = parseEncounterRequest(request.getBody());
-			ProvideAndRegisterDocumentSetRequestType prRequest = buildRegisterRequest(enc);
+			ProvideAndRegisterDocumentSetRequestType prRequest = buildRegisterRequest(request.getBody(), enc);
 			
 			// add request to session prop so that we can access it when processing the response
 			message.setSessionProperty("XDS-ITI-41", marshall(prRequest));
@@ -80,7 +80,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 	 * (http://www.apache.org/licenses/LICENSE-2.0)
 	 */
 	
-	protected ProvideAndRegisterDocumentSetRequestType buildRegisterRequest(EncounterInfo enc) {
+	protected ProvideAndRegisterDocumentSetRequestType buildRegisterRequest(String oru_r01_request, EncounterInfo enc) {
 		ProvideAndRegisterDocumentSetRequestType xdsRequest = new ProvideAndRegisterDocumentSetRequestType();
 		SubmitObjectsRequest submissionRequest = new SubmitObjectsRequest();
 		RegistryObjectListType registryObjects = new RegistryObjectListType();
@@ -111,6 +111,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 			XDSUtil.createSlot("codingScheme", "1.3.6.1.4.1.19376.1.5.3.1.1.10")
 		};
 		document.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSDocumentEntry_ClassCode, "", enc.getEncounterType(), classCodeSlots));
+		
 		SlotType1[] confidentialitySlots = new SlotType1[] {
 			XDSUtil.createSlot("codingScheme", "Connect-a-thon confidentialityCodes")
 		};
@@ -133,7 +134,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		pkg.getSlot().add(XDSUtil.createSlot("submissionTime", formatter_yyyyMMdd.format(now)));
 		// To add classifications
 		SlotType1[] contentTypeSlots = new SlotType1[] {
-				XDSUtil.createSlot("condingScheme", "Connect-a-thon contentTypeCodes")
+				XDSUtil.createSlot("codingScheme", "Connect-a-thon contentTypeCodes")
 		};
 		pkg.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSSubmissionSet_ContentType, "History and Physical", "History and Physical", contentTypeSlots));
 		
@@ -164,7 +165,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		// Add document
 		Document content = new Document();
 		content.setId(document.getId());
-		content.setValue(new byte[] { 1, 2, 3, 4, 5, 6, 7 });
+		content.setValue(oru_r01_request.getBytes());
 		xdsRequest.getDocument().add(content);
 
 		return xdsRequest;
