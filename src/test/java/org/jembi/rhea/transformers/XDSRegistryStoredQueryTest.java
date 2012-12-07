@@ -28,13 +28,13 @@ import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
 import junit.framework.Assert;
 
-public class ConstructAdhocQueryRequestTransformerTest {
+public class XDSRegistryStoredQueryTest {
 	
 	@Test
 	public void testTransformMessageMuleMessageString() throws JAXBException {
 		MuleMessage testMsg = new TestMuleMessage();
 		
-		ConstructAdhocQueryRequestTransformer t = new ConstructAdhocQueryRequestTransformer();
+		XDSRegistryStoredQuery t = new XDSRegistryStoredQuery();
 		try {
 			AdhocQueryRequest request = (AdhocQueryRequest) t.transformMessage(testMsg, null);
 			
@@ -47,7 +47,7 @@ public class ConstructAdhocQueryRequestTransformerTest {
 			List<SlotType1> slotList = request.getAdhocQuery().getSlot();
 			for (SlotType1 slot : slotList) {
 				if (slot.getName().equals("$XDSDocumentEntryPatientId")) {
-					Assert.assertEquals("2552234100^^^GHHS", slot.getValueList().getValue().get(0));
+					Assert.assertEquals("2552234100^^^&1.3.6.1.4.1.33349.3.1.2.1.0.1&ISO", slot.getValueList().getValue().get(0));
 					patIdExists = true;
 				}
 				if (slot.getName().equals("$XDSDocumentEntryStatus")) {
