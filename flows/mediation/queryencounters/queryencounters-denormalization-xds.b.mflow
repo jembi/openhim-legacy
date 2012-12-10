@@ -8,7 +8,7 @@
             <property name="auxiliary;index" value="1"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mediation-denormalization-queryencounters-xds.bFlow" entity-id="5edb140e-4133-4dd8-8a22-7dba739c801a">
+    <flow SubFlow="false" name="mediation-denormalization-queryencounters-xds.bFlow" entity-id="95f90cd3-ee9f-410f-a7f8-bcc968ab0955">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -58,20 +58,19 @@
                     <property name="auxiliary;index" value="4"/>
                 </properties>
             </pattern>
-            <pattern name="Construct AdhocQueryRequest" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#1">
+            <pattern name="Construct XDS Registry Stored Query" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#1">
                 <properties>
-                    <property name="returnClass"/>
-                    <property name="ignoreBadInput"/>
-                    <property name="encoding"/>
+                    <property name="auxiliary;erased;mimeType" value="true"/>
+                    <property name="returnClass" value=""/>
+                    <property name="ignoreBadInput" value="false"/>
+                    <property name="auxiliary;erased;encoding" value="true"/>
+                    <property name="encoding" value=""/>
+                    <property name="class" value="org.jembi.rhea.transformers.XDSRegistryStoredQuery"/>
+                    <property name="mimeType" value=""/>
                     <property name="auxiliary;index" value="5"/>
-                    <property name="mimeType"/>
-                    <property name="auxiliary;index" value="5"/>
-                    <property name="auxiliary;index" value="5"/>
-                    <property name="class" value="org.jembi.rhea.transformers.ConstructAdhocQueryRequestTransformer"/>
-                    <property name="auxiliary;index" value="5"/>
-                    <property name="auxiliary;index" value="5"/>
-                    <property name="auxiliary;index" value="5"/>
+                    <property name="updated"/>
                 </properties>
+                <description></description>
             </pattern>
             <response index="6" entity-id="response#1">
                 <compartment entity-id="compartment#1">
