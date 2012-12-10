@@ -13,6 +13,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import org.jembi.ihe.xds.XDSAffinityDomain;
 import org.junit.Test;
 
 import ca.uhn.hl7v2.HL7Exception;
@@ -23,7 +24,9 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 	public void testParseEncounterRequest() {
 		try {
 			XDSRepositoryProvideAndRegisterDocument.EncounterInfo enc =
-				XDSRepositoryProvideAndRegisterDocument.parseEncounterRequest(TEST_ORU_R01_MSG);
+				XDSRepositoryProvideAndRegisterDocument.parseEncounterRequest(
+					TEST_ORU_R01_MSG, XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE
+				);
 			assertEquals(TEST_ENC.pid, enc.pid);
 			assertEquals(TEST_ENC.firstName, enc.firstName);
 			assertEquals(TEST_ENC.lastName, enc.lastName);
@@ -41,7 +44,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 	@Test
 	public void testBuildRegisterRequest() {
 		ProvideAndRegisterDocumentSetRequestType request =
-			new XDSRepositoryProvideAndRegisterDocument().buildRegisterRequest(TEST_ORU_R01_MSG, TEST_ENC);
+			new XDSRepositoryProvideAndRegisterDocument().buildRegisterRequest(TEST_ORU_R01_MSG, TEST_ENC, XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE);
 		
 		try {
 			JAXBContext jc = JAXBContext.newInstance("ihe.iti.xds_b._2007");
@@ -59,7 +62,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 	private static XDSRepositoryProvideAndRegisterDocument.EncounterInfo TEST_ENC;
 	
 	static {
-		TEST_ENC = new XDSRepositoryProvideAndRegisterDocument.EncounterInfo();
+		TEST_ENC = new XDSRepositoryProvideAndRegisterDocument.EncounterInfo(XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE);
 		TEST_ENC.pid = "2552234100";
 		TEST_ENC.encounterDateTime = "201211150855";
 		TEST_ENC.firstName = "Mary"; TEST_ENC.lastName = "Patient";
@@ -115,7 +118,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 		"		</PID.3>" +
 		"		<PID.3>" +
 		"		    <CX.1>2552234100</CX.1>" +
-		"		    <CX.5>ECID</CX.5>" +
+		"		    <CX.5>" + XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE.getAffinityDomainIDType() + "</CX.5>" +
 		"		</PID.3>" +
 		"		<PID.3>" +
 		"		    <CX.1>100002-P</CX.1>" +

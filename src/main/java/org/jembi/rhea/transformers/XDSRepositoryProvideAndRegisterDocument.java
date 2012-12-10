@@ -25,6 +25,7 @@ import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryObjectListType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryPackageType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
 
+import org.jembi.ihe.xds.XDSAffinityDomain;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -58,8 +59,10 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		
 		try {
 			RestfulHttpRequest request = (RestfulHttpRequest)message.getPayload();
-			EncounterInfo enc = parseEncounterRequest(request.getBody());
-			ProvideAndRegisterDocumentSetRequestType prRequest = buildRegisterRequest(request.getBody(), enc);
+			EncounterInfo enc = parseEncounterRequest(request.getBody(), XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE);
+			ProvideAndRegisterDocumentSetRequestType prRequest = buildRegisterRequest(
+				request.getBody(), enc, XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE
+			);
 			
 			// add request to session prop so that we can access it when processing the response
 			message.setSessionProperty("XDS-ITI-41", marshall(prRequest));
@@ -80,7 +83,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 	 * (http://www.apache.org/licenses/LICENSE-2.0)
 	 */
 	
-	protected ProvideAndRegisterDocumentSetRequestType buildRegisterRequest(String oru_r01_request, EncounterInfo enc) {
+	protected ProvideAndRegisterDocumentSetRequestType buildRegisterRequest(String oru_r01_request, EncounterInfo enc, XDSAffinityDomain domain) {
 		ProvideAndRegisterDocumentSetRequestType xdsRequest = new ProvideAndRegisterDocumentSetRequestType();
 		SubmitObjectsRequest submissionRequest = new SubmitObjectsRequest();
 		RegistryObjectListType registryObjects = new RegistryObjectListType();
@@ -98,6 +101,10 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		document.getSlot().add(XDSUtil.createSlot("serviceStopTime", enc.getEncounterDateTime()));
 		document.getSlot().add(XDSUtil.createSlot("sourcePatientId", enc.getPID()));
 		document.getSlot().add(XDSUtil.createSlot("sourcePatientInfo", "PID-3|" + enc.getPID(), "PID-5|" + enc.getName()));
+		if (domain.getRepositoryUniqueId()!=null)
+			document.getSlot().add(XDSUtil.createSlot("repositoryUniqueId", domain.getRepositoryUniqueId()));
+		if (domain.getHomeCommunityId()!=null)
+			document.getSlot().add(XDSUtil.createSlot("homeCommunityId", domain.getHomeCommunityId()));
 		
 		// To add classifications
 		SlotType1[] authorSlots = new SlotType1[] {
@@ -106,16 +113,15 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		};
 		document.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSDocumentEntry_Author, null, null, authorSlots));
 		
-		//TODO the class code needs to be set correctly according to the document type
 		SlotType1[] classCodeSlots = new SlotType1[] {
-			XDSUtil.createSlot("codingScheme", "1.3.6.1.4.1.19376.1.5.3.1.1.10")
+			XDSUtil.createSlot("codingScheme", domain.getClassCode().getCodingScheme())
 		};
-		document.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSDocumentEntry_ClassCode, "", enc.getEncounterType(), classCodeSlots));
+		document.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSDocumentEntry_ClassCode, domain.getClassCode().getCode(), domain.getClassCode().getDisplay(), classCodeSlots));
 		
 		SlotType1[] confidentialitySlots = new SlotType1[] {
-			XDSUtil.createSlot("codingScheme", "Connect-a-thon confidentialityCodes")
+			XDSUtil.createSlot("codingScheme", domain.getConfidentialityCode().getCodingScheme())
 		};
-		document.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSDocumentEntry_ConfidentialityCode, "1.3.6.1.4.1.21367.2006.7.107", "Normal", confidentialitySlots));
+		document.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSDocumentEntry_ConfidentialityCode, domain.getConfidentialityCode().getCode(), domain.getConfidentialityCode().getDisplay(), confidentialitySlots));
 		
 		// To add external ids
 		document.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSDocumentEntry_PatientId, enc.getPID()));
@@ -128,15 +134,38 @@ public class XDSRepositoryProvideAndRegisterDocument extends
                 ExtrinsicObjectType.class,
                 document
         ));
+		
+		//TODO eventCodeList
 
 		// Create submission set
 		RegistryPackageType pkg = XDSUtil.createRegistryPackage();
 		pkg.getSlot().add(XDSUtil.createSlot("submissionTime", formatter_yyyyMMdd.format(now)));
+		
 		// To add classifications
 		SlotType1[] contentTypeSlots = new SlotType1[] {
-				XDSUtil.createSlot("codingScheme", "Connect-a-thon contentTypeCodes")
+				XDSUtil.createSlot("codingScheme", domain.getContentTypeCode().getCodingScheme())
 		};
-		pkg.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSSubmissionSet_ContentType, "History and Physical", "History and Physical", contentTypeSlots));
+		pkg.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSSubmissionSet_ContentType, domain.getContentTypeCode().getCode(), domain.getContentTypeCode().getDisplay(), contentTypeSlots));
+		
+		SlotType1[] formatSlots = new SlotType1[] {
+			XDSUtil.createSlot("codingScheme", domain.getFormatCode().getCodingScheme())
+		};
+		document.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSDocumentEntry_FormatCode, domain.getFormatCode().getCode(), domain.getFormatCode().getDisplay(), formatSlots));
+		
+		SlotType1[] healthcareFacilityTypeSlots = new SlotType1[] {
+			XDSUtil.createSlot("codingScheme", domain.getHealthcareFacilityTypeCode().getCodingScheme())
+		};
+		document.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSDocumentEntry_HealthcareFacilityCode, domain.getHealthcareFacilityTypeCode().getCode(), domain.getHealthcareFacilityTypeCode().getDisplay(), healthcareFacilityTypeSlots));
+		
+		SlotType1[] practiceSettingSlots = new SlotType1[] {
+			XDSUtil.createSlot("codingScheme", domain.getPracticeSettingCode().getCodingScheme())
+		};
+		document.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSDocumentEntry_PracticeSettingCode, domain.getPracticeSettingCode().getCode(), domain.getPracticeSettingCode().getDisplay(), practiceSettingSlots));
+		
+		SlotType1[] typeSlots = new SlotType1[] {
+			XDSUtil.createSlot("codingScheme", domain.getTypeCode().getCodingScheme())
+		};
+		document.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSDocumentEntry_TypeCode, domain.getTypeCode().getCode(), domain.getTypeCode().getDisplay(), typeSlots));
 		
 		// To add external ids
 		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_PatientId, enc.getPID()));
@@ -176,14 +205,14 @@ public class XDSRepositoryProvideAndRegisterDocument extends
     
     /* Parse ORU_R01 */
     
-	protected static EncounterInfo parseEncounterRequest(String oru_r01) throws HL7Exception {
-		EncounterInfo res = new EncounterInfo();
+	protected static EncounterInfo parseEncounterRequest(String oru_r01, XDSAffinityDomain domain) throws HL7Exception {
+		EncounterInfo res = new EncounterInfo(domain);
 		Parser parser = new GenericParser();
 		ORU_R01 msg = (ORU_R01)parser.parse(oru_r01);
 		
 		PID pid = msg.getPATIENT_RESULT().getPATIENT().getPID();
 		for (CX cx : pid.getPatientIdentifierList()) {
-			if ("ECID".equalsIgnoreCase(cx.getIdentifierTypeCode().getValue()))
+			if (domain.getAffinityDomainIDType().equalsIgnoreCase(cx.getIdentifierTypeCode().getValue()))
 				res.pid = cx.getIDNumber().getValue();
 		}
 		if (pid.getPatientNameReps()>0) {
@@ -206,6 +235,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 	
     
     protected static class EncounterInfo {
+    	protected XDSAffinityDomain domain;
     	protected String pid;
     	protected String firstName, lastName;
     	protected String encounterDateTime;
@@ -214,8 +244,13 @@ public class XDSRepositoryProvideAndRegisterDocument extends
     	protected String location;
     	protected String encounterType;
     	
-	    public String getPID() {
-	    	return pid + "^^^&ECID&ISO";
+    	
+	    EncounterInfo(XDSAffinityDomain domain) {
+			this.domain = domain;
+		}
+
+		public String getPID() {
+	    	return pid + "^^^&" + domain.getAffinityDomainIDType() +"&ISO";
 	    }
 	    
 	    public String getName() {
