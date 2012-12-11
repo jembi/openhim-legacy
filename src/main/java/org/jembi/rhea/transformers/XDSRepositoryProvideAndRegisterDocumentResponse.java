@@ -10,6 +10,11 @@ import java.math.BigInteger;
 
 import javax.xml.bind.JAXBException;
 
+import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryError;
+import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
@@ -23,14 +28,22 @@ import org.mule.transformer.AbstractMessageTransformer;
 public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 		AbstractMessageTransformer {
 
+	private Log log = LogFactory.getLog(this.getClass());
+	
 	@Override
 	public Object transformMessage(MuleMessage message, String encoding)
 			throws TransformerException {
 		
 		try {
 			//TODO process response
+			String result = null;
 			boolean outcome = false;
-		
+			
+			if (message.getPayload() instanceof RegistryResponseType)
+				outcome = processResponse((RegistryResponseType)message.getPayload());
+			else
+				log.error(String.format("Unknown response type received (%s)", message.getPayload().getClass()));
+			
 			//generate audit message
 			String request = (String)message.getSessionProperty("XDS-ITI-41");
 			String uniqueId = (String)message.getSessionProperty("XDS-ITI-41_uniqueId");
@@ -48,6 +61,18 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 			throw new TransformerException(this, e);
 		}
 	}
+	
+	protected boolean processResponse(RegistryResponseType response) {
+		if ("Success".equalsIgnoreCase(response.getStatus())) {
+			return true;
+		} else {
+			log.error("XDS ITI-41 request failed");
+			for (RegistryError re : response.getRegistryErrorList().getRegistryError()) {
+				log.error(String.format("%s (%s): %s (%s:%s)", re.getErrorCode(), re.getSeverity(), re.getValue(), re.getLocation(), re.getCodeContext()));
+			}
+			return false;
+		}
+	}
 
     /* Auditing */
 	
@@ -59,7 +84,7 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 		eid.setEventActionCode("R");
 		eid.setEventDateTime( ATNAUtil.newXMLGregorianCalendar() );
 		eid.getEventTypeCode().add( ATNAUtil.buildCodedValueType("IHE Transactions", "ITI-41", "Provide and Register Document Set-b") );
-		eid.setEventOutcomeIndicator(outcome ? BigInteger.ONE : BigInteger.ZERO);
+		eid.setEventOutcomeIndicator(outcome ? BigInteger.ZERO : new BigInteger("4"));
 		res.setEventIdentification(eid);
 		
 		//TODO userId should be content of <wsa:ReplyTo/>

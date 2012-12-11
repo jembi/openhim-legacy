@@ -25,8 +25,9 @@ import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryObjectListType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryPackageType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.xds.XDSAffinityDomain;
-import org.jembi.rhea.RestfulHttpRequest;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
@@ -47,6 +48,8 @@ import ca.uhn.hl7v2.parser.Parser;
 public class XDSRepositoryProvideAndRegisterDocument extends
 		AbstractMessageTransformer {
 
+	private Log log = LogFactory.getLog(this.getClass());
+	
 	private static SimpleDateFormat formatter_yyyyMMdd = new SimpleDateFormat("yyyyMMdd");
 	
 	private String _uniqueId;
@@ -58,10 +61,10 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 			throws TransformerException {
 		
 		try {
-			RestfulHttpRequest request = (RestfulHttpRequest)message.getPayload();
-			EncounterInfo enc = parseEncounterRequest(request.getBody(), XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE);
+			String request = (String)message.getPayload();
+			EncounterInfo enc = parseEncounterRequest(request, XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE);
 			ProvideAndRegisterDocumentSetRequestType prRequest = buildRegisterRequest(
-				request.getBody(), enc, XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE
+				request, enc, XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE
 			);
 			
 			// add request to session prop so that we can access it when processing the response
@@ -69,6 +72,8 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 			message.setSessionProperty("XDS-ITI-41_uniqueId", _uniqueId);
 			message.setSessionProperty("XDS-ITI-41_patientId", enc.getPID());
 			
+			log.info("Generated XDS Provide and Register Document Set.b request");
+			log.info(prRequest);
 			return prRequest;
 		} catch (HL7Exception ex) {
 			throw new TransformerException(this, ex);
