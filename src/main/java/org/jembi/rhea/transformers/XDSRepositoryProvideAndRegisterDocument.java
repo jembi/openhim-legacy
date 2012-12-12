@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.activation.DataHandler;
+import javax.mail.util.ByteArrayDataSource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -73,7 +75,6 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 			message.setSessionProperty("XDS-ITI-41_patientId", enc.getPID());
 			
 			log.info("Generated XDS Provide and Register Document Set.b request");
-			log.info(prRequest);
 			return prRequest;
 		} catch (HL7Exception ex) {
 			throw new TransformerException(this, ex);
@@ -199,7 +200,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		// Add document
 		Document content = new Document();
 		content.setId(document.getId());
-		content.setValue(oru_r01_request.getBytes());
+		content.setValue(new DataHandler(new ByteArrayDataSource(oru_r01_request.getBytes(), "application/octet-stream")));
 		xdsRequest.getDocument().add(content);
 
 		return xdsRequest;

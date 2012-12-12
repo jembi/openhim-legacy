@@ -30,6 +30,7 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
 			</cxf:features>
         </cxf:jaxws-client>
         <echo-component doc:name="Echo"/>
+        <logger message="Raw SOAP message: #[message:payload]" level="INFO" doc:name="Logger"/>
         <http:outbound-endpoint exchange-pattern="request-response" host="ihexds.nist.gov" port="12080" path="tf6/services/xdsrepositoryb" doc:name="Deliver message to XDS repository"/>
     </flow>
 </mule>
