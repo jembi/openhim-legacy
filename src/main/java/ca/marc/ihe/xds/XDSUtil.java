@@ -78,11 +78,12 @@ public class XDSUtil {
 	 * Create association type
 	 */
 	public static AssociationType1 createAssociation(RegistryObjectType source,
-			ExtrinsicObjectType target, String status) {
+			ExtrinsicObjectType target, String status, String associationType) {
 		AssociationType1 retAssoc = new AssociationType1();
 		retAssoc.setId(String.format("urn:uuid:%s", UUID.randomUUID().toString()));
 		retAssoc.setSourceObject(source.getId());
 		retAssoc.setTargetObject(target.getId());
+		retAssoc.setAssociationType(associationType);
 		retAssoc.getSlot().add(createSlot("SubmissionSetStatus", status));
 		return retAssoc;
 	}

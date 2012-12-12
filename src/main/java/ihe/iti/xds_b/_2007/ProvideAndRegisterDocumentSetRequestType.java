@@ -58,7 +58,7 @@ public class ProvideAndRegisterDocumentSetRequestType {
 
     @XmlElement(name = "SubmitObjectsRequest", namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0", required = true)
     protected SubmitObjectsRequest submitObjectsRequest;
-    @XmlElement(name = "Document")
+    @XmlElement(name = "Document", namespace = "urn:ihe:iti:xds-b:2007")
     protected List<ProvideAndRegisterDocumentSetRequestType.Document> document;
 
     /**

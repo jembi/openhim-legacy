@@ -194,7 +194,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		registryObjects.getIdentifiable().add(new JAXBElement<AssociationType1>(
                 new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "Association"),
                 AssociationType1.class,
-                XDSUtil.createAssociation(pkg, document, "original")
+                XDSUtil.createAssociation(pkg, document, "original", "HasMember")
             ));
 		
 		// Add document
