@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="CE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+<mule xmlns:context="http://www.springframework.org/schema/context" xmlns:wsa="http://cxf.apache.org/ws/addressing" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="CE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
 http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd 
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
-http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.xsd ">
     <flow name="mediation-denormalization-saveencounters-xds" doc:name="mediation-denormalization-saveencounters-xds">
         <vm:inbound-endpoint exchange-pattern="request-response" path="saveEncounters-De-normailization-XDS" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
         <logger message="De-normalizing a save encounters transaction to xds" level="INFO" doc:name="Logger"/>
@@ -23,7 +24,11 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="On-ramp Transformer"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Translation Transformer"/>
         </response>
-        <cxf:jaxws-client operation="DocumentRepository_ProvideAndRegisterDocumentSet-b" clientClass="ihe.iti.xds_b._2007.DocumentRepositoryService" port="DocumentRepository_Port_Soap12" enableMuleSoapHeaders="true" doc:name="SOAP"/>
+        <cxf:jaxws-client operation="DocumentRepository_ProvideAndRegisterDocumentSet-b" clientClass="ihe.iti.xds_b._2007.DocumentRepositoryService" port="DocumentRepository_Port_Soap12"  doc:name="SOAP" mtomEnabled="true">
+            <cxf:features>
+				<wsa:addressing />
+			</cxf:features>
+        </cxf:jaxws-client>
         <echo-component doc:name="Echo"/>
         <http:outbound-endpoint exchange-pattern="request-response" host="ihexds.nist.gov" port="12080" path="tf6/services/xdsrepositoryb" doc:name="Deliver message to XDS repository"/>
     </flow>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mediation-denormalization-queryfacilities-mockserviceprovider">
-    <flow SubFlow="false" name="mediation-denormalization-saveencounters-xds" entity-id="79f9f5ae-3a9f-4891-b178-8aba23f30424">
+    <flow SubFlow="false" name="mediation-denormalization-saveencounters-xds" entity-id="d737254f-bb3f-4727-ae33-33cf9fc343a3">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -139,17 +139,18 @@
                         </pattern>
                         <pattern name="Process XDS Response" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#3">
                             <properties>
-<property name="auxiliary;erased;mimeType" value="true"/>
-<property name="returnClass" value=""/>
-<property name="ignoreBadInput" value="false"/>
-<property name="auxiliary;erased;encoding" value="true"/>
-<property name="encoding" value=""/>
-<property name="class" value="org.jembi.rhea.transformers.XDSRepositoryProvideAndRegisterDocumentResponse"/>
-<property name="mimeType" value=""/>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="encoding"/>
 <property name="auxiliary;index" value="11"/>
-<property name="updated"/>
+<property name="mimeType"/>
+<property name="auxiliary;index" value="11"/>
+<property name="auxiliary;index" value="11"/>
+<property name="class" value="org.jembi.rhea.transformers.XDSRepositoryProvideAndRegisterDocumentResponse"/>
+<property name="auxiliary;index" value="11"/>
+<property name="auxiliary;index" value="11"/>
+<property name="auxiliary;index" value="11"/>
                             </properties>
-                            <description></description>
                         </pattern>
                         <pattern name="HttpResponseToRestfulHttpResponseTransformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#4">
                             <properties>
@@ -211,70 +212,80 @@
             </response>
             <pattern name="SOAP" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="SOAP#1">
                 <properties>
-                    <property name="port" value="DocumentRepository_Port_Soap12"/>
-                    <property name="wsdlLocation" value=""/>
-                    <property name="serviceClass" value=""/>
+                    <property name="configuration-ref"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/jaxws-client"/>
-                    <property name="DATABINDING" value=""/>
-                    <property name="configuration-ref" value=""/>
-                    <property name="operation" value="DocumentRepository_ProvideAndRegisterDocumentSet-b"/>
-                    <property name="auxiliary;erased;DATABINDING" value="true"/>
-                    <property name="mtomEnabled" value="false"/>
-                    <property name="propertiesLabel" value=""/>
-                    <property name="enableMuleSoapHeaders" value="true"/>
-                    <property name="clientClass" value="ihe.iti.xds_b._2007.DocumentRepositoryService"/>
-                    <property name="decoupledEndpoint" value=""/>
+                    <property name="configuration-ref"/>
                     <property name="auxiliary;index" value="16"/>
-                    <property name="updated"/>
-                    <property-collection name="">
-                        <property name="auxiliary;erased;DATABINDING" value="true"/>
-                        <property name="DATABINDING" value=""/>
-                        <property name="propertiesLabel" value=""/>
-                    </property-collection>
+                    <property name="operation" value="DocumentRepository_ProvideAndRegisterDocumentSet-b"/>
+                    <property name="serviceClass"/>
+                    <property name="decoupledEndpoint"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="clientClass" value="ihe.iti.xds_b._2007.DocumentRepositoryService"/>
+                    <property name="port" value="DocumentRepository_Port_Soap12"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="mtomEnabled" value="true"/>
+                    <property name="wsdlLocation"/>
+                    <property name="enableMuleSoapHeaders"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="16"/>
                 </properties>
-                <description></description>
             </pattern>
-            <pattern name="Echo" type="http://www.mulesoft.org/schema/mule/core/echo-component" entity-id="ac747349-327e-4186-beda-bf83ad0b4b1b"/>
+            <pattern name="Echo" type="http://www.mulesoft.org/schema/mule/core/echo-component" entity-id="c8b78168-efa3-4de1-be2b-b8cfb89f8b41"/>
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Deliver message to XDS repository" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                 <properties>
                     <property name="exchange-pattern" value="one-way"/>
                     <property name="exchange-pattern" value="request-response"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="20"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="20"/>
                     <property name="httpLabel"/>
                     <property name="host" value="ihexds.nist.gov"/>
                     <property name="port" value="12080"/>
                     <property name="path" value="tf6/services/xdsrepositoryb"/>
                     <property name="method"/>
-                    <property name="auxiliary;index" value="17"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="20"/>
+                    <property name="auxiliary;index" value="20"/>
                     <property name="businessEventsLabel"/>
                     <property name="tracking:enable-default-events"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="20"/>
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
                     <property name="mimeType"/>
                     <property name="responseTimeout"/>
                     <property name="followRedirects"/>
-                    <property name="auxiliary;index" value="17"/>
-                    <property name="auxiliary;index" value="17"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="20"/>
+                    <property name="auxiliary;index" value="20"/>
+                    <property name="auxiliary;index" value="20"/>
                     <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="auxiliary;index" value="17"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="20"/>
+                    <property name="auxiliary;index" value="20"/>
                     <property name="user"/>
                     <property name="password"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="20"/>
                     <property name="contentType"/>
                     <property name="keep-alive"/>
-                    <property name="auxiliary;index" value="17"/>
-                    <property name="auxiliary;index" value="17"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="20"/>
+                    <property name="auxiliary;index" value="20"/>
+                    <property name="auxiliary;index" value="20"/>
                 </properties>
             </endpoint>
         </lane>
