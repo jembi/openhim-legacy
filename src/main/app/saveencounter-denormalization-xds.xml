@@ -44,6 +44,8 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
             </when>
             <otherwise>
                 <processor-chain>
+                	<!-- For IHE Test 12049 -->
+                    <!-- <http:outbound-endpoint exchange-pattern="request-response" host="ihexds.nist.gov" port="12080" path="tf6/services/repositoryBonedoc" doc:name="Deliver message to XDS repository"/> -->
                     <http:outbound-endpoint exchange-pattern="request-response" host="ihexds.nist.gov" port="12080" path="tf6/services/xdsrepositoryb" doc:name="Deliver message to XDS repository"/>
                 </processor-chain>
             </otherwise>

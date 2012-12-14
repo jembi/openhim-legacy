@@ -10,6 +10,7 @@ import java.math.BigInteger;
 
 import javax.xml.bind.JAXBException;
 
+import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
 import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryError;
 import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
 
@@ -65,6 +66,13 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 	protected boolean processResponse(RegistryResponseType response) {
 		log.info("XDS ITI-41 response status: " + response.getStatus());
 		if (response.getStatus().contains("Success")) {
+			if (response.getResponseSlotList()!=null)
+				for (SlotType1 slot : response.getResponseSlotList().getSlot()) {
+					StringBuilder values = new StringBuilder();
+					for (String value : slot.getValueList().getValue())
+						values.append(value + ", ");
+					log.info(String.format("%s (%s): ", slot.getName(), slot.getSlotType(), values));
+				}
 			return true;
 		} else {
 			log.error("XDS ITI-41 request failed");

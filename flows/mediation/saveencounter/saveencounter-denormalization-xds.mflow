@@ -126,7 +126,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mediation-denormalization-saveencounters-xds" entity-id="66a7079f-ab8c-474e-ad26-8a594b2d3092">
+    <flow SubFlow="false" name="mediation-denormalization-saveencounters-xds" entity-id="99e106a5-45cd-4fd3-ae86-bd534ed3bc9d">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -391,20 +391,20 @@
             </pattern>
             <splitter index="24" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <properties>
-                    <property-collection name="f5d19b0a-a922-46f7-9efa-6eae25b548a0">
+                    <property-collection name="fdf2c635-7ec0-44e7-bbf1-8e5f836511a0">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                    <property-collection name="36a44f44-3ca4-43ed-89f4-664431ec36dc">
                         <property name="choice.expression" value="#[groovy: return false;]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[groovy: return false;]"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="746e3ffc-b3e3-4b5a-a0bf-81b12f38dfd3">
-                        <property name="choice.otherwise" value="true"/>
-                        <property-collection name="choice.attributes"/>
-                    </property-collection>
                 </properties>
                 <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
                 <compartment entity-id="compartment#2">
-                    <lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="false" entity-id="f5d19b0a-a922-46f7-9efa-6eae25b548a0">
+                    <lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="false" entity-id="36a44f44-3ca4-43ed-89f4-664431ec36dc">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Deliver message to XDS repository (Secure)" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
@@ -486,7 +486,7 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="29" isChoiceOtherwiseLane="true" entity-id="746e3ffc-b3e3-4b5a-a0bf-81b12f38dfd3">
+                    <lane hadOnlyOneElement="false" index="29" isChoiceOtherwiseLane="true" entity-id="fdf2c635-7ec0-44e7-bbf1-8e5f836511a0">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Deliver message to XDS repository" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#2">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
