@@ -57,7 +57,7 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 			
 			// return the list of document unique id's found in RestfulHttpRequest format
 			RestfulHttpRequest payload = new RestfulHttpRequest();
-			payload.setPath("ws/rest/v1/retrieve_document_set/?patient_id= "+ patientId + "&document_unique_id=" + docUniqueId + "&repository_unique_id=" + docUniqueId);			
+			payload.setPath("ws/rest/v1/retrieve_document_set/?patient_id= "+ patientId + "&document_unique_id=" + docUniqueId + "&repository_unique_id=" + repositoryUniqueId);			
 			
 			return payload;
 		} catch (JAXBException e) {
@@ -97,7 +97,7 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
     }
     
     private String getRepositoryUniqueId(AdhocQueryResponse aqResponse)  {
-        String uniqueDocId = null;
+        String uniqueRepoId = null;
         
         if (aqResponse.getRegistryObjectList() != null) {
             RegistryObjectListType rol = aqResponse.getRegistryObjectList();
@@ -116,17 +116,17 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
                            List<SlotType1> documentSlots = eot.getSlot();
 
                            // extract repository unique id
-                           uniqueDocId = extractMetadataFromSlots(documentSlots, "repositoryUniqueId", 0);
+                           uniqueRepoId = extractMetadataFromSlots(documentSlots, "repositoryUniqueId", 0);
                        }                	   
                     }
                 }
             }
         } 
         
-        return uniqueDocId;
+        return uniqueRepoId;
     }    
 	
-    // return a list of doc unique id separated by ":"
+    // return a list of doc unique id separated by "~"
     private String extractMetadataFromExternalIdentifiers(
     		List<oasis.names.tc.ebxml_regrep.xsd.rim._3.ExternalIdentifierType> externalIdentifiers,
     		String metadataItemName) {
