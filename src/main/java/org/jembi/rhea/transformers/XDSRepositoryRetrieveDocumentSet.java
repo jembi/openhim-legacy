@@ -62,6 +62,8 @@ public class XDSRepositoryRetrieveDocumentSet extends
    }	
    
    private String getUrnOidFormat(final String oid) {
-       return "urn:oid:" + (oid == null ? "" : oid);
+	   if(oid == null) return "";
+	   else if(oid.startsWith("urn:oid:")) return oid;
+	   else return "urn:oid:" + oid;
    }   
 }

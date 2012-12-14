@@ -55,10 +55,11 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 			String patientId = (String)message.getSessionProperty("XDS-ITI-43_patientId");
 			
 			String at = generateATNAMessage(request, patientId, uniqueId, repositoryUniqueId, outcome); //??shall we log the response as well as the request??
-			MuleClient client = new MuleClient(muleContext);
-			at = ATNAUtil.build_TCP_Msg_header() + at;
-			client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
-			
+			if(muleContext != null) {
+				MuleClient client = new MuleClient(muleContext);
+				at = ATNAUtil.build_TCP_Msg_header() + at;
+				client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+			}
 			// return the content of the document
 			
 			return document;
@@ -73,7 +74,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 
         RegistryResponseType rrt = drResponse.getRegistryResponse();
 
-        if (rrt.getRegistryErrorList() != null) {
+        if (rrt!= null && rrt.getRegistryErrorList() != null) {
            RegistryErrorList rel = rrt.getRegistryErrorList();
 
            if (rel != null &&
@@ -84,7 +85,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
            }
        }
 
-       String status = rrt.getStatus();   // ??Shall we log this and other information(e.g. totalResultCnt, documentLength, mimeType, etc) anywhere??
+       String status = (rrt==null? "" : rrt.getStatus());   // ??Shall we log this and other information(e.g. totalResultCnt, documentLength, mimeType, etc) anywhere??
        int totalResultCnt = 0;     
        String document = null;
 
@@ -98,7 +99,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
                 String docUniqueId = dr.getDocumentUniqueId();       //  <ns2:DocumentUniqueId>1.123401.11111</ns2:DocumentUniqueId>
                 String mimeType = dr.getMimeType();                  //  <ns2:mimeType>text/xml</ns2:mimeType>
                 if(dr.getDocument()!=null) {
-                    document = dr.getDocument().toString();       //  <ns2:Document>VEVTVCBET0NVTUVOVCBDT05URU5U</ns2:Document>
+                    document = new String(dr.getDocument());       //  <ns2:Document>VEVTVCBET0NVTUVOVCBDT05URU5U</ns2:Document>
                     int documentLength = dr.getDocument().length;
                 } else {
                 	throw new TransformerException(this, new Exception("dr.getDocument() returns null!"));
@@ -137,7 +138,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		//TODO homeCommunityId: if known, then add it as an additional participantObjectDetail
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(
-				documentUniqueId, (short)2, (short)3, "RFC-3881", "9", "Report Number", request, "Repository Unique Id", repositoryUniqueId.getBytes()
+				documentUniqueId, (short)2, (short)3, "RFC-3881", "9", "Report Number", request, "Repository Unique Id", (repositoryUniqueId==null? null : repositoryUniqueId.getBytes())
 			)
 		);
 		
