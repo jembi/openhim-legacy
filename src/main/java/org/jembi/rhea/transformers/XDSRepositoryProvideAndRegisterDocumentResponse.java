@@ -63,13 +63,15 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 	}
 	
 	protected boolean processResponse(RegistryResponseType response) {
-		if ("Success".equalsIgnoreCase(response.getStatus())) {
+		log.info("XDS ITI-41 response status: " + response.getStatus());
+		if (response.getStatus().contains("Success")) {
 			return true;
 		} else {
 			log.error("XDS ITI-41 request failed");
-			for (RegistryError re : response.getRegistryErrorList().getRegistryError()) {
-				log.error(String.format("%s (%s): %s (%s:%s)", re.getErrorCode(), re.getSeverity(), re.getValue(), re.getLocation(), re.getCodeContext()));
-			}
+			if (response.getRegistryErrorList()!=null)
+				for (RegistryError re : response.getRegistryErrorList().getRegistryError()) {
+					log.error(String.format("%s (%s): %s (%s:%s)", re.getErrorCode(), re.getSeverity(), re.getValue(), re.getLocation(), re.getCodeContext()));
+				}
 			return false;
 		}
 	}

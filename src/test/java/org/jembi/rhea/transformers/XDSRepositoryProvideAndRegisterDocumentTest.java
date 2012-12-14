@@ -32,6 +32,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 			assertEquals(TEST_ENC.lastName, enc.lastName);
 			assertEquals(TEST_ENC.encounterDateTime, enc.encounterDateTime);
 			assertEquals(TEST_ENC.location, enc.location);
+			assertEquals(TEST_ENC.locationCode, enc.locationCode);
 			assertEquals(TEST_ENC.attendingDoctorID, enc.attendingDoctorID);
 			assertEquals(TEST_ENC.attendingDoctorFirstName, enc.attendingDoctorFirstName);
 			assertEquals(TEST_ENC.attendingDoctorLastName, enc.attendingDoctorLastName);
@@ -68,6 +69,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 		TEST_ENC.firstName = "Mary"; TEST_ENC.lastName = "Patient";
 		TEST_ENC.encounterDateTime = "201211150855";
 		TEST_ENC.location = "Simbi MU";
+		TEST_ENC.locationCode = "871";
 		TEST_ENC.attendingDoctorID = "3525410";
 		TEST_ENC.attendingDoctorFirstName = "John";
 		TEST_ENC.attendingDoctorLastName = "Doctor";

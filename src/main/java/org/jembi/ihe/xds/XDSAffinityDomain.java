@@ -10,13 +10,13 @@ public enum XDSAffinityDomain {
 	
 	IHE_CONNECTATHON_NA2013_RHEAHIE(
 		//affinityDomainIDType
-		//"1.3.6.1.4.1.33349.3.1.2.1.0.1", //mohawk
+		"1.3.6.1.4.1.33349.3.1.2.1.0.1", //mohawk
 		//"1.19.6.24.109.42.1.3", //ihe
-		"ECID",
+		//"ECID",
 		//contentTypeCode
 		new Code("History and Physical", "Connect-a-thon contentTypeCodes", "History and Physical"),
 		//classCode
-		new Code("History and physical", "Connect-a-thon classCodes", "History and physical"),
+		new Code("History and Physical", "Connect-a-thon classCodes", "History and Physical"),
 		//confidentialityCode
 		new Code("N", "2.16.840.1.113883.5.25", "Normal"),
 		//formatCode

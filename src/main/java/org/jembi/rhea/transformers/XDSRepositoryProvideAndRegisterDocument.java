@@ -107,17 +107,17 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		document.getSlot().add(XDSUtil.createSlot("serviceStopTime", enc.getEncounterDateTime()));
 		document.getSlot().add(XDSUtil.createSlot("sourcePatientId", enc.getPID()));
 		document.getSlot().add(XDSUtil.createSlot("sourcePatientInfo", "PID-3|" + enc.getPID(), "PID-5|" + enc.getName()));
-		if (domain.getRepositoryUniqueId()!=null)
-			document.getSlot().add(XDSUtil.createSlot("repositoryUniqueId", domain.getRepositoryUniqueId()));
-		if (domain.getHomeCommunityId()!=null)
-			document.getSlot().add(XDSUtil.createSlot("homeCommunityId", domain.getHomeCommunityId()));
+		//if (domain.getRepositoryUniqueId()!=null)
+		//	document.getSlot().add(XDSUtil.createSlot("repositoryUniqueId", domain.getRepositoryUniqueId()));
+		//if (domain.getHomeCommunityId()!=null)
+		//	document.getSlot().add(XDSUtil.createSlot("homeCommunityId", domain.getHomeCommunityId()));
 		
 		// To add classifications
 		SlotType1[] authorSlots = new SlotType1[] {
 			XDSUtil.createSlot("authorPerson", enc.getAttendingDoctor()),
 			XDSUtil.createSlot("authorInstitution", enc.getLocation()),
 		};
-		document.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSDocumentEntry_Author, null, null, authorSlots));
+		document.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSDocumentEntry_Author, "", null, authorSlots));
 		
 		SlotType1[] classCodeSlots = new SlotType1[] {
 			XDSUtil.createSlot("codingScheme", domain.getClassCode().getCodingScheme())
@@ -131,7 +131,8 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		
 		// To add external ids
 		document.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSDocumentEntry_PatientId, enc.getPID()));
-		_uniqueId = String.format("urn:uuid:%s", UUID.randomUUID());
+		//_uniqueId = String.format("urn:uuid:%s", UUID.randomUUID());
+		_uniqueId = String.format("1.3.6.1.4.1.21367.%s", new SimpleDateFormat("yyyy.MM.dd.ss").format(now));
 		document.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSDocumentEntry_UniqueId, _uniqueId));
 
 		// Add to list of objects
@@ -151,7 +152,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		SlotType1[] contentTypeSlots = new SlotType1[] {
 				XDSUtil.createSlot("codingScheme", domain.getContentTypeCode().getCodingScheme())
 		};
-		pkg.getClassification().add(XDSUtil.createClassification(document, XdsGuidType.XDSSubmissionSet_ContentType, domain.getContentTypeCode().getCode(), domain.getContentTypeCode().getDisplay(), contentTypeSlots));
+		pkg.getClassification().add(XDSUtil.createClassification(pkg, XdsGuidType.XDSSubmissionSet_ContentType, domain.getContentTypeCode().getCode(), domain.getContentTypeCode().getDisplay(), contentTypeSlots));
 		
 		SlotType1[] formatSlots = new SlotType1[] {
 			XDSUtil.createSlot("codingScheme", domain.getFormatCode().getCodingScheme())
@@ -175,6 +176,9 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		
 		// To add external ids
 		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_PatientId, enc.getPID()));
+		//TODO investigate OID generation
+		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_UniqueId, _uniqueId));
+		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_SourceId, _uniqueId));
 
 		// Add package to submission
 		registryObjects.getIdentifiable().add(new JAXBElement<RegistryPackageType>(
@@ -194,7 +198,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		registryObjects.getIdentifiable().add(new JAXBElement<AssociationType1>(
                 new QName("urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0", "Association"),
                 AssociationType1.class,
-                XDSUtil.createAssociation(pkg, document, "original", "HasMember")
+                XDSUtil.createAssociation(pkg, document, "Original", "urn:oasis:names:tc:ebxml-regrep:AssociationType:HasMember")
             ));
 		
 		// Add document
@@ -233,6 +237,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 			res.attendingDoctorLastName = pv1.getAttendingDoctor(0).getFamilyName().getFn1_Surname().getValue();
 		}
 		res.location = pv1.getPv13_AssignedPatientLocation().getPl4_Facility().getHd1_NamespaceID().getValue();
+		res.locationCode = pv1.getPv13_AssignedPatientLocation().getPl1_PointOfCare().getValue();
 		res.encounterDateTime = pv1.getPv144_AdmitDateTime().getTime().getValue();
 		res.encounterType = pv1.getPv14_AdmissionType().getValue();
 		
@@ -248,6 +253,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
     	protected String attendingDoctorFirstName, attendingDoctorLastName;
     	protected String attendingDoctorID;
     	protected String location;
+    	protected String locationCode;
     	protected String encounterType;
     	
     	
@@ -256,7 +262,9 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		}
 
 		public String getPID() {
-	    	return pid + "^^^&" + domain.getAffinityDomainIDType() +"&ISO";
+	    	//return pid + "^^^&" + domain.getAffinityDomainIDType() +"&ISO";
+			//nist testing
+	    	return "55f81316303842c^^^&1.3.6.1.4.1.21367.2009.1.2.300&ISO";
 	    }
 	    
 	    public String getName() {
@@ -273,6 +281,10 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 	    
 	    public String getLocation() {
 	    	return location;
+	    }
+	    
+	    public String getLocationCode() {
+	    	return locationCode;
 	    }
 	    
 	    public String getEncounterType() {
