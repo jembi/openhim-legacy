@@ -6,7 +6,7 @@
             <property name="auxiliary;index" value="1"/>
             <property name="enableCookies"/>
             <property name="label"/>
-            <property name="cookieSpec" value="netscape"/>
+            <property name="cookieSpec"/>
             <property name="auxiliary;index" value="1"/>
             <property name="auxiliary;index" value="1"/>
             <property name="dispatcherPoolFactory-ref"/>
@@ -24,7 +24,7 @@
             <property name="auxiliary;index" value="1"/>
             <property name="enableCookies"/>
             <property name="label"/>
-            <property name="cookieSpec" value="netscape"/>
+            <property name="cookieSpec"/>
             <property name="auxiliary;index" value="1"/>
             <property name="auxiliary;index" value="1"/>
             <property name="dispatcherPoolFactory-ref"/>
@@ -61,8 +61,8 @@
             <property name="socketSoLinger" value="0"/>
             <property name="auxiliary;index" value="1"/>
             <property name="auxiliary;index" value="1"/>
-            <property name="proxyHostname" value="localhost"/>
-            <property name="proxyPort" value="80"/>
+            <property name="proxyHostname"/>
+            <property name="proxyPort"/>
             <property name="proxyUsername"/>
             <property name="proxyPassword"/>
             <property name="auxiliary;index" value="1"/>
@@ -91,8 +91,8 @@
             <property name="socketSoLinger" value="0"/>
             <property name="auxiliary;index" value="1"/>
             <property name="auxiliary;index" value="1"/>
-            <property name="proxyHostname" value="localhost"/>
-            <property name="proxyPort" value="80"/>
+            <property name="proxyHostname"/>
+            <property name="proxyPort"/>
             <property name="proxyUsername"/>
             <property name="proxyPassword"/>
             <property name="auxiliary;index" value="1"/>
@@ -126,7 +126,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mediation-denormalization-saveencounters-xds" entity-id="99e106a5-45cd-4fd3-ae86-bd534ed3bc9d">
+    <flow SubFlow="false" name="mediation-denormalization-saveencounters-xds" entity-id="817fea80-3a0d-4ac6-8126-f5f2dab5b44a">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -391,11 +391,11 @@
             </pattern>
             <splitter index="24" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <properties>
-                    <property-collection name="fdf2c635-7ec0-44e7-bbf1-8e5f836511a0">
+                    <property-collection name="8bbe5cf3-cd6c-4383-8b31-235c7237ccd9">
                         <property name="choice.otherwise" value="true"/>
                         <property-collection name="choice.attributes"/>
                     </property-collection>
-                    <property-collection name="36a44f44-3ca4-43ed-89f4-664431ec36dc">
+                    <property-collection name="078db729-28e3-42bb-83c0-9090204018e1">
                         <property name="choice.expression" value="#[groovy: return false;]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[groovy: return false;]"/>
@@ -404,7 +404,7 @@
                 </properties>
                 <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
                 <compartment entity-id="compartment#2">
-                    <lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="false" entity-id="36a44f44-3ca4-43ed-89f4-664431ec36dc">
+                    <lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="false" entity-id="078db729-28e3-42bb-83c0-9090204018e1">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Deliver message to XDS repository (Secure)" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
@@ -416,9 +416,9 @@
 <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/endpoint"/>
 <property name="auxiliary;index" value="27"/>
 <property name="httpLabel"/>
-<property name="host" value="131.254.209.16"/>
-<property name="port" value="10072"/>
-<property name="path"/>
+<property name="host" value="ihexds.nist.gov"/>
+<property name="port" value="12081"/>
+<property name="path" value="tf6/services/repositoryBonedoc"/>
 <property name="method"/>
 <property name="auxiliary;index" value="27"/>
 <property name="auxiliary;index" value="27"/>
@@ -430,7 +430,7 @@
 <property name="disableTransportTransformer"/>
 <property name="mimeType"/>
 <property name="responseTimeout"/>
-<property name="followRedirects"/>
+<property name="followRedirects" value="true"/>
 <property name="auxiliary;index" value="27"/>
 <property name="auxiliary;index" value="27"/>
 <property name="auxiliary;index" value="27"/>
@@ -451,9 +451,9 @@
 <property name="auxiliary;index" value="27"/>
 <property name="auxiliary;index" value="27"/>
 <property name="httpLabel"/>
-<property name="host" value="131.254.209.16"/>
-<property name="port" value="10072"/>
-<property name="path"/>
+<property name="host" value="ihexds.nist.gov"/>
+<property name="port" value="12081"/>
+<property name="path" value="tf6/services/repositoryBonedoc"/>
 <property name="method"/>
 <property name="auxiliary;index" value="27"/>
 <property name="auxiliary;index" value="27"/>
@@ -465,7 +465,7 @@
 <property name="disableTransportTransformer"/>
 <property name="mimeType"/>
 <property name="responseTimeout"/>
-<property name="followRedirects"/>
+<property name="followRedirects" value="true"/>
 <property name="auxiliary;index" value="27"/>
 <property name="auxiliary;index" value="27"/>
 <property name="auxiliary;index" value="27"/>
@@ -486,7 +486,7 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="29" isChoiceOtherwiseLane="true" entity-id="fdf2c635-7ec0-44e7-bbf1-8e5f836511a0">
+                    <lane hadOnlyOneElement="false" index="29" isChoiceOtherwiseLane="true" entity-id="8bbe5cf3-cd6c-4383-8b31-235c7237ccd9">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Deliver message to XDS repository" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#2">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
