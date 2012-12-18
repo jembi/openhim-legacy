@@ -13,14 +13,25 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
         <logger message="De-normalizing a query encounters transaction to XDS.b registry and repository" level="INFO" doc:name="Logger"/>
         <custom-transformer class="org.jembi.rhea.transformers.XDSRegistryStoredQuery" doc:name="Construct XDS Registry Stored Query"/>
         <response>
-            <logger message="Recieved responce from XDS registry: #[groovy: message.toString();]" level="INFO" doc:name="Logger"/>
+            <logger message="Recieved responce from XDS repository #[groovy: message.toString();]" level="INFO" doc:name="Logger"/>
+            <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSetResponse" doc:name="Construct retrieve documents messages"/>
         </response>
         <cxf:jaxws-client doc:name="SOAP"  clientClass="ihe.iti.xds_b._2007.DocumentRegistryService" port="DocumentRegistry_Port_Soap12" operation="DocumentRegistry_RegistryStoredQuery">
             <cxf:features>
 				<wsa:addressing />
 			</cxf:features>
         </cxf:jaxws-client>
-        <logger message="The raw soap XDS payload: #[groovy: return message.payload.toString();]" level="INFO" doc:name="Logger"/>
+        <logger message="The raw soap XDS registry payload: #[groovy: return message.payload.toString();]" level="INFO" doc:name="Logger"/>
         <http:outbound-endpoint exchange-pattern="request-response" host="xds.marc-hi.ca" port="1025" doc:name="HTTP" path="xdsservice/xdsregistry" encoding="UTF-8"  mimeType="application/soap+xml"/>
+        <logger message="Recieved responce from XDS registry: #[groovy: message.toString();]" level="INFO" doc:name="Logger"/>
+        <custom-transformer class="org.jembi.rhea.transformers.XDSRegistryStoredQueryResponse" doc:name="Process stored query response"/>
+        <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSet" doc:name="Construct retrieve documents messages"/>
+        <cxf:jaxws-client doc:name="SOAP"  clientClass="ihe.iti.xds_b._2007.DocumentRepositoryService" port="DocumentRepository_Port_Soap12" operation="DocumentRepository_RetrieveDocumentSet">
+            <cxf:features>
+				<wsa:addressing />
+			</cxf:features>
+        </cxf:jaxws-client>
+        <logger message="The raw soap XDS repository payload: #[groovy: return message.payload.toString();]" level="INFO" doc:name="Logger"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="xds.marc-hi.ca" port="1025" doc:name="HTTP" path="xdsservice/xdsrepository" encoding="UTF-8"  mimeType="application/soap+xml"/>
     </flow>
 </mule>
