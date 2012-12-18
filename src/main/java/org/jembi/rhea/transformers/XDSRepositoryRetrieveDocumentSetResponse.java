@@ -8,12 +8,25 @@ package org.jembi.rhea.transformers;
  */
 import ihe.iti.atna.AuditMessage;
 import ihe.iti.atna.EventIdentificationType;
+import ihe.iti.xds_b._2007.RetrieveDocumentSetResponseType;
+import ihe.iti.xds_b._2007.RetrieveDocumentSetResponseType.DocumentResponse;
 
 import java.math.BigInteger;
+import java.util.List;
 
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 
+import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryResponse;
+import oasis.names.tc.ebxml_regrep.xsd.rim._3.ExternalIdentifierType;
+import oasis.names.tc.ebxml_regrep.xsd.rim._3.ExtrinsicObjectType;
+import oasis.names.tc.ebxml_regrep.xsd.rim._3.IdentifiableType;
+import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryObjectListType;
+import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryErrorList;
+import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
+
 import org.jembi.ihe.atna.ATNAUtil;
+import org.jembi.rhea.RestfulHttpRequest;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -27,21 +40,29 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
 		try {
-			//TODO process response
+			// process response					
 			boolean outcome = false;
 			String repositoryUniqueId = null;
+
+			RetrieveDocumentSetResponseType response = (RetrieveDocumentSetResponseType) message.getPayload();
+			
+		    // get a list of doc unique id separated by ":"
+			String document = getDocument(response);
 		
 			//generate audit message
 			String request = (String)message.getSessionProperty("XDS-ITI-43");
 			String uniqueId = (String)message.getSessionProperty("XDS-ITI-43_uniqueId");
 			String patientId = (String)message.getSessionProperty("XDS-ITI-43_patientId");
 			
-			String at = generateATNAMessage(request, patientId, uniqueId, repositoryUniqueId, outcome);
-			MuleClient client = new MuleClient(muleContext);
-			at = ATNAUtil.build_TCP_Msg_header() + at;
-			client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+			String at = generateATNAMessage(request, patientId, uniqueId, repositoryUniqueId, outcome); //??shall we log the response as well as the request??
+			if(muleContext != null) {
+				MuleClient client = new MuleClient(muleContext);
+				at = ATNAUtil.build_TCP_Msg_header() + at;
+				client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+			}
+			// return the content of the document
 			
-			return null;
+			return document;
 		} catch (JAXBException e) {
 			throw new TransformerException(this, e);
 		} catch (MuleException e) {
@@ -49,6 +70,46 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		}
 	}
 
+    private String getDocument(RetrieveDocumentSetResponseType drResponse) throws TransformerException {
+
+        RegistryResponseType rrt = drResponse.getRegistryResponse();
+
+        if (rrt!= null && rrt.getRegistryErrorList() != null) {
+           RegistryErrorList rel = rrt.getRegistryErrorList();
+
+           if (rel != null &&
+                   rel.getRegistryError() != null &&
+                   rel.getRegistryError().size() > 0 &&
+                   rel.getRegistryError().get(0) != null) {
+        	   throw new TransformerException(this, new Exception("TotalErrors: " + rel.getRegistryError().size() + "FirstError: " + rel.getRegistryError().get(0).getValue()));
+           }
+       }
+
+       String status = (rrt==null? "" : rrt.getStatus());   // ??Shall we log this and other information(e.g. totalResultCnt, documentLength, mimeType, etc) anywhere??
+       int totalResultCnt = 0;     
+       String document = null;
+
+       List<DocumentResponse> drList =  drResponse.getDocumentResponse();  // <ns2:DocumentResponse>
+
+       if (drList != null && drList.size() > 0 && drList.get(0) != null) {
+    	   totalResultCnt = drList.size();
+           for (DocumentResponse dr : drList) {       // may want to loop thru the results at some point, but for now......
+                String home = dr.getHomeCommunityId();               //  <ns2:HomeCommunityId>urn:oid:1.3.6.1.4.1.12009.6.1</ns2:HomeCommunityId>
+                String reposUniqueId = dr.getRepositoryUniqueId();   //  <ns2:RepositoryUniqueId>1</ns2:RepositoryUniqueId>
+                String docUniqueId = dr.getDocumentUniqueId();       //  <ns2:DocumentUniqueId>1.123401.11111</ns2:DocumentUniqueId>
+                String mimeType = dr.getMimeType();                  //  <ns2:mimeType>text/xml</ns2:mimeType>
+                if(dr.getDocument()!=null) {
+                    document = new String(dr.getDocument());       //  <ns2:Document>VEVTVCBET0NVTUVOVCBDT05URU5U</ns2:Document>
+                    int documentLength = dr.getDocument().length;
+                } else {
+                	throw new TransformerException(this, new Exception("dr.getDocument() returns null!"));
+                }
+           }
+        }
+
+        return document;
+    }
+    
     /* Auditing */
 	
 	protected String generateATNAMessage(String request, String patientId, String documentUniqueId, String repositoryUniqueId, boolean outcome)
@@ -77,7 +138,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		//TODO homeCommunityId: if known, then add it as an additional participantObjectDetail
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(
-				documentUniqueId, (short)2, (short)3, "RFC-3881", "9", "Report Number", request, "Repository Unique Id", repositoryUniqueId.getBytes()
+				documentUniqueId, (short)2, (short)3, "RFC-3881", "9", "Report Number", request, "Repository Unique Id", (repositoryUniqueId==null? null : repositoryUniqueId.getBytes())
 			)
 		);
 		
