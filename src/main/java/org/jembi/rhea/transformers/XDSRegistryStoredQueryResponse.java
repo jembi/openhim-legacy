@@ -25,7 +25,6 @@ import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryObjectListType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
 
 import org.jembi.ihe.atna.ATNAUtil;
-import org.jembi.rhea.RestfulHttpRequest;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;

@@ -1,11 +1,12 @@
 package org.jembi.rhea.transformers;
 
 import static org.junit.Assert.fail;
-
 import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType;
 import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType.DocumentRequest;
 
 import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,8 +16,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import junit.framework.Assert;
+
 import org.jembi.ihe.xds.XDSAffinityDomain;
-import org.jembi.rhea.RestfulHttpRequest;
 import org.junit.Test;
 import org.mule.api.ExceptionPayload;
 import org.mule.api.MuleContext;
@@ -27,7 +29,6 @@ import org.mule.api.transformer.DataType;
 import org.mule.api.transformer.Transformer;
 import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
-import junit.framework.Assert;
 
 public class XDSRepositoryRetrieveDocumentSetTest {
 	
@@ -37,23 +38,44 @@ public class XDSRepositoryRetrieveDocumentSetTest {
 		
 		XDSRepositoryRetrieveDocumentSet t = new XDSRepositoryRetrieveDocumentSet();
 		try {
-			RetrieveDocumentSetRequestType request = (RetrieveDocumentSetRequestType) t.transformMessage(testMsg, null);
+			List<RetrieveDocumentSetRequestType> requests = (List<RetrieveDocumentSetRequestType>) t.transformMessage(testMsg, null);
 					
-			Assert.assertNotNull(request);
-			List<DocumentRequest> docList = request.getDocumentRequest();
-			Assert.assertEquals(2, docList.size());
-			Assert.assertEquals("111111111", docList.get(0).getDocumentUniqueId());	
-			Assert.assertEquals("222222222", docList.get(1).getDocumentUniqueId());				
-			for (DocumentRequest doc : docList) {
-				Assert.assertEquals("1", doc.getRepositoryUniqueId());
-				Assert.assertEquals(XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE.getHomeCommunityId(), doc.getHomeCommunityId());
-			}			
+			Assert.assertNotNull(requests);
+			Assert.assertEquals(2, requests.size());
 			
 			JAXBContext jc = JAXBContext.newInstance("ihe.iti.xds_b._2007");
 			Marshaller marshaller = jc.createMarshaller();
-			StringWriter sw = new StringWriter();
-			marshaller.marshal(request, sw);
-			System.out.println(sw.toString());
+			
+			for (RetrieveDocumentSetRequestType request : requests) {
+				
+				List<DocumentRequest> docList = request.getDocumentRequest();
+				
+				if (docList.size() == 3) {
+				
+					Assert.assertEquals("urn:uuid:79500f02-ed6b-4507-aecd-72200b9e11b1", docList.get(0).getDocumentUniqueId());	
+					Assert.assertEquals("urn:uuid:7c6517ee-3110-4cf4-a643-9825815819d7", docList.get(1).getDocumentUniqueId());
+					Assert.assertEquals("1.2.3.4.5.6.7.8.9.133506.092.1", docList.get(2).getDocumentUniqueId());
+					for (DocumentRequest doc : docList) {
+						Assert.assertEquals("1.3.6.1.4.1.33349.3.1.1.13", doc.getRepositoryUniqueId());
+						Assert.assertEquals(XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE.getHomeCommunityId(), doc.getHomeCommunityId());
+					}
+				} else if (docList.size() == 1) {
+				
+					Assert.assertEquals("1.2.3.4.5.6.7.8.9.123754.573.1", docList.get(0).getDocumentUniqueId());
+					for (DocumentRequest doc : docList) {
+						Assert.assertEquals("1.3.6.1.4.1.33349.3.1.1.14", doc.getRepositoryUniqueId());
+						Assert.assertEquals(XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE.getHomeCommunityId(), doc.getHomeCommunityId());
+					}
+				} else {
+					// error, should never get here...
+					Assert.fail("doclist size incorrect");
+				}
+				
+				StringWriter sw = new StringWriter();
+				sw.append("===RetrieveDocumentMessage===\n");
+				marshaller.marshal(request, sw);
+				System.out.println(sw.toString() + "\n");
+			}
 			
 		} catch (TransformerException e) {
 			fail("Failed due to exception " + e);
@@ -64,9 +86,20 @@ public class XDSRepositoryRetrieveDocumentSetTest {
 	private static class TestMuleMessage implements MuleMessage {
 		@Override
 		public Object getPayload() {
-			RestfulHttpRequest payload = new RestfulHttpRequest();
-			payload.setPath("ws/rest/v1/retrieve_document_set/?patient_id=GHHS-2552234100&document_unique_id=111111111~222222222&repository_unique_id=1");
-			return payload;
+			Map<String, Set<String>> repoDocumentsMap = new HashMap<String, Set<String>>();
+			Set<String> docSet1 = new HashSet<String>();
+			Set<String> docSet2 = new HashSet<String>();
+			
+			docSet1.add("urn:uuid:79500f02-ed6b-4507-aecd-72200b9e11b1");
+			docSet1.add("urn:uuid:7c6517ee-3110-4cf4-a643-9825815819d7");
+			docSet1.add("1.2.3.4.5.6.7.8.9.133506.092.1");
+			
+			docSet2.add("1.2.3.4.5.6.7.8.9.123754.573.1");
+			
+			repoDocumentsMap.put("1.3.6.1.4.1.33349.3.1.1.13", docSet1);
+			repoDocumentsMap.put("1.3.6.1.4.1.33349.3.1.1.14", docSet2);
+			
+			return repoDocumentsMap;
 		}
 
 		@Override
