@@ -3,14 +3,18 @@ package ihe.iti.xds_b._2007;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.activation.DataHandler;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
+
 import oasis.names.tc.ebxml_regrep.xsd.lcm._3.SubmitObjectsRequest;
 
 
@@ -54,7 +58,7 @@ public class ProvideAndRegisterDocumentSetRequestType {
 
     @XmlElement(name = "SubmitObjectsRequest", namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0", required = true)
     protected SubmitObjectsRequest submitObjectsRequest;
-    @XmlElement(name = "Document")
+    @XmlElement(name = "Document", namespace = "urn:ihe:iti:xds-b:2007")
     protected List<ProvideAndRegisterDocumentSetRequestType.Document> document;
 
     /**
@@ -135,7 +139,8 @@ public class ProvideAndRegisterDocumentSetRequestType {
     public static class Document {
 
         @XmlValue
-        protected byte[] value;
+        @XmlMimeType("application/octet-stream")
+        protected DataHandler value;
         @XmlAttribute(name = "id", required = true)
         @XmlSchemaType(name = "anyURI")
         protected String id;
@@ -147,7 +152,7 @@ public class ProvideAndRegisterDocumentSetRequestType {
          *     possible object is
          *     byte[]
          */
-        public byte[] getValue() {
+        public DataHandler getValue() {
             return value;
         }
 
@@ -158,7 +163,7 @@ public class ProvideAndRegisterDocumentSetRequestType {
          *     allowed object is
          *     byte[]
          */
-        public void setValue(byte[] value) {
+        public void setValue(DataHandler value) {
             this.value = value;
         }
 

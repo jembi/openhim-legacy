@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.mule.api.MuleMessage;
-import org.mule.api.MuleSession;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
 
@@ -36,6 +35,10 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		try {
 			//TODO externalise these strings
 			pix_query = constructPIXQuery(id, idType, null, "MOH_CAAT_MARC_HI", "1.3.6.1.4.1.33349.3.1.2.1.0.1");
+			//NIST test 1
+			//pix_query = constructPIXQuery("PIXL1", "NIST2010", "2.16.840.1.113883.3.72.5.9.1", "NIST2010-3", "2.16.840.1.113883.3.72.5.9.3");
+			//NIST test 2
+			//pix_query = constructPIXQuery("PIXL1", "NIST2010", "2.16.840.1.113883.3.72.5.9.1", "", "");
 		} catch (HL7Exception e) {
 			throw new TransformerException(this, e);
 		}
@@ -60,11 +63,18 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		t.set("MSH-4-1", "recieving_application"); // check
 		t.set("MSH-5-1", ""); // check
 		t.set("MSH-6-1", ""); // check
+		/* NIST Testing values */
+		//t.set("MSH-3-1", "openhim"); //sending application
+		//t.set("MSH-4-1", "RHEA-HIE"); //sending facility
+		//t.set("MSH-5-1", "NIST_RCVR_HANNES"); //receiving application
+		//t.set("MSH-6-1", "NIST"); //receiving facility
+		/* */
 		msh.getDateTimeOfMessage().getTime().setValue(new Date());
 		t.set("MSH-9-1", "QBP");
 		t.set("MSH-9-2", "Q23");
 		t.set("MSH-9-3", "QBP_Q21");
-		_msh10 = "123";
+		//MSH-10 message control id
+		_msh10 = String.valueOf( System.currentTimeMillis() );
 		t.set("MSH-10", _msh10); // check
 		t.set("MSH-11-1", "P");
 		t.set("MSH-12-1-1", "2.5");

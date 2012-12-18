@@ -1,9 +1,14 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-package ihe.iti.atna;
+package org.jembi.ihe.atna;
 
+import ihe.iti.atna.AuditMessage;
 import ihe.iti.atna.AuditMessage.ActiveParticipant;
+import ihe.iti.atna.AuditSourceIdentificationType;
+import ihe.iti.atna.CodedValueType;
+import ihe.iti.atna.ParticipantObjectIdentificationType;
+import ihe.iti.atna.TypeValuePairType;
 
 import java.io.StringWriter;
 import java.lang.management.ManagementFactory;
@@ -26,13 +31,19 @@ public class ATNAUtil {
 
 	public static String build_TCP_Msg_header() {
 		StringBuilder res = new StringBuilder("<13>1 ");
-		res.append(dateFormat.format(new Date()) + " ");
+		res.append(now() + " ");
 		res.append(getSystemName() + " ");
 		res.append(getProcessName() + " ");
 		res.append(getProcessID() + " ");
 		res.append("- ");
 		res.append("- ");
 		return res.toString();
+	}
+	
+	private static String now() {
+		String now = dateFormat.format(new Date());
+		now = now.substring(0, 26) + ":" + now.substring(26, 28);
+		return now;
 	}
 	
 	public static ActiveParticipant buildActiveParticipant(String userID, boolean userIsRequestor, String networkAccessPointID,
@@ -104,7 +115,7 @@ public class ATNAUtil {
 	public static String marshall(AuditMessage am) throws JAXBException {
 		JAXBContext jc = JAXBContext.newInstance("ihe.iti.atna");
 		Marshaller marshaller = jc.createMarshaller();
-		marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
+		//marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
 		StringWriter sw = new StringWriter();
 		marshaller.marshal(am, sw);
 		return sw.toString();
@@ -120,6 +131,9 @@ public class ATNAUtil {
 	}
 	
 	public static String getHostIP() {
+		//jembi cpt office public IPs
+		//return "105.236.94.17";
+		//return "41.185.179.82";
 		try {
 			return InetAddress.getLocalHost().getHostAddress();
 		} catch (UnknownHostException e) { /* shouldn't happen since we're referencing localhost */ }

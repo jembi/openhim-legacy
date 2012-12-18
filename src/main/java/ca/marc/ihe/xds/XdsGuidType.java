@@ -73,9 +73,13 @@ public class XdsGuidType {
 	 */
 	public static final XdsGuidType XDSDocumentEntry_EventCodeList = new XdsGuidType("2c6b8cb7-8b2a-4051-b291-b1ae6a575ef4");
 	/**
-	 * XDS docuent entry format code
+	 * XDS document entry format code
 	 */
 	public static final XdsGuidType XDSDocumentEntry_FormatCode = new XdsGuidType("a09d5840-386c-46f2-b5ad-9c3699a4309d");
+	/**
+	 * XDS document entry healthcareFacility code
+	 */
+	public static final XdsGuidType XDSDocumentEntry_HealthcareFacilityCode = new XdsGuidType("f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1");
 	/**
 	 * XDS document entry patient id
 	 */

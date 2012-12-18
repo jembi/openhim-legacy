@@ -11,7 +11,7 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
     <flow name="mediation-denormalization-queryencounters-xds.bFlow" doc:name="mediation-denormalization-queryencounters-xds.bFlow">
         <vm:inbound-endpoint exchange-pattern="request-response" path="queryEncounters-De-normailization-XDS.b" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
         <logger message="De-normalizing a query encounters transaction to XDS.b registry and repository" level="INFO" doc:name="Logger"/>
-        <custom-transformer class="org.jembi.rhea.transformers.ConstructAdhocQueryRequestTransformer" doc:name="Construct AdhocQueryRequest"/>
+        <custom-transformer class="org.jembi.rhea.transformers.XDSRegistryStoredQuery" doc:name="Construct XDS Registry Stored Query"/>
         <response>
             <logger message="Recieved responce from XDS registry: #[groovy: message.toString();]" level="INFO" doc:name="Logger"/>
         </response>

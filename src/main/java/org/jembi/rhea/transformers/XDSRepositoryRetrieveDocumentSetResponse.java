@@ -6,7 +6,6 @@ package org.jembi.rhea.transformers;
 /**
  * Handle XDS ITI-43 Retrieve Document Set response
  */
-import ihe.iti.atna.ATNAUtil;
 import ihe.iti.atna.AuditMessage;
 import ihe.iti.atna.EventIdentificationType;
 
@@ -14,6 +13,7 @@ import java.math.BigInteger;
 
 import javax.xml.bind.JAXBException;
 
+import org.jembi.ihe.atna.ATNAUtil;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;

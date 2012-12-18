@@ -45,14 +45,19 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
             <logger message="Exitting getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         </response>
         <choice doc:name="Choice">
+            <when expression="#[groovy: return false;]">
+                <processor-chain>
+                    <ssl:outbound-endpoint host="cr.marc-hi.ca" port="2100" responseTimeout="10000" doc:name="Mohawk Secure" connector-ref="tlsConnector" exchange-pattern="request-response"/>
+                </processor-chain>
+            </when>
             <when expression="#[groovy: return true;]">
                 <processor-chain>
-                    <ssl:outbound-endpoint host="131.254.209.16" port="10071" responseTimeout="10000" doc:name="SSL (TLS)" connector-ref="tlsConnector" exchange-pattern="request-response"/>
+                    <tcp:outbound-endpoint exchange-pattern="request-response" host="cr.marc-hi.ca" port="2100" responseTimeout="10000" doc:name="Mohawk"/>
                 </processor-chain>
             </when>
             <otherwise>
                 <processor-chain>
-                    <tcp:outbound-endpoint exchange-pattern="request-response" host="cr.marc-hi.ca" port="2100" responseTimeout="10000" connector-ref="tcpConnector" doc:name="TCP"/>
+                    <tcp:outbound-endpoint exchange-pattern="request-response" host="129.6.24.143" port="9080" responseTimeout="10000"  doc:name="NIST"/>
                 </processor-chain>
             </otherwise>
         </choice>
