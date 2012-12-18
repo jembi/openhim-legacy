@@ -9,6 +9,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
 http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.xsd ">
     <https:connector name="HTTP_HTTPS" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="HTTP\HTTPS">
+        <service-overrides sessionHandler="org.mule.session.NullSessionHandler"/>
         <https:tls-client path="${ihe.keystore}" storePassword="${ihe.storepassword}"/>
         <https:tls-key-store path="${ihe.keystore}" keyPassword="${ihe.keypassword}" storePassword="${ihe.storepassword}"/>
     </https:connector>
@@ -41,7 +42,9 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
                 <processor-chain>
                 	<!-- Gazelle test 11109 -->
                     <!-- <https:outbound-endpoint exchange-pattern="request-response" host="131.254.209.16" port="10072"  doc:name="Deliver message to XDS repository (Secure)" connector-ref="HTTP_HTTPS"/> -->
-                    <https:outbound-endpoint exchange-pattern="request-response" host="ihexds.nist.gov" port="12081" path="tf6/services/repositoryBonedoc" doc:name="Deliver message to XDS repository (Secure)" connector-ref="HTTP_HTTPS" followRedirects="true"/>
+                	<!-- For IHE Test 12046 -->
+                    <!-- <https:outbound-endpoint exchange-pattern="request-response" host="ihexds.nist.gov" port="12081" path="tf6/services/repositoryBonedoc" doc:name="Deliver message to XDS repository (Secure)" connector-ref="HTTP_HTTPS"/> -->
+                    <https:outbound-endpoint exchange-pattern="request-response" host="ihexds.nist.gov" port="12081" path="tf6/services/xdsrepositoryb" doc:name="Deliver message to XDS repository (Secure)" connector-ref="HTTP_HTTPS"/>
                 </processor-chain>
             </when>
             <otherwise>
