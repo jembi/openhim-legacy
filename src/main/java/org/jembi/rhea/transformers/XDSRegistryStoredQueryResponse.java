@@ -7,8 +7,12 @@ import ihe.iti.atna.AuditMessage;
 import ihe.iti.atna.EventIdentificationType;
 
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -21,7 +25,6 @@ import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryObjectListType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
 
 import org.jembi.ihe.atna.ATNAUtil;
-import org.jembi.rhea.RestfulHttpRequest;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -41,25 +44,22 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 
 			AdhocQueryResponse response = (AdhocQueryResponse) message.getPayload();
 			
-		    // get a list of doc unique id separated by "~"
-			String docUniqueId = getDocUniqueId(response);
-			String repositoryUniqueId = getRepositoryUniqueId(response);
-		
+			// get a map of repository id's pointing to a list of document id's for that repository
+			Map<String, Set<String>> repoDocumentsMap = getRepositoryDocuments(response);
+			
 			//generate audit message
 			String request = (String)message.getSessionProperty("XDS-ITI-18");
 			String uniqueId = (String)message.getSessionProperty("XDS-ITI-18_uniqueId");
 			String patientId = (String)message.getSessionProperty("XDS-ITI-18_patientId");
 			
 			String at = generateATNAMessage(request, patientId, uniqueId, outcome); //??need to log the response message instead of the request??
-			MuleClient client = new MuleClient(muleContext);
-			at = ATNAUtil.build_TCP_Msg_header() + at;
-			client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+			if (muleContext != null) {
+				MuleClient client = new MuleClient(muleContext);
+				at = ATNAUtil.build_TCP_Msg_header() + at;
+				client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+			}
 			
-			// return the list of document unique id's found in RestfulHttpRequest format
-			RestfulHttpRequest payload = new RestfulHttpRequest();
-			payload.setPath("ws/rest/v1/retrieve_document_set/?patient_id= "+ patientId + "&document_unique_id=" + docUniqueId + "&repository_unique_id=" + repositoryUniqueId);			
-			
-			return payload;
+			return repoDocumentsMap;
 		} catch (JAXBException e) {
 			throw new TransformerException(this, e);
 		} catch (MuleException e) {
@@ -67,66 +67,56 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 		}
 	}
 
-    private String getDocUniqueId(AdhocQueryResponse aqResponse)  {
-        String uniqueDocId = null;
-        
-        if (aqResponse.getRegistryObjectList() != null) {
-            RegistryObjectListType rol = aqResponse.getRegistryObjectList();
+	private Map<String, Set<String>> getRepositoryDocuments(
+			AdhocQueryResponse aqResponse) {
+		Map<String, Set<String>> repoDocumentsMap = new HashMap<String, Set<String>>();
 
-            List<JAXBElement<? extends IdentifiableType>> identifiableObjectList = rol.getIdentifiable();
+		if (aqResponse.getRegistryObjectList() != null) {
+			RegistryObjectListType rol = aqResponse.getRegistryObjectList();
 
-            for (int i = 0; i < identifiableObjectList.size(); i++) {
-                ExtrinsicObjectType eot = null;
-                Object tempObj = identifiableObjectList.get(i).getValue();   //the getValue method will return the non-JAXBElement<? extends...> object
+			List<JAXBElement<? extends IdentifiableType>> identifiableObjectList = rol
+					.getIdentifiable();
 
-                if (tempObj instanceof ExtrinsicObjectType) {
-                    eot = (ExtrinsicObjectType) tempObj;
+			for (int i = 0; i < identifiableObjectList.size(); i++) {
+				ExtrinsicObjectType eot = null;
+				// the getValue method will return the non-JAXBElement<? extends...> object
+				Object tempObj = identifiableObjectList.get(i).getValue();
 
-                   if (eot != null) {
-                        //get the externalIdentifiers so that we can get the docId  
-                        List<ExternalIdentifierType> externalIdentifiers = eot.getExternalIdentifier();
+				if (tempObj instanceof ExtrinsicObjectType) {
+					eot = (ExtrinsicObjectType) tempObj;
 
-                        //extract the docId
-                        uniqueDocId = extractMetadataFromExternalIdentifiers(externalIdentifiers, "XDSDocumentEntry.uniqueId");
-                    }
-                }
-            }
-        } 
-        
-        return uniqueDocId;
-    }
-    
-    private String getRepositoryUniqueId(AdhocQueryResponse aqResponse)  {
-        String uniqueRepoId = null;
-        
-        if (aqResponse.getRegistryObjectList() != null) {
-            RegistryObjectListType rol = aqResponse.getRegistryObjectList();
+					if (eot != null) {
+						String uniqueRepoId = null;
+						if (eot.getSlot() != null && eot.getSlot().size() > 0) {
+							List<SlotType1> documentSlots = eot.getSlot();
 
-            List<JAXBElement<? extends IdentifiableType>> identifiableObjectList = rol.getIdentifiable();
+							// extract repository unique id
+							uniqueRepoId = extractMetadataFromSlots(documentSlots, "repositoryUniqueId", 0);
+						}
+						// get the externalIdentifiers so that we can get the
+						// docId
+						List<ExternalIdentifierType> externalIdentifiers = eot.getExternalIdentifier();
 
-            for (int i = 0; i < identifiableObjectList.size(); i++) {
-                ExtrinsicObjectType eot = null;
-                Object tempObj = identifiableObjectList.get(i).getValue();   //the getValue method will return the non-JAXBElement<? extends...> object
+						// extract the docId
+						String uniqueDocId = extractMetadataFromExternalIdentifiers(externalIdentifiers, "XDSDocumentEntry.uniqueId");
+						
+						// store uniqueRepoId and docId
+						Set<String> documentIdSet = repoDocumentsMap.get(uniqueRepoId);
+						if (documentIdSet == null) {
+							documentIdSet = new HashSet<String>();
+							repoDocumentsMap.put(uniqueRepoId, documentIdSet);
+						}
+						
+						documentIdSet.add(uniqueDocId);
+					}
+				}
+			}
+		}
 
-                if (tempObj instanceof ExtrinsicObjectType) {
-                    eot = (ExtrinsicObjectType) tempObj;
-
-                   if (eot != null) {
-                       if (eot.getSlot() != null && eot.getSlot().size() > 0) {
-                           List<SlotType1> documentSlots = eot.getSlot();
-
-                           // extract repository unique id
-                           uniqueRepoId = extractMetadataFromSlots(documentSlots, "repositoryUniqueId", 0);
-                       }                	   
-                    }
-                }
-            }
-        } 
-        
-        return uniqueRepoId;
-    }    
+		return repoDocumentsMap;
+	}  
 	
-    // return a list of doc unique id separated by "~"
+    // return id from an external identifier
     private String extractMetadataFromExternalIdentifiers(
     		List<oasis.names.tc.ebxml_regrep.xsd.rim._3.ExternalIdentifierType> externalIdentifiers,
     		String metadataItemName) {
@@ -137,12 +127,7 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 		        externalIdentifier : externalIdentifiers) {
 		    String externalIdentifierName = externalIdentifier.getName().getLocalizedString().get(0).getValue();
 		    if (metadataItemName.equalsIgnoreCase(externalIdentifierName)) {
-		    	if(metadataItemValue == null) {
-		    		metadataItemValue = externalIdentifier.getValue();
-		    	} else {
-		    		metadataItemValue = metadataItemValue + "~" + externalIdentifier.getValue(); 
-		    	}
-		        
+		    	return externalIdentifier.getValue();
 		    }
 		}
 		

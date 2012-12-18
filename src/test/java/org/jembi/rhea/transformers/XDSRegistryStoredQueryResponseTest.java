@@ -1,12 +1,6 @@
 package org.jembi.rhea.transformers;
 
-import static org.junit.Assert.fail;
-import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType;
-import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType.DocumentRequest;
-
-import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,11 +8,11 @@ import java.util.Set;
 import javax.activation.DataHandler;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
-import junit.framework.Assert;
+import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryResponse;
 
-import org.jembi.ihe.xds.XDSAffinityDomain;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mule.api.ExceptionPayload;
 import org.mule.api.MuleContext;
@@ -30,76 +24,43 @@ import org.mule.api.transformer.Transformer;
 import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
 
-public class XDSRepositoryRetrieveDocumentSetTest {
+public class XDSRegistryStoredQueryResponseTest {
 	
 	@Test
-	public void testTransformMessageMuleMessageString() throws JAXBException {
+	public void testTransformMessageMuleMessageString() throws TransformerException {
 		MuleMessage testMsg = new TestMuleMessage();
 		
-		XDSRepositoryRetrieveDocumentSet t = new XDSRepositoryRetrieveDocumentSet();
-		try {
-			List<RetrieveDocumentSetRequestType> requests = (List<RetrieveDocumentSetRequestType>) t.transformMessage(testMsg, null);
-					
-			Assert.assertNotNull(requests);
-			Assert.assertEquals(2, requests.size());
-			
-			JAXBContext jc = JAXBContext.newInstance("ihe.iti.xds_b._2007");
-			Marshaller marshaller = jc.createMarshaller();
-			
-			for (RetrieveDocumentSetRequestType request : requests) {
-				
-				List<DocumentRequest> docList = request.getDocumentRequest();
-				
-				if (docList.size() == 3) {
-				
-					Assert.assertEquals("urn:uuid:79500f02-ed6b-4507-aecd-72200b9e11b1", docList.get(0).getDocumentUniqueId());	
-					Assert.assertEquals("urn:uuid:7c6517ee-3110-4cf4-a643-9825815819d7", docList.get(1).getDocumentUniqueId());
-					Assert.assertEquals("1.2.3.4.5.6.7.8.9.133506.092.1", docList.get(2).getDocumentUniqueId());
-					for (DocumentRequest doc : docList) {
-						Assert.assertEquals("1.3.6.1.4.1.33349.3.1.1.13", doc.getRepositoryUniqueId());
-						Assert.assertEquals(XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE.getHomeCommunityId(), doc.getHomeCommunityId());
-					}
-				} else if (docList.size() == 1) {
-				
-					Assert.assertEquals("1.2.3.4.5.6.7.8.9.123754.573.1", docList.get(0).getDocumentUniqueId());
-					for (DocumentRequest doc : docList) {
-						Assert.assertEquals("1.3.6.1.4.1.33349.3.1.1.14", doc.getRepositoryUniqueId());
-						Assert.assertEquals(XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE.getHomeCommunityId(), doc.getHomeCommunityId());
-					}
-				} else {
-					// error, should never get here...
-					Assert.fail("doclist size incorrect");
-				}
-				
-				StringWriter sw = new StringWriter();
-				sw.append("===RetrieveDocumentMessage===\n");
-				marshaller.marshal(request, sw);
-				System.out.println(sw.toString() + "\n");
-			}
-			
-		} catch (TransformerException e) {
-			fail("Failed due to exception " + e);
-			e.printStackTrace();
-		}
+		XDSRegistryStoredQueryResponse res = new XDSRegistryStoredQueryResponse();
+		
+		Map<String, Set<String>> repoDocumentsMap = (Map<String, Set<String>>) res.transformMessage(testMsg, null);
+		
+		Assert.assertNotNull(repoDocumentsMap);
+		
+		Set<String> docSet1 = repoDocumentsMap.get("1.3.6.1.4.1.33349.3.1.1.13");
+		Set<String> docSet2 = repoDocumentsMap.get("1.3.6.1.4.1.33349.3.1.1.14");
+		
+		Assert.assertTrue(docSet1.contains("urn:uuid:79500f02-ed6b-4507-aecd-72200b9e11b1"));
+		Assert.assertTrue(docSet1.contains("urn:uuid:7c6517ee-3110-4cf4-a643-9825815819d7"));
+		Assert.assertTrue(docSet1.contains("1.2.3.4.5.6.7.8.9.133506.092.1"));
+		
+		Assert.assertTrue(docSet2.contains("1.2.3.4.5.6.7.8.9.123754.573.1"));
 	}
 	
 	private static class TestMuleMessage implements MuleMessage {
 		@Override
 		public Object getPayload() {
-			Map<String, Set<String>> repoDocumentsMap = new HashMap<String, Set<String>>();
-			Set<String> docSet1 = new HashSet<String>();
-			Set<String> docSet2 = new HashSet<String>();
 			
-			docSet1.add("urn:uuid:79500f02-ed6b-4507-aecd-72200b9e11b1");
-			docSet1.add("urn:uuid:7c6517ee-3110-4cf4-a643-9825815819d7");
-			docSet1.add("1.2.3.4.5.6.7.8.9.133506.092.1");
+			AdhocQueryResponse payload = null;
+			try {
+				JAXBContext jc = JAXBContext.newInstance("oasis.names.tc.ebxml_regrep.xsd.query._3");
+				Unmarshaller unmarshaller = jc.createUnmarshaller();
+				InputStream is = this.getClass().getClassLoader().getResourceAsStream("AdhocQueryResponse.xml");
+				payload = (AdhocQueryResponse) unmarshaller.unmarshal(is);
+			} catch (JAXBException e) {
+				e.printStackTrace();
+			}
 			
-			docSet2.add("1.2.3.4.5.6.7.8.9.123754.573.1");
-			
-			repoDocumentsMap.put("1.3.6.1.4.1.33349.3.1.1.13", docSet1);
-			repoDocumentsMap.put("1.3.6.1.4.1.33349.3.1.1.14", docSet2);
-			
-			return repoDocumentsMap;
+			return payload;
 		}
 
 		@Override
