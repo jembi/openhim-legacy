@@ -92,7 +92,7 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
         // TODO get this from the PIX query
         String idOid = "1.19.6.24.109.42.1.3";
         // TODO HARD CODED REMOVE
-        id = "aed8bf355e184a8";
+        id = "1b48e083395f498";
         String srcPatientId = String.format("'%s^^^&%s&ISO'", id, idOid);
         adhocQuery.getSlot().add(createQuerySlot("$XDSDocumentEntryPatientId", srcPatientId));
         
