@@ -38,7 +38,7 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
         <echo-component doc:name="Echo"/>
         <logger message="Raw SOAP message: #[message:payload]" level="INFO" doc:name="Logger"/>
         <choice doc:name="Choice">
-            <when expression="#[groovy: return false;]">
+            <when expression="#[groovy: return ${ihe.secure};]">
                 <processor-chain>
                 	<!-- Gazelle test 11109 -->
                     <!-- <https:outbound-endpoint exchange-pattern="request-response" host="131.254.209.16" port="10072"  doc:name="Deliver message to XDS repository (Secure)" connector-ref="HTTP_HTTPS"/> -->
