@@ -48,7 +48,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "RepositoryRetrieveDocumentSet")
 public class RetrieveDocumentSetRequestType {
 
-    @XmlElement(name = "DocumentRequest", required = true)
+    @XmlElement(name = "DocumentRequest", namespace = "urn:ihe:iti:xds-b:2007", required = true)
     protected List<RetrieveDocumentSetRequestType.DocumentRequest> documentRequest;
 
     /**
@@ -110,11 +110,11 @@ public class RetrieveDocumentSetRequestType {
     })
     public static class DocumentRequest {
 
-        @XmlElement(name = "HomeCommunityId")
+        @XmlElement(name = "HomeCommunityId", namespace = "urn:ihe:iti:xds-b:2007")
         protected String homeCommunityId;
-        @XmlElement(name = "RepositoryUniqueId", required = true)
+        @XmlElement(name = "RepositoryUniqueId", namespace = "urn:ihe:iti:xds-b:2007", required = true)
         protected String repositoryUniqueId;
-        @XmlElement(name = "DocumentUniqueId", required = true)
+        @XmlElement(name = "DocumentUniqueId", namespace = "urn:ihe:iti:xds-b:2007", required = true)
         protected String documentUniqueId;
 
         /**
