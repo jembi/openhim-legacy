@@ -47,9 +47,9 @@ public class XDSRepositoryRetrieveDocumentSet extends
 				
 		// add request to session prop so that we can access it when processing the response
 		// TODO we are going to have to find a new way to do these...
-		message.setSessionProperty("XDS-ITI-43", null);
-		message.setSessionProperty("XDS-ITI-43_uniqueId", null);
-		message.setSessionProperty("XDS-ITI-43_patientId", null);
+		//message.setSessionProperty("XDS-ITI-43", null);
+		//message.setSessionProperty("XDS-ITI-43_uniqueId", null);
+		//message.setSessionProperty("XDS-ITI-43_patientId", null);
 		
 		return retrieveDocumentMessages;
 	}

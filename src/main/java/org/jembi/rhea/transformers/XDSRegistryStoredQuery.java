@@ -91,6 +91,8 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
         // Slots, first setup slot for patient ID
         // TODO get this from the PIX query
         String idOid = "1.19.6.24.109.42.1.3";
+        // TODO HARD CODED REMOVE
+        id = "aed8bf355e184a8";
         String srcPatientId = String.format("'%s^^^&%s&ISO'", id, idOid);
         adhocQuery.getSlot().add(createQuerySlot("$XDSDocumentEntryPatientId", srcPatientId));
         
@@ -109,9 +111,9 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
 		
 		//TODO
 		// add request to session prop so that we can access it when processing the response
-		message.setSessionProperty("XDS-ITI-18", null);
-		message.setSessionProperty("XDS-ITI-18_uniqueId", null);
-		message.setSessionProperty("XDS-ITI-18_patientId", null);
+		//message.setSessionProperty("XDS-ITI-18", null);
+		//message.setSessionProperty("XDS-ITI-18_uniqueId", null);
+		//message.setSessionProperty("XDS-ITI-18_patientId", null);
 		
 		return request;
 	}

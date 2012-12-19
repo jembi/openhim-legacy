@@ -23,7 +23,10 @@ import oasis.names.tc.ebxml_regrep.xsd.rim._3.ExtrinsicObjectType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.IdentifiableType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryObjectListType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
+import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
@@ -35,14 +38,23 @@ import org.mule.transformer.AbstractMessageTransformer;
  * Handle XDS ITI-18 Registry Stored Query response
  */
 public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
+	
+	private Log log = LogFactory.getLog(this.getClass());
+	
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
 		try {
 			// process response					
 			boolean outcome = false;
-
-			AdhocQueryResponse response = (AdhocQueryResponse) message.getPayload();
+			
+			AdhocQueryResponse response = null;
+			if (message.getPayload() instanceof AdhocQueryResponse) {
+				response = (AdhocQueryResponse) message.getPayload();
+			} else {
+				log.error(String.format("Unknown response type received (%s)", message.getPayload().getClass()));
+				return null;
+			}
 			
 			// get a map of repository id's pointing to a list of document id's for that repository
 			Map<String, Set<String>> repoDocumentsMap = getRepositoryDocuments(response);
