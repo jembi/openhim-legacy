@@ -6,6 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
 
@@ -51,6 +52,7 @@ import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
     "registryResponse",
     "documentResponse"
 })
+@XmlRootElement(name = "RetrieveDocumentSetResponse", namespace = "urn:ihe:iti:xds-b:2007")
 public class RetrieveDocumentSetResponseType {
 
     @XmlElement(name = "RegistryResponse", namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0", required = true)

@@ -51,7 +51,9 @@ public class XDSRepositoryRetrieveDocumentSet extends
 		//message.setSessionProperty("XDS-ITI-43_uniqueId", null);
 		//message.setSessionProperty("XDS-ITI-43_patientId", null);
 		
-		return retrieveDocumentMessages;
+		//return retrieveDocumentMessages;
+		//TODO just handle one for now
+		return retrieveDocumentMessages.size()>0 ? retrieveDocumentMessages.get(0) : null;
 	}
 	
    private DocumentRequest createDocumentRequest(String docUniqueId, String homeCommunityId, String repositoryUniqueId) {
@@ -59,6 +61,7 @@ public class XDSRepositoryRetrieveDocumentSet extends
        dr.setHomeCommunityId(getUrnOidFormat(homeCommunityId));
        dr.setDocumentUniqueId(docUniqueId);
        dr.setRepositoryUniqueId(repositoryUniqueId);
+       //dr.setRepositoryUniqueId("1.3.6.1.4.1.21367.2011.2.3.7");
 
        return dr;
    }	

@@ -17,12 +17,7 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
 	        <custom-transformer class="org.jembi.rhea.transformers.XDSRegistryStoredQueryResponse" doc:name="Process stored query response"/>
 	        <echo-component doc:name="Echo"/>
 	        <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSet" doc:name="Construct retrieve documents messages"/>
-	        <foreach doc:name="Foreach">
-	            <cxf:jaxws-client operation="DocumentRepository_RetrieveDocumentSet" clientClass="ihe.iti.xds_b._2007.DocumentRepositoryService" port="DocumentRepository_Port_Soap12" doc:name="SOAP"/>
-	            <logger message="The raw soap XDS repository payload: #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
-	            <http:outbound-endpoint exchange-pattern="request-response" host="${xds.repository.host}" port="${xds.repository.port}" path="${xds.repository.path}" encoding="UTF-8" mimeType="application/soap+xml" doc:name="HTTP"/>
-	        </foreach>
-            <logger message="Recieved responce from XDS repository #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
+	        <vm:outbound-endpoint exchange-pattern="request-response" doc:name="Send Retrieve Documents Request" path="queryencounter_xds_retrieve_document_setb"/>
             <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSetResponse" doc:name="Process retrieve documents response"/>
         </response>
         <cxf:jaxws-client doc:name="SOAP"  clientClass="ihe.iti.xds_b._2007.DocumentRegistryService" port="DocumentRegistry_Port_Soap12" operation="DocumentRegistry_RegistryStoredQuery">

@@ -12,21 +12,18 @@ import ihe.iti.xds_b._2007.RetrieveDocumentSetResponseType;
 import ihe.iti.xds_b._2007.RetrieveDocumentSetResponseType.DocumentResponse;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 
-import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryResponse;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.ExternalIdentifierType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.ExtrinsicObjectType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.IdentifiableType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryObjectListType;
 import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryErrorList;
 import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
-import org.jembi.rhea.RestfulHttpRequest;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -35,39 +32,63 @@ import org.mule.transformer.AbstractMessageTransformer;
 
 public class XDSRepositoryRetrieveDocumentSetResponse extends
 		AbstractMessageTransformer {
+	
+	private Log log = LogFactory.getLog(this.getClass());
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
 		try {
 			// process response					
-			boolean outcome = false;
-			String repositoryUniqueId = null;
-
-			RetrieveDocumentSetResponseType response = (RetrieveDocumentSetResponseType) message.getPayload();
-			
-		    // get a list of doc unique id separated by ":"
-			String document = getDocument(response);
-		
-			//generate audit message
-			String request = (String)message.getSessionProperty("XDS-ITI-43");
-			String uniqueId = (String)message.getSessionProperty("XDS-ITI-43_uniqueId");
-			String patientId = (String)message.getSessionProperty("XDS-ITI-43_patientId");
-			
-			String at = generateATNAMessage(request, patientId, uniqueId, repositoryUniqueId, outcome); //??shall we log the response as well as the request??
-			if(muleContext != null) {
-				MuleClient client = new MuleClient(muleContext);
-				at = ATNAUtil.build_TCP_Msg_header() + at;
-				client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+			if (message.getPayload()==null) {
+				log.error("Null response received from XDS repository");
+				return null;
+			} else if (message.getPayload() instanceof RetrieveDocumentSetResponseType) {
+				RetrieveDocumentSetResponseType response = (RetrieveDocumentSetResponseType) message.getPayload();
+				return Collections.singleton(processResponse(response));
+			} else if (message.getPayload() instanceof ArrayList &&
+					((List)message.getPayload()).size()>0 &&
+					((List)message.getPayload()).get(0) instanceof RetrieveDocumentSetResponseType) {
+				List<RetrieveDocumentSetResponseType> responses = (List<RetrieveDocumentSetResponseType>)message.getPayload();
+				List<String> res = new ArrayList<String>(responses.size());
+				for (RetrieveDocumentSetResponseType response : responses)
+					res.add(processResponse(response));
+				return res;
+			} else {
+				log.error("Unknown response type received from XDS repository: " + message.getPayload().getClass());
+				return null;
 			}
-			// return the content of the document
 			
-			return document;
 		} catch (JAXBException e) {
 			throw new TransformerException(this, e);
 		} catch (MuleException e) {
 			throw new TransformerException(this, e);
 		}
+	}
+	
+	private String processResponse(RetrieveDocumentSetResponseType response) throws JAXBException, MuleException {
+		boolean outcome = false;
+		String repositoryUniqueId = null;
+
+	    // get a list of doc unique id separated by ":"
+		String document = getDocument(response);
+	
+		//generate audit message
+		//String request = (String)message.getSessionProperty("XDS-ITI-43");
+		//String uniqueId = (String)message.getSessionProperty("XDS-ITI-43_uniqueId");
+		//String patientId = (String)message.getSessionProperty("XDS-ITI-43_patientId");
+		String request = null, uniqueId = null, patientId = null;
+		
+		String at = generateATNAMessage(request, patientId, uniqueId, repositoryUniqueId, outcome); //??shall we log the response as well as the request??
+		if(muleContext != null) {
+			MuleClient client = new MuleClient(muleContext);
+			at = ATNAUtil.build_TCP_Msg_header() + at;
+			client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+		}
+		// return the content of the document
+		
+		return document;
 	}
 
     private String getDocument(RetrieveDocumentSetResponseType drResponse) throws TransformerException {
