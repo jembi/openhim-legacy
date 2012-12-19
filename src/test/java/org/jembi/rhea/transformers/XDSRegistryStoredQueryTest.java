@@ -47,11 +47,11 @@ public class XDSRegistryStoredQueryTest {
 			List<SlotType1> slotList = request.getAdhocQuery().getSlot();
 			for (SlotType1 slot : slotList) {
 				if (slot.getName().equals("$XDSDocumentEntryPatientId")) {
-					Assert.assertEquals("2552234100^^^&1.3.6.1.4.1.33349.3.1.2.1.0.1&ISO", slot.getValueList().getValue().get(0));
+					Assert.assertEquals("'2552234100^^^&1.3.6.1.4.1.33349.3.1.2.1.0.1&ISO'", slot.getValueList().getValue().get(0));
 					patIdExists = true;
 				}
 				if (slot.getName().equals("$XDSDocumentEntryStatus")) {
-					Assert.assertEquals("urn:oasis:names:tc:ebxml-regrep:StatusType:Approved", slot.getValueList().getValue().get(0));
+					Assert.assertEquals("('urn:oasis:names:tc:ebxml-regrep:StatusType:Approved')", slot.getValueList().getValue().get(0));
 					statusExists = true;
 				}
 				if (slot.getName().equals("$XDSDocumentEntryCreationTimeFrom")) {

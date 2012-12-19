@@ -90,12 +90,12 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
         
         // Slots, first setup slot for patient ID
         // TODO get this from the PIX query
-        String idOid = "1.3.6.1.4.1.33349.3.1.2.1.0.1";
-        String srcPatientId = String.format("%s^^^&%s&ISO", id, idOid);
+        String idOid = "1.19.6.24.109.42.1.3";
+        String srcPatientId = String.format("'%s^^^&%s&ISO'", id, idOid);
         adhocQuery.getSlot().add(createQuerySlot("$XDSDocumentEntryPatientId", srcPatientId));
         
         // Setup status slot 
-        adhocQuery.getSlot().add(createQuerySlot("$XDSDocumentEntryStatus", "urn:oasis:names:tc:ebxml-regrep:StatusType:Approved"));
+        adhocQuery.getSlot().add(createQuerySlot("$XDSDocumentEntryStatus", "('urn:oasis:names:tc:ebxml-regrep:StatusType:Approved')"));
         
         // From time
         SimpleDateFormat hl7DateFormat = new SimpleDateFormat("yyyyMMddHHmm"); 
