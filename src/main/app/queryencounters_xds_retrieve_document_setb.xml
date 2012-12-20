@@ -15,7 +15,7 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
 			</cxf:features>
         </cxf:jaxws-client>
         <logger message="The raw soap XDS repository payload: #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
-        <http:outbound-endpoint exchange-pattern="request-response" host="${xds.repository.host}" port="${xds.repository.port}" path="${xds.repository.path}" encoding="UTF-8" doc:name="HTTP"/>
-        <logger message="Recieved responce from XDS repository #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="${xds.repository.host}" port="${xds.repository.port}" path="${xds.repository.path}" doc:name="HTTP"/>
+        <logger message="Recieved response from XDS repository #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
     </flow>
 </mule>

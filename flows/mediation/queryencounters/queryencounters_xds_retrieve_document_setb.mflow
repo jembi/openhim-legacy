@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="XDS Retrieve Document Set.b Query">
-    <flow SubFlow="false" name="XDS_Retrieve_Document_Set.b_QueryFlow1" entity-id="9472deae-00a3-4859-96d5-578e422362e5">
+    <flow SubFlow="false" name="XDS_Retrieve_Document_Set.b_QueryFlow1" entity-id="ea6c8b30-1338-4d09-9a41-ad137fe11ee3">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -103,7 +103,7 @@
                     <property name="tracking:enable-default-events"/>
                     <property name="auxiliary;index" value="7"/>
                     <property name="address"/>
-                    <property name="encoding" value="UTF-8"/>
+                    <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
                     <property name="mimeType"/>
                     <property name="responseTimeout"/>
@@ -129,7 +129,7 @@
             </endpoint>
             <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
                 <properties>
-                    <property name="message" value="Recieved responce from XDS repository #[groovy: message.getPayloadAsString();]"/>
+                    <property name="message" value="Recieved response from XDS repository #[groovy: message.getPayloadAsString();]"/>
                     <property name="level" value="INFO"/>
                     <property name="category"/>
                     <property name="auxiliary;index" value="8"/>

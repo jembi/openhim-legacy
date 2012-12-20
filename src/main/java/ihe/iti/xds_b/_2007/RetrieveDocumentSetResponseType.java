@@ -52,12 +52,11 @@ import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
     "registryResponse",
     "documentResponse"
 })
-@XmlRootElement(name = "RetrieveDocumentSetResponse", namespace = "urn:ihe:iti:xds-b:2007")
 public class RetrieveDocumentSetResponseType {
 
     @XmlElement(name = "RegistryResponse", namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0", required = true)
     protected RegistryResponseType registryResponse;
-    @XmlElement(name = "DocumentResponse")
+    @XmlElement(name = "DocumentResponse", namespace = "urn:ihe:iti:xds-b:2007")
     protected List<RetrieveDocumentSetResponseType.DocumentResponse> documentResponse;
 
     /**
@@ -147,15 +146,15 @@ public class RetrieveDocumentSetResponseType {
     })
     public static class DocumentResponse {
 
-        @XmlElement(name = "HomeCommunityId")
+        @XmlElement(name = "HomeCommunityId", namespace = "urn:ihe:iti:xds-b:2007")
         protected String homeCommunityId;
-        @XmlElement(name = "RepositoryUniqueId", required = true)
+        @XmlElement(name = "RepositoryUniqueId", namespace = "urn:ihe:iti:xds-b:2007", required = true)
         protected String repositoryUniqueId;
-        @XmlElement(name = "DocumentUniqueId", required = true)
+        @XmlElement(name = "DocumentUniqueId", namespace = "urn:ihe:iti:xds-b:2007", required = true)
         protected String documentUniqueId;
-        @XmlElement(required = true)
+        @XmlElement(namespace = "urn:ihe:iti:xds-b:2007", required = true)
         protected String mimeType;
-        @XmlElement(name = "Document", required = true)
+        @XmlElement(name = "Document", namespace = "urn:ihe:iti:xds-b:2007", required = true)
         protected byte[] document;
 
         /**
