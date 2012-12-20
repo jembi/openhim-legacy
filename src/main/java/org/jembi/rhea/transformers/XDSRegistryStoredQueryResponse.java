@@ -7,12 +7,11 @@ import ihe.iti.atna.AuditMessage;
 import ihe.iti.atna.EventIdentificationType;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -23,11 +22,11 @@ import oasis.names.tc.ebxml_regrep.xsd.rim._3.ExtrinsicObjectType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.IdentifiableType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryObjectListType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
-import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
+import org.jembi.rhea.xds.DocumentMetaData;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -57,7 +56,7 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 			}
 			
 			// get a map of repository id's pointing to a list of document id's for that repository
-			Map<String, Set<String>> repoDocumentsMap = getRepositoryDocuments(response);
+			Map<String, List<DocumentMetaData>> repoDocumentsMap = getRepositoryDocuments(response);
 			
 			//generate audit message
 			String request = (String)message.getSessionProperty("XDS-ITI-18");
@@ -79,9 +78,9 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 		}
 	}
 
-	private Map<String, Set<String>> getRepositoryDocuments(
+	private Map<String, List<DocumentMetaData>> getRepositoryDocuments(
 			AdhocQueryResponse aqResponse) {
-		Map<String, Set<String>> repoDocumentsMap = new HashMap<String, Set<String>>();
+		Map<String, List<DocumentMetaData>> repoDocumentsMap = new HashMap<String, List<DocumentMetaData>>();
 
 		if (aqResponse.getRegistryObjectList() != null) {
 			RegistryObjectListType rol = aqResponse.getRegistryObjectList();
@@ -113,13 +112,16 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 						String uniqueDocId = extractMetadataFromExternalIdentifiers(externalIdentifiers, "XDSDocumentEntry.uniqueId");
 						
 						// store uniqueRepoId and docId
-						Set<String> documentIdSet = repoDocumentsMap.get(uniqueRepoId);
-						if (documentIdSet == null) {
-							documentIdSet = new HashSet<String>();
-							repoDocumentsMap.put(uniqueRepoId, documentIdSet);
+						List<DocumentMetaData> docList = repoDocumentsMap.get(uniqueRepoId);
+						if (docList == null) {
+							docList = new ArrayList<DocumentMetaData>();
+							repoDocumentsMap.put(uniqueRepoId, docList);
 						}
 						
-						documentIdSet.add(uniqueDocId);
+						// get homeCommunityId
+						String homeCommunityId = eot.getHome();
+						
+						docList.add(new DocumentMetaData(uniqueDocId, homeCommunityId));
 					}
 				}
 			}

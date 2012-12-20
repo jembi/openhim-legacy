@@ -74,7 +74,7 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		t.set("MSH-9-2", "Q23");
 		t.set("MSH-9-3", "QBP_Q21");
 		//MSH-10 message control id
-		_msh10 = String.valueOf( System.currentTimeMillis() );
+		_msh10 = UUID.randomUUID().toString();
 		t.set("MSH-10", _msh10); // check
 		t.set("MSH-11-1", "P");
 		t.set("MSH-12-1-1", "2.5");

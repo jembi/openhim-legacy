@@ -5,8 +5,8 @@ import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType;
 import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType.DocumentRequest;
 
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +18,7 @@ import javax.xml.bind.Marshaller;
 
 import junit.framework.Assert;
 
-import org.jembi.ihe.xds.XDSAffinityDomain;
+import org.jembi.rhea.xds.DocumentMetaData;
 import org.junit.Test;
 import org.mule.api.ExceptionPayload;
 import org.mule.api.MuleContext;
@@ -38,10 +38,13 @@ public class XDSRepositoryRetrieveDocumentSetTest {
 		
 		XDSRepositoryRetrieveDocumentSet t = new XDSRepositoryRetrieveDocumentSet();
 		try {
-			List<RetrieveDocumentSetRequestType> requests = (List<RetrieveDocumentSetRequestType>) t.transformMessage(testMsg, null);
+			// TODO fix once we are returning multiple retrieve documents messages again
+			List<RetrieveDocumentSetRequestType> requests = new ArrayList<RetrieveDocumentSetRequestType>(); //(List<RetrieveDocumentSetRequestType>) t.transformMessage(testMsg, null);
+			requests.add((RetrieveDocumentSetRequestType) t.transformMessage(testMsg, null));
 					
 			Assert.assertNotNull(requests);
-			Assert.assertEquals(2, requests.size());
+			//Assert.assertEquals(2, requests.size());
+			Assert.assertEquals(1, requests.size());
 			
 			JAXBContext jc = JAXBContext.newInstance("ihe.iti.xds_b._2007");
 			Marshaller marshaller = jc.createMarshaller();
@@ -57,14 +60,14 @@ public class XDSRepositoryRetrieveDocumentSetTest {
 					Assert.assertEquals("1.2.3.4.5.6.7.8.9.133506.092.1", docList.get(2).getDocumentUniqueId());
 					for (DocumentRequest doc : docList) {
 						Assert.assertEquals("1.3.6.1.4.1.33349.3.1.1.13", doc.getRepositoryUniqueId());
-						Assert.assertEquals(XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE.getHomeCommunityId(), doc.getHomeCommunityId());
+						Assert.assertEquals("urn:oid:home", doc.getHomeCommunityId());
 					}
 				} else if (docList.size() == 1) {
 				
 					Assert.assertEquals("1.2.3.4.5.6.7.8.9.123754.573.1", docList.get(0).getDocumentUniqueId());
 					for (DocumentRequest doc : docList) {
 						Assert.assertEquals("1.3.6.1.4.1.33349.3.1.1.14", doc.getRepositoryUniqueId());
-						Assert.assertEquals(XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE.getHomeCommunityId(), doc.getHomeCommunityId());
+						Assert.assertEquals("urn:oid:home2", doc.getHomeCommunityId());
 					}
 				} else {
 					// error, should never get here...
@@ -86,18 +89,18 @@ public class XDSRepositoryRetrieveDocumentSetTest {
 	private static class TestMuleMessage implements MuleMessage {
 		@Override
 		public Object getPayload() {
-			Map<String, Set<String>> repoDocumentsMap = new HashMap<String, Set<String>>();
-			Set<String> docSet1 = new HashSet<String>();
-			Set<String> docSet2 = new HashSet<String>();
+			Map<String, List<DocumentMetaData>> repoDocumentsMap = new HashMap<String, List<DocumentMetaData>>();
+			List<DocumentMetaData> docList1 = new ArrayList<DocumentMetaData>();
+			List<DocumentMetaData> docList2 = new ArrayList<DocumentMetaData>();
 			
-			docSet1.add("urn:uuid:79500f02-ed6b-4507-aecd-72200b9e11b1");
-			docSet1.add("urn:uuid:7c6517ee-3110-4cf4-a643-9825815819d7");
-			docSet1.add("1.2.3.4.5.6.7.8.9.133506.092.1");
+			docList1.add(new DocumentMetaData("urn:uuid:79500f02-ed6b-4507-aecd-72200b9e11b1", "home"));
+			docList1.add(new DocumentMetaData("urn:uuid:7c6517ee-3110-4cf4-a643-9825815819d7", "home"));
+			docList1.add(new DocumentMetaData("1.2.3.4.5.6.7.8.9.133506.092.1", "home"));
 			
-			docSet2.add("1.2.3.4.5.6.7.8.9.123754.573.1");
+			docList2.add(new DocumentMetaData("1.2.3.4.5.6.7.8.9.123754.573.1", "home2"));
 			
-			repoDocumentsMap.put("1.3.6.1.4.1.33349.3.1.1.13", docSet1);
-			repoDocumentsMap.put("1.3.6.1.4.1.33349.3.1.1.14", docSet2);
+			repoDocumentsMap.put("1.3.6.1.4.1.33349.3.1.1.13", docList1);
+			repoDocumentsMap.put("1.3.6.1.4.1.33349.3.1.1.14", docList2);
 			
 			return repoDocumentsMap;
 		}

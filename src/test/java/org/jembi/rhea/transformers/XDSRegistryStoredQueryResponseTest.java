@@ -12,6 +12,7 @@ import javax.xml.bind.Unmarshaller;
 
 import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryResponse;
 
+import org.jembi.rhea.xds.DocumentMetaData;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mule.api.ExceptionPayload;
@@ -32,18 +33,18 @@ public class XDSRegistryStoredQueryResponseTest {
 		
 		XDSRegistryStoredQueryResponse res = new XDSRegistryStoredQueryResponse();
 		
-		Map<String, Set<String>> repoDocumentsMap = (Map<String, Set<String>>) res.transformMessage(testMsg, null);
+		Map<String, List<DocumentMetaData>> repoDocumentsMap = (Map<String, List<DocumentMetaData>>) res.transformMessage(testMsg, null);
 		
 		Assert.assertNotNull(repoDocumentsMap);
 		
-		Set<String> docSet1 = repoDocumentsMap.get("1.3.6.1.4.1.33349.3.1.1.13");
-		Set<String> docSet2 = repoDocumentsMap.get("1.3.6.1.4.1.33349.3.1.1.14");
+		List<DocumentMetaData> docList1 = repoDocumentsMap.get("1.3.6.1.4.1.33349.3.1.1.13");
+		List<DocumentMetaData> docList2 = repoDocumentsMap.get("1.3.6.1.4.1.33349.3.1.1.14");
 		
-		Assert.assertTrue(docSet1.contains("urn:uuid:79500f02-ed6b-4507-aecd-72200b9e11b1"));
-		Assert.assertTrue(docSet1.contains("urn:uuid:7c6517ee-3110-4cf4-a643-9825815819d7"));
-		Assert.assertTrue(docSet1.contains("1.2.3.4.5.6.7.8.9.133506.092.1"));
+		Assert.assertEquals(docList1.get(0).getDocumentUniqueId(), "urn:uuid:79500f02-ed6b-4507-aecd-72200b9e11b1");
+		Assert.assertEquals(docList1.get(1).getDocumentUniqueId(), "urn:uuid:7c6517ee-3110-4cf4-a643-9825815819d7");
+		Assert.assertEquals(docList1.get(2).getDocumentUniqueId(), "1.2.3.4.5.6.7.8.9.133506.092.1");
 		
-		Assert.assertTrue(docSet2.contains("1.2.3.4.5.6.7.8.9.123754.573.1"));
+		Assert.assertEquals(docList2.get(0).getDocumentUniqueId(), "1.2.3.4.5.6.7.8.9.123754.573.1");
 	}
 	
 	private static class TestMuleMessage implements MuleMessage {

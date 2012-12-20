@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jembi.ihe.xds.XDSAffinityDomain;
+import org.jembi.rhea.xds.DocumentMetaData;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
@@ -25,21 +25,21 @@ public class XDSRepositoryRetrieveDocumentSet extends
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {		
 		// extract patient id, repository id and a list of document unique id's from the payload
-		Map<String, Set<String>> repoDocumentsMap = (Map<String, Set<String>>) message.getPayload();
+		Map<String, List<DocumentMetaData>> repoDocumentsMap = (Map<String, List<DocumentMetaData>>) message.getPayload();
 		List<RetrieveDocumentSetRequestType> retrieveDocumentMessages = new ArrayList<RetrieveDocumentSetRequestType>();
 		
 		Set<String> keySet = repoDocumentsMap.keySet();
 		for (String key : keySet) {
-			Set<String> docSet = repoDocumentsMap.get(key);
+			List<DocumentMetaData> docList = repoDocumentsMap.get(key);
 			
 			// construct RetrieveDocumentSetRequestType
 			RetrieveDocumentSetRequestType rdRequest = new RetrieveDocumentSetRequestType();
-			String homeCommunityId = XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE.getHomeCommunityId();
-			String repositoryUniqueId = key;  //??XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE.getRepositoryUniqueId();??
+			
+			String repositoryUniqueId = key;
 			
 			// add unique document id list to document request
-			for(String docUniqueId : docSet) {			
-				rdRequest.getDocumentRequest().add(createDocumentRequest(docUniqueId, homeCommunityId, repositoryUniqueId));
+			for(DocumentMetaData documentMetaData : docList) {			
+				rdRequest.getDocumentRequest().add(createDocumentRequest(documentMetaData.getDocumentUniqueId(), documentMetaData.getHomeCommunityId(), repositoryUniqueId));
 			}
 			
 			retrieveDocumentMessages.add(rdRequest);
@@ -51,9 +51,7 @@ public class XDSRepositoryRetrieveDocumentSet extends
 		//message.setSessionProperty("XDS-ITI-43_uniqueId", null);
 		//message.setSessionProperty("XDS-ITI-43_patientId", null);
 		
-		//return retrieveDocumentMessages;
-		//TODO just handle one for now
-		return retrieveDocumentMessages.size()>0 ? retrieveDocumentMessages.get(0) : null;
+		return retrieveDocumentMessages;
 	}
 	
    private DocumentRequest createDocumentRequest(String docUniqueId, String homeCommunityId, String repositoryUniqueId) {
