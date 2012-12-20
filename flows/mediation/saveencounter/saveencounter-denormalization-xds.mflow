@@ -126,7 +126,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mediation-denormalization-saveencounters-xds" entity-id="509b6949-8931-48b3-a1bf-30e69acb5b95">
+    <flow SubFlow="false" name="mediation-denormalization-saveencounters-xds" entity-id="c929f1bc-31bf-4f83-a57d-ef8e21825461">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -391,11 +391,11 @@
             </pattern>
             <splitter index="25" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <properties>
-                    <property-collection name="59a9046e-958a-4117-9358-d0480edbd0b3">
+                    <property-collection name="c680102b-f379-47eb-b3d4-ac292f44e891">
                         <property name="choice.otherwise" value="true"/>
                         <property-collection name="choice.attributes"/>
                     </property-collection>
-                    <property-collection name="f56130a1-4c12-462a-ade9-f456c2f136a3">
+                    <property-collection name="e7515be6-c4be-469f-af44-6873d132e393">
                         <property name="choice.expression" value="#[groovy: return ${ihe.secure};]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[groovy: return ${ihe.secure};]"/>
@@ -404,8 +404,8 @@
                 </properties>
                 <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
                 <compartment entity-id="compartment#2">
-                    <lane hadOnlyOneElement="false" index="27" isChoiceOtherwiseLane="false" entity-id="f56130a1-4c12-462a-ade9-f456c2f136a3">
-                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Deliver message to XDS repository (Secure)" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
+                    <lane hadOnlyOneElement="false" index="27" isChoiceOtherwiseLane="false" entity-id="e7515be6-c4be-469f-af44-6873d132e393">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTPS" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
 <property name="exchange-pattern" value="request-response"/>
@@ -416,9 +416,9 @@
 <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/endpoint"/>
 <property name="auxiliary;index" value="28"/>
 <property name="httpLabel"/>
-<property name="host" value="ihexds.nist.gov"/>
-<property name="port" value="12081"/>
-<property name="path" value="tf6/services/xdsrepositoryb"/>
+<property name="host" value="${xds.repository.host}"/>
+<property name="port" value="${xds.repository.securePort}"/>
+<property name="path" value="${xds.repository.path}"/>
 <property name="method"/>
 <property name="auxiliary;index" value="28"/>
 <property name="auxiliary;index" value="28"/>
@@ -451,9 +451,9 @@
 <property name="auxiliary;index" value="28"/>
 <property name="auxiliary;index" value="28"/>
 <property name="httpLabel"/>
-<property name="host" value="ihexds.nist.gov"/>
-<property name="port" value="12081"/>
-<property name="path" value="tf6/services/xdsrepositoryb"/>
+<property name="host" value="${xds.repository.host}"/>
+<property name="port" value="${xds.repository.securePort}"/>
+<property name="path" value="${xds.repository.path}"/>
 <property name="method"/>
 <property name="auxiliary;index" value="28"/>
 <property name="auxiliary;index" value="28"/>
@@ -486,8 +486,8 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="30" isChoiceOtherwiseLane="true" entity-id="59a9046e-958a-4117-9358-d0480edbd0b3">
-                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Deliver message to XDS repository" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#2">
+                    <lane hadOnlyOneElement="false" index="30" isChoiceOtherwiseLane="true" entity-id="c680102b-f379-47eb-b3d4-ac292f44e891">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#2">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
 <property name="exchange-pattern" value="request-response"/>
@@ -495,9 +495,9 @@
 <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
 <property name="auxiliary;index" value="31"/>
 <property name="httpLabel"/>
-<property name="host" value="ihexds.nist.gov"/>
-<property name="port" value="12080"/>
-<property name="path" value="tf6/services/xdsrepositoryb"/>
+<property name="host" value="${xds.repository.host}"/>
+<property name="port" value="${xds.repository.port}"/>
+<property name="path" value="${xds.repository.path}"/>
 <property name="method"/>
 <property name="auxiliary;index" value="31"/>
 <property name="auxiliary;index" value="31"/>
