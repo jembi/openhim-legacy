@@ -51,9 +51,7 @@ public class XDSRepositoryRetrieveDocumentSet extends
 		//message.setSessionProperty("XDS-ITI-43_uniqueId", null);
 		//message.setSessionProperty("XDS-ITI-43_patientId", null);
 		
-		//return retrieveDocumentMessages;
-		//TODO just handle one for now
-		return retrieveDocumentMessages.size()>0 ? retrieveDocumentMessages.get(0) : null;
+		return retrieveDocumentMessages;
 	}
 	
    private DocumentRequest createDocumentRequest(String docUniqueId, String homeCommunityId, String repositoryUniqueId) {

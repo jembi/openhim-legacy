@@ -8,7 +8,7 @@
             <property name="auxiliary;index" value="1"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mediation-denormalization-queryencounters-xds.bFlow" entity-id="065f8d02-3445-498c-a5ba-d1dd7e015a14">
+    <flow SubFlow="false" name="mediation-denormalization-queryencounters-xds.bFlow" entity-id="576247b8-e123-486e-a425-0c62ceb5bde0">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -124,47 +124,63 @@
 <property name="auxiliary;index" value="10"/>
                             </properties>
                         </pattern>
-                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Send Retrieve Documents Request" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#2">
+                        <scope name="Foreach" type="http://www.mulesoft.org/schema/mule/core/foreach" entity-id="Foreach#1">
                             <properties>
-<property name="exchange-pattern" value="one-way"/>
-<property name="exchange-pattern" value="request-response"/>
 <property name="auxiliary;index" value="11"/>
-<property name="path" value="queryencounter_xds_retrieve_document_setb"/>
-<property name="auxiliary;index" value="11"/>
-<property name="auxiliary;index" value="11"/>
-<property name="auxiliary;index" value="11"/>
-<property name="businessEventsLabel"/>
-<property name="tracking:enable-default-events"/>
-<property name="auxiliary;index" value="11"/>
-<property name="address"/>
-<property name="responseTimeout"/>
-<property name="encoding"/>
-<property name="disableTransportTransformer"/>
-<property name="mimeType"/>
-<property name="auxiliary;index" value="11"/>
-<property name="auxiliary;index" value="11"/>
-<property name="connector-ref"/>
-<property name="ref"/>
-<property name="transformer-refs"/>
-<property name="responseTransformer-refs"/>
+<property name="collection"/>
+<property name="counterVariableName"/>
+<property name="batchSize"/>
+<property name="rootMessageVariableName"/>
 <property name="auxiliary;index" value="11"/>
 <property name="auxiliary;index" value="11"/>
 <property name="auxiliary;index" value="11"/>
                             </properties>
-                        </endpoint>
+                            <compartment entity-id="compartment#2">
+<lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#3">
+    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Send Retrieve Documents Request" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#2">
+        <properties>
+            <property name="exchange-pattern" value="one-way"/>
+            <property name="exchange-pattern" value="request-response"/>
+            <property name="auxiliary;index" value="12"/>
+            <property name="path" value="queryencounter_xds_retrieve_document_setb"/>
+            <property name="auxiliary;index" value="12"/>
+            <property name="auxiliary;index" value="12"/>
+            <property name="auxiliary;index" value="12"/>
+            <property name="businessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="12"/>
+            <property name="address"/>
+            <property name="responseTimeout"/>
+            <property name="encoding"/>
+            <property name="disableTransportTransformer"/>
+            <property name="mimeType"/>
+            <property name="auxiliary;index" value="12"/>
+            <property name="auxiliary;index" value="12"/>
+            <property name="connector-ref"/>
+            <property name="ref"/>
+            <property name="transformer-refs"/>
+            <property name="responseTransformer-refs"/>
+            <property name="auxiliary;index" value="12"/>
+            <property name="auxiliary;index" value="12"/>
+            <property name="auxiliary;index" value="12"/>
+        </properties>
+    </endpoint>
+</lane>
+                            </compartment>
+                        </scope>
                         <pattern name="Process retrieve documents response" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#4">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
 <property name="encoding"/>
-<property name="auxiliary;index" value="12"/>
+<property name="auxiliary;index" value="13"/>
 <property name="mimeType"/>
-<property name="auxiliary;index" value="12"/>
-<property name="auxiliary;index" value="12"/>
+<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="13"/>
 <property name="class" value="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSetResponse"/>
-<property name="auxiliary;index" value="12"/>
-<property name="auxiliary;index" value="12"/>
-<property name="auxiliary;index" value="12"/>
+<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="13"/>
                             </properties>
                         </pattern>
                     </lane>
@@ -175,34 +191,34 @@
                     <property name="configuration-ref"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/jaxws-client"/>
                     <property name="configuration-ref"/>
-                    <property name="auxiliary;index" value="13"/>
+                    <property name="auxiliary;index" value="14"/>
                     <property name="operation" value="DocumentRegistry_RegistryStoredQuery"/>
                     <property name="serviceClass"/>
                     <property name="decoupledEndpoint"/>
-                    <property name="auxiliary;index" value="13"/>
+                    <property name="auxiliary;index" value="14"/>
                     <property name="clientClass" value="ihe.iti.xds_b._2007.DocumentRegistryService"/>
                     <property name="port" value="DocumentRegistry_Port_Soap12"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
                     <property name="mtomEnabled"/>
                     <property name="wsdlLocation"/>
                     <property name="enableMuleSoapHeaders"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
-                    <property name="auxiliary;index" value="13"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
                 </properties>
             </pattern>
             <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#3">
@@ -210,51 +226,51 @@
                     <property name="message" value="The raw soap XDS registry payload: #[groovy: return message.payload.toString();]"/>
                     <property name="level" value="INFO"/>
                     <property name="category"/>
-                    <property name="auxiliary;index" value="16"/>
-                    <property name="auxiliary;index" value="16"/>
-                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="17"/>
                 </properties>
             </pattern>
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                 <properties>
                     <property name="exchange-pattern" value="one-way"/>
                     <property name="exchange-pattern" value="request-response"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="18"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="18"/>
                     <property name="httpLabel"/>
                     <property name="host" value="${xds.registry.host}"/>
                     <property name="port" value="${xds.registry.port}"/>
                     <property name="path" value="${xds.registry.path}"/>
                     <property name="method"/>
-                    <property name="auxiliary;index" value="17"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="18"/>
+                    <property name="auxiliary;index" value="18"/>
                     <property name="businessEventsLabel"/>
                     <property name="tracking:enable-default-events"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="18"/>
                     <property name="address"/>
                     <property name="encoding" value="UTF-8"/>
                     <property name="disableTransportTransformer"/>
                     <property name="mimeType"/>
                     <property name="responseTimeout"/>
                     <property name="followRedirects"/>
-                    <property name="auxiliary;index" value="17"/>
-                    <property name="auxiliary;index" value="17"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="18"/>
+                    <property name="auxiliary;index" value="18"/>
+                    <property name="auxiliary;index" value="18"/>
                     <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="auxiliary;index" value="17"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="18"/>
+                    <property name="auxiliary;index" value="18"/>
                     <property name="user"/>
                     <property name="password"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="18"/>
                     <property name="contentType"/>
                     <property name="keep-alive"/>
-                    <property name="auxiliary;index" value="17"/>
-                    <property name="auxiliary;index" value="17"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="18"/>
+                    <property name="auxiliary;index" value="18"/>
+                    <property name="auxiliary;index" value="18"/>
                 </properties>
             </endpoint>
         </lane>
