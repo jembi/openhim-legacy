@@ -8,7 +8,7 @@ It was developed for the Rwandan Health Infromation Exchange however, it was des
 Setup
 =====
 
-The HIM is developed as a Mule ESB application so we need MuleStudio to work with the project. You can download it here: http://www.mulesoft.org/download-mule-esb-community-edition
+The HIM is developed as a Mule ESB application so we need MuleStudio to work with the project. You can download it here: http://www.mulesoft.org/download-mule-esb-community-edition. If you are new to MuleStudio I would suggest going over some of the getting started documentation and do some of the tutorials: http://www.mulesoft.org/documentation/display/MULE3START/Home.
 
 Next, you will want to import this git repo into MuleStudio. There is some good documentation on how to accomblish this on the Mule wiki: http://www.mulesoft.org/documentation/display/MULE3STUDIO/Using+Git+with+Studio
 
