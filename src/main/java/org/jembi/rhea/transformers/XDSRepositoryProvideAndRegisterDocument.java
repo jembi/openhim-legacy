@@ -263,7 +263,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 
 		public String getPID() {
 	    	//return pid + "^^^&" + domain.getAffinityDomainIDType() +"&ISO";
-			//nist testing
+			//TODO hardcoded for nist testing
 	    	return "55f81316303842c^^^&1.3.6.1.4.1.21367.2009.1.2.300&ISO";
 	    }
 	    

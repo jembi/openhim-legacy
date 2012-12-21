@@ -55,6 +55,7 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 			at = ATNAUtil.build_TCP_Msg_header() + at;
 			client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
 			
+			//TODO this ain't right...
 			return null;
 		} catch (JAXBException e) {
 			throw new TransformerException(this, e);
@@ -104,6 +105,7 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 		
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
+		//TODO use correct affinity domain id type (i.e. not hardcoded ECID)
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(patientId +  "^^^&ECID&ISO", (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
 		);
