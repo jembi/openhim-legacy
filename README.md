@@ -66,6 +66,6 @@ To test the RHEA HIM implementation you can use SOAP UI (http://www.soapui.org/)
 
 A soapUI project that is setup for testing the API calls for the HIM can be found here: https://github.com/jembi/rhea-api-tests
 
-By default the OpenHIM run on port 5000 so make sure to set the endpoint in soapUI to point to https://localhost:5000. You must supply a HTTP basic auth username and password to connect to the OpenHIM. the details must be equal to one of the user in the LDAP databse. If you used the ldif provies you can use the following details:
+By default the OpenHIM run on port 5000 so make sure to set the endpoint in soapUI to point to https://localhost:5000. You must supply a HTTP basic auth username and password to connect to the OpenHIM. the details must be equal to one of the user in the LDAP databse. If you used the ldif provied you can use the following details:
 * Username: test
 * Passowrd: test 
