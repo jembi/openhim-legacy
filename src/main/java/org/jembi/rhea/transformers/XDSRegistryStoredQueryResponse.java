@@ -224,6 +224,7 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 		
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
+		//TODO use correct affinity domain id type (i.e. not hardcoded ECID)
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(patientId +  "^^^&ECID&ISO", (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
 		);

@@ -118,6 +118,8 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
 		return request;
 	}
 	
+	//TODO util functions can be moved to a utility class (somewhere in org.jembi.ihe.xds)
+	
     /**
      * Create a query slot
      */
