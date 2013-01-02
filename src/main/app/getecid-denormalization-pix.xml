@@ -21,7 +21,11 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
     <flow name="mediation-getecid-denormalization-pix" doc:name="mediation-getecid-denormalization-pix">
         <vm:inbound-endpoint exchange-pattern="request-response" path="getecid-pix" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
         <logger message="In getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
-        <custom-transformer class="org.jembi.rhea.transformers.PIXQueryGenerator" doc:name="Generate PIX Query"/>
+        <custom-transformer class="org.jembi.rhea.transformers.PIXQueryGenerator" doc:name="Generate PIX Query">
+            <spring:property name="assigningAuthorityId" value="${pix.assigningAuthorityId}"/>
+            <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthority}"/>
+            <spring:property name="requestedAssigningAuthorityId" value="${pix.requestedAssigningAuthorityId}"/>
+        </custom-transformer>
         <logger message="Generated PIX messgage: #[groovy: return message.payload;]" level="INFO" doc:name="Logger"/>
         <response>
             <echo-component doc:name="Echo"/>
@@ -45,19 +49,14 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
             <logger message="Exitting getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         </response>
         <choice doc:name="Choice">
-            <when expression="#[groovy: return false;]">
+            <when expression="#[groovy: return ${ihe.secure};]">
                 <processor-chain>
-                    <ssl:outbound-endpoint host="cr.marc-hi.ca" port="2100" responseTimeout="10000" doc:name="Mohawk Secure" connector-ref="tlsConnector" exchange-pattern="request-response"/>
-                </processor-chain>
-            </when>
-            <when expression="#[groovy: return true;]">
-                <processor-chain>
-                    <tcp:outbound-endpoint exchange-pattern="request-response" host="cr.marc-hi.ca" port="2100" responseTimeout="10000" doc:name="Mohawk"/>
+                    <ssl:outbound-endpoint host="${pix.manager.host}" port="${pix.manager.securePort}" responseTimeout="10000" doc:name="Secure" connector-ref="tlsConnector" exchange-pattern="request-response"/>
                 </processor-chain>
             </when>
             <otherwise>
                 <processor-chain>
-                    <tcp:outbound-endpoint exchange-pattern="request-response" host="129.6.24.143" port="9080" responseTimeout="10000"  doc:name="NIST"/>
+                    <tcp:outbound-endpoint exchange-pattern="request-response" host="${pix.manager.host}" port="${pix.manager.port}" responseTimeout="10000"  doc:name="Non-secure"/>
                 </processor-chain>
             </otherwise>
         </choice>

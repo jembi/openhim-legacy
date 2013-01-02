@@ -22,6 +22,10 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 
 	private String _msh10;
 	
+	private String assigningAuthorityId = "";
+	private String requestedAssigningAuthority = "";
+	private String requestedAssigningAuthorityId = "";
+	
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
@@ -33,12 +37,7 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		
 		String pix_query;
 		try {
-			//TODO externalise these strings
-			pix_query = constructPIXQuery(id, idType, null, "MOH_CAAT_MARC_HI", "1.3.6.1.4.1.33349.3.1.2.1.0.1");
-			//NIST test 1
-			//pix_query = constructPIXQuery("PIXL1", "NIST2010", "2.16.840.1.113883.3.72.5.9.1", "NIST2010-3", "2.16.840.1.113883.3.72.5.9.3");
-			//NIST test 2
-			//pix_query = constructPIXQuery("PIXL1", "NIST2010", "2.16.840.1.113883.3.72.5.9.1", "", "");
+			pix_query = constructPIXQuery(id, idType, assigningAuthorityId, requestedAssigningAuthority, requestedAssigningAuthorityId);
 		} catch (HL7Exception e) {
 			throw new TransformerException(this, e);
 		}
@@ -75,7 +74,7 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		t.set("MSH-9-3", "QBP_Q21");
 		//MSH-10 message control id
 		_msh10 = UUID.randomUUID().toString();
-		t.set("MSH-10", _msh10); // check
+		t.set("MSH-10", _msh10);
 		t.set("MSH-11-1", "P");
 		t.set("MSH-12-1-1", "2.5");
 		
@@ -96,5 +95,30 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		
 		Parser p = new GenericParser();
 		return p.encode(qbp_q21);
+	}
+
+	public String getAssigningAuthorityId() {
+		return assigningAuthorityId;
+	}
+
+	public void setAssigningAuthorityId(String assigningAuthorityId) {
+		this.assigningAuthorityId = assigningAuthorityId;
+	}
+
+	public String getRequestedAssigningAuthority() {
+		return requestedAssigningAuthority;
+	}
+
+	public void setRequestedAssigningAuthority(String requestedAssigningAuthority) {
+		this.requestedAssigningAuthority = requestedAssigningAuthority;
+	}
+
+	public String getRequestedAssigningAuthorityId() {
+		return requestedAssigningAuthorityId;
+	}
+
+	public void setRequestedAssigningAuthorityId(
+			String requestedAssigningAuthorityId) {
+		this.requestedAssigningAuthorityId = requestedAssigningAuthorityId;
 	}
 }
