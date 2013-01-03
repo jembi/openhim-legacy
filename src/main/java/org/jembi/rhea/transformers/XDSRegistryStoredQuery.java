@@ -28,6 +28,7 @@ import org.jembi.rhea.RestfulHttpRequest;
 import org.jembi.rhea.Util;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 
 import ca.marc.ihe.xds.XdsGuidType;
@@ -90,9 +91,8 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
         
         // Slots, first setup slot for patient ID
         // TODO get this from the PIX query
-        String idOid = "1.19.6.24.109.42.1.3";
-        // TODO HARD CODED REMOVE
-        id = "1b48e083395f498";
+        //String idOid = "1.19.6.24.109.42.1.3";
+        String idOid = message.getProperty(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, PropertyScope.SESSION);
         String srcPatientId = String.format("'%s^^^&%s&ISO'", id, idOid);
         adhocQuery.getSlot().add(createQuerySlot("$XDSDocumentEntryPatientId", srcPatientId));
         
