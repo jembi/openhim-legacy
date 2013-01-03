@@ -54,6 +54,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 	
 	private static SimpleDateFormat formatter_yyyyMMdd = new SimpleDateFormat("yyyyMMdd");
 	
+	private String systemSourceID = "";
 	private String _uniqueId;
 	
 	/* Transform ORU_R01 and generate register request */
@@ -131,8 +132,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		
 		// To add external ids
 		document.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSDocumentEntry_PatientId, enc.getPID()));
-		//_uniqueId = String.format("urn:uuid:%s", UUID.randomUUID());
-		_uniqueId = String.format("1.3.6.1.4.1.21367.%s", new SimpleDateFormat("yyyy.MM.dd.ss").format(now));
+		_uniqueId = String.format("%s.%s", systemSourceID, new SimpleDateFormat("yyyy.MM.dd.ss").format(now));
 		document.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSDocumentEntry_UniqueId, _uniqueId));
 
 		// Add to list of objects
@@ -176,9 +176,8 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		
 		// To add external ids
 		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_PatientId, enc.getPID()));
-		//TODO investigate OID generation
 		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_UniqueId, _uniqueId));
-		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_SourceId, _uniqueId));
+		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_SourceId, systemSourceID));
 
 		// Add package to submission
 		registryObjects.getIdentifiable().add(new JAXBElement<RegistryPackageType>(
@@ -301,5 +300,14 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		StringWriter sw = new StringWriter();
 		marshaller.marshal(prRequest, sw);
 		return sw.toString();
+	}
+
+	
+	public String getSystemSourceID() {
+		return systemSourceID;
+	}
+
+	public void setSystemSourceID(String systemSourceID) {
+		this.systemSourceID = systemSourceID;
 	}
 }
