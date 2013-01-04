@@ -40,6 +40,9 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 	
 	private Log log = LogFactory.getLog(this.getClass());
 	
+	private String xdsRegistryHost = "";
+	private String requestedAssigningAuthority = "";
+	
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
@@ -63,7 +66,7 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 			String uniqueId = (String)message.getSessionProperty("XDS-ITI-18_uniqueId");
 			String patientId = (String)message.getSessionProperty("XDS-ITI-18_patientId");
 			
-			String at = generateATNAMessage(request, patientId, uniqueId, outcome); //??need to log the response message instead of the request??
+			String at = generateATNAMessage(request, patientId, uniqueId, outcome);
 			if (muleContext != null) {
 				MuleClient client = new MuleClient(muleContext);
 				at = ATNAUtil.build_TCP_Msg_header() + at;
@@ -219,14 +222,12 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 		
 		//TODO userId should be content of <wsa:ReplyTo/>
 		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("userId", ATNAUtil.getProcessID(), true, ATNAUtil.getHostIP(), (short)2, "DCM", "110153", "Source"));
-		//TODO reference the SHR from the configuration
-		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("localhost", false, "localhost", (short)1, "DCM", "110152", "Destination"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(xdsRegistryHost, false, xdsRegistryHost, (short)1, "DCM", "110152", "Destination"));
 		
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
-		//TODO use correct affinity domain id type (i.e. not hardcoded ECID)
 		res.getParticipantObjectIdentification().add(
-			ATNAUtil.buildParticipantObjectIdentificationType(patientId +  "^^^&ECID&ISO", (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
+			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
 		);
 		
 		//TODO homeCommunityId: if known, then add it to participantObjectName and as an additional participantObjectDetail
@@ -240,4 +241,20 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 	}
 	
     /* */
+
+	public String getXdsRegistryHost() {
+		return xdsRegistryHost;
+	}
+
+	public void setXdsRegistryHost(String xdsRegistryHost) {
+		this.xdsRegistryHost = xdsRegistryHost;
+	}
+
+	public String getRequestedAssigningAuthority() {
+		return requestedAssigningAuthority;
+	}
+
+	public void setRequestedAssigningAuthority(String requestedAssigningAuthority) {
+		this.requestedAssigningAuthority = requestedAssigningAuthority;
+	}
 }

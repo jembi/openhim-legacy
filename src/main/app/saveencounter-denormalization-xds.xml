@@ -26,7 +26,10 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
         </custom-transformer>
         <response>
             <logger message="Recieved response from xds provider: #[groovy: message.toString();]]" level="INFO" doc:name="Logger"/>
-            <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryProvideAndRegisterDocumentResponse" doc:name="Process XDS Response"/>
+            <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryProvideAndRegisterDocumentResponse" doc:name="Process XDS Response">
+                <spring:property name="xdsRepositoryHost" value="${xds.repository.host}"/>
+                <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthorityId}"/>
+            </custom-transformer>
             <custom-transformer class="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer" doc:name="HttpResponseToRestfulHttpResponseTransformer"/>
             <logger message="Responce normalization" level="INFO" doc:name="Logger"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="On-ramp Transformer"/>

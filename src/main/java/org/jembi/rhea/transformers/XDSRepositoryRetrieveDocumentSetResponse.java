@@ -34,6 +34,9 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		AbstractMessageTransformer {
 	
 	private Log log = LogFactory.getLog(this.getClass());
+	
+	private String xdsRepositoryHost = "";
+	private String requestedAssigningAuthority = "";
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
@@ -145,16 +148,14 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		eid.setEventOutcomeIndicator(outcome ? BigInteger.ONE : BigInteger.ZERO);
 		res.setEventIdentification(eid);
 		
-		//TODO reference the SHR from the configuration
-		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("localhost", false, "localhost", (short)1, "DCM", "110153", "Source"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(xdsRepositoryHost, false, xdsRepositoryHost, (short)1, "DCM", "110153", "Source"));
 		//TODO userId should be content of <wsa:ReplyTo/>
 		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("userId", ATNAUtil.getProcessID(), true, ATNAUtil.getHostIP(), (short)2, "DCM", "110152", "Destination"));
 		
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
-		//TODO use correct affinity domain id type (i.e. not hardcoded ECID)
 		res.getParticipantObjectIdentification().add(
-			ATNAUtil.buildParticipantObjectIdentificationType(patientId +  "^^^&ECID&ISO", (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
+			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
 		);
 		
 		//TODO homeCommunityId: if known, then add it as an additional participantObjectDetail
@@ -168,4 +169,20 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 	}
 	
     /* */
+
+	public String getXdsRepositoryHost() {
+		return xdsRepositoryHost;
+	}
+
+	public void setXdsRepositoryHost(String xdsRepositoryHost) {
+		this.xdsRepositoryHost = xdsRepositoryHost;
+	}
+
+	public String getRequestedAssigningAuthority() {
+		return requestedAssigningAuthority;
+	}
+
+	public void setRequestedAssigningAuthority(String requestedAssigningAuthority) {
+		this.requestedAssigningAuthority = requestedAssigningAuthority;
+	}
 }
