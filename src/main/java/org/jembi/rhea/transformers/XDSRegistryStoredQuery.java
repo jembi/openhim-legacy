@@ -3,12 +3,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.jembi.rhea.transformers;
 
+import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryRequest;
 import oasis.names.tc.ebxml_regrep.xsd.query._3.ResponseOptionType;
@@ -87,7 +92,8 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
         // Setup the ad-hoc query
         AdhocQueryType adhocQuery = new AdhocQueryType();
         // set query type to find documents, by specific urn
-        adhocQuery.setId(String.format("urn:uuid:%s", "14d4debf-8f97-4251-9a74-a90016b0af0d"));
+        String storedQueryId = (String.format("urn:uuid:%s", "14d4debf-8f97-4251-9a74-a90016b0af0d"));
+        adhocQuery.setId(storedQueryId);
         
         // Slots, first setup slot for patient ID
         // TODO get this from the PIX query
@@ -109,11 +115,14 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
         // Append the ad-hoc query to the request 
         request.setAdhocQuery(adhocQuery);
 		
-		//TODO
-		// add request to session prop so that we can access it when processing the response
-		//message.setSessionProperty("XDS-ITI-18", null);
-		//message.setSessionProperty("XDS-ITI-18_uniqueId", null);
-		//message.setSessionProperty("XDS-ITI-18_patientId", null);
+        try {
+			// add request to session prop so that we can access it when processing the response
+			message.setSessionProperty("XDS-ITI-18", marshall(request));
+			message.setSessionProperty("XDS-ITI-18_uniqueId", storedQueryId);
+			message.setSessionProperty("XDS-ITI-18_patientId", id);
+		} catch (JAXBException ex) {
+			throw new TransformerException(this, ex);
+		}
 		
 		return request;
 	}
@@ -218,4 +227,12 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
         return retSlot;
     }
 
+	private static String marshall(AdhocQueryRequest prRequest) throws JAXBException {
+		JAXBContext jc = JAXBContext.newInstance("oasis.names.tc.ebxml_regrep.xsd.query._3");
+		Marshaller marshaller = jc.createMarshaller();
+		marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
+		StringWriter sw = new StringWriter();
+		marshaller.marshal(prRequest, sw);
+		return sw.toString();
+	}
 }
