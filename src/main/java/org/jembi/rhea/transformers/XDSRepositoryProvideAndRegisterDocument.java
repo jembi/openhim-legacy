@@ -30,8 +30,10 @@ import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.xds.XDSAffinityDomain;
+import org.jembi.rhea.Util;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 
 import ca.marc.ihe.xds.XDSUtil;
@@ -64,8 +66,19 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 			throws TransformerException {
 		
 		try {
+			String path = message.getProperty("path", PropertyScope.OUTBOUND);
+			
+			int beginIndex = path.indexOf("patient/") + 8;
+			int endIndex = path.indexOf("/encounters");
+			String id_str = path.substring(beginIndex, endIndex);
+			
+			String[] identifer = Util.splitIdentifer(id_str);
+			String id = identifer[1];
+			
 			String request = (String)message.getPayload();
 			EncounterInfo enc = parseEncounterRequest(request, XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE);
+			enc.pid = id;
+			
 			ProvideAndRegisterDocumentSetRequestType prRequest = buildRegisterRequest(
 				request, enc, XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE
 			);
@@ -132,8 +145,8 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		
 		// To add external ids
 		document.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSDocumentEntry_PatientId, enc.getPID()));
-		_uniqueId = String.format("%s.%s", systemSourceID, new SimpleDateFormat("yyyy.MM.dd.ss").format(now));
-		document.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSDocumentEntry_UniqueId, _uniqueId));
+		String docUniqueId = String.format("%s.%s", systemSourceID, new SimpleDateFormat("yyyy.MM.dd.ss.SSS").format(now));
+		document.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSDocumentEntry_UniqueId, docUniqueId));
 
 		// Add to list of objects
 		registryObjects.getIdentifiable().add(new JAXBElement<ExtrinsicObjectType>(
@@ -176,6 +189,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		
 		// To add external ids
 		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_PatientId, enc.getPID()));
+		_uniqueId = String.format("%s.%s", systemSourceID, new SimpleDateFormat("yyyy.MM.dd.ss.SSS").format(now));
 		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_UniqueId, _uniqueId));
 		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_SourceId, systemSourceID));
 
@@ -220,10 +234,6 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		ORU_R01 msg = (ORU_R01)parser.parse(oru_r01);
 		
 		PID pid = msg.getPATIENT_RESULT().getPATIENT().getPID();
-		for (CX cx : pid.getPatientIdentifierList()) {
-			if (domain.getAffinityDomainIDType().equalsIgnoreCase(cx.getIdentifierTypeCode().getValue()))
-				res.pid = cx.getIDNumber().getValue();
-		}
 		if (pid.getPatientNameReps()>0) {
 			res.lastName = pid.getPatientName(0).getXpn1_FamilyName().getFn1_Surname().getValue();
 			res.firstName = pid.getPatientName(0).getXpn2_GivenName().getValue();
@@ -243,7 +253,8 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		return res;
 	}
 	
-    
+    // TODO a static class may enable different thread to alter fields while another still need the original values,
+	// this is, however, unlikely. 
     protected static class EncounterInfo {
     	protected XDSAffinityDomain domain;
     	protected String pid;
@@ -261,9 +272,8 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		}
 
 		public String getPID() {
-	    	//return pid + "^^^&" + domain.getAffinityDomainIDType() +"&ISO";
-			//TODO hardcoded for nist testing
-	    	return "55f81316303842c^^^&1.3.6.1.4.1.21367.2009.1.2.300&ISO";
+			// TODO Externalise domain ID
+	    	return pid + "^^^&" + domain.getAffinityDomainIDType() +"&ISO";
 	    }
 	    
 	    public String getName() {

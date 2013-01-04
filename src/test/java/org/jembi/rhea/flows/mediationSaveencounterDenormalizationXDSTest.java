@@ -53,6 +53,9 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	    // Mohawk
 	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_MARC_HI-2552234100/encounters");
 	    
+	    //TODO hardcoded for nist testing [modify for use here]
+    	//return "55f81316303842c^^^&1.3.6.1.4.1.21367.2009.1.2.300&ISO";
+	    
 	    String oru_r01 = getResourceAsString("oru_r01.xml");
 	    payload.setBody(oru_r01);
 	    

@@ -10,7 +10,7 @@ public enum XDSAffinityDomain {
 	
 	IHE_CONNECTATHON_NA2013_RHEAHIE(
 		//affinityDomainIDType
-		"1.3.6.1.4.1.33349.3.1.2.1.0.1", //mohawk
+		"1.3.6.1.4.1.33349.3.1.2.1.0.1", //mohawk TODO externalise
 		//"1.19.6.24.109.42.1.3", //ihe
 		//"ECID",
 		//contentTypeCode

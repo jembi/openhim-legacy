@@ -27,7 +27,6 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 				XDSRepositoryProvideAndRegisterDocument.parseEncounterRequest(
 					TEST_ORU_R01_MSG, XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE
 				);
-			assertEquals(TEST_ENC.pid, enc.pid);
 			assertEquals(TEST_ENC.firstName, enc.firstName);
 			assertEquals(TEST_ENC.lastName, enc.lastName);
 			assertEquals(TEST_ENC.encounterDateTime, enc.encounterDateTime);
@@ -120,7 +119,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 		"		</PID.3>" +
 		"		<PID.3>" +
 		"		    <CX.1>2552234100</CX.1>" +
-		"		    <CX.5>" + XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE.getAffinityDomainIDType() + "</CX.5>" +
+		"		    <CX.5>MOH_CAAT_MARC_HI</CX.5>" +
 		"		</PID.3>" +
 		"		<PID.3>" +
 		"		    <CX.1>100002-P</CX.1>" +
