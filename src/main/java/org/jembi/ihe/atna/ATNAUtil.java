@@ -17,6 +17,7 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -24,6 +25,8 @@ import javax.xml.bind.Marshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+import edu.emory.mathcs.backport.java.util.Collections;
 
 public class ATNAUtil {
 	
@@ -69,8 +72,31 @@ public class ATNAUtil {
 	public static ParticipantObjectIdentificationType buildParticipantObjectIdentificationType(
 			String participantObjectId, short participantObjectTypeCode, short participantObjectTypeCodeRole,
 			String participantObjectIDTypeCode_CodeSystemName, String participantObjectIDTypeCode_Code,
+			String participantObjectIDTypeCode_DisplayName, String participantObjectQuery) {
+		return buildParticipantObjectIdentificationType(
+			participantObjectId, participantObjectTypeCode, participantObjectTypeCodeRole,
+			participantObjectIDTypeCode_CodeSystemName, participantObjectIDTypeCode_Code, participantObjectIDTypeCode_DisplayName,
+			participantObjectQuery, Collections.emptyList()
+		);
+	}
+	
+	public static ParticipantObjectIdentificationType buildParticipantObjectIdentificationType(
+			String participantObjectId, short participantObjectTypeCode, short participantObjectTypeCodeRole,
+			String participantObjectIDTypeCode_CodeSystemName, String participantObjectIDTypeCode_Code,
 			String participantObjectIDTypeCode_DisplayName, String participantObjectQuery,
-			String participantObjectDetailType, byte[] participantObjectDetailValue) {
+			ParticipantObjectDetail participantObjectDetail) {
+		return buildParticipantObjectIdentificationType(
+			participantObjectId, participantObjectTypeCode, participantObjectTypeCodeRole,
+			participantObjectIDTypeCode_CodeSystemName, participantObjectIDTypeCode_Code, participantObjectIDTypeCode_DisplayName,
+			participantObjectQuery, Collections.singletonList(participantObjectDetail)
+		);
+	}
+	
+	public static ParticipantObjectIdentificationType buildParticipantObjectIdentificationType(
+			String participantObjectId, short participantObjectTypeCode, short participantObjectTypeCodeRole,
+			String participantObjectIDTypeCode_CodeSystemName, String participantObjectIDTypeCode_Code,
+			String participantObjectIDTypeCode_DisplayName, String participantObjectQuery,
+			List<ParticipantObjectDetail> participantObjectDetails) {
 		
 		ParticipantObjectIdentificationType res = new ParticipantObjectIdentificationType();
 		res.setParticipantObjectID(participantObjectId);
@@ -87,11 +113,13 @@ public class ATNAUtil {
 		
 		if (participantObjectQuery!=null) res.setParticipantObjectQuery(participantObjectQuery.getBytes());
 		
-		if (participantObjectDetailType!=null) {
-			TypeValuePairType tvpt = new TypeValuePairType();
-			tvpt.setType(participantObjectDetailType);
-			tvpt.setValue(participantObjectDetailValue);
-			res.getParticipantObjectDetail().add(tvpt);
+		if (participantObjectDetails!=null) {
+			for (ParticipantObjectDetail participantObjectDetail : participantObjectDetails) {
+				TypeValuePairType tvpt = new TypeValuePairType();
+				tvpt.setType(participantObjectDetail.getType());
+				tvpt.setValue(participantObjectDetail.getValue());
+				res.getParticipantObjectDetail().add(tvpt);
+			}
 		}
 		
 		return res;
@@ -153,5 +181,32 @@ public class ATNAUtil {
 	
 	public static String getProcessName() {
 		return "java";
+	}
+	
+	
+	public static class ParticipantObjectDetail {
+		private String type;
+		private byte[] value;
+		
+		public ParticipantObjectDetail(String type, byte[] value) {
+			this.type = type;
+			this.value = value;
+		}
+
+		public String getType() {
+			return type;
+		}
+
+		public void setType(String type) {
+			this.type = type;
+		}
+
+		public byte[] getValue() {
+			return value;
+		}
+
+		public void setValue(byte[] value) {
+			this.value = value;
+		}
 	}
 }

@@ -16,6 +16,7 @@ import javax.xml.bind.JAXBException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
+import org.jembi.ihe.atna.ATNAUtil.ParticipantObjectDetail;
 import org.jembi.rhea.Constants;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -124,11 +125,11 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
 		res.getParticipantObjectIdentification().add(
-			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
+			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null)
 		);
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(
-				UUID.randomUUID().toString(), (short)2, (short)24, "IHE Transactions", "ITI-9", "PIX Query", request, "MSH-10", msh10.getBytes()
+				UUID.randomUUID().toString(), (short)2, (short)24, "IHE Transactions", "ITI-9", "PIX Query", request, new ParticipantObjectDetail("MSH-10", msh10.getBytes())
 			)
 		);
 		
