@@ -38,33 +38,38 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 	public Object transformMessage(MuleMessage message, String encoding)
 			throws TransformerException {
 		
+		boolean outcome = false;
 		try {
 			//TODO process response
 			String result = null;
-			boolean outcome = false;
 			
 			if (message.getPayload() instanceof RegistryResponseType)
 				outcome = processResponse((RegistryResponseType)message.getPayload());
 			else
 				log.error(String.format("Unknown response type received (%s)", message.getPayload().getClass()));
 			
-			//generate audit message
-			String request = (String)message.getSessionProperty("XDS-ITI-41");
-			String uniqueId = (String)message.getSessionProperty("XDS-ITI-41_uniqueId");
-			String patientId = (String)message.getSessionProperty("XDS-ITI-41_patientId");
+		} finally {
 			
-			String at = generateATNAMessage(request, patientId, uniqueId, outcome);
-			MuleClient client = new MuleClient(muleContext);
-			at = ATNAUtil.build_TCP_Msg_header() + at;
-			client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
-			
-			//TODO this ain't right...
-			return null;
-		} catch (JAXBException e) {
-			throw new TransformerException(this, e);
-		} catch (MuleException e) {
-			throw new TransformerException(this, e);
+			try {
+				//generate audit message
+				String request = (String)message.getSessionProperty("XDS-ITI-41");
+				String uniqueId = (String)message.getSessionProperty("XDS-ITI-41_uniqueId");
+				String patientId = (String)message.getSessionProperty("XDS-ITI-41_patientId");
+				
+				String at = generateATNAMessage(request, patientId, uniqueId, outcome);
+				MuleClient client = new MuleClient(muleContext);
+				at = ATNAUtil.build_TCP_Msg_header() + at;
+				client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+				
+				log.info("Dispatched ATNA message");
+			} catch (Exception e) {
+				//If the auditing breaks, it shouldn't break the flow, so catch and log
+				log.error("Failed to dispatch ATNA message", e);
+			}
 		}
+			
+		//TODO this ain't right...
+		return null;
 	}
 	
 	protected boolean processResponse(RegistryResponseType response) {
@@ -107,7 +112,6 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 		
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
-		//TODO use correct affinity domain id type (i.e. not hardcoded ECID)
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
 		);

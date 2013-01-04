@@ -46,10 +46,11 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
-		try {
-			// process response					
-			boolean outcome = false;
+		
+		boolean outcome = false;
+		Map<String, List<DocumentMetaData>> repoDocumentsMap = null;
 			
+		try {
 			AdhocQueryResponse response = null;
 			if (message.getPayload() instanceof AdhocQueryResponse) {
 				response = (AdhocQueryResponse) message.getPayload();
@@ -59,26 +60,30 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 			}
 			
 			// get a map of repository id's pointing to a list of document id's for that repository
-			Map<String, List<DocumentMetaData>> repoDocumentsMap = getRepositoryDocuments(response);
+			repoDocumentsMap = getRepositoryDocuments(response);
 			
-			//generate audit message
-			String request = (String)message.getSessionProperty("XDS-ITI-18");
-			String uniqueId = (String)message.getSessionProperty("XDS-ITI-18_uniqueId");
-			String patientId = (String)message.getSessionProperty("XDS-ITI-18_patientId");
-			
-			String at = generateATNAMessage(request, patientId, uniqueId, outcome);
-			if (muleContext != null) {
-				MuleClient client = new MuleClient(muleContext);
-				at = ATNAUtil.build_TCP_Msg_header() + at;
-				client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+		} finally {
+			try {
+				//generate audit message
+				String request = (String)message.getSessionProperty("XDS-ITI-18");
+				String uniqueId = (String)message.getSessionProperty("XDS-ITI-18_uniqueId");
+				String patientId = (String)message.getSessionProperty("XDS-ITI-18_patientId");
+				
+				String at = generateATNAMessage(request, patientId, uniqueId, outcome);
+				if (muleContext != null) {
+					MuleClient client = new MuleClient(muleContext);
+					at = ATNAUtil.build_TCP_Msg_header() + at;
+					client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+					
+					log.info("Dispatched ATNA message");
+				}
+			} catch (Exception e) {
+				//If the auditing breaks, it shouldn't break the flow, so catch and log
+				log.error("Failed to dispatch ATNA message", e);
 			}
-			
-			return repoDocumentsMap;
-		} catch (JAXBException e) {
-			throw new TransformerException(this, e);
-		} catch (MuleException e) {
-			throw new TransformerException(this, e);
 		}
+		
+		return repoDocumentsMap;
 	}
 
 	private Map<String, List<DocumentMetaData>> getRepositoryDocuments(

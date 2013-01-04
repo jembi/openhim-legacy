@@ -42,55 +42,61 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
-		try {
-			// process response					
-			if (message.getPayload()==null) {
-				log.error("Null response received from XDS repository");
-				return null;
-			} else if (message.getPayload() instanceof RetrieveDocumentSetResponseType) {
-				RetrieveDocumentSetResponseType response = (RetrieveDocumentSetResponseType) message.getPayload();
-				return Collections.singleton(processResponse(response));
-			} else if (message.getPayload() instanceof ArrayList &&
-					((List)message.getPayload()).size()>0 &&
-					((List)message.getPayload()).get(0) instanceof RetrieveDocumentSetResponseType) {
-				List<RetrieveDocumentSetResponseType> responses = (List<RetrieveDocumentSetResponseType>)message.getPayload();
-				List<String> res = new ArrayList<String>(responses.size());
-				for (RetrieveDocumentSetResponseType response : responses)
-					res.add(processResponse(response));
-				return res;
-			} else {
-				log.error("Unknown response type received from XDS repository: " + message.getPayload().getClass());
-				return null;
-			}
-			
-		} catch (JAXBException e) {
-			throw new TransformerException(this, e);
-		} catch (MuleException e) {
-			throw new TransformerException(this, e);
+		
+		// process response					
+		if (message.getPayload()==null) {
+			log.error("Null response received from XDS repository");
+			return null;
+		} else if (message.getPayload() instanceof RetrieveDocumentSetResponseType) {
+			RetrieveDocumentSetResponseType response = (RetrieveDocumentSetResponseType) message.getPayload();
+			return Collections.singleton(processResponse(response));
+		} else if (message.getPayload() instanceof ArrayList &&
+				((List)message.getPayload()).size()>0 &&
+				((List)message.getPayload()).get(0) instanceof RetrieveDocumentSetResponseType) {
+			List<RetrieveDocumentSetResponseType> responses = (List<RetrieveDocumentSetResponseType>)message.getPayload();
+			List<String> res = new ArrayList<String>(responses.size());
+			for (RetrieveDocumentSetResponseType response : responses)
+				res.add(processResponse(response));
+			return res;
+		} else {
+			log.error("Unknown response type received from XDS repository: " + message.getPayload().getClass());
+			return null;
 		}
 	}
 	
-	private String processResponse(RetrieveDocumentSetResponseType response) throws JAXBException, MuleException {
+	private String processResponse(RetrieveDocumentSetResponseType response) throws TransformerException {
 		boolean outcome = false;
 		String repositoryUniqueId = null;
+		String document = null;
 
-	    // get a list of doc unique id separated by ":"
-		String document = getDocument(response);
-	
-		//generate audit message
-		//String request = (String)message.getSessionProperty("XDS-ITI-43");
-		//String uniqueId = (String)message.getSessionProperty("XDS-ITI-43_uniqueId");
-		//String patientId = (String)message.getSessionProperty("XDS-ITI-43_patientId");
-		String request = null, uniqueId = null, patientId = null;
-		
-		String at = generateATNAMessage(request, patientId, uniqueId, repositoryUniqueId, outcome); //??shall we log the response as well as the request??
-		if(muleContext != null) {
-			MuleClient client = new MuleClient(muleContext);
-			at = ATNAUtil.build_TCP_Msg_header() + at;
-			client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+		try {
+		    // get a list of doc unique id separated by ":"
+			document = getDocument(response);
+			outcome = true;
+			
+		} finally {
+			try {
+				//generate audit message
+				//String request = (String)message.getSessionProperty("XDS-ITI-43");
+				//String uniqueId = (String)message.getSessionProperty("XDS-ITI-43_uniqueId");
+				//String patientId = (String)message.getSessionProperty("XDS-ITI-43_patientId");
+				String request = null, uniqueId = null, patientId = null;
+				
+				String at = generateATNAMessage(request, patientId, uniqueId, repositoryUniqueId, outcome);
+				if(muleContext != null) {
+					MuleClient client = new MuleClient(muleContext);
+					at = ATNAUtil.build_TCP_Msg_header() + at;
+					client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+					
+					log.info("Dispatched ATNA message");
+				}
+			} catch (Exception e) {
+				//If the auditing breaks, it shouldn't break the flow, so catch and log
+				log.error("Failed to dispatch ATNA message", e);
+			}
 		}
-		// return the content of the document
 		
+		// return the content of the document
 		return document;
 	}
 

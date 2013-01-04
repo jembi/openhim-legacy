@@ -43,6 +43,8 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
+		String pid = null;
+		
 		try {
 			String response = message.getPayloadAsString();
 			
@@ -52,17 +54,9 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 			
 			Map<String, String> idMap = parseResponse(response);
 			
-			String pid = idMap.get("id");
+			pid = idMap.get("id");
 			
 			message.setProperty(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, idMap.get("assigningAuthority"), PropertyScope.SESSION);
-			
-			// send auditing message
-			String request = (String)message.getSessionProperty("PIX-ITI-9");
-			String msh10 = (String)message.getSessionProperty("PIX-ITI-9_MSH-10");
-			String at = generateATNAMessage(request, pid, msh10);
-			MuleClient client = new MuleClient(muleContext);
-			at = ATNAUtil.build_TCP_Msg_header() + at;
-			client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
 			
 			return pid;
 			
@@ -72,6 +66,21 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 			throw new TransformerException(this, e);
 		} catch (Exception e) { // Pokemon exception handling, when you just gotta catch them all!
 			throw new TransformerException(this, e);
+		} finally {
+			try {
+				// send auditing message
+				String request = (String)message.getSessionProperty("PIX-ITI-9");
+				String msh10 = (String)message.getSessionProperty("PIX-ITI-9_MSH-10");
+				String at = generateATNAMessage(request, pid, msh10);
+				MuleClient client = new MuleClient(muleContext);
+				at = ATNAUtil.build_TCP_Msg_header() + at;
+				client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+				
+				log.info("Dispatched ATNA message");
+			} catch (Exception e) {
+				//If the auditing breaks, it shouldn't break the flow, so catch and log
+				log.error("Failed to dispatch ATNA message", e);
+			}
 		}
 	}
 
