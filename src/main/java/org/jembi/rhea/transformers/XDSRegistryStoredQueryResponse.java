@@ -26,6 +26,7 @@ import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
+import org.jembi.ihe.atna.ATNAUtil.ParticipantObjectDetail;
 import org.jembi.rhea.xds.DocumentMetaData;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
@@ -41,6 +42,10 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 	private Log log = LogFactory.getLog(this.getClass());
 	
 	private String xdsRegistryHost = "";
+	private String xdsRegistryPath = "";
+	private String xdsRegistryPort = "";
+	private String xdsRegistrySecurePort = "";
+	private String iheSecure = "";
 	private String requestedAssigningAuthority = "";
 	private String homeCommunityId;
 	
@@ -228,21 +233,21 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 		
 		//TODO userId should be content of <wsa:ReplyTo/>
 		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("userId", ATNAUtil.getProcessID(), true, ATNAUtil.getHostIP(), (short)2, "DCM", "110153", "Source"));
-		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(xdsRegistryHost, false, xdsRegistryHost, (short)1, "DCM", "110152", "Destination"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(buildRegistryPath(), xdsRegistryHost, false, xdsRegistryHost, (short)1, "DCM", "110152", "Destination"));
 		
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
 		res.getParticipantObjectIdentification().add(
-			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, (byte[])null)
+			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null)
 		);
 		
-		List<byte[]> od = new ArrayList<byte[]>();
-		od.add("UTF-8".getBytes());
-		if (homeCommunityId!=null) od.add(homeCommunityId.getBytes());
+		List<ParticipantObjectDetail> pod = new ArrayList<ParticipantObjectDetail>();
+		pod.add(new ParticipantObjectDetail("QueryEncoding", "UTF-8".getBytes()));
+		if (homeCommunityId!=null) pod.add(new ParticipantObjectDetail("urn:ihe:iti:xca:2010:homeCommunityId", homeCommunityId.getBytes()));
 		
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(
-				uniqueId, (short)2, (short)24, "IHE Transactions", "ITI-18", "Registry Stored Query", request, "QueryEncoding", od
+				uniqueId, (short)2, (short)24, "IHE Transactions", "ITI-18", "Registry Stored Query", request, pod
 			)
 		);
 		
@@ -265,5 +270,41 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 
 	public void setRequestedAssigningAuthority(String requestedAssigningAuthority) {
 		this.requestedAssigningAuthority = requestedAssigningAuthority;
+	}
+
+	public String getXdsRegistryPath() {
+		return xdsRegistryPath;
+	}
+
+	public void setXdsRegistryPath(String xdsRegistryPath) {
+		this.xdsRegistryPath = xdsRegistryPath;
+	}
+
+	public String getXdsRegistryPort() {
+		return xdsRegistryPort;
+	}
+
+	public void setXdsRegistryPort(String xdsRegistryPort) {
+		this.xdsRegistryPort = xdsRegistryPort;
+	}
+
+	public String getXdsRegistrySecurePort() {
+		return xdsRegistrySecurePort;
+	}
+
+	public void setXdsRegistrySecurePort(String xdsRegistrySecurePort) {
+		this.xdsRegistrySecurePort = xdsRegistrySecurePort;
+	}
+
+	public String getIheSecure() {
+		return iheSecure;
+	}
+
+	public void setIheSecure(String iheSecure) {
+		this.iheSecure = iheSecure;
+	}
+	
+	private String buildRegistryPath() {
+		return String.format("%s:%s/%s", xdsRegistryHost, ((iheSecure.equalsIgnoreCase("true")) ? xdsRegistrySecurePort : xdsRegistryPort), xdsRegistryPath);
 	}
 }

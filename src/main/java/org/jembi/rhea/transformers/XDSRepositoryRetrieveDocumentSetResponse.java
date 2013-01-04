@@ -24,6 +24,7 @@ import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
+import org.jembi.ihe.atna.ATNAUtil.ParticipantObjectDetail;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -36,6 +37,10 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 	private Log log = LogFactory.getLog(this.getClass());
 	
 	private String xdsRepositoryHost = "";
+	private String xdsRepositoryPath = "";
+	private String xdsRepositoryPort = "";
+	private String xdsRepositorySecurePort = "";
+	private String iheSecure = "";
 	private String requestedAssigningAuthority = "";
 	private String homeCommunityId;
 
@@ -155,23 +160,23 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		eid.setEventOutcomeIndicator(outcome ? BigInteger.ONE : BigInteger.ZERO);
 		res.setEventIdentification(eid);
 		
-		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(xdsRepositoryHost, false, xdsRepositoryHost, (short)1, "DCM", "110153", "Source"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(buildRepositoryPath(), xdsRepositoryHost, false, xdsRepositoryHost, (short)1, "DCM", "110153", "Source"));
 		//TODO userId should be content of <wsa:ReplyTo/>
 		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("userId", ATNAUtil.getProcessID(), true, ATNAUtil.getHostIP(), (short)2, "DCM", "110152", "Destination"));
 		
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
 		res.getParticipantObjectIdentification().add(
-			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, (byte[])null)
+			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null)
 		);
 		
-		List<byte[]> od = new ArrayList<byte[]>();
-		if (repositoryUniqueId!=null) od.add(repositoryUniqueId.getBytes());
-		if (homeCommunityId!=null) od.add(homeCommunityId.getBytes());
+		List<ParticipantObjectDetail> pod = new ArrayList<ParticipantObjectDetail>();
+		if (repositoryUniqueId!=null) pod.add(new ParticipantObjectDetail("Repository Unique Id", repositoryUniqueId.getBytes()));
+		if (homeCommunityId!=null) pod.add(new ParticipantObjectDetail("“ihe:homeCommunityID", homeCommunityId.getBytes()));
 		
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(
-				documentUniqueId, (short)2, (short)3, "RFC-3881", "9", "Report Number", request, "Repository Unique Id", od
+				documentUniqueId, (short)2, (short)3, "RFC-3881", "9", "Report Number", request, pod
 			)
 		);
 		
@@ -194,5 +199,41 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 
 	public void setRequestedAssigningAuthority(String requestedAssigningAuthority) {
 		this.requestedAssigningAuthority = requestedAssigningAuthority;
+	}
+
+	public String getXdsRepositoryPath() {
+		return xdsRepositoryPath;
+	}
+
+	public void setXdsRepositoryPath(String xdsRepositoryPath) {
+		this.xdsRepositoryPath = xdsRepositoryPath;
+	}
+
+	public String getXdsRepositoryPort() {
+		return xdsRepositoryPort;
+	}
+
+	public void setXdsRepositoryPort(String xdsRepositoryPort) {
+		this.xdsRepositoryPort = xdsRepositoryPort;
+	}
+
+	public String getXdsRepositorySecurePort() {
+		return xdsRepositorySecurePort;
+	}
+
+	public void setXdsRepositorySecurePort(String xdsRepositorySecurePort) {
+		this.xdsRepositorySecurePort = xdsRepositorySecurePort;
+	}
+
+	public String getIheSecure() {
+		return iheSecure;
+	}
+
+	public void setIheSecure(String iheSecure) {
+		this.iheSecure = iheSecure;
+	}
+	
+	private String buildRepositoryPath() {
+		return String.format("%s:%s/%s", xdsRepositoryHost, ((iheSecure.equalsIgnoreCase("true")) ? xdsRepositorySecurePort : xdsRepositoryPort), xdsRepositoryPath);
 	}
 }

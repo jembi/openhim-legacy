@@ -72,13 +72,11 @@ public class ATNAUtil {
 	public static ParticipantObjectIdentificationType buildParticipantObjectIdentificationType(
 			String participantObjectId, short participantObjectTypeCode, short participantObjectTypeCodeRole,
 			String participantObjectIDTypeCode_CodeSystemName, String participantObjectIDTypeCode_Code,
-			String participantObjectIDTypeCode_DisplayName, String participantObjectQuery,
-			String participantObjectDetailType, byte[] participantObjectDetailValues) {
+			String participantObjectIDTypeCode_DisplayName, String participantObjectQuery) {
 		return buildParticipantObjectIdentificationType(
 			participantObjectId, participantObjectTypeCode, participantObjectTypeCodeRole,
 			participantObjectIDTypeCode_CodeSystemName, participantObjectIDTypeCode_Code, participantObjectIDTypeCode_DisplayName,
-			participantObjectQuery, participantObjectDetailType,
-			Collections.singletonList(participantObjectDetailValues)
+			participantObjectQuery, Collections.emptyList()
 		);
 	}
 	
@@ -86,7 +84,19 @@ public class ATNAUtil {
 			String participantObjectId, short participantObjectTypeCode, short participantObjectTypeCodeRole,
 			String participantObjectIDTypeCode_CodeSystemName, String participantObjectIDTypeCode_Code,
 			String participantObjectIDTypeCode_DisplayName, String participantObjectQuery,
-			String participantObjectDetailType, List<byte[]> participantObjectDetailValues) {
+			ParticipantObjectDetail participantObjectDetail) {
+		return buildParticipantObjectIdentificationType(
+			participantObjectId, participantObjectTypeCode, participantObjectTypeCodeRole,
+			participantObjectIDTypeCode_CodeSystemName, participantObjectIDTypeCode_Code, participantObjectIDTypeCode_DisplayName,
+			participantObjectQuery, Collections.singletonList(participantObjectDetail)
+		);
+	}
+	
+	public static ParticipantObjectIdentificationType buildParticipantObjectIdentificationType(
+			String participantObjectId, short participantObjectTypeCode, short participantObjectTypeCodeRole,
+			String participantObjectIDTypeCode_CodeSystemName, String participantObjectIDTypeCode_Code,
+			String participantObjectIDTypeCode_DisplayName, String participantObjectQuery,
+			List<ParticipantObjectDetail> participantObjectDetails) {
 		
 		ParticipantObjectIdentificationType res = new ParticipantObjectIdentificationType();
 		res.setParticipantObjectID(participantObjectId);
@@ -103,11 +113,11 @@ public class ATNAUtil {
 		
 		if (participantObjectQuery!=null) res.setParticipantObjectQuery(participantObjectQuery.getBytes());
 		
-		if (participantObjectDetailType!=null) {
-			for (byte[] participantObjectDetailValue : participantObjectDetailValues) {
+		if (participantObjectDetails!=null) {
+			for (ParticipantObjectDetail participantObjectDetail : participantObjectDetails) {
 				TypeValuePairType tvpt = new TypeValuePairType();
-				tvpt.setType(participantObjectDetailType);
-				tvpt.setValue(participantObjectDetailValue);
+				tvpt.setType(participantObjectDetail.getType());
+				tvpt.setValue(participantObjectDetail.getValue());
 				res.getParticipantObjectDetail().add(tvpt);
 			}
 		}
@@ -171,5 +181,32 @@ public class ATNAUtil {
 	
 	public static String getProcessName() {
 		return "java";
+	}
+	
+	
+	public static class ParticipantObjectDetail {
+		private String type;
+		private byte[] value;
+		
+		public ParticipantObjectDetail(String type, byte[] value) {
+			this.type = type;
+			this.value = value;
+		}
+
+		public String getType() {
+			return type;
+		}
+
+		public void setType(String type) {
+			this.type = type;
+		}
+
+		public byte[] getValue() {
+			return value;
+		}
+
+		public void setValue(byte[] value) {
+			this.value = value;
+		}
 	}
 }

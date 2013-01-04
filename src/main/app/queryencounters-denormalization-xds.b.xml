@@ -23,7 +23,11 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
         	<logger message="Recieved response from XDS registry: #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
 	        <custom-transformer class="org.jembi.rhea.transformers.XDSRegistryStoredQueryResponse" doc:name="Process stored query response">
                 <spring:property name="xdsRegistryHost" value="${xds.registry.host}"/>
+                <spring:property name="xdsRegistryPath" value="${xds.registry.path}"/>
+                <spring:property name="xdsRegistrySecurePort" value="${xds.registry.securePort}"/>
+                <spring:property name="xdsRegistryPort" value="${xds.registry.port}"/>
                 <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthorityId}"/>
+                <spring:property name="iheSecure" value="${ihe.secure}"/>
             </custom-transformer>
 	        <echo-component doc:name="Echo"/>
 	        <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSet" doc:name="Construct retrieve documents messages"/>
@@ -32,7 +36,11 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
 	        </foreach>
             <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSetResponse" doc:name="Process retrieve documents response">
                 <spring:property name="xdsRepositoryHost" value="${xds.repository.host}"/>
+                <spring:property name="xdsRepositoryPath" value="${xds.repository.path}"/>
+                <spring:property name="xdsRepositorySecurePort" value="${xds.repository.securePort}"/>
+                <spring:property name="xdsRepositoryPort" value="${xds.repository.port}"/>
                 <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthorityId}"/>
+                <spring:property name="iheSecure" value="${ihe.secure}"/>
             </custom-transformer>
         </response>
         <cxf:jaxws-client doc:name="SOAP"  clientClass="ihe.iti.xds_b._2007.DocumentRegistryService" port="DocumentRegistry_Port_Soap12" operation="DocumentRegistry_RegistryStoredQuery">
