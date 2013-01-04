@@ -35,7 +35,7 @@ public class mediationDenormalizationQueryEncountersXDS_BTest extends
 
 	@Override
 	protected String getConfigResources() {
-		return "src/main/app/queryencounters-denormalization-xds.b.xml";
+		return "src/main/app/queryencounters-denormalization-xds.b.xml, src/main/app/global-elements.xml";
 	}
 	
 	@Test
