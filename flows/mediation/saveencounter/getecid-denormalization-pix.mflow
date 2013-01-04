@@ -87,11 +87,6 @@
             <property name="auxiliary;index" value="4"/>
             <property name="auxiliary;index" value="4"/>
             <property name="auxiliary;index" value="4"/>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/tcp/custom-protocol;0">
-                <property name="class" value="org.jembi.openhim.connector.MLLPByteProtocol"/>
-                <property name="auxiliary;wrapIn" value="5"/>
-                <property name="auxiliary;index" value="5"/>
-            </property-collection>
             <property-collection name="@http://www.mulesoft.org/schema/mule/ssl/client;0">
                 <property name="storePassword" value="${ihe.storepassword}"/>
                 <property name="path" value="${ihe.keystore}"/>
@@ -105,9 +100,14 @@
                 <property name="auxiliary;wrapIn" value="7"/>
                 <property name="auxiliary;index" value="7"/>
             </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/tcp/custom-protocol;0">
+                <property name="class" value="org.jembi.openhim.connector.MLLPByteProtocol"/>
+                <property name="auxiliary;wrapIn" value="5"/>
+                <property name="auxiliary;index" value="5"/>
+            </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mediation-getecid-denormalization-pix" entity-id="4e969854-5fa9-4d59-b5fe-c1c413c479aa">
+    <flow SubFlow="false" name="mediation-getecid-denormalization-pix" entity-id="5dd07573-b841-4862-8c0c-895cb7cb8696">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -213,35 +213,77 @@
                         </pattern>
                         <pattern name="Handle RSP response" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#2">
                             <properties>
-<property name="returnClass"/>
-<property name="ignoreBadInput"/>
-<property name="encoding"/>
-<property name="auxiliary;index" value="18"/>
-<property name="mimeType"/>
-<property name="auxiliary;index" value="18"/>
-<property name="auxiliary;index" value="18"/>
+<property name="auxiliary;erased;mimeType" value="true"/>
+<property name="returnClass" value=""/>
+<property name="ignoreBadInput" value="false"/>
+<property name="auxiliary;erased;encoding" value="true"/>
+<property name="encoding" value=""/>
 <property name="class" value="org.jembi.rhea.transformers.PIXQueryResponseTransformer"/>
+<property name="mimeType" value=""/>
 <property name="auxiliary;index" value="18"/>
-<property name="auxiliary;index" value="18"/>
-<property name="auxiliary;index" value="18"/>
+<property name="updated"/>
+<property-collection name="@http://www.springframework.org/schema/beans/property;24539861">
+    <property name="ref" value=""/>
+    <property name="name" value="requestedAssigningAuthority"/>
+    <property name="value" value="${pix.requestedAssigningAuthorityId}"/>
+    <property name="isProcessed$$$$" value="true"/>
+</property-collection>
+<property-collection name="@http://www.springframework.org/schema/beans/property;29034201">
+    <property name="ref" value=""/>
+    <property name="name" value="pixManagerHost"/>
+    <property name="value" value="${pix.manager.host}"/>
+    <property name="isProcessed$$$$" value="true"/>
+</property-collection>
                             </properties>
+                            <description></description>
                         </pattern>
                         <splitter index="19" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                             <properties>
-<property-collection name="908d7f75-09e9-442b-b6ba-84cad1a3ab13">
+<property name=";INDEX" value="19"/>
+<property name=";INDEX" value="19"/>
+<property name=";INDEX" value="19"/>
+<property name=";INDEX" value="19"/>
+<property name=";INDEX" value="19"/>
+<property name=";INDEX" value="19"/>
+<property name=";INDEX" value="19"/>
+<property name=";INDEX" value="19"/>
+<property name=";INDEX" value="19"/>
+<property-collection name="aa5c2726-cedc-4727-a217-30cffea22c61">
     <property name="choice.otherwise" value="true"/>
     <property-collection name="choice.attributes"/>
 </property-collection>
-<property-collection name="35d83ff7-4a2d-4bc2-baba-937a39ed0846">
+<property-collection name="51302830-c074-423b-9cbd-f2bfa74c164b">
     <property name="choice.expression" value="#[groovy: return message.payload != null; ]"/>
     <property-collection name="choice.attributes">
         <property name="expression" value="#[groovy: return message.payload != null; ]"/>
     </property-collection>
 </property-collection>
                             </properties>
-                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
+                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
+<properties>
+    <property name=";INDEX" value="19"/>
+    <property name=";INDEX" value="19"/>
+    <property name=";INDEX" value="19"/>
+    <property name=";INDEX" value="19"/>
+    <property name=";INDEX" value="19"/>
+    <property name=";INDEX" value="19"/>
+    <property name=";INDEX" value="19"/>
+    <property name=";INDEX" value="19"/>
+    <property name=";INDEX" value="19"/>
+    <property-collection name="aa5c2726-cedc-4727-a217-30cffea22c61">
+        <property name="choice.otherwise" value="true"/>
+        <property-collection name="choice.attributes"/>
+    </property-collection>
+    <property-collection name="51302830-c074-423b-9cbd-f2bfa74c164b">
+        <property name="choice.expression" value="#[groovy: return message.payload != null; ]"/>
+        <property-collection name="choice.attributes">
+            <property name="expression" value="#[groovy: return message.payload != null; ]"/>
+        </property-collection>
+    </property-collection>
+</properties>
+                            </pattern>
                             <compartment entity-id="compartment#2">
-<lane hadOnlyOneElement="false" index="21" isChoiceOtherwiseLane="false" entity-id="35d83ff7-4a2d-4bc2-baba-937a39ed0846">
+<lane hadOnlyOneElement="false" index="21" isChoiceOtherwiseLane="false" entity-id="51302830-c074-423b-9cbd-f2bfa74c164b">
     <pattern name="Set transaction success" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="Message Properties#1">
         <properties>
             <property name="returnClass"/>
@@ -264,11 +306,12 @@
                 <property name="auxiliary;wrapIn" value="23"/>
                 <property name="auxiliary;index" value="23"/>
                 <property name="key" value="success"/>
+                <property name="isProcessed$$$$" value="true"/>
             </property-collection>
         </properties>
     </pattern>
 </lane>
-<lane hadOnlyOneElement="false" index="25" isChoiceOtherwiseLane="true" entity-id="908d7f75-09e9-442b-b6ba-84cad1a3ab13">
+<lane hadOnlyOneElement="false" index="25" isChoiceOtherwiseLane="true" entity-id="aa5c2726-cedc-4727-a217-30cffea22c61">
     <pattern name="Set transaction success" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="Message Properties#2">
         <properties>
             <property name="returnClass"/>
@@ -291,6 +334,7 @@
                 <property name="auxiliary;wrapIn" value="27"/>
                 <property name="auxiliary;index" value="27"/>
                 <property name="key" value="success"/>
+                <property name="isProcessed$$$$" value="true"/>
             </property-collection>
         </properties>
     </pattern>
@@ -312,20 +356,51 @@
             </response>
             <splitter index="29" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#3">
                 <properties>
-                    <property-collection name="d6be98b1-298b-4e5a-a8cf-ab6f80132c83">
+                    <property name=";INDEX" value="29"/>
+                    <property name=";INDEX" value="29"/>
+                    <property name=";INDEX" value="29"/>
+                    <property name=";INDEX" value="29"/>
+                    <property name=";INDEX" value="29"/>
+                    <property name=";INDEX" value="29"/>
+                    <property name=";INDEX" value="29"/>
+                    <property name=";INDEX" value="29"/>
+                    <property name=";INDEX" value="29"/>
+                    <property-collection name="48fcbf7a-29e5-4a26-b5ee-8929a4d36456">
                         <property name="choice.otherwise" value="true"/>
                         <property-collection name="choice.attributes"/>
                     </property-collection>
-                    <property-collection name="3ba8a556-acbf-4912-9bec-2b471b02d649">
+                    <property-collection name="41696f8e-338c-421f-a88b-bfdab25a71f2">
                         <property name="choice.expression" value="#[groovy: return ${ihe.secure};]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[groovy: return ${ihe.secure};]"/>
                         </property-collection>
                     </property-collection>
                 </properties>
-                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#4"/>
+                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#4">
+                    <properties>
+                        <property name=";INDEX" value="29"/>
+                        <property name=";INDEX" value="29"/>
+                        <property name=";INDEX" value="29"/>
+                        <property name=";INDEX" value="29"/>
+                        <property name=";INDEX" value="29"/>
+                        <property name=";INDEX" value="29"/>
+                        <property name=";INDEX" value="29"/>
+                        <property name=";INDEX" value="29"/>
+                        <property name=";INDEX" value="29"/>
+                        <property-collection name="48fcbf7a-29e5-4a26-b5ee-8929a4d36456">
+                            <property name="choice.otherwise" value="true"/>
+                            <property-collection name="choice.attributes"/>
+                        </property-collection>
+                        <property-collection name="41696f8e-338c-421f-a88b-bfdab25a71f2">
+                            <property name="choice.expression" value="#[groovy: return ${ihe.secure};]"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="#[groovy: return ${ihe.secure};]"/>
+                            </property-collection>
+                        </property-collection>
+                    </properties>
+                </pattern>
                 <compartment entity-id="compartment#3">
-                    <lane hadOnlyOneElement="false" index="31" isChoiceOtherwiseLane="false" entity-id="3ba8a556-acbf-4912-9bec-2b471b02d649">
+                    <lane hadOnlyOneElement="false" index="31" isChoiceOtherwiseLane="false" entity-id="41696f8e-338c-421f-a88b-bfdab25a71f2">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Secure" type="http://www.mulesoft.org/schema/mule/tls/endpoint" entity-id="TLS#1">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
@@ -407,7 +482,7 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="34" isChoiceOtherwiseLane="true" entity-id="d6be98b1-298b-4e5a-a8cf-ab6f80132c83">
+                    <lane hadOnlyOneElement="false" index="34" isChoiceOtherwiseLane="true" entity-id="48fcbf7a-29e5-4a26-b5ee-8929a4d36456">
                         <endpoint direction="Outbound" message-exchange-pattern="RequestResponse" name="Non-secure" type="http://www.mulesoft.org/schema/mule/tcp/endpoint" entity-id="TCP#1">
                             <properties>
 <property name="exchange-pattern" value="request-response"/>

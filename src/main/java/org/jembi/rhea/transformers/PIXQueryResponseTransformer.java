@@ -33,6 +33,9 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 
 	private Log log = LogFactory.getLog(this.getClass());
 	
+	private String pixManagerHost = "";
+	private String requestedAssigningAuthority = "";
+	
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
@@ -92,14 +95,12 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		res.setEventIdentification(eid);
 		
 		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(ATNAUtil.getSystemName() + "|openhim", ATNAUtil.getProcessID(), true, ATNAUtil.getHostIP(), (short)2, "DCM", "110153", "Source"));
-		//TODO reference the CR from the configuration
-		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("cr.marc-hi.ca|pixmanager", "2100", false, "cr.marc-hi.ca", (short)1, "DCM", "110152", "Destination"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(pixManagerHost + "|pixmanager", "2100", false, pixManagerHost, (short)1, "DCM", "110152", "Destination"));
 		
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
-		//TODO use correct affinity domain id type (i.e. not hardcoded ECID)
 		res.getParticipantObjectIdentification().add(
-			ATNAUtil.buildParticipantObjectIdentificationType(patientId +  "^^^&ECID&ISO", (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
+			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
 		);
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(
@@ -108,5 +109,22 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		);
 		
 		return ATNAUtil.marshall(res);
+	}
+
+
+	public String getPixManagerHost() {
+		return pixManagerHost;
+	}
+
+	public void setPixManagerHost(String pixManagerHost) {
+		this.pixManagerHost = pixManagerHost;
+	}
+
+	public String getRequestedAssigningAuthority() {
+		return requestedAssigningAuthority;
+	}
+
+	public void setRequestedAssigningAuthority(String requestedAssigningAuthority) {
+		this.requestedAssigningAuthority = requestedAssigningAuthority;
 	}
 }
