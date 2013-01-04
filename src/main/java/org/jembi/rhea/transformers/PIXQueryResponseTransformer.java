@@ -7,6 +7,8 @@ import ihe.iti.atna.AuditMessage;
 import ihe.iti.atna.EventIdentificationType;
 
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.xml.bind.JAXBException;
@@ -14,8 +16,10 @@ import javax.xml.bind.JAXBException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
+import org.jembi.rhea.Constants;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+import org.mule.api.transport.PropertyScope;
 import org.mule.module.client.MuleClient;
 import org.mule.transformer.AbstractMessageTransformer;
 
@@ -46,7 +50,11 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 			response = response.replace("\013", "");
 			response = response.replace("\034", "");
 			
-			String pid = parseResponse(response);
+			Map<String, String> idMap = parseResponse(response);
+			
+			String pid = idMap.get("id");
+			
+			message.setProperty(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, idMap.get("assigningAuthority"), PropertyScope.SESSION);
 			
 			// send auditing message
 			String request = (String)message.getSessionProperty("PIX-ITI-9");
@@ -68,7 +76,7 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 	}
 
 	
-	protected String parseResponse(String response) throws EncodingNotSupportedException, HL7Exception {
+	protected Map<String, String> parseResponse(String response) throws EncodingNotSupportedException, HL7Exception {
 		Parser parser = new GenericParser();
 		Object parsedMsg = parser.parse(response);
 		if (!(parsedMsg instanceof RSP_K23))
@@ -80,7 +88,14 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		if (numIds < 1)
 			return null;
 		
-		return msg.getQUERY_RESPONSE().getPID().getPatientIdentifierList(0).getCx1_IDNumber().getValue();
+		String id = msg.getQUERY_RESPONSE().getPID().getPatientIdentifierList(0).getCx1_IDNumber().getValue();
+		String assigningAuthority = msg.getQUERY_RESPONSE().getPID().getPatientIdentifierList(0).getAssigningAuthority().getUniversalID().getValue();
+		
+		Map<String, String> idMap = new HashMap<String, String>();
+		idMap.put("id", id);
+		idMap.put("assigningAuthority", assigningAuthority);
+		
+		return idMap;
 	}
 	
 	protected String generateATNAMessage(String request, String patientId, String msh10) throws JAXBException {

@@ -17,4 +17,6 @@ public class Constants {
 	public static final String QUERY_ENC_NOTIFICATION_TYPE_PARAM = "notificationType";
 	public static final String QUERY_ENC_ELID_PARAM = "ELID";
 	
+	public static final String ASSIGNING_AUTHORITY_OID_PROPERTY_NAME = "assigningAuthorityOid";
+	
 }

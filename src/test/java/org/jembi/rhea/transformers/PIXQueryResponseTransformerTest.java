@@ -5,6 +5,8 @@ package org.jembi.rhea.transformers;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Map;
+
 import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
@@ -16,8 +18,9 @@ public class PIXQueryResponseTransformerTest {
 
 	@Test
 	public void testParseResponse() throws EncodingNotSupportedException, HL7Exception {
-		String result = (String)new PIXQueryResponseTransformer().parseResponse(TEST_RSP);
-		assertEquals("3058035884", result);
+		Map<String, String> result = new PIXQueryResponseTransformer().parseResponse(TEST_RSP);
+		assertEquals("3058035884", result.get("id"));
+		assertEquals("1.3.6.1.4.1.33349.3.1.2.1.0.1", result.get("assigningAuthority"));
 	}
 
 
