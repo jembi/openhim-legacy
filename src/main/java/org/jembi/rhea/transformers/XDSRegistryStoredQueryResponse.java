@@ -42,6 +42,7 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 	
 	private String xdsRegistryHost = "";
 	private String requestedAssigningAuthority = "";
+	private String homeCommunityId;
 	
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
@@ -127,7 +128,7 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 						}
 						
 						// get homeCommunityId
-						String homeCommunityId = eot.getHome();
+						homeCommunityId = eot.getHome();
 						
 						docList.add(new DocumentMetaData(uniqueDocId, homeCommunityId));
 					}
@@ -232,13 +233,16 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
 		res.getParticipantObjectIdentification().add(
-			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
+			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, (byte[])null)
 		);
 		
-		//TODO homeCommunityId: if known, then add it to participantObjectName and as an additional participantObjectDetail
+		List<byte[]> od = new ArrayList<byte[]>();
+		od.add("UTF-8".getBytes());
+		if (homeCommunityId!=null) od.add(homeCommunityId.getBytes());
+		
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(
-				uniqueId, (short)2, (short)24, "IHE Transactions", "ITI-18", "Registry Stored Query", request, "QueryEncoding", "UTF-8".getBytes()
+				uniqueId, (short)2, (short)24, "IHE Transactions", "ITI-18", "Registry Stored Query", request, "QueryEncoding", od
 			)
 		);
 		

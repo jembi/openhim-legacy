@@ -17,6 +17,7 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -24,6 +25,8 @@ import javax.xml.bind.Marshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+import edu.emory.mathcs.backport.java.util.Collections;
 
 public class ATNAUtil {
 	
@@ -70,7 +73,20 @@ public class ATNAUtil {
 			String participantObjectId, short participantObjectTypeCode, short participantObjectTypeCodeRole,
 			String participantObjectIDTypeCode_CodeSystemName, String participantObjectIDTypeCode_Code,
 			String participantObjectIDTypeCode_DisplayName, String participantObjectQuery,
-			String participantObjectDetailType, byte[] participantObjectDetailValue) {
+			String participantObjectDetailType, byte[] participantObjectDetailValues) {
+		return buildParticipantObjectIdentificationType(
+			participantObjectId, participantObjectTypeCode, participantObjectTypeCodeRole,
+			participantObjectIDTypeCode_CodeSystemName, participantObjectIDTypeCode_Code, participantObjectIDTypeCode_DisplayName,
+			participantObjectQuery, participantObjectDetailType,
+			Collections.singletonList(participantObjectDetailValues)
+		);
+	}
+	
+	public static ParticipantObjectIdentificationType buildParticipantObjectIdentificationType(
+			String participantObjectId, short participantObjectTypeCode, short participantObjectTypeCodeRole,
+			String participantObjectIDTypeCode_CodeSystemName, String participantObjectIDTypeCode_Code,
+			String participantObjectIDTypeCode_DisplayName, String participantObjectQuery,
+			String participantObjectDetailType, List<byte[]> participantObjectDetailValues) {
 		
 		ParticipantObjectIdentificationType res = new ParticipantObjectIdentificationType();
 		res.setParticipantObjectID(participantObjectId);
@@ -88,10 +104,12 @@ public class ATNAUtil {
 		if (participantObjectQuery!=null) res.setParticipantObjectQuery(participantObjectQuery.getBytes());
 		
 		if (participantObjectDetailType!=null) {
-			TypeValuePairType tvpt = new TypeValuePairType();
-			tvpt.setType(participantObjectDetailType);
-			tvpt.setValue(participantObjectDetailValue);
-			res.getParticipantObjectDetail().add(tvpt);
+			for (byte[] participantObjectDetailValue : participantObjectDetailValues) {
+				TypeValuePairType tvpt = new TypeValuePairType();
+				tvpt.setType(participantObjectDetailType);
+				tvpt.setValue(participantObjectDetailValue);
+				res.getParticipantObjectDetail().add(tvpt);
+			}
 		}
 		
 		return res;

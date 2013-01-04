@@ -113,11 +113,11 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
 		res.getParticipantObjectIdentification().add(
-			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
+			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, (byte[])null)
 		);
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(
-				uniqueId, (short)2, (short)20, "IHE XDS Metadata", "urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd", "submission set classificationNode", request, null, null
+				uniqueId, (short)2, (short)20, "IHE XDS Metadata", "urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd", "submission set classificationNode", request, null, (byte[])null
 			)
 		);
 		

@@ -124,7 +124,7 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
 		res.getParticipantObjectIdentification().add(
-			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
+			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, (byte[])null)
 		);
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(

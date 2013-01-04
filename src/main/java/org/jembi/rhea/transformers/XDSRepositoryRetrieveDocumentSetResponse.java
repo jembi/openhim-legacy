@@ -37,6 +37,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 	
 	private String xdsRepositoryHost = "";
 	private String requestedAssigningAuthority = "";
+	private String homeCommunityId;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
@@ -124,7 +125,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
        if (drList != null && drList.size() > 0 && drList.get(0) != null) {
     	   totalResultCnt = drList.size();
            for (DocumentResponse dr : drList) {       // may want to loop thru the results at some point, but for now......
-                String home = dr.getHomeCommunityId();               //  <ns2:HomeCommunityId>urn:oid:1.3.6.1.4.1.12009.6.1</ns2:HomeCommunityId>
+                homeCommunityId = dr.getHomeCommunityId();               //  <ns2:HomeCommunityId>urn:oid:1.3.6.1.4.1.12009.6.1</ns2:HomeCommunityId>
                 String reposUniqueId = dr.getRepositoryUniqueId();   //  <ns2:RepositoryUniqueId>1</ns2:RepositoryUniqueId>
                 String docUniqueId = dr.getDocumentUniqueId();       //  <ns2:DocumentUniqueId>1.123401.11111</ns2:DocumentUniqueId>
                 String mimeType = dr.getMimeType();                  //  <ns2:mimeType>text/xml</ns2:mimeType>
@@ -161,13 +162,16 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
 		res.getParticipantObjectIdentification().add(
-			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, null)
+			ATNAUtil.buildParticipantObjectIdentificationType(String.format("%s^^^&%s&ISO", patientId, requestedAssigningAuthority), (short)1, (short)1, "RFC-3881", "2", "PatientNumber", null, null, (byte[])null)
 		);
 		
-		//TODO homeCommunityId: if known, then add it as an additional participantObjectDetail
+		List<byte[]> od = new ArrayList<byte[]>();
+		if (repositoryUniqueId!=null) od.add(repositoryUniqueId.getBytes());
+		if (homeCommunityId!=null) od.add(homeCommunityId.getBytes());
+		
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(
-				documentUniqueId, (short)2, (short)3, "RFC-3881", "9", "Report Number", request, "Repository Unique Id", (repositoryUniqueId==null? null : repositoryUniqueId.getBytes())
+				documentUniqueId, (short)2, (short)3, "RFC-3881", "9", "Report Number", request, "Repository Unique Id", od
 			)
 		);
 		
