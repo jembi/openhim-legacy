@@ -82,9 +82,11 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
         adhocQuery.setId(storedQueryId);
         
         // Slots, first setup slot for patient ID
-        // TODO get this from the PIX query
-        //String idOid = "1.19.6.24.109.42.1.3";
         String idOid = message.getProperty(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, PropertyScope.SESSION);
+        // To enable unit testing
+        if (idOid == null) {
+        	idOid = message.getProperty(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, PropertyScope.INBOUND);
+        }
         String srcPatientId = String.format("'%s^^^&%s&ISO'", id, idOid);
         adhocQuery.getSlot().add(XDSUtil.createQuerySlot("$XDSDocumentEntryPatientId", srcPatientId));
         

@@ -196,7 +196,7 @@ public class XDSRepositoryRetrieveDocumentSetResponseTest {
 		"		</PID.3>" +
 		"		<PID.3>" +
 		"		    <CX.1>2552234100</CX.1>" +
-		"		    <CX.5>" + XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE.getAffinityDomainIDType() + "</CX.5>" +
+		"		    <CX.5>MOH_CAAT_MARC_HI</CX.5>" +
 		"		</PID.3>" +
 		"		<PID.3>" +
 		"		    <CX.1>100002-P</CX.1>" +
