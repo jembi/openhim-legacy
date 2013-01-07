@@ -3,6 +3,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.jembi.rhea;
 
+import java.io.StringWriter;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+
 public class Util {
 	
 	/**
@@ -20,4 +26,22 @@ public class Util {
 		return ret;
 	}
 
+	/**
+	 * Marshall a JAXB object and return the XML as a string. The XML declaration will be added.
+	 */
+	public static String marshallJAXBObject(String namespace, Object o) throws JAXBException {
+		return marshallJAXBObject(namespace, o, true);
+	}
+	
+	/**
+	 * Marshall a JAXB object and return the XML as a string
+	 */
+	public static String marshallJAXBObject(String namespace, Object o, boolean addXMLDeclaration) throws JAXBException {
+		JAXBContext jc = JAXBContext.newInstance(namespace);
+		Marshaller marshaller = jc.createMarshaller();
+		marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", addXMLDeclaration);
+		StringWriter sw = new StringWriter();
+		marshaller.marshal(o, sw);
+		return sw.toString();
+	}
 }

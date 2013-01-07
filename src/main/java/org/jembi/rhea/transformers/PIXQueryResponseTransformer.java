@@ -70,13 +70,9 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		} finally {
 			try {
 				// send auditing message
-				String request = (String)message.getSessionProperty("PIX-ITI-9");
-				String msh10 = (String)message.getSessionProperty("PIX-ITI-9_MSH-10");
-				String at = generateATNAMessage(request, pid, msh10);
-				MuleClient client = new MuleClient(muleContext);
-				at = ATNAUtil.build_TCP_Msg_header() + at;
-				client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
-				
+				String request = (String)message.getProperty(Constants.PIX_REQUEST_PROPERTY, PropertyScope.SESSION);
+				String msh10 = (String)message.getProperty(Constants.PIX_REQUEST_MSH10_PROPERTY, PropertyScope.SESSION);
+				ATNAUtil.dispatchAuditMessage(muleContext, generateATNAMessage(request, pid, msh10));
 				log.info("Dispatched ATNA message");
 			} catch (Exception e) {
 				//If the auditing breaks, it shouldn't break the flow, so catch and log
@@ -133,7 +129,7 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 			)
 		);
 		
-		return ATNAUtil.marshall(res);
+		return ATNAUtil.marshallATNAObject(res);
 	}
 
 

@@ -6,17 +6,13 @@ package org.jembi.rhea.transformers;
 import ihe.iti.xds_b._2007.ProvideAndRegisterDocumentSetRequestType;
 import ihe.iti.xds_b._2007.ProvideAndRegisterDocumentSetRequestType.Document;
 
-import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
 import javax.activation.DataHandler;
 import javax.mail.util.ByteArrayDataSource;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 
 import oasis.names.tc.ebxml_regrep.xsd.lcm._3.SubmitObjectsRequest;
@@ -30,6 +26,7 @@ import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.xds.XDSAffinityDomain;
+import org.jembi.rhea.Constants;
 import org.jembi.rhea.Util;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -39,7 +36,6 @@ import org.mule.transformer.AbstractMessageTransformer;
 import ca.marc.ihe.xds.XDSUtil;
 import ca.marc.ihe.xds.XdsGuidType;
 import ca.uhn.hl7v2.HL7Exception;
-import ca.uhn.hl7v2.model.v25.datatype.CX;
 import ca.uhn.hl7v2.model.v25.message.ORU_R01;
 import ca.uhn.hl7v2.model.v25.segment.PID;
 import ca.uhn.hl7v2.model.v25.segment.PV1;
@@ -84,9 +80,9 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 			);
 			
 			// add request to session prop so that we can access it when processing the response
-			message.setSessionProperty("XDS-ITI-41", marshall(prRequest));
-			message.setSessionProperty("XDS-ITI-41_uniqueId", _uniqueId);
-			message.setSessionProperty("XDS-ITI-41_patientId", enc.getPID());
+			message.setProperty(Constants.XDS_ITI_41, Util.marshallJAXBObject("ihe.iti.xds_b._2007", prRequest, false), PropertyScope.SESSION);
+			message.setProperty(Constants.XDS_ITI_41_UNIQUEID, _uniqueId, PropertyScope.SESSION);
+			message.setProperty(Constants.XDS_ITI_41_PATIENTID, enc.getPID(), PropertyScope.SESSION);
 			
 			log.info("Generated XDS Provide and Register Document Set.b request");
 			return prRequest;
@@ -302,16 +298,6 @@ public class XDSRepositoryProvideAndRegisterDocument extends
     }
     
     /* */
-    
-	private static String marshall(ProvideAndRegisterDocumentSetRequestType prRequest) throws JAXBException {
-		JAXBContext jc = JAXBContext.newInstance("ihe.iti.xds_b._2007");
-		Marshaller marshaller = jc.createMarshaller();
-		marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
-		StringWriter sw = new StringWriter();
-		marshaller.marshal(prRequest, sw);
-		return sw.toString();
-	}
-
 	
 	public String getSystemSourceID() {
 		return systemSourceID;

@@ -25,9 +25,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
 import org.jembi.ihe.atna.ATNAUtil.ParticipantObjectDetail;
+import org.jembi.rhea.Constants;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+import org.mule.api.transport.PropertyScope;
 import org.mule.module.client.MuleClient;
 import org.mule.transformer.AbstractMessageTransformer;
 
@@ -83,19 +85,12 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		} finally {
 			try {
 				//generate audit message
-				//String request = (String)message.getSessionProperty("XDS-ITI-43");
-				//String uniqueId = (String)message.getSessionProperty("XDS-ITI-43_uniqueId");
-				//String patientId = (String)message.getSessionProperty("XDS-ITI-43_patientId");
-				String request = null, uniqueId = null, patientId = null;
-				
-				String at = generateATNAMessage(request, patientId, uniqueId, repositoryUniqueId, outcome);
-				if(muleContext != null) {
-					MuleClient client = new MuleClient(muleContext);
-					at = ATNAUtil.build_TCP_Msg_header() + at;
-					client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
-					
-					log.info("Dispatched ATNA message");
-				}
+				//String request = (String)message.getProperty(Constants.XDS_ITI_43, PropertyScope.SESSION);
+				//String uniqueId = (String)message.getProperty(Constants.XDS_ITI_43_UNIQUEID, PropertyScope.SESSION);
+				//String patientId = (String)message.getProperty(Constants.XDS_ITI_43_PATIENTID, PropertyScope.SESSION);
+				String request = null, patientId = null, uniqueId = null;
+				ATNAUtil.dispatchAuditMessage(muleContext, generateATNAMessage(request, patientId, uniqueId, repositoryUniqueId, outcome));
+				log.info("Dispatched ATNA message");
 			} catch (Exception e) {
 				//If the auditing breaks, it shouldn't break the flow, so catch and log
 				log.error("Failed to dispatch ATNA message", e);
@@ -157,7 +152,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		eid.setEventActionCode("C");
 		eid.setEventDateTime( ATNAUtil.newXMLGregorianCalendar() );
 		eid.getEventTypeCode().add( ATNAUtil.buildCodedValueType("IHE Transactions", "ITI-43", "Retrieve Document Set") );
-		eid.setEventOutcomeIndicator(outcome ? BigInteger.ONE : BigInteger.ZERO);
+		eid.setEventOutcomeIndicator(outcome ? BigInteger.ZERO : new BigInteger("4"));
 		res.setEventIdentification(eid);
 		
 		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(buildRepositoryPath(), xdsRepositoryHost, false, xdsRepositoryHost, (short)1, "DCM", "110153", "Source"));
@@ -180,7 +175,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 			)
 		);
 		
-		return ATNAUtil.marshall(res);
+		return ATNAUtil.marshallATNAObject(res);
 	}
 	
     /* */

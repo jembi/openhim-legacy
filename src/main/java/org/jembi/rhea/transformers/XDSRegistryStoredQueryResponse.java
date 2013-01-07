@@ -27,11 +27,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
 import org.jembi.ihe.atna.ATNAUtil.ParticipantObjectDetail;
+import org.jembi.rhea.Constants;
 import org.jembi.rhea.xds.DocumentMetaData;
-import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
-import org.mule.module.client.MuleClient;
+import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 
 /**
@@ -71,18 +71,11 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 		} finally {
 			try {
 				//generate audit message
-				String request = (String)message.getSessionProperty("XDS-ITI-18");
-				String uniqueId = (String)message.getSessionProperty("XDS-ITI-18_uniqueId");
-				String patientId = (String)message.getSessionProperty("XDS-ITI-18_patientId");
-				
-				String at = generateATNAMessage(request, patientId, uniqueId, outcome);
-				if (muleContext != null) {
-					MuleClient client = new MuleClient(muleContext);
-					at = ATNAUtil.build_TCP_Msg_header() + at;
-					client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
-					
-					log.info("Dispatched ATNA message");
-				}
+				String request = (String)message.getProperty(Constants.XDS_ITI_18_PROPERTY, PropertyScope.SESSION);
+				String uniqueId = (String)message.getProperty(Constants.XDS_ITI_18_UNIQUEID_PROPERTY, PropertyScope.SESSION);
+				String patientId = (String)message.getProperty(Constants.XDS_ITI_18_PATIENTID_PROPERTY, PropertyScope.SESSION);
+				ATNAUtil.dispatchAuditMessage(muleContext, generateATNAMessage(request, patientId, uniqueId, outcome));
+				log.info("Dispatched ATNA message");
 			} catch (Exception e) {
 				//If the auditing breaks, it shouldn't break the flow, so catch and log
 				log.error("Failed to dispatch ATNA message", e);
@@ -173,7 +166,6 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
      * @return Returns the value of the first metadata value with the given metadata
      *         name. Null if not present.
      */
-    @SuppressWarnings("unchecked")
     private String extractMetadataFromSlots(List<oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1>
             documentSlots, String slotName, int valueIndex) {
         String slotValue = null;
@@ -188,9 +180,9 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
                 if (returnAllValues) {
                     int listSize = slot.getValueList().getValue().size();
                     int counter = 0;
-                    Iterator iter = slot.getValueList().getValue().iterator();
+                    Iterator<String> iter = slot.getValueList().getValue().iterator();
                     while (iter.hasNext()) {
-                        String value = (String) iter.next();
+                        String value = iter.next();
                         slotValues.append(value);
                         counter++;
                         if (counter < listSize) {
@@ -251,7 +243,7 @@ public class XDSRegistryStoredQueryResponse extends AbstractMessageTransformer {
 			)
 		);
 		
-		return ATNAUtil.marshall(res);
+		return ATNAUtil.marshallATNAObject(res);
 	}
 	
     /* */

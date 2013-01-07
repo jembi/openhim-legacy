@@ -18,9 +18,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
 import org.jembi.ihe.atna.ATNAUtil.ParticipantObjectDetail;
+import org.jembi.rhea.Constants;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+import org.mule.api.transport.PropertyScope;
 import org.mule.module.client.MuleClient;
 import org.mule.transformer.AbstractMessageTransformer;
 
@@ -53,15 +55,10 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 			
 			try {
 				//generate audit message
-				String request = (String)message.getSessionProperty("XDS-ITI-41");
-				String uniqueId = (String)message.getSessionProperty("XDS-ITI-41_uniqueId");
-				String patientId = (String)message.getSessionProperty("XDS-ITI-41_patientId");
-				
-				String at = generateATNAMessage(request, patientId, uniqueId, outcome);
-				MuleClient client = new MuleClient(muleContext);
-				at = ATNAUtil.build_TCP_Msg_header() + at;
-				client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
-				
+				String request = (String)message.getProperty(Constants.XDS_ITI_41, PropertyScope.SESSION);
+				String uniqueId = (String)message.getProperty(Constants.XDS_ITI_41_UNIQUEID, PropertyScope.SESSION);
+				String patientId = (String)message.getProperty(Constants.XDS_ITI_41_PATIENTID, PropertyScope.SESSION);
+				ATNAUtil.dispatchAuditMessage(muleContext, generateATNAMessage(request, patientId, uniqueId, outcome));
 				log.info("Dispatched ATNA message");
 			} catch (Exception e) {
 				//If the auditing breaks, it shouldn't break the flow, so catch and log
@@ -122,7 +119,7 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 			)
 		);
 		
-		return ATNAUtil.marshall(res);
+		return ATNAUtil.marshallATNAObject(res);
 	}
 	
     /* */
