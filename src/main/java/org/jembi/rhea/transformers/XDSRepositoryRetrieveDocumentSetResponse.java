@@ -15,6 +15,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.JAXBException;
 
@@ -44,7 +45,9 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 	private String xdsRepositorySecurePort = "";
 	private String iheSecure = "";
 	private String requestedAssigningAuthority = "";
-	private String homeCommunityId;
+	//not thread safe...
+	private String _homeCommunityId;
+	private String _docUniqueId;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
@@ -57,14 +60,14 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 			return null;
 		} else if (message.getPayload() instanceof RetrieveDocumentSetResponseType) {
 			RetrieveDocumentSetResponseType response = (RetrieveDocumentSetResponseType) message.getPayload();
-			return Collections.singleton(processResponse(response));
+			return Collections.singleton(processResponse(message, response));
 		} else if (message.getPayload() instanceof ArrayList &&
 				((List)message.getPayload()).size()>0 &&
 				((List)message.getPayload()).get(0) instanceof RetrieveDocumentSetResponseType) {
 			List<RetrieveDocumentSetResponseType> responses = (List<RetrieveDocumentSetResponseType>)message.getPayload();
 			List<String> res = new ArrayList<String>(responses.size());
 			for (RetrieveDocumentSetResponseType response : responses)
-				res.add(processResponse(response));
+				res.add(processResponse(message, response));
 			return res;
 		} else {
 			log.error("Unknown response type received from XDS repository: " + message.getPayload().getClass());
@@ -72,7 +75,8 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		}
 	}
 	
-	private String processResponse(RetrieveDocumentSetResponseType response) throws TransformerException {
+	@SuppressWarnings("unchecked")
+	private String processResponse(MuleMessage message, RetrieveDocumentSetResponseType response) throws TransformerException {
 		boolean outcome = false;
 		String repositoryUniqueId = null;
 		String document = null;
@@ -85,11 +89,9 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		} finally {
 			try {
 				//generate audit message
-				//String request = (String)message.getProperty(Constants.XDS_ITI_43, PropertyScope.SESSION);
-				//String uniqueId = (String)message.getProperty(Constants.XDS_ITI_43_UNIQUEID, PropertyScope.SESSION);
-				//String patientId = (String)message.getProperty(Constants.XDS_ITI_43_PATIENTID, PropertyScope.SESSION);
-				String request = null, patientId = null, uniqueId = null;
-				ATNAUtil.dispatchAuditMessage(muleContext, generateATNAMessage(request, patientId, uniqueId, repositoryUniqueId, outcome));
+				String request = ((Map<String, String>)message.getProperty(Constants.XDS_ITI_43, PropertyScope.SESSION)).get(_docUniqueId);
+				String patientId = (String)message.getProperty(Constants.XDS_ITI_18_PATIENTID_PROPERTY, PropertyScope.SESSION);
+				ATNAUtil.dispatchAuditMessage(muleContext, generateATNAMessage(request, patientId, repositoryUniqueId, outcome));
 				log.info("Dispatched ATNA message");
 			} catch (Exception e) {
 				//If the auditing breaks, it shouldn't break the flow, so catch and log
@@ -125,9 +127,9 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
        if (drList != null && drList.size() > 0 && drList.get(0) != null) {
     	   totalResultCnt = drList.size();
            for (DocumentResponse dr : drList) {       // may want to loop thru the results at some point, but for now......
-                homeCommunityId = dr.getHomeCommunityId();               //  <ns2:HomeCommunityId>urn:oid:1.3.6.1.4.1.12009.6.1</ns2:HomeCommunityId>
+                _homeCommunityId = dr.getHomeCommunityId();               //  <ns2:HomeCommunityId>urn:oid:1.3.6.1.4.1.12009.6.1</ns2:HomeCommunityId>
                 String reposUniqueId = dr.getRepositoryUniqueId();   //  <ns2:RepositoryUniqueId>1</ns2:RepositoryUniqueId>
-                String docUniqueId = dr.getDocumentUniqueId();       //  <ns2:DocumentUniqueId>1.123401.11111</ns2:DocumentUniqueId>
+                _docUniqueId = dr.getDocumentUniqueId();       //  <ns2:DocumentUniqueId>1.123401.11111</ns2:DocumentUniqueId>
                 String mimeType = dr.getMimeType();                  //  <ns2:mimeType>text/xml</ns2:mimeType>
                 if(dr.getDocument()!=null) {
                     document = new String(dr.getDocument());       //  <ns2:Document>VEVTVCBET0NVTUVOVCBDT05URU5U</ns2:Document>
@@ -143,7 +145,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
     
     /* Auditing */
 	
-	protected String generateATNAMessage(String request, String patientId, String documentUniqueId, String repositoryUniqueId, boolean outcome)
+	protected String generateATNAMessage(String request, String patientId, String repositoryUniqueId, boolean outcome)
 			throws JAXBException {
 		AuditMessage res = new AuditMessage();
 		
@@ -156,8 +158,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		res.setEventIdentification(eid);
 		
 		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(buildRepositoryPath(), xdsRepositoryHost, false, xdsRepositoryHost, (short)1, "DCM", "110153", "Source"));
-		//TODO userId should be content of <wsa:ReplyTo/>
-		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("userId", ATNAUtil.getProcessID(), true, ATNAUtil.getHostIP(), (short)2, "DCM", "110152", "Destination"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(ATNAUtil.WSA_REPLYTO_ANON, ATNAUtil.getProcessID(), true, ATNAUtil.getHostIP(), (short)2, "DCM", "110152", "Destination"));
 		
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
@@ -167,11 +168,11 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		
 		List<ParticipantObjectDetail> pod = new ArrayList<ParticipantObjectDetail>();
 		if (repositoryUniqueId!=null) pod.add(new ParticipantObjectDetail("Repository Unique Id", repositoryUniqueId.getBytes()));
-		if (homeCommunityId!=null) pod.add(new ParticipantObjectDetail("“ihe:homeCommunityID", homeCommunityId.getBytes()));
+		if (_homeCommunityId!=null) pod.add(new ParticipantObjectDetail("“ihe:homeCommunityID", _homeCommunityId.getBytes()));
 		
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(
-				documentUniqueId, (short)2, (short)3, "RFC-3881", "9", "Report Number", request, pod
+				_docUniqueId, (short)2, (short)3, "RFC-3881", "9", "Report Number", request, pod
 			)
 		);
 		

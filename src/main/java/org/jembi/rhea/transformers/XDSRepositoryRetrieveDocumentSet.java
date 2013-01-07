@@ -7,11 +7,15 @@ import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType;
 import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType.DocumentRequest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.xml.bind.JAXBException;
+
 import org.jembi.rhea.Constants;
+import org.jembi.rhea.Util;
 import org.jembi.rhea.xds.DocumentMetaData;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -29,6 +33,7 @@ public class XDSRepositoryRetrieveDocumentSet extends
 		// extract patient id, repository id and a list of document unique id's from the payload
 		Map<String, List<DocumentMetaData>> repoDocumentsMap = (Map<String, List<DocumentMetaData>>) message.getPayload();
 		List<RetrieveDocumentSetRequestType> retrieveDocumentMessages = new ArrayList<RetrieveDocumentSetRequestType>();
+		Map<String, String> requests = new HashMap<String, String>(); //K: docUniqueId, V: request XML
 		
 		Set<String> keySet = repoDocumentsMap.keySet();
 		for (String key : keySet) {
@@ -41,17 +46,20 @@ public class XDSRepositoryRetrieveDocumentSet extends
 			
 			// add unique document id list to document request
 			for(DocumentMetaData documentMetaData : docList) {			
-				rdRequest.getDocumentRequest().add(createDocumentRequest(documentMetaData.getDocumentUniqueId(), documentMetaData.getHomeCommunityId(), repositoryUniqueId));
+				DocumentRequest dr = createDocumentRequest(documentMetaData.getDocumentUniqueId(), documentMetaData.getHomeCommunityId(), repositoryUniqueId);
+				rdRequest.getDocumentRequest().add(dr);
+				try {
+					requests.put(dr.getDocumentUniqueId(), Util.marshallJAXBObject("ihe.iti.xds_b._2007", dr, false));
+				} catch (JAXBException e) {
+					throw new TransformerException(this, e);
+				}
 			}
 			
 			retrieveDocumentMessages.add(rdRequest);
 		}
 				
 		// add request to session prop so that we can access it when processing the response
-		// TODO we are going to have to find a new way to do these...
-		//message.setProperty(Constants.XDS_ITI_43, null, PropertyScope.SESSION);
-		//message.setProperty(Constants.XDS_ITI_43_UNIQUEID, null, PropertyScope.SESSION);
-		//message.setProperty(Constants.XDS_ITI_43_PATIENTID, null, PropertyScope.SESSION);
+		message.setProperty(Constants.XDS_ITI_43, requests, PropertyScope.SESSION);
 		
 		return retrieveDocumentMessages;
 	}

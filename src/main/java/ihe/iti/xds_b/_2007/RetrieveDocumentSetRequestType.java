@@ -108,6 +108,7 @@ public class RetrieveDocumentSetRequestType {
         "repositoryUniqueId",
         "documentUniqueId"
     })
+    @XmlRootElement(name = "DocumentRequest")
     public static class DocumentRequest {
 
         @XmlElement(name = "HomeCommunityId", namespace = "urn:ihe:iti:xds-b:2007")

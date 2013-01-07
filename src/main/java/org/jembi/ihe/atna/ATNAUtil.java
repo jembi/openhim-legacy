@@ -31,8 +31,11 @@ import java.util.Collections;
 
 public class ATNAUtil {
 	
+	public static final String WSA_REPLYTO_ANON = "http://www.w3.org/2005/08/addressing/anonymous";
+	
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
+	
 	public static String build_TCP_Msg_header() {
 		StringBuilder res = new StringBuilder("<13>1 ");
 		res.append(now() + " ");
