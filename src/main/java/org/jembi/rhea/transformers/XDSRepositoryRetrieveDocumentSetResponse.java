@@ -62,8 +62,11 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 			RetrieveDocumentSetResponseType response = (RetrieveDocumentSetResponseType) message.getPayload();
 			return Collections.singleton(processResponse(message, response));
 		} else if (message.getPayload() instanceof ArrayList &&
-				((List)message.getPayload()).size()>0 &&
-				((List)message.getPayload()).get(0) instanceof RetrieveDocumentSetResponseType) {
+				((List)message.getPayload()).size()>0) {
+			if (!(((List)message.getPayload()).get(0) instanceof RetrieveDocumentSetResponseType)) {
+				log.error("Unknown response type received from XDS repository in list: " + ((List)message.getPayload()).get(0).getClass());
+				return null;
+			}
 			List<RetrieveDocumentSetResponseType> responses = (List<RetrieveDocumentSetResponseType>)message.getPayload();
 			List<String> res = new ArrayList<String>(responses.size());
 			for (RetrieveDocumentSetResponseType response : responses)
