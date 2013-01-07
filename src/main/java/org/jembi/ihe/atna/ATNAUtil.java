@@ -3,14 +3,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.jembi.ihe.atna;
 
-import ihe.iti.atna.AuditMessage;
 import ihe.iti.atna.AuditMessage.ActiveParticipant;
 import ihe.iti.atna.AuditSourceIdentificationType;
 import ihe.iti.atna.CodedValueType;
 import ihe.iti.atna.ParticipantObjectIdentificationType;
 import ihe.iti.atna.TypeValuePairType;
 
-import java.io.StringWriter;
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -19,14 +17,17 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import edu.emory.mathcs.backport.java.util.Collections;
+import org.jembi.rhea.Util;
+import org.mule.api.MuleContext;
+import org.mule.api.MuleException;
+import org.mule.module.client.MuleClient;
+
+import java.util.Collections;
 
 public class ATNAUtil {
 	
@@ -76,7 +77,7 @@ public class ATNAUtil {
 		return buildParticipantObjectIdentificationType(
 			participantObjectId, participantObjectTypeCode, participantObjectTypeCodeRole,
 			participantObjectIDTypeCode_CodeSystemName, participantObjectIDTypeCode_Code, participantObjectIDTypeCode_DisplayName,
-			participantObjectQuery, Collections.emptyList()
+			participantObjectQuery, Collections.EMPTY_LIST
 		);
 	}
 	
@@ -140,15 +141,6 @@ public class ATNAUtil {
 		return res;
 	}
 	
-	public static String marshall(AuditMessage am) throws JAXBException {
-		JAXBContext jc = JAXBContext.newInstance("ihe.iti.atna");
-		Marshaller marshaller = jc.createMarshaller();
-		//marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
-		StringWriter sw = new StringWriter();
-		marshaller.marshal(am, sw);
-		return sw.toString();
-	}
-	
 	public static XMLGregorianCalendar newXMLGregorianCalendar() throws JAXBException {
 		GregorianCalendar gc = new GregorianCalendar();
 		try {
@@ -183,6 +175,15 @@ public class ATNAUtil {
 		return "java";
 	}
 	
+	public static String marshallATNAObject(Object o) throws JAXBException {
+		return Util.marshallJAXBObject("ihe.iti.atna", o, true);
+	}
+	
+	public static void dispatchAuditMessage(MuleContext muleContext, String at) throws MuleException {
+		MuleClient client = new MuleClient(muleContext);
+		at = ATNAUtil.build_TCP_Msg_header() + at;
+		client.dispatch("vm://atna_auditing", at.length() + " " + at, null);
+	}
 	
 	public static class ParticipantObjectDetail {
 		private String type;

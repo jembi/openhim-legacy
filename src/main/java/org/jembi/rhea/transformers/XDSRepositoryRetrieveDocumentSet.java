@@ -11,9 +11,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.jembi.rhea.Constants;
 import org.jembi.rhea.xds.DocumentMetaData;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 
 /**
@@ -47,9 +49,9 @@ public class XDSRepositoryRetrieveDocumentSet extends
 				
 		// add request to session prop so that we can access it when processing the response
 		// TODO we are going to have to find a new way to do these...
-		//message.setSessionProperty("XDS-ITI-43", null);
-		//message.setSessionProperty("XDS-ITI-43_uniqueId", null);
-		//message.setSessionProperty("XDS-ITI-43_patientId", null);
+		//message.setProperty(Constants.XDS_ITI_43, null, PropertyScope.SESSION);
+		//message.setProperty(Constants.XDS_ITI_43_UNIQUEID, null, PropertyScope.SESSION);
+		//message.setProperty(Constants.XDS_ITI_43_PATIENTID, null, PropertyScope.SESSION);
 		
 		return retrieveDocumentMessages;
 	}

@@ -3,30 +3,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.jembi.rhea.transformers;
 
-import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
-import java.util.UUID;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 
 import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryRequest;
 import oasis.names.tc.ebxml_regrep.xsd.query._3.ResponseOptionType;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.AdhocQueryType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.AssociationType1;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.ClassificationType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.ExternalIdentifierType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.ExtrinsicObjectType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.InternationalStringType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.LocalizedStringType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.RegistryObjectType;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.ValueListType;
 
 import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpRequest;
@@ -36,7 +22,7 @@ import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 
-import ca.marc.ihe.xds.XdsGuidType;
+import ca.marc.ihe.xds.XDSUtil;
 
 /**
  * XDS ITI-18 Registry Stored Query
@@ -100,139 +86,30 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
         //String idOid = "1.19.6.24.109.42.1.3";
         String idOid = message.getProperty(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, PropertyScope.SESSION);
         String srcPatientId = String.format("'%s^^^&%s&ISO'", id, idOid);
-        adhocQuery.getSlot().add(createQuerySlot("$XDSDocumentEntryPatientId", srcPatientId));
+        adhocQuery.getSlot().add(XDSUtil.createQuerySlot("$XDSDocumentEntryPatientId", srcPatientId));
         
         // Setup status slot 
-        adhocQuery.getSlot().add(createQuerySlot("$XDSDocumentEntryStatus", "('urn:oasis:names:tc:ebxml-regrep:StatusType:Approved')"));
+        adhocQuery.getSlot().add(XDSUtil.createQuerySlot("$XDSDocumentEntryStatus", "('urn:oasis:names:tc:ebxml-regrep:StatusType:Approved')"));
         
         // From time
         SimpleDateFormat hl7DateFormat = new SimpleDateFormat("yyyyMMddHHmm"); 
         if(startDate != null)
-        	adhocQuery.getSlot().add(createQuerySlot("$XDSDocumentEntryCreationTimeFrom", hl7DateFormat.format(startDate)));
+        	adhocQuery.getSlot().add(XDSUtil.createQuerySlot("$XDSDocumentEntryCreationTimeFrom", hl7DateFormat.format(startDate)));
         if(endDate != null)
-        	adhocQuery.getSlot().add(createQuerySlot("$XDSDocumentEntryCreationTimeTo", hl7DateFormat.format(endDate)));
+        	adhocQuery.getSlot().add(XDSUtil.createQuerySlot("$XDSDocumentEntryCreationTimeTo", hl7DateFormat.format(endDate)));
         
         // Append the ad-hoc query to the request 
         request.setAdhocQuery(adhocQuery);
 		
         try {
 			// add request to session prop so that we can access it when processing the response
-			message.setSessionProperty("XDS-ITI-18", marshall(request));
-			message.setSessionProperty("XDS-ITI-18_uniqueId", storedQueryId);
-			message.setSessionProperty("XDS-ITI-18_patientId", id);
+			message.setProperty(Constants.XDS_ITI_18_PROPERTY, Util.marshallJAXBObject("oasis.names.tc.ebxml_regrep.xsd.query._3", request, false), PropertyScope.SESSION);
+			message.setProperty(Constants.XDS_ITI_18_UNIQUEID_PROPERTY, storedQueryId, PropertyScope.SESSION);
+			message.setProperty(Constants.XDS_ITI_18_PATIENTID_PROPERTY, id, PropertyScope.SESSION);
 		} catch (JAXBException ex) {
 			throw new TransformerException(this, ex);
 		}
 		
 		return request;
-	}
-	
-	//TODO util functions can be moved to a utility class (somewhere in org.jembi.ihe.xds)
-	
-    /**
-     * Create a query slot
-     */
-    private static SlotType1 createSlot(String slotName, String... value)
-    {
-    	SlotType1 retSlot = new SlotType1();
-        ValueListType patientValueList = new ValueListType();
-        patientValueList.getValue().addAll(Arrays.asList(value));
-        retSlot.setName(slotName);
-        retSlot.setValueList(patientValueList);
-        return retSlot;
-    }
-    
-	/**
-	 * Create association type
-	 */
-	private static AssociationType1 createAssociation(RegistryObjectType source,
-			ExtrinsicObjectType target, String status) {
-		AssociationType1 retAssoc = new AssociationType1();
-		retAssoc.setId(String.format("urn:uuid:%s", UUID.randomUUID().toString()));
-		retAssoc.setSourceObject(source.getId());
-		retAssoc.setTargetObject(target.getId());
-		retAssoc.getSlot().add(createSlot("SubmissionSetStatus", status));
-		return retAssoc;
-	}
-
-    /**
-     * Create classification object
-     */
-    private static ClassificationType createClassification(RegistryObjectType classifiedObject, XdsGuidType scheme, String nodeRepresentation, String name, SlotType1... slots)
-    {
-
-    	ClassificationType retClass = new ClassificationType();
-    	retClass.setId(String.format("urn:uuid:%s", UUID.randomUUID().toString()));
-    	retClass.setClassificationScheme(scheme.toString());
-    	retClass.setClassifiedObject(classifiedObject.getId());
-    	retClass.setNodeRepresentation(nodeRepresentation);
-    	retClass.getSlot().addAll(Arrays.asList(slots));
-    	
-    	InternationalStringType localName = new InternationalStringType();
-		LocalizedStringType stringValue = new LocalizedStringType();
-		stringValue.setValue(name);
-		localName.getLocalizedString().add(stringValue);
-		retClass.setName(localName);
-		
-    	return retClass;
-    }
-    
-    /**
-	 * Create node classification
-	 * @param registryObject
-	 * @param classificationNode
-	 * @return
-	 */
-	private static ClassificationType createNodeClassification(RegistryObjectType registryObject, XdsGuidType classificationNode)
-	{
-		ClassificationType retClass = new ClassificationType();
-		retClass.setId(String.format("urn:uuid:%s", UUID.randomUUID()));
-		retClass.setClassificationNode(classificationNode.toString());
-		retClass.setClassifiedObject(registryObject.getId());
-		return retClass;
-	}
-	
-    /**
-     * Create external identifier
-     */
-    private static ExternalIdentifierType createExternalIdentifier(RegistryObjectType registryObject, XdsGuidType scheme, String value)
-    {
-
-    	ExternalIdentifierType retId = new ExternalIdentifierType();
-    	retId.setId(String.format("urn:uuid:%s", UUID.randomUUID().toString()));
-    	
-    	retId.setRegistryObject(registryObject.getId());
-    	retId.setIdentificationScheme(scheme.toString());
-    	retId.setValue(value);
-    	
-		InternationalStringType localName = new InternationalStringType();
-		LocalizedStringType stringValue = new LocalizedStringType();
-		stringValue.setValue(scheme.getName());
-		localName.getLocalizedString().add(stringValue);
-		retId.setName(localName);
-		
-		return retId;
-    }
-    
-    /**
-     * Create a query slot
-     */
-    private SlotType1 createQuerySlot(String slotName, String... value)
-    {
-    	SlotType1 retSlot = new SlotType1();
-        ValueListType patientValueList = new ValueListType();
-        patientValueList.getValue().addAll(Arrays.asList(value));
-        retSlot.setName(slotName);
-        retSlot.setValueList(patientValueList);
-        return retSlot;
-    }
-
-	private static String marshall(AdhocQueryRequest prRequest) throws JAXBException {
-		JAXBContext jc = JAXBContext.newInstance("oasis.names.tc.ebxml_regrep.xsd.query._3");
-		Marshaller marshaller = jc.createMarshaller();
-		marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
-		StringWriter sw = new StringWriter();
-		marshaller.marshal(prRequest, sw);
-		return sw.toString();
 	}
 }

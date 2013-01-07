@@ -7,8 +7,10 @@ import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
+import org.jembi.rhea.Constants;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 
 import ca.uhn.hl7v2.HL7Exception;
@@ -26,6 +28,7 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 	private String requestedAssigningAuthority = "";
 	private String requestedAssigningAuthorityId = "";
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
@@ -44,8 +47,8 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		
 		// add request to session prop so that we can access it when
 		// processing the response in PIXQueryResponseTransformer
-		message.setSessionProperty("PIX-ITI-9", pix_query);
-		message.setSessionProperty("PIX-ITI-9_MSH-10", _msh10);
+		message.setProperty(Constants.PIX_REQUEST_PROPERTY, pix_query, PropertyScope.SESSION);
+		message.setProperty(Constants.PIX_REQUEST_MSH10_PROPERTY, _msh10, PropertyScope.SESSION);
 		
 		return pix_query;
 	}

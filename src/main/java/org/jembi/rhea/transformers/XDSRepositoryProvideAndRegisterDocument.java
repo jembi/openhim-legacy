@@ -30,8 +30,11 @@ import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.xds.XDSAffinityDomain;
+import org.jembi.rhea.Constants;
+import org.jembi.rhea.Util;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 
 import ca.marc.ihe.xds.XDSUtil;
@@ -71,9 +74,9 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 			);
 			
 			// add request to session prop so that we can access it when processing the response
-			message.setSessionProperty("XDS-ITI-41", marshall(prRequest));
-			message.setSessionProperty("XDS-ITI-41_uniqueId", _uniqueId);
-			message.setSessionProperty("XDS-ITI-41_patientId", enc.getPID());
+			message.setProperty(Constants.XDS_ITI_41, Util.marshallJAXBObject("ihe.iti.xds_b._2007", prRequest, false), PropertyScope.SESSION);
+			message.setProperty(Constants.XDS_ITI_41_UNIQUEID, _uniqueId, PropertyScope.SESSION);
+			message.setProperty(Constants.XDS_ITI_41_PATIENTID, enc.getPID(), PropertyScope.SESSION);
 			
 			log.info("Generated XDS Provide and Register Document Set.b request");
 			return prRequest;
@@ -292,16 +295,6 @@ public class XDSRepositoryProvideAndRegisterDocument extends
     }
     
     /* */
-    
-	private static String marshall(ProvideAndRegisterDocumentSetRequestType prRequest) throws JAXBException {
-		JAXBContext jc = JAXBContext.newInstance("ihe.iti.xds_b._2007");
-		Marshaller marshaller = jc.createMarshaller();
-		marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
-		StringWriter sw = new StringWriter();
-		marshaller.marshal(prRequest, sw);
-		return sw.toString();
-	}
-
 	
 	public String getSystemSourceID() {
 		return systemSourceID;

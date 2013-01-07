@@ -83,7 +83,7 @@ public class XDSUtil {
 		retAssoc.setId(String.format("urn:uuid:%s", UUID.randomUUID().toString()));
 		retAssoc.setSourceObject(source.getId());
 		retAssoc.setTargetObject(target.getId());
-		retAssoc.setAssociationType(associationType);
+		if (associationType!=null) retAssoc.setAssociationType(associationType);
 		retAssoc.getSlot().add(createSlot("SubmissionSetStatus", status));
 		return retAssoc;
 	}
@@ -147,5 +147,18 @@ public class XDSUtil {
 		retId.setName(localName);
 		
 		return retId;
+    }
+    
+    /**
+     * Create a query slot
+     */
+    public static SlotType1 createQuerySlot(String slotName, String... value)
+    {
+    	SlotType1 retSlot = new SlotType1();
+        ValueListType patientValueList = new ValueListType();
+        patientValueList.getValue().addAll(Arrays.asList(value));
+        retSlot.setName(slotName);
+        retSlot.setValueList(patientValueList);
+        return retSlot;
     }
 }
