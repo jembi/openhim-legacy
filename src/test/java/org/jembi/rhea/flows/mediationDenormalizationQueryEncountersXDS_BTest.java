@@ -12,7 +12,9 @@ import org.apache.log4j.Logger;
 import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.junit.Test;
+import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleMessage;
+import org.mule.api.transport.PropertyScope;
 import org.mule.module.client.MuleClient;
 import org.mule.tck.junit4.FunctionalTestCase;
 
@@ -53,8 +55,8 @@ public class mediationDenormalizationQueryEncountersXDS_BTest extends
 	    //properties.put(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, "2.16.840.1.113883.3.72.5.9.2");
 	    
 	    // Mohawk
-	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_MARC_HI-2552234100/encounters");
-	    properties.put(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, "1.3.6.1.4.1.33349.3.1.2.1.0.1");
+	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_MARC_HI-3770298161/encounters");
+	    properties.put(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, "1.3.6.1.4.1.33349.3.1.100.2012.1.3");
 	    
 	    MuleMessage result = client.send("vm://queryEncounters-De-normailization-XDS.b", payload, properties);
 	    
