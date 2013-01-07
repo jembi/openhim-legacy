@@ -28,7 +28,7 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
         </custom-transformer>
         <logger message="Generated PIX messgage: #[groovy: return message.payload;]" level="INFO" doc:name="Logger"/>
         <response>
-            <echo-component doc:name="Echo"/>
+            <logger message="PIX Response: #[groovy: return message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
             <custom-transformer class="org.jembi.rhea.transformers.PIXQueryResponseTransformer" doc:name="Handle RSP response">
                 <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthorityId}"/>
                 <spring:property name="pixManagerHost" value="${pix.manager.host}"/>

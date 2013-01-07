@@ -49,6 +49,7 @@ public class mediationGetecidDenormalizationPixTest extends
 		
 		// Mohawk
 		idMap.put("id", "496945-000306-1987W");
+	    //idMap.put("id", "994620-002229-1988L");
 		idMap.put("idType", "GHHS");
 	    
 	    Map<String, Object> properties = null;
