@@ -55,7 +55,7 @@ public class mediationDenormalizationQueryEncountersXDS_BTest_wATNA extends
 	    
 	    // NIST
 	    //payload.setPath("ws/rest/v1/patient/NID-1b48e083395f498/encounters");//NIST2010-2
-	    //properties.put(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, "2.16.840.1.113883.3.72.5.9.2");
+	    //properties.put(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, "1.19.6.24.109.42.1.3");
 	    
 	    // Mohawk
 	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_MARC_HI-3770298161/encounters");
