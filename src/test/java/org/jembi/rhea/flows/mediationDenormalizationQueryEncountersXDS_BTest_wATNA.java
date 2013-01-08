@@ -18,7 +18,10 @@ import org.mule.api.transport.PropertyScope;
 import org.mule.module.client.MuleClient;
 import org.mule.tck.junit4.FunctionalTestCase;
 
-public class mediationDenormalizationQueryEncountersXDS_BTest extends
+/**
+ * Copy of mediationDenormalizationQueryEncountersXDS_BTest with ATNA enabled
+ */
+public class mediationDenormalizationQueryEncountersXDS_BTest_wATNA extends
 		FunctionalTestCase {
 	
 	private final Log log = LogFactory.getLog(this.getClass());
@@ -37,7 +40,7 @@ public class mediationDenormalizationQueryEncountersXDS_BTest extends
 
 	@Override
 	protected String getConfigResources() {
-		return "src/main/app/queryencounters-denormalization-xds.b.xml, src/main/app/global-elements.xml";
+		return "src/main/app/queryencounters-denormalization-xds.b.xml, src/main/app/atnasend.xml, src/main/app/global-elements.xml";
 	}
 	
 	@Test

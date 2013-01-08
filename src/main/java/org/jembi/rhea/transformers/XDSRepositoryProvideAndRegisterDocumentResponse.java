@@ -104,8 +104,7 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 		eid.setEventOutcomeIndicator(outcome ? BigInteger.ZERO : new BigInteger("4"));
 		res.setEventIdentification(eid);
 		
-		//TODO userId should be content of <wsa:ReplyTo/>
-		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant("userId", ATNAUtil.getProcessID(), true, ATNAUtil.getHostIP(), (short)2, "DCM", "110153", "Source"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(ATNAUtil.WSA_REPLYTO_ANON, ATNAUtil.getProcessID(), true, ATNAUtil.getHostIP(), (short)2, "DCM", "110153", "Source"));
 		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(xdsRepositoryHost, false, xdsRepositoryHost, (short)1, "DCM", "110152", "Destination"));
 		
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());

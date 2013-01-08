@@ -27,7 +27,6 @@ public class Constants {
 	public static final String XDS_ITI_41_UNIQUEID = "XDS-ITI-41_uniqueId";
 	public static final String XDS_ITI_41_PATIENTID = "XDS-ITI-41_patientId";
 	public static final String XDS_ITI_43 = "XDS-ITI-43";
-	public static final String XDS_ITI_43_UNIQUEID = "XDS-ITI-43_uniqueId";
 	public static final String XDS_ITI_43_PATIENTID = "XDS-ITI-43_patientId";
 	
 }
