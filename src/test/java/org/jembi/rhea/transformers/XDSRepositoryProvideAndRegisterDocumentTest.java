@@ -25,8 +25,7 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 		try {
 			XDSRepositoryProvideAndRegisterDocument.EncounterInfo enc =
 				XDSRepositoryProvideAndRegisterDocument.parseEncounterRequest(
-					TEST_ORU_R01_MSG, XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE
-				);
+					TEST_ORU_R01_MSG, "1.3.6.1.4.1.33349.3.1.100.2012.1.3"); // Mohawk
 			assertEquals(TEST_ENC.firstName, enc.firstName);
 			assertEquals(TEST_ENC.lastName, enc.lastName);
 			assertEquals(TEST_ENC.encounterDateTime, enc.encounterDateTime);
@@ -56,13 +55,12 @@ public class XDSRepositoryProvideAndRegisterDocumentTest {
 			e.printStackTrace();
 		}
 			
-		fail("Oh no!");
 	}
 	
 	private static XDSRepositoryProvideAndRegisterDocument.EncounterInfo TEST_ENC;
 	
 	static {
-		TEST_ENC = new XDSRepositoryProvideAndRegisterDocument.EncounterInfo(XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE);
+		TEST_ENC = new XDSRepositoryProvideAndRegisterDocument.EncounterInfo();
 		TEST_ENC.pid = "2552234100";
 		TEST_ENC.encounterDateTime = "201211150855";
 		TEST_ENC.firstName = "Mary"; TEST_ENC.lastName = "Patient";

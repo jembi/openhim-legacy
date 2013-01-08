@@ -55,6 +55,9 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 	private String systemSourceID = "";
 	private String _uniqueId;
 	
+	// Injected properties
+	private String affinityDomainID = null;
+	
 	/* Transform ORU_R01 and generate register request */
 	
 	@Override
@@ -72,7 +75,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 			String id = identifer[1];
 			
 			String request = (String)message.getPayload();
-			EncounterInfo enc = parseEncounterRequest(request, XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE);
+			EncounterInfo enc = parseEncounterRequest(request, affinityDomainID);
 			enc.pid = id;
 			
 			ProvideAndRegisterDocumentSetRequestType prRequest = buildRegisterRequest(
@@ -224,8 +227,9 @@ public class XDSRepositoryProvideAndRegisterDocument extends
     
     /* Parse ORU_R01 */
     
-	protected static EncounterInfo parseEncounterRequest(String oru_r01, XDSAffinityDomain domain) throws HL7Exception {
-		EncounterInfo res = new EncounterInfo(domain);
+	protected static EncounterInfo parseEncounterRequest(String oru_r01, String affinityDomainID) throws HL7Exception {
+		EncounterInfo res = new EncounterInfo();
+		res.affinityDomainID = affinityDomainID;
 		Parser parser = new GenericParser();
 		ORU_R01 msg = (ORU_R01)parser.parse(oru_r01);
 		
@@ -249,10 +253,24 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		return res;
 	}
 	
-    // TODO a static class may enable different thread to alter fields while another still need the original values,
-	// this is, however, unlikely. 
+	public String getSystemSourceID() {
+		return systemSourceID;
+	}
+
+	public void setSystemSourceID(String systemSourceID) {
+		this.systemSourceID = systemSourceID;
+	}
+	
+	public String getAffinityDomainID() {
+		return affinityDomainID;
+	}
+
+	public void setAffinityDomainID(String affinityDomainID) {
+		this.affinityDomainID = affinityDomainID;
+	}
+	
     protected static class EncounterInfo {
-    	protected XDSAffinityDomain domain;
+    	protected String affinityDomainID;
     	protected String pid;
     	protected String firstName, lastName;
     	protected String encounterDateTime;
@@ -262,14 +280,8 @@ public class XDSRepositoryProvideAndRegisterDocument extends
     	protected String locationCode;
     	protected String encounterType;
     	
-    	
-	    EncounterInfo(XDSAffinityDomain domain) {
-			this.domain = domain;
-		}
-
 		public String getPID() {
-			// TODO Externalise domain ID
-	    	return pid + "^^^&" + domain.getAffinityDomainIDType() +"&ISO";
+	    	return pid + "^^^&" + affinityDomainID +"&ISO";
 	    }
 	    
 	    public String getName() {
@@ -297,13 +309,4 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 	    }
     }
     
-    /* */
-	
-	public String getSystemSourceID() {
-		return systemSourceID;
-	}
-
-	public void setSystemSourceID(String systemSourceID) {
-		this.systemSourceID = systemSourceID;
-	}
 }
