@@ -50,11 +50,10 @@ public class mediationDenormalizationQueryEncountersXDS_BTest extends
 	    
 	    // NIST
 	    //payload.setPath("ws/rest/v1/patient/NID-1b48e083395f498/encounters");//NIST2010-2
-	    //properties.put(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, "1.19.6.24.109.42.1.3");
 	    
 	    // Mohawk
-	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_MARC_HI-3770298161/encounters");
-	    properties.put(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, "1.3.6.1.4.1.33349.3.1.100.2012.1.3");
+	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_MARC_HI-3770298161/encounters");
+	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
 	    MuleMessage result = client.send("vm://queryEncounters-De-normailization-XDS.b", payload, properties);
 	    

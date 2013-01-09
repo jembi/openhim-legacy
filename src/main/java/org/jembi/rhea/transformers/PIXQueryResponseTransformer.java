@@ -57,7 +57,7 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 			
 			pid = idMap.get("id");
 			
-			message.setProperty(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, idMap.get("assigningAuthority"), PropertyScope.SESSION);
+			//message.setProperty(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, idMap.get("assigningAuthority"), PropertyScope.SESSION);
 			
 			return pid;
 			
