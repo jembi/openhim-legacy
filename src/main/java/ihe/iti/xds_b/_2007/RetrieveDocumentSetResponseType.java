@@ -52,6 +52,7 @@ import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
     "registryResponse",
     "documentResponse"
 })
+@XmlRootElement(name = "RetrieveDocumentSetResponse", namespace = "urn:ihe:iti:xds-b:2007")
 public class RetrieveDocumentSetResponseType {
 
     @XmlElement(name = "RegistryResponse", namespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0", required = true)

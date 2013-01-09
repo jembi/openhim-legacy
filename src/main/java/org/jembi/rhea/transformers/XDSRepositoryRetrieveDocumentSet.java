@@ -61,6 +61,7 @@ public class XDSRepositoryRetrieveDocumentSet extends
 		// add request to session prop so that we can access it when processing the response
 		message.setProperty(Constants.XDS_ITI_43, requests, PropertyScope.SESSION);
 		
+		//return retrieveDocumentMessages.isEmpty() ? null : retrieveDocumentMessages.get(0);
 		return retrieveDocumentMessages;
 	}
 	

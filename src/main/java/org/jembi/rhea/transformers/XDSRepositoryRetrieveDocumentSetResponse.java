@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.xml.bind.JAXBException;
 
@@ -47,6 +48,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 	private String requestedAssigningAuthority = "";
 	//not thread safe...
 	private String _homeCommunityId;
+	private String _reposUniqueId;
 	private String _docUniqueId;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -65,7 +67,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 			RetrieveDocumentSetResponseType response = (RetrieveDocumentSetResponseType) message.getPayload();
 			return Collections.singleton(processResponse(message, response));
 			
-		} else if (message.getPayload() instanceof ArrayList &&
+		} else if (message.getPayload() instanceof List &&
 				((List)message.getPayload()).size()>0) {
 			
 			if (!(((List)message.getPayload()).get(0) instanceof RetrieveDocumentSetResponseType)) {
@@ -79,8 +81,11 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 			
 			List<RetrieveDocumentSetResponseType> responses = (List<RetrieveDocumentSetResponseType>)message.getPayload();
 			List<String> res = new ArrayList<String>(responses.size());
-			for (RetrieveDocumentSetResponseType response : responses)
-				res.add(processResponse(message, response));
+			for (RetrieveDocumentSetResponseType response : responses) {
+				String doc = processResponse(message, response);
+				res.add(doc);
+				log.info("Received document:\n" + doc);
+			}
 			return res;
 			
 		} else {
@@ -94,7 +99,6 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 	@SuppressWarnings("unchecked")
 	private String processResponse(MuleMessage message, RetrieveDocumentSetResponseType response) throws TransformerException {
 		boolean outcome = false;
-		String repositoryUniqueId = null;
 		String document = null;
 
 		try {
@@ -107,7 +111,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 				//generate audit message
 				String request = ((Map<String, String>)message.getProperty(Constants.XDS_ITI_43, PropertyScope.SESSION)).get(_docUniqueId);
 				String patientId = (String)message.getProperty(Constants.XDS_ITI_18_PATIENTID_PROPERTY, PropertyScope.SESSION);
-				ATNAUtil.dispatchAuditMessage(muleContext, generateATNAMessage(request, patientId, repositoryUniqueId, outcome));
+				ATNAUtil.dispatchAuditMessage(muleContext, generateATNAMessage(request, patientId, outcome));
 				log.info("Dispatched ATNA message");
 			} catch (Exception e) {
 				//If the auditing breaks, it shouldn't break the flow, so catch and log
@@ -144,7 +148,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
     	   totalResultCnt = drList.size();
            for (DocumentResponse dr : drList) {       // may want to loop thru the results at some point, but for now......
                 _homeCommunityId = dr.getHomeCommunityId();               //  <ns2:HomeCommunityId>urn:oid:1.3.6.1.4.1.12009.6.1</ns2:HomeCommunityId>
-                String reposUniqueId = dr.getRepositoryUniqueId();   //  <ns2:RepositoryUniqueId>1</ns2:RepositoryUniqueId>
+                _reposUniqueId = dr.getRepositoryUniqueId();   //  <ns2:RepositoryUniqueId>1</ns2:RepositoryUniqueId>
                 _docUniqueId = dr.getDocumentUniqueId();       //  <ns2:DocumentUniqueId>1.123401.11111</ns2:DocumentUniqueId>
                 String mimeType = dr.getMimeType();                  //  <ns2:mimeType>text/xml</ns2:mimeType>
                 if(dr.getDocument()!=null) {
@@ -161,7 +165,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
     
     /* Auditing */
 	
-	protected String generateATNAMessage(String request, String patientId, String repositoryUniqueId, boolean outcome)
+	protected String generateATNAMessage(String request, String patientId, boolean outcome)
 			throws JAXBException {
 		AuditMessage res = new AuditMessage();
 		
@@ -183,7 +187,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		);
 		
 		List<ParticipantObjectDetail> pod = new ArrayList<ParticipantObjectDetail>();
-		if (repositoryUniqueId!=null) pod.add(new ParticipantObjectDetail("Repository Unique Id", repositoryUniqueId.getBytes()));
+		if (_reposUniqueId!=null) pod.add(new ParticipantObjectDetail("Repository Unique Id", _reposUniqueId.getBytes()));
 		if (_homeCommunityId!=null) pod.add(new ParticipantObjectDetail("ihe:homeCommunityID", _homeCommunityId.getBytes()));
 		
 		res.getParticipantObjectIdentification().add(
