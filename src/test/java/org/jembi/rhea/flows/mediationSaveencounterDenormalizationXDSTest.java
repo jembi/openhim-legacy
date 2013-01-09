@@ -43,7 +43,7 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	}
 	
 	@Test
-	public void testSendPixQuery() throws Exception {
+	public void testSend() throws Exception {
 		log.info("Starting test");
 	    MuleClient client = new MuleClient(muleContext);
 	    

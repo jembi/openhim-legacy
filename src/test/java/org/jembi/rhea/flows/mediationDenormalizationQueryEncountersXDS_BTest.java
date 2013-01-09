@@ -12,9 +12,7 @@ import org.apache.log4j.Logger;
 import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.junit.Test;
-import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleMessage;
-import org.mule.api.transport.PropertyScope;
 import org.mule.module.client.MuleClient;
 import org.mule.tck.junit4.FunctionalTestCase;
 

@@ -56,7 +56,7 @@ public class XDSRepositoryRetrieveDocumentSetResponseTest {
 			RetrieveDocumentSetResponseType.DocumentResponse dr = new RetrieveDocumentSetResponseType.DocumentResponse();
 			dr.setDocument(TEST_ORU_R01_MSG.getBytes());
 			dr.setDocumentUniqueId("111111111");
-			dr.setHomeCommunityId(XDSAffinityDomain.IHE_CONNECTATHON_NA2013_RHEAHIE.getHomeCommunityId());
+			dr.setHomeCommunityId("urn:oid:1.19.6.24.109.42.1.3");
 			dr.setMimeType("text/plain");
 			dr.setRepositoryUniqueId("1");
 			payload.getDocumentResponse().add(dr);

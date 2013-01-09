@@ -9,10 +9,6 @@ package org.jembi.ihe.xds;
 public enum XDSAffinityDomain {
 	
 	IHE_CONNECTATHON_NA2013_RHEAHIE(
-		//affinityDomainIDType
-		"1.3.6.1.4.1.33349.3.1.100.2012.1.3", //mohawk TODO externalise
-		//"1.19.6.24.109.42.1.3", //ihe
-		//"ECID",
 		//contentTypeCode
 		new Code("History and Physical", "Connect-a-thon contentTypeCodes", "History and Physical"),
 		//classCode
@@ -28,14 +24,9 @@ public enum XDSAffinityDomain {
 		//eventCodeList
 		new Code[]{},
 		//typeCode
-		new Code("34117-2", "LOINC", "History And Physical Note"),
-		//repositoryUniqueId
-		"1.19.6.24.109.42.1.5",
-		//homeCommunityId
-		"urn:oid:1.19.6.24.109.42.1.3"
+		new Code("34117-2", "LOINC", "History And Physical Note")
 	);
 	
-	private String affinityDomainIDType; //the patient id type to use
 	private Code contentTypeCode;
 	private Code classCode;
 	private Code confidentialityCode;
@@ -44,16 +35,11 @@ public enum XDSAffinityDomain {
 	private Code practiceSettingCode;
 	private Code eventCodeList[];
 	private Code typeCode;
-	private String repositoryUniqueId; //is 1.19.6.24.109.42.1.5
-	private String homeCommunityId; //is urn:oid:1.19.6.24.109.42.1.3
 	
-	
-	private XDSAffinityDomain(String affinityDomainIDType, Code contentTypeCode, Code classCode,
+	private XDSAffinityDomain(Code contentTypeCode, Code classCode,
 			Code confidentialityCode, Code formatCode,
 			Code healthcareFacilityTypeCode, Code practiceSettingCode,
-			Code[] eventCodeList, Code typeCode,
-			String repositoryUniqueId, String homeCommunityId) {
-		this.affinityDomainIDType = affinityDomainIDType;
+			Code[] eventCodeList, Code typeCode) {
 		this.contentTypeCode = contentTypeCode;
 		this.classCode = classCode;
 		this.confidentialityCode = confidentialityCode;
@@ -62,15 +48,8 @@ public enum XDSAffinityDomain {
 		this.practiceSettingCode = practiceSettingCode;
 		this.eventCodeList = eventCodeList;
 		this.typeCode = typeCode;
-		this.repositoryUniqueId = repositoryUniqueId;
-		this.homeCommunityId = homeCommunityId;
 	}
 
-
-	public String getAffinityDomainIDType() {
-		return affinityDomainIDType;
-	}
-	
 	public Code getContentTypeCode() {
 		return contentTypeCode;
 	}
@@ -103,15 +82,6 @@ public enum XDSAffinityDomain {
 	public Code getTypeCode() {
 		return typeCode;
 	}
-
-	public String getRepositoryUniqueId() {
-		return repositoryUniqueId;
-	}
-
-	public String getHomeCommunityId() {
-		return homeCommunityId;
-	}
-
 
 	public static class Code {
 		private String code, codingScheme, display;
