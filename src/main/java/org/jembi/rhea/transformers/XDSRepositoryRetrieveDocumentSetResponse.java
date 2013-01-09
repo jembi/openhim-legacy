@@ -184,7 +184,7 @@ public class XDSRepositoryRetrieveDocumentSetResponse extends
 		
 		List<ParticipantObjectDetail> pod = new ArrayList<ParticipantObjectDetail>();
 		if (repositoryUniqueId!=null) pod.add(new ParticipantObjectDetail("Repository Unique Id", repositoryUniqueId.getBytes()));
-		if (_homeCommunityId!=null) pod.add(new ParticipantObjectDetail("“ihe:homeCommunityID", _homeCommunityId.getBytes()));
+		if (_homeCommunityId!=null) pod.add(new ParticipantObjectDetail("ihe:homeCommunityID", _homeCommunityId.getBytes()));
 		
 		res.getParticipantObjectIdentification().add(
 			ATNAUtil.buildParticipantObjectIdentificationType(
