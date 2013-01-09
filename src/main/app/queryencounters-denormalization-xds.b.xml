@@ -31,9 +31,9 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
             </custom-transformer>
 	        <echo-component doc:name="Echo"/>
 	        <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSet" doc:name="Construct retrieve documents messages"/>
-	        <foreach doc:name="Foreach">
-	        	<vm:outbound-endpoint exchange-pattern="request-response" doc:name="Send Retrieve Documents Request" path="queryencounter_xds_retrieve_document_setb" />
-	        </foreach>
+            <collection-splitter doc:name="Collection Splitter"/>
+	        <vm:outbound-endpoint exchange-pattern="request-response" doc:name="Send Retrieve Documents Request" path="queryencounter_xds_retrieve_document_setb" />
+            <collection-aggregator failOnTimeout="true" doc:name="Collection Aggregator"/>
             <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSetResponse" doc:name="Process retrieve documents response">
                 <spring:property name="xdsRepositoryHost" value="${xds.repository.host}"/>
                 <spring:property name="xdsRepositoryPath" value="${xds.repository.path}"/>
