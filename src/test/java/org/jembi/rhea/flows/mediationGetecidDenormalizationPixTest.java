@@ -48,9 +48,8 @@ public class mediationGetecidDenormalizationPixTest extends
 		//idMap.put("idType", "NIST2010");
 		
 		// Mohawk
-		idMap.put("id", "496945-000306-1987W");
-	    //idMap.put("id", "994620-002229-1988L");
-		idMap.put("idType", "GHHS");
+	    idMap.put("id", "994620-002229-1988L");
+	    idMap.put("idType", "W2012CATOID");
 	    
 	    Map<String, Object> properties = null;
 	    MuleMessage result = client.send("vm://getecid-pix", idMap, properties);
@@ -58,7 +57,7 @@ public class mediationGetecidDenormalizationPixTest extends
 	    assertNotNull(result.getPayload());
 	    
 	    // Mohawk
-	    assertEquals("2552234100", result.getPayloadAsString());
+	    assertEquals("756", result.getPayloadAsString());
 
 	    log.info(result.getPayloadAsString());
 	    
