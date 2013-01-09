@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "RetrieveDocumentSetRequestType", propOrder = {
     "documentRequest"
 })
-@XmlRootElement(name = "RepositoryRetrieveDocumentSet")
+@XmlRootElement(name = "RetrieveDocumentSet", namespace = "urn:ihe:iti:xds-b:2007")
 public class RetrieveDocumentSetRequestType {
 
     @XmlElement(name = "DocumentRequest", namespace = "urn:ihe:iti:xds-b:2007", required = true)
@@ -108,7 +108,7 @@ public class RetrieveDocumentSetRequestType {
         "repositoryUniqueId",
         "documentUniqueId"
     })
-    @XmlRootElement(name = "DocumentRequest")
+    @XmlRootElement(name = "DocumentRequest", namespace = "urn:ihe:iti:xds-b:2007")
     public static class DocumentRequest {
 
         @XmlElement(name = "HomeCommunityId", namespace = "urn:ihe:iti:xds-b:2007")
