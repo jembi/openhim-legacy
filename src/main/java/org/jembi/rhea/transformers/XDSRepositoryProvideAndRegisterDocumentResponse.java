@@ -14,6 +14,7 @@ import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
 import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryError;
 import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
 
+import org.apache.commons.httpclient.HttpVersion;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
@@ -25,6 +26,7 @@ import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
 import org.mule.module.client.MuleClient;
 import org.mule.transformer.AbstractMessageTransformer;
+import org.mule.transport.http.HttpResponse;
 
 /**
  * Handle the response for XDS ITI-41 Provide and Register Document Set-b
@@ -43,9 +45,6 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 		
 		boolean outcome = false;
 		try {
-			//TODO process response
-			String result = null;
-			
 			if (message.getPayload() instanceof RegistryResponseType)
 				outcome = processResponse((RegistryResponseType)message.getPayload());
 			else
@@ -66,8 +65,9 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 			}
 		}
 			
-		//TODO this ain't right...
-		return null;
+		HttpResponse response = new HttpResponse();
+		response.setStatusLine(HttpVersion.HTTP_1_1, outcome ? 200 : 500);
+		return response;
 	}
 	
 	protected boolean processResponse(RegistryResponseType response) {
