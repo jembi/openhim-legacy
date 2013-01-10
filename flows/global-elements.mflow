@@ -1,49 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="global-elements">
-    <global-unknown description="false" unknownName="debuggerAgent" index="1" entity-id="global-unknown#1">
-        <content>&lt;custom-agent xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot; name=&quot;debuggerAgent&quot; class=&quot;com.mulesoft.mule.debugger.server.DebuggerAgent&quot;/&gt;</content>
-    </global-unknown>
     <global-element name="HTTP\HTTPS" type="org.mule.tooling.ui.modules.core.global.httpConnector" entity-id="HTTP\HTTPS#1">
         <properties>
             <property name="name" value="NoSessionConnector"/>
-            <property name="auxiliary;index" value="2"/>
+            <property name="auxiliary;index" value="1"/>
             <property name="enableCookies"/>
             <property name="label"/>
             <property name="cookieSpec"/>
-            <property name="auxiliary;index" value="2"/>
-            <property name="auxiliary;index" value="2"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
             <property name="dispatcherPoolFactory-ref"/>
-            <property name="auxiliary;index" value="2"/>
+            <property name="auxiliary;index" value="1"/>
             <property name="dynamicNotification"/>
             <property name="validateConnections"/>
-            <property name="auxiliary;index" value="2"/>
-            <property name="auxiliary;index" value="2"/>
-            <property name="auxiliary;index" value="2"/>
-            <property name="auxiliary;index" value="2"/>
-            <property name="auxiliary;index" value="2"/>
-            <property name="auxiliary;index" value="2"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
             <property name="sendBufferSize"/>
             <property name="receiveBufferSize"/>
-            <property name="auxiliary;index" value="2"/>
+            <property name="auxiliary;index" value="1"/>
             <property name="receiveBacklog"/>
             <property name="sendTcpNoDelay"/>
             <property name="reuseAddress"/>
             <property name="keepSendSocketOpen"/>
             <property name="keepAlive"/>
-            <property name="auxiliary;index" value="2"/>
-            <property name="auxiliary;index" value="2"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
             <property name="clientSoTimeout"/>
             <property name="serverSoTimeout"/>
             <property name="socketSoLinger"/>
-            <property name="auxiliary;index" value="2"/>
-            <property name="auxiliary;index" value="2"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
             <property name="proxyHostname"/>
             <property name="proxyPort"/>
             <property name="proxyUsername"/>
             <property name="proxyPassword"/>
-            <property name="auxiliary;index" value="2"/>
-            <property name="auxiliary;index" value="2"/>
-            <property name="auxiliary;index" value="2"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
         </properties>
     </global-element>
     <description></description>
