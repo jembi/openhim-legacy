@@ -2,7 +2,7 @@
 <ORU_R01 xmlns="urn:hl7-org:v2xml">
     <MSH>
         <MSH.1>|</MSH.1>
-        <MSH.2>^~\&amp;amp;</MSH.2>
+        <MSH.2>^~\&amp;</MSH.2>
         <MSH.4>
             <HD.1>357</HD.1>
         </MSH.4>

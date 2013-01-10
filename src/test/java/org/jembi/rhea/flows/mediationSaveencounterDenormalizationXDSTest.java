@@ -3,16 +3,13 @@ package org.jembi.rhea.flows;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.jembi.TestUtil;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.jembi.rhea.RestfulHttpResponse;
 import org.junit.Test;
@@ -57,7 +54,7 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	    //TODO hardcoded for nist testing [modify for use here]
     	//return "55f81316303842c^^^&1.3.6.1.4.1.21367.2009.1.2.300&ISO";
 	    
-	    String oru_r01 = getResourceAsString("oru_r01.xml");
+	    String oru_r01 = TestUtil.getResourceAsString("oru_r01.xml");
 	    payload.setBody(oru_r01);
 	    
 	    Map<String, Object> properties = null;
@@ -72,19 +69,4 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	    log.info("Test completed");
 	}
 	
-	private String getResourceAsString(String resource) throws IOException {
-		InputStream is = this.getClass().getClassLoader().getResourceAsStream(resource);
-	    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-	    String         line = null;
-	    StringBuilder  stringBuilder = new StringBuilder();
-	    String         ls = System.getProperty("line.separator");
-
-	    while((line = reader.readLine()) != null ) {
-	        stringBuilder.append(line);
-	        stringBuilder.append(ls);
-	    }
-
-	    return stringBuilder.toString();
-	}
-
 }
