@@ -168,7 +168,7 @@
   <con:entry key="encounter_start_date" value="1991-01-01T00:00:00"/>
   <con:entry key="ELID" value="357"/>
   <con:entry key="encounter_end_date" value="2014-01-01T00:00:00"/>
-</con:parameters></con:request></con:method></con:resource></con:interface><con:testSuite name="SHR Service TestSuite"><con:description>TestSuite generated for REST Service [SHR Service]</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="encounters TestCase" searchProperties="true"><con:description>TestCase generated for REST Resource [encounters] located at [/ws/rest/v1/patient/{param0}/encounters]</con:description><con:settings/><con:testStep type="restrequest" name="Post enc - MARC-HI Request"><con:settings/><con:config service="SHR Service" resourcePath="/ws/rest/v1/patient/{param0}/encounters" methodName="Post encounters" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Post enc - MARC-HI Request" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
+</con:parameters></con:request></con:method></con:resource></con:interface><con:testSuite name="SHR Service TestSuite"><con:description>TestSuite generated for REST Service [SHR Service]</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="encounters TestCase" searchProperties="true"><con:description>TestCase generated for REST Resource [encounters] located at [/ws/rest/v1/patient/{param0}/encounters]</con:description><con:settings/><con:testStep type="restrequest" name="Post enc - MARC-HI Request"><con:settings/><con:config service="SHR Service" resourcePath="/ws/rest/v1/patient/{param0}/encounters" methodName="Post encounters" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="MARC-HI Request" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
 <ORU_R01 xmlns="urn:hl7-org:v2xml">
     <MSH>
         <MSH.1>|</MSH.1>
@@ -207,8 +207,8 @@
             <PID>
                 <PID.1>1</PID.1>
                 <PID.3>
-                    <CX.1>496945-000306-1987W</CX.1>
-                    <CX.5>GHHS</CX.5>
+                    <CX.1>994620-002229-1988L</CX.1>
+                    <CX.5>W2012CATOID</CX.5>
                 </PID.3>
                 <PID.5>
                     <XPN.1>
@@ -302,10 +302,9 @@
             </ORU_R01.OBSERVATION>
         </ORU_R01.ORDER_OBSERVATION>
     </ORU_R01.PATIENT_RESULT>
-</ORU_R01>]]></con:request><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>201
-</codes></con:configuration></con:assertion><con:credentials><con:username>rhea</con:username><con:password>2BAi3SyKVe9J</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="param0" value="GHHS-496945-000306-1987W" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Get enc - MARC-HI Request"><con:settings/><con:config service="SHR Service" resourcePath="/ws/rest/v1/patient/{param0}/encounters" methodName="Get encounters" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get enc - MARC-HI Request" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting><con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@follow-redirects">false</con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>rhea</con:username><con:password>2BAi3SyKVe9J</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="param0" value="GHHS-496945-000306-1987W"/>
-  <con:entry key="ELID" value="357"/>
+</ORU_R01>]]></con:request><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>201</codes></con:configuration></con:assertion><con:credentials><con:username>rhea</con:username><con:password>2BAi3SyKVe9J</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="param0" value="W2012CATOID-994620-002229-1988L" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Query enc - MARC-HI Request"><con:settings/><con:config service="SHR Service" resourcePath="/ws/rest/v1/patient/{param0}/encounters" methodName="Get encounters" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="MARC-HI Request" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting><con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@follow-redirects">false</con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>rhea</con:username><con:password>2BAi3SyKVe9J</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="param0" value="W2012CATOID-994620-002229-1988L"/>
   <con:entry key="encounter_start_date" value="1991-01-01T00:00:00"/>
-  <con:entry key="encounter_end_date" value="2013-01-01T00:00:00"/>
+  <con:entry key="ELID" value="357"/>
+  <con:entry key="encounter_end_date" value="2014-01-01T00:00:00"/>
 </con:parameters></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>
