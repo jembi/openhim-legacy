@@ -67,7 +67,7 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 		}
 			
 		RestfulHttpResponse response = new RestfulHttpResponse();
-		response.setHttpStatus(outcome ? 200 : 500);
+		response.setHttpStatus(outcome ? 201 : 500);
 		return response;
 	}
 	
