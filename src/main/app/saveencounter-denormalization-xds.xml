@@ -32,8 +32,8 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
                 <spring:property name="xdsRepositoryHost" value="${xds.repository.host}"/>
                 <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthorityId}"/>
             </custom-transformer>
-            <custom-transformer class="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer" doc:name="HttpResponseToRestfulHttpResponseTransformer"/>
-            <logger message="Responce normalization" level="INFO" doc:name="Logger"/>
+            <logger message="Response normalization" level="INFO" doc:name="Logger"/>
+            <logger message="Response: #[message:payload]" level="INFO" doc:name="Logger"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="On-ramp Transformer"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Translation Transformer"/>
         </response>

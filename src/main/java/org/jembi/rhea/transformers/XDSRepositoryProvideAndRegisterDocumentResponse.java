@@ -20,6 +20,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
 import org.jembi.ihe.atna.ATNAUtil.ParticipantObjectDetail;
 import org.jembi.rhea.Constants;
+import org.jembi.rhea.RestfulHttpResponse;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -65,8 +66,8 @@ public class XDSRepositoryProvideAndRegisterDocumentResponse extends
 			}
 		}
 			
-		HttpResponse response = new HttpResponse();
-		response.setStatusLine(HttpVersion.HTTP_1_1, outcome ? 200 : 500);
+		RestfulHttpResponse response = new RestfulHttpResponse();
+		response.setHttpStatus(outcome ? 200 : 500);
 		return response;
 	}
 	
