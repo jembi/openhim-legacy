@@ -28,6 +28,8 @@ import ca.marc.ihe.xds.XDSUtil;
  * XDS ITI-18 Registry Stored Query
  */
 public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
+	
+	private String requestedAssigningAuthorityId = "";
 
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
@@ -82,12 +84,7 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
         adhocQuery.setId(storedQueryId);
         
         // Slots, first setup slot for patient ID
-        String idOid = message.getProperty(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, PropertyScope.SESSION);
-        // To enable unit testing
-        if (idOid == null) {
-        	idOid = message.getProperty(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, PropertyScope.INBOUND);
-        }
-        String srcPatientId = String.format("'%s^^^&%s&ISO'", id, idOid);
+        String srcPatientId = String.format("'%s^^^&%s&ISO'", id, requestedAssigningAuthorityId);
         adhocQuery.getSlot().add(XDSUtil.createQuerySlot("$XDSDocumentEntryPatientId", srcPatientId));
         
         // Setup status slot 
@@ -113,5 +110,14 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
 		}
 		
 		return request;
+	}
+
+	public String getRequestedAssigningAuthorityId() {
+		return requestedAssigningAuthorityId;
+	}
+
+	public void setRequestedAssigningAuthorityId(
+			String requestedAssigningAuthorityId) {
+		this.requestedAssigningAuthorityId = requestedAssigningAuthorityId;
 	}
 }
