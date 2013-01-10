@@ -14,20 +14,15 @@ import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
 import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryError;
 import oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType;
 
-import org.apache.commons.httpclient.HttpVersion;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jembi.ihe.atna.ATNAUtil;
-import org.jembi.ihe.atna.ATNAUtil.ParticipantObjectDetail;
 import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpResponse;
-import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
-import org.mule.module.client.MuleClient;
 import org.mule.transformer.AbstractMessageTransformer;
-import org.mule.transport.http.HttpResponse;
 
 /**
  * Handle the response for XDS ITI-41 Provide and Register Document Set-b

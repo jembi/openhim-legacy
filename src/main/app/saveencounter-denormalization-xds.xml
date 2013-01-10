@@ -47,17 +47,11 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
         <choice doc:name="Choice">
             <when expression="#[groovy: return ${ihe.secure};]">
                 <processor-chain>
-                	<!-- Gazelle test 11109 -->
-                    <!-- <https:outbound-endpoint exchange-pattern="request-response" host="131.254.209.16" port="10072"  doc:name="Deliver message to XDS repository (Secure)" connector-ref="HTTP_HTTPS"/> -->
-                	<!-- For IHE Test 12046 -->
-                    <!-- <https:outbound-endpoint exchange-pattern="request-response" host="ihexds.nist.gov" port="12081" path="tf6/services/repositoryBonedoc" doc:name="Deliver message to XDS repository (Secure)" connector-ref="HTTP_HTTPS"/> -->
                     <https:outbound-endpoint exchange-pattern="request-response" host="${xds.repository.host}" port="${xds.repository.securePort}" path="${xds.repository.path}" doc:name="HTTPS" connector-ref="HTTP_HTTPS"/>
                 </processor-chain>
             </when>
             <otherwise>
                 <processor-chain>
-                	<!-- For IHE Test 12049 -->
-                    <!-- <http:outbound-endpoint exchange-pattern="request-response" host="ihexds.nist.gov" port="12080" path="tf6/services/repositoryBonedoc" doc:name="Deliver message to XDS repository"/> -->
                     <http:outbound-endpoint exchange-pattern="request-response" host="${xds.repository.host}" port="${xds.repository.port}" path="${xds.repository.path}" doc:name="HTTP"/>
                 </processor-chain>
             </otherwise>
