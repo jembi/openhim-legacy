@@ -56,14 +56,14 @@ public class mediationDenormalizationQueryEncountersXDS_BTest_wATNA extends
 	    //properties.put(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, "1.19.6.24.109.42.1.3");
 	    
 	    // Mohawk
-	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_MARC_HI-3770298161/encounters");
-	    properties.put(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, "1.3.6.1.4.1.33349.3.1.100.2012.1.3");
+	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
 	    MuleMessage result = client.send("vm://queryEncounters-De-normailization-XDS.b", payload, properties);
 	    
 	    assertNotNull(result.getPayload());
 	    
-	    log.info(result.getPayloadAsString());
+	    log.info(result.getPayload().getClass());
+	    log.info(result.getPayload());
 	    
 	    log.info("Test completed");
 	}

@@ -1,5 +1,6 @@
 package org.jembi.rhea.transformers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -22,14 +23,16 @@ public class XDSRepositoryResponseToRestfulHttpResponseTransformer extends
 	
 	private final Log log = LogFactory.getLog(this.getClass());
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
 			throws TransformerException {
 		
 		RestfulHttpResponse res = new RestfulHttpResponse();
 		
-		@SuppressWarnings("unchecked")
-		List<String> documentList = (List<String>) message.getPayload();
+		List<String> documentList = new ArrayList<String>();
+		for (List<String> docs : (List<List<String>>)message.getPayload())
+			documentList.addAll(docs);
 		
 		if (documentList.size() > 0) {
 			res.setHttpStatus(200);

@@ -59,7 +59,8 @@ public class mediationDenormalizationQueryEncountersXDS_BTest extends
 	    
 	    assertNotNull(result.getPayload());
 	    
-	    log.info(result.getPayloadAsString());
+	    log.info(result.getPayload().getClass());
+	    log.info(result.getPayload());
 	    
 	    log.info("Test completed");
 	}

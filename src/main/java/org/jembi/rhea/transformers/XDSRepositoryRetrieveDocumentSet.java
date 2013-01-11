@@ -7,19 +7,13 @@ import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType;
 import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType.DocumentRequest;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.xml.bind.JAXBException;
-
-import org.jembi.rhea.Constants;
-import org.jembi.rhea.Util;
 import org.jembi.rhea.xds.DocumentMetaData;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
-import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 
 /**
@@ -28,12 +22,12 @@ import org.mule.transformer.AbstractMessageTransformer;
 public class XDSRepositoryRetrieveDocumentSet extends
 		AbstractMessageTransformer {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {		
 		// extract patient id, repository id and a list of document unique id's from the payload
 		Map<String, List<DocumentMetaData>> repoDocumentsMap = (Map<String, List<DocumentMetaData>>) message.getPayload();
 		List<RetrieveDocumentSetRequestType> retrieveDocumentMessages = new ArrayList<RetrieveDocumentSetRequestType>();
-		Map<String, String> requests = new HashMap<String, String>(); //K: docUniqueId, V: request XML
 		
 		Set<String> keySet = repoDocumentsMap.keySet();
 		for (String key : keySet) {
@@ -48,20 +42,11 @@ public class XDSRepositoryRetrieveDocumentSet extends
 			for(DocumentMetaData documentMetaData : docList) {			
 				DocumentRequest dr = createDocumentRequest(documentMetaData.getDocumentUniqueId(), documentMetaData.getHomeCommunityId(), repositoryUniqueId);
 				rdRequest.getDocumentRequest().add(dr);
-				try {
-					requests.put(dr.getDocumentUniqueId(), Util.marshallJAXBObject("ihe.iti.xds_b._2007", dr, false));
-				} catch (JAXBException e) {
-					throw new TransformerException(this, e);
-				}
 			}
 			
 			retrieveDocumentMessages.add(rdRequest);
 		}
 				
-		// add request to session prop so that we can access it when processing the response
-		message.setProperty(Constants.XDS_ITI_43, requests, PropertyScope.SESSION);
-		
-		//return retrieveDocumentMessages.isEmpty() ? null : retrieveDocumentMessages.get(0);
 		return retrieveDocumentMessages;
 	}
 	
