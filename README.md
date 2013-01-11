@@ -8,7 +8,7 @@ It was developed for the Rwandan Health Infromation Exchange however, it was des
 Setup
 =====
 
-The HIM is developed as a Mule ESB application so we need MuleStudio to work with the project. You can download it here: http://www.mulesoft.org/download-mule-esb-community-edition
+The HIM is developed as a Mule ESB application so we need MuleStudio to work with the project. You can download it here: http://www.mulesoft.org/download-mule-esb-community-edition. If you are new to MuleStudio I would suggest going over some of the getting started documentation and do some of the tutorials: http://www.mulesoft.org/documentation/display/MULE3START/Home.
 
 Next, you will want to import this git repo into MuleStudio. There is some good documentation on how to accomblish this on the Mule wiki: http://www.mulesoft.org/documentation/display/MULE3STUDIO/Using+Git+with+Studio
 
@@ -66,6 +66,6 @@ To test the RHEA HIM implementation you can use SOAP UI (http://www.soapui.org/)
 
 A soapUI project that is setup for testing the API calls for the HIM can be found here: https://github.com/jembi/rhea-api-tests
 
-By default the OpenHIM run on port 5000 so make sure to set the endpoint in soapUI to point to https://localhost:5000. You must supply a HTTP basic auth username and password to connect to the OpenHIM. the details must be equal to one of the user in the LDAP databse. If you used the ldif provies you can use the following details:
+By default the OpenHIM run on port 5000 so make sure to set the endpoint in soapUI to point to https://localhost:5000. You must supply a HTTP basic auth username and password to connect to the OpenHIM. the details must be equal to one of the user in the LDAP databse. If you used the ldif provied you can use the following details:
 * Username: test
 * Passowrd: test 
