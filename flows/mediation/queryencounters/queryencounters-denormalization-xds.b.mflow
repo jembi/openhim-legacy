@@ -112,13 +112,6 @@
                 <property name="auxiliary;wrapIn" value="4"/>
                 <property name="auxiliary;index" value="4"/>
             </property-collection>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/https/tls-key-store;0">
-                <property name="storePassword" value="${ihe.storepassword}"/>
-                <property name="path" value="${ihe.keystore}"/>
-                <property name="keyPassword" value="${ihe.keypassword}"/>
-                <property name="auxiliary;wrapIn" value="5"/>
-                <property name="auxiliary;index" value="5"/>
-            </property-collection>
             <property-collection name="@http://www.mulesoft.org/schema/mule/https/tls-client;0">
                 <property name="storePassword" value="${ihe.storepassword}"/>
                 <property name="path" value="${ihe.keystore}"/>
@@ -132,9 +125,16 @@
                 <property name="auxiliary;wrapIn" value="5"/>
                 <property name="auxiliary;index" value="5"/>
             </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/https/tls-key-store;0">
+                <property name="storePassword" value="${ihe.storepassword}"/>
+                <property name="path" value="${ihe.keystore}"/>
+                <property name="keyPassword" value="${ihe.keypassword}"/>
+                <property name="auxiliary;wrapIn" value="5"/>
+                <property name="auxiliary;index" value="5"/>
+            </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mediation-denormalization-queryencounters-xds.bFlow" entity-id="4e3f334c-50c6-4c5a-b0bd-39348d875400">
+    <flow SubFlow="false" name="mediation-denormalization-queryencounters-xds.bFlow" entity-id="7c5970fc-464b-4c24-bafd-695c542d89aa">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -236,36 +236,42 @@
     <property name="value" value="${xds.registry.host}"/>
     <property name="auxiliary;wrapIn" value="14"/>
     <property name="auxiliary;index" value="14"/>
+    <property name="isProcessed$$$$" value="true"/>
 </property-collection>
 <property-collection name="@http://www.springframework.org/schema/beans/property;1">
     <property name="name" value="xdsRegistryPath"/>
     <property name="value" value="${xds.registry.path}"/>
     <property name="auxiliary;wrapIn" value="15"/>
     <property name="auxiliary;index" value="15"/>
+    <property name="isProcessed$$$$" value="true"/>
 </property-collection>
 <property-collection name="@http://www.springframework.org/schema/beans/property;2">
     <property name="name" value="xdsRegistrySecurePort"/>
     <property name="value" value="${xds.registry.securePort}"/>
     <property name="auxiliary;wrapIn" value="16"/>
     <property name="auxiliary;index" value="16"/>
+    <property name="isProcessed$$$$" value="true"/>
 </property-collection>
 <property-collection name="@http://www.springframework.org/schema/beans/property;3">
     <property name="name" value="xdsRegistryPort"/>
     <property name="value" value="${xds.registry.port}"/>
     <property name="auxiliary;wrapIn" value="17"/>
     <property name="auxiliary;index" value="17"/>
+    <property name="isProcessed$$$$" value="true"/>
 </property-collection>
 <property-collection name="@http://www.springframework.org/schema/beans/property;4">
     <property name="name" value="requestedAssigningAuthority"/>
     <property name="value" value="${pix.requestedAssigningAuthorityId}"/>
     <property name="auxiliary;wrapIn" value="18"/>
     <property name="auxiliary;index" value="18"/>
+    <property name="isProcessed$$$$" value="true"/>
 </property-collection>
 <property-collection name="@http://www.springframework.org/schema/beans/property;5">
     <property name="name" value="iheSecure"/>
     <property name="value" value="${ihe.secure}"/>
     <property name="auxiliary;wrapIn" value="19"/>
     <property name="auxiliary;index" value="19"/>
+    <property name="isProcessed$$$$" value="true"/>
 </property-collection>
                             </properties>
                         </pattern>
@@ -363,51 +369,56 @@
     <property name="value" value="${xds.repository.host}"/>
     <property name="auxiliary;wrapIn" value="26"/>
     <property name="auxiliary;index" value="26"/>
+    <property name="isProcessed$$$$" value="true"/>
 </property-collection>
 <property-collection name="@http://www.springframework.org/schema/beans/property;1">
     <property name="name" value="xdsRepositoryPath"/>
     <property name="value" value="${xds.repository.path}"/>
     <property name="auxiliary;wrapIn" value="27"/>
     <property name="auxiliary;index" value="27"/>
+    <property name="isProcessed$$$$" value="true"/>
 </property-collection>
 <property-collection name="@http://www.springframework.org/schema/beans/property;2">
     <property name="name" value="xdsRepositorySecurePort"/>
     <property name="value" value="${xds.repository.securePort}"/>
     <property name="auxiliary;wrapIn" value="28"/>
     <property name="auxiliary;index" value="28"/>
+    <property name="isProcessed$$$$" value="true"/>
 </property-collection>
 <property-collection name="@http://www.springframework.org/schema/beans/property;3">
     <property name="name" value="xdsRepositoryPort"/>
     <property name="value" value="${xds.repository.port}"/>
     <property name="auxiliary;wrapIn" value="29"/>
     <property name="auxiliary;index" value="29"/>
+    <property name="isProcessed$$$$" value="true"/>
 </property-collection>
 <property-collection name="@http://www.springframework.org/schema/beans/property;4">
     <property name="name" value="requestedAssigningAuthority"/>
     <property name="value" value="${pix.requestedAssigningAuthorityId}"/>
     <property name="auxiliary;wrapIn" value="30"/>
     <property name="auxiliary;index" value="30"/>
+    <property name="isProcessed$$$$" value="true"/>
 </property-collection>
 <property-collection name="@http://www.springframework.org/schema/beans/property;5">
     <property name="name" value="iheSecure"/>
     <property name="value" value="${ihe.secure}"/>
     <property name="auxiliary;wrapIn" value="31"/>
     <property name="auxiliary;index" value="31"/>
+    <property name="isProcessed$$$$" value="true"/>
 </property-collection>
                             </properties>
                         </pattern>
-                        <pattern name="Collection Aggregator" type="http://www.mulesoft.org/schema/mule/core/collection-aggregator" entity-id="Collection Aggregator#1">
+                        <pattern name="Custom Aggregator" type="http://www.mulesoft.org/schema/mule/core/custom-aggregator" entity-id="Custom Aggregator#1">
                             <properties>
-<property name="timeout"/>
 <property name="failOnTimeout" value="true"/>
+<property name="class" value="org.jembi.rhea.orchestration.XDSRepositoryRetrieveDocumentSetResponseAggregator"/>
+<property name="storePrefix" value=""/>
+<property name="timeout" value=""/>
+<property name="persistentStores" value="false"/>
 <property name="auxiliary;index" value="32"/>
-<property name="auxiliary;index" value="32"/>
-<property name="businessEventsLabel"/>
-<property name="tracking:enable-default-events"/>
-<property name="auxiliary;index" value="32"/>
-<property name="auxiliary;index" value="32"/>
-<property name="auxiliary;index" value="32"/>
+<property name="updated"/>
                             </properties>
+                            <description></description>
                         </pattern>
                         <pattern name="Transform document list to RestfulHttpResponse" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#6">
                             <properties>
@@ -474,20 +485,37 @@
             </pattern>
             <splitter index="38" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <properties>
-                    <property-collection name="c6d253c3-7e65-46bf-8400-df45fb3e5674">
+                    <property name=";INDEX" value="38"/>
+                    <property name=";INDEX" value="38"/>
+                    <property-collection name="c09a8cc3-3e95-4fb1-96a1-706c093e3334">
                         <property name="choice.expression" value="#[groovy: return ${ihe.secure};]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[groovy: return ${ihe.secure};]"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="296e8bef-56e3-43e5-990c-ef0b4a11b6f9">
+                    <property-collection name="85416c59-efe5-4c96-91cf-82aabcffb34e">
                         <property name="choice.otherwise" value="true"/>
                         <property-collection name="choice.attributes"/>
                     </property-collection>
                 </properties>
-                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
+                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
+                    <properties>
+                        <property name=";INDEX" value="38"/>
+                        <property name=";INDEX" value="38"/>
+                        <property-collection name="c09a8cc3-3e95-4fb1-96a1-706c093e3334">
+                            <property name="choice.expression" value="#[groovy: return ${ihe.secure};]"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="#[groovy: return ${ihe.secure};]"/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="85416c59-efe5-4c96-91cf-82aabcffb34e">
+                            <property name="choice.otherwise" value="true"/>
+                            <property-collection name="choice.attributes"/>
+                        </property-collection>
+                    </properties>
+                </pattern>
                 <compartment entity-id="compartment#2">
-                    <lane hadOnlyOneElement="false" index="40" isChoiceOtherwiseLane="false" entity-id="c6d253c3-7e65-46bf-8400-df45fb3e5674">
+                    <lane hadOnlyOneElement="false" index="40" isChoiceOtherwiseLane="false" entity-id="c09a8cc3-3e95-4fb1-96a1-706c093e3334">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
@@ -569,7 +597,7 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="43" isChoiceOtherwiseLane="true" entity-id="296e8bef-56e3-43e5-990c-ef0b4a11b6f9">
+                    <lane hadOnlyOneElement="false" index="43" isChoiceOtherwiseLane="true" entity-id="85416c59-efe5-4c96-91cf-82aabcffb34e">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#2">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
@@ -617,7 +645,7 @@
             </splitter>
         </lane>
     </flow>
-    <flow SubFlow="false" name="XDS_Retrieve_Document_Set.b_QueryFlow1" entity-id="f2aa41ad-0696-48dc-a0ae-4b68b34df92f">
+    <flow SubFlow="false" name="XDS_Retrieve_Document_Set.b_QueryFlow1" entity-id="0bc51210-8790-4d32-b97d-21538912f5ea">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -704,20 +732,37 @@
             </pattern>
             <splitter index="51" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#3">
                 <properties>
-                    <property-collection name="fc43a68f-d1fc-4d44-8860-0daeb1f6bbd9">
+                    <property name=";INDEX" value="51"/>
+                    <property name=";INDEX" value="51"/>
+                    <property-collection name="1edd27be-f398-4daa-8866-782032f722fd">
                         <property name="choice.expression" value="#[groovy: return ${ihe.secure};]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[groovy: return ${ihe.secure};]"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="49c53fa1-f5d5-4bf0-ba5f-d2b37f3a8c95">
+                    <property-collection name="14d953fc-0891-4bb2-9476-4af09c1a1329">
                         <property name="choice.otherwise" value="true"/>
                         <property-collection name="choice.attributes"/>
                     </property-collection>
                 </properties>
-                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#4"/>
+                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#4">
+                    <properties>
+                        <property name=";INDEX" value="51"/>
+                        <property name=";INDEX" value="51"/>
+                        <property-collection name="1edd27be-f398-4daa-8866-782032f722fd">
+                            <property name="choice.expression" value="#[groovy: return ${ihe.secure};]"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="#[groovy: return ${ihe.secure};]"/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="14d953fc-0891-4bb2-9476-4af09c1a1329">
+                            <property name="choice.otherwise" value="true"/>
+                            <property-collection name="choice.attributes"/>
+                        </property-collection>
+                    </properties>
+                </pattern>
                 <compartment entity-id="compartment#3">
-                    <lane hadOnlyOneElement="false" index="53" isChoiceOtherwiseLane="false" entity-id="fc43a68f-d1fc-4d44-8860-0daeb1f6bbd9">
+                    <lane hadOnlyOneElement="false" index="53" isChoiceOtherwiseLane="false" entity-id="1edd27be-f398-4daa-8866-782032f722fd">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTPS" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#3">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
@@ -799,7 +844,7 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="56" isChoiceOtherwiseLane="true" entity-id="49c53fa1-f5d5-4bf0-ba5f-d2b37f3a8c95">
+                    <lane hadOnlyOneElement="false" index="56" isChoiceOtherwiseLane="true" entity-id="14d953fc-0891-4bb2-9476-4af09c1a1329">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#4">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
