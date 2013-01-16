@@ -48,7 +48,6 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	    payload.setHttpMethod(RestfulHttpRequest.HTTP_POST);
 	    
 	    // Mohawk
-	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_MARC_HI-3770298161/encounters");
 	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
 	    //TODO hardcoded for nist testing [modify for use here]

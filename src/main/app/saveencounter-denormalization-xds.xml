@@ -24,7 +24,7 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
         <expression-transformer evaluator="groovy" expression="return message.payload.body;" doc:name="Transfor HTTPRestfulMessage to HTTP Body"/>
         <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryProvideAndRegisterDocument" doc:name="Transform to XDS Provide and Register Document Set.b Request">
             <spring:property name="systemSourceID" value="${ihe.systemSourceID}"/>
-            <spring:property name="affinityDomainID" value="${ihe.affinityDomainID}"/>
+            <spring:property name="affinityDomainID" value="${pix.requestedAssigningAuthorityId}"/>
         </custom-transformer>
         <response>
             <logger message="Recieved response from xds provider: #[groovy: message.toString();]]" level="INFO" doc:name="Logger"/>
