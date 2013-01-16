@@ -54,6 +54,8 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 			response = response.replace("\034", "");
 			
 			Map<String, String> idMap = parseResponse(response);
+			if (idMap==null)
+				return null;
 			
 			pid = idMap.get("id");
 			
