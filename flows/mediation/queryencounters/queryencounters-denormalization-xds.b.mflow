@@ -134,7 +134,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mediation-denormalization-queryencounters-xds.bFlow" entity-id="5c27844b-2d29-44e3-85ee-c82f840ab03d">
+    <flow SubFlow="false" name="mediation-denormalization-queryencounters-xds.bFlow" entity-id="4e3f334c-50c6-4c5a-b0bd-39348d875400">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -396,20 +396,14 @@
 </property-collection>
                             </properties>
                         </pattern>
-                        <pattern name="Custom Aggregator" type="http://www.mulesoft.org/schema/mule/core/custom-aggregator" entity-id="Custom Aggregator#1">
+                        <pattern name="Collection Aggregator" type="http://www.mulesoft.org/schema/mule/core/collection-aggregator" entity-id="Collection Aggregator#1">
                             <properties>
 <property name="timeout"/>
 <property name="failOnTimeout" value="true"/>
 <property name="auxiliary;index" value="32"/>
-<property name="class" value="org.jembi.rhea.orchestration.XDSRepositoryRetrieveDocumentSetResponseAggregator"/>
-<property name="persistentStores"/>
-<property name="storePrefix"/>
-<property name="auxiliary;index" value="32"/>
 <property name="auxiliary;index" value="32"/>
 <property name="businessEventsLabel"/>
 <property name="tracking:enable-default-events"/>
-<property name="auxiliary;index" value="32"/>
-<property name="auxiliary;index" value="32"/>
 <property name="auxiliary;index" value="32"/>
 <property name="auxiliary;index" value="32"/>
 <property name="auxiliary;index" value="32"/>
@@ -480,172 +474,150 @@
             </pattern>
             <splitter index="38" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <properties>
-                    <property-collection name="32ed24f5-7f1c-47ba-8c44-1730496ed3ea">
-                        <property name="choice.otherwise" value="true"/>
-                        <property-collection name="choice.attributes"/>
-                    </property-collection>
-                    <property-collection name="d893b48b-a002-4fa6-8919-9b66389da316">
+                    <property-collection name="c6d253c3-7e65-46bf-8400-df45fb3e5674">
                         <property name="choice.expression" value="#[groovy: return ${ihe.secure};]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[groovy: return ${ihe.secure};]"/>
                         </property-collection>
                     </property-collection>
+                    <property-collection name="296e8bef-56e3-43e5-990c-ef0b4a11b6f9">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
                 </properties>
                 <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
                 <compartment entity-id="compartment#2">
-                    <lane hadOnlyOneElement="false" index="40" isChoiceOtherwiseLane="false" entity-id="d893b48b-a002-4fa6-8919-9b66389da316">
-                        <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#1">
+                    <lane hadOnlyOneElement="false" index="40" isChoiceOtherwiseLane="false" entity-id="c6d253c3-7e65-46bf-8400-df45fb3e5674">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                             <properties>
-<property name="auxiliary;index" value="40"/>
-<property name="auxiliary;index" value="40"/>
-<property name="auxiliary;index" value="40"/>
+<property name="exchange-pattern" value="one-way"/>
+<property name="exchange-pattern" value="request-response"/>
+<property name="auxiliary;index" value="41"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/endpoint"/>
+<property name="exchange-pattern" value="request-response"/>
+<property name="auxiliary;index" value="41"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/endpoint"/>
+<property name="auxiliary;index" value="41"/>
+<property name="httpLabel"/>
+<property name="host" value="${xds.registry.host}"/>
+<property name="port" value="${xds.registry.securePort}"/>
+<property name="path" value="${xds.registry.path}"/>
+<property name="method"/>
+<property name="auxiliary;index" value="41"/>
+<property name="auxiliary;index" value="41"/>
+<property name="businessEventsLabel"/>
+<property name="tracking:enable-default-events"/>
+<property name="auxiliary;index" value="41"/>
+<property name="address"/>
+<property name="encoding" value="UTF-8"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="responseTimeout"/>
+<property name="followRedirects"/>
+<property name="auxiliary;index" value="41"/>
+<property name="auxiliary;index" value="41"/>
+<property name="auxiliary;index" value="41"/>
+<property name="connector-ref" value="HTTP_HTTPS1"/>
+<property name="connector-ref-outbound" value="HTTP_HTTPS1"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="41"/>
+<property name="auxiliary;index" value="41"/>
+<property name="user"/>
+<property name="password"/>
+<property name="auxiliary;index" value="41"/>
+<property name="contentType"/>
+<property name="keep-alive"/>
+<property name="auxiliary;index" value="41"/>
+<property name="auxiliary;index" value="41"/>
+<property name="auxiliary;index" value="41"/>
+<property name="auxiliary;index" value="41"/>
+<property name="httpLabel"/>
+<property name="host" value="${xds.registry.host}"/>
+<property name="port" value="${xds.registry.securePort}"/>
+<property name="path" value="${xds.registry.path}"/>
+<property name="method"/>
+<property name="auxiliary;index" value="41"/>
+<property name="auxiliary;index" value="41"/>
+<property name="businessEventsLabel"/>
+<property name="tracking:enable-default-events"/>
+<property name="auxiliary;index" value="41"/>
+<property name="address"/>
+<property name="encoding" value="UTF-8"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="responseTimeout"/>
+<property name="followRedirects"/>
+<property name="auxiliary;index" value="41"/>
+<property name="auxiliary;index" value="41"/>
+<property name="auxiliary;index" value="41"/>
+<property name="connector-ref" value="HTTP_HTTPS1"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="41"/>
+<property name="auxiliary;index" value="41"/>
+<property name="user"/>
+<property name="password"/>
+<property name="auxiliary;index" value="41"/>
+<property name="contentType"/>
+<property name="keep-alive"/>
+<property name="auxiliary;index" value="41"/>
+<property name="auxiliary;index" value="41"/>
+<property name="auxiliary;index" value="41"/>
                             </properties>
-                            <compartment entity-id="compartment#3">
-<lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#3">
-    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
-        <properties>
-            <property name="exchange-pattern" value="one-way"/>
-            <property name="exchange-pattern" value="request-response"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/endpoint"/>
-            <property name="exchange-pattern" value="request-response"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/endpoint"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="httpLabel"/>
-            <property name="host" value="${xds.registry.host}"/>
-            <property name="port" value="${xds.registry.securePort}"/>
-            <property name="path" value="${xds.registry.path}"/>
-            <property name="method"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="businessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="address"/>
-            <property name="encoding" value="UTF-8"/>
-            <property name="disableTransportTransformer"/>
-            <property name="mimeType"/>
-            <property name="responseTimeout"/>
-            <property name="followRedirects"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="connector-ref" value="HTTP_HTTPS1"/>
-            <property name="connector-ref-outbound" value="HTTP_HTTPS1"/>
-            <property name="ref"/>
-            <property name="transformer-refs"/>
-            <property name="responseTransformer-refs"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="user"/>
-            <property name="password"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="contentType"/>
-            <property name="keep-alive"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="httpLabel"/>
-            <property name="host" value="${xds.registry.host}"/>
-            <property name="port" value="${xds.registry.securePort}"/>
-            <property name="path" value="${xds.registry.path}"/>
-            <property name="method"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="businessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="address"/>
-            <property name="encoding" value="UTF-8"/>
-            <property name="disableTransportTransformer"/>
-            <property name="mimeType"/>
-            <property name="responseTimeout"/>
-            <property name="followRedirects"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="connector-ref" value="HTTP_HTTPS1"/>
-            <property name="ref"/>
-            <property name="transformer-refs"/>
-            <property name="responseTransformer-refs"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="user"/>
-            <property name="password"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="contentType"/>
-            <property name="keep-alive"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="auxiliary;index" value="41"/>
-            <property name="auxiliary;index" value="41"/>
-        </properties>
-    </endpoint>
-</lane>
-                            </compartment>
-                        </scope>
+                        </endpoint>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="43" isChoiceOtherwiseLane="true" entity-id="32ed24f5-7f1c-47ba-8c44-1730496ed3ea">
-                        <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#2">
+                    <lane hadOnlyOneElement="false" index="43" isChoiceOtherwiseLane="true" entity-id="296e8bef-56e3-43e5-990c-ef0b4a11b6f9">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#2">
                             <properties>
-<property name="auxiliary;index" value="43"/>
-<property name="auxiliary;index" value="43"/>
-<property name="auxiliary;index" value="43"/>
+<property name="exchange-pattern" value="one-way"/>
+<property name="exchange-pattern" value="request-response"/>
+<property name="auxiliary;index" value="44"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+<property name="auxiliary;index" value="44"/>
+<property name="httpLabel"/>
+<property name="host" value="${xds.registry.host}"/>
+<property name="port" value="${xds.registry.port}"/>
+<property name="path" value="${xds.registry.path}"/>
+<property name="method"/>
+<property name="auxiliary;index" value="44"/>
+<property name="auxiliary;index" value="44"/>
+<property name="businessEventsLabel"/>
+<property name="tracking:enable-default-events"/>
+<property name="auxiliary;index" value="44"/>
+<property name="address"/>
+<property name="encoding" value="UTF-8"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="responseTimeout"/>
+<property name="followRedirects"/>
+<property name="auxiliary;index" value="44"/>
+<property name="auxiliary;index" value="44"/>
+<property name="auxiliary;index" value="44"/>
+<property name="connector-ref"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="44"/>
+<property name="auxiliary;index" value="44"/>
+<property name="user"/>
+<property name="password"/>
+<property name="auxiliary;index" value="44"/>
+<property name="contentType"/>
+<property name="keep-alive"/>
+<property name="auxiliary;index" value="44"/>
+<property name="auxiliary;index" value="44"/>
+<property name="auxiliary;index" value="44"/>
                             </properties>
-                            <compartment entity-id="compartment#4">
-<lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#4">
-    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#2">
-        <properties>
-            <property name="exchange-pattern" value="one-way"/>
-            <property name="exchange-pattern" value="request-response"/>
-            <property name="auxiliary;index" value="44"/>
-            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-            <property name="auxiliary;index" value="44"/>
-            <property name="httpLabel"/>
-            <property name="host" value="${xds.registry.host}"/>
-            <property name="port" value="${xds.registry.port}"/>
-            <property name="path" value="${xds.registry.path}"/>
-            <property name="method"/>
-            <property name="auxiliary;index" value="44"/>
-            <property name="auxiliary;index" value="44"/>
-            <property name="businessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
-            <property name="auxiliary;index" value="44"/>
-            <property name="address"/>
-            <property name="encoding" value="UTF-8"/>
-            <property name="disableTransportTransformer"/>
-            <property name="mimeType"/>
-            <property name="responseTimeout"/>
-            <property name="followRedirects"/>
-            <property name="auxiliary;index" value="44"/>
-            <property name="auxiliary;index" value="44"/>
-            <property name="auxiliary;index" value="44"/>
-            <property name="connector-ref"/>
-            <property name="ref"/>
-            <property name="transformer-refs"/>
-            <property name="responseTransformer-refs"/>
-            <property name="auxiliary;index" value="44"/>
-            <property name="auxiliary;index" value="44"/>
-            <property name="user"/>
-            <property name="password"/>
-            <property name="auxiliary;index" value="44"/>
-            <property name="contentType"/>
-            <property name="keep-alive"/>
-            <property name="auxiliary;index" value="44"/>
-            <property name="auxiliary;index" value="44"/>
-            <property name="auxiliary;index" value="44"/>
-        </properties>
-    </endpoint>
-</lane>
-                            </compartment>
-                        </scope>
+                        </endpoint>
                     </lane>
                 </compartment>
             </splitter>
         </lane>
     </flow>
-    <flow SubFlow="false" name="XDS_Retrieve_Document_Set.b_QueryFlow1" entity-id="c2022fd9-df75-435c-ba2a-29fde236659d">
+    <flow SubFlow="false" name="XDS_Retrieve_Document_Set.b_QueryFlow1" entity-id="f2aa41ad-0696-48dc-a0ae-4b68b34df92f">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -656,7 +628,7 @@
             <property name="auxiliary;index" value="45"/>
             <property name="auxiliary;index" value="45"/>
         </properties>
-        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#5">
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#3">
             <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="VM" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#3">
                 <properties>
                     <property name="exchange-pattern" value="one-way"/>
@@ -732,166 +704,144 @@
             </pattern>
             <splitter index="51" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#3">
                 <properties>
-                    <property-collection name="5943d160-fed3-407d-a6d4-2be396c3f32c">
-                        <property name="choice.otherwise" value="true"/>
-                        <property-collection name="choice.attributes"/>
-                    </property-collection>
-                    <property-collection name="207cbf60-4513-4b02-ba23-ea65975cc896">
+                    <property-collection name="fc43a68f-d1fc-4d44-8860-0daeb1f6bbd9">
                         <property name="choice.expression" value="#[groovy: return ${ihe.secure};]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[groovy: return ${ihe.secure};]"/>
                         </property-collection>
                     </property-collection>
+                    <property-collection name="49c53fa1-f5d5-4bf0-ba5f-d2b37f3a8c95">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
                 </properties>
                 <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#4"/>
-                <compartment entity-id="compartment#5">
-                    <lane hadOnlyOneElement="false" index="53" isChoiceOtherwiseLane="false" entity-id="207cbf60-4513-4b02-ba23-ea65975cc896">
-                        <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#3">
+                <compartment entity-id="compartment#3">
+                    <lane hadOnlyOneElement="false" index="53" isChoiceOtherwiseLane="false" entity-id="fc43a68f-d1fc-4d44-8860-0daeb1f6bbd9">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTPS" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#3">
                             <properties>
-<property name="auxiliary;index" value="53"/>
-<property name="auxiliary;index" value="53"/>
-<property name="auxiliary;index" value="53"/>
+<property name="exchange-pattern" value="one-way"/>
+<property name="exchange-pattern" value="request-response"/>
+<property name="auxiliary;index" value="54"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/endpoint"/>
+<property name="exchange-pattern" value="request-response"/>
+<property name="auxiliary;index" value="54"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/endpoint"/>
+<property name="auxiliary;index" value="54"/>
+<property name="httpLabel"/>
+<property name="host" value="${xds.repository.host}"/>
+<property name="port" value="${xds.repository.securePort}"/>
+<property name="path" value="${xds.repository.path}"/>
+<property name="method"/>
+<property name="auxiliary;index" value="54"/>
+<property name="auxiliary;index" value="54"/>
+<property name="businessEventsLabel"/>
+<property name="tracking:enable-default-events"/>
+<property name="auxiliary;index" value="54"/>
+<property name="address"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="responseTimeout"/>
+<property name="followRedirects"/>
+<property name="auxiliary;index" value="54"/>
+<property name="auxiliary;index" value="54"/>
+<property name="auxiliary;index" value="54"/>
+<property name="connector-ref" value="HTTP_HTTPS1"/>
+<property name="connector-ref-outbound" value="HTTP_HTTPS1"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="54"/>
+<property name="auxiliary;index" value="54"/>
+<property name="user"/>
+<property name="password"/>
+<property name="auxiliary;index" value="54"/>
+<property name="contentType"/>
+<property name="keep-alive"/>
+<property name="auxiliary;index" value="54"/>
+<property name="auxiliary;index" value="54"/>
+<property name="auxiliary;index" value="54"/>
+<property name="auxiliary;index" value="54"/>
+<property name="httpLabel"/>
+<property name="host" value="${xds.repository.host}"/>
+<property name="port" value="${xds.repository.securePort}"/>
+<property name="path" value="${xds.repository.path}"/>
+<property name="method"/>
+<property name="auxiliary;index" value="54"/>
+<property name="auxiliary;index" value="54"/>
+<property name="businessEventsLabel"/>
+<property name="tracking:enable-default-events"/>
+<property name="auxiliary;index" value="54"/>
+<property name="address"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="responseTimeout"/>
+<property name="followRedirects"/>
+<property name="auxiliary;index" value="54"/>
+<property name="auxiliary;index" value="54"/>
+<property name="auxiliary;index" value="54"/>
+<property name="connector-ref" value="HTTP_HTTPS1"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="54"/>
+<property name="auxiliary;index" value="54"/>
+<property name="user"/>
+<property name="password"/>
+<property name="auxiliary;index" value="54"/>
+<property name="contentType"/>
+<property name="keep-alive"/>
+<property name="auxiliary;index" value="54"/>
+<property name="auxiliary;index" value="54"/>
+<property name="auxiliary;index" value="54"/>
                             </properties>
-                            <compartment entity-id="compartment#6">
-<lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#6">
-    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTPS" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#3">
-        <properties>
-            <property name="exchange-pattern" value="one-way"/>
-            <property name="exchange-pattern" value="request-response"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/endpoint"/>
-            <property name="exchange-pattern" value="request-response"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/endpoint"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="httpLabel"/>
-            <property name="host" value="${xds.repository.host}"/>
-            <property name="port" value="${xds.repository.securePort}"/>
-            <property name="path" value="${xds.repository.path}"/>
-            <property name="method"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="businessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="address"/>
-            <property name="encoding"/>
-            <property name="disableTransportTransformer"/>
-            <property name="mimeType"/>
-            <property name="responseTimeout"/>
-            <property name="followRedirects"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="connector-ref" value="HTTP_HTTPS1"/>
-            <property name="connector-ref-outbound" value="HTTP_HTTPS1"/>
-            <property name="ref"/>
-            <property name="transformer-refs"/>
-            <property name="responseTransformer-refs"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="user"/>
-            <property name="password"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="contentType"/>
-            <property name="keep-alive"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="httpLabel"/>
-            <property name="host" value="${xds.repository.host}"/>
-            <property name="port" value="${xds.repository.securePort}"/>
-            <property name="path" value="${xds.repository.path}"/>
-            <property name="method"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="businessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="address"/>
-            <property name="encoding"/>
-            <property name="disableTransportTransformer"/>
-            <property name="mimeType"/>
-            <property name="responseTimeout"/>
-            <property name="followRedirects"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="connector-ref" value="HTTP_HTTPS1"/>
-            <property name="ref"/>
-            <property name="transformer-refs"/>
-            <property name="responseTransformer-refs"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="user"/>
-            <property name="password"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="contentType"/>
-            <property name="keep-alive"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="auxiliary;index" value="54"/>
-            <property name="auxiliary;index" value="54"/>
-        </properties>
-    </endpoint>
-</lane>
-                            </compartment>
-                        </scope>
+                        </endpoint>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="56" isChoiceOtherwiseLane="true" entity-id="5943d160-fed3-407d-a6d4-2be396c3f32c">
-                        <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#4">
+                    <lane hadOnlyOneElement="false" index="56" isChoiceOtherwiseLane="true" entity-id="49c53fa1-f5d5-4bf0-ba5f-d2b37f3a8c95">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#4">
                             <properties>
-<property name="auxiliary;index" value="56"/>
-<property name="auxiliary;index" value="56"/>
-<property name="auxiliary;index" value="56"/>
+<property name="exchange-pattern" value="one-way"/>
+<property name="exchange-pattern" value="request-response"/>
+<property name="auxiliary;index" value="57"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+<property name="auxiliary;index" value="57"/>
+<property name="httpLabel"/>
+<property name="host" value="${xds.repository.host}"/>
+<property name="port" value="${xds.repository.port}"/>
+<property name="path" value="${xds.repository.path}"/>
+<property name="method"/>
+<property name="auxiliary;index" value="57"/>
+<property name="auxiliary;index" value="57"/>
+<property name="businessEventsLabel"/>
+<property name="tracking:enable-default-events"/>
+<property name="auxiliary;index" value="57"/>
+<property name="address"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="responseTimeout"/>
+<property name="followRedirects"/>
+<property name="auxiliary;index" value="57"/>
+<property name="auxiliary;index" value="57"/>
+<property name="auxiliary;index" value="57"/>
+<property name="connector-ref"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="57"/>
+<property name="auxiliary;index" value="57"/>
+<property name="user"/>
+<property name="password"/>
+<property name="auxiliary;index" value="57"/>
+<property name="contentType"/>
+<property name="keep-alive"/>
+<property name="auxiliary;index" value="57"/>
+<property name="auxiliary;index" value="57"/>
+<property name="auxiliary;index" value="57"/>
                             </properties>
-                            <compartment entity-id="compartment#7">
-<lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#7">
-    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#4">
-        <properties>
-            <property name="exchange-pattern" value="one-way"/>
-            <property name="exchange-pattern" value="request-response"/>
-            <property name="auxiliary;index" value="57"/>
-            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-            <property name="auxiliary;index" value="57"/>
-            <property name="httpLabel"/>
-            <property name="host" value="${xds.repository.host}"/>
-            <property name="port" value="${xds.repository.port}"/>
-            <property name="path" value="${xds.repository.path}"/>
-            <property name="method"/>
-            <property name="auxiliary;index" value="57"/>
-            <property name="auxiliary;index" value="57"/>
-            <property name="businessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
-            <property name="auxiliary;index" value="57"/>
-            <property name="address"/>
-            <property name="encoding"/>
-            <property name="disableTransportTransformer"/>
-            <property name="mimeType"/>
-            <property name="responseTimeout"/>
-            <property name="followRedirects"/>
-            <property name="auxiliary;index" value="57"/>
-            <property name="auxiliary;index" value="57"/>
-            <property name="auxiliary;index" value="57"/>
-            <property name="connector-ref"/>
-            <property name="ref"/>
-            <property name="transformer-refs"/>
-            <property name="responseTransformer-refs"/>
-            <property name="auxiliary;index" value="57"/>
-            <property name="auxiliary;index" value="57"/>
-            <property name="user"/>
-            <property name="password"/>
-            <property name="auxiliary;index" value="57"/>
-            <property name="contentType"/>
-            <property name="keep-alive"/>
-            <property name="auxiliary;index" value="57"/>
-            <property name="auxiliary;index" value="57"/>
-            <property name="auxiliary;index" value="57"/>
-        </properties>
-    </endpoint>
-</lane>
-                            </compartment>
-                        </scope>
+                        </endpoint>
                     </lane>
                 </compartment>
             </splitter>

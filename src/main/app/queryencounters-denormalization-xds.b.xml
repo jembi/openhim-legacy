@@ -44,7 +44,7 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
                 <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthorityId}"/>
                 <spring:property name="iheSecure" value="${ihe.secure}"/>
             </custom-transformer>
-	        <custom-aggregator failOnTimeout="true" class="org.jembi.rhea.orchestration.XDSRepositoryRetrieveDocumentSetResponseAggregator" doc:name="Custom Aggregator"/>
+            <collection-aggregator failOnTimeout="true" doc:name="Collection Aggregator"/>
             <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryResponseToRestfulHttpResponseTransformer" doc:name="Transform document list to RestfulHttpResponse" />
         </response>
         <cxf:jaxws-client doc:name="SOAP"  clientClass="ihe.iti.xds_b._2007.DocumentRegistryService" port="DocumentRegistry_Port_Soap12" operation="DocumentRegistry_RegistryStoredQuery">

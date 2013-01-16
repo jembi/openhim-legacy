@@ -30,7 +30,9 @@ public class XDSRepositoryResponseToRestfulHttpResponseTransformer extends
 		
 		RestfulHttpResponse res = new RestfulHttpResponse();
 		
-		List<String> documentList = (List<String>)message.getPayload();
+		List<String> documentList = new ArrayList<String>();
+		for (List<String> docs : (List<List<String>>)message.getPayload())
+			documentList.addAll(docs);
 		
 		if (documentList.size() > 0) {
 			res.setHttpStatus(200);
