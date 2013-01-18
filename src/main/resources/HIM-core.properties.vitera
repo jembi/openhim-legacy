@@ -61,21 +61,21 @@ ihe.keypassword=Jembi#123
 ihe.storepassword=Jembi#123
 # The OID that uniquely identifies this system
 ihe.systemSourceID=1.3.6.1.4.1.21367.13.60.89
-ihe.secure=true
+ihe.secure=false
 
 # == IHE XDS Registry ==
 # Vitera
 #xds.registry.host=216.154.198.93
-#xds.registry.port=8010
-#xds.registry.securePort=8011
-#xds.registry.path=openxds/services/DocumentRegistry
+xds.registry.port=8010
+xds.registry.securePort=8011
+xds.registry.path=openxds/services/DocumentRegistry
 
 # == IHE XDS Repository ==
 # Vitera
-#xds.repository.host=216.154.198.93
-#xds.repository.port=8010
-#xds.repository.securePort=8011
-#xds.repository.path=openxds/services/DocumentRepository
+xds.repository.host=216.154.198.93
+xds.repository.port=8010
+xds.repository.securePort=8011
+xds.repository.path=openxds/services/DocumentRepository
 
 #Enable the RapidSMS-Alerts service for save-encounter
 #Currently this feature will be enabled regardless of this setting
