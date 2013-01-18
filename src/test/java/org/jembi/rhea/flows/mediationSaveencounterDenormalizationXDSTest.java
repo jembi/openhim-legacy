@@ -66,7 +66,7 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	    assertNotNull(result.getPayload());
 	    Assert.assertTrue(result.getPayload() instanceof RestfulHttpResponse);
 	    RestfulHttpResponse response = (RestfulHttpResponse) result.getPayload();
-	    assertEquals(200, response.getHttpStatus());
+	    assertEquals(201, response.getHttpStatus());
 	    
 	    log.info(result.getPayloadAsString());
 	    
