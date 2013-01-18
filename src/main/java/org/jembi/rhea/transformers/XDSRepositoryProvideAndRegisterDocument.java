@@ -75,10 +75,10 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 			String id = identifer[1];
 			
 			// Get id and idtype from message properties if they exist
-			String idFromProp = message.getProperty("id", PropertyScope.OUTBOUND);
+			Object idFromProp = message.getProperty("id", PropertyScope.OUTBOUND);
 			
-			if (idFromProp != null && !idFromProp.isEmpty()) {
-				id = idFromProp;
+			if (idFromProp != null && (idFromProp instanceof String) && !((String)idFromProp).isEmpty()) {
+				id = (String)idFromProp;
 			}
 			
 			String request = (String)message.getPayload();
