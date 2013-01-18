@@ -27,6 +27,10 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 	private String assigningAuthorityId = "";
 	private String requestedAssigningAuthority = "";
 	private String requestedAssigningAuthorityId = "";
+	private String sendingApplication = "";
+	private String sendingFacility = "";
+	private String receivingApplication = "";
+	private String receivingFacility = "";
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -61,16 +65,10 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		MSH msh = (MSH) t.getSegment("MSH");
 		t.set("MSH-1", "|");
 		t.set("MSH-2", "^~\\&");
-		t.set("MSH-3-1", "sending_application"); // check
-		t.set("MSH-4-1", "recieving_application"); // check
-		t.set("MSH-5-1", ""); // check
-		t.set("MSH-6-1", ""); // check
-		/* NIST Testing values */
-		//t.set("MSH-3-1", "openhim"); //sending application
-		//t.set("MSH-4-1", "RHEA-HIE"); //sending facility
-		//t.set("MSH-5-1", "NIST_RCVR_HANNES"); //receiving application
-		//t.set("MSH-6-1", "NIST"); //receiving facility
-		/* */
+		t.set("MSH-3-1", sendingApplication);
+		t.set("MSH-4-1", sendingFacility);
+		t.set("MSH-5-1", receivingApplication);
+		t.set("MSH-6-1", receivingFacility);
 		msh.getDateTimeOfMessage().getTime().setValue(new Date());
 		t.set("MSH-9-1", "QBP");
 		t.set("MSH-9-2", "Q23");
@@ -123,5 +121,37 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 	public void setRequestedAssigningAuthorityId(
 			String requestedAssigningAuthorityId) {
 		this.requestedAssigningAuthorityId = requestedAssigningAuthorityId;
+	}
+
+	public String getSendingApplication() {
+		return sendingApplication;
+	}
+
+	public void setSendingApplication(String sendingApplication) {
+		this.sendingApplication = sendingApplication;
+	}
+
+	public String getSendingFacility() {
+		return sendingFacility;
+	}
+
+	public void setSendingFacility(String sendingFacility) {
+		this.sendingFacility = sendingFacility;
+	}
+
+	public String getReceivingApplication() {
+		return receivingApplication;
+	}
+
+	public void setReceivingApplication(String receivingApplication) {
+		this.receivingApplication = receivingApplication;
+	}
+
+	public String getReceivingFacility() {
+		return receivingFacility;
+	}
+
+	public void setReceivingFacility(String receivingFacility) {
+		this.receivingFacility = receivingFacility;
 	}
 }

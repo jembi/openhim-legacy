@@ -90,3 +90,7 @@ pix.manager.securePort=3610
 pix.assigningAuthorityId=
 pix.requestedAssigningAuthority=VIP111
 pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.3000.1.6
+pix.sendingApplication=openhim
+pix.sendingFacility=RHEA-HIE
+pix.receivingApplication=
+pix.receivingFacility=
