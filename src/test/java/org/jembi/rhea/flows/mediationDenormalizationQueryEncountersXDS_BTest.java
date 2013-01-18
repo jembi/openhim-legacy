@@ -11,6 +11,8 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpRequest;
+import org.jembi.rhea.RestfulHttpResponse;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mule.api.MuleMessage;
 import org.mule.module.client.MuleClient;
@@ -52,16 +54,16 @@ public class mediationDenormalizationQueryEncountersXDS_BTest extends
 	    //payload.setPath("ws/rest/v1/patient/NIST2010-1b48e083395f498/encounters");//NIST2010-2
 	    
 	    // Mohawk and EMC
-	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
+	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
 	    // Nexj
-	    payload.setPath("ws/rest/v1/patient/IHEFACILITY-996-IHEFACILITY/encounters?id=IHEFACILITY-996&idType=IHEFACILITY");
+	    //payload.setPath("ws/rest/v1/patient/IHEFACILITY-996-IHEFACILITY/encounters?id=IHEFACILITY-996&idType=IHEFACILITY");
 	    
 	    MuleMessage result = client.send("vm://queryEncounters-De-normailization-XDS.b", payload, properties);
 	    
 	    assertNotNull(result.getPayload());
+	    Assert.assertTrue(result.getPayload() instanceof RestfulHttpResponse);
 	    
-	    log.info(result.getPayload().getClass());
 	    log.info(result.getPayload());
 	    
 	    log.info("Test completed");

@@ -9,8 +9,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpRequest;
+import org.jembi.rhea.RestfulHttpResponse;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mule.api.MuleMessage;
 import org.mule.module.client.MuleClient;
@@ -61,8 +62,7 @@ public class mediationDenormalizationQueryEncountersXDS_BTest_wATNA extends
 	    MuleMessage result = client.send("vm://queryEncounters-De-normailization-XDS.b", payload, properties);
 	    
 	    assertNotNull(result.getPayload());
-	    
-	    log.info(result.getPayload().getClass());
+	    Assert.assertTrue(result.getPayload() instanceof RestfulHttpResponse);
 	    log.info(result.getPayload());
 	    
 	    log.info("Test completed");

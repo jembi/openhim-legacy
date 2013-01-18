@@ -15,6 +15,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.jembi.rhea.RestfulHttpResponse;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mule.api.MuleMessage;
 import org.mule.module.client.MuleClient;
@@ -64,6 +65,7 @@ public class mediationSaveencounterDenormalization extends
 	    MuleMessage result = client.send("vm://saveEncountersDe-NormalizationQueue", payload, properties);
 	    
 	    assertNotNull(result.getPayload());
+	    Assert.assertTrue(result.getPayload() instanceof RestfulHttpResponse);
 	    RestfulHttpResponse response = (RestfulHttpResponse) result.getPayload();
 	    assertEquals(201, response.getHttpStatus());
 	    

@@ -134,7 +134,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mediation-denormalization-queryencounters-xds.bFlow" entity-id="4e3f334c-50c6-4c5a-b0bd-39348d875400">
+    <flow SubFlow="false" name="mediation-denormalization-queryencounters-xds.bFlow" entity-id="6142cb0f-e2a7-4bf3-ba0d-7f989d248cb1">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -396,14 +396,20 @@
 </property-collection>
                             </properties>
                         </pattern>
-                        <pattern name="Collection Aggregator" type="http://www.mulesoft.org/schema/mule/core/collection-aggregator" entity-id="Collection Aggregator#1">
+                        <pattern name="Custom Aggregator" type="http://www.mulesoft.org/schema/mule/core/custom-aggregator" entity-id="Custom Aggregator#1">
                             <properties>
 <property name="timeout"/>
 <property name="failOnTimeout" value="true"/>
 <property name="auxiliary;index" value="32"/>
+<property name="class" value="org.jembi.rhea.orchestration.XDSRepositoryRetrieveDocumentSetResponseAggregator"/>
+<property name="persistentStores"/>
+<property name="storePrefix"/>
+<property name="auxiliary;index" value="32"/>
 <property name="auxiliary;index" value="32"/>
 <property name="businessEventsLabel"/>
 <property name="tracking:enable-default-events"/>
+<property name="auxiliary;index" value="32"/>
+<property name="auxiliary;index" value="32"/>
 <property name="auxiliary;index" value="32"/>
 <property name="auxiliary;index" value="32"/>
 <property name="auxiliary;index" value="32"/>
@@ -474,20 +480,20 @@
             </pattern>
             <splitter index="38" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <properties>
-                    <property-collection name="c6d253c3-7e65-46bf-8400-df45fb3e5674">
+                    <property-collection name="bea68847-5f44-4f10-8b28-283848adb5a6">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                    <property-collection name="38e23765-54de-42d6-a8bb-74f49e1b711a">
                         <property name="choice.expression" value="#[groovy: return ${ihe.secure};]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[groovy: return ${ihe.secure};]"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="296e8bef-56e3-43e5-990c-ef0b4a11b6f9">
-                        <property name="choice.otherwise" value="true"/>
-                        <property-collection name="choice.attributes"/>
-                    </property-collection>
                 </properties>
                 <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
                 <compartment entity-id="compartment#2">
-                    <lane hadOnlyOneElement="false" index="40" isChoiceOtherwiseLane="false" entity-id="c6d253c3-7e65-46bf-8400-df45fb3e5674">
+                    <lane hadOnlyOneElement="false" index="40" isChoiceOtherwiseLane="false" entity-id="38e23765-54de-42d6-a8bb-74f49e1b711a">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
@@ -569,7 +575,7 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="43" isChoiceOtherwiseLane="true" entity-id="296e8bef-56e3-43e5-990c-ef0b4a11b6f9">
+                    <lane hadOnlyOneElement="false" index="43" isChoiceOtherwiseLane="true" entity-id="bea68847-5f44-4f10-8b28-283848adb5a6">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#2">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
@@ -617,7 +623,7 @@
             </splitter>
         </lane>
     </flow>
-    <flow SubFlow="false" name="XDS_Retrieve_Document_Set.b_QueryFlow1" entity-id="f2aa41ad-0696-48dc-a0ae-4b68b34df92f">
+    <flow SubFlow="false" name="XDS_Retrieve_Document_Set.b_QueryFlow1" entity-id="60fdc02f-dc3e-4564-98b1-62208637613a">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -704,20 +710,20 @@
             </pattern>
             <splitter index="51" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#3">
                 <properties>
-                    <property-collection name="fc43a68f-d1fc-4d44-8860-0daeb1f6bbd9">
+                    <property-collection name="8a1eeafc-77ae-4d53-9af3-b461dc0e51fb">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                    <property-collection name="5b138a14-e034-48fd-b179-2123b69b42c4">
                         <property name="choice.expression" value="#[groovy: return ${ihe.secure};]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[groovy: return ${ihe.secure};]"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="49c53fa1-f5d5-4bf0-ba5f-d2b37f3a8c95">
-                        <property name="choice.otherwise" value="true"/>
-                        <property-collection name="choice.attributes"/>
-                    </property-collection>
                 </properties>
                 <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#4"/>
                 <compartment entity-id="compartment#3">
-                    <lane hadOnlyOneElement="false" index="53" isChoiceOtherwiseLane="false" entity-id="fc43a68f-d1fc-4d44-8860-0daeb1f6bbd9">
+                    <lane hadOnlyOneElement="false" index="53" isChoiceOtherwiseLane="false" entity-id="5b138a14-e034-48fd-b179-2123b69b42c4">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTPS" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#3">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
@@ -799,7 +805,7 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="56" isChoiceOtherwiseLane="true" entity-id="49c53fa1-f5d5-4bf0-ba5f-d2b37f3a8c95">
+                    <lane hadOnlyOneElement="false" index="56" isChoiceOtherwiseLane="true" entity-id="8a1eeafc-77ae-4d53-9af3-b461dc0e51fb">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#4">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>

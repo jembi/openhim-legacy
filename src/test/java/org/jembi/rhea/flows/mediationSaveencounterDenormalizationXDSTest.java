@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.jembi.TestUtil;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.jembi.rhea.RestfulHttpResponse;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mule.api.MuleMessage;
 import org.mule.module.client.MuleClient;
@@ -48,13 +49,13 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	    payload.setHttpMethod(RestfulHttpRequest.HTTP_POST);
 	    
 	    // Mohawk
-	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
+	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
 	    //TODO hardcoded for nist testing [modify for use here]
     	//return "55f81316303842c^^^&1.3.6.1.4.1.21367.2009.1.2.300&ISO";
 	    
 	    // Nexj
-	    payload.setPath("ws/rest/v1/patient/IHEFACILITY-996/encounters?id=IHEFACILITY-996&idType=IHEFACILITY");
+	    //payload.setPath("ws/rest/v1/patient/IHEFACILITY-996/encounters?id=IHEFACILITY-996&idType=IHEFACILITY");
 	    
 	    String oru_r01 = TestUtil.getResourceAsString("oru_r01.xml");
 	    payload.setBody(oru_r01);
@@ -63,6 +64,7 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	    MuleMessage result = client.send("vm://saveEncounters-De-normailization-XDS", payload, properties);
 	    
 	    assertNotNull(result.getPayload());
+	    Assert.assertTrue(result.getPayload() instanceof RestfulHttpResponse);
 	    RestfulHttpResponse response = (RestfulHttpResponse) result.getPayload();
 	    assertEquals(200, response.getHttpStatus());
 	    
