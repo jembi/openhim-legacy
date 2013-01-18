@@ -25,6 +25,10 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
             <spring:property name="assigningAuthorityId" value="${pix.assigningAuthorityId}"/>
             <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthority}"/>
             <spring:property name="requestedAssigningAuthorityId" value="${pix.requestedAssigningAuthorityId}"/>
+            <spring:property name="sendingApplication" value="${pix.sendingApplication}"/>
+            <spring:property name="sendingFacility" value="${pix.sendingFacility}"/>
+            <spring:property name="receivingApplication" value="${pix.receivingApplication}"/>
+            <spring:property name="receivingFacility" value="${pix.receivingFacility}"/>
         </custom-transformer>
         <logger message="Generated PIX messgage: #[groovy: return message.payload;]" level="INFO" doc:name="Logger"/>
         <response>

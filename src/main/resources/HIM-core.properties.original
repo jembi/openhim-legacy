@@ -198,3 +198,7 @@ pix.requestedAssigningAuthorityId=1.19.6.24.109.42.1.3
 #pix.assigningAuthorityId=2.16.840.1.113883.3.72.5.9.2
 #pix.requestedAssigningAuthority=NIST2010
 #pix.requestedAssigningAuthorityId=2.16.840.1.113883.3.72.5.9.1
+pix.sendingApplication=openhim
+pix.sendingFacility=RHEA-HIE
+pix.receivingApplication=
+pix.receivingFacility=

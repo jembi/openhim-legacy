@@ -61,7 +61,7 @@ ihe.keypassword=Jembi#123
 ihe.storepassword=Jembi#123
 # The OID that uniquely identifies this system
 ihe.systemSourceID=1.3.6.1.4.1.21367.13.60.89
-ihe.secure=true
+ihe.secure=false
 
 # == IHE XDS Registry ==
 # NIST
@@ -96,3 +96,7 @@ pix.requestedAssigningAuthority=NIST2010-3
 #pix.requestedAssigningAuthorityId=2.16.840.1.113883.3.72.5.9.3
 # For XDS NIST test
 pix.requestedAssigningAuthorityId=1.19.6.24.109.42.1.3
+pix.sendingApplication=openhim
+pix.sendingFacility=RHEA-HIE
+pix.receivingApplication=NIST_RCVR_HANNES
+pix.receivingFacility=NIST
