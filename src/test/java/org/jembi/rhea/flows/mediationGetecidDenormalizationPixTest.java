@@ -52,8 +52,12 @@ public class mediationGetecidDenormalizationPixTest extends
 	    //idMap.put("idType", "W2012CATOID");
 	    
 	    // Sysnet
-	    idMap.put("id", "JEMBI-2");
-	    idMap.put("idType", "NIST2010-2");
+	    //idMap.put("id", "JEMBI-2");
+	    //idMap.put("idType", "NIST2010-2");
+	    
+	    // Nexj
+	    idMap.put("id", "IHERED-996");
+	    idMap.put("idType", "IHERED");
 	    
 	    Map<String, Object> properties = null;
 	    MuleMessage result = client.send("vm://getecid-pix", idMap, properties);
@@ -63,7 +67,8 @@ public class mediationGetecidDenormalizationPixTest extends
 	    // Mohawk
 	    //assertEquals("756", result.getPayloadAsString());
 	    // Sysnet
-	    assertEquals("JEMBI-1", result.getPayloadAsString());
+	    //assertEquals("JEMBI-1", result.getPayloadAsString());
+	    // Nexj
 
 	    log.info(result.getPayloadAsString());
 	    

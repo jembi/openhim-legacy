@@ -49,10 +49,13 @@ public class mediationDenormalizationQueryEncountersXDS_BTest extends
 	    Map<String, Object> properties = new HashMap<String, Object>();
 	    
 	    // NIST
-	    payload.setPath("ws/rest/v1/patient/NIST2010-1b48e083395f498/encounters");//NIST2010-2
+	    //payload.setPath("ws/rest/v1/patient/NIST2010-1b48e083395f498/encounters");//NIST2010-2
 	    
-	    // Mohawk
+	    // Mohawk and EMC
 	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
+	    
+	    // Nexj
+	    payload.setPath("ws/rest/v1/patient/IHEFACILITY-996-IHEFACILITY/encounters");
 	    
 	    MuleMessage result = client.send("vm://queryEncounters-De-normailization-XDS.b", payload, properties);
 	    
