@@ -47,6 +47,17 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
 		String idType = identifer[0];
 		String id = identifer[1];
 		
+		// Get id and idtype from request params if they exist
+		Map<String, String> parmMap = restRequest.getRequestParams();
+		if (parmMap != null) {
+			String idFromMap = parmMap.get("id");
+			String idTypeFromMap = parmMap.get("idType");
+			if (idFromMap != null && !idFromMap.isEmpty() && idFromMap != null && !idTypeFromMap.isEmpty()) {
+				id = idFromMap;
+				idType = idFromMap;
+			}
+		}
+		
 		Map<String, String> requestParams = restRequest.getRequestParams();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");

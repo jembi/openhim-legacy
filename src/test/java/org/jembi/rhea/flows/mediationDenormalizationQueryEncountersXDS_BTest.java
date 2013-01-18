@@ -55,7 +55,7 @@ public class mediationDenormalizationQueryEncountersXDS_BTest extends
 	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
 	    // Nexj
-	    payload.setPath("ws/rest/v1/patient/IHEFACILITY-996-IHEFACILITY/encounters");
+	    payload.setPath("ws/rest/v1/patient/IHEFACILITY-996-IHEFACILITY/encounters?id=IHEFACILITY-996&idType=IHEFACILITY");
 	    
 	    MuleMessage result = client.send("vm://queryEncounters-De-normailization-XDS.b", payload, properties);
 	    
