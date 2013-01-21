@@ -4,12 +4,18 @@
 package org.jembi.rhea;
 
 import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 public class Util {
+	
+	//creating a new JAXB context is expensive, so keep static instances
+	private static Map<String, JAXBContext> JAXBContextInstances = new HashMap<String, JAXBContext>();
 	
 	/**
 	 * Split an id string into the id type and the id number
@@ -37,11 +43,17 @@ public class Util {
 	 * Marshall a JAXB object and return the XML as a string
 	 */
 	public static String marshallJAXBObject(String namespace, Object o, boolean addXMLDeclaration) throws JAXBException {
-		JAXBContext jc = JAXBContext.newInstance(namespace);
+		JAXBContext jc = getJAXBContext(namespace);
 		Marshaller marshaller = jc.createMarshaller();
 		marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", addXMLDeclaration);
 		StringWriter sw = new StringWriter();
 		marshaller.marshal(o, sw);
 		return sw.toString();
+	}
+	
+	public static JAXBContext getJAXBContext(String namespace) throws JAXBException {
+		if (!JAXBContextInstances.containsKey(namespace))
+			JAXBContextInstances.put(namespace, JAXBContext.newInstance(namespace));
+		return JAXBContextInstances.get(namespace);
 	}
 }
