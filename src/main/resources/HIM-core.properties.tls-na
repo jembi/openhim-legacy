@@ -76,6 +76,7 @@ xds.repository.host=131.254.209.16
 xds.repository.port=80
 xds.repository.securePort=10072
 xds.repository.path=tf6/services/xdsrepositoryb
+xds.repository.UniqueId=
 
 #Enable the RapidSMS-Alerts service for save-encounter
 #Currently this feature will be enabled regardless of this setting
