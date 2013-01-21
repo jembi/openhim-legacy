@@ -79,6 +79,7 @@ xds.repository.securePort=8443
 xds.repository.path=cs-repository/xds-iti43
 # for Provide and Reg
 #xds.repository.path=cs-repository/xds-iti41
+xds.repository.UniqueId=
 
 #Enable the RapidSMS-Alerts service for save-encounter
 #Currently this feature will be enabled regardless of this setting

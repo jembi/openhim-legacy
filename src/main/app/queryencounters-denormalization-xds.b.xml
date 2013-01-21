@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <mule xmlns:https="http://www.mulesoft.org/schema/mule/https"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:wsa="http://cxf.apache.org/ws/addressing" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="CE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:wsa="http://cxf.apache.org/ws/addressing" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="EE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
 http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd 
@@ -32,7 +32,9 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
                 <spring:property name="iheSecure" value="${ihe.secure}"/>
             </custom-transformer>
 	        <logger message="DocumentMap: #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
-	        <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSet" doc:name="Construct retrieve documents messages"/>
+	        <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSet" doc:name="Construct retrieve documents messages">
+                <spring:property name="configuredRepositoryUniqueId" value="${xds.repository.UniqueId}"/>
+            </custom-transformer>
             <collection-splitter doc:name="Collection Splitter"/>
 	        <component class="org.jembi.rhea.orchestration.SetPayloadAsSessionVariable" doc:name="Set request as session property"/>
 	        <vm:outbound-endpoint exchange-pattern="request-response" doc:name="Send Retrieve Documents Request" path="queryencounter_xds_retrieve_document_setb" />
@@ -55,12 +57,12 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
         <logger message="The raw soap XDS registry payload: #[groovy: return message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
         <choice doc:name="Choice">
             <when expression="#[groovy: return ${ihe.secure};]">
-                <processor-chain >
+                <processor-chain doc:name="Processor Chain">
                     <https:outbound-endpoint exchange-pattern="request-response" host="${xds.registry.host}" port="${xds.registry.securePort}" doc:name="HTTP" path="${xds.registry.path}" encoding="UTF-8" connector-ref="HTTP_HTTPS1" />
                 </processor-chain>
             </when>
             <otherwise>
-                <processor-chain >
+                <processor-chain doc:name="Processor Chain">
                     <http:outbound-endpoint exchange-pattern="request-response" host="${xds.registry.host}" port="${xds.registry.port}" doc:name="HTTP" path="${xds.registry.path}" encoding="UTF-8" />
                 </processor-chain>
             </otherwise>
@@ -76,12 +78,12 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
         <logger message="The raw soap XDS repository payload: #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
         <choice doc:name="Choice">
             <when expression="#[groovy: return ${ihe.secure};]">
-                <processor-chain >
+                <processor-chain doc:name="Processor Chain">
                     <https:outbound-endpoint exchange-pattern="request-response" host="${xds.repository.host}" port="${xds.repository.securePort}" path="${xds.repository.path}" doc:name="HTTPS" connector-ref="HTTP_HTTPS1"/>
                 </processor-chain>
             </when>
             <otherwise>
-                <processor-chain >
+                <processor-chain doc:name="Processor Chain">
                     <http:outbound-endpoint exchange-pattern="request-response" host="${xds.repository.host}" port="${xds.repository.port}" path="${xds.repository.path}" doc:name="HTTP"/>
                 </processor-chain>
             </otherwise>

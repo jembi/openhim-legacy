@@ -61,7 +61,7 @@ ihe.keypassword=Jembi#123
 ihe.storepassword=Jembi#123
 # The OID that uniquely identifies this system
 ihe.systemSourceID=1.3.6.1.4.1.21367.13.60.89
-ihe.secure=false
+ihe.secure=true
 
 # == IHE XDS Registry ==
 # Vitera
@@ -76,6 +76,7 @@ xds.repository.host=216.154.198.93
 xds.repository.port=8010
 xds.repository.securePort=8011
 xds.repository.path=openxds/services/DocumentRepository
+xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.102
 
 #Enable the RapidSMS-Alerts service for save-encounter
 #Currently this feature will be enabled regardless of this setting
@@ -87,9 +88,9 @@ rapidsms.alerts.enabled=true
 pix.manager.host=216.154.198.93
 pix.manager.port=3600
 pix.manager.securePort=3610
-pix.assigningAuthorityId=
-pix.requestedAssigningAuthority=VIP111
-pix.requestedAssigningAuthorityId=
+pix.assigningAuthorityId=1.3.6.1.4.1.21367.3000.1.6
+pix.requestedAssigningAuthority=IHEBLUE
+pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.3000
 pix.sendingApplication=openhim
 pix.sendingFacility=RHEA-HIE
 pix.receivingApplication=PIX_MGR_VITERA_Inter

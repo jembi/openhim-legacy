@@ -22,6 +22,8 @@ import org.mule.transformer.AbstractMessageTransformer;
 public class XDSRepositoryRetrieveDocumentSet extends
 		AbstractMessageTransformer {
 
+	private String configuredRepositoryUniqueId = "";
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {		
@@ -30,13 +32,16 @@ public class XDSRepositoryRetrieveDocumentSet extends
 		List<RetrieveDocumentSetRequestType> retrieveDocumentMessages = new ArrayList<RetrieveDocumentSetRequestType>();
 		
 		Set<String> keySet = repoDocumentsMap.keySet();
-		for (String key : keySet) {
-			List<DocumentMetaData> docList = repoDocumentsMap.get(key);
+		for (String repositoryUniqueId : keySet) {
+			// For now only support a single repository
+			if (!configuredRepositoryUniqueId.isEmpty() && !repositoryUniqueId.equals(configuredRepositoryUniqueId)) {
+				continue;
+			}
+			
+			List<DocumentMetaData> docList = repoDocumentsMap.get(repositoryUniqueId);
 			
 			// construct RetrieveDocumentSetRequestType
 			RetrieveDocumentSetRequestType rdRequest = new RetrieveDocumentSetRequestType();
-			
-			String repositoryUniqueId = key;
 			
 			// add unique document id list to document request
 			for(DocumentMetaData documentMetaData : docList) {			
@@ -64,5 +69,13 @@ public class XDSRepositoryRetrieveDocumentSet extends
 	   if(oid == null) return "";
 	   else if(oid.startsWith("urn:oid:")) return oid;
 	   else return "urn:oid:" + oid;
-   }   
+   }
+
+public String getConfiguredRepositoryUniqueId() {
+	return configuredRepositoryUniqueId;
+}
+
+public void setConfiguredRepositoryUniqueId(String configuredRepositoryUniqueId) {
+	this.configuredRepositoryUniqueId = configuredRepositoryUniqueId;
+}   
 }

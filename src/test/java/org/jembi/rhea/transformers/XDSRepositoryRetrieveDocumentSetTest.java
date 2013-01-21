@@ -38,13 +38,11 @@ public class XDSRepositoryRetrieveDocumentSetTest {
 		
 		XDSRepositoryRetrieveDocumentSet t = new XDSRepositoryRetrieveDocumentSet();
 		try {
-			// TODO fix once we are returning multiple retrieve documents messages again
-			List<RetrieveDocumentSetRequestType> requests = new ArrayList<RetrieveDocumentSetRequestType>(); //(List<RetrieveDocumentSetRequestType>) t.transformMessage(testMsg, null);
-			requests.add((RetrieveDocumentSetRequestType) t.transformMessage(testMsg, null));
+			@SuppressWarnings("unchecked")
+			List<RetrieveDocumentSetRequestType> requests = (List<RetrieveDocumentSetRequestType>) t.transformMessage(testMsg, null);
 					
 			Assert.assertNotNull(requests);
-			//Assert.assertEquals(2, requests.size());
-			Assert.assertEquals(1, requests.size());
+			Assert.assertEquals(2, requests.size());
 			
 			JAXBContext jc = JAXBContext.newInstance("ihe.iti.xds_b._2007");
 			Marshaller marshaller = jc.createMarshaller();
@@ -68,6 +66,52 @@ public class XDSRepositoryRetrieveDocumentSetTest {
 					for (DocumentRequest doc : docList) {
 						Assert.assertEquals("1.3.6.1.4.1.33349.3.1.1.14", doc.getRepositoryUniqueId());
 						Assert.assertEquals("urn:oid:home2", doc.getHomeCommunityId());
+					}
+				} else {
+					// error, should never get here...
+					Assert.fail("doclist size incorrect");
+				}
+				
+				StringWriter sw = new StringWriter();
+				sw.append("===RetrieveDocumentMessage===\n");
+				marshaller.marshal(request, sw);
+				System.out.println(sw.toString() + "\n");
+			}
+			
+		} catch (TransformerException e) {
+			fail("Failed due to exception " + e);
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testTransformMessageSingleConfiguredXDSRepo() throws JAXBException {
+		MuleMessage testMsg = new TestMuleMessage();
+		
+		XDSRepositoryRetrieveDocumentSet t = new XDSRepositoryRetrieveDocumentSet();
+		t.setConfiguredRepositoryUniqueId("1.3.6.1.4.1.33349.3.1.1.13");
+		try {
+			@SuppressWarnings("unchecked")
+			List<RetrieveDocumentSetRequestType> requests = (List<RetrieveDocumentSetRequestType>) t.transformMessage(testMsg, null);
+					
+			Assert.assertNotNull(requests);
+			Assert.assertEquals(1, requests.size());
+			
+			JAXBContext jc = JAXBContext.newInstance("ihe.iti.xds_b._2007");
+			Marshaller marshaller = jc.createMarshaller();
+			
+			for (RetrieveDocumentSetRequestType request : requests) {
+				
+				List<DocumentRequest> docList = request.getDocumentRequest();
+				
+				if (docList.size() == 3) {
+				
+					Assert.assertEquals("urn:uuid:79500f02-ed6b-4507-aecd-72200b9e11b1", docList.get(0).getDocumentUniqueId());	
+					Assert.assertEquals("urn:uuid:7c6517ee-3110-4cf4-a643-9825815819d7", docList.get(1).getDocumentUniqueId());
+					Assert.assertEquals("1.2.3.4.5.6.7.8.9.133506.092.1", docList.get(2).getDocumentUniqueId());
+					for (DocumentRequest doc : docList) {
+						Assert.assertEquals("1.3.6.1.4.1.33349.3.1.1.13", doc.getRepositoryUniqueId());
+						Assert.assertEquals("urn:oid:home", doc.getHomeCommunityId());
 					}
 				} else {
 					// error, should never get here...
