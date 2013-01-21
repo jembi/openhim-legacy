@@ -6,10 +6,6 @@
 			<xsd:import namespace="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" schemaLocation="../schema/ebRS/query.xsd"/>
 			<xsd:import namespace="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" schemaLocation="../schema/ebRS/rs.xsd"/>
 			<xsd:import namespace="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" schemaLocation="../schema/ebRS/lcm.xsd"/>
-			<xsd:import namespace="urn:hl7-org:v3" schemaLocation="../schema/HL7V3/multicacheschemas/PRPA_IN201301UV.xsd"/>
-			<xsd:import namespace="urn:hl7-org:v3" schemaLocation="../schema/HL7V3/multicacheschemas/PRPA_IN201302UV.xsd"/>
-			<xsd:import namespace="urn:hl7-org:v3" schemaLocation="../schema/HL7V3/multicacheschemas/PRPA_IN201304UV.xsd"/>
-			<xsd:import namespace="urn:hl7-org:v3" schemaLocation="../schema/HL7V3/multicacheschemas/MCCI_IN000002UV01.xsd"/>
 		</xsd:schema>
 	</types>
 	<message name="RegistryStoredQuery_Message">
@@ -28,18 +24,6 @@
 		<documentation>Register Document Set - b Response</documentation>
 		<part name="body" element="rs:RegistryResponse"/>
 	</message>
-	<message name="PRPA_IN201301UV_Message">
-		<part name="body" element="hl7:PRPA_IN201301UV"/>
-	</message>
-	<message name="PRPA_IN201302UV_Message">
-		<part name="body" element="hl7:PRPA_IN201302UV"/>
-	</message>
-	<message name="PRPA_IN201304UV_Message">
-		<part name="body" element="hl7:PRPA_IN201304UV"/>
-	</message>
-	<message name="MCCI_IN000002UV01_Message">
-		<part name="body" element="hl7:MCCI_IN000002UV01"/>
-	</message>
 	<portType name="DocumentRegistry_PortType">
 		<operation name="DocumentRegistry_RegisterDocumentSet-b">
 			<input message="ihe:RegisterDocumentSet-b_Message" wsaw:Action="urn:ihe:iti:2007:RegisterDocumentSet-b"/>
@@ -48,18 +32,6 @@
 		<operation name="DocumentRegistry_RegistryStoredQuery">
 			<input message="ihe:RegistryStoredQuery_Message" wsaw:Action="urn:ihe:iti:2007:RegistryStoredQuery"/>
 			<output message="ihe:RegistryStoredQueryResponse_Message" wsaw:Action="urn:ihe:iti:2007:RegistryStoredQueryResponse"/>
-		</operation>
-		<operation name="DocumentRegistry_PRPA_IN201301UV">
-			<input message="ihe:PRPA_IN201301UV_Message" wsaw:Action="urn:hl7-org:v3:PRPA_IN201301UV"/>
-			<output message="ihe:MCCI_IN000002UV01_Message" wsaw:Action="urn:hl7-org:v3:MCCI_IN000002UV01"/>
-		</operation>
-		<operation name="DocumentRegistry_PRPA_IN201302UV">
-			<input message="ihe:PRPA_IN201302UV_Message" wsaw:Action="urn:hl7-org:v3:PRPA_IN201302UV"/>
-			<output message="ihe:MCCI_IN000002UV01_Message" wsaw:Action="urn:hl7-org:v3:MCCI_IN000002UV01"/>
-		</operation>
-		<operation name="DocumentRegistry_PRPA_IN201304UV">
-			<input message="ihe:PRPA_IN201304UV_Message" wsaw:Action="urn:hl7-org:v3:PRPA_IN201304UV"/>
-			<output message="ihe:MCCI_IN000002UV01_Message" wsaw:Action="urn:hl7-org:v3:MCCI_IN000002UV01"/>
 		</operation>
 	</portType>
 	<binding name="DocumentRegistry_Binding_Soap11" type="ihe:DocumentRegistry_PortType">
@@ -82,33 +54,6 @@
 				<soap:body use="literal"/>
 			</output>
 		</operation>
-		<operation name="DocumentRegistry_PRPA_IN201301UV">
-			<soap:operation soapAction="urn:hl7-org:v3:PRPA_IN201301UV"/>
-			<input>
-				<soap:body use="literal"/>
-			</input>
-			<output>
-				<soap:body use="literal"/>
-			</output>
-		</operation>
-		<operation name="DocumentRegistry_PRPA_IN201302UV">
-			<soap:operation soapAction="urn:hl7-org:v3:PRPA_IN201302UV"/>
-			<input>
-				<soap:body use="literal"/>
-			</input>
-			<output>
-				<soap:body use="literal"/>
-			</output>
-		</operation>
-		<operation name="DocumentRegistry_PRPA_IN201304UV">
-			<soap:operation soapAction="urn:hl7-org:v3:PRPA_IN201304UV"/>
-			<input>
-				<soap:body use="literal"/>
-			</input>
-			<output>
-				<soap:body use="literal"/>
-			</output>
-		</operation>
 	</binding>
 	<binding name="DocumentRegistry_Binding_Soap12" type="ihe:DocumentRegistry_PortType">
 		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
@@ -123,33 +68,6 @@
 		</operation>
 		<operation name="DocumentRegistry_RegistryStoredQuery">
 			<soap12:operation soapAction="urn:ihe:iti:2007:RegistryStoredQuery"/>
-			<input>
-				<soap12:body use="literal"/>
-			</input>
-			<output>
-				<soap12:body use="literal"/>
-			</output>
-		</operation>
-		<operation name="DocumentRegistry_PRPA_IN201301UV">
-			<soap12:operation soapAction="urn:hl7-org:v3:PRPA_IN201301UV"/>
-			<input>
-				<soap12:body use="literal"/>
-			</input>
-			<output>
-				<soap12:body use="literal"/>
-			</output>
-		</operation>
-		<operation name="DocumentRegistry_PRPA_IN201302UV">
-			<soap12:operation soapAction="urn:hl7-org:v3:PRPA_IN201302UV"/>
-			<input>
-				<soap12:body use="literal"/>
-			</input>
-			<output>
-				<soap12:body use="literal"/>
-			</output>
-		</operation>
-		<operation name="DocumentRegistry_PRPA_IN201304UV">
-			<soap12:operation soapAction="urn:hl7-org:v3:PRPA_IN201304UV"/>
 			<input>
 				<soap12:body use="literal"/>
 			</input>

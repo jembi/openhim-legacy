@@ -59,40 +59,4 @@ public interface DocumentRegistryPortType {
         @WebParam(name = "AdhocQueryRequest", targetNamespace = "urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0", partName = "body")
         AdhocQueryRequest body);
 
-    /**
-     * 
-     * @param body
-     * @return
-     *     returns org.hl7.v3.MCCIIN000002UV01
-     */
-    @WebMethod(operationName = "DocumentRegistry_PRPA_IN201301UV", action = "urn:hl7-org:v3:PRPA_IN201301UV")
-    @WebResult(name = "MCCI_IN000002UV01", targetNamespace = "urn:hl7-org:v3", partName = "body")
-    public MCCIIN000002UV01 documentRegistryPRPAIN201301UV(
-        @WebParam(name = "PRPA_IN201301UV", targetNamespace = "urn:hl7-org:v3", partName = "body")
-        PRPAIN201301UV body);
-
-    /**
-     * 
-     * @param body
-     * @return
-     *     returns org.hl7.v3.MCCIIN000002UV01
-     */
-    @WebMethod(operationName = "DocumentRegistry_PRPA_IN201302UV", action = "urn:hl7-org:v3:PRPA_IN201302UV")
-    @WebResult(name = "MCCI_IN000002UV01", targetNamespace = "urn:hl7-org:v3", partName = "body")
-    public MCCIIN000002UV01 documentRegistryPRPAIN201302UV(
-        @WebParam(name = "PRPA_IN201302UV", targetNamespace = "urn:hl7-org:v3", partName = "body")
-        PRPAIN201302UV body);
-
-    /**
-     * 
-     * @param body
-     * @return
-     *     returns org.hl7.v3.MCCIIN000002UV01
-     */
-    @WebMethod(operationName = "DocumentRegistry_PRPA_IN201304UV", action = "urn:hl7-org:v3:PRPA_IN201304UV")
-    @WebResult(name = "MCCI_IN000002UV01", targetNamespace = "urn:hl7-org:v3", partName = "body")
-    public MCCIIN000002UV01 documentRegistryPRPAIN201304UV(
-        @WebParam(name = "PRPA_IN201304UV", targetNamespace = "urn:hl7-org:v3", partName = "body")
-        PRPAIN201304UV body);
-
 }
