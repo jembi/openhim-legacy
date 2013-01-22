@@ -55,10 +55,10 @@ public class mediationSaveencounterDenormalizationXDSTest extends
     	//return "55f81316303842c^^^&1.3.6.1.4.1.21367.2009.1.2.300&ISO";
 	    
 	    // Nexj
-	    //payload.setPath("ws/rest/v1/patient/IHEFACILITY-996/encounters?id=IHEFACILITY-996&idType=IHEFACILITY");
+	    payload.setPath("ws/rest/v1/patient/IHERED-995/encounters?id=IHERED-995&idType=IHERED");
 	    
 	    // Vitera
-	    payload.setPath("ws/rest/v1/patient/IHEBLUE-0118jembi/encounters?id=0118jembi&idType=IHEBLUE");
+	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-0118jembi/encounters?id=0118jembi&idType=IHEBLUE");
 	    
 	    String oru_r01 = TestUtil.getResourceAsString("oru_r01.xml");
 	    payload.setBody(oru_r01);

@@ -53,10 +53,13 @@ public class mediationSaveencounterDenormalization extends
 	    
 	    // Mohawk
 	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_MARC_HI-3770298161/encounters");
-	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
+	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
 	    //TODO hardcoded for nist testing [modify for use here]
     	//return "55f81316303842c^^^&1.3.6.1.4.1.21367.2009.1.2.300&ISO";
+	    
+	    // Nexj
+	    payload.setPath("ws/rest/v1/patient/IHERED-995/encounters?id=IHERED-995&idType=IHERED");
 	    
 	    String oru_r01 = getResourceAsString("oru_r01.xml");
 	    payload.setBody(oru_r01);
