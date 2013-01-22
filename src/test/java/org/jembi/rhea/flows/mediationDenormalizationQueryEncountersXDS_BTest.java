@@ -57,13 +57,15 @@ public class mediationDenormalizationQueryEncountersXDS_BTest extends
 	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
 	    // Nexj
-	    //payload.setPath("ws/rest/v1/patient/IHEFACILITY-996-IHEFACILITY/encounters?id=IHEFACILITY-996&idType=IHEFACILITY");
+	    payload.setPath("ws/rest/v1/patient/IHERED-994/encounters?id=IHERED-994&idType=IHERED");
+	    //payload.setPath("ws/rest/v1/patient/IHERED-993/encounters?id=IHERED-993&idType=IHERED");
+	    //payload.setPath("ws/rest/v1/patient/IHERED-992/encounters?id=IHERED-992&idType=IHERED");
 	    
 	    // Vitera
 	    //		single repo response
 	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-0118jembi1/encounters?id=0118jembi1&idType=IHEBLUE");
 	    //		multiple repo response
-	    payload.setPath("ws/rest/v1/patient/IHEBLUE-0118jembi/encounters?id=0118jembi1&idType=IHEBLUE");
+	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-0118jembi/encounters?id=0118jembi1&idType=IHEBLUE");
 	    
 	    MuleMessage result = client.send("vm://queryEncounters-De-normailization-XDS.b", payload, properties);
 	    

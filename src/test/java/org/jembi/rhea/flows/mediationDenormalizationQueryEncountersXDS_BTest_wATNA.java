@@ -57,7 +57,12 @@ public class mediationDenormalizationQueryEncountersXDS_BTest_wATNA extends
 	    //properties.put(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, "1.19.6.24.109.42.1.3");
 	    
 	    // Mohawk
-	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
+	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
+	    
+	    // Nexj
+	    payload.setPath("ws/rest/v1/patient/IHERED-994/encounters?id=IHERED-994&idType=IHERED");
+	    //payload.setPath("ws/rest/v1/patient/IHERED-993/encounters?id=IHERED-993&idType=IHERED");
+	    //payload.setPath("ws/rest/v1/patient/IHERED-992/encounters?id=IHERED-992&idType=IHERED");
 	    
 	    MuleMessage result = client.send("vm://queryEncounters-De-normailization-XDS.b", payload, properties);
 	    
