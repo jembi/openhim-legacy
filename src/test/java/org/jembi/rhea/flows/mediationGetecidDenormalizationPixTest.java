@@ -44,8 +44,8 @@ public class mediationGetecidDenormalizationPixTest extends
 	    Map<String, String> idMap = new HashMap<String, String>();
 		
 	    // NIST
-	    idMap.put("id", "PIXL1");
-		idMap.put("idType", "NIST2010");
+	    //idMap.put("id", "PIXL1");
+		//idMap.put("idType", "NIST2010");
 		
 		// Mohawk
 	    //idMap.put("id", "994620-002229-1988L");
@@ -56,12 +56,12 @@ public class mediationGetecidDenormalizationPixTest extends
 	    //idMap.put("idType", "NIST2010-2");
 	    
 	    // Nexj
-	    //idMap.put("id", "IHEFACILITY-996");
-	    //idMap.put("idType", "IHEFACILITY");
-		
-		// Vitera
-	    idMap.put("id", "L101");
+	    idMap.put("id", "IHEFACILITY-996");
 	    idMap.put("idType", "IHEFACILITY");
+		
+		// Vitera (official connect-a-thon config)
+	    //idMap.put("id", "L101");
+	    //idMap.put("idType", "IHEFACILITY");
 	    
 	    Map<String, Object> properties = null;
 	    MuleMessage result = client.send("vm://getecid-pix", idMap, properties);
@@ -73,7 +73,7 @@ public class mediationGetecidDenormalizationPixTest extends
 	    // Sysnet
 	    //assertEquals("JEMBI-1", result.getPayloadAsString());
 	    // Nexj
-	    //assertEquals("IHERED-996", result.getPayloadAsString());
+	    assertEquals("IHERED-996", result.getPayloadAsString());
 
 	    log.info(result.getPayloadAsString());
 	    
