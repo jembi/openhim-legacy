@@ -2,32 +2,33 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-<mule xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.3.0" xsi:schemaLocation="
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.4.0" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
-http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd 
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd 
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
-http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd ">
     <flow name="mediation-denormalization-saveencountersFlow" doc:name="mediation-denormalization-saveencountersFlow">
         <vm:inbound-endpoint exchange-pattern="request-response" path="saveEncountersDe-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
         <choice doc:name="Choice">
             <when expression="return false;" evaluator="groovy">
-                <processor-chain>
+                <processor-chain doc:name="Processor Chain">
                     <logger message="De-normailize for mock service provider" level="INFO" doc:name="Log De-normailize for mock service provider"/>
                     <vm:outbound-endpoint exchange-pattern="request-response" path="saveEncounters-De-normailization-MockServiceProvider" responseTimeout="10000" mimeType="text/plain" doc:name="Send to queryPatientDemographics-De-normailization-MockServiceProvider"/>
                 </processor-chain>
             </when>
-            <when expression="return true;">
-                <processor-chain>
+            <when expression="return ${ihe.enableXDS};">
+                <processor-chain doc:name="Processor Chain">
                    <logger message="De-normalize for XDS" level="INFO" doc:name="Log De-normalize for XDS"/>
                    <choice doc:name="Choice">
                        <when expression="#[groovy: return ${rapidsms.alerts.enabled};]">
-                           <processor-chain>
+                           <processor-chain doc:name="Processor Chain">
                                <logger message="Sending encounter to RapidSMS alerts service" level="INFO" doc:name="Logger"/>
         			           <custom-transformer class="org.jembi.rhea.transformers.CopyToRapidSMSAlertService" doc:name="Copy to RapidSMS Alert Service"/>
                            </processor-chain>
                        </when>
                        <otherwise>
-                           <processor-chain>
+                           <processor-chain doc:name="Processor Chain">
                                <logger message="RapidSMS alerts disabled, skipping send" level="INFO" doc:name="Logger"/>
                            </processor-chain>
                        </otherwise>
@@ -36,7 +37,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
                 </processor-chain>
             </when>
             <otherwise>
-                <processor-chain>
+                <processor-chain doc:name="Processor Chain">
                     <logger message="De-normailize for openmrs shr" level="INFO" doc:name="Log De-normailize for openmrs shr"/>
                     <vm:outbound-endpoint exchange-pattern="request-response" path="saveEncounters-De-normailization-OpenMRSSHR" responseTimeout="10000" mimeType="text/plain" doc:name="Send to queryPatientDemographics-De-normailization-OpenMRSSHR"/>
                 </processor-chain>
