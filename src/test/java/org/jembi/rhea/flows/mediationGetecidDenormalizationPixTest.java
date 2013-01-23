@@ -48,16 +48,16 @@ public class mediationGetecidDenormalizationPixTest extends
 		//idMap.put("idType", "NIST2010");
 		
 		// Mohawk
-	    //idMap.put("id", "994620-002229-1988L");
-	    //idMap.put("idType", "W2012CATOID");
+	    idMap.put("id", "994620-002229-1988L");
+	    idMap.put("idType", "W2012CATOID");
 	    
 	    // Sysnet
 	    //idMap.put("id", "JEMBI-2");
 	    //idMap.put("idType", "NIST2010-2");
 	    
 	    // Nexj
-	    idMap.put("id", "IHEFACILITY-996");
-	    idMap.put("idType", "IHEFACILITY");
+	    //idMap.put("id", "IHEFACILITY-996");
+	    //idMap.put("idType", "IHEFACILITY");
 		
 		// Vitera (official connect-a-thon config)
 	    //idMap.put("id", "L101");
@@ -69,11 +69,11 @@ public class mediationGetecidDenormalizationPixTest extends
 	    assertNotNull(result.getPayload());
 	    
 	    // Mohawk
-	    //assertEquals("756", result.getPayloadAsString());
+	    assertEquals("756", result.getPayloadAsString());
 	    // Sysnet
 	    //assertEquals("JEMBI-1", result.getPayloadAsString());
 	    // Nexj
-	    assertEquals("IHERED-996", result.getPayloadAsString());
+	    //assertEquals("IHERED-996", result.getPayloadAsString());
 
 	    log.info(result.getPayloadAsString());
 	    
