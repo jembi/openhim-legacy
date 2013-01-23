@@ -49,7 +49,7 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	    payload.setHttpMethod(RestfulHttpRequest.HTTP_POST);
 	    
 	    // Mohawk
-	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
+	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
 	    //TODO hardcoded for nist testing [modify for use here]
     	//return "55f81316303842c^^^&1.3.6.1.4.1.21367.2009.1.2.300&ISO";
@@ -59,6 +59,9 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	    
 	    // Vitera
 	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-0118jembi/encounters?id=0118jembi&idType=IHEBLUE");
+	    
+	    // OpenXDS - regenstrief
+	    payload.setPath("ws/rest/v1/patient/ECID-dc8d2234-7fce-4869-945e-97c8b7d97332/encounters");
 	    
 	    String oru_r01 = TestUtil.getResourceAsString("oru_r01.xml");
 	    payload.setBody(oru_r01);
