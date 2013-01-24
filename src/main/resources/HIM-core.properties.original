@@ -100,7 +100,7 @@ rapidsm.auth=Basic cmhlYTpyaGVh
 # Jembi test server
 #atna.host=192.168.1.101
 #atna.tlsPort=2862
-#atna.keystore=clientKeyStore2
+#atna.keystore=OpenATNA-clientKeyStore-jembi.jks
 #atna.keypassword=password
 #atna.storepassword=password
 # IHE syslog collector
