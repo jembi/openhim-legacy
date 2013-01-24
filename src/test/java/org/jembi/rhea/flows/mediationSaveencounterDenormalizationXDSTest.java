@@ -51,8 +51,8 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	    // Mohawk
 	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
-	    //TODO hardcoded for nist testing [modify for use here]
-    	//return "55f81316303842c^^^&1.3.6.1.4.1.21367.2009.1.2.300&ISO";
+	    // NIST
+    	//payload.setPath("ws/rest/v1/patient/NIST-55f81316303842c/encounters?id=55f81316303842c&idType=NIST");
 	    
 	    // Nexj
 	    //payload.setPath("ws/rest/v1/patient/IHERED-995/encounters?id=IHERED-995&idType=IHERED");

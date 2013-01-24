@@ -1,104 +1,205 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mediation-orchestration-queryfacilities">
-    <flow SubFlow="false" name="mediation-orchestration-queryencountersFlow">
+    <flow SubFlow="false" name="mediation-orchestration-queryencountersFlow" entity-id="22e56892-a029-4b1b-9b2d-c5deeb4b50ae">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
         </properties>
-        <lane entity-id="3f6a506a-2599-4033-afd7-5dd57a2eef57">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="9c259c99-c09e-4241-a238-e0935d2531db">
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Read from queue" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
                 <properties>
-                    <property value="one-way" name="exchange-pattern"/>
-                    <property value="request-response" name="exchange-pattern"/>
-                    <property value="queryEncountersOrchestrationQueue" name="path"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="path" value="queryEncountersOrchestrationQueue"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="auxiliary;index" value="2"/>
                     <property name="address"/>
-                    <property value="10000" name="responseTimeout"/>
+                    <property name="responseTimeout" value="10000"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
-                    <property value="text/plain" name="mimeType"/>
+                    <property name="mimeType" value="text/plain"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="auxiliary;index" value="2"/>
                     <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="auxiliary;index" value="2"/>
                 </properties>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="d87abac8-b5ab-4647-84d4-f58a9ddd7d7b">
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
                 <properties>
-                    <property value="Orchestrating a query encounters transaction" name="message"/>
-                    <property value="INFO" name="level"/>
+                    <property name="message" value="Orchestrating a query encounters transaction"/>
+                    <property name="level" value="INFO"/>
                     <property name="category"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="auxiliary;index" value="3"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Inject ECID from CR" entity-id="d4f6798b-4648-48db-acc5-561279ad89aa">
+            <pattern name="Inject ECID from CR" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#1">
                 <properties>
-                    <property name="returnClass"/>
-                    <property name="ignoreBadInput"/>
-                    <property name="encoding"/>
-                    <property name="mimeType"/>
-                    <property value="org.jembi.rhea.transformers.QueryEncounterInjectECIDTransformer" name="class"/>
+                    <property name="auxiliary;erased;mimeType" value="true"/>
+                    <property name="returnClass" value=""/>
+                    <property name="ignoreBadInput" value="false"/>
+                    <property name="auxiliary;erased;encoding" value="true"/>
+                    <property name="encoding" value=""/>
+                    <property name="class" value="org.jembi.rhea.transformers.QueryEncounterInjectECIDTransformer"/>
+                    <property name="mimeType" value=""/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property name="updated"/>
+                    <property-collection name="@http://www.springframework.org/schema/beans/property;847217488">
+                        <property name="ref" value=""/>
+                        <property name="name" value="requestedAssigningAuthority"/>
+                        <property name="value" value="${pix.requestedAssigningAuthority}"/>
+                    </property-collection>
                 </properties>
+                <description></description>
             </pattern>
-            <response entity-id="ca2fb516-79d0-4250-84b7-ca2bad44a133">
-                <compartment entity-id="bbd7e7ce-c635-4dde-afb0-52a542563e93">
-                    <lane entity-id="ecea1034-513e-4b4d-90c6-3a3b2444aeaa">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="3720bf88-fd6e-4dab-8914-064a7c5d5b34">
+            <response index="5" entity-id="response#1">
+                <compartment entity-id="compartment#1">
+                    <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
+                        <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
                             <properties>
-<property value="Responce orchestration" name="message"/>
-<property value="INFO" name="level"/>
+<property name="message" value="Responce orchestration"/>
+<property name="level" value="INFO"/>
 <property name="category"/>
+<property name="auxiliary;index" value="6"/>
+<property name="auxiliary;index" value="6"/>
+<property name="auxiliary;index" value="6"/>
                             </properties>
                         </pattern>
-                        <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="14047d98-4d4d-4571-ba28-f23ee5b58d78">
+                        <splitter index="7" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                             <properties>
-<property-collection name="eb655e7e-53f6-495f-92dd-9e74264dcce4">
-    <property value="true" name="choice.otherwise"/>
+<property name=";INDEX" value="7"/>
+<property name=";INDEX" value="7"/>
+<property name=";INDEX" value="7"/>
+<property-collection name="4cad6040-9953-4c38-831d-c391a73a89fd">
+    <property name="choice.otherwise" value="true"/>
+    <property-collection name="choice.attributes"/>
 </property-collection>
-<property-collection name="ca118efc-231f-42ca-964d-a0b9ccdf5095">
-    <property value="message.payload.httpStatus == 200" name="choice.expression"/>
-    <property value="groovy" name="choice.evaluator"/>
+<property-collection name="99e7b9a2-6b12-467a-8579-53d7f00505e8">
+    <property name="choice.expression" value="message.payload.httpStatus == 200"/>
+    <property-collection name="choice.attributes">
+        <property name="expression" value="message.payload.httpStatus == 200"/>
+        <property name="evaluator" value="groovy"/>
+    </property-collection>
 </property-collection>
                             </properties>
-                            <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="fece6d52-9622-432a-b80b-03214407b52b"/>
-                            <compartment entity-id="421e43dc-f8df-4489-af0d-9795238a227c">
-<lane entity-id="ca118efc-231f-42ca-964d-a0b9ccdf5095">
-    <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Inject NID from PR" entity-id="194d172d-95cb-47e3-9c35-c1ac74b961d4">
+                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
+<properties>
+    <property name=";INDEX" value="7"/>
+    <property name=";INDEX" value="7"/>
+    <property name=";INDEX" value="7"/>
+    <property-collection name="4cad6040-9953-4c38-831d-c391a73a89fd">
+        <property name="choice.otherwise" value="true"/>
+        <property-collection name="choice.attributes"/>
+    </property-collection>
+    <property-collection name="99e7b9a2-6b12-467a-8579-53d7f00505e8">
+        <property name="choice.expression" value="message.payload.httpStatus == 200"/>
+        <property-collection name="choice.attributes">
+            <property name="expression" value="message.payload.httpStatus == 200"/>
+            <property name="evaluator" value="groovy"/>
+        </property-collection>
+    </property-collection>
+</properties>
+                            </pattern>
+                            <compartment entity-id="compartment#2">
+<lane hadOnlyOneElement="false" index="9" isChoiceOtherwiseLane="false" entity-id="99e7b9a2-6b12-467a-8579-53d7f00505e8">
+    <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#1">
         <properties>
-            <property name="returnClass"/>
-            <property name="ignoreBadInput"/>
-            <property name="encoding"/>
-            <property name="mimeType"/>
-            <property value="org.jembi.rhea.transformers.QueryEncounterInjectNIDTransformer" name="class"/>
+            <property name="auxiliary;index" value="9"/>
+            <property name="auxiliary;index" value="9"/>
+            <property name="auxiliary;index" value="9"/>
         </properties>
-    </pattern>
+        <compartment entity-id="compartment#3">
+            <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#3">
+                <pattern name="Inject NID from PR" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#2">
+                    <properties>
+                        <property name="returnClass"/>
+                        <property name="ignoreBadInput"/>
+                        <property name="encoding"/>
+                        <property name="auxiliary;index" value="10"/>
+                        <property name="mimeType"/>
+                        <property name="auxiliary;index" value="10"/>
+                        <property name="auxiliary;index" value="10"/>
+                        <property name="class" value="org.jembi.rhea.transformers.QueryEncounterInjectNIDTransformer"/>
+                        <property name="auxiliary;index" value="10"/>
+                        <property name="auxiliary;index" value="10"/>
+                        <property name="auxiliary;index" value="10"/>
+                    </properties>
+                </pattern>
+            </lane>
+        </compartment>
+    </scope>
 </lane>
-<lane entity-id="eb655e7e-53f6-495f-92dd-9e74264dcce4">
-    <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="b6814abe-5f67-4fcf-b7fa-56734bd42476">
+<lane hadOnlyOneElement="false" index="12" isChoiceOtherwiseLane="true" entity-id="4cad6040-9953-4c38-831d-c391a73a89fd">
+    <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#2">
         <properties>
-            <property value="Return SHR error" name="message"/>
-            <property value="INFO" name="level"/>
-            <property name="category"/>
+            <property name="auxiliary;index" value="12"/>
+            <property name="auxiliary;index" value="12"/>
+            <property name="auxiliary;index" value="12"/>
         </properties>
-    </pattern>
+        <compartment entity-id="compartment#4">
+            <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#4">
+                <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#3">
+                    <properties>
+                        <property name="message" value="Return SHR error"/>
+                        <property name="level" value="INFO"/>
+                        <property name="category"/>
+                        <property name="auxiliary;index" value="13"/>
+                        <property name="auxiliary;index" value="13"/>
+                        <property name="auxiliary;index" value="13"/>
+                    </properties>
+                </pattern>
+            </lane>
+        </compartment>
+    </scope>
 </lane>
                             </compartment>
                         </splitter>
                     </lane>
                 </compartment>
             </response>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Send to queryPatientDemographicsDe-NormalizationQueue" entity-id="43e5fbb3-fe2a-4e11-92c1-8f98e0ded81e">
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Send to queryPatientDemographicsDe-NormalizationQueue" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#2">
                 <properties>
-                    <property value="one-way" name="exchange-pattern"/>
-                    <property value="request-response" name="exchange-pattern"/>
-                    <property value="queryEncountersDe-NormalizationQueue" name="path"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="path" value="queryEncountersDe-NormalizationQueue"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="auxiliary;index" value="14"/>
                     <property name="address"/>
-                    <property value="10000" name="responseTimeout"/>
+                    <property name="responseTimeout" value="10000"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
-                    <property value="text/plain" name="mimeType"/>
+                    <property name="mimeType" value="text/plain"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
                     <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
                 </properties>
             </endpoint>
         </lane>

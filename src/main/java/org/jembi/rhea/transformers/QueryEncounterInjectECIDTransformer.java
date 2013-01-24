@@ -12,12 +12,15 @@ import org.jembi.rhea.RestfulHttpRequest;
 import org.jembi.rhea.Util;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+import org.mule.api.transport.PropertyScope;
 import org.mule.module.client.MuleClient;
 import org.mule.transformer.AbstractMessageTransformer;
 
 public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransformer {
 	
 	public static Map<String, String[]> requestClientIds = new HashMap<String, String[]>();
+	
+	private String requestedAssigningAuthority = "";
 
 	@Override
 	public Object transformMessage(MuleMessage msg, String enc)
@@ -46,9 +49,7 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 				throw new Exception("Invalid Client: id or id type is null");
 			}
 			
-			//MuleMessage responce = client.send("vm://getecid-openempi", idMap, null, 5000);
-			// TODO make this configurable
-			MuleMessage responce = client.send("vm://getecid-pix", idMap, null, 5000);
+			MuleMessage responce = client.send("vm://getecid", idMap, null, 5000);
 			
 			String success = responce.getInboundProperty("success");
 			
@@ -56,12 +57,11 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 			String enterpriseIdType;
 			if (success != null && success.equals("true")) {
 				ecid = responce.getPayloadAsString();
-				// TODO the pix query need to return the idType (assigningAuthority) as well
-				enterpriseIdType = "MOH_CAAT_MARC_HI";
+				enterpriseIdType = requestedAssigningAuthority;
 				
 				// Save original ID for later use
-				msg.setSessionProperty("id", id);
-				msg.setSessionProperty("idType", idType);
+				msg.setProperty("id", id, PropertyScope.SESSION);
+				msg.setProperty("idType", idType, PropertyScope.SESSION);
 				
 				String uuid = req.getUuid();
 				
@@ -79,6 +79,14 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 		}
 		
 		return msg;
+	}
+
+	public String getRequestedAssigningAuthority() {
+		return requestedAssigningAuthority;
+	}
+
+	public void setRequestedAssigningAuthority(String requestedAssigningAuthority) {
+		this.requestedAssigningAuthority = requestedAssigningAuthority;
 	}
 
 }

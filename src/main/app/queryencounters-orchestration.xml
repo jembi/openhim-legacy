@@ -2,24 +2,26 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.2.1" xsi:schemaLocation="
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.4.0" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
-http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
     <flow name="mediation-orchestration-queryencountersFlow" doc:name="mediation-orchestration-queryencountersFlow">
         <vm:inbound-endpoint exchange-pattern="request-response" path="queryEncountersOrchestrationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
         <logger message="Orchestrating a query encounters transaction" level="INFO" doc:name="Logger"/>
-        <custom-transformer class="org.jembi.rhea.transformers.QueryEncounterInjectECIDTransformer" doc:name="Inject ECID from CR"/>
+        <custom-transformer class="org.jembi.rhea.transformers.QueryEncounterInjectECIDTransformer" doc:name="Inject ECID from CR">
+            <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthority}"/>
+        </custom-transformer>
         <response>
             <logger message="Responce orchestration" level="INFO" doc:name="Logger"/>
             <choice doc:name="Choice">
                 <when expression="message.payload.httpStatus == 200" evaluator="groovy">
-                    <processor-chain>
+                    <processor-chain doc:name="Processor Chain">
                         <custom-transformer class="org.jembi.rhea.transformers.QueryEncounterInjectNIDTransformer" doc:name="Inject NID from PR"/>
                     </processor-chain>
                 </when>
                 <otherwise>
-                    <processor-chain>
+                    <processor-chain doc:name="Processor Chain">
                         <logger message="Return SHR error" level="INFO" doc:name="Logger"/>
                     </processor-chain>
                 </otherwise>
