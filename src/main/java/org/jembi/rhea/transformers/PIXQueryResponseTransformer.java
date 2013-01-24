@@ -40,6 +40,10 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 	
 	private String pixManagerHost = "";
 	private String requestedAssigningAuthority = "";
+	private String pixSendingApplication = "";
+	private String pixSendingFacility = "";
+	private String pixReceivingApplication = ""; 
+	private String pixReceivingFacility = "";
 	
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding)
@@ -75,7 +79,7 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 				String request = (String)message.getProperty(Constants.PIX_REQUEST_PROPERTY, PropertyScope.SESSION);
 				String msh10 = (String)message.getProperty(Constants.PIX_REQUEST_MSH10_PROPERTY, PropertyScope.SESSION);
 				ATNAUtil.dispatchAuditMessage(muleContext, generateATNAMessage(request, pid, msh10));
-				log.info("Dispatched ATNA message");
+				log.info("Dispatched ATNA message" + generateATNAMessage(request, pid, msh10));
 			} catch (Exception e) {
 				//If the auditing breaks, it shouldn't break the flow, so catch and log
 				log.error("Failed to dispatch ATNA message", e);
@@ -108,7 +112,7 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 	
 	protected String generateATNAMessage(String request, String patientId, String msh10) throws JAXBException {
 		AuditMessage res = new AuditMessage();
-		
+	
 		EventIdentificationType eid = new EventIdentificationType();
 		eid.setEventID( ATNAUtil.buildCodedValueType("DCM", "110112", "Query") );
 		eid.setEventActionCode("E");
@@ -117,8 +121,8 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 		eid.setEventOutcomeIndicator(patientId!=null ? BigInteger.ZERO : new BigInteger("4"));
 		res.setEventIdentification(eid);
 		
-		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(ATNAUtil.getSystemName() + "|openhim", ATNAUtil.getProcessID(), true, ATNAUtil.getHostIP(), (short)2, "DCM", "110153", "Source"));
-		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(pixManagerHost + "|pixmanager", "2100", false, pixManagerHost, (short)1, "DCM", "110152", "Destination"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(getPixSendingFacility() + "|" + getPixSendingApplication(), ATNAUtil.getProcessID(), true, ATNAUtil.getHostIP(), (short)2, "DCM", "110153", "Source"));
+		res.getActiveParticipant().add( ATNAUtil.buildActiveParticipant(getPixReceivingFacility() + "|" + getPixReceivingApplication(), "2100", false, pixManagerHost, (short)1, "DCM", "110152", "Destination"));
 		
 		res.getAuditSourceIdentification().add(ATNAUtil.buildAuditSource());
 		
@@ -149,5 +153,37 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 
 	public void setRequestedAssigningAuthority(String requestedAssigningAuthority) {
 		this.requestedAssigningAuthority = requestedAssigningAuthority;
+	}
+
+	public String getPixSendingApplication() {
+		return (pixSendingApplication!=null && !pixSendingApplication.isEmpty()) ? pixSendingApplication : "openhim";
+	}
+
+	public void setPixSendingApplication(String pixSendingApplication) {
+		this.pixSendingApplication = pixSendingApplication;
+	}
+
+	public String getPixSendingFacility() {
+		return (pixSendingFacility!=null && !pixSendingFacility.isEmpty()) ? pixSendingFacility : "RHEA-HIE";
+	}
+
+	public void setPixSendingFacility(String pixSendingFacility) {
+		this.pixSendingFacility = pixSendingFacility;
+	}
+
+	public String getPixReceivingApplication() {
+		return (pixReceivingApplication!=null && !pixReceivingApplication.isEmpty()) ? pixReceivingApplication : "pixmanager";
+	}
+
+	public void setPixReceivingApplication(String pixReceivingApplication) {
+		this.pixReceivingApplication = pixReceivingApplication;
+	}
+
+	public String getPixReceivingFacility() {
+		return (pixReceivingFacility!=null && !pixReceivingFacility.isEmpty()) ? pixReceivingFacility : pixManagerHost;
+	}
+
+	public void setPixReceivingFacility(String pixReceivingFacility) {
+		this.pixReceivingFacility = pixReceivingFacility;
 	}
 }

@@ -36,6 +36,10 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
             <custom-transformer class="org.jembi.rhea.transformers.PIXQueryResponseTransformer" doc:name="Handle RSP response">
                 <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthorityId}"/>
                 <spring:property name="pixManagerHost" value="${pix.manager.host}"/>
+                <spring:property name="pixSendingApplication" value="${pix.sendingApplication}"/>
+                <spring:property name="pixReceivingApplication" value="${pix.receivingApplication}"/>
+                <spring:property name="pixSendingFacility" value="${pix.sendingFacility}"/>
+                <spring:property name="pixReceivingFacility" value="${pix.receivingFacility}"/>
             </custom-transformer>
             <choice doc:name="Choice">
                 <when expression="#[groovy: return message.payload != null; ]">
