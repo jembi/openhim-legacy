@@ -73,6 +73,13 @@ public class mediationSaveencounterDenormalizationXDSTest_wATNA extends
 	    
 	    log.info(result.getPayloadAsString());
 	    
+	    try {
+	    	log.info("Giving ATNA a chance to finish...");
+	    	Thread.sleep(5000);
+	    } catch(InterruptedException ex) {
+	    	Thread.currentThread().interrupt();
+	    }
+	    
 	    log.info("Test completed");
 	}
 	

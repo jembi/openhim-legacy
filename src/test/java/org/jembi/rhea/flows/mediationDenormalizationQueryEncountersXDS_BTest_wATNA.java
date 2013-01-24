@@ -70,6 +70,13 @@ public class mediationDenormalizationQueryEncountersXDS_BTest_wATNA extends
 	    Assert.assertTrue(result.getPayload() instanceof RestfulHttpResponse);
 	    log.info(result.getPayload());
 	    
+	    try {
+	    	log.info("Giving ATNA a chance to finish...");
+	    	Thread.sleep(10000);
+	    } catch(InterruptedException ex) {
+	    	Thread.currentThread().interrupt();
+	    }
+	    
 	    log.info("Test completed");
 	}
 
