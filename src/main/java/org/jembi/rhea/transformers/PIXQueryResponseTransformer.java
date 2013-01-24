@@ -79,7 +79,7 @@ public class PIXQueryResponseTransformer extends AbstractMessageTransformer {
 				String request = (String)message.getProperty(Constants.PIX_REQUEST_PROPERTY, PropertyScope.SESSION);
 				String msh10 = (String)message.getProperty(Constants.PIX_REQUEST_MSH10_PROPERTY, PropertyScope.SESSION);
 				ATNAUtil.dispatchAuditMessage(muleContext, generateATNAMessage(request, pid, msh10));
-				log.info("Dispatched ATNA message" + generateATNAMessage(request, pid, msh10));
+				log.info("Dispatched ATNA message");
 			} catch (Exception e) {
 				//If the auditing breaks, it shouldn't break the flow, so catch and log
 				log.error("Failed to dispatch ATNA message", e);
