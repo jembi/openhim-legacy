@@ -60,23 +60,23 @@ ihe.keystore=ihe/na/keystore.jks
 ihe.keypassword=Jembi#123
 ihe.storepassword=Jembi#123
 # The OID that uniquely identifies this system
-ihe.systemSourceID=1.3.6.1.4.1.21367.13.60.89
+ihe.systemSourceID=1.3.6.1.4.1.21367.2010.1.2
 ihe.secure=false
 ihe.enablePIX=false
 ihe.enableXDS=true
 
 # == IHE XDS Registry ==
-# OpenXDS
-xds.registry.host=openhie.regenstrief.org
-xds.registry.port=8080
-xds.registry.securePort=8080
+# OpenXDS - openhie.regenstrief.org
+xds.registry.host=134.68.31.191
+xds.registry.port=8010
+xds.registry.securePort=8010
 xds.registry.path=axis2/services/xdsregistryb
 
 # == IHE XDS Repository ==
 # OpenXDS
-xds.repository.host=openhie.regenstrief.org
-xds.repository.port=8080
-xds.repository.securePort=8080
+xds.repository.host=134.68.31.191
+xds.repository.port=8020
+xds.repository.securePort=8020
 xds.repository.path=axis2/services/xdsrepositoryb
 xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.102
 
@@ -86,14 +86,14 @@ xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.102
 rapidsms.alerts.enabled=true
 
 # == PIX Manager ==
-# Vitera
-pix.manager.host=216.154.198.93
+# OpenEMPI - RHEA EC2 - cr.jembi.org
+pix.manager.host=50.19.146.97
 pix.manager.port=3600
-pix.manager.securePort=3610
-pix.assigningAuthorityId=1.3.6.1.4.1.21367.3000.1.6
-pix.requestedAssigningAuthority=IHEBLUE
-pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.3000
+pix.manager.securePort=3600
+pix.assigningAuthorityId=
+pix.requestedAssigningAuthority=ECID
+pix.requestedAssigningAuthorityId=ECID
 pix.sendingApplication=openhim
 pix.sendingFacility=RHEA-HIE
-pix.receivingApplication=PIX_MGR_VITERA_Inter
-pix.receivingFacility=VITERA
+pix.receivingApplication=
+pix.receivingFacility=

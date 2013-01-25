@@ -54,10 +54,10 @@ public class mediationDenormalizationQueryEncountersXDS_BTest extends
 	    //payload.setPath("ws/rest/v1/patient/NIST2010-1b48e083395f498/encounters");//NIST2010-2
 	    
 	    // Mohawk and EMC
-	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
+	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
 	    // Nexj
-	    //payload.setPath("ws/rest/v1/patient/IHERED-995/encounters?id=IHERED-995&idType=IHERED");
+	    payload.setPath("ws/rest/v1/patient/IHERED-995/encounters?id=IHERED-995&idType=IHERED");
 	    //payload.setPath("ws/rest/v1/patient/IHERED-994/encounters?id=IHERED-994&idType=IHERED");
 	    //payload.setPath("ws/rest/v1/patient/IHERED-993/encounters?id=IHERED-993&idType=IHERED");
 	    //payload.setPath("ws/rest/v1/patient/IHERED-992/encounters?id=IHERED-992&idType=IHERED");
