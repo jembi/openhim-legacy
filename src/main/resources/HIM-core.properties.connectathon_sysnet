@@ -50,7 +50,7 @@ rapidsm.auth=Basic cmhlYTpyaGVh
 
 # == ATNA ==
 # IHE syslog collector
-atna.host=gazelle-gold.wustl.edu
+atna.host=10.242.27.17
 atna.tlsPort=3201
 atna.keystore=ihe/na/keystore.jks
 atna.keypassword=Jembi#123
