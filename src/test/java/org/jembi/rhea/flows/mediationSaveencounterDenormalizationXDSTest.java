@@ -61,7 +61,10 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-0118jembi/encounters?id=0118jembi&idType=IHEBLUE");
 	    
 	    // OpenXDS - regenstrief
-	    payload.setPath("ws/rest/v1/patient/ECID-dc8d2234-7fce-4869-945e-97c8b7d97332/encounters");
+	    //payload.setPath("ws/rest/v1/patient/ECID-dc8d2234-7fce-4869-945e-97c8b7d97332/encounters");
+	    
+	    // CONNECTATHON - NIST BLUE
+	    payload.setPath("ws/rest/v1/patient/IHEBLUE-BLUE5507/encounters?id=BLUE5507&idType=IHEBLUE");
 	    
 	    String oru_r01 = TestUtil.getResourceAsString("oru_r01.xml");
 	    payload.setBody(oru_r01);
