@@ -49,9 +49,9 @@ rapidsms.port=8004
 rapidsm.auth=Basic cmhlYTpyaGVh
 
 # == ATNA ==
-# Connectathon Wed. Afternoon
-atna.host=
-atna.tlsPort=3201
+# Connectathon Wed. morning - PACS_Tiani - Cisco_0
+atna.host=10.242.26.23
+atna.tlsPort=6514
 atna.keystore=ihe/na/keystore.jks
 atna.keypassword=Jembi#123
 atna.storepassword=Jembi#123
