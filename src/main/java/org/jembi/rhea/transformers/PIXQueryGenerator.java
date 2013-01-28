@@ -3,6 +3,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.jembi.rhea.transformers;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
@@ -22,6 +23,8 @@ import ca.uhn.hl7v2.util.Terser;
 
 public class PIXQueryGenerator  extends AbstractMessageTransformer {
 
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssZ");
+	
 	private String _msh10;
 	
 	private String assigningAuthorityId = "";
@@ -69,7 +72,7 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		t.set("MSH-4-1", sendingFacility);
 		t.set("MSH-5-1", receivingApplication);
 		t.set("MSH-6-1", receivingFacility);
-		msh.getDateTimeOfMessage().getTime().setValue(new Date());
+		msh.getDateTimeOfMessage().getTime().setValue(dateFormat.format(new Date()));
 		t.set("MSH-9-1", "QBP");
 		t.set("MSH-9-2", "Q23");
 		t.set("MSH-9-3", "QBP_Q21");
