@@ -48,8 +48,8 @@ public class mediationGetecidDenormalizationPixTest extends
 		//idMap.put("idType", "NIST2010");
 		
 		// Mohawk
-	    idMap.put("id", "994620-002229-1988L");
-	    idMap.put("idType", "W2012CATOID");
+	    //idMap.put("id", "994620-002229-1988L");
+	    //idMap.put("idType", "W2012CATOID");
 	    
 	    // Sysnet
 	    //idMap.put("id", "JEMBI-2");
@@ -63,13 +63,17 @@ public class mediationGetecidDenormalizationPixTest extends
 	    //idMap.put("id", "L101");
 	    //idMap.put("idType", "IHEFACILITY");
 	    
+	    // OpenEMPI - cr.jembi.org
+	    idMap.put("id", "123456789");
+	    idMap.put("idType", "NID");
+	    
 	    Map<String, Object> properties = null;
 	    MuleMessage result = client.send("vm://getecid-pix", idMap, properties);
 	    
 	    assertNotNull(result.getPayload());
 	    
 	    // Mohawk
-	    assertEquals("756", result.getPayloadAsString());
+	    //assertEquals("756", result.getPayloadAsString());
 	    // Sysnet
 	    //assertEquals("JEMBI-1", result.getPayloadAsString());
 	    // Nexj
