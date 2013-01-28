@@ -62,10 +62,12 @@ public class mediationGetecidDenormalizationPixTest extends
 		// Vitera (official connect-a-thon config)
 	    //idMap.put("id", "L101");
 	    //idMap.put("idType", "IHEFACILITY");
+	    idMap.put("id", "IHEBLUE-1264");
+	    idMap.put("idType", "IHEBLUE");
 	    
 	    // OpenEMPI - cr.jembi.org
-	    idMap.put("id", "123456789");
-	    idMap.put("idType", "NID");
+	    //idMap.put("id", "123456789");
+	    //idMap.put("idType", "NID");
 	    
 	    Map<String, Object> properties = null;
 	    MuleMessage result = client.send("vm://getecid-pix", idMap, properties);

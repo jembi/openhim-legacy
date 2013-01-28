@@ -9,12 +9,12 @@ cert.keystore=keystore.jks
 cert.keypassword=Jembi#123
 cert.storepassword=Jembi#123
 
+
 ldap.url=ldap://localhost:389/dc=moh,dc=gov,dc=rw
 ldap.admin.userdn=cn=admin,dc=moh,dc=gov,dc=rw
 ldap.admin.password=Jembi#123
 
 # == Client Registry ==
-#openempi.sessionkey=1ADF165CA416EB900E58B9125AA8ED02
 # Mock
 cr.host=localhost
 cr.port=8002
@@ -49,9 +49,9 @@ rapidsms.port=8004
 rapidsm.auth=Basic cmhlYTpyaGVh
 
 # == ATNA ==
-# IHE syslog collector
-atna.host=10.242.27.17
-atna.tlsPort=3201
+# OTHER_ECW
+atna.host=10.242.17.24
+atna.tlsPort=6514
 atna.keystore=ihe/na/keystore.jks
 atna.keypassword=Jembi#123
 atna.storepassword=Jembi#123
@@ -62,27 +62,26 @@ ihe.keypassword=Jembi#123
 ihe.storepassword=Jembi#123
 # The OID that uniquely identifies this system
 ihe.systemSourceID=1.3.6.1.4.1.21367.13.60.89
-ihe.secure=false
+ihe.secure=true
 ihe.enablePIX=true
 ihe.enableXDS=true
 
 # == IHE XDS Registry ==
-# NIST
-xds.registry.host=ihexds.nist.gov
-xds.registry.port=12080
-xds.registry.securePort=12081
+# NIST BLUE
+xds.registry.host=10.242.27.14
+xds.registry.port=80
+xds.registry.securePort=9080
 xds.registry.path=tf6/services/xdsregistryb
-# for XCA
-#xds.registry.path=tf6/services/xcaregistry
 
 # == IHE XDS Repository ==
-# NIST
-xds.repository.host=ihexds.nist.gov
-xds.repository.port=12080
-xds.repository.securePort=12081
+# NIST BLUE
+xds.repository.host=10.242.27.14
+xds.repository.port=80
+xds.repository.securePort=9080
 xds.repository.path=tf6/services/xdsrepositoryb
-# for XCA
-#xds.repository.path=tf6/services/xcarepository
+# non-secure
+#xds.repository.path=Repository/Repository.svc
+xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.78
 
 #Enable the RapidSMS-Alerts service for save-encounter
 #Currently this feature will be enabled regardless of this setting
@@ -90,16 +89,14 @@ xds.repository.path=tf6/services/xdsrepositoryb
 rapidsms.alerts.enabled=true
 
 # == PIX Manager ==
-# Vitera Connectathon
-pix.manager.host=10.242.23.11
-pix.manager.port=3600
-pix.manager.securePort=3610
-pix.assigningAuthorityId=1.3.6.1.4.1.21367.13.20.3000
-#pix.requestedAssigningAuthority=IHEBLUE
-#pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.3000
-pix.requestedAssigningAuthority=
-pix.requestedAssigningAuthorityId=
+# ??
+pix.manager.host=
+pix.manager.port=
+pix.manager.securePort=
+pix.assigningAuthorityId=1.3.6.1.4.1.21367.3000.1.6
+pix.requestedAssigningAuthority=IHEBLUE
+pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.3000
 pix.sendingApplication=openhim
 pix.sendingFacility=RHEA-HIE
-pix.receivingApplication=PIX_MGR_VITERA
-pix.receivingFacility=VITERA
+pix.receivingApplication=
+pix.receivingFacility=
