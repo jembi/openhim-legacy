@@ -48,12 +48,14 @@ public class mediationGetecidDenormalizationPixTest_wATNA extends
 		//idMap.put("idType", "NIST2010");
 		
 		// Mohawk
-	    idMap.put("id", "994620-002229-1988L");
-	    idMap.put("idType", "W2012CATOID");
+	    //idMap.put("id", "994620-002229-1988L");
+	    //idMap.put("idType", "W2012CATOID");
 	    
 	    // Sysnet
-	    //idMap.put("id", "JEMBI-2");
-	    //idMap.put("idType", "NIST2010-2");
+	    //idMap.put("id", "IHEFACILITY-997");
+	    //idMap.put("idType", "IHEFACILITY");
+	    idMap.put("id", "IHEBLUE-997");
+	    idMap.put("idType", "IHEBLUE");
 	    
 	    // Nexj
 	    //idMap.put("id", "IHEFACILITY-996");
@@ -69,7 +71,7 @@ public class mediationGetecidDenormalizationPixTest_wATNA extends
 	    assertNotNull(result.getPayload());
 	    
 	    // Mohawk
-	    assertEquals("756", result.getPayloadAsString());
+	    //assertEquals("756", result.getPayloadAsString());
 	    // Sysnet
 	    //assertEquals("JEMBI-1", result.getPayloadAsString());
 	    // Nexj

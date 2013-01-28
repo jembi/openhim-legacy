@@ -54,6 +54,10 @@ public class mediationGetecidDenormalizationPixTest extends
 	    // Sysnet
 	    //idMap.put("id", "JEMBI-2");
 	    //idMap.put("idType", "NIST2010-2");
+	    //idMap.put("id", "IHEBLUE-997");
+	    //idMap.put("idType", "IHEBLUE");
+	    idMap.put("id", "IHEFACILITY-997");
+	    idMap.put("idType", "IHEFACILITY");
 	    
 	    // Nexj
 	    //idMap.put("id", "IHEFACILITY-996");
@@ -64,8 +68,8 @@ public class mediationGetecidDenormalizationPixTest extends
 	    //idMap.put("idType", "IHEFACILITY");
 	    
 	    // OpenEMPI - cr.jembi.org
-	    idMap.put("id", "123456789");
-	    idMap.put("idType", "NID");
+	    //idMap.put("id", "123456789");
+	    //idMap.put("idType", "NID");
 	    
 	    Map<String, Object> properties = null;
 	    MuleMessage result = client.send("vm://getecid-pix", idMap, properties);
