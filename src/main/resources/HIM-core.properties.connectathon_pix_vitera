@@ -91,9 +91,9 @@ rapidsms.alerts.enabled=true
 
 # == PIX Manager ==
 # Sysnet Connectathon
-pix.manager.host=10.242.20.18
+pix.manager.host=10.242.23.11
 pix.manager.port=3600
-pix.manager.securePort=3600
+pix.manager.securePort=3610
 pix.assigningAuthorityId=1.3.6.1.4.1.21367.3000.1.6
 #pix.requestedAssigningAuthority=IHEBLUE
 #pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.3000
@@ -101,5 +101,5 @@ pix.requestedAssigningAuthority=
 pix.requestedAssigningAuthorityId=
 pix.sendingApplication=openhim
 pix.sendingFacility=RHEA-HIE
-pix.receivingApplication=OPENEMPI_XREF
-pix.receivingFacility=SYSNET
+pix.receivingApplication=PIX_MGR_VITERA
+pix.receivingFacility=VITERA
