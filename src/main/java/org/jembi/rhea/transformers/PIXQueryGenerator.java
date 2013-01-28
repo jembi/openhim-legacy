@@ -90,10 +90,12 @@ public class PIXQueryGenerator  extends AbstractMessageTransformer {
 		t.set("QPD-3-4-3", "ISO");
 		t.set("QPD-3-5", "PI");
 		
-		t.set("QPD-4-4", requestedAssigningAuthority);
-		t.set("QPD-4-4-2", requestedAssigningAuthorityId);
-		t.set("QPD-4-4-3", "ISO");
-		t.set("QPD-4-5", "PI");
+		if (requestedAssigningAuthority!=null && !requestedAssigningAuthority.isEmpty()) {
+			t.set("QPD-4-4", requestedAssigningAuthority);
+			t.set("QPD-4-4-2", requestedAssigningAuthorityId);
+			t.set("QPD-4-4-3", "ISO");
+			t.set("QPD-4-5", "PI");
+		}
 		
 		t.set("RCP-1", "I");
 		
