@@ -49,9 +49,9 @@ rapidsms.port=8004
 rapidsm.auth=Basic cmhlYTpyaGVh
 
 # == ATNA ==
-# OTHER_ECW
-atna.host=10.242.17.24
-atna.tlsPort=6514
+# IHE syslog collector
+atna.host=10.242.27.17
+atna.tlsPort=3201
 atna.keystore=ihe/na/keystore.jks
 atna.keypassword=Jembi#123
 atna.storepassword=Jembi#123
@@ -79,7 +79,7 @@ xds.repository.host=10.242.29.16
 xds.repository.port=7001
 xds.repository.securePort=7002
 xds.repository.path=htb/xdsrepositoryb_Soap12
-xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.92
+xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.91
 
 #Enable the RapidSMS-Alerts service for save-encounter
 #Currently this feature will be enabled regardless of this setting
@@ -92,8 +92,8 @@ pix.manager.host=
 pix.manager.port=
 pix.manager.securePort=
 pix.assigningAuthorityId=1.3.6.1.4.1.21367.3000.1.6
-pix.requestedAssigningAuthority=IHERED
-pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.1000
+pix.requestedAssigningAuthority=IHEBLUE
+pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.3000
 pix.sendingApplication=openhim
 pix.sendingFacility=RHEA-HIE
 pix.receivingApplication=

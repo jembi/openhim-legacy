@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:https="http://www.mulesoft.org/schema/mule/https" xmlns:context="http://www.springframework.org/schema/context" xmlns:wsa="http://cxf.apache.org/ws/addressing" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="CE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+<mule xmlns:https="http://www.mulesoft.org/schema/mule/https" xmlns:context="http://www.springframework.org/schema/context" xmlns:wsa="http://cxf.apache.org/ws/addressing" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="EE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
 http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd 
@@ -48,12 +48,12 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
         <logger message="Raw SOAP message: #[message:payload]" level="INFO" doc:name="Logger"/>
         <choice doc:name="Choice">
             <when expression="#[groovy: return ${ihe.secure};]">
-                <processor-chain>
-                    <https:outbound-endpoint exchange-pattern="request-response" host="${xds.repository.host}" port="${xds.repository.securePort}" path="${xds.repository.path}" doc:name="HTTPS" connector-ref="HTTP_HTTPS"/>
+                <processor-chain doc:name="Processor Chain">
+                    <https:outbound-endpoint exchange-pattern="request-response" host="${xds.repository.host}" port="${xds.repository.securePort}" path="${xds.repository.path}" doc:name="HTTPS" connector-ref="HTTP_HTTPS" responseTimeout="30000"/>
                 </processor-chain>
             </when>
             <otherwise>
-                <processor-chain>
+                <processor-chain doc:name="Processor Chain">
                     <http:outbound-endpoint exchange-pattern="request-response" host="${xds.repository.host}" port="${xds.repository.port}" path="${xds.repository.path}" doc:name="HTTP"/>
                 </processor-chain>
             </otherwise>

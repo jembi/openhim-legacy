@@ -68,6 +68,9 @@ public class mediationDenormalizationQueryEncountersXDS_BTest extends
 	    //		multiple repo response
 	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-0118jembi/encounters?id=0118jembi1&idType=IHEBLUE");
 	    
+	    // Connectathon NIST RED
+	    payload.setPath("ws/rest/v1/patient/IHERED-RED5507/encounters?id=RED5507&idType=IHERED");
+	    
 	    MuleMessage result = client.send("vm://queryEncounters-De-normailization-XDS.b", payload, properties);
 	    
 	    assertNotNull(result.getPayload());

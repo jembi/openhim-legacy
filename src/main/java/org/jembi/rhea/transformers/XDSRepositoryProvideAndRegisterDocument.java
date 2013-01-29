@@ -151,7 +151,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		
 		// To add external ids
 		document.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSDocumentEntry_PatientId, enc.getPID()));
-		String docUniqueId = String.format("%s.%s", systemSourceID, new SimpleDateFormat("yyyy.MM.dd.ss.SSS").format(now));
+		String docUniqueId = String.format("%s.%s.%s", systemSourceID, "1", new SimpleDateFormat("yyyy.MM.dd.ss.SSS").format(now));
 		document.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSDocumentEntry_UniqueId, docUniqueId));
 
 		// Add to list of objects
@@ -195,7 +195,7 @@ public class XDSRepositoryProvideAndRegisterDocument extends
 		
 		// To add external ids
 		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_PatientId, enc.getPID()));
-		_uniqueId = String.format("%s.%s", systemSourceID, new SimpleDateFormat("yyyy.MM.dd.ss.SSS").format(now));
+		_uniqueId = String.format("%s.%s.%s", systemSourceID, "2", new SimpleDateFormat("yyyy.MM.dd.ss.SSS").format(now));
 		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_UniqueId, _uniqueId));
 		pkg.getExternalIdentifier().add(XDSUtil.createExternalIdentifier(document, XdsGuidType.XDSSubmissionSet_SourceId, systemSourceID));
 

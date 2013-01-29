@@ -49,7 +49,7 @@ public class mediationSaveencounterDenormalizationXDSTest_wATNA extends
 	    payload.setHttpMethod(RestfulHttpRequest.HTTP_POST);
 	    
 	    // Mohawk
-	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
+	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
 	    //TODO hardcoded for nist testing [modify for use here]
     	//return "55f81316303842c^^^&1.3.6.1.4.1.21367.2009.1.2.300&ISO";
@@ -59,8 +59,12 @@ public class mediationSaveencounterDenormalizationXDSTest_wATNA extends
 	    
 	    // Vitera
 	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-0118jembi/encounters?id=0118jembi&idType=IHEBLUE");
+	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-BLUE5507/encounters?id=BLUE5507&idType=IHEBLUE");
 	    
-	    String oru_r01 = TestUtil.getResourceAsString("oru_r01.xml");
+	    // Connectathon - Session 1
+	    payload.setPath("ws/rest/v1/patient/IHEBLUE-IHEBLUE-1338/encounters?id=IHEBLUE-1338&idType=IHEBLUE");
+	    
+	    String oru_r01 = TestUtil.getResourceAsString("oru_r01_connectathon.xml");
 	    payload.setBody(oru_r01);
 	    
 	    Map<String, Object> properties = null;
