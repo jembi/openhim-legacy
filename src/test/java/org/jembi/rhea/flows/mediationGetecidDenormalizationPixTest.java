@@ -54,6 +54,10 @@ public class mediationGetecidDenormalizationPixTest extends
 	    // Sysnet
 	    //idMap.put("id", "JEMBI-2");
 	    //idMap.put("idType", "NIST2010-2");
+	    //idMap.put("id", "IHEBLUE-997");
+	    //idMap.put("idType", "IHEBLUE");
+	    idMap.put("id", "IHEFACILITY-997");
+	    idMap.put("idType", "IHEFACILITY");
 	    
 	    // Nexj
 	    //idMap.put("id", "IHEFACILITY-996");
