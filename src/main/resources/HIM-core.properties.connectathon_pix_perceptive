@@ -9,12 +9,12 @@ cert.keystore=keystore.jks
 cert.keypassword=Jembi#123
 cert.storepassword=Jembi#123
 
-
 ldap.url=ldap://localhost:389/dc=moh,dc=gov,dc=rw
 ldap.admin.userdn=cn=admin,dc=moh,dc=gov,dc=rw
 ldap.admin.password=Jembi#123
 
 # == Client Registry ==
+#openempi.sessionkey=1ADF165CA416EB900E58B9125AA8ED02
 # Mock
 cr.host=localhost
 cr.port=8002
@@ -49,9 +49,9 @@ rapidsms.port=8004
 rapidsm.auth=Basic cmhlYTpyaGVh
 
 # == ATNA ==
-# NexJ syslog collector
-atna.host=10.242.33.27
-atna.tlsPort=30001
+# IHE syslog collector
+atna.host=10.242.27.17
+atna.tlsPort=3201
 atna.keystore=ihe/na/keystore.jks
 atna.keypassword=Jembi#123
 atna.storepassword=Jembi#123
@@ -62,26 +62,27 @@ ihe.keypassword=Jembi#123
 ihe.storepassword=Jembi#123
 # The OID that uniquely identifies this system
 ihe.systemSourceID=1.3.6.1.4.1.21367.13.60.89
-ihe.secure=true
+ihe.secure=false
 ihe.enablePIX=true
 ihe.enableXDS=true
 
 # == IHE XDS Registry ==
-# OTHER_CERNER_2013
-xds.registry.host=10.242.17.29
-xds.registry.port=1012
-xds.registry.securePort=2012
-xds.registry.path=ihe/services/xdsregistryb
+# NIST
+xds.registry.host=ihexds.nist.gov
+xds.registry.port=12080
+xds.registry.securePort=12081
+xds.registry.path=tf6/services/xdsregistryb
+# for XCA
+#xds.registry.path=tf6/services/xcaregistry
 
 # == IHE XDS Repository ==
-# GATEWAY_SIEMENS_0
-xds.repository.host=10.242.34.21
-xds.repository.port=80
-xds.repository.securePort=443
-xds.repository.path=RepositorySSL/Repository.svc
-# non-secure
-#xds.repository.path=Repository/Repository.svc
-xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.78
+# NIST
+xds.repository.host=ihexds.nist.gov
+xds.repository.port=12080
+xds.repository.securePort=12081
+xds.repository.path=tf6/services/xdsrepositoryb
+# for XCA
+#xds.repository.path=tf6/services/xcarepository
 
 #Enable the RapidSMS-Alerts service for save-encounter
 #Currently this feature will be enabled regardless of this setting
@@ -89,14 +90,16 @@ xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.78
 rapidsms.alerts.enabled=true
 
 # == PIX Manager ==
-# ??
-pix.manager.host=
-pix.manager.port=
-pix.manager.securePort=
+# Sysnet Connectathon
+pix.manager.host=10.242.20.18
+pix.manager.port=3600
+pix.manager.securePort=3600
 pix.assigningAuthorityId=1.3.6.1.4.1.21367.3000.1.6
-pix.requestedAssigningAuthority=IHERED
-pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.1000
+#pix.requestedAssigningAuthority=IHEBLUE
+#pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.3000
+pix.requestedAssigningAuthority=
+pix.requestedAssigningAuthorityId=
 pix.sendingApplication=openhim
 pix.sendingFacility=RHEA-HIE
-pix.receivingApplication=
-pix.receivingFacility=
+pix.receivingApplication=OPENEMPI_XREF
+pix.receivingFacility=SYSNET

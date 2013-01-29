@@ -49,9 +49,9 @@ rapidsms.port=8004
 rapidsm.auth=Basic cmhlYTpyaGVh
 
 # == ATNA ==
-# IHE syslog collector
-atna.host=10.242.27.17
-atna.tlsPort=3201
+# NexJ syslog collector
+atna.host=10.242.33.27
+atna.tlsPort=30001
 atna.keystore=ihe/na/keystore.jks
 atna.keypassword=Jembi#123
 atna.storepassword=Jembi#123
