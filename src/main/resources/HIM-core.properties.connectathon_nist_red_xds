@@ -68,19 +68,17 @@ ihe.enableXDS=true
 
 # == IHE XDS Registry ==
 # NIST BLUE
-xds.registry.host=10.242.27.14
+xds.registry.host=nistred.ihe-us-test.net
 xds.registry.port=80
 xds.registry.securePort=9080
 xds.registry.path=tf6/services/xdsregistryb
 
 # == IHE XDS Repository ==
 # NIST BLUE
-xds.repository.host=10.242.27.14
+xds.repository.host=nistred.ihe-us-test.net
 xds.repository.port=80
 xds.repository.securePort=9080
 xds.repository.path=tf6/services/xdsrepositoryb
-# non-secure
-#xds.repository.path=Repository/Repository.svc
 xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.78
 
 #Enable the RapidSMS-Alerts service for save-encounter
@@ -94,8 +92,8 @@ pix.manager.host=
 pix.manager.port=
 pix.manager.securePort=
 pix.assigningAuthorityId=1.3.6.1.4.1.21367.3000.1.6
-pix.requestedAssigningAuthority=IHEBLUE
-pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.3000
+pix.requestedAssigningAuthority=IHERED
+pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.1000
 pix.sendingApplication=openhim
 pix.sendingFacility=RHEA-HIE
 pix.receivingApplication=
