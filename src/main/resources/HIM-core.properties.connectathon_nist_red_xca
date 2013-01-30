@@ -71,15 +71,15 @@ ihe.enableXDS=true
 xds.registry.host=nistred.ihe-us-test.net
 xds.registry.port=9080
 xds.registry.securePort=9081
-xds.registry.path=tf6/services/xdsregistryb
+xds.registry.path=tf6/services/xcaregistry
 
 # == IHE XDS Repository ==
 # NIST RED
 xds.repository.host=nistred.ihe-us-test.net
 xds.repository.port=9080
 xds.repository.securePort=9081
-xds.repository.path=tf6/services/xdsrepositoryb
-xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.78
+xds.repository.path=tf6/services/xcarepository
+xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.112
 
 #Enable the RapidSMS-Alerts service for save-encounter
 #Currently this feature will be enabled regardless of this setting

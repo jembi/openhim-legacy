@@ -9,12 +9,12 @@ cert.keystore=keystore.jks
 cert.keypassword=Jembi#123
 cert.storepassword=Jembi#123
 
-
 ldap.url=ldap://localhost:389/dc=moh,dc=gov,dc=rw
 ldap.admin.userdn=cn=admin,dc=moh,dc=gov,dc=rw
 ldap.admin.password=Jembi#123
 
 # == Client Registry ==
+#openempi.sessionkey=1ADF165CA416EB900E58B9125AA8ED02
 # Mock
 cr.host=localhost
 cr.port=8002
@@ -49,9 +49,9 @@ rapidsms.port=8004
 rapidsm.auth=Basic cmhlYTpyaGVh
 
 # == ATNA ==
-# OTHER_ECW
-atna.host=10.242.17.24
-atna.tlsPort=6514
+# NexJ syslog collector
+atna.host=10.242.33.27
+atna.tlsPort=30001
 atna.keystore=ihe/na/keystore.jks
 atna.keypassword=Jembi#123
 atna.storepassword=Jembi#123
@@ -67,19 +67,19 @@ ihe.enablePIX=true
 ihe.enableXDS=true
 
 # == IHE XDS Registry ==
-# NIST RED
-xds.registry.host=nistred.ihe-us-test.net
-xds.registry.port=9080
-xds.registry.securePort=9081
-xds.registry.path=tf6/services/xdsregistryb
+# Acuo
+xds.registry.host=10.242.20.16
+xds.registry.port=17037
+xds.registry.securePort=17036
+xds.registry.path=XDS/Registry
 
 # == IHE XDS Repository ==
-# NIST RED
-xds.repository.host=nistred.ihe-us-test.net
-xds.repository.port=9080
-xds.repository.securePort=9081
-xds.repository.path=tf6/services/xdsrepositoryb
-xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.78
+# Leafsprout
+xds.repository.host=10.242.22.13
+xds.repository.port=80
+xds.repository.securePort=443
+xds.repository.path=docVaultS/Repository.svc
+xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.86
 
 #Enable the RapidSMS-Alerts service for save-encounter
 #Currently this feature will be enabled regardless of this setting
@@ -87,14 +87,17 @@ xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.78
 rapidsms.alerts.enabled=true
 
 # == PIX Manager ==
-# ??
-pix.manager.host=
-pix.manager.port=
-pix.manager.securePort=
+# Leafsprout Connectathon
+pix.manager.host=10.242.22.12
+pix.manager.port=7220
+pix.manager.securePort=7221
 pix.assigningAuthorityId=1.3.6.1.4.1.21367.3000.1.6
-pix.requestedAssigningAuthority=IHERED
-pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.1000
+#pix.assigningAuthorityId=1.3.6.1.4.1.21367.13.20.3000
+pix.requestedAssigningAuthority=IHEGREEN
+pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.2000
+#pix.requestedAssigningAuthority=
+#pix.requestedAssigningAuthorityId=
 pix.sendingApplication=openhim
 pix.sendingFacility=RHEA-HIE
-pix.receivingApplication=
-pix.receivingFacility=
+pix.receivingApplication=OTHER_LEAFSPROUT_DHS
+pix.receivingFacility=LEAFSPROUT

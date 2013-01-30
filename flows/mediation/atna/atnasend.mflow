@@ -55,7 +55,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="atnasendFlow1" entity-id="a7346c02-29b9-4f60-baf6-816638632ced">
+    <flow SubFlow="false" name="atnasendFlow1" entity-id="117ea02e-8da4-4248-8757-a5b2210d64f6">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -95,6 +95,15 @@
                     <property name="auxiliary;index" value="5"/>
                 </properties>
             </endpoint>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="a5f2e503-8cd0-4d63-bb64-807beaab84a6">
+                <properties>
+                    <property name="message" value="The ATNA message logged: #[groovy: message.getPayloadAsString();]"/>
+                    <property name="category" value=""/>
+                    <property name="level" value="INFO"/>
+                    <property name="updated"/>
+                </properties>
+                <description></description>
+            </pattern>
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="SSL (TLS)" type="http://www.mulesoft.org/schema/mule/tls/endpoint" entity-id="TLS#1">
                 <properties>
                     <property name="exchange-pattern" value="one-way"/>
