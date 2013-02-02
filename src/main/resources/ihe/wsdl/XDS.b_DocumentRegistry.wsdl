@@ -78,10 +78,10 @@
 	</binding>
 	<service name="DocumentRegistry_Service">
 		<port name="DocumentRegistry_Port_Soap11" binding="ihe:DocumentRegistry_Binding_Soap11">
-			<soap:address location="http://xds.marc-hi.ca:1025/xdsservice/xdsregistry"/>
+			<soap:address location="https://leafsprout4:443/docRegistryS/Registry.svc"/>
 		</port>
 		<port name="DocumentRegistry_Port_Soap12" binding="ihe:DocumentRegistry_Binding_Soap12">
-			<soap12:address location="http://xds.marc-hi.ca:1025/xdsservice/xdsregistry"/>
+			<soap12:address location="https://leafsprout4:443/docRegistryS/Registry.svc  "/>
 		</port>
 	</service>
 </definitions>
