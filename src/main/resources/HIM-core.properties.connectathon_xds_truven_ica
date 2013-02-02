@@ -73,19 +73,19 @@ ihe.enablePIX=true
 ihe.enableXDS=true
 
 # == IHE XDS Registry ==
-# LeafSprout
-xds.registry.host=leafsprout4
-xds.registry.port=80
-xds.registry.securePort=443
-xds.registry.path=docRegistryS/Registry.svc
+# ICA
+xds.registry.host=ica1.ihe-us-test.net
+xds.registry.port=10999
+xds.registry.securePort=999
+xds.registry.path=na2013/registry 
 
 # == IHE XDS Repository ==
-# Nexgen
-xds.repository.host=nextgen5
+# Truven
+xds.repository.host=truven0
 xds.repository.port=80
-xds.repository.securePort=443
-xds.repository.path=Repository/DocumentRepositorySecure.svc
-xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.90
+xds.repository.securePort=12081
+xds.repository.path=Connectathon/Adapter1/XdsRepositoryService/XdsRepositoryService
+xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.94
 
 #Enable the RapidSMS-Alerts service for save-encounter
 #Currently this feature will be enabled regardless of this setting
@@ -99,8 +99,8 @@ pix.manager.port=7220
 pix.manager.securePort=7221
 pix.assigningAuthorityId=1.3.6.1.4.1.21367.3000.1.6
 #pix.assigningAuthorityId=1.3.6.1.4.1.21367.13.20.3000
-pix.requestedAssigningAuthority=IHEBLUE
-pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.3000
+pix.requestedAssigningAuthority=IHERED
+pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.1000
 #pix.requestedAssigningAuthority=
 #pix.requestedAssigningAuthorityId=
 pix.sendingApplication=openhim

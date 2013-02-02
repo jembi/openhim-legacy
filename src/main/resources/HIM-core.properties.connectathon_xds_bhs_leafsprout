@@ -80,12 +80,12 @@ xds.registry.securePort=443
 xds.registry.path=docRegistryS/Registry.svc
 
 # == IHE XDS Repository ==
-# Nexgen
-xds.repository.host=nextgen5
-xds.repository.port=80
-xds.repository.securePort=443
-xds.repository.path=Repository/DocumentRepositorySecure.svc
-xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.90
+# BHS
+xds.repository.host=bhs3
+xds.repository.port=8088
+xds.repository.securePort=9099
+xds.repository.path=xdsrepository
+xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.65
 
 #Enable the RapidSMS-Alerts service for save-encounter
 #Currently this feature will be enabled regardless of this setting

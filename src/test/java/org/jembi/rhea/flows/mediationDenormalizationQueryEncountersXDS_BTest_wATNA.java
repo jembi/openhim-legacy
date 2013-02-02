@@ -65,7 +65,8 @@ public class mediationDenormalizationQueryEncountersXDS_BTest_wATNA extends
 	    //payload.setPath("ws/rest/v1/patient/IHERED-992/encounters?id=IHERED-992&idType=IHERED");
 	    
 	    // Connectathon tuesday morning
-	    payload.setPath("ws/rest/v1/patient/IHEBLUE-IHEBLUE-1338/encounters?id=IHEBLUE-1338&idType=IHEBLUE");
+	    payload.setPath("ws/rest/v1/patient/IHEBLUE-IHEBLUE-1354/encounters?id=IHEBLUE-1354&idType=IHEBLUE");
+	    //payload.setPath("ws/rest/v1/patient/IHEGREEN-IHEGREEN-1338/encounters?id=IHEGREEN-1338&idType=IHEGREEN");
 	    
 	    MuleMessage result = client.send("vm://queryEncounters-De-normailization-XDS.b", payload, properties);
 	    

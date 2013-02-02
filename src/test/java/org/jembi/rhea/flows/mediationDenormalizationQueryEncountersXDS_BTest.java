@@ -57,7 +57,7 @@ public class mediationDenormalizationQueryEncountersXDS_BTest extends
 	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
 	    // Nexj
-	    payload.setPath("ws/rest/v1/patient/IHERED-995/encounters?id=IHERED-995&idType=IHERED");
+	    //payload.setPath("ws/rest/v1/patient/IHERED-995/encounters?id=IHERED-995&idType=IHERED");
 	    //payload.setPath("ws/rest/v1/patient/IHERED-994/encounters?id=IHERED-994&idType=IHERED");
 	    //payload.setPath("ws/rest/v1/patient/IHERED-993/encounters?id=IHERED-993&idType=IHERED");
 	    //payload.setPath("ws/rest/v1/patient/IHERED-992/encounters?id=IHERED-992&idType=IHERED");
@@ -69,7 +69,15 @@ public class mediationDenormalizationQueryEncountersXDS_BTest extends
 	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-0118jembi/encounters?id=0118jembi1&idType=IHEBLUE");
 	    
 	    // Connectathon NIST RED
-	    payload.setPath("ws/rest/v1/patient/IHERED-RED5507/encounters?id=RED5507&idType=IHERED");
+	    //payload.setPath("ws/rest/v1/patient/IHERED-RED5507/encounters?id=RED5507&idType=IHERED");
+	    //payload.setPath("ws/rest/v1/patient/IHERED-IHERED-1336/encounters?id=IHERED-1336&idType=IHERED");
+	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-IHEBLUE-1338/encounters?id=IHEBLUE-1338&idType=IHEBLUE");
+	    
+	    // XCA
+	    //payload.setPath("ws/rest/v1/patient/IHERED-69c6d1fe1f874af/encounters?id=69c6d1fe1f874af&idType=IHERED");
+	    
+	    // HIMMS
+	    payload.setPath("ws/rest/v1/patient/ECID-dc8d2234-7fce-4869-945e-97c8b7d97332/encounters");
 	    
 	    MuleMessage result = client.send("vm://queryEncounters-De-normailization-XDS.b", payload, properties);
 	    

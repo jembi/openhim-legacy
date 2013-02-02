@@ -13,7 +13,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthority}"/>
         </custom-transformer>
         <response>
-            <logger message="Responce orchestration" level="INFO" doc:name="Logger"/>
+            <logger message="Query encounters responce orchestration" level="INFO" doc:name="Logger"/>
             <choice doc:name="Choice">
                 <when expression="message.payload.httpStatus == 200" evaluator="groovy">
                     <processor-chain doc:name="Processor Chain">

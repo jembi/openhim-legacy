@@ -62,23 +62,23 @@ ihe.storepassword=Jembi#123
 # The OID that uniquely identifies this system
 ihe.systemSourceID=1.3.6.1.4.1.21367.2010.1.2
 ihe.secure=false
-ihe.enablePIX=false
+ihe.enablePIX=true
 ihe.enableXDS=true
 
 # == IHE XDS Registry ==
 # OpenXDS - openhie.regenstrief.org
-xds.registry.host=134.68.31.191
+xds.registry.host=134.68.31.192
 xds.registry.port=8010
 xds.registry.securePort=8010
 xds.registry.path=axis2/services/xdsregistryb
 
 # == IHE XDS Repository ==
 # OpenXDS
-xds.repository.host=134.68.31.191
+xds.repository.host=134.68.31.192
 xds.repository.port=8020
 xds.repository.securePort=8020
 xds.repository.path=axis2/services/xdsrepositoryb
-xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.102
+xds.repository.UniqueId=1.3.6.1.4.1.21367.2010.1.2.1125
 
 #Enable the RapidSMS-Alerts service for save-encounter
 #Currently this feature will be enabled regardless of this setting
@@ -86,13 +86,14 @@ xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.102
 rapidsms.alerts.enabled=true
 
 # == PIX Manager ==
-# OpenEMPI - RHEA EC2 - cr.jembi.org
-pix.manager.host=50.19.146.97
+# OpenEMPI
+#pix.manager.host=50.19.146.97
+pix.manager.host=10.242.22.155
 pix.manager.port=3600
 pix.manager.securePort=3600
-pix.assigningAuthorityId=
+pix.assigningAuthorityId=NID
 pix.requestedAssigningAuthority=ECID
-pix.requestedAssigningAuthorityId=ECID
+pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.60.89.2.3.14.15
 pix.sendingApplication=openhim
 pix.sendingFacility=RHEA-HIE
 pix.receivingApplication=

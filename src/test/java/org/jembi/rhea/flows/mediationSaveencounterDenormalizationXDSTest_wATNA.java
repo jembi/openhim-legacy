@@ -62,7 +62,12 @@ public class mediationSaveencounterDenormalizationXDSTest_wATNA extends
 	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-BLUE5507/encounters?id=BLUE5507&idType=IHEBLUE");
 	    
 	    // Connectathon - Session 1
-	    payload.setPath("ws/rest/v1/patient/IHEBLUE-IHEBLUE-1338/encounters?id=IHEBLUE-1338&idType=IHEBLUE");
+	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-IHEBLUE-1338/encounters?id=IHEBLUE-1338&idType=IHEBLUE");
+	    //payload.setPath("ws/rest/v1/patient/IHEGREEN-IHEGREEN-9999/encounters?id=IHEGREEN-9999&idType=IHEGREEN");
+	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-IHEBLUE-1354/encounters?id=IHEBLUE-1354&idType=IHEBLUE");
+	    
+	    //ECID
+	    payload.setPath("ws/rest/v1/patient/ECID-dc8d2234-7fce-4869-945e-97c8b7d97332/encounters?id=dc8d2234-7fce-4869-945e-97c8b7d97332&idType=ECID");
 	    
 	    String oru_r01 = TestUtil.getResourceAsString("oru_r01_connectathon.xml");
 	    payload.setBody(oru_r01);
