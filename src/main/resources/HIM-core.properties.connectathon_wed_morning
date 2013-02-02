@@ -49,8 +49,8 @@ rapidsms.port=8004
 rapidsm.auth=Basic cmhlYTpyaGVh
 
 # == ATNA ==
-# Connectathon Wed. morning - PACS_Tiani - Cisco_0
-atna.host=10.242.26.23
+# Connectathon Wed. morning - EHR_Tiani - Cisco_0
+atna.host=10.242.26.15
 atna.tlsPort=6514
 atna.keystore=ihe/na/keystore.jks
 atna.keypassword=Jembi#123
@@ -62,7 +62,7 @@ ihe.keypassword=Jembi#123
 ihe.storepassword=Jembi#123
 # The OID that uniquely identifies this system
 ihe.systemSourceID=1.3.6.1.4.1.21367.13.60.89
-ihe.secure=false
+ihe.secure=true
 ihe.enablePIX=true
 ihe.enableXDS=true
 
@@ -81,7 +81,7 @@ xds.repository.host=10.242.35.11
 xds.repository.port=8080
 xds.repository.securePort=8181
 xds.repository.path=csp/connect/HS.IHE.XDSb.Repository.Services.cls
-xds.repository.UniqueId=
+xds.repository.UniqueId=1.3.6.1.4.1.21367.13.40.76
 
 #Enable the RapidSMS-Alerts service for save-encounter
 #Currently this feature will be enabled regardless of this setting
@@ -94,8 +94,8 @@ pix.manager.host=
 pix.manager.port=
 pix.manager.securePort=
 pix.assigningAuthorityId=1.3.6.1.4.1.21367.3000.1.6
-pix.requestedAssigningAuthority=IHERED
-pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.1000
+pix.requestedAssigningAuthority=IHEBLUE
+pix.requestedAssigningAuthorityId=1.3.6.1.4.1.21367.13.20.3000
 pix.sendingApplication=openhim
 pix.sendingFacility=RHEA-HIE
 pix.receivingApplication=

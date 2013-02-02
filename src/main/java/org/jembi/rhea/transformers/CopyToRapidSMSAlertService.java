@@ -15,7 +15,8 @@ public class CopyToRapidSMSAlertService extends AbstractTransformer {
 		try {
 			if (src instanceof RestfulHttpRequest) {
 				MuleClient client = new MuleClient(muleContext);
-				MuleMessage result = client.send("vm://saveEncounters-De-normailization-OpenMRSSHR", ((RestfulHttpRequest)src).clone(), null);
+				//MuleMessage result = client.send("vm://saveEncounters-De-normailization-OpenMRSSHR", ((RestfulHttpRequest)src).clone(), null);
+				MuleMessage result = client.send("vm://saveEncounters-rapidSMSAlertsService", ((RestfulHttpRequest)src).clone(), null);
 				//ignore result
 			}
 		} catch (MuleException e) {
