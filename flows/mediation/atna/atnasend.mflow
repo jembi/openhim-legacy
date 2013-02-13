@@ -55,7 +55,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="atnasendFlow1" entity-id="117ea02e-8da4-4248-8757-a5b2210d64f6">
+    <flow SubFlow="false" name="atnasendFlow1" entity-id="8af4f514-bf9c-4cf6-9c9f-65d6fe09f221">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -95,95 +95,145 @@
                     <property name="auxiliary;index" value="5"/>
                 </properties>
             </endpoint>
-            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="a5f2e503-8cd0-4d63-bb64-807beaab84a6">
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
                 <properties>
                     <property name="message" value="The ATNA message logged: #[groovy: message.getPayloadAsString();]"/>
-                    <property name="category" value=""/>
                     <property name="level" value="INFO"/>
-                    <property name="updated"/>
+                    <property name="category"/>
+                    <property name="auxiliary;index" value="6"/>
+                    <property name="auxiliary;index" value="6"/>
+                    <property name="auxiliary;index" value="6"/>
                 </properties>
-                <description></description>
             </pattern>
-            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="SSL (TLS)" type="http://www.mulesoft.org/schema/mule/tls/endpoint" entity-id="TLS#1">
+            <splitter index="7" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <properties>
-                    <property name="exchange-pattern" value="one-way"/>
-                    <property name="exchange-pattern"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/ssl/endpoint"/>
-                    <property name="exchange-pattern"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/ssl/endpoint"/>
-                    <property name="exchange-pattern"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/ssl/endpoint"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="host" value="${atna.host}"/>
-                    <property name="port" value="${atna.tlsPort}"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="tracking:enable-default-events"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="address"/>
-                    <property name="responseTimeout" value="10000"/>
-                    <property name="encoding"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="mimeType"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="connector-ref" value="SSL__TLS_"/>
-                    <property name="ref"/>
-                    <property name="transformer-refs"/>
-                    <property name="responseTransformer-refs"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="host" value="${atna.host}"/>
-                    <property name="port" value="${atna.tlsPort}"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="tracking:enable-default-events"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="address"/>
-                    <property name="responseTimeout" value="10000"/>
-                    <property name="encoding"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="mimeType"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="connector-ref" value="SSL__TLS_"/>
-                    <property name="ref"/>
-                    <property name="transformer-refs"/>
-                    <property name="responseTransformer-refs"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="host" value="${atna.host}"/>
-                    <property name="port" value="${atna.tlsPort}"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="tracking:enable-default-events"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="address"/>
-                    <property name="responseTimeout" value="10000"/>
-                    <property name="encoding"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="mimeType"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="connector-ref" value="SSL__TLS_"/>
-                    <property name="ref"/>
-                    <property name="transformer-refs"/>
-                    <property name="responseTransformer-refs"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="auxiliary;index" value="6"/>
+                    <property-collection name="33188040-b707-4e7a-999b-133921ef57f6">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                    <property-collection name="fe36db26-be6a-439e-9388-abcb86dc0a3f">
+                        <property name="choice.expression" value="#[groovy: return ${atna.useTls};]"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value="#[groovy: return ${atna.useTls};]"/>
+                        </property-collection>
+                    </property-collection>
                 </properties>
-            </endpoint>
+                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
+                <compartment entity-id="compartment#1">
+                    <lane hadOnlyOneElement="false" index="9" isChoiceOtherwiseLane="false" entity-id="fe36db26-be6a-439e-9388-abcb86dc0a3f">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="SSL (TLS)" type="http://www.mulesoft.org/schema/mule/tls/endpoint" entity-id="TLS#1">
+                            <properties>
+<property name="exchange-pattern" value="one-way"/>
+<property name="exchange-pattern"/>
+<property name="auxiliary;index" value="10"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/ssl/endpoint"/>
+<property name="exchange-pattern"/>
+<property name="auxiliary;index" value="10"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/ssl/endpoint"/>
+<property name="exchange-pattern"/>
+<property name="auxiliary;index" value="10"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/ssl/endpoint"/>
+<property name="auxiliary;index" value="10"/>
+<property name="host" value="${atna.host}"/>
+<property name="port" value="${atna.tlsPort}"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="businessEventsLabel"/>
+<property name="tracking:enable-default-events"/>
+<property name="auxiliary;index" value="10"/>
+<property name="address"/>
+<property name="responseTimeout" value="10000"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="connector-ref" value="SSL__TLS_"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="host" value="${atna.host}"/>
+<property name="port" value="${atna.tlsPort}"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="businessEventsLabel"/>
+<property name="tracking:enable-default-events"/>
+<property name="auxiliary;index" value="10"/>
+<property name="address"/>
+<property name="responseTimeout" value="10000"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="connector-ref" value="SSL__TLS_"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="host" value="${atna.host}"/>
+<property name="port" value="${atna.tlsPort}"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="businessEventsLabel"/>
+<property name="tracking:enable-default-events"/>
+<property name="auxiliary;index" value="10"/>
+<property name="address"/>
+<property name="responseTimeout" value="10000"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="connector-ref" value="SSL__TLS_"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="12" isChoiceOtherwiseLane="true" entity-id="33188040-b707-4e7a-999b-133921ef57f6">
+                        <endpoint direction="Outbound" message-exchange-pattern="RequestResponse" name="UDP" type="http://www.mulesoft.org/schema/mule/udp/endpoint" entity-id="UDP#1">
+                            <properties>
+<property name="exchange-pattern" value="request-response"/>
+<property name="exchange-pattern"/>
+<property name="auxiliary;index" value="13"/>
+<property name="host" value="${atna.host}"/>
+<property name="port" value="${atna.udpPort}"/>
+<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="13"/>
+<property name="businessEventsLabel"/>
+<property name="tracking:enable-default-events"/>
+<property name="auxiliary;index" value="13"/>
+<property name="address"/>
+<property name="responseTimeout" value="10000"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="13"/>
+<property name="connector-ref"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="13"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                </compartment>
+            </splitter>
         </lane>
     </flow>
     <description>Wait for ATNA audit messages arriving on a queue, and send them out to an ATNA server.</description>
