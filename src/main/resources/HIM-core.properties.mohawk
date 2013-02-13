@@ -51,13 +51,17 @@ rapidsm.auth=Basic cmhlYTpyaGVh
 # == ATNA ==
 # Jembi test server
 #atna.host=192.168.1.101
+#atna.useTls=true
 #atna.tlsPort=2862
+#atna.udpPort=2863
 #atna.keystore=OpenATNA-clientKeyStore-jembi.jks
 #atna.keypassword=password
 #atna.storepassword=password
 # IHE syslog collector
 atna.host=gazelle-gold.wustl.edu
+atna.useTls=true
 atna.tlsPort=3201
+atna.udpPort=2863
 atna.keystore=ihe/na/keystore.jks
 atna.keypassword=Jembi#123
 atna.storepassword=Jembi#123
