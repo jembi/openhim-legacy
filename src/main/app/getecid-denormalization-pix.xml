@@ -21,6 +21,7 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
     <flow name="mediation-getecid-denormalization-pix" doc:name="mediation-getecid-denormalization-pix">
         <vm:inbound-endpoint exchange-pattern="request-response" path="getecid-pix" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
         <logger message="In getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
+        <component class="org.jembi.rhea.orchestration.ATNADispatchAuditMessage" doc:name="Send Mohawk Visualizer Message"/>
         <custom-transformer class="org.jembi.rhea.transformers.PIXQueryGenerator" doc:name="Generate PIX Query">
             <spring:property name="assigningAuthorityId" value="${pix.assigningAuthorityId}"/>
             <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthority}"/>
@@ -58,6 +59,7 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
                 </otherwise>
             </choice>
             <logger message="Exitting getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
+            <component class="org.jembi.rhea.orchestration.ATNADispatchAuditMessage" doc:name="Send Mohawk Visualizer Message"/>
         </response>
         <choice doc:name="Choice">
             <when expression="#[groovy: return ${ihe.secure};]">

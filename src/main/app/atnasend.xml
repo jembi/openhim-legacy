@@ -17,13 +17,13 @@ http://www.mulesoft.org/schema/mule/tcp http://www.mulesoft.org/schema/mule/tcp/
         <logger message="The ATNA message logged: #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
         <choice doc:name="Choice">
             <when expression="#[groovy: return ${atna.useTls};]">
-                <processor-chain doc:name="Processor Chain">
+                <processor-chain >
 			        <ssl:outbound-endpoint host="${atna.host}" port="${atna.tlsPort}" responseTimeout="10000" connector-ref="SSL__TLS_" doc:name="SSL (TLS)"/>
 			    </processor-chain>
 			</when>
 			<otherwise>
-                <processor-chain doc:name="Processor Chain">
-        			<udp:outbound-endpoint host="${atna.host}" port="${atna.udpPort}" responseTimeout="10000" doc:name="UDP"/>
+                <processor-chain >
+        			<udp:outbound-endpoint host="${atna.host}" port="${atna.udpPort}" responseTimeout="10000" doc:name="UDP" />
 			    </processor-chain>
 			</otherwise>
 		</choice>

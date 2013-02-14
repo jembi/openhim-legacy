@@ -38,6 +38,7 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
             <logger message="Response: #[message:payload]" level="INFO" doc:name="Logger"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="On-ramp Transformer"/>
             <custom-transformer class="org.jembi.heal.DoNothingTransformer" doc:name="Translation Transformer"/>
+            <component class="org.jembi.rhea.orchestration.ATNADispatchAuditMessage" doc:name="Send Mohawk Visualizer Message"/>
         </response>
         <cxf:jaxws-client operation="DocumentRepository_ProvideAndRegisterDocumentSet-b" clientClass="ihe.iti.xds_b._2007.DocumentRepositoryService" port="DocumentRepository_Port_Soap12"  doc:name="SOAP" mtomEnabled="true">
             <cxf:features>

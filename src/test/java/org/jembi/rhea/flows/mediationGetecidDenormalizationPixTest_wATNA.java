@@ -48,22 +48,22 @@ public class mediationGetecidDenormalizationPixTest_wATNA extends
 		//idMap.put("idType", "NIST2010");
 		
 		// Mohawk
-	    //idMap.put("id", "994620-002229-1988L");
-	    //idMap.put("idType", "W2012CATOID");
+	    idMap.put("id", "994620-002229-1988L");
+	    idMap.put("idType", "W2012CATOID");
 	    
 	    // Sysnet
 	    //idMap.put("id", "IHEFACILITY-997");
 	    //idMap.put("idType", "IHEFACILITY");
-	    idMap.put("id", "IHEBLUE-997");
-	    idMap.put("idType", "IHEBLUE");
+	    //idMap.put("id", "IHEBLUE-997");
+	    //idMap.put("idType", "IHEBLUE");
 	    
 	    // Nexj
 	    //idMap.put("id", "IHEFACILITY-996");
 	    //idMap.put("idType", "IHEFACILITY");
 		
 		// Vitera (official connect-a-thon config)
-	    idMap.put("id", "IHEFACILITY-997");
-	    idMap.put("idType", "IHEFACILITY");
+	    //idMap.put("id", "IHEFACILITY-997");
+	    //idMap.put("idType", "IHEFACILITY");
 	    
 	    Map<String, Object> properties = null;
 	    MuleMessage result = client.send("vm://getecid-pix", idMap, properties);

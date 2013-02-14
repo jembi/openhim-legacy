@@ -31,6 +31,7 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
                 <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthorityId}"/>
                 <spring:property name="iheSecure" value="${ihe.secure}"/>
             </custom-transformer>
+            <component class="org.jembi.rhea.orchestration.ATNADispatchAuditMessage" doc:name="Send Mohawk Visualizer Message"/>
 	        <logger message="DocumentMap: #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
 	        <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSet" doc:name="Construct retrieve documents messages">
                 <spring:property name="configuredRepositoryUniqueId" value="${xds.repository.UniqueId}"/>
@@ -89,5 +90,6 @@ http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.x
             </otherwise>
         </choice>
         <logger message="Recieved response from XDS repository #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
+        <component class="org.jembi.rhea.orchestration.ATNADispatchAuditMessage" doc:name="Send Mohawk Visualizer Message"/>
     </flow>
 </mule>

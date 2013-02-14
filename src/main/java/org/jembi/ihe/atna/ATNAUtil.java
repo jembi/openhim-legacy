@@ -137,10 +137,11 @@ public class ATNAUtil {
 		return cvt;
 	}
 	
-	public static AuditSourceIdentificationType buildAuditSource() {
+	public static AuditSourceIdentificationType buildAuditSource(String systemName) {
 		AuditSourceIdentificationType res = new AuditSourceIdentificationType();
-		String runtime = ManagementFactory.getRuntimeMXBean().getName();
-		res.setAuditSourceID(runtime.split("@")[1]);
+		//String runtime = ManagementFactory.getRuntimeMXBean().getName();
+		//res.setAuditSourceID(runtime.split("@")[1]);
+		res.setAuditSourceID(systemName);
 		return res;
 	}
 	
