@@ -153,4 +153,16 @@ public class RestfulHttpRequest implements Serializable {
 	public String buildUrlWithRequestParams() {
 		return getPath() + '?' + getRequestParamsAsString();
 	}
+	
+	
+	@Override
+	public RestfulHttpRequest clone() {
+		RestfulHttpRequest theClone = new RestfulHttpRequest();
+		theClone.uuid = uuid;
+		theClone.path = path;
+		theClone.body = body;
+		theClone.httpMethod = httpMethod;
+		theClone.requestParams = requestParams;
+		return theClone;
+	}
 }

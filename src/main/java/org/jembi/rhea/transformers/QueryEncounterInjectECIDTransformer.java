@@ -12,12 +12,15 @@ import org.jembi.rhea.RestfulHttpRequest;
 import org.jembi.rhea.Util;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+import org.mule.api.transport.PropertyScope;
 import org.mule.module.client.MuleClient;
 import org.mule.transformer.AbstractMessageTransformer;
 
 public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransformer {
 	
 	public static Map<String, String[]> requestClientIds = new HashMap<String, String[]>();
+	
+	private String requestedAssigningAuthority = "";
 
 	@Override
 	public Object transformMessage(MuleMessage msg, String enc)
@@ -46,16 +49,19 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 				throw new Exception("Invalid Client: id or id type is null");
 			}
 			
-			MuleMessage responce = client.send("vm://getecid-openempi", idMap, null, 5000);
+			MuleMessage responce = client.send("vm://getecid", idMap, null, 5000);
 			
 			String success = responce.getInboundProperty("success");
 			
 			String ecid;
+			String enterpriseIdType;
 			if (success != null && success.equals("true")) {
 				ecid = responce.getPayloadAsString();
+				enterpriseIdType = requestedAssigningAuthority;
+				
 				// Save original ID for later use
-				msg.setSessionProperty("id", id);
-				msg.setSessionProperty("idType", idType);
+				msg.setProperty("id", id, PropertyScope.SESSION);
+				msg.setProperty("idType", idType, PropertyScope.SESSION);
 				
 				String uuid = req.getUuid();
 				
@@ -64,7 +70,7 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 				throw new Exception("Invalid Client: ECID for id type: " + idType + " with ID: " + id + " could not be found in Client Registry");
 			}
 			
-			path = "ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid + "/encounters";  
+			path = "ws/rest/v1/patient/" + enterpriseIdType + "-" + ecid + "/encounters";  
 			
 			req.setPath(path);
 			
@@ -73,6 +79,14 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 		}
 		
 		return msg;
+	}
+
+	public String getRequestedAssigningAuthority() {
+		return requestedAssigningAuthority;
+	}
+
+	public void setRequestedAssigningAuthority(String requestedAssigningAuthority) {
+		this.requestedAssigningAuthority = requestedAssigningAuthority;
 	}
 
 }

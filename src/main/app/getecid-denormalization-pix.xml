@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tcp="http://www.mulesoft.org/schema/mule/tcp" xmlns:ssl="http://www.mulesoft.org/schema/mule/ssl" xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="CE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
+http://www.mulesoft.org/schema/mule/tcp http://www.mulesoft.org/schema/mule/tcp/current/mule-tcp.xsd 
+http://www.mulesoft.org/schema/mule/ssl http://www.mulesoft.org/schema/mule/ssl/current/mule-ssl.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd 
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd ">
+    <context:property-placeholder xmlns:context="http://www.springframework.org/schema/context" location="classpath:HIM-core.properties, classpath:HIM-core-override.properties"></context:property-placeholder>
+    <tcp:connector name="tcpConnector" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="TCP connector">
+        <tcp:custom-protocol class="org.jembi.openhim.connector.MLLPByteProtocol"/>
+    </tcp:connector>
+    <ssl:connector name="tlsConnector" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="SSL (TLS)">
+        <tcp:custom-protocol class="org.jembi.openhim.connector.MLLPByteProtocol"/>
+        <ssl:client path="${ihe.keystore}" storePassword="${ihe.storepassword}"/>
+        <ssl:key-store path="${ihe.keystore}" keyPassword="${ihe.keypassword}" storePassword="${ihe.storepassword}"/>
+    </ssl:connector>
+    <flow name="mediation-getecid-denormalization-pix" doc:name="mediation-getecid-denormalization-pix">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="getecid-pix" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
+        <logger message="In getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
+        <component class="org.jembi.rhea.orchestration.ATNADispatchAuditMessage" doc:name="Send Mohawk Visualizer Message"/>
+        <custom-transformer class="org.jembi.rhea.transformers.PIXQueryGenerator" doc:name="Generate PIX Query">
+            <spring:property name="assigningAuthorityId" value="${pix.assigningAuthorityId}"/>
+            <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthority}"/>
+            <spring:property name="requestedAssigningAuthorityId" value="${pix.requestedAssigningAuthorityId}"/>
+            <spring:property name="sendingApplication" value="${pix.sendingApplication}"/>
+            <spring:property name="sendingFacility" value="${pix.sendingFacility}"/>
+            <spring:property name="receivingApplication" value="${pix.receivingApplication}"/>
+            <spring:property name="receivingFacility" value="${pix.receivingFacility}"/>
+        </custom-transformer>
+        <logger message="Generated PIX messgage: #[groovy: return message.payload;]" level="INFO" doc:name="Logger"/>
+        <response>
+            <logger message="PIX Response: #[groovy: return message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
+            <custom-transformer class="org.jembi.rhea.transformers.PIXQueryResponseTransformer" doc:name="Handle RSP response">
+                <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthorityId}"/>
+                <spring:property name="pixManagerHost" value="${pix.manager.host}"/>
+                <spring:property name="pixSendingApplication" value="${pix.sendingApplication}"/>
+                <spring:property name="pixReceivingApplication" value="${pix.receivingApplication}"/>
+                <spring:property name="pixSendingFacility" value="${pix.sendingFacility}"/>
+                <spring:property name="pixReceivingFacility" value="${pix.receivingFacility}"/>
+            </custom-transformer>
+            <choice doc:name="Choice">
+                <when expression="#[groovy: return message.payload != null; ]">
+                    <processor-chain>
+                        <message-properties-transformer doc:name="Set transaction success">
+                            <add-message-property key="success" value="true"/>
+                        </message-properties-transformer>
+                    </processor-chain>
+                </when>
+                <otherwise>
+                    <processor-chain>
+                        <message-properties-transformer doc:name="Set transaction success">
+                            <add-message-property key="success" value="false"/>
+                        </message-properties-transformer>
+                    </processor-chain>
+                </otherwise>
+            </choice>
+            <logger message="Exitting getecid de-normalization #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
+            <component class="org.jembi.rhea.orchestration.ATNADispatchAuditMessage" doc:name="Send Mohawk Visualizer Message"/>
+        </response>
+        <choice doc:name="Choice">
+            <when expression="#[groovy: return ${ihe.secure};]">
+                <processor-chain>
+                    <ssl:outbound-endpoint host="${pix.manager.host}" port="${pix.manager.securePort}" responseTimeout="10000" doc:name="Secure" connector-ref="tlsConnector" exchange-pattern="request-response"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+                    <tcp:outbound-endpoint exchange-pattern="request-response" host="${pix.manager.host}" port="${pix.manager.port}" responseTimeout="10000"  doc:name="Non-secure"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+</mule>
