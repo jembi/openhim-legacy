@@ -8,7 +8,7 @@
             <property name="auxiliary;index" value="1"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mediation-denormalization-getfacilities-resourcemapFlow" entity-id="90a1d5a4-044f-4ef4-99f5-85d235ec05f3">
+    <flow SubFlow="false" name="mediation-denormalization-getfacilities-resourcemapFlow" entity-id="262d5c56-6d5b-4fb4-a0a9-4009aa1e066c">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
