@@ -11,6 +11,7 @@ import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
 
 import ca.uhn.hl7v2.model.v25.message.ORU_R01;
+import ca.uhn.hl7v2.parser.EncodingNotSupportedException;
 import ca.uhn.hl7v2.parser.GenericParser;
 import ca.uhn.hl7v2.util.Terser;
 
@@ -53,7 +54,16 @@ public class XDSRepositoryResponseToRestfulHttpResponseTransformer extends
 		
 		 for (String oru_r01_str : documentList) {
 			try {
-				ORU_R01 oru_r01 = (ORU_R01) parser.parse(oru_r01_str);
+				ORU_R01 oru_r01 = null;
+				
+				try {
+					oru_r01 = (ORU_R01) parser.parse(oru_r01_str);
+				} catch (EncodingNotSupportedException ex) {
+					//Seems we're getting docs back from certain OpenXDS instances
+					//as a hex encoded string, with an incorrect starting character
+					String doc = decodeWeirdHex(oru_r01_str);
+					oru_r01 = (ORU_R01) parser.parse(doc);
+				}
 				Terser t = new Terser(oru_r01);
 				
 				String facilityId = t.get("/PATIENT_RESULT/PATIENT/VISIT/PV1-3-1");
@@ -152,4 +162,37 @@ public class XDSRepositoryResponseToRestfulHttpResponseTransformer extends
 		return oru_r01_str;
 	}
 
+	//Why is it weird? it starts with a non-hex single character 'K'
+	//(which is supposed to encode the character '<')
+	//TODO figure out what's going on. it's likely an issue with OpenXDS though
+	private static String decodeWeirdHex(String oruDoc) {
+		String hex = oruDoc.substring(1);
+		return "<" + convertHexToString(hex);
+	}
+	
+	/*
+	 * From mkyong's excellent blog at:
+	 * http://www.mkyong.com/java/how-to-convert-hex-to-ascii-in-java/
+	 * */
+	public static String convertHexToString(String hex){
+		 
+		StringBuilder sb = new StringBuilder();
+		StringBuilder temp = new StringBuilder();
+	 
+		//49204c6f7665204a617661 split into two characters 49, 20, 4c...
+		for( int i=0; i<hex.length()-1; i+=2 ){
+	 
+			//grab the hex in pairs
+			String output = hex.substring(i, (i + 2));
+			//convert hex to decimal
+			int decimal = Integer.parseInt(output, 16);
+			//convert the decimal to character
+			sb.append((char)decimal);
+	 
+			temp.append(decimal);
+		}
+	 
+		return sb.toString();
+	}
+	/**/
 }
