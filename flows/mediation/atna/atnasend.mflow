@@ -55,7 +55,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="atnasendFlow1" entity-id="bc8c699e-ff27-449d-b513-185498def2fa">
+    <flow SubFlow="false" name="atnasendFlow1" entity-id="9cd733f9-aeb3-4873-9bb2-9e4753572cab">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -107,20 +107,20 @@
             </pattern>
             <splitter index="7" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <properties>
-                    <property-collection name="acd82788-47cf-4e6a-bdd0-86c8dc6946a8">
+                    <property-collection name="9c8200ca-79d4-437c-addd-74064714d22b">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                    <property-collection name="ecff0ee6-579a-43e1-9c9f-38907a310bde">
                         <property name="choice.expression" value="#[groovy: return ${atna.useTls};]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[groovy: return ${atna.useTls};]"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="b8e35e51-85f8-4198-9a28-531638cdac11">
-                        <property name="choice.otherwise" value="true"/>
-                        <property-collection name="choice.attributes"/>
-                    </property-collection>
                 </properties>
                 <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
                 <compartment entity-id="compartment#1">
-                    <lane hadOnlyOneElement="false" index="9" isChoiceOtherwiseLane="false" entity-id="acd82788-47cf-4e6a-bdd0-86c8dc6946a8">
+                    <lane hadOnlyOneElement="false" index="9" isChoiceOtherwiseLane="false" entity-id="ecff0ee6-579a-43e1-9c9f-38907a310bde">
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="SSL (TLS)" type="http://www.mulesoft.org/schema/mule/tls/endpoint" entity-id="TLS#1">
                             <properties>
 <property name="exchange-pattern" value="one-way"/>
@@ -202,7 +202,7 @@
                             </properties>
                         </endpoint>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="11" isChoiceOtherwiseLane="true" entity-id="b8e35e51-85f8-4198-9a28-531638cdac11">
+                    <lane hadOnlyOneElement="false" index="11" isChoiceOtherwiseLane="true" entity-id="9c8200ca-79d4-437c-addd-74064714d22b">
                         <endpoint direction="Outbound" message-exchange-pattern="RequestResponse" name="UDP" type="http://www.mulesoft.org/schema/mule/udp/endpoint" entity-id="UDP#1">
                             <properties>
 <property name="exchange-pattern" value="request-response"/>
