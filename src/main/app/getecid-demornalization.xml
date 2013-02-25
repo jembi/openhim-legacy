@@ -8,7 +8,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <flow name="getecid-demornalizationFlow1" doc:name="getecid-demornalizationFlow1">
         <vm:inbound-endpoint exchange-pattern="request-response" path="getecid" doc:name="VM"/>
         <response>
-        	<message-properties-transformer doc:name="Copy success message property to outbound" overwrite="true" scope="outbound">
+        	<message-properties-transformer doc:name="Copy success message property to outbound" overwrite="true" >
                 <add-message-property key="success" value="#[header:INBOUND:success]"/>
             </message-properties-transformer>
         </response>
@@ -16,10 +16,6 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
             <when expression="#[groovy: return ${ihe.enablePIX};]">
                 <logger message="Sending getecid message for PIX de-normalization" level="INFO" doc:name="Sending getecid message for PIX de-normalization"/>
                 <vm:outbound-endpoint exchange-pattern="request-response" path="getecid-pix" doc:name="VM"/>
-            </when>
-            <when expression="">
-                <logger message="Sending getecid message for MOCK de-normalization" level="INFO" doc:name="Sending getecid message for MOCK de-normalization"/>
-                <vm:outbound-endpoint exchange-pattern="request-response" path="getecid-mock" doc:name="VM"/>
             </when>
             <otherwise>
                 <logger message="Sending getecid message for OpenEMPI-ws de-normalization" level="INFO" doc:name="Sending getecid message for OpenEMPI-ws de-normalization"/>
