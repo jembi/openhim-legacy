@@ -79,6 +79,9 @@ public class XDSRegistryStoredQuery extends AbstractMessageTransformer {
 		String notificationType = requestParams.get(Constants.QUERY_ENC_NOTIFICATION_TYPE_PARAM);
 		String ELID = requestParams.get(Constants.QUERY_ENC_ELID_PARAM);
 		
+		// Store elid for later...
+		message.setProperty("elid", ELID, PropertyScope.SESSION);
+		
 		// construct AdhocQueryRequest
 		AdhocQueryRequest request = new AdhocQueryRequest();
 		

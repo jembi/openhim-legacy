@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jembi.rhea.RestfulHttpResponse;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 
 import ca.uhn.hl7v2.model.v25.message.ORU_R01;
@@ -38,7 +39,8 @@ public class XDSRepositoryResponseToRestfulHttpResponseTransformer extends
 		
 		documentList = tranformORU_R01ToMultipeEncounterForm(documentList);
 		
-		String oru_r01_str = combindORU_R01Messages(documentList);
+		String elid = message.getProperty("elid", PropertyScope.SESSION);
+		String oru_r01_str = combindORU_R01Messages(documentList, elid);
 		
 		res.setBody(oru_r01_str);
 
@@ -101,7 +103,7 @@ public class XDSRepositoryResponseToRestfulHttpResponseTransformer extends
 		return newDocList;
 	}
 
-	private String combindORU_R01Messages(List<String> documentList) {
+	private String combindORU_R01Messages(List<String> documentList, String elid) {
 		// combine all document into a single ORU_R01 message
 		// Hapi attempt
 		/*Parser parser = new GenericParser();
@@ -139,8 +141,13 @@ public class XDSRepositoryResponseToRestfulHttpResponseTransformer extends
 		
 		// String processing attempt
 		String oru_r01_str = null;
+		
 		for (int i = 0 ; i < documentList.size() ; i++) {
 			String oru_r01ToAdd_str = documentList.get(i);
+			// skip messages from this location
+			if (oru_r01ToAdd_str.contains("<HD.1>"+ elid +"</HD.1>")) {
+				continue;
+			}
 			if (oru_r01ToAdd_str.contains("ORU_R01") && oru_r01_str == null) {
 				oru_r01_str = oru_r01ToAdd_str;
 				continue;
