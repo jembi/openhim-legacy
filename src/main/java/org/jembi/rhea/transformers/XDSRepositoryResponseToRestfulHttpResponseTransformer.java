@@ -141,11 +141,12 @@ public class XDSRepositoryResponseToRestfulHttpResponseTransformer extends
 		
 		// String processing attempt
 		String oru_r01_str = null;
-		
+		log.info("The ELID is: " + elid);
 		for (int i = 0 ; i < documentList.size() ; i++) {
 			String oru_r01ToAdd_str = documentList.get(i);
 			// skip messages from this location
 			if (oru_r01ToAdd_str.contains("<HD.1>"+ elid +"</HD.1>")) {
+				log.info("Skipping a message from ELID: " + elid);
 				continue;
 			}
 			if (oru_r01ToAdd_str.contains("ORU_R01") && oru_r01_str == null) {
