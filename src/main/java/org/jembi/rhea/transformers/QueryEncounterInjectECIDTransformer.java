@@ -33,7 +33,7 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 			
 			String path = req.getPath();
 			int beginIndex = path.indexOf("patient/") + 8;
-			int endIndex = path.indexOf("/encounters");
+			int endIndex = path.indexOf("/encounter");
 			String id_str = path.substring(beginIndex, endIndex);
 			
 			String[] identifer = Util.splitIdentifer(id_str);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="saveEncounters-rapidSMSAlertsService">
-    <flow SubFlow="false" name="saveEncounters-rapidSMSAlertsServiceFlow1" entity-id="face2e9f-2c87-4b08-b7af-c37e54b49f65">
+    <flow SubFlow="false" name="saveEncounters-rapidSMSAlertsServiceFlow1" entity-id="b41cb783-cf4f-44e3-a6e3-ccf8d842f0b9">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
