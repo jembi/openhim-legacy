@@ -2,7 +2,7 @@
 <con:soapui-project name="OpenHIM-integration-tests" soapui-version="4.5.1" abortOnError="false" runType="PARALLELL" resourceRoot="" activeEnvironment="Default" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
   <con:entry key="Environment" value="Default"/>
   <con:entry key="Global Properties" value=""/>
-  <con:entry key="TestSuite" value="&lt;all>"/>
+  <con:entry key="TestSuite" value="OpenHIM Interface TestSuite"/>
   <con:entry key="Report to Generate" value=""/>
   <con:entry key="Password" value="test"/>
   <con:entry key="soapui-setings.xml Password" value=""/>
@@ -29,85 +29,35 @@
   <con:entry key="Save After" value="false"/>
   <con:entry key="Add Settings" value="false"/>
   <con:entry key="Endpoint" value="https://localhost:5000"/>
-</xml-fragment>]]></con:setting></con:settings><con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="Facility Service" type="rest" basePath="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>https://localhost:5000</con:endpoint></con:endpoints><con:resource name="facilities" path="/ws/rest/v1/facilities"><con:settings/><con:parameters/><con:method name="Get Facilities" method="GET"><con:settings/><con:parameters><con:parameter><con:name>sector</con:name><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>type</con:name><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>fosaid</con:name><con:value>1</con:value><con:style>QUERY</con:style><con:default>1</con:default></con:parameter><con:parameter><con:name>updated_since</con:name><con:value>2012-04-17</con:value><con:style>QUERY</con:style><con:default>2012-04-17</con:default></con:parameter><con:parameter><con:name>page</con:name><con:value>2</con:value><con:style>QUERY</con:style><con:default>2</con:default></con:parameter></con:parameters><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>500 404 401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/xml</con:mediaType><con:status>200</con:status><con:params/><con:element>facility-report</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200</con:status><con:params/><con:element>multipleFaciltyReport</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="page" value=""/>
-  <con:entry key="updated_since" value=""/>
-  <con:entry key="type" value="open"/>
-  <con:entry key="fosaid" value=""/>
-</con:parameters></con:request></con:method></con:resource><con:resource name="facility" path="/ws/rest/v1/facility/{fid}"><con:settings/><con:parameters><con:parameter><con:name>fid</con:name><con:value>1234567890</con:value><con:style>TEMPLATE</con:style><con:type xmlns:xs="http://www.w3.org/2001/XMLSchema">xs:string</con:type><con:default>1234567890</con:default><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Get Facility" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>text/xml</con:mediaType><con:status>200</con:status><con:params/><con:element>facilityReport</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>500 401 404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200</con:status><con:params/><con:element>facilityReport</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="fid" value="363" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="Client Service" type="rest" basePath="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>https://localhost:5000</con:endpoint></con:endpoints><con:resource name="patients" path="/ws/rest/v1/patients"><con:settings/><con:parameters/><con:method name="Post Patient" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/xml</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>204</con:status><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>text/xml</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>text/xml</con:mediaType><con:status>204 201</con:status><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/xml</con:mediaType><con:status>415 500 400 401</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200 201</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>400 500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Mary" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<ADT_A05 xmlns="urn:hl7-org:v2xml">
-   <MSH>
-      <MSH.1>|</MSH.1>
-      <MSH.2>^~\&amp;</MSH.2>
-      <MSH.7>
-         <TS.1/>
-      </MSH.7>
-      <MSH.9>
-         <MSG.1>ADT</MSG.1>
-         <MSG.2>A28</MSG.2>
-         <MSG.3>ADT_A05</MSG.3>
-      </MSH.9>
-      <MSH.12>
-         <VID.1>2.5</VID.1>
-      </MSH.12>
-   </MSH>
-   <PID>
-      <PID.3>
-         <CX.1>9375fc8d-ec7d-40ea-936a-5eba0e49db08</CX.1>
-         <CX.5>ECID</CX.5>
-      </PID.3>
-      <PID.3>
-         <CX.1>9876543210987654</CX.1>
-         <CX.5>NID</CX.5>
-      </PID.3>
-      <PID.5>
-         <XPN.1>
-            <FN.1>Patient</FN.1>
-         </XPN.1>
-         <XPN.2>Mary</XPN.2>
-      </PID.5>
-      <PID.7>
-         <TS.1>19870814</TS.1>
-      </PID.7>
-      <PID.8>F</PID.8>
-      <PID.11>
-         <XAD.3>Rwamagana</XAD.3>
-         <XAD.4>Eastern</XAD.4>
-         <XAD.6>Rwanda</XAD.6>
-         <XAD.8>Ruhunda</XAD.8>
-         <XAD.9>Gishari</XAD.9>
-         <XAD.10>someVillage</XAD.10>
-      </PID.11>
-      <PID.13>
-         <XTN.1>0763214985</XTN.1>
-      </PID.13>
-   </PID>
-   <NK1>
-      <NK1.1>1</NK1.1>
-      <NK1.2>
-         <XPN.1>
-            <FN.1>Sara</FN.1>
-         </XPN.1>
-      </NK1.2>
-      <NK1.3>
-         <CE.1>MTH</CE.1>
-         <CE.2>mother</CE.2>
-         <CE.3>REL_RTS</CE.3>
-      </NK1.3>
-   </NK1>
-   <NK1>
-      <NK1.1>2</NK1.1>
-      <NK1.2>
-         <XPN.1>
-            <FN.1>Dad</FN.1>
-         </XPN.1>
-      </NK1.2>
-      <NK1.3>
-         <CE.1>FTH</CE.1>
-         <CE.2>father</CE.2>
-         <CE.3>REL_RTS</CE.3>
-      </NK1.3>
-   </NK1>
-</ADT_A05>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request><con:request name="Mosa" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<ADT_A05 xmlns="urn:hl7-org:v2xml">
+</xml-fragment>]]></con:setting><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.LoadTestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="TestSuite" value="&lt;all>"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="Report to Generate" value=""/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="soapui-setings.xml Password" value=""/>
+  <con:entry key="TestRunner Path" value="/home/ryan/Programs/soapUI-4.5.1/bin"/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="LoadTest" value="&lt;all>"/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="Save Project" value="false"/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Print Report Statistics" value="false"/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="TestCase" value="&lt;all>"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Endpoint" value=""/>
+  <con:entry key="ThreadCount" value=""/>
+  <con:entry key="Limit" value=""/>
+</xml-fragment>]]></con:setting></con:settings><con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="OpenHIM Interface" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>https://localhost:5000</con:endpoint></con:endpoints><con:resource name="patients" path="ws/rest/v1/patients"><con:settings/><con:parameters/><con:method name="Save patient" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/xml</con:mediaType><con:params/><con:element xmlns:urn="urn:hl7-org:v2xml">urn:ORU_R01</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>201</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>text/xml</con:mediaType><con:params/><con:element xmlns:urn="urn:hl7-org:v2xml">urn:ADT_A05</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Save Mary" mediaType="application/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0" ?><ORU_R01 xmlns="urn:hl7-org:v2xml"><MSH><MSH.1>|</MSH.1><MSH.2>^~\&amp;</MSH.2><MSH.3><HD.1>RAPIDSMS</HD.1></MSH.3><MSH.4><HD.1>66</HD.1></MSH.4><MSH.5><HD.1>SHARED HEALTH RECORD</HD.1></MSH.5><MSH.6><HD.1>RWANDA MOH</HD.1></MSH.6><MSH.7><TS.1>20130314145831</TS.1></MSH.7><MSH.9><MSG.1>ORU</MSG.1><MSG.2>R01</MSG.2><MSG.3>ORU_R01</MSG.3></MSH.9><MSH.10>168709</MSH.10><MSH.11><PT.1>D</PT.1><PT.2>C</PT.2></MSH.11><MSH.12><VID.1>2.5</VID.1><VID.2><CE.1>RWA</CE.1></VID.2></MSH.12><MSH.21><EI.1>BIR</EI.1></MSH.21></MSH><ORU_R01.PATIENT_RESULT><ORU_R01.PATIENT><PID><PID.1>1</PID.1><PID.3><CX.1>1198270060740007</CX.1><CX.5>NID</CX.5></PID.3></PID><ORU_R01.VISIT><PV1><PV1.2>0</PV1.2><PV1.4>BIR</PV1.4><PV1.7><XCN.1>1197070025682044</XCN.1><XCN.13>NID</XCN.13></PV1.7></PV1></ORU_R01.VISIT></ORU_R01.PATIENT><ORU_R01.ORDER_OBSERVATION><OBR><OBR.1>0</OBR.1><OBR.4><CE.2>BIR</CE.2></OBR.4></OBR><ORU_R01.OBSERVATION><OBX><OBX.1>0</OBX.1><OBX.2>CE</OBX.2><OBX.3><CE.1>rsms_gn</CE.1><CE.2>rsms_gn SEX</CE.2><CE.3>RSMS</CE.3></OBX.3><OBX.5><CE.1>rsms_ma</CE.1><CE.2>rsms_ma MALE</CE.2><CE.3>RSMS</CE.3></OBX.5></OBX></ORU_R01.OBSERVATION><ORU_R01.OBSERVATION><OBX><OBX.1>1</OBX.1><OBX.2>CE</OBX.2><OBX.3><CE.1>rsms_risk</CE.1><CE.2>rsms_risk RISK</CE.2><CE.3>RSMS</CE.3></OBX.3><OBX.5><CE.1>np</CE.1><CE.2>np NO PROBLEM</CE.2><CE.3>RSMS</CE.3></OBX.5></OBX></ORU_R01.OBSERVATION><ORU_R01.OBSERVATION><OBX><OBX.1>2</OBX.1><OBX.2>CE</OBX.2><OBX.3><CE.1>rsms_lo</CE.1><CE.2>rsms_lo LOCATION</CE.2><CE.3>RSMS</CE.3></OBX.3><OBX.5><CE.1>ho</CE.1><CE.2>ho AT HOME</CE.2><CE.3>RSMS</CE.3></OBX.5></OBX></ORU_R01.OBSERVATION><ORU_R01.OBSERVATION><OBX><OBX.1>3</OBX.1><OBX.2>NM</OBX.2><OBX.3><CE.1>rsms_bw</CE.1><CE.2>rsms_bw BABY'S WEIGHT</CE.2><CE.3>RSMS</CE.3></OBX.3><OBX.5>3.20000</OBX.5><OBX.6><CE.1>Kg</CE.1><CE.3>UCUM</CE.3></OBX.6></OBX></ORU_R01.OBSERVATION><ORU_R01.OBSERVATION><OBX><OBX.1>4</OBX.1><OBX.2>NM</OBX.2><OBX.3><CE.1>rsms_cn</CE.1><CE.2>rsms_cn CHILD NUMBER</CE.2><CE.3>RSMS</CE.3></OBX.3><OBX.5>1.00000</OBX.5><OBX.6><CE.1/><CE.3>UCUM</CE.3></OBX.6></OBX></ORU_R01.OBSERVATION><ORU_R01.OBSERVATION><OBX><OBX.1>5</OBX.1><OBX.2>TS</OBX.2><OBX.3><CE.1>rsms_db</CE.1><CE.2>rsms_db DATE OF BIRTH</CE.2><CE.3>RSMS</CE.3></OBX.3><OBX.5><TS.1>20130310000000</TS.1></OBX.5></OBX></ORU_R01.OBSERVATION></ORU_R01.ORDER_OBSERVATION></ORU_R01.PATIENT_RESULT></ORU_R01>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request><con:request name="Save Mosa" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<ADT_A05 xmlns="urn:hl7-org:v2xml">
    <MSH>
       <MSH.1>|</MSH.1>
       <MSH.2>^~\&amp;</MSH.2>
@@ -180,7 +130,7 @@
          <CE.3>REL_RTS</CE.3>
       </NK1.3>
    </NK1>
-</ADT_A05>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request><con:request name="Susan" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<ADT_A05 xmlns="urn:hl7-org:v2xml">
+</ADT_A05>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request><con:request name="Save Susan" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<ADT_A05 xmlns="urn:hl7-org:v2xml">
    <MSH>
       <MSH.1>|</MSH.1>
       <MSH.2>^~\&amp;</MSH.2>
@@ -249,95 +199,7 @@
          <CE.3>REL_RTS</CE.3>
       </NK1.3>
    </NK1>
-</ADT_A05>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Get Patients" method="GET"><con:settings/><con:parameters><con:parameter><con:name>given_name</con:name><con:value>Mosa</con:value><con:style>QUERY</con:style><con:default>Mosa</con:default></con:parameter><con:parameter><con:name>family_name</con:name><con:value>Patient</con:value><con:style>QUERY</con:style><con:default>Patient</con:default></con:parameter><con:parameter><con:name>dob</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>id</con:name><con:value>NID-123456789</con:value><con:style>QUERY</con:style><con:default>NID-123456789</con:default></con:parameter><con:parameter><con:name>addr_cell</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>addr_district</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>addr_province</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>addr_sector</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>addr_village</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>gender</con:name><con:value>M</con:value><con:style>QUERY</con:style><con:default>M</con:default></con:parameter></con:parameters><con:representation type="RESPONSE"><con:mediaType>text/xml</con:mediaType><con:status>200</con:status><con:params/><con:element>unimplemented</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200</con:status><con:params/><con:element>unimplemented</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>500 401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="id" value=""/>
-  <con:entry key="family_name" value="Man"/>
-  <con:entry key="addr_province" value=" "/>
-  <con:entry key="given_name" value=""/>
-</con:parameters></con:request><con:request name="OMRS test" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="addr_village" value="Iterambere"/>
-  <con:entry key="addr_cell" value="Akabahizi"/>
-  <con:entry key="addr_sector" value="Gitega"/>
-  <con:entry key="dob" value="1986"/>
-  <con:entry key="gender" value="F"/>
-  <con:entry key="family_name" value="Online"/>
-  <con:entry key="addr_province" value="Kigali Province"/>
-  <con:entry key="given_name" value="Patient"/>
-  <con:entry key="addr_district" value="Nyarugenge"/>
-</con:parameters></con:request></con:method></con:resource><con:resource name="patient" path="/ws/rest/v1/patient/{param0}"><con:settings/><con:parameters><con:parameter><con:name>param0</con:name><con:value>1234567890123456</con:value><con:style>TEMPLATE</con:style><con:default>1234567890123456</con:default></con:parameter></con:parameters><con:method name="Get Patient" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>404 500 401 400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/xml</con:mediaType><con:status>200</con:status><con:params/><con:element>unimplemented</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200</con:status><con:params/><con:element>unimplemented</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:credentials><con:username>poc_avega</con:username><con:password>W0Hk4RnrLnpH</con:password><con:domain/><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="param0" value="NID-1198870177785077" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method><con:method name="Put Patient" method="PUT"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/xml</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/xml</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200 201</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>text/xml</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/xml</con:mediaType><con:status>201</con:status><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/xml</con:mediaType><con:status>400 401</con:status><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>400 500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>304</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Mary" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<ADT_A05 xmlns="urn:hl7-org:v2xml">
-   <MSH>
-      <MSH.1>|</MSH.1>
-      <MSH.2>^~\&amp;</MSH.2>
-      <MSH.7>
-         <TS.1/>
-      </MSH.7>
-      <MSH.9>
-         <MSG.1>ADT</MSG.1>
-         <MSG.2>A31</MSG.2>
-         <MSG.3>ADT_A05</MSG.3>
-      </MSH.9>
-      <MSH.12>
-         <VID.1>2.5</VID.1>
-      </MSH.12>
-   </MSH>
-   <PID>
-      <PID.3>
-         <CX.1>9375fc8d-ec7d-40ea-936a-5eba0e49db08</CX.1>
-         <CX.5>ECID</CX.5>
-      </PID.3>
-      <PID.3>
-         <CX.1>9876543210987654</CX.1>
-         <CX.5>NID</CX.5>
-      </PID.3>
-      <PID.5>
-         <XPN.1>
-            <FN.1>Patient</FN.1>
-         </XPN.1>
-         <XPN.2>Mary</XPN.2>
-      </PID.5>
-      <PID.7>
-         <TS.1>19870814</TS.1>
-      </PID.7>
-      <PID.8>F</PID.8>
-      <PID.11>
-         <XAD.3>Rwamagana</XAD.3>
-         <XAD.4>Eastern</XAD.4>
-         <XAD.6>Rwanda</XAD.6>
-         <XAD.8>Ruhunda</XAD.8>
-         <XAD.9>Gishari</XAD.9>
-         <XAD.10>someVillage</XAD.10>
-      </PID.11>
-      <PID.13>
-         <XTN.1>0763214985</XTN.1>
-      </PID.13>
-   </PID>
-   <NK1>
-      <NK1.1>1</NK1.1>
-      <NK1.2>
-         <XPN.1>
-            <FN.1>Sara</FN.1>
-         </XPN.1>
-      </NK1.2>
-      <NK1.3>
-         <CE.1>MTH</CE.1>
-         <CE.2>mother</CE.2>
-         <CE.3>REL_RTS</CE.3>
-      </NK1.3>
-   </NK1>
-   <NK1>
-      <NK1.1>2</NK1.1>
-      <NK1.2>
-         <XPN.1>
-            <FN.1>Dad</FN.1>
-         </XPN.1>
-      </NK1.2>
-      <NK1.3>
-         <CE.1>FTH</CE.1>
-         <CE.2>father</CE.2>
-         <CE.3>REL_RTS</CE.3>
-      </NK1.3>
-   </NK1>
-</ADT_A05>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="param0" value="NID-9876543210987654" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request><con:request name="Mosa" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<ADT_A05 xmlns="urn:hl7-org:v2xml">
+</ADT_A05>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Get Patients" method="GET"><con:settings/><con:parameters><con:parameter><con:name>family_name</con:name><con:value>Patient</con:value><con:style>QUERY</con:style><con:default>Patient</con:default></con:parameter><con:parameter><con:name>given_name</con:name><con:value>Mosa</con:value><con:style>QUERY</con:style><con:default>Mosa</con:default></con:parameter><con:parameter><con:name>addr_village</con:name><con:value>Iterambere</con:value><con:style>QUERY</con:style><con:default>Iterambere</con:default></con:parameter><con:parameter><con:name>addr_cell</con:name><con:value>Akabahizi</con:value><con:style>QUERY</con:style><con:default>Akabahizi</con:default></con:parameter><con:parameter><con:name>dob</con:name><con:value>1991</con:value><con:style>QUERY</con:style><con:default>1991</con:default></con:parameter><con:parameter><con:name>gender</con:name><con:value>F</con:value><con:style>QUERY</con:style><con:default>F</con:default></con:parameter><con:parameter><con:name>addr_district</con:name><con:value>Nyarugenge</con:value><con:style>QUERY</con:style><con:default>Nyarugenge</con:default></con:parameter><con:parameter><con:name>addr_sector</con:name><con:value>Gitega</con:value><con:style>QUERY</con:style><con:default>Gitega</con:default></con:parameter><con:parameter><con:name>id</con:name><con:value>NID-1234567890123456</con:value><con:style>QUERY</con:style><con:default>NID-1234567890123456</con:default></con:parameter><con:parameter><con:name>addr_province</con:name><con:value>Kigali Province</con:value><con:style>QUERY</con:style><con:default>Kigali Province</con:default></con:parameter></con:parameters><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200</con:status><con:params/><con:element>rss</con:element></con:representation><con:request name="Full query for Mosa" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="patient" path="/ws/rest/v1/patient/{pid}"><con:settings/><con:parameters><con:parameter><con:name>pid</con:name><con:value>NID-1234567890123456</con:value><con:style>TEMPLATE</con:style><con:type xmlns:xs="http://www.w3.org/2001/XMLSchema">xs:string</con:type><con:default>NID-1234567890123456</con:default><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Get Patient" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200</con:status><con:params/><con:element>ADT_A05</con:element></con:representation><con:request name="Get Mosa" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Update patient" method="PUT"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/xml</con:mediaType><con:params/><con:element xmlns:urn="urn:hl7-org:v2xml">urn:ADT_A05</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>text/xml</con:mediaType><con:params/><con:element xmlns:urn="urn:hl7-org:v2xml">urn:ADT_A05</con:element></con:representation><con:request name="Update Mosa" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<ADT_A05 xmlns="urn:hl7-org:v2xml">
    <MSH>
       <MSH.1>|</MSH.1>
       <MSH.2>^~\&amp;</MSH.2>
@@ -410,32 +272,100 @@
          <CE.3>REL_RTS</CE.3>
       </NK1.3>
    </NK1>
-</ADT_A05>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="param0" value="NID-1234567890123456" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="SHR Service" type="rest" basePath="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>https://localhost:5000</con:endpoint></con:endpoints><con:resource name="encounters" path="/ws/rest/v1/patient/{param0}/encounters"><con:settings/><con:parameters><con:parameter><con:name>param0</con:name><con:value>1234567890123456</con:value><con:style>TEMPLATE</con:style><con:type xmlns:xs="http://www.w3.org/2001/XMLSchema">xs:string</con:type><con:default>1234567890123456</con:default><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Post encounters" method="POST"><con:settings/><con:parameters><con:parameter><con:name>notificationType</con:name><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>ELID</con:name><con:style>QUERY</con:style></con:parameter></con:parameters><con:representation type="REQUEST"><con:mediaType>application/xml</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>204 201</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200 201</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>text/xml</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>text/xml</con:mediaType><con:status>201</con:status><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/xml</con:mediaType><con:status>400 401</con:status><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>400 500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="RapidSMS 3 RISK" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0" ?>
+</ADT_A05>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request><con:request name="Update Mary" mediaType="application/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<ADT_A05 xmlns="urn:hl7-org:v2xml">
+   <MSH>
+      <MSH.1>|</MSH.1>
+      <MSH.2>^~\&amp;</MSH.2>
+      <MSH.7>
+         <TS.1/>
+      </MSH.7>
+      <MSH.9>
+         <MSG.1>ADT</MSG.1>
+         <MSG.2>A31</MSG.2>
+         <MSG.3>ADT_A05</MSG.3>
+      </MSH.9>
+      <MSH.12>
+         <VID.1>2.5</VID.1>
+      </MSH.12>
+   </MSH>
+   <PID>
+      <PID.3>
+         <CX.1>9375fc8d-ec7d-40ea-936a-5eba0e49db08</CX.1>
+         <CX.5>ECID</CX.5>
+      </PID.3>
+      <PID.3>
+         <CX.1>9876543210987654</CX.1>
+         <CX.5>NID</CX.5>
+      </PID.3>
+      <PID.5>
+         <XPN.1>
+            <FN.1>Patient</FN.1>
+         </XPN.1>
+         <XPN.2>Mary</XPN.2>
+      </PID.5>
+      <PID.7>
+         <TS.1>19870814</TS.1>
+      </PID.7>
+      <PID.8>F</PID.8>
+      <PID.11>
+         <XAD.3>Rwamagana</XAD.3>
+         <XAD.4>Eastern</XAD.4>
+         <XAD.6>Rwanda</XAD.6>
+         <XAD.8>Ruhunda</XAD.8>
+         <XAD.9>Gishari</XAD.9>
+         <XAD.10>someVillage</XAD.10>
+      </PID.11>
+      <PID.13>
+         <XTN.1>0763214985</XTN.1>
+      </PID.13>
+   </PID>
+   <NK1>
+      <NK1.1>1</NK1.1>
+      <NK1.2>
+         <XPN.1>
+            <FN.1>Sara</FN.1>
+         </XPN.1>
+      </NK1.2>
+      <NK1.3>
+         <CE.1>MTH</CE.1>
+         <CE.2>mother</CE.2>
+         <CE.3>REL_RTS</CE.3>
+      </NK1.3>
+   </NK1>
+   <NK1>
+      <NK1.1>2</NK1.1>
+      <NK1.2>
+         <XPN.1>
+            <FN.1>Dad</FN.1>
+         </XPN.1>
+      </NK1.2>
+      <NK1.3>
+         <CE.1>FTH</CE.1>
+         <CE.2>father</CE.2>
+         <CE.3>REL_RTS</CE.3>
+      </NK1.3>
+   </NK1>
+</ADT_A05>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="pid" value="NID-9876543210987654" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource><con:resource name="facilities" path="/ws/rest/v1/facilities"><con:settings/><con:parameters/><con:method name="Get Facilities" method="GET"><con:settings/><con:parameters><con:parameter><con:name>page</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>updated_Since</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>sector</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>fosaid</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>type</con:name><con:value>open</con:value><con:style>QUERY</con:style><con:default>open</con:default></con:parameter></con:parameters><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200</con:status><con:params/><con:element>rss</con:element></con:representation><con:request name="Query all open facilities" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="facility" path="/ws/rest/v1/facility/{fid}"><con:settings/><con:parameters><con:parameter><con:name>fid</con:name><con:value>321</con:value><con:style>TEMPLATE</con:style><con:type xmlns:xs="http://www.w3.org/2001/XMLSchema">xs:string</con:type><con:default>321</con:default><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Get Facility" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200</con:status><con:params/><con:element>facilityReport</con:element></con:representation><con:request name="Get facility 363" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="fid" value="363" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource><con:resource name="alerts" path="/ws/rest/v1/alerts"><con:settings/><con:parameters/><con:method name="Send alert" method="POST"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>text/xml</con:mediaType><con:params/><con:element xmlns:urn="urn:hl7-org:v2xml">urn:ORU_R01</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>201</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Send alert for mock services" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
 <ORU_R01 xmlns="urn:hl7-org:v2xml">
     <MSH>
         <MSH.1>|</MSH.1>
         <MSH.2>^~\&amp;</MSH.2>
-        <MSH.3>
-            <HD.1>RAPIDSMS</HD.1>
-        </MSH.3>
+		<MSH.3>Sending Facility</MSH.3>
         <MSH.4>
-            <HD.1>316</HD.1>
+            <HD.1>FOSAID</HD.1>
         </MSH.4>
-        <MSH.5>
-            <HD.1>SHARED HEALTH RECORD</HD.1>
-        </MSH.5>
         <MSH.6>
-            <HD.1>RWANDA MOH</HD.1>
+            <HD.1>Shared Health Record</HD.1>
         </MSH.6>
         <MSH.7>
-            <TS.1>20120229154622</TS.1>
+            <TS.1>20120821135106</TS.1> 
         </MSH.7>
         <MSH.9>
             <MSG.1>ORU</MSG.1>
             <MSG.2>R01</MSG.2>
-            <MSG.3>ORU_R01</MSG.3>
+            <MSG.3>ORU_R01</MSG.3> 
         </MSH.9>
-        <MSH.10>3</MSH.10>
+        <MSH.10>47e16a3d-ba4d-40da-ae59-032f21c5e831</MSH.10> 
         <MSH.11>
             <PT.1>D</PT.1>
             <PT.2>C</PT.2>
@@ -447,7 +377,7 @@
             </VID.2>
         </MSH.12>
         <MSH.21>
-            <EI.1>RISK</EI.1>
+            <EI.1>CLSM_V0.83</EI.1>
         </MSH.21>
     </MSH>
     <ORU_R01.PATIENT_RESULT>
@@ -455,17 +385,18 @@
             <PID>
                 <PID.1>1</PID.1>
                 <PID.3>
-                    <CX.1>1234567890123456</CX.1>
-                    <CX.5>NID</CX.5>
+                    <CX.1>dc8d2234-7fce-4869-945e-97c8b7d97332</CX.1>
+                    <CX.5>ECID</CX.5>
                 </PID.3>
+				<PID.29>20120302233456</PID.29>
             </PID>
             <ORU_R01.VISIT>
                 <PV1>
                     <PV1.2>0</PV1.2>
-                    <PV1.4>RISK</PV1.4>
+                    <PV1.4>BIR</PV1.4>
                     <PV1.7>
-                        <XCN.1>3525410</XCN.1>
-                        <XCN.13>NID</XCN.13>
+                        <XCN.1>e8597a14-436f-1031-8b61-8d373bf4f88f</XCN.1>
+                        <XCN.13>EPID</XCN.13>
                     </PV1.7>
                 </PV1>
             </ORU_R01.VISIT>
@@ -474,7 +405,7 @@
             <OBR>
                 <OBR.1>0</OBR.1>
                 <OBR.4>
-                    <CE.2>RISK</CE.2>
+                    <CE.2>BIR</CE.2>
                 </OBR.4>
             </OBR>
             <ORU_R01.OBSERVATION>
@@ -482,55 +413,20 @@
                     <OBX.1>0</OBX.1>
                     <OBX.2>CE</OBX.2>
                     <OBX.3>
-                        <CE.1>rsms_risk</CE.1>
-                        <CE.2>rsms_risk RISK</CE.2>
-                        <CE.3>RSMS</CE.3>
+						<CE.1>rsms_rm</CE.1>
+                        <CE.2>REMINDER</CE.2>
+						<CE.3>RSMS</CE.3>
                     </OBX.3>
                     <OBX.5>
-                        <CE.1>fe</CE.1>
-                        <CE.2>fe FEVER</CE.2>
-                        <CE.3>RSMS</CE.3>
+						<CE.1>rsms_pmr</CE.1>
+                        <CE.2>rsms_pmr PATIENT MISSED REFERRAL</CE.2>  <!-- name<space>description -->
+						<CE.3>RSMS</CE.3>
                     </OBX.5>
-                </OBX>
-            </ORU_R01.OBSERVATION>
-            <ORU_R01.OBSERVATION>
-                <OBX>
-                    <OBX.1>1</OBX.1>
-                    <OBX.2>CE</OBX.2>
-                    <OBX.3>
-                        <CE.1>rsms_risk</CE.1>
-                        <CE.2>rsms_risk RISK</CE.2>
-                        <CE.3>RSMS</CE.3>
-                    </OBX.3>
-                    <OBX.5>
-                        <CE.1>he</CE.1>
-                        <CE.2>he HEMORRHAGING BLEEDING</CE.2>
-                        <CE.3>RSMS</CE.3>
-                    </OBX.5>
-                </OBX>
-            </ORU_R01.OBSERVATION>
-            <ORU_R01.OBSERVATION>
-                <OBX>
-                    <OBX.1>3</OBX.1>
-                    <OBX.2>NM</OBX.2>
-                    <OBX.3>
-                        <CE.1>rsms_we</CE.1>
-                        <CE.2>rsms_we WEIGHT</CE.2>
-                        <CE.3>RSMS</CE.3>
-                    </OBX.3>
-                    <OBX.5>71.20000</OBX.5>
-                    <OBX.6>
-                        <CE.1/>
-                        <CE.3>UCUM</CE.3>
-                    </OBX.6>
                 </OBX>
             </ORU_R01.OBSERVATION>
         </ORU_R01.ORDER_OBSERVATION>
     </ORU_R01.PATIENT_RESULT>
-</ORU_R01>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="param0" value="NID-1234567890123456"/>
-  <con:entry key="notificationType" value="MAT"/>
-</con:parameters></con:request><con:request name="OMRS test" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
+</ORU_R01>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="encounters" path="/ws/rest/v1/patient/{pid}/encounters"><con:settings/><con:parameters><con:parameter><con:name>pid</con:name><con:value>NID-1234567890123456</con:value><con:style>TEMPLATE</con:style><con:type xmlns:xs="http://www.w3.org/2001/XMLSchema">xs:string</con:type><con:default>NID-1234567890123456</con:default><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Save encounter" method="POST"><con:settings/><con:parameters><con:parameter><con:name>ELID</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>notificationType</con:name><con:style>QUERY</con:style></con:parameter></con:parameters><con:representation type="REQUEST"><con:mediaType>text/xml</con:mediaType><con:params/><con:element xmlns:urn="urn:hl7-org:v2xml">urn:ORU_R01</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>201</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="OpenMRS request" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
 <ORU_R01 xmlns="urn:hl7-org:v2xml">
     <MSH>
         <MSH.1>|</MSH.1>
@@ -743,35 +639,32 @@
             </ORU_R01.OBSERVATION>
         </ORU_R01.ORDER_OBSERVATION>
     </ORU_R01.PATIENT_RESULT>
-</ORU_R01>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="param0" value="NID-1234567890456789" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method><con:method name="Get encounters" method="GET"><con:settings/><con:parameters><con:parameter><con:name>encounter_start_date</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>encounter_end_date</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>ELID</con:name><con:style>QUERY</con:style></con:parameter></con:parameters><con:representation type="RESPONSE"><con:mediaType>text/xml</con:mediaType><con:status>200</con:status><con:params/><con:element>unimplemented</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200 302</con:status><con:params/><con:element>unimplemented</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>500 401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting><con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@follow-redirects">false</con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="param0" value="NID-1234567890123456"/>
-  <con:entry key="encounter_start_date" value="1991-01-01T00:00:00"/>
-  <con:entry key="ELID" value="357"/>
-</con:parameters></con:request></con:method></con:resource><con:resource name="encounter" path="/ws/rest/v1/patient/{param0}/encounter/{param1}"><con:settings/><con:parameters><con:parameter><con:name>param0</con:name><con:value>1234567890123456</con:value><con:style>TEMPLATE</con:style><con:type xmlns:xs="http://www.w3.org/2001/XMLSchema">xs:string</con:type><con:default>1234567890123456</con:default><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>param1</con:name><con:value>321</con:value><con:style>TEMPLATE</con:style><con:default>321</con:default></con:parameter></con:parameters><con:method name="Get encounter" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>404 401 500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/xml</con:mediaType><con:status>200</con:status><con:params/><con:element>unimplemented</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200</con:status><con:params/><con:element>unimplemented</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="param0" value="NID-1234567890123456" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="RapidSMS Service" type="rest" basePath="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>https://localhost:5000</con:endpoint></con:endpoints><con:resource name="alerts" path="/ws/rest/v1/alerts"><con:settings/><con:parameters/><con:method name="Post alerts" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>204 201</con:status><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/xml</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200 201</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/xml</con:mediaType><con:status>201</con:status><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>text/xml</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/xml</con:mediaType><con:status>400 401</con:status><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>400 500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
+</ORU_R01>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="pid" value="NID-1234567890456789" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request><con:request name="RapidSMS request RISK" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0" ?>
 <ORU_R01 xmlns="urn:hl7-org:v2xml">
     <MSH>
         <MSH.1>|</MSH.1>
         <MSH.2>^~\&amp;</MSH.2>
         <MSH.3>
-            <HD.1>SHR</HD.1>
+            <HD.1>RAPIDSMS</HD.1>
         </MSH.3>
         <MSH.4>
-            <HD.1>RwandaMOH</HD.1>
+            <HD.1>316</HD.1>
         </MSH.4>
         <MSH.5>
-            <HD.1>RapidSMS</HD.1>
+            <HD.1>SHARED HEALTH RECORD</HD.1>
         </MSH.5>
         <MSH.6>
-            <HD.1>316</HD.1>
+            <HD.1>RWANDA MOH</HD.1>
         </MSH.6>
         <MSH.7>
-            <TS.1>20111109075738</TS.1>
+            <TS.1>20120229154622</TS.1>
         </MSH.7>
         <MSH.9>
             <MSG.1>ORU</MSG.1>
             <MSG.2>R01</MSG.2>
             <MSG.3>ORU_R01</MSG.3>
         </MSH.9>
+        <MSH.10>3</MSH.10>
         <MSH.11>
             <PT.1>D</PT.1>
             <PT.2>C</PT.2>
@@ -783,77 +676,7 @@
             </VID.2>
         </MSH.12>
         <MSH.21>
-            <EI.1>ALER</EI.1>
-        </MSH.21>
-    </MSH>
-    <ORU_R01.PATIENT_RESULT>
-        <ORU_R01.PATIENT>
-            <PID>
-                <PID.3>
-                    <CX.1>1198270120343040</CX.1>
-                    <CX.5>NID</CX.5>
-                </PID.3>
-            </PID>
-        </ORU_R01.PATIENT>
-        <ORU_R01.ORDER_OBSERVATION>
-            <OBR>
-                <OBR.1>1</OBR.1>
-                <OBR.4>
-                    <CE.2>Maternal Health Alert</CE.2>
-                </OBR.4>
-                <OBR.47>
-                    <CE.1>CHW</CE.1>
-                </OBR.47>
-            </OBR>
-            <ORU_R01.OBSERVATION>
-                <OBX>
-                    <OBX.1>1</OBX.1>
-                    <OBX.2>CE</OBX.2>
-                    <OBX.3>
-                        <CE.2>Alert</CE.2>
-                    </OBX.3>
-                    <OBX.5>
-                        <CE.1>HE</CE.1>
-                    </OBX.5>
-                    <OBX.11>F</OBX.11>
-                </OBX>
-            </ORU_R01.OBSERVATION>
-        </ORU_R01.ORDER_OBSERVATION>
-    </ORU_R01.PATIENT_RESULT>
-</ORU_R01>
-]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request><con:request name="Gen from SHR" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
-<ORU_R01 xmlns="urn:hl7-org:v2xml">
-    <MSH>
-        <MSH.1>|</MSH.1>
-        <MSH.2>^~\&amp;</MSH.2>
-		<MSH.3>Sending Facility</MSH.3>
-        <MSH.4>
-            <HD.1>FOSAID</HD.1>
-        </MSH.4>
-        <MSH.6>
-            <HD.1>Shared Health Record</HD.1>
-        </MSH.6>
-        <MSH.7>
-            <TS.1>20120821135106</TS.1> 
-        </MSH.7>
-        <MSH.9>
-            <MSG.1>ORU</MSG.1>
-            <MSG.2>R01</MSG.2>
-            <MSG.3>ORU_R01</MSG.3> 
-        </MSH.9>
-        <MSH.10>47e16a3d-ba4d-40da-ae59-032f21c5e831</MSH.10> 
-        <MSH.11>
-            <PT.1>D</PT.1>
-            <PT.2>C</PT.2>
-        </MSH.11>
-        <MSH.12>
-            <VID.1>2.5</VID.1>
-            <VID.2>
-                <CE.1>RWA</CE.1>
-            </VID.2>
-        </MSH.12>
-        <MSH.21>
-            <EI.1>CLSM_V0.83</EI.1>
+            <EI.1>RISK</EI.1>
         </MSH.21>
     </MSH>
     <ORU_R01.PATIENT_RESULT>
@@ -861,98 +684,16 @@
             <PID>
                 <PID.1>1</PID.1>
                 <PID.3>
-                    <CX.1>dc8d2234-7fce-4869-945e-97c8b7d97332</CX.1>
-                    <CX.5>ECID</CX.5>
-                </PID.3>
-				<PID.29>20120302233456</PID.29>
-            </PID>
-            <ORU_R01.VISIT>
-                <PV1>
-                    <PV1.2>0</PV1.2>
-                    <PV1.4>BIR</PV1.4>
-                    <PV1.7>
-                        <XCN.1>e8597a14-436f-1031-8b61-8d373bf4f88f</XCN.1>
-                        <XCN.13>EPID</XCN.13>
-                    </PV1.7>
-                </PV1>
-            </ORU_R01.VISIT>
-        </ORU_R01.PATIENT>
-        <ORU_R01.ORDER_OBSERVATION>
-            <OBR>
-                <OBR.1>0</OBR.1>
-                <OBR.4>
-                    <CE.2>BIR</CE.2>
-                </OBR.4>
-            </OBR>
-            <ORU_R01.OBSERVATION>
-                <OBX>
-                    <OBX.1>0</OBX.1>
-                    <OBX.2>CE</OBX.2>
-                    <OBX.3>
-						<CE.1>rsms_rm</CE.1>
-                        <CE.2>REMINDER</CE.2>
-						<CE.3>RSMS</CE.3>
-                    </OBX.3>
-                    <OBX.5>
-						<CE.1>rsms_pmr</CE.1>
-                        <CE.2>rsms_pmr PATIENT MISSED REFERRAL</CE.2>  <!-- name<space>description -->
-						<CE.3>RSMS</CE.3>
-                    </OBX.5>
-                </OBX>
-            </ORU_R01.OBSERVATION>
-        </ORU_R01.ORDER_OBSERVATION>
-    </ORU_R01.PATIENT_RESULT>
-</ORU_R01>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request><con:request name="Gen from SHR (edit)" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
-<ORU_R01 xmlns="urn:hl7-org:v2xml">
-    <MSH>
-        <MSH.1>|</MSH.1>
-        <MSH.2>^~\&amp;</MSH.2>
-		<MSH.3>Sending Facility</MSH.3>
-        <MSH.4>
-            <HD.1>FOSAID</HD.1>
-        </MSH.4>
-        <MSH.6>
-            <HD.1>Shared Health Record</HD.1>
-        </MSH.6>
-        <MSH.7>
-            <TS.1>20120821135106</TS.1> 
-        </MSH.7>
-        <MSH.9>
-            <MSG.1>ORU</MSG.1>
-            <MSG.2>R01</MSG.2>
-            <MSG.3>ORU_R01</MSG.3> 
-        </MSH.9>
-        <MSH.10>47e16a3d-ba4d-40da-ae59-032f21c5e831</MSH.10> 
-        <MSH.11>
-            <PT.1>D</PT.1>
-            <PT.2>C</PT.2>
-        </MSH.11>
-        <MSH.12>
-            <VID.1>2.5</VID.1>
-            <VID.2>
-                <CE.1>RWA</CE.1>
-            </VID.2>
-        </MSH.12>
-        <MSH.21>
-            <EI.1>CLSM_V0.83</EI.1>
-        </MSH.21>
-    </MSH>
-    <ORU_R01.PATIENT_RESULT>
-        <ORU_R01.PATIENT>
-            <PID>
-                <PID.1>1</PID.1>
-                <PID.3>
-                    <CX.1>123456789</CX.1>
+                    <CX.1>1234567890123456</CX.1>
                     <CX.5>NID</CX.5>
                 </PID.3>
-				<PID.29>20120302233456</PID.29>
             </PID>
             <ORU_R01.VISIT>
                 <PV1>
                     <PV1.2>0</PV1.2>
-                    <PV1.4>BIR</PV1.4>
+                    <PV1.4>RISK</PV1.4>
                     <PV1.7>
-                        <XCN.1>1198680069759062</XCN.1>
+                        <XCN.1>3525410</XCN.1>
                         <XCN.13>NID</XCN.13>
                     </PV1.7>
                 </PV1>
@@ -962,7 +703,7 @@
             <OBR>
                 <OBR.1>0</OBR.1>
                 <OBR.4>
-                    <CE.2>BIR</CE.2>
+                    <CE.2>RISK</CE.2>
                 </OBR.4>
             </OBR>
             <ORU_R01.OBSERVATION>
@@ -970,170 +711,127 @@
                     <OBX.1>0</OBX.1>
                     <OBX.2>CE</OBX.2>
                     <OBX.3>
-						<CE.1>rsms_rm</CE.1>
-                        <CE.2>REMINDER</CE.2>
-						<CE.3>RSMS</CE.3>
+                        <CE.1>rsms_risk</CE.1>
+                        <CE.2>rsms_risk RISK</CE.2>
+                        <CE.3>RSMS</CE.3>
                     </OBX.3>
                     <OBX.5>
-						<CE.1>rsms_pmr</CE.1>
-                        <CE.2>rsms_pmr PATIENT MISSED REFERRAL</CE.2>  <!-- name<space>description -->
-						<CE.3>RSMS</CE.3>
+                        <CE.1>fe</CE.1>
+                        <CE.2>fe FEVER</CE.2>
+                        <CE.3>RSMS</CE.3>
                     </OBX.5>
                 </OBX>
             </ORU_R01.OBSERVATION>
-        </ORU_R01.ORDER_OBSERVATION>
-    </ORU_R01.PATIENT_RESULT>
-</ORU_R01>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request><con:request name="Gen from SHR (for mocks)" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
-<ORU_R01 xmlns="urn:hl7-org:v2xml">
-    <MSH>
-        <MSH.1>|</MSH.1>
-        <MSH.2>^~\&amp;</MSH.2>
-		<MSH.3>Sending Facility</MSH.3>
-        <MSH.4>
-            <HD.1>FOSAID</HD.1>
-        </MSH.4>
-        <MSH.6>
-            <HD.1>Shared Health Record</HD.1>
-        </MSH.6>
-        <MSH.7>
-            <TS.1>20120821135106</TS.1> 
-        </MSH.7>
-        <MSH.9>
-            <MSG.1>ORU</MSG.1>
-            <MSG.2>R01</MSG.2>
-            <MSG.3>ORU_R01</MSG.3> 
-        </MSH.9>
-        <MSH.10>47e16a3d-ba4d-40da-ae59-032f21c5e831</MSH.10> 
-        <MSH.11>
-            <PT.1>D</PT.1>
-            <PT.2>C</PT.2>
-        </MSH.11>
-        <MSH.12>
-            <VID.1>2.5</VID.1>
-            <VID.2>
-                <CE.1>RWA</CE.1>
-            </VID.2>
-        </MSH.12>
-        <MSH.21>
-            <EI.1>CLSM_V0.83</EI.1>
-        </MSH.21>
-    </MSH>
-    <ORU_R01.PATIENT_RESULT>
-        <ORU_R01.PATIENT>
-            <PID>
-                <PID.1>1</PID.1>
-                <PID.3>
-                    <CX.1>dc8d2234-7fce-4869-945e-97c8b7d97332</CX.1>
-                    <CX.5>ECID</CX.5>
-                </PID.3>
-				<PID.29>20120302233456</PID.29>
-            </PID>
-            <ORU_R01.VISIT>
-                <PV1>
-                    <PV1.2>0</PV1.2>
-                    <PV1.4>BIR</PV1.4>
-                    <PV1.7>
-                        <XCN.1>e8597a14-436f-1031-8b61-8d373bf4f88f</XCN.1>
-                        <XCN.13>EPID</XCN.13>
-                    </PV1.7>
-                </PV1>
-            </ORU_R01.VISIT>
-        </ORU_R01.PATIENT>
-        <ORU_R01.ORDER_OBSERVATION>
-            <OBR>
-                <OBR.1>0</OBR.1>
-                <OBR.4>
-                    <CE.2>BIR</CE.2>
-                </OBR.4>
-            </OBR>
             <ORU_R01.OBSERVATION>
                 <OBX>
-                    <OBX.1>0</OBX.1>
+                    <OBX.1>1</OBX.1>
                     <OBX.2>CE</OBX.2>
                     <OBX.3>
-						<CE.1>rsms_rm</CE.1>
-                        <CE.2>REMINDER</CE.2>
-						<CE.3>RSMS</CE.3>
+                        <CE.1>rsms_risk</CE.1>
+                        <CE.2>rsms_risk RISK</CE.2>
+                        <CE.3>RSMS</CE.3>
                     </OBX.3>
                     <OBX.5>
-						<CE.1>rsms_pmr</CE.1>
-                        <CE.2>rsms_pmr PATIENT MISSED REFERRAL</CE.2>  <!-- name<space>description -->
-						<CE.3>RSMS</CE.3>
+                        <CE.1>he</CE.1>
+                        <CE.2>he HEMORRHAGING BLEEDING</CE.2>
+                        <CE.3>RSMS</CE.3>
                     </OBX.5>
+                </OBX>
+            </ORU_R01.OBSERVATION>
+            <ORU_R01.OBSERVATION>
+                <OBX>
+                    <OBX.1>3</OBX.1>
+                    <OBX.2>NM</OBX.2>
+                    <OBX.3>
+                        <CE.1>rsms_we</CE.1>
+                        <CE.2>rsms_we WEIGHT</CE.2>
+                        <CE.3>RSMS</CE.3>
+                    </OBX.3>
+                    <OBX.5>71.20000</OBX.5>
+                    <OBX.6>
+                        <CE.1/>
+                        <CE.3>UCUM</CE.3>
+                    </OBX.6>
                 </OBX>
             </ORU_R01.OBSERVATION>
         </ORU_R01.ORDER_OBSERVATION>
     </ORU_R01.PATIENT_RESULT>
-</ORU_R01>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite name="Client Service TestSuite"><con:description>TestSuite generated for REST Service [Client Service]</con:description><con:settings/><con:runType>PARALLELL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="patients TestCase" searchProperties="true" id="d2c1f8d5-6a92-4dbc-bcac-6e92cabf7194"><con:description>TestCase generated for REST Resource [patients] located at [/ws/rest/v1/patients]</con:description><con:settings/><con:testStep type="restrequest" name="Save patient"><con:settings/><con:config service="Client Service" resourcePath="/ws/rest/v1/patients" methodName="Post Patient" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Save patient" mediaType="text/xml" postQueryString="false" accept=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
-<ADT_A05 xmlns="urn:hl7-org:v2xml">
-    <MSH>
-        <MSH.1>|</MSH.1>
-        <MSH.2>^~\&amp;</MSH.2>
-        <MSH.3>
-            <HD.1>null</HD.1>
-        </MSH.3>
-        <MSH.7>
-            <TS.1>20120626</TS.1>
-        </MSH.7>
-        <MSH.9>
-            <MSG.1>ADT</MSG.1>
-            <MSG.2>A28</MSG.2>
-            <MSG.3>ADT_A05</MSG.3>
-        </MSH.9>
-        <MSH.12>
-            <VID.1>2.5</VID.1>
-        </MSH.12>
-        <MSH.13>123</MSH.13>
-    </MSH>
-    <PID>
-        <PID.3>
-            <CX.1>987654321</CX.1>
-            <CX.5>NID</CX.5>
-        </PID.3>
-        <PID.3>
-            <CX.1>333</CX.1>
-            <CX.5>OpenMRS-416</CX.5>
-        </PID.3>
-        <PID.5>
-            <XPN.1>
-                <FN.1>Patient</FN.1>
-            </XPN.1>
-            <XPN.2>Mary</XPN.2>
-        </PID.5>
-        <PID.7>
-            <TS.1>19870814</TS.1>
-        </PID.7>
-        <PID.8>F</PID.8>
-        <PID.11>
-            <XAD.1>
-                <SAD.1>Mumararungu</SAD.1>
-            </XAD.1>
-            <XAD.3>Rwezamenyo</XAD.3>
-            <XAD.4>Kigali Province</XAD.4>
-        </PID.11>
-        <PID.30>false</PID.30>
-    </PID>
-    <NK1>
-        <NK1.4>
-            <XAD.1>
-                <SAD.1>Mumararungu</SAD.1>
-            </XAD.1>
-            <XAD.3>Rwezamenyo</XAD.3>
-            <XAD.4>Kigali Province</XAD.4>
-            <XAD.6>Rwanda</XAD.6>
-        </NK1.4>
-    </NK1>
-    <PV1>
-        <PV1.1>1</PV1.1>
-        <PV1.2>U</PV1.2>
-    </PV1>
-</ADT_A05>
-
-]]></con:request><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>201</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Query patients"><con:settings/><con:config service="Client Service" resourcePath="/ws/rest/v1/patients" methodName="Get Patients" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Query patients" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="id" value=""/>
-  <con:entry key="gender" value="F"/>
-  <con:entry key="addr_province" value=" "/>
-</con:parameters></con:restRequest></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="patient TestCase" searchProperties="true" id="eb9256eb-86e4-4ab3-9722-b4e7d654392c"><con:description>TestCase generated for REST Resource [patient] located at [/ws/rest/v1/patient/{param0}]</con:description><con:settings/><con:testStep type="restrequest" name="Get patient"><con:settings/><con:config service="Client Service" resourcePath="/ws/rest/v1/patient/{param0}" methodName="Get Patient" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get patient" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="param0" value="NID-123456789" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Update patient"><con:settings/><con:config service="Client Service" resourcePath="/ws/rest/v1/patient/{param0}" methodName="Put Patient" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Update patient" mediaType="text/xml" postQueryString="false" accept=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<ADT_A05 xmlns="urn:hl7-org:v2xml">
+</ORU_R01>]]></con:request><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="notificationType" value="MAT" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method><con:method name="Query encounters" method="GET"><con:settings/><con:parameters><con:parameter><con:name>ELID</con:name><con:value>357</con:value><con:style>QUERY</con:style><con:default>357</con:default></con:parameter><con:parameter><con:name>encounter_start_date</con:name><con:value>1991-01-01T00:00:00</con:value><con:style>QUERY</con:style><con:default>1991-01-01T00:00:00</con:default></con:parameter><con:parameter><con:name>encounter_end_date</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter></con:parameters><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:urn="urn:hl7-org:v2xml">urn:ORU_R01</con:element></con:representation><con:request name="Query for encounters for Mosa after 1991" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="encounter" path="/ws/rest/v1/patient/{pid}/encounter/{eid}"><con:settings/><con:parameters><con:parameter><con:name>pid</con:name><con:value>NID-1234567890123456</con:value><con:style>TEMPLATE</con:style><con:type xmlns:xs="http://www.w3.org/2001/XMLSchema">xs:string</con:type><con:default>NID-1234567890123456</con:default><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>eid</con:name><con:value>321</con:value><con:style>TEMPLATE</con:style><con:type xmlns:xs="http://www.w3.org/2001/XMLSchema">xs:string</con:type><con:default>321</con:default><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Get encounter" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/plain</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:urn="urn:hl7-org:v2xml">urn:ORU_R01</con:element></con:representation><con:request name="Get encounter 321" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite name="OpenHIM Interface TestSuite"><con:settings/><con:runType>PARALLELL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Save patient" searchProperties="true" id="9fa1fb79-37ab-4991-b89f-cc97700b5dd5"><con:settings/><con:testStep type="restrequest" name="Save patient - Save Mosa"><con:settings/><con:config service="OpenHIM Interface" resourcePath="/ws/rest/v1/patients" methodName="Save patient" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Save patient - Save Mosa" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<ADT_A05 xmlns="urn:hl7-org:v2xml">
+   <MSH>
+      <MSH.1>|</MSH.1>
+      <MSH.2>^~\&amp;</MSH.2>
+      <MSH.7>
+         <TS.1/>
+      </MSH.7>
+      <MSH.9>
+         <MSG.1>ADT</MSG.1>
+         <MSG.2>A28</MSG.2>
+         <MSG.3>ADT_A05</MSG.3>
+      </MSH.9>
+      <MSH.12>
+         <VID.1>2.5</VID.1>
+      </MSH.12>
+   </MSH>
+   <PID>
+      <PID.3>
+         <CX.1>dc8d2234-7fce-4869-945e-97c8b7d97332</CX.1>
+         <CX.5>ECID</CX.5>
+      </PID.3>
+      <PID.3>
+         <CX.1>1234567890123456</CX.1>
+         <CX.5>NID</CX.5>
+      </PID.3>
+      <PID.5>
+         <XPN.1>
+            <FN.1>Patient</FN.1>
+         </XPN.1>
+         <XPN.2>Mosa</XPN.2>
+      </PID.5>
+      <PID.7>
+         <TS.1>19910405</TS.1>
+      </PID.7>
+      <PID.8>F</PID.8>
+      <PID.11>
+         <XAD.3>Rwamagana</XAD.3>
+         <XAD.4>Eastern</XAD.4>
+         <XAD.6>Rwanda</XAD.6>
+         <XAD.8>Kagarama</XAD.8>
+         <XAD.9>Musha</XAD.9>
+         <XAD.10>aVillage</XAD.10>
+      </PID.11>
+      <PID.13>
+         <XTN.1>0763214569</XTN.1>
+      </PID.13>
+   </PID>
+   <NK1>
+      <NK1.1>1</NK1.1>
+      <NK1.2>
+         <XPN.1>
+            <FN.1>Mama</FN.1>
+         </XPN.1>
+      </NK1.2>
+      <NK1.3>
+         <CE.1>MTH</CE.1>
+         <CE.2>mother</CE.2>
+         <CE.3>REL_RTS</CE.3>
+      </NK1.3>
+   </NK1>
+   <NK1>
+      <NK1.1>2</NK1.1>
+      <NK1.2>
+         <XPN.1>
+            <FN.1>Papa</FN.1>
+         </XPN.1>
+      </NK1.2>
+      <NK1.3>
+         <CE.1>FTH</CE.1>
+         <CE.2>father</CE.2>
+         <CE.3>REL_RTS</CE.3>
+      </NK1.3>
+   </NK1>
+</ADT_A05>]]></con:request><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>201
+</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Get patients" searchProperties="true" id="87bc7171-a328-4662-ad7a-badf7062ddb7"><con:settings/><con:testStep type="restrequest" name="Get Patients - Full query for Mosa"><con:settings/><con:config service="OpenHIM Interface" resourcePath="/ws/rest/v1/patients" methodName="Get Patients" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get Patients - Full query for Mosa" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200
+</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Get Patient" searchProperties="true" id="7602d994-089a-4b21-b58a-a188dc8d0b29"><con:settings/><con:testStep type="restrequest" name="Get Patient - Get Mosa"><con:settings/><con:config service="OpenHIM Interface" resourcePath="/ws/rest/v1/patient/{pid}" methodName="Get Patient" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get Patient - Get Mosa" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Update patient" searchProperties="true" id="0774a8ad-8ab3-4f9a-8fc0-9a00ac19f7e1"><con:settings/><con:testStep type="restrequest" name="Update patient - Update Mosa"><con:settings/><con:config service="OpenHIM Interface" resourcePath="/ws/rest/v1/patient/{pid}" methodName="Update patient" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Update patient - Update Mosa" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<ADT_A05 xmlns="urn:hl7-org:v2xml">
    <MSH>
       <MSH.1>|</MSH.1>
       <MSH.2>^~\&amp;</MSH.2>
@@ -1206,11 +904,7 @@
          <CE.3>REL_RTS</CE.3>
       </NK1.3>
    </NK1>
-</ADT_A05>]]></con:request><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="param0" value="NID-1234567890123456" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="Facility Service TestSuite"><con:description>TestSuite generated for REST Service [Facility Service]</con:description><con:settings/><con:runType>PARALLELL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="facilities TestCase" searchProperties="true" id="cd753385-3225-4b0c-ac7d-18a74e4bd37d"><con:description>TestCase generated for REST Resource [facilities] located at [/ws/rest/v1/facilities]</con:description><con:settings/><con:testStep type="restrequest" name="Query facilities"><con:settings/><con:config service="Facility Service" resourcePath="/ws/rest/v1/facilities" methodName="Get Facilities" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Query facilities" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="page" value=""/>
-  <con:entry key="updated_since" value=""/>
-  <con:entry key="fosaid" value="321"/>
-</con:parameters></con:restRequest></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="facility TestCase" searchProperties="true" id="b462a9e7-8293-4ab0-aa80-7688e8a9d664"><con:description>TestCase generated for REST Resource [facility] located at [/ws/rest/v1/facility/{fid}]</con:description><con:settings/><con:testStep type="restrequest" name="Get Facility"><con:settings/><con:config service="Facility Service" resourcePath="/ws/rest/v1/facility/{fid}" methodName="Get Facility" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get Facility" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="fid" value="999" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="RapidSMS Service TestSuite"><con:description>TestSuite generated for REST Service [RapidSMS Service]</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="alerts TestCase" searchProperties="true" id="29bb5f76-23ee-4184-92e4-cd37fd07c72a"><con:description>TestCase generated for REST Resource [alerts] located at [/ws/rest/v1/alerts]</con:description><con:settings/><con:testStep type="restrequest" name="Post Alert"><con:settings/><con:config service="RapidSMS Service" resourcePath="/ws/rest/v1/alerts" methodName="Post alerts" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Post Alert" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
+</ADT_A05>]]></con:request><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Get facilities" searchProperties="true" id="0d8a38b7-1552-4edf-922e-3833fcd187f9"><con:settings/><con:testStep type="restrequest" name="Get Facilities - Query all open facilities"><con:settings/><con:config service="OpenHIM Interface" resourcePath="/ws/rest/v1/facilities" methodName="Get Facilities" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get Facilities - Query all open facilities" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Get facility" searchProperties="true" id="5ccbbb2d-239c-44fd-b20d-32c7706c8e76"><con:settings/><con:testStep type="restrequest" name="Get Facility - Get facility 363"><con:settings/><con:config service="OpenHIM Interface" resourcePath="/ws/rest/v1/facility/{fid}" methodName="Get Facility" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get Facility - Get facility 363" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="fid" value="363" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Send alert" searchProperties="true" id="6bb1fa43-58b6-48a1-b52e-1299dabc9305"><con:settings/><con:testStep type="restrequest" name="Send alert - Send alert for mock services"><con:settings/><con:config service="OpenHIM Interface" resourcePath="/ws/rest/v1/alerts" methodName="Send alert" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Send alert - Send alert for mock services" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
 <ORU_R01 xmlns="urn:hl7-org:v2xml">
     <MSH>
         <MSH.1>|</MSH.1>
@@ -1291,26 +985,26 @@
             </ORU_R01.OBSERVATION>
         </ORU_R01.ORDER_OBSERVATION>
     </ORU_R01.PATIENT_RESULT>
-</ORU_R01>]]></con:request><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="SHR Service TestSuite"><con:description>TestSuite generated for REST Service [SHR Service]</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="encounters TestCase" searchProperties="true" id="342b7879-9a85-42e5-bd0e-4ce9322cd6eb"><con:description>TestCase generated for REST Resource [encounters] located at [/ws/rest/v1/patient/{param0}/encounters]</con:description><con:settings/><con:testStep type="restrequest" name="Save encounter"><con:settings/><con:config service="SHR Service" resourcePath="/ws/rest/v1/patient/{param0}/encounters" methodName="Post encounters" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Save encounter" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
+</ORU_R01>]]></con:request><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>201</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Save encounter" searchProperties="true" id="72690f98-eb15-4e92-bb14-6955a220d583"><con:settings/><con:testStep type="restrequest" name="Save encounter - OpenMRS request"><con:settings/><con:config service="OpenHIM Interface" resourcePath="/ws/rest/v1/patient/{pid}/encounters" methodName="Save encounter" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Save encounter - OpenMRS request" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request><![CDATA[<?xml version="1.0"?>
 <ORU_R01 xmlns="urn:hl7-org:v2xml">
     <MSH>
         <MSH.1>|</MSH.1>
-        <MSH.2>^~\&amp;</MSH.2>
+        <MSH.2>^~\&amp;amp;</MSH.2>
         <MSH.4>
-            <HD.1>357</HD.1>
+            <HD.1>363</HD.1>
         </MSH.4>
         <MSH.6>
             <HD.1>Shared Health Record</HD.1>
         </MSH.6>
         <MSH.7>
-            <TS.1>20120719061643</TS.1>
+            <TS.1>20120918160235</TS.1>
         </MSH.7>
         <MSH.9>
             <MSG.1>ORU</MSG.1>
             <MSG.2>R01</MSG.2>
             <MSG.3>ORU_R01</MSG.3>
         </MSH.9>
-        <MSH.10>5b7d43a6-241f-4648-8a70-0af5a343c1f7</MSH.10>
+        <MSH.10>63357449-6a6c-4faa-af7a-e8843a545c31</MSH.10>
         <MSH.11>
             <PT.1>D</PT.1>
             <PT.2>C</PT.2>
@@ -1328,38 +1022,41 @@
     <ORU_R01.PATIENT_RESULT>
         <ORU_R01.PATIENT>
             <PID>
-                <PID.1>1</PID.1>
                 <PID.3>
-                    <CX.1>123456789</CX.1>
+                    <CX.1>1234567890456789</CX.1>
                     <CX.5>NID</CX.5>
+                </PID.3>
+                <PID.3>
+                    <CX.1>3630NX3X-J</CX.1>
+                    <CX.5>OMRS363</CX.5>
                 </PID.3>
                 <PID.5>
                     <XPN.1>
-                        <FN.1>Patient</FN.1>
+                        <FN.1>Umurwayi</FN.1>
                     </XPN.1>
-                    <XPN.2>Mosa</XPN.2>
+                    <XPN.2>Test</XPN.2>
                 </PID.5>
             </PID>
             <ORU_R01.VISIT>
                 <PV1>
                     <PV1.2>0</PV1.2>
                     <PV1.3>
-                        <PL.1>103</PL.1>
+                        <PL.1>111</PL.1>
                         <PL.4>
-                            <HD.1>Rwamagana</HD.1>
+                            <HD.1>Ruhunda</HD.1>
                         </PL.4>
                     </PV1.3>
                     <PV1.4>ANC</PV1.4>
                     <PV1.7>
                         <XCN.1>3525410</XCN.1>
                         <XCN.2>
-                            <FN.1>Doctor</FN.1>
+                            <FN.1>doctor</FN.1>
                         </XCN.2>
-                        <XCN.3>John</XCN.3>
+                        <XCN.3>john</XCN.3>
                         <XCN.13>NID</XCN.13>
                     </PV1.7>
                     <PV1.44>
-                        <TS.1>201207190616</TS.1>
+                        <TS.1>201209180402</TS.1>
                     </PV1.44>
                 </PV1>
             </ORU_R01.VISIT>
@@ -1368,30 +1065,30 @@
             <ORC>
                 <ORC.1>RE</ORC.1>
                 <ORC.9>
-                    <TS.1>201207190616</TS.1>
+                    <TS.1>201209181602</TS.1>
                 </ORC.9>
                 <ORC.12>
-                    <XCN.1>33</XCN.1>
+                    <XCN.1>259086</XCN.1>
                 </ORC.12>
                 <ORC.16>
-                    <CE.1>XXX</CE.1>
-                    <CE.2>YYY</CE.2>
-                    <CE.3>ZZZ</CE.3>
+                    <CE.1>Identifier</CE.1>
+                    <CE.2>Text</CE.2>
+                    <CE.3>Name of Coding System</CE.3>
                 </ORC.16>
             </ORC>
             <OBR>
                 <OBR.1>0</OBR.1>
                 <OBR.3>
-                    <EI.1>38</EI.1>
+                    <EI.1>1437</EI.1>
                 </OBR.3>
                 <OBR.4>
                     <CE.2>ANC</CE.2>
                 </OBR.4>
                 <OBR.7>
-                    <TS.1>201207190000</TS.1>
+                    <TS.1>201209180000</TS.1>
                 </OBR.7>
-                <OBR.20>103</OBR.20>
-                <OBR.21>Rwamagana</OBR.21>
+                <OBR.20>111</OBR.20>
+                <OBR.21>Ruhunda</OBR.21>
             </OBR>
         </ORU_R01.ORDER_OBSERVATION>
         <ORU_R01.ORDER_OBSERVATION>
@@ -1400,26 +1097,26 @@
                 <OBR.18>0</OBR.18>
                 <OBR.29>
                     <EIP.2>
-                        <EI.3>38</EI.3>
+                        <EI.3>1437</EI.3>
                     </EIP.2>
                 </OBR.29>
             </OBR>
             <ORU_R01.OBSERVATION>
                 <OBX>
                     <OBX.1>0</OBX.1>
-                    <OBX.2>NM</OBX.2>
+                    <OBX.2>CE</OBX.2>
                     <OBX.3>
-                        <CE.1>11885-1</CE.1>
-                        <CE.2>NUMBER OF WEEKS PREGNANT</CE.2>
+                        <CE.1>72179-5</CE.1>
+                        <CE.2>Given Sulfadoxin Pyrimethamine</CE.2>
                         <CE.3>LOINC</CE.3>
                     </OBX.3>
-                    <OBX.5>34.0</OBX.5>
-                    <OBX.6>
-                        <CE.1>weeks</CE.1>
-                        <CE.3>UCUM</CE.3>
-                    </OBX.6>
+                    <OBX.5>
+                        <CE.1>1065</CE.1>
+                        <CE.2>YES</CE.2>
+                        <CE.3>RWCS</CE.3>
+                    </OBX.5>
                     <OBX.14>
-                        <TS.1>20120719061641</TS.1>
+                        <TS.1>20120918160235</TS.1>
                     </OBX.14>
                 </OBX>
             </ORU_R01.OBSERVATION>
@@ -1428,13 +1125,77 @@
                     <OBX.1>1</OBX.1>
                     <OBX.2>CE</OBX.2>
                     <OBX.3>
-                        <CE.1>72155-5</CE.1>
-                        <CE.2>Presentation (how is the child positioned in the womb)</CE.2>
+                        <CE.1>8406</CE.1>
+                        <CE.2>Given Mebendazole</CE.2>
+                        <CE.3>RWCS</CE.3>
+                    </OBX.3>
+                    <OBX.5>
+                        <CE.1>1065</CE.1>
+                        <CE.2>YES</CE.2>
+                        <CE.3>RWCS</CE.3>
+                    </OBX.5>
+                    <OBX.14>
+                        <TS.1>20120918160235</TS.1>
+                    </OBX.14>
+                </OBX>
+            </ORU_R01.OBSERVATION>
+            <ORU_R01.OBSERVATION>
+                <OBX>
+                    <OBX.1>2</OBX.1>
+                    <OBX.2>CE</OBX.2>
+                    <OBX.3>
+                        <CE.1>72187-8</CE.1>
+                        <CE.2>Given tetanus vaccine</CE.2>
                         <CE.3>LOINC</CE.3>
                     </OBX.3>
+                    <OBX.5>
+                        <CE.1>1065</CE.1>
+                        <CE.2>YES</CE.2>
+                        <CE.3>RWCS</CE.3>
+                    </OBX.5>
+                    <OBX.14>
+                        <TS.1>20120918160235</TS.1>
+                    </OBX.14>
+                </OBX>
+            </ORU_R01.OBSERVATION>
+            <ORU_R01.OBSERVATION>
+                <OBX>
+                    <OBX.1>3</OBX.1>
+                    <OBX.2>CE</OBX.2>
+                    <OBX.3>
+                        <CE.1>72180-3</CE.1>
+                        <CE.2>Was the woman given iron and folic acid?</CE.2>
+                        <CE.3>LOINC</CE.3>
+                    </OBX.3>
+                    <OBX.5>
+                        <CE.1>1065</CE.1>
+                        <CE.2>YES</CE.2>
+                        <CE.3>RWCS</CE.3>
+                    </OBX.5>
+                    <OBX.14>
+                        <TS.1>20120918160235</TS.1>
+                    </OBX.14>
+                </OBX>
+            </ORU_R01.OBSERVATION>
+            <ORU_R01.OBSERVATION>
+                <OBX>
+                    <OBX.1>4</OBX.1>
+                    <OBX.2>CE</OBX.2>
+                    <OBX.3>
+                        <CE.1>72178-7</CE.1>
+                        <CE.2>Given Mosquito Nets</CE.2>
+                        <CE.3>LOINC</CE.3>
+                    </OBX.3>
+                    <OBX.5>
+                        <CE.1>1065</CE.1>
+                        <CE.2>YES</CE.2>
+                        <CE.3>RWCS</CE.3>
+                    </OBX.5>
+                    <OBX.14>
+                        <TS.1>20120918160235</TS.1>
+                    </OBX.14>
                 </OBX>
             </ORU_R01.OBSERVATION>
         </ORU_R01.ORDER_OBSERVATION>
     </ORU_R01.PATIENT_RESULT>
-</ORU_R01>
-]]></con:request><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>201</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="param0" value="NID-123456789" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Query encounters"><con:settings/><con:config service="SHR Service" resourcePath="/ws/rest/v1/patient/{param0}/encounters" methodName="Get encounters" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Query encounters" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="param0" value="NID-123456789" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="encounter TestCase" searchProperties="true" id="c8dfb6b3-24f8-4902-a316-e3fb0ac7fc2f"><con:description>TestCase generated for REST Resource [encounter] located at [/ws/rest/v1/patient/{param0}/encounter/{param1}]</con:description><con:settings/><con:testStep type="restrequest" name="Get encounter"><con:settings/><con:config service="SHR Service" resourcePath="/ws/rest/v1/patient/{param0}/encounter/{param1}" methodName="Get encounter" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get encounter" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="param0" value="NID-1234567890123456" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:properties/></con:testSuite><con:endpointStrategy xsi:type="con:DefaultEndpointStrategy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:endpoint mode="COMPLEMENT" username="test" password="test">https://localhost:5000</con:endpoint></con:endpointStrategy><con:properties/><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>
+</ORU_R01>]]></con:request><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>201</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="pid" value="NID-1234567890456789" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Query encounters" searchProperties="true" id="7140b38e-6177-440a-8afe-7a77aba93806"><con:settings/><con:testStep type="restrequest" name="Query encounters - Query for encounters for Mosa after 1991"><con:settings/><con:config service="OpenHIM Interface" resourcePath="/ws/rest/v1/patient/{pid}/encounters" methodName="Query encounters" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Query encounters - Query for encounters for Mosa after 1991" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Get encounter" searchProperties="true" id="7f44417a-5bf5-4b19-8767-fd33495335be"><con:settings/><con:testStep type="restrequest" name="Get encounter - Get encounter 321"><con:settings/><con:config service="OpenHIM Interface" resourcePath="/ws/rest/v1/patient/{pid}/encounter/{eid}" methodName="Get encounter" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get encounter - Get encounter 321" mediaType="application/xml"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:5000</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>test</con:username><con:password>test</con:password><con:domain xsi:nil="true"/><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:endpointStrategy xsi:type="con:DefaultEndpointStrategy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:endpoint mode="COMPLEMENT" username="test" password="test">https://localhost:5000</con:endpoint><con:endpoint mode="COMPLEMENT" username="test" password="test">http://localhost:5000</con:endpoint></con:endpointStrategy><con:properties/><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>
