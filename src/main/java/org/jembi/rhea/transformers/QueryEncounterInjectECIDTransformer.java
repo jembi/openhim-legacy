@@ -70,7 +70,11 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 				throw new Exception("Invalid Client: ECID for id type: " + idType + " with ID: " + id + " could not be found in Client Registry");
 			}
 			
-			path = "ws/rest/v1/patient/" + enterpriseIdType + "-" + ecid + "/encounters";  
+			if (path.contains("/encounters")) {
+				path = "ws/rest/v1/patient/" + enterpriseIdType + "-" + ecid + "/encounters";
+			} else if (path.contains("/encounter/")) {
+				path = "ws/rest/v1/patient/" + enterpriseIdType + "-" + ecid + path.substring(path.indexOf("/encounter"));
+			}
 			
 			req.setPath(path);
 			
