@@ -1,0 +1,120 @@
+<project name="OpenHIM" default="package" basedir=".">
+
+	<taskdef resource="org/mule/mulePackagingTasks.properties"/>
+
+	<property name="dir.java" value="src"/>
+	<property name="dir.test" value="src/test/java"/>
+	<property name="dir.conf" value="conf"/>
+	<property name="dir.build" value="target"/>
+	<property name="dir.classes" value="${dir.build}/classes"/>
+
+	<property name="app.name" value="HIM-core"/>
+	<property name="app.jar" value="${dir.build}/${app.name}.jar"/>
+	<property name="app.file" value="${app.name}.zip"/>
+	<property environment="env"/>
+
+
+	<target name="clean"
+            description="Clean the output directory (start from scratch).">
+		<delete dir="${dir.build}"/>
+		<delete file="${app.file}"/>
+	</target>
+	
+	<target name="set-paths">
+		<property name="dir.mule.home" value="/home/ryan/Programs/mule-standalone-3.2.1" />
+		<property name="dir.user.lib" value="${dir.mule.home}/lib/user/" />
+	</target>
+
+	<target name="init" depends="set-paths">
+		<!-- Create the build directory if it doesn't exist -->
+		<mkdir dir="${dir.classes}"/>
+
+		<!-- Configure Mule classpath (mirrors wrapper.conf settings) -->
+		<path id="classpath.mule">
+			<pathelement location="${dir.mule.home}/conf"/>
+			<fileset dir="${dir.mule.home}/lib/user">
+				<include name="**/*.jar"/>
+			</fileset>
+			<fileset dir="${dir.mule.home}/lib/mule">
+				<include name="**/*.jar"/>
+			</fileset>
+			<fileset dir="${dir.mule.home}/lib/opt">
+				<include name="**/*.jar"/>
+			</fileset>
+			<fileset dir="${dir.mule.home}/lib">
+				<include name="**/*.jar"/>
+			</fileset>
+			<fileset dir="lib">
+				<include name="**/*.jar"/>
+			</fileset>
+		</path>
+		
+	</target>
+
+	<target name="compile"
+            depends="init"
+            description="Compile the application.">
+
+		<javac srcdir="${dir.java}"
+               destdir="${dir.classes}"
+               debug="true"
+               source="1.6"
+               target="1.6">
+			<classpath refid="classpath.mule"/>
+		</javac>
+
+	</target>
+
+	<target name="jar" 
+            depends="compile"
+            description="build the application jar">
+
+		<jar jarfile="${app.jar}" 
+             basedir="${dir.classes}"/>
+	</target>
+
+
+	<target name="package" 
+           depends="jar" 
+           description="Package the application">
+
+		<copy todir="${dir.build}/lib">
+			<fileset dir="lib"/>
+		</copy>
+
+		<copy todir="${dir.build}/classes">
+			<fileset dir="src/main/resources"/>
+		</copy>
+
+		<mulePackage applicationFile="${app.file}">
+			<config dir="src/main/app"/>
+			<classes dir="${dir.build}/classes"/>
+			<lib dir="${dir.build}/lib"/>
+		</mulePackage>
+	</target>
+
+	<target name="test" depends="compile">
+		<junit printsummary="true" failureproperty="junit.failure" haltonerror="yes" showoutput="true">
+			<classpath>
+				<path refid="classpath.mule" />
+				<path path="${dir.classes}" />
+				<fileset dir="${dir.classes}">
+					<include name="**/*.class" />
+				</fileset>
+			</classpath>
+			
+			<batchtest>
+				<fileset dir="${dir.test}">
+					<include name="**/*Test*.java" />
+					<exclude name="**/TestUtil.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+		<fail if="junit.failure" message="One or more unit tests failed." />
+	</target>
+
+	<target name="deploy" depends="package" description="Deploy the application to the Mule server">
+		<muleDeploy applicationFile="${app.file}" />
+	</target>
+
+</project>
