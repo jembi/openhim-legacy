@@ -1,144 +1,157 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:loadui-project label="OpenHIM-load-tests" id="b82e7359-0dce-4ca3-8b2e-2851f2f4a745" xmlns:con="http://eviware.com/loadui/config"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="CanvasItem.abortOnFinish" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="ModelItem.saveReport" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="ModelItem.reportFolder" type="java.lang.String"/><con:property propagates="true" key="ModelItem.reportFormat" type="java.lang.String"/><con:property propagates="true" key="ProjectItem.statisticNumberOfAutosaves" type="java.lang.Long">5</con:property></con:properties><con:attributes><con:property key="miniature">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
-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
-cnE8pwAAAABJRU5ErkJggg==
-</con:property><con:property key="gui.statistics.view">statistics.manage</con:property><con:property key="limits">Time=300;</con:property></con:attributes><con:addons/><con:scene label="Save encounter transactions" id="54889dcf-ea45-4f25-a510-bf75d2ad6497" version="9"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="CanvasItem.abortOnFinish" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="SceneItem.followProject" type="java.lang.Boolean">true</con:property></con:properties><con:attributes><con:property key="gui.layoutX">171</con:property><con:property key="gui.layoutY">184</con:property><con:property key="gui.compact">false</con:property><con:property key="miniature">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
-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
-AElFTkSuQmCC
+<con:loadui-project label="OpenHIM-load-tests" id="b82e7359-0dce-4ca3-8b2e-2851f2f4a745" xmlns:con="http://eviware.com/loadui/config"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="CanvasItem.abortOnFinish" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="ModelItem.saveReport" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="ModelItem.reportFolder" type="java.lang.String"/><con:property propagates="true" key="ModelItem.reportFormat" type="java.lang.String"/><con:property propagates="true" key="ProjectItem.statisticNumberOfAutosaves" type="java.lang.Long">5</con:property></con:properties><con:attributes><con:property key="miniature">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
+SAAAAABJRU5ErkJggg==
+</con:property><con:property key="limits">Time=120;</con:property><con:property key="gui.statistics.view">statistics.view</con:property></con:attributes><con:addons/><con:scene label="Save encounter transactions" id="54889dcf-ea45-4f25-a510-bf75d2ad6497" version="20"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="CanvasItem.abortOnFinish" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="SceneItem.followProject" type="java.lang.Boolean">true</con:property></con:properties><con:attributes><con:property key="gui.layoutX">174</con:property><con:property key="gui.layoutY">183</con:property><con:property key="gui.compact">false</con:property><con:property key="miniature">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
+uf4fuGJIPOjg6jgAAAAASUVORK5CYII=
 </con:property></con:attributes><con:addons/><con:component type="com.eviware.loadui.groovy.GroovyComponent" label="Fixed Rate" id="bf70ed01-ae1e-45b7-8d89-735c63252698" category="generators"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="_script" type="java.lang.String">// 
 // Copyright 2011 SmartBear Software
 // 
@@ -220,83 +233,277 @@ settings( label: "General" ) {
 	property( property: burstSize, label: 'Burst size' ) 
 }
 
-if( running ) schedule()</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="rate" type="java.lang.Long">6</con:property><con:property propagates="true" key="unit" type="java.lang.String">Sec</con:property><con:property propagates="true" key="burstSize" type="java.lang.Long">1</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Fixed Rate</con:property><con:property key="_digest">c7926addaeaab3d091fd733b87da44d4</con:property><con:property key="_id">com.eviware.FixedRate</con:property><con:property key="_classLoader">com.eviware.FixedRate</con:property><con:property key="gui.layoutX">392</con:property><con:property key="gui.layoutY">170</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.components.soapui.SoapUISamplerComponent" label="Save encounter runner" id="6bf2af3a-62fd-42df-a9d3-7d411c52b81f"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="concurrentSamples" type="java.lang.Long">100</con:property><con:property propagates="true" key="maxQueueSize" type="java.lang.Long">1000</con:property><con:property propagates="true" key="countDiscarded" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="_projectFileworkingCopy" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="false" key="projectRelativePath" type="java.lang.String">../git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="disabledTestSteps" type="java.lang.String"/><con:property propagates="true" key="settingsFile" type="java.io.File">/home/ryan/soapui-settings.xml</con:property><con:property propagates="true" key="_projectPassword" xsi:nil="true" type="java.lang.String" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:property propagates="true" key="useProjectRelativePath" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="raiseError" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="outputTestCaseProperties" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="OutputLevel" type="java.lang.String">TestCase only</con:property><con:property propagates="true" key="closeConnectionsAfterRequest" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="disableSoapuiAssertions" type="java.lang.Boolean">false</con:property><con:property propagates="false" key="projectFile" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="testSuite" type="java.lang.String">OpenHIM Interface TestSuite</con:property><con:property propagates="true" key="testCase" type="java.lang.String">Save encounter</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">soapUI Runner</con:property><con:property key="gui.layoutX">291</con:property><con:property key="gui.layoutY">378</con:property><con:property key="gui.compact">false</con:property></con:attributes><con:addons/></con:component><con:connection outputTerminalId="bf70ed01-ae1e-45b7-8d89-735c63252698/triggerTerminal" inputTerminalId="6bf2af3a-62fd-42df-a9d3-7d411c52b81f/triggerTerminal"/></con:scene><con:scene label="Get encounter transactions" id="83a33f6d-ed3d-440d-b153-6fc4fdafcc2a" version="5"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="CanvasItem.abortOnFinish" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="SceneItem.followProject" type="java.lang.Boolean">true</con:property></con:properties><con:attributes><con:property key="gui.layoutX">562</con:property><con:property key="gui.layoutY">185</con:property><con:property key="gui.compact">false</con:property><con:property key="miniature">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
-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
+if( running ) schedule()</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="rate" type="java.lang.Long">6</con:property><con:property propagates="true" key="unit" type="java.lang.String">Sec</con:property><con:property propagates="true" key="burstSize" type="java.lang.Long">1</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Fixed Rate</con:property><con:property key="_digest">c7926addaeaab3d091fd733b87da44d4</con:property><con:property key="_id">com.eviware.FixedRate</con:property><con:property key="_classLoader">com.eviware.FixedRate</con:property><con:property key="gui.layoutX">375</con:property><con:property key="gui.layoutY">210</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.components.soapui.SoapUISamplerComponent" label="Save encounter runner" id="6bf2af3a-62fd-42df-a9d3-7d411c52b81f"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="concurrentSamples" type="java.lang.Long">100</con:property><con:property propagates="true" key="maxQueueSize" type="java.lang.Long">1000</con:property><con:property propagates="true" key="countDiscarded" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="_projectFileworkingCopy" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="false" key="projectRelativePath" type="java.lang.String">OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="disabledTestSteps" type="java.lang.String"/><con:property propagates="true" key="settingsFile" type="java.io.File">/home/ryan/soapui-settings.xml</con:property><con:property propagates="true" key="_projectPassword" xsi:nil="true" type="java.lang.String" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:property propagates="true" key="useProjectRelativePath" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="raiseError" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="outputTestCaseProperties" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="OutputLevel" type="java.lang.String">TestCase only</con:property><con:property propagates="true" key="closeConnectionsAfterRequest" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="disableSoapuiAssertions" type="java.lang.Boolean">false</con:property><con:property propagates="false" key="projectFile" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="testSuite" type="java.lang.String">OpenHIM Interface TestSuite</con:property><con:property propagates="true" key="testCase" type="java.lang.String">Save encounter</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">soapUI Runner</con:property><con:property key="gui.layoutX">471</con:property><con:property key="gui.layoutY">450</con:property><con:property key="gui.compact">false</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.groovy.GroovyComponent" label="Ramp" id="d083070e-34f7-4626-86a9-ef37a0393819" category="generators"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="_script" type="java.lang.String">// 
+// Copyright 2011 SmartBear Software
+// 
+// Licensed under the EUPL, Version 1.1 or - as soon they will be approved by the European Commission - subsequent
+// versions of the EUPL (the "Licence");
+// You may not use this work except in compliance with the Licence.
+// You may obtain a copy of the Licence at:
+// 
+// http://ec.europa.eu/idabc/eupl5
+// 
+// Unless required by applicable law or agreed to in writing, software distributed under the Licence is
+// distributed on an "AS IS" basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied. See the Licence for the specific language governing permissions and limitations
+// under the Licence.
+// 
+
+/**
+ * Sends signals at a decreasing or increasing rate until it gets to a prespecified level
+ * 
+ * @id com.eviware.Ramp
+ * @help http://www.loadui.org/Generators/ramp-updown-component.html
+ * @category generators
+ * @nonBlocking true
+ */
+
+import com.eviware.loadui.api.events.PropertyEvent
+
+//Properties
+createProperty( 'start', Long, 0 )
+createProperty( 'end', Long, 10 )
+createProperty( 'period', Long, 10 )
+createProperty( 'unit', String, 'Sec' )
+
+direction = "up"
+msPerUnit = 1000
+currentRate = 0
+gradient = 0
+timeEllapsed = 0
+currentDelay = 0
+targetReached = false
+
+timer = new Timer(true)
+
+scheduled = false
+future = null
+
+reset = {
+	currentDelay = 0
+	timeEllapsed = 0
+	targetReached = false
+	if ( period.value > 0 ) {
+		//Some sanity checks
+//		if (start.value != 0) {
+//			if (msPerUnit/start.value > period.value * 1000) {
+//				targetReached = true
+//				currentRate = end.value
+//			}
+//		} 
+		
+		if (!targetReached) {
+			gradient = (end.value - start.value)/ (period.value * 1000)
+			currentRate = start.value
+			while (currentRate.longValue() == 0) {
+				timeEllapsed++
+				currentRate = start.value + timeEllapsed * gradient
+			}
+		}
+	} else {
+		targetReached = true
+		currentRate = end.value()
+	}
+	scheduled = false
+}
+
+begin = {
+	if (stateProperty.value) {
+		reset();
+		schedule();
+	}
+}
+
+schedule = {
+	if (stateProperty.value &amp;&amp; running &amp;&amp; !scheduled) {
+		if (!targetReached) {
+			if (currentDelay > 0) {
+				timeEllapsed = timeEllapsed + currentDelay
+				currentRate = start.value + timeEllapsed * gradient
+			}
+			
+			if (timeEllapsed/1000 >= period.value) {
+				targetReached = true
+				currentRate = end.value
+				direction = "none"
+			}
+			if (currentRate.longValue() > 0) { 
+				currentDelay = msPerUnit/(currentRate.longValue()) 
+			}
+			else { 
+				currentDelay = 1 //Handling edge cases
+			}
+		} 
+		
+		future = timer.runAfter(currentDelay.intValue()) {
+			trigger()
+			scheduled = false
+			schedule()
+		}
+		scheduled = true
+	}
+}
+
+addEventListener( PropertyEvent ) { event ->
+	if ( event.event == PropertyEvent.Event.VALUE ) {
+		
+		if( event.property == unit ) {
+			if ( unit.value == "Sec" )
+				msPerUnit = 1000
+			if ( unit.value == "Min" )
+				msPerUnit = 60000
+			if ( unit.value == "Hour" )
+				msPerUnit = 3600000
+		}
+		
+		future?.cancel()
+		
+		started = false
+		if (end.value > start.value)
+			direction = "up"
+		
+		if (start.value > end.value)
+			direction = "down"
+		
+		if (start.value == end.value)
+			direction = "none"
+		begin()
+	}
+}
+
+onAction( "START" ) { schedule() }
+
+onAction( "STOP" ) {
+	future?.cancel()
+	started = false
+	scheduled = false
+}
+
+onAction( "COMPLETE" ) { reset() }
+
+//Layout
+layout  { 
+	property( property:start, label:'Start', min:0 )
+	property( property:end, label:'End', min:0 )
+	separator( vertical:true )
+	property( property:unit, label:'Unit', options:['Sec','Min','Hour'] )
+	separator( vertical:true )
+	property( property:period, label:'Period\n(Sec)', min:1 ) 
+	separator( vertical:true )
+	box ( layout:"wrap, ins 0" ) {
+		box( widget:'display' ) {
+			node( label:'Rate', content: { "${currentRate.longValue()} / $unit.value $direction" }, constraints:"w 60!" )
+		}
+		action( label:"Restart", action: { reset(); begin(); }, constraints:"align right" )
+	}
+}
+
+//Compact Layout
+compactLayout  {
+	box( widget:'display' ) {
+		node( label:'Rate', content: { "${currentRate.longValue()} / $unit.value $direction" } )
+	}
+}
+
+//Settings
+//settings( label: "Properties", layout: 'wrap 2' ) {
+//	box(layout:"growx, wrap 1") {
+//		property( property:start, label:'Start', min:0 ) 
+//		property( property:end, label:'End', min:0 ) 
+//		property( property:period, label:'Period', min:1 ) 
+//		property( property:unit, label:'Unit', options:['Sec','Min','Hour'] )
+//	}
+//} 
+
+reset();
+if (running)
+	begin();
+</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="start" type="java.lang.Long">0</con:property><con:property propagates="true" key="end" type="java.lang.Long">12</con:property><con:property propagates="true" key="period" type="java.lang.Long">120</con:property><con:property propagates="true" key="unit" type="java.lang.String">Sec</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Ramp</con:property><con:property key="_digest">3e1518dec707a9129b715eccefcde3da</con:property><con:property key="_id">com.eviware.Ramp</con:property><con:property key="_classLoader">com.eviware.Ramp</con:property><con:property key="gui.layoutX">773</con:property><con:property key="gui.layoutY">207</con:property></con:attributes><con:addons/></con:component><con:connection outputTerminalId="bf70ed01-ae1e-45b7-8d89-735c63252698/triggerTerminal" inputTerminalId="6bf2af3a-62fd-42df-a9d3-7d411c52b81f/triggerTerminal"/></con:scene><con:scene label="Get encounter transactions" id="83a33f6d-ed3d-440d-b153-6fc4fdafcc2a" version="12"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="CanvasItem.abortOnFinish" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="SceneItem.followProject" type="java.lang.Boolean">true</con:property></con:properties><con:attributes><con:property key="gui.layoutX">558</con:property><con:property key="gui.layoutY">183</con:property><con:property key="gui.compact">false</con:property><con:property key="miniature">iVBORw0KGgoAAAANSUhEUgAAAPQAAABwCAYAAAApDl0wAAAS3klEQVR42u2dCXQURR7Gc1+QoGRR
+FlhdYDmGy+OtsCpP5VzRyE0OCIiCXBEUkUMIIAQkCogmgggEhRyEIxwJd0IQcgEhAQKEhEOeghiE
+RGVRUfT9d74KPfYcCRPSPenM/L/3vlfdXdVV0z31667u6u5ycmKxWCwWi8Vi1U7F8y5gsdRRki39
+9qAXKC4ujk51rkO2Lpv/alZVhUq6s7b82N9z0+jW3gSb+bdDeyg5OYUys7LolVdesWnZcNmWFcRV
+1H515Q6Aiji9+z9ox85dNHnSJFIy3ztWQ/3/t3Ac2dI3P3qTFr7YkRYtXkxfv9jIJmUuD+omjOlt
+r73EQNupvvs1eSUp6fFhYZSVnUOrYmIoee5bpHT+agBdNqQtwalty8PLwW0ppmcbOjmwLW18oXyZ
+8m5H34U+qlLelTup6z8ZaHttGt+IeNngmX260L7X+xnmN+uP5MO6/EdMX5wx2ChtRf5+eiAFBQbS
+xW730U9WpL+bvwh6RhjTJ98aoArQpQENqSJfrSSutnpTp/sZaHsFuiyoNUV1bEh9m9SjoU/oaM+L
+rakksLVYvqZHayrVh5cGtaIdL5RPl9WgjwU0UwXoc+fOkSN5xQq+hrZboEt7Nag1zn/OX1Wgr1y5
+QqGhoZSWlibmZ82aZQbDjBkzqKCgQEwXFxeLsHfv3pqDNioqymgev/ns2bMMtL0DbU3lyMrKskkl
+zMnJMZrPzc01mgdoagPdo0cPUU52drYB3NpqCWA+Qzsg0NOmTaOYmBgx/fnnn9OUKVPMgA4JCaGX
+X36ZRo4cSePGjRPLduzYoTjQ7733nhHQRUVFNgMa+wTlnDp1yui3nT59mhYvXlyrLW0TA+0AQL/z
+zjvk7OwspmNjY2n37t0Od4bma2iWXQHt4uJisQJs376dLly4UGNevXq1TYAuLCykM2fOKGI02REi
+TylfS/kfOHCgynl37tyZ5s6da9ERERHC0vzMmTOpa9eu4mCJdRlovoYWN39q2rYAGk1SpZyRkSHC
+lStX0qZNm2jr1q00ffp0s3T79++vct5vvPEGDR8+nIKDg408cOBAatiwITVp0oRcXV2NjFYWN7kd
+BGgAI51J7ub8/HwR4qwdHx8vptevX2+WbteuXSJ86qmnaMSIEWYeNWqUuIssX4bHIFEx/f39qWXL
+luJ6VsrPFkCfOHFCMePMizA396jYZ7jBZindvn37qpw39lOfPn2o5/M9qeeAnuTa2ZWc6zmL/fXg
+gw9S48aNzZ6yO3jwoFiXgXYAoBMSEkSFs8a4rkUIYJOTk8W6OGOYpsPNMoTPP/+8iLdkdPe0adPG
+oh955BF6+OGHDfnZAui8vDyD8eIEYDt+/Lg4w8rjJAOM1NRUASyatPK49PR0Ec6NmC9gwo29Dz74
+gBYsWGCUdu/evUbrffPNN+JggJtwy5Yts1hu//796dlnnyXPOp7ks7sOeSf7kPdq70qBRksA6zLQ
+DgI0KqXcR44cEc1G0+WojAijopdRXHyCqHimaeCUlBQRPvfccwLqXvN7UcCqAGp5vhXdn1GffH19
+qX379uTl5WXRrVq1Ig8PD0N+tgAa2ywZEEtAl5aWiml5PLxlyxYD0FevXqV169YZ4vBbEX4ctZQm
+TnxLAG26Poybj9J0ZmamaLUgxH69ceOGxXW6d+9Ofn5+Fp93rwho6fcz0A4CtGlllioqjuryOECO
+MPL9heJGGioers9w5pGn27Ztmwg7depEjz/+uDjbOjnrK5er3h5OAtZ27dpV+CKG1OSW8rMF0DhY
+Sd6wYYPYBxLQ0dHRRvHwxo0bDQc9AD1//nxDHM68CHHg25a8XQCNm1Vo1aALSUq3c+dOw/SePXto
+8+bNhjP0zZs3xZnVtNyOHTuKA6J7oLthf3mGe5FLG1cBdL1R9cituxt5jPUgn13i9UyxLVIvAgPt
+AEDLKwxglIAuKSmhjz76yBCHyiZV1K3bUkTFM61wMM5eCNF09vT0JJcOrobK56JzsRpoKT9bAI0D
+k2T5GRr98gBLHg9/+umnhv2EJjq2WYrDmRehHGjT9WFcmpguk4COjIy0uA72DYCuyhkaBwup+5GB
+dgCg0cyTjMqIM4UENM4sUhyuDRHKgcbZGRVz3rx5hnRYHyGazuIMMsfLULnqFvqSh6d1QEv52QJo
+nG3lxjZ9/PHHYptN4yQDeqTBPQX5cmleDvTUqVNFVxKupaV0uDQxzTMxMZE++eSTCsvEpQr2a/Pm
+zc2s0+nEPQjT5fhPsS4D7SBA48aNZMzjzHP06FHx56PSSnGACqEcaPm6kpOSkkT40EMPWQTW2jO0
+lJ8tgMaZUfLs2bOpV69eFBYWRu+++65RnNw4cL300kvC8uU4GCDE45eSLa2PJrh8Hj0GCLH/0FJa
+uHCh2TpoMVTVOENjXQbaQYBGk9LUuEY0XYZrQ4RyoFHh4aVLl5qtW12gpfxsAbR8O3EQw5nZ0n6x
+xujWsyYdoL3XMiTLDxoVWb4fGWgHABoVWG400fAwBPqRTZebprVk3FSyJp21tgXQSv5enHmtSYfr
+bvk8+ufDw8PFNFpJ1uSBrkQYz9+/+eabtGbNGvF0Hfr28aQY4uT7kYF2AKBx5rXGaEpakw7Xgdbm
+aY1tATQAUsrSjcW7GU12+TxutKGfGQdObLc1eWC/SK5oXkrLQDsI0KhAWrYtgMZ1pr2bgXYAoKU3
+rL744gtNGk1/WwCNPmF7NwPtIEDXBvPrk/z6JIuBZqAZaMcB+uTJk4pb6iJROl9cS6sBtBr7QMv+
+7LPPGGgG2jrjkcmU7TtE9wnuqiqZN56+sheg8Xw6upTQG8BAsxQTuqHQZ6yUx48fT9k5hygmZrXo
+T1UqXzxBheeUVdgF/7A1UPgKS3LKdsrMyhbvNtu6fLxUwzWfZZWCgoLE1zRUOpuqpQFOyg/bU6kX
+LVpM8fEJtGrVKrJ12VxLWVUSvqahVoMC71bfyb9vbd5H+CAjXoPUTzbkGsPStJ544glFgcbXTfCs
+eP369TdLy5o2bSq+0cV7m8VSWU2aNHlXH0yubj4TJkwQN9cqivfy8mqGb5DxHmex1FXDFi1a3DNo
+zZo1K8IZ2Zq0k8qHrWWxWGrq7bffvifQAHLdunWLq7DK3++8oslisdSStWdYSRhiB91ctiiLxWJV
+UY8++igge8WKpF/fOSs/YKuDB4vFUgE0xGOUh+qWgxf7eW+zWOrLxRRqDw+P21j2zDPPKAYhmuu8
+q1ksG6lBgwa/4wPy+Oi+Gvn37NkT+Trznmax7i5fLbtzgIv4MmZQ6H8BdQ+t/16uTqwaU8lPh+jC
+tY2a9qjJj9OJggJKXL+BDl+Yq/nfC3PNYtWEzmecH09ad8KRDvTp8uU0NmwMrU4erMnfuCt/tLA0
+z1WLVSNAr8vVETy0Qweau0JH4Z/oaG1W+bL+w3Q0b7WOVqbpaNICHX2QoKNFiToa/oaOxkzX0auT
+ytNN+1BHM5fqaNCrOoqMLV+mtGP3d6HYrHaq5K2GuWqxagTo1dkNiK28uWqxagRoR/vWlhI+c+aM
+0TzGtDJNw1WLpQmgp02bJsYvxkBqmMega/iEDoP8lw8fPixGecTwM5jH+GBYJu0zBpqlqTO0VFEt
+nXnY5UDL5wE0n6FZmgIalfTLL79kV8NysLlqsWoUaHzUjl19M9AsTQB9/vx5tgJmoFmaAFoaY7iw
+sJAiIiLo9ddfp8jISMrMzKTo6GgaO3as+L4XxkTOz8+nJUuWiJtAWI6mpjXjF5s6JiaGli1bJj5B
+hBEZMUrj2rVrady4cfeU392M34mhXTGNsbSwnZieOnWqKDcvL098cxzL8MH/bt26VbkMBpqlCaCL
+i4vZCpiBZmkCaPStsqtvBpqlCaDR1D516hQtX76cJk+eTPPnz6ewsDAxpMrs2bPFaBlY9uGHH4q0
+o0ePpvfff180WwcPHiyWSaM2IB2arPgQP0aNOHbsmIiXG032GTNmUFRUlEiD5jaGjUHcxIkTDU1/
+9IMvXbqUjh8/LoaWwQgbmEc8hk7FqCAhISEiL5Rz6NAhQ7ypMRZXfHy8iM/NzRXLAgMDxaUFphcs
+WCA+JYxvpWE+IyNDjOZhKa+KzECzNAE0YK6qAeC9rKcFA3418mWgWZoA2tFGZ1TLDDRLE0AXFBSw
+FTADzdIE0LhGZVffDDRLE0DjmnLfvn3sezT667EPGWiWJoDGwyK//XaLiotO15hR/rmzRZXG3y2P
+s0WFIh2MbZK7ZcuWqrl3796iDAaapQmg8RRVVsaXosvm9u3bRl6xYoXZMiX9xx9/CBfrYUR3EsDY
+u3evWTwgRYj4yvKRgMY2yY3uMRjdYrA0L/eYMWPEE3GW4jAYfZs2bcjLy8tsPOZOnTrxyxks7QAN
+kNJTd9P331+ly5cvi0c6k5I20S+//Ew//3yT0tP3UVpaKo0cOVIsU9K//voL3br1K50sOEZbtmwW
+83FxsVRaet0oHpBmZmaIeSwfOnQoYfB5TPft2/dOulsGoLFNcoeGhgrjsVb0q0vzco8YMYLwUX9M
+d+jQwQzcyoBGGQw0SxNA4/XJlC1JVFZ2ncpKrfE1Cy6PK71+zWDr1r9OP/xQSkcOZdONn3688xtk
+6+rnf/yhTECKUCrDtEyR7scyA9DYJrnxEAmMh2JgaV5uHCR0Op0ZsNYALX9PmqsWq0aBxhNWuYcy
+7crYJrn79esn/NqOUfTqlFdpUPQgMT9g1AAKPhxMLm4u5OPjQ61bt/4LVmcnch/qTu4heg9yp7oX
+fckvq55FoFEGA83SDNDX9c1tPIoJXbp0SczXhCtSwYkTdPv336ky/fnnn6L7CDIFuk+fPsIYVgfu
+0698Hm9Vubm5Cfv5+QmgpXlTt23blnwe8DFbzkCzNAV0Tk6OgAnPTgPma9eumYF2rrhIhCVXrlDs
+mjW0PnEd7ddfW39f8h0lJiSIuMM52Yb0J47li/Dqd1fo2tUSunzpG5sCjW2SW2pqh6aEiptfmH7y
+ySepffv2BuO6GaNqypfJjTikMV0OoFEGA83SBNDZ2X+BiJci8CIDpnOys0QIaAGlKXzSMilEOliK
+L7nyrdG83LlHDhvWUQJo3OGWA41tkrtLly7CA4IG0MCBA6lePfOms1mTuwrX0CiDgWZpAmh8xdLe
+hG2S++mnnxYOCAgQoSVgAXSLFi0qBBqwVwQ0ymCgWZoAGk862ZuwTXJ37NhRuHv37uTf2J+cfZwN
+QGLaubGzgLXRrEbly12dyPXfruTk5mRw0381pToD61gEGmUw0CxNAI13f+1N2Ca5H3vsMWG/7X5U
+b/N95B7sXg6kHlSfzT7kvcGH3Fq6UYPpDf4C/W/O5B7oTt5r9XG93ej+VfeTd4C3RaBRBgPN0gTQ
+Bw8etDugsU1y4w41XKdOHWFLTWrcsa5fv36FTW5/f3+RxhLQKIOBZjHQNgIaz1yL6+SuPuTp6WkR
+WFdXVwPsbv304HoYx9etW5dcXFwYaJa2gT5w4IDdAY1tkrt58+YV9i/D7u7uwh4eHoZpubEcBwKE
+pgbQKIOBZmkCaIz8YG8yHdmiUaNGFTalq2sAjTIYaJYmgEa/s70J2yS3vLvJpa0reUV5k/MDzuQx
+xZM8w73ItZN+2ULjLincFPP9yY98v/UVj31WBjTKYKBZmgA6PT3d7oDGNsmt1tlZAhplMNAsTQCN
+r27Ym0y/KiLB5xXtbR2ozndsJdAog4FmaQLotLQ0uwMa2yS3BJ9nhJd1QLtUDWiUwUCzNAF0amqq
+3QGNbZJb7SY3ymCgWQw0A81iKQs0vuHFrr4ZaJYmgN6zZw+dPn1aGEO6SNNVsTyPuxlPVc2aNcsw
+j1cPK0tfWXxFvxe/R0lX9vswnhfSMNAsTQCNweVM3x8ODg42msfLB+Hh4eIBCoypjGX4QqYUL88D
+bx5h8DcMaAd48R4xvtmFL6IgHoPMYYA5TOODfcOHD6d58+aJd7ExcB0GlJszZ47IA1/cRDwOAPh4
+H9bB+8xIizGqMY+XLpAnypL/HiWNPJOTk8XdbPzGIUOGiI8kYLk0QB8DzdIE0BgpEpUVoTVOSkqy
+Oq0lYxRIHBSquh5Ar065ahlAI2SgWZoAGkOzsqtvBpqlCaC3bt0qmqzsezf2IQPN0gTQbGXNVYvF
+QDPQLFb1gK7O4Oa4222rgdTxidy8vDyblIVxnvHmVHXy4KrFqjVAFxYWUlhYGCUkrBNdWWoDBpDj
+4uNF9xa6i9Qsq6ioSHyzOy4uTnzFk4Fm1SrhKxtVrawXL16kbduSKTMrm0aPHqM60OjeOqqHel1i
+ogBNzbK++uor2o7+bP2BCgPg3UseGNmSaxarNskfD4wsWryYYmNjVa+8ISEhNDcigoYNG4ayhqhc
+XNMJEyZQpH77lixZwmCyHEpNbVyWt51uG4vFYrFYLBaLxWKxWCwWi8VisVgsFovFYrFYLBaLxWKx
+WCwWi8VisVgsFovFYrFYLBaLpbT+D/1OwCV4lldaAAAAAElFTkSuQmCC
 </con:property></con:attributes><con:addons/><con:component type="com.eviware.loadui.groovy.GroovyComponent" label="Fixed Rate" id="0888ae3f-3942-401b-92b3-aef683e3ced9" category="generators"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="_script" type="java.lang.String">// 
 // Copyright 2011 SmartBear Software
 // 
@@ -378,82 +585,279 @@ settings( label: "General" ) {
 	property( property: burstSize, label: 'Burst size' ) 
 }
 
-if( running ) schedule()</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="rate" type="java.lang.Long">2</con:property><con:property propagates="true" key="unit" type="java.lang.String">Sec</con:property><con:property propagates="true" key="burstSize" type="java.lang.Long">1</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Fixed Rate</con:property><con:property key="_digest">c7926addaeaab3d091fd733b87da44d4</con:property><con:property key="_id">com.eviware.FixedRate</con:property><con:property key="_classLoader">com.eviware.FixedRate</con:property><con:property key="gui.layoutX">457</con:property><con:property key="gui.layoutY">182</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.components.soapui.SoapUISamplerComponent" label="Get encounter runner" id="213e27f2-ac82-49af-817b-f87487f4fcf7"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="concurrentSamples" type="java.lang.Long">100</con:property><con:property propagates="true" key="maxQueueSize" type="java.lang.Long">1000</con:property><con:property propagates="true" key="countDiscarded" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="_projectFileworkingCopy" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="false" key="projectRelativePath" type="java.lang.String">../git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="disabledTestSteps" type="java.lang.String"/><con:property propagates="true" key="settingsFile" type="java.io.File">/home/ryan/soapui-settings.xml</con:property><con:property propagates="true" key="_projectPassword" xsi:nil="true" type="java.lang.String" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:property propagates="true" key="useProjectRelativePath" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="raiseError" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="outputTestCaseProperties" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="OutputLevel" type="java.lang.String">TestCase only</con:property><con:property propagates="true" key="closeConnectionsAfterRequest" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="disableSoapuiAssertions" type="java.lang.Boolean">false</con:property><con:property propagates="false" key="projectFile" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="testSuite" type="java.lang.String">OpenHIM Interface TestSuite</con:property><con:property propagates="true" key="testCase" type="java.lang.String">Query encounters</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">soapUI Runner</con:property><con:property key="gui.layoutX">300</con:property><con:property key="gui.layoutY">378</con:property></con:attributes><con:addons/></con:component><con:connection outputTerminalId="0888ae3f-3942-401b-92b3-aef683e3ced9/triggerTerminal" inputTerminalId="213e27f2-ac82-49af-817b-f87487f4fcf7/triggerTerminal"/></con:scene><con:scene label="Save patient" id="fa9cfa5c-4872-42cd-8fa2-dd9926fc7626" version="5"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="CanvasItem.abortOnFinish" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="SceneItem.followProject" type="java.lang.Boolean">true</con:property></con:properties><con:attributes><con:property key="gui.layoutX">939</con:property><con:property key="gui.layoutY">183</con:property><con:property key="gui.compact">false</con:property><con:property key="miniature">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
-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
-</con:property></con:attributes><con:addons/><con:component type="com.eviware.loadui.components.soapui.SoapUISamplerComponent" label="Save patient runner" id="81f8e33b-b1f6-4b7b-92ea-aafec04b07b7"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="concurrentSamples" type="java.lang.Long">100</con:property><con:property propagates="true" key="maxQueueSize" type="java.lang.Long">1000</con:property><con:property propagates="true" key="countDiscarded" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="_projectFileworkingCopy" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="false" key="projectRelativePath" type="java.lang.String">../git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="disabledTestSteps" type="java.lang.String"/><con:property propagates="true" key="settingsFile" type="java.io.File">/home/ryan/soapui-settings.xml</con:property><con:property propagates="true" key="_projectPassword" xsi:nil="true" type="java.lang.String" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:property propagates="true" key="useProjectRelativePath" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="raiseError" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="outputTestCaseProperties" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="OutputLevel" type="java.lang.String">TestCase only</con:property><con:property propagates="true" key="closeConnectionsAfterRequest" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="disableSoapuiAssertions" type="java.lang.Boolean">false</con:property><con:property propagates="false" key="projectFile" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="testSuite" type="java.lang.String">OpenHIM Interface TestSuite</con:property><con:property propagates="true" key="testCase" type="java.lang.String">Save patient</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">soapUI Runner</con:property><con:property key="gui.layoutX">336</con:property><con:property key="gui.layoutY">391</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.groovy.GroovyComponent" label="Fixed Rate" id="41ce0bb3-f3ef-4a7b-a5d1-5eb0f9a24bfb" category="generators"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="_script" type="java.lang.String">// 
+if( running ) schedule()</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="rate" type="java.lang.Long">2</con:property><con:property propagates="true" key="unit" type="java.lang.String">Sec</con:property><con:property propagates="true" key="burstSize" type="java.lang.Long">1</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Fixed Rate</con:property><con:property key="_digest">c7926addaeaab3d091fd733b87da44d4</con:property><con:property key="_id">com.eviware.FixedRate</con:property><con:property key="_classLoader">com.eviware.FixedRate</con:property><con:property key="gui.layoutX">437</con:property><con:property key="gui.layoutY">219</con:property><con:property key="gui.compact">false</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.components.soapui.SoapUISamplerComponent" label="Get encounter runner" id="213e27f2-ac82-49af-817b-f87487f4fcf7"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="concurrentSamples" type="java.lang.Long">100</con:property><con:property propagates="true" key="maxQueueSize" type="java.lang.Long">1000</con:property><con:property propagates="true" key="countDiscarded" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="_projectFileworkingCopy" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="false" key="projectRelativePath" type="java.lang.String">OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="disabledTestSteps" type="java.lang.String"/><con:property propagates="true" key="settingsFile" type="java.io.File">/home/ryan/soapui-settings.xml</con:property><con:property propagates="true" key="_projectPassword" xsi:nil="true" type="java.lang.String" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:property propagates="true" key="useProjectRelativePath" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="raiseError" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="outputTestCaseProperties" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="OutputLevel" type="java.lang.String">TestCase only</con:property><con:property propagates="true" key="closeConnectionsAfterRequest" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="disableSoapuiAssertions" type="java.lang.Boolean">false</con:property><con:property propagates="false" key="projectFile" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="testSuite" type="java.lang.String">OpenHIM Interface TestSuite</con:property><con:property propagates="true" key="testCase" type="java.lang.String">Query encounters</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">soapUI Runner</con:property><con:property key="gui.layoutX">480</con:property><con:property key="gui.layoutY">450</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.groovy.GroovyComponent" label="Ramp" id="5da54aa2-5494-42e5-baa3-864420276bee" category="generators"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="_script" type="java.lang.String">// 
+// Copyright 2011 SmartBear Software
+// 
+// Licensed under the EUPL, Version 1.1 or - as soon they will be approved by the European Commission - subsequent
+// versions of the EUPL (the "Licence");
+// You may not use this work except in compliance with the Licence.
+// You may obtain a copy of the Licence at:
+// 
+// http://ec.europa.eu/idabc/eupl5
+// 
+// Unless required by applicable law or agreed to in writing, software distributed under the Licence is
+// distributed on an "AS IS" basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied. See the Licence for the specific language governing permissions and limitations
+// under the Licence.
+// 
+
+/**
+ * Sends signals at a decreasing or increasing rate until it gets to a prespecified level
+ * 
+ * @id com.eviware.Ramp
+ * @help http://www.loadui.org/Generators/ramp-updown-component.html
+ * @category generators
+ * @nonBlocking true
+ */
+
+import com.eviware.loadui.api.events.PropertyEvent
+
+//Properties
+createProperty( 'start', Long, 0 )
+createProperty( 'end', Long, 10 )
+createProperty( 'period', Long, 10 )
+createProperty( 'unit', String, 'Sec' )
+
+direction = "up"
+msPerUnit = 1000
+currentRate = 0
+gradient = 0
+timeEllapsed = 0
+currentDelay = 0
+targetReached = false
+
+timer = new Timer(true)
+
+scheduled = false
+future = null
+
+reset = {
+	currentDelay = 0
+	timeEllapsed = 0
+	targetReached = false
+	if ( period.value > 0 ) {
+		//Some sanity checks
+//		if (start.value != 0) {
+//			if (msPerUnit/start.value > period.value * 1000) {
+//				targetReached = true
+//				currentRate = end.value
+//			}
+//		} 
+		
+		if (!targetReached) {
+			gradient = (end.value - start.value)/ (period.value * 1000)
+			currentRate = start.value
+			while (currentRate.longValue() == 0) {
+				timeEllapsed++
+				currentRate = start.value + timeEllapsed * gradient
+			}
+		}
+	} else {
+		targetReached = true
+		currentRate = end.value()
+	}
+	scheduled = false
+}
+
+begin = {
+	if (stateProperty.value) {
+		reset();
+		schedule();
+	}
+}
+
+schedule = {
+	if (stateProperty.value &amp;&amp; running &amp;&amp; !scheduled) {
+		if (!targetReached) {
+			if (currentDelay > 0) {
+				timeEllapsed = timeEllapsed + currentDelay
+				currentRate = start.value + timeEllapsed * gradient
+			}
+			
+			if (timeEllapsed/1000 >= period.value) {
+				targetReached = true
+				currentRate = end.value
+				direction = "none"
+			}
+			if (currentRate.longValue() > 0) { 
+				currentDelay = msPerUnit/(currentRate.longValue()) 
+			}
+			else { 
+				currentDelay = 1 //Handling edge cases
+			}
+		} 
+		
+		future = timer.runAfter(currentDelay.intValue()) {
+			trigger()
+			scheduled = false
+			schedule()
+		}
+		scheduled = true
+	}
+}
+
+addEventListener( PropertyEvent ) { event ->
+	if ( event.event == PropertyEvent.Event.VALUE ) {
+		
+		if( event.property == unit ) {
+			if ( unit.value == "Sec" )
+				msPerUnit = 1000
+			if ( unit.value == "Min" )
+				msPerUnit = 60000
+			if ( unit.value == "Hour" )
+				msPerUnit = 3600000
+		}
+		
+		future?.cancel()
+		
+		started = false
+		if (end.value > start.value)
+			direction = "up"
+		
+		if (start.value > end.value)
+			direction = "down"
+		
+		if (start.value == end.value)
+			direction = "none"
+		begin()
+	}
+}
+
+onAction( "START" ) { schedule() }
+
+onAction( "STOP" ) {
+	future?.cancel()
+	started = false
+	scheduled = false
+}
+
+onAction( "COMPLETE" ) { reset() }
+
+//Layout
+layout  { 
+	property( property:start, label:'Start', min:0 )
+	property( property:end, label:'End', min:0 )
+	separator( vertical:true )
+	property( property:unit, label:'Unit', options:['Sec','Min','Hour'] )
+	separator( vertical:true )
+	property( property:period, label:'Period\n(Sec)', min:1 ) 
+	separator( vertical:true )
+	box ( layout:"wrap, ins 0" ) {
+		box( widget:'display' ) {
+			node( label:'Rate', content: { "${currentRate.longValue()} / $unit.value $direction" }, constraints:"w 60!" )
+		}
+		action( label:"Restart", action: { reset(); begin(); }, constraints:"align right" )
+	}
+}
+
+//Compact Layout
+compactLayout  {
+	box( widget:'display' ) {
+		node( label:'Rate', content: { "${currentRate.longValue()} / $unit.value $direction" } )
+	}
+}
+
+//Settings
+//settings( label: "Properties", layout: 'wrap 2' ) {
+//	box(layout:"growx, wrap 1") {
+//		property( property:start, label:'Start', min:0 ) 
+//		property( property:end, label:'End', min:0 ) 
+//		property( property:period, label:'Period', min:1 ) 
+//		property( property:unit, label:'Unit', options:['Sec','Min','Hour'] )
+//	}
+//} 
+
+reset();
+if (running)
+	begin();
+</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="start" type="java.lang.Long">0</con:property><con:property propagates="true" key="end" type="java.lang.Long">4</con:property><con:property propagates="true" key="period" type="java.lang.Long">120</con:property><con:property propagates="true" key="unit" type="java.lang.String">Sec</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Ramp</con:property><con:property key="_digest">3e1518dec707a9129b715eccefcde3da</con:property><con:property key="_id">com.eviware.Ramp</con:property><con:property key="_classLoader">com.eviware.Ramp</con:property><con:property key="gui.layoutX">831</con:property><con:property key="gui.layoutY">208</con:property></con:attributes><con:addons/></con:component><con:connection outputTerminalId="0888ae3f-3942-401b-92b3-aef683e3ced9/triggerTerminal" inputTerminalId="213e27f2-ac82-49af-817b-f87487f4fcf7/triggerTerminal"/></con:scene><con:scene label="Save patient" id="fa9cfa5c-4872-42cd-8fa2-dd9926fc7626" version="10"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="CanvasItem.abortOnFinish" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="SceneItem.followProject" type="java.lang.Boolean">true</con:property></con:properties><con:attributes><con:property key="gui.layoutX">939</con:property><con:property key="gui.layoutY">183</con:property><con:property key="gui.compact">false</con:property><con:property key="miniature">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
+rkJggg==
+</con:property></con:attributes><con:addons/><con:component type="com.eviware.loadui.components.soapui.SoapUISamplerComponent" label="Save patient runner" id="81f8e33b-b1f6-4b7b-92ea-aafec04b07b7"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="concurrentSamples" type="java.lang.Long">100</con:property><con:property propagates="true" key="maxQueueSize" type="java.lang.Long">1000</con:property><con:property propagates="true" key="countDiscarded" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="_projectFileworkingCopy" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="false" key="projectRelativePath" type="java.lang.String">OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="disabledTestSteps" type="java.lang.String"/><con:property propagates="true" key="settingsFile" type="java.io.File">/home/ryan/soapui-settings.xml</con:property><con:property propagates="true" key="_projectPassword" xsi:nil="true" type="java.lang.String" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:property propagates="true" key="useProjectRelativePath" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="raiseError" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="outputTestCaseProperties" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="OutputLevel" type="java.lang.String">TestCase only</con:property><con:property propagates="true" key="closeConnectionsAfterRequest" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="disableSoapuiAssertions" type="java.lang.Boolean">false</con:property><con:property propagates="false" key="projectFile" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="testSuite" type="java.lang.String">OpenHIM Interface TestSuite</con:property><con:property propagates="true" key="testCase" type="java.lang.String">Save patient</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">soapUI Runner</con:property><con:property key="gui.layoutX">336</con:property><con:property key="gui.layoutY">391</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.groovy.GroovyComponent" label="Fixed Rate" id="41ce0bb3-f3ef-4a7b-a5d1-5eb0f9a24bfb" category="generators"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="_script" type="java.lang.String">// 
 // Copyright 2011 SmartBear Software
 // 
 // Licensed under the EUPL, Version 1.1 or - as soon they will be approved by the European Commission - subsequent
@@ -534,80 +938,280 @@ settings( label: "General" ) {
 	property( property: burstSize, label: 'Burst size' ) 
 }
 
-if( running ) schedule()</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="rate" type="java.lang.Long">2</con:property><con:property propagates="true" key="unit" type="java.lang.String">Sec</con:property><con:property propagates="true" key="burstSize" type="java.lang.Long">1</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Fixed Rate</con:property><con:property key="_digest">c7926addaeaab3d091fd733b87da44d4</con:property><con:property key="_id">com.eviware.FixedRate</con:property><con:property key="_classLoader">com.eviware.FixedRate</con:property><con:property key="gui.layoutX">453</con:property><con:property key="gui.layoutY">184</con:property><con:property key="gui.compact">false</con:property></con:attributes><con:addons/></con:component><con:connection outputTerminalId="41ce0bb3-f3ef-4a7b-a5d1-5eb0f9a24bfb/triggerTerminal" inputTerminalId="81f8e33b-b1f6-4b7b-92ea-aafec04b07b7/triggerTerminal"/></con:scene><con:scene label="Edit patient" id="949eb200-a7ed-48b9-8d47-72b6b38a9947" version="5"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="CanvasItem.abortOnFinish" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="SceneItem.followProject" type="java.lang.Boolean">true</con:property></con:properties><con:attributes><con:property key="gui.layoutX">374</con:property><con:property key="gui.layoutY">497</con:property><con:property key="gui.compact">false</con:property><con:property key="miniature">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
-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
-HKYKvAAAAABJRU5ErkJggg==
-</con:property></con:attributes><con:addons/><con:component type="com.eviware.loadui.components.soapui.SoapUISamplerComponent" label="Edit patient runner" id="0a178bf5-8574-4673-8984-2061bf73832e"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="concurrentSamples" type="java.lang.Long">100</con:property><con:property propagates="true" key="maxQueueSize" type="java.lang.Long">1000</con:property><con:property propagates="true" key="countDiscarded" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="_projectFileworkingCopy" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="false" key="projectRelativePath" type="java.lang.String">../git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="disabledTestSteps" type="java.lang.String"/><con:property propagates="true" key="settingsFile" type="java.io.File">/home/ryan/soapui-settings.xml</con:property><con:property propagates="true" key="_projectPassword" xsi:nil="true" type="java.lang.String" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:property propagates="true" key="useProjectRelativePath" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="raiseError" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="outputTestCaseProperties" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="OutputLevel" type="java.lang.String">TestCase only</con:property><con:property propagates="true" key="closeConnectionsAfterRequest" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="disableSoapuiAssertions" type="java.lang.Boolean">false</con:property><con:property propagates="false" key="projectFile" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="testSuite" type="java.lang.String">OpenHIM Interface TestSuite</con:property><con:property propagates="true" key="testCase" type="java.lang.String">Update patient</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">soapUI Runner</con:property><con:property key="gui.layoutX">277</con:property><con:property key="gui.layoutY">417</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.groovy.GroovyComponent" label="Fixed Rate" id="3550eb88-c6d3-4d91-b9df-a68e806f2792" category="generators"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="_script" type="java.lang.String">// 
+if( running ) schedule()</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="rate" type="java.lang.Long">2</con:property><con:property propagates="true" key="unit" type="java.lang.String">Sec</con:property><con:property propagates="true" key="burstSize" type="java.lang.Long">1</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Fixed Rate</con:property><con:property key="_digest">c7926addaeaab3d091fd733b87da44d4</con:property><con:property key="_id">com.eviware.FixedRate</con:property><con:property key="_classLoader">com.eviware.FixedRate</con:property><con:property key="gui.layoutX">305</con:property><con:property key="gui.layoutY">182</con:property><con:property key="gui.compact">false</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.groovy.GroovyComponent" label="Ramp" id="14170154-87c1-4454-ab8a-8d1c263e3350" category="generators"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="_script" type="java.lang.String">// 
+// Copyright 2011 SmartBear Software
+// 
+// Licensed under the EUPL, Version 1.1 or - as soon they will be approved by the European Commission - subsequent
+// versions of the EUPL (the "Licence");
+// You may not use this work except in compliance with the Licence.
+// You may obtain a copy of the Licence at:
+// 
+// http://ec.europa.eu/idabc/eupl5
+// 
+// Unless required by applicable law or agreed to in writing, software distributed under the Licence is
+// distributed on an "AS IS" basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied. See the Licence for the specific language governing permissions and limitations
+// under the Licence.
+// 
+
+/**
+ * Sends signals at a decreasing or increasing rate until it gets to a prespecified level
+ * 
+ * @id com.eviware.Ramp
+ * @help http://www.loadui.org/Generators/ramp-updown-component.html
+ * @category generators
+ * @nonBlocking true
+ */
+
+import com.eviware.loadui.api.events.PropertyEvent
+
+//Properties
+createProperty( 'start', Long, 0 )
+createProperty( 'end', Long, 10 )
+createProperty( 'period', Long, 10 )
+createProperty( 'unit', String, 'Sec' )
+
+direction = "up"
+msPerUnit = 1000
+currentRate = 0
+gradient = 0
+timeEllapsed = 0
+currentDelay = 0
+targetReached = false
+
+timer = new Timer(true)
+
+scheduled = false
+future = null
+
+reset = {
+	currentDelay = 0
+	timeEllapsed = 0
+	targetReached = false
+	if ( period.value > 0 ) {
+		//Some sanity checks
+//		if (start.value != 0) {
+//			if (msPerUnit/start.value > period.value * 1000) {
+//				targetReached = true
+//				currentRate = end.value
+//			}
+//		} 
+		
+		if (!targetReached) {
+			gradient = (end.value - start.value)/ (period.value * 1000)
+			currentRate = start.value
+			while (currentRate.longValue() == 0) {
+				timeEllapsed++
+				currentRate = start.value + timeEllapsed * gradient
+			}
+		}
+	} else {
+		targetReached = true
+		currentRate = end.value()
+	}
+	scheduled = false
+}
+
+begin = {
+	if (stateProperty.value) {
+		reset();
+		schedule();
+	}
+}
+
+schedule = {
+	if (stateProperty.value &amp;&amp; running &amp;&amp; !scheduled) {
+		if (!targetReached) {
+			if (currentDelay > 0) {
+				timeEllapsed = timeEllapsed + currentDelay
+				currentRate = start.value + timeEllapsed * gradient
+			}
+			
+			if (timeEllapsed/1000 >= period.value) {
+				targetReached = true
+				currentRate = end.value
+				direction = "none"
+			}
+			if (currentRate.longValue() > 0) { 
+				currentDelay = msPerUnit/(currentRate.longValue()) 
+			}
+			else { 
+				currentDelay = 1 //Handling edge cases
+			}
+		} 
+		
+		future = timer.runAfter(currentDelay.intValue()) {
+			trigger()
+			scheduled = false
+			schedule()
+		}
+		scheduled = true
+	}
+}
+
+addEventListener( PropertyEvent ) { event ->
+	if ( event.event == PropertyEvent.Event.VALUE ) {
+		
+		if( event.property == unit ) {
+			if ( unit.value == "Sec" )
+				msPerUnit = 1000
+			if ( unit.value == "Min" )
+				msPerUnit = 60000
+			if ( unit.value == "Hour" )
+				msPerUnit = 3600000
+		}
+		
+		future?.cancel()
+		
+		started = false
+		if (end.value > start.value)
+			direction = "up"
+		
+		if (start.value > end.value)
+			direction = "down"
+		
+		if (start.value == end.value)
+			direction = "none"
+		begin()
+	}
+}
+
+onAction( "START" ) { schedule() }
+
+onAction( "STOP" ) {
+	future?.cancel()
+	started = false
+	scheduled = false
+}
+
+onAction( "COMPLETE" ) { reset() }
+
+//Layout
+layout  { 
+	property( property:start, label:'Start', min:0 )
+	property( property:end, label:'End', min:0 )
+	separator( vertical:true )
+	property( property:unit, label:'Unit', options:['Sec','Min','Hour'] )
+	separator( vertical:true )
+	property( property:period, label:'Period\n(Sec)', min:1 ) 
+	separator( vertical:true )
+	box ( layout:"wrap, ins 0" ) {
+		box( widget:'display' ) {
+			node( label:'Rate', content: { "${currentRate.longValue()} / $unit.value $direction" }, constraints:"w 60!" )
+		}
+		action( label:"Restart", action: { reset(); begin(); }, constraints:"align right" )
+	}
+}
+
+//Compact Layout
+compactLayout  {
+	box( widget:'display' ) {
+		node( label:'Rate', content: { "${currentRate.longValue()} / $unit.value $direction" } )
+	}
+}
+
+//Settings
+//settings( label: "Properties", layout: 'wrap 2' ) {
+//	box(layout:"growx, wrap 1") {
+//		property( property:start, label:'Start', min:0 ) 
+//		property( property:end, label:'End', min:0 ) 
+//		property( property:period, label:'Period', min:1 ) 
+//		property( property:unit, label:'Unit', options:['Sec','Min','Hour'] )
+//	}
+//} 
+
+reset();
+if (running)
+	begin();
+</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="start" type="java.lang.Long">0</con:property><con:property propagates="true" key="end" type="java.lang.Long">4</con:property><con:property propagates="true" key="period" type="java.lang.Long">120</con:property><con:property propagates="true" key="unit" type="java.lang.String">Sec</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Ramp</con:property><con:property key="_digest">3e1518dec707a9129b715eccefcde3da</con:property><con:property key="_id">com.eviware.Ramp</con:property><con:property key="_classLoader">com.eviware.Ramp</con:property><con:property key="gui.layoutX">651</con:property><con:property key="gui.layoutY">174</con:property></con:attributes><con:addons/></con:component><con:connection outputTerminalId="41ce0bb3-f3ef-4a7b-a5d1-5eb0f9a24bfb/triggerTerminal" inputTerminalId="81f8e33b-b1f6-4b7b-92ea-aafec04b07b7/triggerTerminal"/></con:scene><con:scene label="Edit patient" id="949eb200-a7ed-48b9-8d47-72b6b38a9947" version="10"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="CanvasItem.abortOnFinish" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="SceneItem.followProject" type="java.lang.Boolean">true</con:property></con:properties><con:attributes><con:property key="gui.layoutX">374</con:property><con:property key="gui.layoutY">497</con:property><con:property key="gui.compact">false</con:property><con:property key="miniature">iVBORw0KGgoAAAANSUhEUgAAAPQAAABwCAYAAAApDl0wAAATLUlEQVR42u2dC1RVxf7HOTx9gA/w
+fVUUVxYp2r+Htv6WdaPbLbmBFaUtNW+maQliSb7R8oXmSm+BAYokIiAKytsUH6EipKhoJJpp5utf
+9+8jS+2W2e+e79Ds9uEc5HUO+3DO77vWd83eZ4Y9ZzbzOTN79t4zDg4W0s/p0XRluC+lDxwoQviT
+p3zpmf/xpUf7Ve5nDfGlFx7wpZS/+ypptPLgji3JXGWXx8zr31+ES//qS+MG+lK0vy+NHqB9WS1h
+B5Zt62by+3R5SIcm48FermarlE2p3OYy13gb1/nz5+nkyZNNxn369DFbpWxK5a6Nv/jiC4P9iooK
+ozRc4+0I6IkTJ1JoaCgtWbKEkpOTjSrDtm3bKD4+nubNm0dbt26lTz/9lObMmWP2illQUGCwv2nT
+JosDHRkZSVOnThV5r1q1yug77d+/XwBTXl5OaWlptGHDBgoMDLQ6oAHx3r17DYA+fvw4A22PQHt5
+eQlnZmYK21MLjXJPmzaNsrOzKT8/n1toVtMHWr8rbKqylJSUaGrZylgKaJQbQFct96FDh+jzzz9v
+0t64cSMDzdfQfxot1okTJzS3FtfQhw8fpq+++qrJm4G2M6AzMjLo2LFjdTKuJxGuXbv2junGjx9P
+ISEh4nr7jTfeMOnZs2dTWFiY2A4KCqJOnTpRq1at6IknnlCOYymgUQ50T83t5cuXi3D37t1GcRij
+qO1xEhMTRYhzYurchYeHi96F3B87diz5+PiI8zdz5kyDrjfXeDsB+ujRo3U2Wm5UpoULF94xHUCF
+p0yZomxLDxo0iHx9fal///4CVmyrDaDlcSwFNK49LeG3335b/Ih99NFHRnHr1q2r9XEANEJAWvX8
+wUOHDiU/Pz+jcwcDaPW1Ndd4OwEa14p1dVJSMu3cuavGdP7+/vT000/TyKiRFHD8H+Ts4qxcr0v3
+7t2b3N3djT4H0PI4lgK6rKzM7N66rYAys3KotPSgyfikpKRaH2vNmjUi7N69uziXQ7YOoafCnyKP
+c62o5V536tChA3Xt2tXo3MEAGn/LQNsZ0Lgto/alS5eosLCQvvzyS4qNjTWKh1cnrKHt23eIbVQc
+dL1NpXvggQfo4YcfJr/+fqTz0JmseHcCWh7HUkAfPHhQMcqA23Pqz6oarStu2x04cEB0102lycvL
+p1dffVV/7uJEulmzZunhLjXIR53+zJkz+h/HnXTkyBHRRVfHffLJJyLs0qWLOJcurV1I10JHutZ6
+t9PVCDT+loG2M6CLi4sV5+TkiHu/EugrV64YxEtP0Xe3cc1mKk7tXr16kZubG/Xt29dkpasJaHkc
+SwGtHhEGzBLoixcviu5y1VFjDDLhHjxAPXv2rLhWrpomOyeX0jak69OUmhx5Rje66kg0/hcA+urV
+q7Rjxw4lLiEhQYQA18nJyfAc6RxqBBp/y0DbGdB4GEEaIKMFkUBfuHBBtB7qNDBaldu3b4vtGTNm
+0LvvvmuUBkYlBNB+/pUtdLOY5uTQXEcuz7mQY3fHGoGWx7EU0Oofn+3bt4vusAR6wYIFRj9QuIW2
+cuVKBej58+cbpcnSd7fTMzYLoDdv3kxLly41OBa60er0AFq20AB69erVShyARujp6Vl5Xlz+PD/N
+ljSj9n9pbwS0rpVOAVr+GDLQdgQ0unlq79mzRwCNARV0F6vGw7LLbSpObVSshrTQ8jiWArqoqEhx
+SkqKeFpMdou3bNliEA/j3KAVB9DofiNd1TSZmdkK0FXjYACt3o+JiVGABvzqOACNEKPWps5dTS00
+/paBtjOgd+3aZWRU7NTUVJNxsAQa21FRUfT++++LCl41XUOBlsexFNAAtKoBtqnP1cYjoPLHr6o3
+b85UgEbrC2DRzZbxuC6ubb5orRHWF2j8LQNtZ0Djmk3txYsXi2vpjz/+mOLi4ozitbClgEZPRBrP
+c+NWHODDwJc6Tu1JkyZRXl6evmudVW2aOxlAq/fHjRsnrsvvv/9+cRtqxIgRShyArk8eajPQdga0
+HAyyZlsK6Op6IJY0utG1TYsXYkx9Xpun6/CDI3s3DLQdAY3WwdptKaAxENbYBtDq/TFjxogwNzdX
+9IzUcQDa1DHk7Tw8hQdw9+3bJ/ZfeuklcfmDbQzIIS0DbWdAYzQ7PT3dai0fX7QE0Fr0NtCNVu9P
+mDCBgoOD6fXXX6eIiAiDOLzOWd988Eiv7N0w0HYEtD1PcNAUeifm6N0w0Ay0XQCNbi6eS7dV49Yb
+A21HQJv7pQQ8O4xWwRIvPPAURA0z13gb17lz58wKHJ6iwltG6ekZ4kEJBpqBZjWidDqduN9qrtFb
+vBWVmZVFnxUW0siRI806MowBHv1X/qe5ym6p1yat2VzjWXUWHpoImzxZjNha8/fUAii8KBEaOkk8
+YcZAs5qM8KKGtX9HPHDRmDChy5uSup4Olx2h5f/6l7hv3Jj5494010yWzQL9hyIb03hkdE1iopjJ
+pLHz5lrJsgegG1vBDpUvTvTkU8FqMho+fDgDzWLZkAK6deu2mU8Di2UH3e6HHnpIzHAi3bp161l8
+xlgsK5aXl9eTkydPVqD29vZOArxvvfUWPhuuTjtq1Ch8xlCzWNYuOeunk5PTC/Vt0VksVhMTJo3n
+s8Bi2Yh8fHwmO/D9UhbLZvTYfffdl8engcWyEb388svc7WaxbEGt2jrQ+AXODDSLVYO+zd0XTrnF
+1uusohDKzMqmvPwtFJnWzqq/K7xs9Qj+4WFpozOXc6js3DKr9tFzMZSekUFZ2TkUMsfP6r8v7FD5
+TDaL1bjaf2YO5ZcPJY/WriLMLH2Wpi8eTJMiHhH70rlHgwz2G9urdreh6O3NacXGpzX9HtU54sMB
+NDd6II0KvUfsM9AsTVRQMYKSSrzJ1UUnwiEv9qbBf7ubpi3rJfZXbOkhwmUZPWl1YQ+a+kHl5wm7
+vUUY8bEPzY3zEdvsP81AszRRfvmztGqvB9vMZqBZmghLnqonisP6xvY4QV59LCf4l8aCBKoJ9xho
+lnUALRd/O3z4sFjCFCs5MMA1G6tYMNAsqwKabbYpcRlolnZAY+Gy06dPsxvokpISBpqlPdBff/01
+2wyWYxAMNMsqu9y4npatjlwHacWKFWbplg4bNkzZfvPNN0U4c+bMRu0av/LKKzRv3jxlPzk5WUyy
+UN/jYd1lBpqlOdByEfA9e/aIQbCNGzfSunXrKCoqSszbLOMB3rRp0+izzz6j4uJi8Rkmhq/NAuNV
+jWNgnaulS5dSdnY2+fv7EyY8wJI59TleTcYqIHl5ebR+/XratGmTyHv+/PkiDiAXFRUJmPHDhTLC
+mPy+LnnIkW8GmqUp0ICI3XAfO3aMgWZpDzRaFnjGjBnKNhwYGChatscee4weeeQRWrRokUG8dExM
+jMF+QkKCyXRqh4eHG+wfOHCAQkJCRCuJ/dTUVIP4qVOnGuyjyy63IyMjRbhmzZpq8zt48OAd9+GV
+K1fW+L3vZHkvmoFmaQo0KiKM7racrC89PZ0CAgJE1xgwDx48mAYMGCC63VgcDumPHj1Kr732mgAR
+XVmsXYXPMQFgWlqagBDdaXl8tQE9oF2+fLnYx7U6usC49419LEIHQNE9xiVAVlYWjRkzRkCH+NjY
+WJEHrruRZvr06TRhwgSxsqWp/GbPnk333nsv7d+/X+SN5Wbi4+PFCD+61kiDNbe2bdsm0po6Rk2W
+y9ow0CxNgS4vL2ebwfiBY6BZmgNtj8unWsLoXTDQLM2BRkVkN9x4XJaBZmkOdFlZGdsMxqL2DDRL
+c6BREdkNN0bOGWiW5kCjIsK3b9+m33//XYSNZeQn8/z+u/+rNs25s98qaav7jvj865Mn6Jdf/iOM
+MmE0GyFG58eNG0djx441MkbKQ0NDTcZhxB+j9erPMOrfoUMHcnNzoz59+giAkQduvTHQLM2BLi0t
+Fb5161f69ddfKS4ujr7//jv99i+KP/zwQ1qxIppycrINPjeHke9vv/1Gt/Wu/A6/UGpqikE8YL91
+65b4fpcu/b8Sl5+fL0KMMCPdkcMHFaBRJjwBhhC3tSZOnGjSiMOtNlNxzz//PN11113k5eVl5I4d
+O5Kfn5/YRh64JcZAszQHGhURvnH9J/rx2g908cJ5+ub0Kbr2w1WxP2vWTLpw/hxdvXKZggIDadOm
+DBGnNtLV1z/9+AP9fPMm3bxxXfnsyuXLtGFDGl27pj/2j5Xf6ebNG2I7LjaWSoqL6Qs9xCnJyZSR
+ka6H/N/641yjkqLdCtAoEx5nRYgHWdAKm/I777wjWmK5jzWsvb29hXv37k2+vr7Kvto9e/akfv36
+iW3kwW9bsawCaDxYAQOkG9evV+8bf1gPvgwBESCrCdpryvbVSkir7JcdKqUd2z8VUIvjX79u8Pef
+lxRRxbHyP77LH/EG+V4VPn3qpAI0yoRnzRGiBQ4ODqZRP4+i4OHBNGzRMHpx/IsUPDKYQueF0ugL
+o6nvQj8Jo7DT/U7Uvn178lruRW6LmpHTw07k2N+JXMe4inh1lxt5MNAsqwAaFRG+9O/vNXd1qile
+nQ4qO1TZYgJohOg+BwUF0XPvPkeBQwNp6BtDKSg4iIJeCKKx08eRx/96kFM/JwOgHdwcyOsfXtSt
+Wzexr/uLIzn2dCTXcDcjoJEHXlhhoFmaA42KCAMGDPjgsUsJUPnRI8r2dxcv1AnO+FWrlO1N6em0
+YP58ZT8sbJLZgcYjqWqgUabCwkIRjh8/noYMGULPPPOMgdEC9+rVCwvLG8IM6xxEvAS6qtVAIw8M
+wDHQLM2BRkWEAQMGkfBqIbbPn/2WThyvENs7d2wXQJuCen9JMU2fNk1sL14cqXy+amWcsr02MZE+
++OADsb1MH1oC6CVLlhgAjTLhWXSEeOb8ySefpIB9AeJVTdjZWSyvUy3Qzs861xpo5IFzx0CzNAca
+FRG2tS43yrRr1y4Rjh49WrxgIt2sWTMFzGpbaIfat9DIY+/evQw0y3qAtiVVBRoDYo8++qgw3hoD
+jNI9evSgtm3bGnwmjfvNXbt2NRnn7u5Od999t9hmoFlWAzQqImxrQKNMeJ0SIa6fYf/d/tQuux21
++bYtdZzTkbo+2JU6LehMXYZ2Ic8EL+rWo5tokeHu3bsL2NvtbCe2PfM9qbt3d7Et7ePjI0LkgVtk
+DDRLc6BREWFbAxplwrxoCB9//HFxz9jR0dGo64wHQ9RdcLXRCrdp08ZkHK7BO3XqJLaRB0bUGWiW
+5kCjIsK2BjTKhBF7hA8++CDdc8895F7hYQSmh4cHubi4GH3uOsNNgN6yZUuTQDs5OYmuOraRB0bU
+GWiW5kCjIsK2BjTKVFBQIELMVtK5c2dyHetqcnALcFb9vHlqC9EKu7q6mgQarX2LFi3ENvLAiDoD
+zdIcaFRE2NaARpkANMLqRqphnU4nXNc42UojRB4YgGOgWZoDjYoI2xrQKBPmCEOIFykAWqufW5Ou
+TfWAGlw/l7tXdr1DKlto+YSYKSMPDMAx0CzNgUZFhG0NaJQJs5Yi9PT0rLxe/qkV6TrqqHlSC9J1
+rgS7xbaW5PKKCzVPa2F8HR3qVgm0i357avVAIw+50B8DzWKgLQw0Rqtr0yrX1ww0y2qARkWEbQ1o
+lAmPsSKUj3k2T2pea0id/+pc67TIAyPqDDRLc6BREWFbAxplwtI2CC3ZOsPIAwNwDDRLc6BREWFb
+AxplwowmCC0NNPLAABwDzdIcaFREuHDXdpsyyoQF6hBiGiFLGnngep2BZmkONCoifOrUqXobS+hs
+2LCh1ukbml9NxjI5yCM3N1cpX0OMQa/q8sIidUiD63UGmqU50KiIMKaixZxaeOoJ25jFErNZymlq
+165dKwBJTEwU60nhs7CwMBFiPSiZDutQIcR6V5jJIyIiQnRJMQmATCPzk8YkewixppbMH/d28R0w
+cQGWt8U6VDI93m6S61AhLikpSXwvGPFYNwt54PvK8jXEMl9MoIg8ALj8zrI8cg1tBpplFUADoJyc
+HOUhCYAJaOQtGUzjM3fuXHrvvffETJlYQxlAIz3Akg+o4FhTpkxR9gEiZg0FmOo0CLFwXHR0tIBB
+5iO3AQ5AXbx4sZhqFytOyr8HWGgVcVzkhal2Mdmf/D4SaJTHHEDLfHE85JWSkiK68+ryMNAsqwAa
+FRFeuHBhvY2WFeDVNn1D86vJaJmRhwwbaixZW1N5MADHQLM0BxoVkd1w40eNgWZpDjTbvGagWQw0
+A81iNUxnzpyhiooKtpnNQLM00TfffFPvxc2xUgRGwBtjIXUsM4NbXhh4snReWCMLZcMIdn2PwUCz
+NBEqbn0qLG5R7SsuoTWJayk+Pt6igKELm5uXr//xKKCoqCiLA41bX8UlJbR6dYK4785As5qSRmNq
+HswtXRdjQvuc3DyKiYmt89/W1QMHDqTU9etpY3q6HrLVFs8P97tRtqjo6Hr9Pab85WrFamr6J7rb
+gwYNapTKGxAQIB5O0W++1AjZxWI6ob59+zKYLBaLxWKxWCwWi8VisVgsFovFYrFYLBaLxWKxWCwW
+i8VisVgsFovFYrFYLBaLxWKxWCwWi8VisVgsFovFYrFYLBaLxWKxWPaq/wLfrSgTauAvRQAAAABJ
+RU5ErkJggg==
+</con:property></con:attributes><con:addons/><con:component type="com.eviware.loadui.components.soapui.SoapUISamplerComponent" label="Edit patient runner" id="0a178bf5-8574-4673-8984-2061bf73832e"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="concurrentSamples" type="java.lang.Long">100</con:property><con:property propagates="true" key="maxQueueSize" type="java.lang.Long">1000</con:property><con:property propagates="true" key="countDiscarded" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="_projectFileworkingCopy" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="false" key="projectRelativePath" type="java.lang.String">OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="disabledTestSteps" type="java.lang.String"/><con:property propagates="true" key="settingsFile" type="java.io.File">/home/ryan/soapui-settings.xml</con:property><con:property propagates="true" key="_projectPassword" xsi:nil="true" type="java.lang.String" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:property propagates="true" key="useProjectRelativePath" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="raiseError" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="outputTestCaseProperties" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="OutputLevel" type="java.lang.String">TestCase only</con:property><con:property propagates="true" key="closeConnectionsAfterRequest" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="disableSoapuiAssertions" type="java.lang.Boolean">false</con:property><con:property propagates="false" key="projectFile" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="testSuite" type="java.lang.String">OpenHIM Interface TestSuite</con:property><con:property propagates="true" key="testCase" type="java.lang.String">Update patient</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">soapUI Runner</con:property><con:property key="gui.layoutX">277</con:property><con:property key="gui.layoutY">417</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.groovy.GroovyComponent" label="Fixed Rate" id="3550eb88-c6d3-4d91-b9df-a68e806f2792" category="generators"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="_script" type="java.lang.String">// 
 // Copyright 2011 SmartBear Software
 // 
 // Licensed under the EUPL, Version 1.1 or - as soon they will be approved by the European Commission - subsequent
@@ -688,84 +1292,283 @@ settings( label: "General" ) {
 	property( property: burstSize, label: 'Burst size' ) 
 }
 
-if( running ) schedule()</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="rate" type="java.lang.Long">11</con:property><con:property propagates="true" key="unit" type="java.lang.String">Min</con:property><con:property propagates="true" key="burstSize" type="java.lang.Long">1</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Fixed Rate</con:property><con:property key="_digest">c7926addaeaab3d091fd733b87da44d4</con:property><con:property key="_id">com.eviware.FixedRate</con:property><con:property key="_classLoader">com.eviware.FixedRate</con:property><con:property key="gui.layoutX">568</con:property><con:property key="gui.layoutY">166</con:property></con:attributes><con:addons/></con:component><con:connection outputTerminalId="3550eb88-c6d3-4d91-b9df-a68e806f2792/triggerTerminal" inputTerminalId="0a178bf5-8574-4673-8984-2061bf73832e/triggerTerminal"/></con:scene><con:scene label="Query patient" id="16e5f2ce-6100-46b2-ac39-08ec3ab71857" version="5"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="CanvasItem.abortOnFinish" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="SceneItem.followProject" type="java.lang.Boolean">true</con:property></con:properties><con:attributes><con:property key="gui.layoutX">749</con:property><con:property key="gui.layoutY">501</con:property><con:property key="gui.compact">false</con:property><con:property key="miniature">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
-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
-</con:property></con:attributes><con:addons/><con:component type="com.eviware.loadui.components.soapui.SoapUISamplerComponent" label="Query patient runner" id="546cc6e3-ec04-43f4-a840-5aaa9225e505"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="concurrentSamples" type="java.lang.Long">100</con:property><con:property propagates="true" key="maxQueueSize" type="java.lang.Long">1000</con:property><con:property propagates="true" key="countDiscarded" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="_projectFileworkingCopy" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="false" key="projectRelativePath" type="java.lang.String">../git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="disabledTestSteps" type="java.lang.String"/><con:property propagates="true" key="settingsFile" type="java.io.File">/home/ryan/soapui-settings.xml</con:property><con:property propagates="true" key="_projectPassword" xsi:nil="true" type="java.lang.String" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:property propagates="true" key="useProjectRelativePath" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="raiseError" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="outputTestCaseProperties" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="OutputLevel" type="java.lang.String">TestCase only</con:property><con:property propagates="true" key="closeConnectionsAfterRequest" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="disableSoapuiAssertions" type="java.lang.Boolean">false</con:property><con:property propagates="false" key="projectFile" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="testSuite" type="java.lang.String">OpenHIM Interface TestSuite</con:property><con:property propagates="true" key="testCase" type="java.lang.String">Get patients</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">soapUI Runner</con:property><con:property key="gui.layoutX">333</con:property><con:property key="gui.layoutY">367</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.groovy.GroovyComponent" label="Fixed Rate" id="115054ee-809f-466f-8a2c-5de5f51ce15f" category="generators"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="_script" type="java.lang.String">// 
+if( running ) schedule()</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="rate" type="java.lang.Long">11</con:property><con:property propagates="true" key="unit" type="java.lang.String">Min</con:property><con:property propagates="true" key="burstSize" type="java.lang.Long">1</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Fixed Rate</con:property><con:property key="_digest">c7926addaeaab3d091fd733b87da44d4</con:property><con:property key="_id">com.eviware.FixedRate</con:property><con:property key="_classLoader">com.eviware.FixedRate</con:property><con:property key="gui.layoutX">320</con:property><con:property key="gui.layoutY">171</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.groovy.GroovyComponent" label="Ramp" id="f29d9d7a-6cef-42f1-ac11-d73c0a6e5e28" category="generators"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="_script" type="java.lang.String">// 
+// Copyright 2011 SmartBear Software
+// 
+// Licensed under the EUPL, Version 1.1 or - as soon they will be approved by the European Commission - subsequent
+// versions of the EUPL (the "Licence");
+// You may not use this work except in compliance with the Licence.
+// You may obtain a copy of the Licence at:
+// 
+// http://ec.europa.eu/idabc/eupl5
+// 
+// Unless required by applicable law or agreed to in writing, software distributed under the Licence is
+// distributed on an "AS IS" basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied. See the Licence for the specific language governing permissions and limitations
+// under the Licence.
+// 
+
+/**
+ * Sends signals at a decreasing or increasing rate until it gets to a prespecified level
+ * 
+ * @id com.eviware.Ramp
+ * @help http://www.loadui.org/Generators/ramp-updown-component.html
+ * @category generators
+ * @nonBlocking true
+ */
+
+import com.eviware.loadui.api.events.PropertyEvent
+
+//Properties
+createProperty( 'start', Long, 0 )
+createProperty( 'end', Long, 10 )
+createProperty( 'period', Long, 10 )
+createProperty( 'unit', String, 'Sec' )
+
+direction = "up"
+msPerUnit = 1000
+currentRate = 0
+gradient = 0
+timeEllapsed = 0
+currentDelay = 0
+targetReached = false
+
+timer = new Timer(true)
+
+scheduled = false
+future = null
+
+reset = {
+	currentDelay = 0
+	timeEllapsed = 0
+	targetReached = false
+	if ( period.value > 0 ) {
+		//Some sanity checks
+//		if (start.value != 0) {
+//			if (msPerUnit/start.value > period.value * 1000) {
+//				targetReached = true
+//				currentRate = end.value
+//			}
+//		} 
+		
+		if (!targetReached) {
+			gradient = (end.value - start.value)/ (period.value * 1000)
+			currentRate = start.value
+			while (currentRate.longValue() == 0) {
+				timeEllapsed++
+				currentRate = start.value + timeEllapsed * gradient
+			}
+		}
+	} else {
+		targetReached = true
+		currentRate = end.value()
+	}
+	scheduled = false
+}
+
+begin = {
+	if (stateProperty.value) {
+		reset();
+		schedule();
+	}
+}
+
+schedule = {
+	if (stateProperty.value &amp;&amp; running &amp;&amp; !scheduled) {
+		if (!targetReached) {
+			if (currentDelay > 0) {
+				timeEllapsed = timeEllapsed + currentDelay
+				currentRate = start.value + timeEllapsed * gradient
+			}
+			
+			if (timeEllapsed/1000 >= period.value) {
+				targetReached = true
+				currentRate = end.value
+				direction = "none"
+			}
+			if (currentRate.longValue() > 0) { 
+				currentDelay = msPerUnit/(currentRate.longValue()) 
+			}
+			else { 
+				currentDelay = 1 //Handling edge cases
+			}
+		} 
+		
+		future = timer.runAfter(currentDelay.intValue()) {
+			trigger()
+			scheduled = false
+			schedule()
+		}
+		scheduled = true
+	}
+}
+
+addEventListener( PropertyEvent ) { event ->
+	if ( event.event == PropertyEvent.Event.VALUE ) {
+		
+		if( event.property == unit ) {
+			if ( unit.value == "Sec" )
+				msPerUnit = 1000
+			if ( unit.value == "Min" )
+				msPerUnit = 60000
+			if ( unit.value == "Hour" )
+				msPerUnit = 3600000
+		}
+		
+		future?.cancel()
+		
+		started = false
+		if (end.value > start.value)
+			direction = "up"
+		
+		if (start.value > end.value)
+			direction = "down"
+		
+		if (start.value == end.value)
+			direction = "none"
+		begin()
+	}
+}
+
+onAction( "START" ) { schedule() }
+
+onAction( "STOP" ) {
+	future?.cancel()
+	started = false
+	scheduled = false
+}
+
+onAction( "COMPLETE" ) { reset() }
+
+//Layout
+layout  { 
+	property( property:start, label:'Start', min:0 )
+	property( property:end, label:'End', min:0 )
+	separator( vertical:true )
+	property( property:unit, label:'Unit', options:['Sec','Min','Hour'] )
+	separator( vertical:true )
+	property( property:period, label:'Period\n(Sec)', min:1 ) 
+	separator( vertical:true )
+	box ( layout:"wrap, ins 0" ) {
+		box( widget:'display' ) {
+			node( label:'Rate', content: { "${currentRate.longValue()} / $unit.value $direction" }, constraints:"w 60!" )
+		}
+		action( label:"Restart", action: { reset(); begin(); }, constraints:"align right" )
+	}
+}
+
+//Compact Layout
+compactLayout  {
+	box( widget:'display' ) {
+		node( label:'Rate', content: { "${currentRate.longValue()} / $unit.value $direction" } )
+	}
+}
+
+//Settings
+//settings( label: "Properties", layout: 'wrap 2' ) {
+//	box(layout:"growx, wrap 1") {
+//		property( property:start, label:'Start', min:0 ) 
+//		property( property:end, label:'End', min:0 ) 
+//		property( property:period, label:'Period', min:1 ) 
+//		property( property:unit, label:'Unit', options:['Sec','Min','Hour'] )
+//	}
+//} 
+
+reset();
+if (running)
+	begin();
+</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="start" type="java.lang.Long">0</con:property><con:property propagates="true" key="end" type="java.lang.Long">1</con:property><con:property propagates="true" key="period" type="java.lang.Long">120</con:property><con:property propagates="true" key="unit" type="java.lang.String">Sec</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Ramp</con:property><con:property key="_digest">3e1518dec707a9129b715eccefcde3da</con:property><con:property key="_id">com.eviware.Ramp</con:property><con:property key="_classLoader">com.eviware.Ramp</con:property><con:property key="gui.layoutX">699</con:property><con:property key="gui.layoutY">171</con:property></con:attributes><con:addons/></con:component><con:connection outputTerminalId="3550eb88-c6d3-4d91-b9df-a68e806f2792/triggerTerminal" inputTerminalId="0a178bf5-8574-4673-8984-2061bf73832e/triggerTerminal"/></con:scene><con:scene label="Query patient" id="16e5f2ce-6100-46b2-ac39-08ec3ab71857" version="10"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="CanvasItem.abortOnFinish" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="SceneItem.followProject" type="java.lang.Boolean">true</con:property></con:properties><con:attributes><con:property key="gui.layoutX">749</con:property><con:property key="gui.layoutY">501</con:property><con:property key="gui.compact">false</con:property><con:property key="miniature">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
+</con:property></con:attributes><con:addons/><con:component type="com.eviware.loadui.components.soapui.SoapUISamplerComponent" label="Query patient runner" id="546cc6e3-ec04-43f4-a840-5aaa9225e505"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="concurrentSamples" type="java.lang.Long">100</con:property><con:property propagates="true" key="maxQueueSize" type="java.lang.Long">1000</con:property><con:property propagates="true" key="countDiscarded" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="_projectFileworkingCopy" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="false" key="projectRelativePath" type="java.lang.String">OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="disabledTestSteps" type="java.lang.String"/><con:property propagates="true" key="settingsFile" type="java.io.File">/home/ryan/soapui-settings.xml</con:property><con:property propagates="true" key="_projectPassword" xsi:nil="true" type="java.lang.String" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:property propagates="true" key="useProjectRelativePath" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="raiseError" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="outputTestCaseProperties" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="OutputLevel" type="java.lang.String">TestCase only</con:property><con:property propagates="true" key="closeConnectionsAfterRequest" type="java.lang.Boolean">false</con:property><con:property propagates="true" key="disableSoapuiAssertions" type="java.lang.Boolean">false</con:property><con:property propagates="false" key="projectFile" type="java.io.File">/home/ryan/git/openhim/src/test/resources/soapui-tests/OpenHIM-integration-tests.xml</con:property><con:property propagates="true" key="testSuite" type="java.lang.String">OpenHIM Interface TestSuite</con:property><con:property propagates="true" key="testCase" type="java.lang.String">Get patients</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">soapUI Runner</con:property><con:property key="gui.layoutX">333</con:property><con:property key="gui.layoutY">403</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.groovy.GroovyComponent" label="Fixed Rate" id="115054ee-809f-466f-8a2c-5de5f51ce15f" category="generators"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="_script" type="java.lang.String">// 
 // Copyright 2011 SmartBear Software
 // 
 // Licensed under the EUPL, Version 1.1 or - as soon they will be approved by the European Commission - subsequent
@@ -846,4 +1649,189 @@ settings( label: "General" ) {
 	property( property: burstSize, label: 'Burst size' ) 
 }
 
-if( running ) schedule()</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="rate" type="java.lang.Long">2</con:property><con:property propagates="true" key="unit" type="java.lang.String">Sec</con:property><con:property propagates="true" key="burstSize" type="java.lang.Long">1</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Fixed Rate</con:property><con:property key="_digest">c7926addaeaab3d091fd733b87da44d4</con:property><con:property key="_id">com.eviware.FixedRate</con:property><con:property key="_classLoader">com.eviware.FixedRate</con:property><con:property key="gui.layoutX">563</con:property><con:property key="gui.layoutY">170</con:property></con:attributes><con:addons/></con:component><con:connection outputTerminalId="115054ee-809f-466f-8a2c-5de5f51ce15f/triggerTerminal" inputTerminalId="546cc6e3-ec04-43f4-a840-5aaa9225e505/triggerTerminal"/></con:scene><con:statistics><con:page title="General"><con:chartGroup type="com.eviware.loadui.api.statistics.model.chart.line.LineChartView" title="Response Times"><con:templateScript xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:chart statisticHolder="b82e7359-0dce-4ca3-8b2e-2851f2f4a745"><con:attributes><con:property key="_CHART_segments">68:36:b82e7359-0dce-4ca3-8b2e-2851f2f4a7458:Requests10:PER_SECOND4:main</con:property><con:property key="_CHART__SEGMENT_36:b82e7359-0dce-4ca3-8b2e-2851f2f4a7458:Requests10:PER_SECOND4:main_color">#FF2100</con:property></con:attributes></con:chart><con:chart statisticHolder="546cc6e3-ec04-43f4-a840-5aaa9225e505"><con:attributes><con:property key="_CHART_segments">67:36:546cc6e3-ec04-43f4-a840-5aaa9225e50510:Time Taken7:AVERAGE4:main</con:property><con:property key="_CHART__SEGMENT_36:546cc6e3-ec04-43f4-a840-5aaa9225e50510:Time Taken7:AVERAGE4:main_color">#FF7B00</con:property></con:attributes></con:chart><con:chart statisticHolder="0a178bf5-8574-4673-8984-2061bf73832e"><con:attributes><con:property key="_CHART_segments">67:36:0a178bf5-8574-4673-8984-2061bf73832e10:Time Taken7:AVERAGE4:main</con:property><con:property key="_CHART__SEGMENT_36:0a178bf5-8574-4673-8984-2061bf73832e10:Time Taken7:AVERAGE4:main_color">#00B700</con:property></con:attributes></con:chart><con:chart statisticHolder="213e27f2-ac82-49af-817b-f87487f4fcf7"><con:attributes><con:property key="_CHART_segments">67:36:213e27f2-ac82-49af-817b-f87487f4fcf710:Time Taken7:AVERAGE4:main</con:property><con:property key="_CHART__SEGMENT_36:213e27f2-ac82-49af-817b-f87487f4fcf710:Time Taken7:AVERAGE4:main_color">#00B2D2</con:property></con:attributes></con:chart><con:chart statisticHolder="81f8e33b-b1f6-4b7b-92ea-aafec04b07b7"><con:attributes><con:property key="_CHART_segments">67:36:81f8e33b-b1f6-4b7b-92ea-aafec04b07b710:Time Taken7:AVERAGE4:main</con:property><con:property key="_CHART__SEGMENT_36:81f8e33b-b1f6-4b7b-92ea-aafec04b07b710:Time Taken7:AVERAGE4:main_color">#7826B5</con:property></con:attributes></con:chart><con:chart statisticHolder="6bf2af3a-62fd-42df-a9d3-7d411c52b81f"><con:attributes><con:property key="_CHART_segments">67:36:6bf2af3a-62fd-42df-a9d3-7d411c52b81f10:Time Taken7:AVERAGE4:main</con:property><con:property key="_CHART__SEGMENT_36:6bf2af3a-62fd-42df-a9d3-7d411c52b81f10:Time Taken7:AVERAGE4:main_color">#D7268E</con:property></con:attributes></con:chart><con:attributes><con:property key="_CHARTGROUP_zoomLevel">SECONDS</con:property><con:property key="_CHARTGROUP_timeSpan">99666</con:property><con:property key="_CHARTGROUP_position">290000</con:property><con:property key="_CHARTGROUP_follow">true</con:property></con:attributes></con:chartGroup></con:page></con:statistics></con:loadui-project>
+if( running ) schedule()</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="rate" type="java.lang.Long">2</con:property><con:property propagates="true" key="unit" type="java.lang.String">Sec</con:property><con:property propagates="true" key="burstSize" type="java.lang.Long">1</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Fixed Rate</con:property><con:property key="_digest">c7926addaeaab3d091fd733b87da44d4</con:property><con:property key="_id">com.eviware.FixedRate</con:property><con:property key="_classLoader">com.eviware.FixedRate</con:property><con:property key="gui.layoutX">292</con:property><con:property key="gui.layoutY">180</con:property></con:attributes><con:addons/></con:component><con:component type="com.eviware.loadui.groovy.GroovyComponent" label="Ramp" id="03eb4adc-9ab2-4155-a0a4-6ceab21f323d" category="generators"><con:properties><con:property propagates="true" key="ModelItem.description" type="java.lang.String"/><con:property propagates="true" key="_script" type="java.lang.String">// 
+// Copyright 2011 SmartBear Software
+// 
+// Licensed under the EUPL, Version 1.1 or - as soon they will be approved by the European Commission - subsequent
+// versions of the EUPL (the "Licence");
+// You may not use this work except in compliance with the Licence.
+// You may obtain a copy of the Licence at:
+// 
+// http://ec.europa.eu/idabc/eupl5
+// 
+// Unless required by applicable law or agreed to in writing, software distributed under the Licence is
+// distributed on an "AS IS" basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied. See the Licence for the specific language governing permissions and limitations
+// under the Licence.
+// 
+
+/**
+ * Sends signals at a decreasing or increasing rate until it gets to a prespecified level
+ * 
+ * @id com.eviware.Ramp
+ * @help http://www.loadui.org/Generators/ramp-updown-component.html
+ * @category generators
+ * @nonBlocking true
+ */
+
+import com.eviware.loadui.api.events.PropertyEvent
+
+//Properties
+createProperty( 'start', Long, 0 )
+createProperty( 'end', Long, 10 )
+createProperty( 'period', Long, 10 )
+createProperty( 'unit', String, 'Sec' )
+
+direction = "up"
+msPerUnit = 1000
+currentRate = 0
+gradient = 0
+timeEllapsed = 0
+currentDelay = 0
+targetReached = false
+
+timer = new Timer(true)
+
+scheduled = false
+future = null
+
+reset = {
+	currentDelay = 0
+	timeEllapsed = 0
+	targetReached = false
+	if ( period.value > 0 ) {
+		//Some sanity checks
+//		if (start.value != 0) {
+//			if (msPerUnit/start.value > period.value * 1000) {
+//				targetReached = true
+//				currentRate = end.value
+//			}
+//		} 
+		
+		if (!targetReached) {
+			gradient = (end.value - start.value)/ (period.value * 1000)
+			currentRate = start.value
+			while (currentRate.longValue() == 0) {
+				timeEllapsed++
+				currentRate = start.value + timeEllapsed * gradient
+			}
+		}
+	} else {
+		targetReached = true
+		currentRate = end.value()
+	}
+	scheduled = false
+}
+
+begin = {
+	if (stateProperty.value) {
+		reset();
+		schedule();
+	}
+}
+
+schedule = {
+	if (stateProperty.value &amp;&amp; running &amp;&amp; !scheduled) {
+		if (!targetReached) {
+			if (currentDelay > 0) {
+				timeEllapsed = timeEllapsed + currentDelay
+				currentRate = start.value + timeEllapsed * gradient
+			}
+			
+			if (timeEllapsed/1000 >= period.value) {
+				targetReached = true
+				currentRate = end.value
+				direction = "none"
+			}
+			if (currentRate.longValue() > 0) { 
+				currentDelay = msPerUnit/(currentRate.longValue()) 
+			}
+			else { 
+				currentDelay = 1 //Handling edge cases
+			}
+		} 
+		
+		future = timer.runAfter(currentDelay.intValue()) {
+			trigger()
+			scheduled = false
+			schedule()
+		}
+		scheduled = true
+	}
+}
+
+addEventListener( PropertyEvent ) { event ->
+	if ( event.event == PropertyEvent.Event.VALUE ) {
+		
+		if( event.property == unit ) {
+			if ( unit.value == "Sec" )
+				msPerUnit = 1000
+			if ( unit.value == "Min" )
+				msPerUnit = 60000
+			if ( unit.value == "Hour" )
+				msPerUnit = 3600000
+		}
+		
+		future?.cancel()
+		
+		started = false
+		if (end.value > start.value)
+			direction = "up"
+		
+		if (start.value > end.value)
+			direction = "down"
+		
+		if (start.value == end.value)
+			direction = "none"
+		begin()
+	}
+}
+
+onAction( "START" ) { schedule() }
+
+onAction( "STOP" ) {
+	future?.cancel()
+	started = false
+	scheduled = false
+}
+
+onAction( "COMPLETE" ) { reset() }
+
+//Layout
+layout  { 
+	property( property:start, label:'Start', min:0 )
+	property( property:end, label:'End', min:0 )
+	separator( vertical:true )
+	property( property:unit, label:'Unit', options:['Sec','Min','Hour'] )
+	separator( vertical:true )
+	property( property:period, label:'Period\n(Sec)', min:1 ) 
+	separator( vertical:true )
+	box ( layout:"wrap, ins 0" ) {
+		box( widget:'display' ) {
+			node( label:'Rate', content: { "${currentRate.longValue()} / $unit.value $direction" }, constraints:"w 60!" )
+		}
+		action( label:"Restart", action: { reset(); begin(); }, constraints:"align right" )
+	}
+}
+
+//Compact Layout
+compactLayout  {
+	box( widget:'display' ) {
+		node( label:'Rate', content: { "${currentRate.longValue()} / $unit.value $direction" } )
+	}
+}
+
+//Settings
+//settings( label: "Properties", layout: 'wrap 2' ) {
+//	box(layout:"growx, wrap 1") {
+//		property( property:start, label:'Start', min:0 ) 
+//		property( property:end, label:'End', min:0 ) 
+//		property( property:period, label:'Period', min:1 ) 
+//		property( property:unit, label:'Unit', options:['Sec','Min','Hour'] )
+//	}
+//} 
+
+reset();
+if (running)
+	begin();
+</con:property><con:property propagates="true" key="stateProperty" type="java.lang.Boolean">true</con:property><con:property propagates="true" key="start" type="java.lang.Long">0</con:property><con:property propagates="true" key="end" type="java.lang.Long">4</con:property><con:property propagates="true" key="period" type="java.lang.Long">120</con:property><con:property propagates="true" key="unit" type="java.lang.String">Sec</con:property></con:properties><con:attributes><con:property key="com.eviware.loadui.api.model.ComponentItem@type">Ramp</con:property><con:property key="_digest">3e1518dec707a9129b715eccefcde3da</con:property><con:property key="_id">com.eviware.Ramp</con:property><con:property key="_classLoader">com.eviware.Ramp</con:property><con:property key="gui.layoutX">661</con:property><con:property key="gui.layoutY">174</con:property></con:attributes><con:addons/></con:component><con:connection outputTerminalId="115054ee-809f-466f-8a2c-5de5f51ce15f/triggerTerminal" inputTerminalId="546cc6e3-ec04-43f4-a840-5aaa9225e505/triggerTerminal"/></con:scene><con:statistics><con:page title="General"><con:chartGroup type="com.eviware.loadui.api.statistics.model.chart.line.LineChartView" title="Response Times"><con:templateScript xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:chart statisticHolder="b82e7359-0dce-4ca3-8b2e-2851f2f4a745"><con:attributes><con:property key="_CHART_segments">68:36:b82e7359-0dce-4ca3-8b2e-2851f2f4a7458:Requests10:PER_SECOND4:main</con:property><con:property key="_CHART__SEGMENT_36:b82e7359-0dce-4ca3-8b2e-2851f2f4a7458:Requests10:PER_SECOND4:main_color">#FF2100</con:property><con:property key="_CHART__SEGMENT_36:b82e7359-0dce-4ca3-8b2e-2851f2f4a7458:Requests10:PER_SECOND4:main_scale">0</con:property></con:attributes></con:chart><con:chart statisticHolder="546cc6e3-ec04-43f4-a840-5aaa9225e505"><con:attributes><con:property key="_CHART_segments">67:36:546cc6e3-ec04-43f4-a840-5aaa9225e50510:Time Taken7:AVERAGE4:main</con:property><con:property key="_CHART__SEGMENT_36:546cc6e3-ec04-43f4-a840-5aaa9225e50510:Time Taken7:AVERAGE4:main_color">#FF7B00</con:property></con:attributes></con:chart><con:chart statisticHolder="0a178bf5-8574-4673-8984-2061bf73832e"><con:attributes><con:property key="_CHART_segments">67:36:0a178bf5-8574-4673-8984-2061bf73832e10:Time Taken7:AVERAGE4:main</con:property><con:property key="_CHART__SEGMENT_36:0a178bf5-8574-4673-8984-2061bf73832e10:Time Taken7:AVERAGE4:main_color">#00B700</con:property></con:attributes></con:chart><con:chart statisticHolder="213e27f2-ac82-49af-817b-f87487f4fcf7"><con:attributes><con:property key="_CHART_segments">67:36:213e27f2-ac82-49af-817b-f87487f4fcf710:Time Taken7:AVERAGE4:main</con:property><con:property key="_CHART__SEGMENT_36:213e27f2-ac82-49af-817b-f87487f4fcf710:Time Taken7:AVERAGE4:main_color">#00B2D2</con:property></con:attributes></con:chart><con:chart statisticHolder="81f8e33b-b1f6-4b7b-92ea-aafec04b07b7"><con:attributes><con:property key="_CHART_segments">67:36:81f8e33b-b1f6-4b7b-92ea-aafec04b07b710:Time Taken7:AVERAGE4:main</con:property><con:property key="_CHART__SEGMENT_36:81f8e33b-b1f6-4b7b-92ea-aafec04b07b710:Time Taken7:AVERAGE4:main_color">#7826B5</con:property></con:attributes></con:chart><con:chart statisticHolder="6bf2af3a-62fd-42df-a9d3-7d411c52b81f"><con:attributes><con:property key="_CHART_segments">67:36:6bf2af3a-62fd-42df-a9d3-7d411c52b81f10:Time Taken7:AVERAGE4:main</con:property><con:property key="_CHART__SEGMENT_36:6bf2af3a-62fd-42df-a9d3-7d411c52b81f10:Time Taken7:AVERAGE4:main_color">#D7268E</con:property></con:attributes></con:chart><con:attributes><con:property key="_CHARTGROUP_zoomLevel">SECONDS</con:property><con:property key="_CHARTGROUP_timeSpan">69500</con:property><con:property key="_CHARTGROUP_position">38453</con:property><con:property key="_CHARTGROUP_follow">false</con:property></con:attributes></con:chartGroup></con:page></con:statistics></con:loadui-project>
