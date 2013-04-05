@@ -2,46 +2,36 @@
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="global-elements">
     <global-element name="HTTP\HTTPS" type="org.mule.tooling.ui.modules.core.global.httpConnector" entity-id="HTTP\HTTPS#1">
         <properties>
-            <property name="name" value="NoSessionConnector"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="enableCookies"/>
-            <property name="label"/>
-            <property name="cookieSpec"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="dispatcherPoolFactory-ref"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="dynamicNotification"/>
-            <property name="validateConnections"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="sendBufferSize"/>
-            <property name="receiveBufferSize"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="receiveBacklog"/>
-            <property name="sendTcpNoDelay"/>
+            <property name="proxyUsername"/>
             <property name="reuseAddress"/>
-            <property name="keepSendSocketOpen"/>
-            <property name="keepAlive"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="clientSoTimeout"/>
+            <property name="receiveBacklog"/>
+            <property name="enableCookies"/>
             <property name="serverSoTimeout"/>
             <property name="socketSoLinger"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="proxyHostname"/>
+            <property name="clientSoTimeout"/>
+            <property name="validateConnections"/>
+            <property name="keepAlive"/>
+            <property name="label"/>
+            <property name="sendTcpNoDelay"/>
             <property name="proxyPort"/>
-            <property name="proxyUsername"/>
+            <property name="cookieSpec"/>
+            <property name="dispatcherPoolFactory-ref"/>
+            <property name="proxyHostname"/>
+            <property name="receiveBufferSize"/>
+            <property name="name" value="NoSessionConnector"/>
+            <property name="keepSendSocketOpen"/>
+            <property name="dynamicNotification"/>
+            <property name="sendBufferSize"/>
             <property name="proxyPassword"/>
-            <property name="auxiliary;index" value="1"/>
-            <property name="auxiliary;index" value="1"/>
             <property name="auxiliary;index" value="1"/>
         </properties>
     </global-element>
+    <global-unknown description="false" index="3" entity-id="global-unknown#1">
+        <content>&lt;management:jmx-default-config xmlns:management=&quot;http://www.mulesoft.org/schema/mule/management&quot; port=&quot;1098&quot; registerMx4jAdapter=&quot;true&quot;&gt;
+		&lt;management:credentials&gt;
+			&lt;spring:entry xmlns:spring=&quot;http://www.springframework.org/schema/beans&quot; key=&quot;jembi&quot; value=&quot;Jembi#123&quot;/&gt;
+		&lt;/management:credentials&gt;
+	&lt;/management:jmx-default-config&gt;</content>
+    </global-unknown>
     <description></description>
 </mule-configuration>
