@@ -52,21 +52,8 @@ public class mediationDenormalizationQueryEncountersXDS_BTest_wATNA extends
 	    
 	    Map<String, Object> properties = new HashMap<String, Object>();
 	    
-	    // NIST
-	    //payload.setPath("ws/rest/v1/patient/NID-1b48e083395f498/encounters");//NIST2010-2
-	    //properties.put(Constants.ASSIGNING_AUTHORITY_OID_PROPERTY_NAME, "1.19.6.24.109.42.1.3");
-	    
 	    // Mohawk
-	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
-	    
-	    // Nexj
-	    //payload.setPath("ws/rest/v1/patient/IHERED-994/encounters?id=IHERED-994&idType=IHERED");
-	    //payload.setPath("ws/rest/v1/patient/IHERED-993/encounters?id=IHERED-993&idType=IHERED");
-	    //payload.setPath("ws/rest/v1/patient/IHERED-992/encounters?id=IHERED-992&idType=IHERED");
-	    
-	    // Connectathon tuesday morning
-	    payload.setPath("ws/rest/v1/patient/IHEBLUE-IHEBLUE-1354/encounters?id=IHEBLUE-1354&idType=IHEBLUE");
-	    //payload.setPath("ws/rest/v1/patient/IHEGREEN-IHEGREEN-1338/encounters?id=IHEGREEN-1338&idType=IHEGREEN");
+	    payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
 	    MuleMessage result = client.send("vm://queryEncounters-De-normailization-XDS.b", payload, properties);
 	    

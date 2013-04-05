@@ -51,20 +51,8 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	    // Mohawk
 	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
-	    // NIST
-    	//payload.setPath("ws/rest/v1/patient/NIST-55f81316303842c/encounters?id=55f81316303842c&idType=NIST");
-	    
-	    // Nexj
-	    //payload.setPath("ws/rest/v1/patient/IHERED-995/encounters?id=IHERED-995&idType=IHERED");
-	    
-	    // Vitera
-	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-0118jembi/encounters?id=0118jembi&idType=IHEBLUE");
-	    
 	    // OpenXDS - regenstrief
-	    //payload.setPath("ws/rest/v1/patient/ECID-dc8d2234-7fce-4869-945e-97c8b7d97332/encounters");
-	    
-	    // CONNECTATHON - NIST BLUE
-	    payload.setPath("ws/rest/v1/patient/IHERED-RED5507/encounters?id=RED5507&idType=IHERED");
+	    payload.setPath("ws/rest/v1/patient/ECID-dc8d2234-7fce-4869-945e-97c8b7d97332/encounters");
 	    
 	    String oru_r01 = TestUtil.getResourceAsString("oru_r01.xml");
 	    payload.setBody(oru_r01);

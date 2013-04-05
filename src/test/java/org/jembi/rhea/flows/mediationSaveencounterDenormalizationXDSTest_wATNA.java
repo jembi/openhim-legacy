@@ -51,21 +51,6 @@ public class mediationSaveencounterDenormalizationXDSTest_wATNA extends
 	    // Mohawk
 	    //payload.setPath("ws/rest/v1/patient/MOH_CAAT_CR-756/encounters");
 	    
-	    //TODO hardcoded for nist testing [modify for use here]
-    	//return "55f81316303842c^^^&1.3.6.1.4.1.21367.2009.1.2.300&ISO";
-	    
-	    // Nexj
-	    //payload.setPath("ws/rest/v1/patient/IHERED-995/encounters?id=IHERED-995&idType=IHERED");
-	    
-	    // Vitera
-	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-0118jembi/encounters?id=0118jembi&idType=IHEBLUE");
-	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-BLUE5507/encounters?id=BLUE5507&idType=IHEBLUE");
-	    
-	    // Connectathon - Session 1
-	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-IHEBLUE-1338/encounters?id=IHEBLUE-1338&idType=IHEBLUE");
-	    //payload.setPath("ws/rest/v1/patient/IHEGREEN-IHEGREEN-9999/encounters?id=IHEGREEN-9999&idType=IHEGREEN");
-	    //payload.setPath("ws/rest/v1/patient/IHEBLUE-IHEBLUE-1354/encounters?id=IHEBLUE-1354&idType=IHEBLUE");
-	    
 	    //ECID
 	    payload.setPath("ws/rest/v1/patient/ECID-dc8d2234-7fce-4869-945e-97c8b7d97332/encounters?id=dc8d2234-7fce-4869-945e-97c8b7d97332&idType=ECID");
 	    

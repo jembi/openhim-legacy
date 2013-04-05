@@ -43,39 +43,13 @@ public class mediationGetecidDenormalizationPixTest extends
 	    
 	    Map<String, String> idMap = new HashMap<String, String>();
 		
-	    // NIST
-	    //idMap.put("id", "PIXL1");
-		//idMap.put("idType", "NIST2010");
-		
 		// Mohawk
 	    //idMap.put("id", "994620-002229-1988L");
 	    //idMap.put("idType", "W2012CATOID");
 	    
-	    // Sysnet
-	    //idMap.put("id", "JEMBI-2");
-	    //idMap.put("idType", "NIST2010-2");
-	    //idMap.put("id", "IHEBLUE-997");
-	    //idMap.put("idType", "IHEBLUE");
-	    //idMap.put("id", "IHEFACILITY-997");
-	    //idMap.put("idType", "IHEFACILITY");
-	    
-	    // Nexj
-	    //idMap.put("id", "IHEFACILITY-996");
-	    //idMap.put("idType", "IHEFACILITY");
-		
-		// Vitera (official connect-a-thon config)
-	    //idMap.put("id", "L101");
-	    //idMap.put("idType", "IHEFACILITY");
-	    //idMap.put("id", "IHEBLUE-1264");
-	    //idMap.put("idType", "IHEBLUE");
-	    
 	    // OpenEMPI - cr.jembi.org
 	    idMap.put("id", "123456789");
 	    idMap.put("idType", "NID");
-	    
-	    //Tiani
-	    //idMap.put("id", "L101");
-	    //idMap.put("idType", "IHEFACILITY");
 	    
 	    //IHE Facility
 	    //idMap.put("id", "IHEFACILITY-997");
@@ -88,10 +62,6 @@ public class mediationGetecidDenormalizationPixTest extends
 	    
 	    // Mohawk
 	    //assertEquals("756", result.getPayloadAsString());
-	    // Sysnet
-	    //assertEquals("JEMBI-1", result.getPayloadAsString());
-	    // Nexj
-	    //assertEquals("IHERED-996", result.getPayloadAsString());
 
 	    log.info(result.getPayloadAsString());
 	    
