@@ -27,11 +27,14 @@
         </properties>
     </global-element>
     <global-unknown description="false" index="3" entity-id="global-unknown#1">
-        <content>&lt;management:jmx-default-config xmlns:management=&quot;http://www.mulesoft.org/schema/mule/management&quot; port=&quot;1098&quot; registerMx4jAdapter=&quot;true&quot;&gt;
+        <content>&lt;management:jmx-default-config xmlns:management=&quot;http://www.mulesoft.org/schema/mule/management&quot; port=&quot;${jmx.port}&quot; registerMx4jAdapter=&quot;true&quot;&gt;
 		&lt;management:credentials&gt;
-			&lt;spring:entry xmlns:spring=&quot;http://www.springframework.org/schema/beans&quot; key=&quot;jembi&quot; value=&quot;Jembi#123&quot;/&gt;
+			&lt;spring:entry xmlns:spring=&quot;http://www.springframework.org/schema/beans&quot; key=&quot;${jmx.username}&quot; value=&quot;${jmx.password}&quot;/&gt;
 		&lt;/management:credentials&gt;
 	&lt;/management:jmx-default-config&gt;</content>
+    </global-unknown>
+    <global-unknown description="false" index="6" entity-id="global-unknown#2">
+        <content>&lt;management:jmx-mx4j-adaptor xmlns:management=&quot;http://www.mulesoft.org/schema/mule/management&quot; login=&quot;${jmx.username}&quot; password=&quot;${jmx.password}&quot;/&gt;</content>
     </global-unknown>
     <description></description>
 </mule-configuration>
