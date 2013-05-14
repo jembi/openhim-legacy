@@ -5,15 +5,13 @@ package org.jembi.rhea.transformers;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
 
-import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.jembi.rhea.Util;
 import org.mule.api.MuleMessage;
+import org.mule.api.client.LocalMuleClient;
 import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
-import org.mule.module.client.MuleClient;
 import org.mule.transformer.AbstractMessageTransformer;
 
 public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransformer {
@@ -27,7 +25,7 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 			throws TransformerException {
 		
 		try {
-			MuleClient client = new MuleClient(muleContext);
+			LocalMuleClient client = muleContext.getClient();
 			
 			RestfulHttpRequest req = (RestfulHttpRequest) msg.getPayload();
 			
