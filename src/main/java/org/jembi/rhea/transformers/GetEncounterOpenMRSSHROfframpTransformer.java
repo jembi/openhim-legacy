@@ -19,7 +19,7 @@ public class GetEncounterOpenMRSSHROfframpTransformer extends AbstractMessageTra
 		String path = request.getPath();
 		
 		String subPath = path.substring(path.indexOf("/patient"));
-		Log.info("Subpath: " + subPath);
+		Log.debug("Subpath: " + subPath);
 		request.setPath("openmrs/ws/rest/RHEA" + subPath);
 		
 		return msg;
