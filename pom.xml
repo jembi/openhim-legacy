@@ -335,6 +335,13 @@
 			<version>3.1.4.RELEASE</version>
 		</dependency>
 
+		<!-- Mysql driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.25</version>
+		</dependency>
+
 		<!-- for testing -->
 		<dependency>
 			<groupId>org.mule.tests</groupId>
