@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.api.MuleMessage;
 import org.mule.module.client.MuleClient;
@@ -36,6 +37,7 @@ public class mediationGetepidDenormalizationOpenLDAPTest extends
 		return "src/main/app/getepid-denormalization-openldap.xml";
 	}
 	
+	@Ignore("Needs to be make to work independantly")
 	@Test
 	public void testSend() throws Exception {
 		log.info("Starting test");

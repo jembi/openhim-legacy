@@ -3,13 +3,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.jembi.rhea.transformers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jembi.rhea.RestfulHttpRequest;
-import org.mortbay.log.Log;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
 
 public class GetEncounterOpenMRSSHROfframpTransformer extends AbstractMessageTransformer {
+	
+	private Log log = LogFactory.getLog(GetEncounterOpenMRSSHROfframpTransformer.class);
 
 	@Override
 	public Object transformMessage(MuleMessage msg, String enc)
@@ -19,7 +22,7 @@ public class GetEncounterOpenMRSSHROfframpTransformer extends AbstractMessageTra
 		String path = request.getPath();
 		
 		String subPath = path.substring(path.indexOf("/patient"));
-		Log.info("Subpath: " + subPath);
+		log.info("Subpath: " + subPath);
 		request.setPath("openmrs/ws/rest/RHEA" + subPath);
 		
 		return msg;

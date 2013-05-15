@@ -13,6 +13,7 @@ import org.jembi.TestUtil;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.jembi.rhea.RestfulHttpResponse;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.api.MuleMessage;
 import org.mule.module.client.MuleClient;
@@ -40,6 +41,7 @@ public class mediationSaveencounterDenormalizationXDSTest_wATNA extends
 		return "src/main/app/saveencounter-denormalization-xds.xml, src/main/app/atnasend.xml, src/main/app/global-elements.xml";
 	}
 	
+	@Ignore("Needs to be make to work independantly")
 	@Test
 	public void testSend() throws Exception {
 		log.info("Starting test");
