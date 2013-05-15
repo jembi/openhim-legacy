@@ -3,13 +3,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.jembi.rhea.transformers;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.jembi.rhea.Constants;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mule.api.transformer.TransformerException;
@@ -23,23 +25,67 @@ public class OpenMRSSHROfframpTransformerTest {
 		transformer = new OpenMRSSHROfframpTransformer();
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
 
 	@Test
-	public void testBuildOpenMRSSHRRequestParams() {
+	public void testBuildOpenMRSSHRRequestParams_Valid() {
 		Map<String, String> requestParams = new HashMap<String, String>();
-		requestParams.put(Constants.QUERY_ENC_START_DATE_PARAM, "");
-		requestParams.put(Constants.QUERY_ENC_END_DATE_PARAM, "");
-		requestParams.put(Constants.QUERY_ENC_NOTIFICATION_TYPE_PARAM, "");
-		requestParams.put(Constants.QUERY_ENC_ELID_PARAM, "");
-		//TODO
+		requestParams.put(Constants.QUERY_ENC_START_DATE_PARAM, "2013-01-01T12:00:00");
+		requestParams.put(Constants.QUERY_ENC_END_DATE_PARAM, "2013-01-31T12:00:00");
+		requestParams.put(Constants.QUERY_ENC_NOTIFICATION_TYPE_PARAM, "TEST");
+		requestParams.put(Constants.QUERY_ENC_ELID_PARAM, "1234");
+		
+		try {
+			Map<String, String> result = transformer.buildOpenMRSSHRRequestParams("/ws/rest/v1/patient/NID-123456789/encounters", requestParams);
+			assertMapValueEquals(result, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_ELID, "1234");
+			assertMapValueEquals(result, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_ENDDATE, "31-01-2013");
+			assertMapValueEquals(result, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_NOTIFICATION_TYPE, "TEST");
+			assertMapValueEquals(result, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_PATIENT_ID, "123456789");
+			assertMapValueEquals(result, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_PATIENT_IDTYPE, "NID");
+			assertMapValueEquals(result, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_STARTDATE, "02-01-2013");
+		} catch (TransformerException e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testBuildOpenMRSSHRRequestParams_Invalid() {
+		Map<String, String> requestParams = new HashMap<String, String>();
+		requestParams.put(Constants.QUERY_ENC_START_DATE_PARAM, "2013-01-01T12:00:00");
+		requestParams.put(Constants.QUERY_ENC_END_DATE_PARAM, "2013-01-31T12:00:00");
+		requestParams.put(Constants.QUERY_ENC_NOTIFICATION_TYPE_PARAM, "TEST");
+		requestParams.put(Constants.QUERY_ENC_ELID_PARAM, "1234");
+		
+		try {
+			transformer.buildOpenMRSSHRRequestParams("/ws/rest/v1/patient/NID123456789/encounters", requestParams);
+			fail("Failed to throw exception for invalid path");
+		} catch (TransformerException e) {
+			//This is supposed to happen
+		}
 	}
 
 	@Test
-	public void testParseAndSetPatientIdParams() {
-		//TODO
+	public void testParseAndSetPatientIdParams_Valid() {
+		try {
+			testPatientIdPaths("/ws/rest/v1/patient/NID-123456789/encounters", "123456789", "NID");
+		} catch (TransformerException ex) {
+			fail();
+		}
+	}
+		
+	public void testParseAndSetPatientIdParams_Invalid() {
+		try {
+			testPatientIdPaths("/ws/rest/v1/patient/NID123456789/encounters", "123456789", "NID");
+			fail("Failed to throw exception for invalid path");
+		} catch (TransformerException ex) {
+			//This is supposed to happen
+		}
+	}
+	
+	private void testPatientIdPaths(String path, String expectedId, String expectedIdType) throws TransformerException {
+		Map<String, String> targetParams = new HashMap<String, String>();
+		transformer.parseAndSetPatientIdParams(targetParams, path);
+		assertMapValueEquals(targetParams, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_PATIENT_ID, expectedId);
+		assertMapValueEquals(targetParams, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_PATIENT_IDTYPE, expectedIdType);
 	}
 
 	@Test
@@ -86,14 +132,8 @@ public class OpenMRSSHROfframpTransformerTest {
 		Map<String, String> targetParams = new HashMap<String, String>();
 		try {
 			transformer.formatAndSetDateParams(targetParams, start, end);
-			
-			assertTrue(targetParams.containsKey(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_STARTDATE));
-			assertNotNull(targetParams.get(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_STARTDATE));
-			assertEquals(targetParams.get(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_STARTDATE), expectedStart);
-			
-			assertTrue(targetParams.containsKey(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_ENDDATE));
-			assertNotNull(targetParams.get(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_ENDDATE));
-			assertEquals(targetParams.get(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_ENDDATE), expectedEnd);
+			assertMapValueEquals(targetParams, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_STARTDATE, expectedStart);
+			assertMapValueEquals(targetParams, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_ENDDATE, expectedEnd);
 		} catch (TransformerException e) {
 			fail();
 		}
@@ -115,17 +155,13 @@ public class OpenMRSSHROfframpTransformerTest {
 			transformer.formatAndSetDateParams(targetParams, start, end);
 			
 			if (start!=null && !start.isEmpty()) {
-				assertTrue(targetParams.containsKey(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_STARTDATE));
-				assertNotNull(targetParams.get(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_STARTDATE));
-				assertEquals(targetParams.get(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_STARTDATE), expectedStart);
+				assertMapValueEquals(targetParams, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_STARTDATE, expectedStart);
 			} else {
 				assertTrue(!targetParams.containsKey(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_STARTDATE));
 			}
 			
 			if (end!=null && !end.isEmpty()) {
-				assertTrue(targetParams.containsKey(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_ENDDATE));
-				assertNotNull(targetParams.get(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_ENDDATE));
-				assertEquals(targetParams.get(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_ENDDATE), expectedEnd);
+				assertMapValueEquals(targetParams, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_ENDDATE, expectedEnd);
 			} else {
 				assertTrue(!targetParams.containsKey(OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_ENDDATE));
 			}
@@ -133,4 +169,10 @@ public class OpenMRSSHROfframpTransformerTest {
 			fail();
 		}
 	}
+	
+	private void assertMapValueEquals(Map<String, String> map, String key, String value) {
+		assertTrue(map.containsKey(key));
+		assertNotNull(map.get(key));
+		assertEquals(map.get(key), value);
+	}	
 }

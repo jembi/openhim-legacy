@@ -84,7 +84,7 @@ public class OpenMRSSHROfframpTransformer extends AbstractMessageTransformer {
 		
 		int index = id_str.indexOf("-");
 		if (index < 0) {
-			throw new TransformerException(null);
+			throw new TransformerException(this, null);
 		} else {
 			idType = id_str.substring(0, index);
 			patientId = id_str.substring(index + 1);
