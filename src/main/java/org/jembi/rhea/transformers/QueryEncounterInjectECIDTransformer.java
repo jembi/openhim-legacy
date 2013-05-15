@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.jembi.rhea.RestfulHttpRequest;
 import org.jembi.rhea.Util;
+import org.jembi.rhea.transformers.exceptions.InvalidClientIdException;
 import org.mule.api.MuleMessage;
 import org.mule.api.client.LocalMuleClient;
 import org.mule.api.transformer.TransformerException;
@@ -65,7 +66,7 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 				
 				requestClientIds.put(uuid, new String[] {idType, id});
 			} else {
-				throw new Exception("Invalid Client: ECID for id type: " + idType + " with ID: " + id + " could not be found in Client Registry");
+				throw new InvalidClientIdException("Invalid Client: ECID for id type: " + idType + " with ID: " + id + " could not be found in Client Registry");
 			}
 			
 			if (path.contains("/encounters")) {
