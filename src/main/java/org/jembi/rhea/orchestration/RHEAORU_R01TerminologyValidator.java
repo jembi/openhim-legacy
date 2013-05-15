@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jembi.rhea.RestfulHttpRequest;
+import org.jembi.rhea.services.CodeValidator;
+import org.jembi.rhea.services.impl.ApelonCodeValidator;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEventContext;
 import org.mule.api.MuleException;
@@ -37,7 +39,7 @@ public class RHEAORU_R01TerminologyValidator implements Callable {
 		RestfulHttpRequest payload = (RestfulHttpRequest) msg.getPayload();
 		String oru_r01_str = payload.getBody();
 		
-		validateTerminologyInORU_R01(oru_r01_str, new MuleFlowValidator(client));
+		validateTerminologyInORU_R01(oru_r01_str, new ApelonCodeValidator(client));
 		
 		return msg;
 	}
@@ -67,28 +69,6 @@ public class RHEAORU_R01TerminologyValidator implements Callable {
 		}
 	}
 	
-	public static interface CodeValidator {
-		boolean validateCode(String namespace, String code) throws Exception;
-	}
-	
-	public static class MuleFlowValidator implements CodeValidator {
-		private MuleClient client;
-		private Map<String, String> idMap = new HashMap<String, String>();
-		
-		public MuleFlowValidator(MuleClient client) {
-			this.client = client;
-		}
-		
-		@Override
-		public boolean validateCode(String namespace, String code) throws MuleException {
-			idMap.put("id", code);
-			idMap.put("namespace", namespace);
-			
-			MuleMessage response = client.send("vm://validateterm", idMap, null);
-			String success = response.getInboundProperty("success");
-			return success.equals("true");
-		}
-	}
 	
 	public static class UnknownTerminologyException extends Exception {
 		private static final long serialVersionUID = 1L;

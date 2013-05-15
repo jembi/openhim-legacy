@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jembi.TestUtil;
-import org.jembi.rhea.orchestration.RHEAORU_R01TerminologyValidator.CodeValidator;
 import org.jembi.rhea.orchestration.RHEAORU_R01TerminologyValidator.InvalidTerminologyException;
 import org.jembi.rhea.orchestration.RHEAORU_R01TerminologyValidator.UnknownTerminologyException;
+import org.jembi.rhea.services.CodeValidator;
 import org.junit.Before;
 import org.junit.Test;
 
