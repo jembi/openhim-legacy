@@ -5,15 +5,14 @@ package org.jembi.rhea.transformers;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
 
-import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.jembi.rhea.Util;
+import org.jembi.rhea.transformers.exceptions.InvalidClientIdException;
 import org.mule.api.MuleMessage;
+import org.mule.api.client.LocalMuleClient;
 import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
-import org.mule.module.client.MuleClient;
 import org.mule.transformer.AbstractMessageTransformer;
 
 public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransformer {
@@ -27,7 +26,7 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 			throws TransformerException {
 		
 		try {
-			MuleClient client = new MuleClient(muleContext);
+			LocalMuleClient client = muleContext.getClient();
 			
 			RestfulHttpRequest req = (RestfulHttpRequest) msg.getPayload();
 			
@@ -67,7 +66,7 @@ public class QueryEncounterInjectECIDTransformer extends AbstractMessageTransfor
 				
 				requestClientIds.put(uuid, new String[] {idType, id});
 			} else {
-				throw new Exception("Invalid Client: ECID for id type: " + idType + " with ID: " + id + " could not be found in Client Registry");
+				throw new InvalidClientIdException("Invalid Client: ECID for id type: " + idType + " with ID: " + id + " could not be found in Client Registry");
 			}
 			
 			if (path.contains("/encounters")) {
