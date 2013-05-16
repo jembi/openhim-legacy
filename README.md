@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jembi/openhim.png?branch=develop)](https://travis-ci.org/jembi/openhim)
+
 OpenHIM
 =======
 
