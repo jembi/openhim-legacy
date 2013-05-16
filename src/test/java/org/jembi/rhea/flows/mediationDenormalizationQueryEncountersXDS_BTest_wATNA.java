@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.jembi.rhea.RestfulHttpResponse;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.api.MuleMessage;
 import org.mule.module.client.MuleClient;
@@ -42,6 +43,7 @@ public class mediationDenormalizationQueryEncountersXDS_BTest_wATNA extends
 		return "src/main/app/queryencounters-denormalization-xds.b.xml, src/main/app/atnasend.xml, src/main/app/global-elements.xml";
 	}
 	
+	@Ignore("Needs to be make to work independantly")
 	@Test
 	public void testSend() throws Exception {
 		log.info("Starting test");

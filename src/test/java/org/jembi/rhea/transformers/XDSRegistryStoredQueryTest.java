@@ -12,10 +12,12 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import junit.framework.Assert;
 import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryRequest;
 import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotType1;
 
 import org.jembi.rhea.RestfulHttpRequest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.api.ExceptionPayload;
 import org.mule.api.MuleContext;
@@ -26,10 +28,10 @@ import org.mule.api.transformer.DataType;
 import org.mule.api.transformer.Transformer;
 import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
-import junit.framework.Assert;
 
 public class XDSRegistryStoredQueryTest {
 	
+	@Ignore("Needs to be reworked")
 	@Test
 	public void testTransformMessageMuleMessageString() throws JAXBException {
 		MuleMessage testMsg = new TestMuleMessage();
