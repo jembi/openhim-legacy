@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jembi/openhim.png?branch=develop)](https://travis-ci.org/jembi/openhim)
+
 OpenHIM
 =======
 
@@ -53,6 +55,13 @@ How to run the application
 1.	In the openhim Mule application locate the mule-project.xml file.
 2.	Right click on and it and choose 'run as', then choose 'Mule Application'.
 3.	The app will start up and run in the eclipse console, hey presto!
+
+Building the OpenHIM from the command line
+------------------------------------------
+
+The OpenHIM can be built using maven. This will run the unit tests and also ouput a zip package that you can load into a standalone mule server.
+
+`mvn clean install`
 
 Running the Mock Services
 -------------------------

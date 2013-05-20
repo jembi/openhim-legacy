@@ -1,23 +1,18 @@
 package org.jembi.rhea.transformers;
 
 import static org.junit.Assert.fail;
-
-import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType;
 import ihe.iti.xds_b._2007.RetrieveDocumentSetResponseType;
-import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType.DocumentRequest;
 
-import java.io.StringWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.activation.DataHandler;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 
-import org.jembi.ihe.xds.XDSAffinityDomain;
-import org.jembi.rhea.RestfulHttpRequest;
+import junit.framework.Assert;
+
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.api.ExceptionPayload;
 import org.mule.api.MuleContext;
@@ -28,10 +23,10 @@ import org.mule.api.transformer.DataType;
 import org.mule.api.transformer.Transformer;
 import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
-import junit.framework.Assert;
 
 public class XDSRepositoryRetrieveDocumentSetResponseTest {
 	
+	@Ignore("Needs to be reworked")
 	@Test
 	public void testTransformMessageMuleMessageString() throws JAXBException {
 		MuleMessage testMsg = new TestMuleMessage();

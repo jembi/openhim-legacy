@@ -1,140 +1,225 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mediation-denormalization-queryfacilities-mockserviceprovider">
-    <flow SubFlow="false" name="mediation-denormalization-receivealert-mockserviceproviderFlow">
+    <flow SubFlow="false" name="mediation-denormalization-receivealert-mockserviceproviderFlow" entity-id="42ea8f0b-ca10-4a5b-a6c1-23852f2985ea">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
         </properties>
-        <lane entity-id="d8164684-8ecf-4b46-a40a-67f7c0f77f0d">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="dcd213a0-243d-4e63-bbe4-14e78f5fd656">
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Read from queue" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
                 <properties>
-                    <property value="one-way" name="exchange-pattern"/>
-                    <property value="request-response" name="exchange-pattern"/>
-                    <property value="receiveAlert-De-normailization-MockServiceProvider" name="path"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="path" value="receiveAlert-De-normailization-MockServiceProvider"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="auxiliary;index" value="2"/>
                     <property name="address"/>
-                    <property value="10000" name="responseTimeout"/>
+                    <property name="responseTimeout" value="10000"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
-                    <property value="text/plain" name="mimeType"/>
+                    <property name="mimeType" value="text/plain"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="auxiliary;index" value="2"/>
                     <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="auxiliary;index" value="2"/>
                 </properties>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="5aa98709-73c0-43c5-91c5-f0f99c218431">
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
                 <properties>
-                    <property value="De-normalizing a receive alert transaction to mock service provider" name="message"/>
-                    <property value="INFO" name="level"/>
+                    <property name="message" value="De-normalizing a receive alert transaction to mock service provider"/>
+                    <property name="level" value="INFO"/>
                     <property name="category"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="auxiliary;index" value="3"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Off-ramp Transformer" entity-id="20a363a9-fbdc-4769-949a-627535fee14a">
+            <pattern name="Off-ramp Transformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#1">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
+                    <property name="auxiliary;index" value="4"/>
                     <property name="mimeType"/>
-                    <property value="org.jembi.heal.DoNothingTransformer" name="class"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property name="class" value="org.jembi.heal.DoNothingTransformer"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property name="auxiliary;index" value="4"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set Path Property" entity-id="de62740a-1dc3-4cb1-9031-b82ad0569fec">
+            <pattern name="Set Path Property" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="Message Properties#1">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
+                    <property name="auxiliary;index" value="5"/>
                     <property name="mimeType"/>
+                    <property name="auxiliary;index" value="5"/>
+                    <property name="auxiliary;index" value="5"/>
                     <property name="overwrite"/>
                     <property name="scope"/>
+                    <property name="auxiliary;index" value="5"/>
+                    <property name="auxiliary;index" value="5"/>
+                    <property name="auxiliary;index" value="5"/>
+                    <property name="auxiliary;index" value="5"/>
+                    <property name="auxiliary;index" value="5"/>
+                    <property name="auxiliary;index" value="5"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
-                        <property value="#[groovy: return message.payload.buildUrlWithRequestParams();]" name="value"/>
-                        <property value="path" name="key"/>
+                        <property name="value" value="#[groovy: return message.payload.buildUrlWithRequestParams();]"/>
+                        <property name="auxiliary;wrapIn" value="6"/>
+                        <property name="auxiliary;index" value="6"/>
+                        <property name="key" value="path"/>
                     </property-collection>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="Transfor HTTPRestfulMessage to HTTP Body" entity-id="cdc18d19-f100-40ac-bccf-58fe60a624f5">
+            <pattern name="Transfor HTTPRestfulMessage to HTTP Body" type="http://www.mulesoft.org/schema/mule/core/expression-transformer" entity-id="Expression#1">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
+                    <property name="auxiliary;index" value="7"/>
                     <property name="mimeType"/>
-                    <property value="groovy" name="evaluator"/>
-                    <property value="return message.payload.body;" name="expression"/>
+                    <property name="auxiliary;index" value="7"/>
+                    <property name="auxiliary;index" value="7"/>
+                    <property name="auxiliary;index" value="7"/>
+                    <property name="evaluator" value="groovy"/>
+                    <property name="expression" value="return message.payload.body;"/>
                     <property name="custom-evaluator"/>
                     <property name="returnSourceIfNull"/>
+                    <property name="auxiliary;index" value="7"/>
+                    <property name="auxiliary;index" value="7"/>
+                    <property name="auxiliary;index" value="7"/>
                 </properties>
             </pattern>
-            <response entity-id="884a5427-6162-41be-af98-fa6cd9b14639">
-                <compartment entity-id="437319c0-0cca-4497-a4e9-cbe04b3aee7d">
-                    <lane entity-id="f08e908d-9403-41b8-bf58-833bb979e458">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="2b315890-4951-4cba-b73e-d1af3b38c41b">
+            <response index="8" entity-id="response#1">
+                <compartment entity-id="compartment#1">
+                    <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
+                        <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
                             <properties>
-<property value="Recieved responce from mock service provider: #[groovy: message.toString();]]" name="message"/>
-<property value="INFO" name="level"/>
+<property name="message" value="Recieved responce from mock service provider: #[groovy: message.toString();]"/>
+<property name="category" value=""/>
+<property name="level" value="INFO"/>
+<property name="auxiliary;index" value="9"/>
+<property name="updated"/>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                        <pattern name="HttpResponseToRestfulHttpResponseTransformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#2">
+                            <properties>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="encoding"/>
+<property name="auxiliary;index" value="10"/>
+<property name="mimeType"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="class" value="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+<property name="auxiliary;index" value="10"/>
+                            </properties>
+                        </pattern>
+                        <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#3">
+                            <properties>
+<property name="message" value="Responce normalization"/>
+<property name="level" value="INFO"/>
 <property name="category"/>
+<property name="auxiliary;index" value="11"/>
+<property name="auxiliary;index" value="11"/>
+<property name="auxiliary;index" value="11"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="HttpResponseToRestfulHttpResponseTransformer" entity-id="016ba91c-b168-4d01-9ca3-c1296cac18af">
+                        <pattern name="On-ramp Transformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#3">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
 <property name="encoding"/>
+<property name="auxiliary;index" value="12"/>
 <property name="mimeType"/>
-<property value="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer" name="class"/>
+<property name="auxiliary;index" value="12"/>
+<property name="auxiliary;index" value="12"/>
+<property name="class" value="org.jembi.heal.DoNothingTransformer"/>
+<property name="auxiliary;index" value="12"/>
+<property name="auxiliary;index" value="12"/>
+<property name="auxiliary;index" value="12"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="6369d467-5e1b-4590-b11a-f8b1cd84545a">
-                            <properties>
-<property value="Responce normalization" name="message"/>
-<property value="INFO" name="level"/>
-<property name="category"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="On-ramp Transformer" entity-id="d2bec457-90e0-438a-920a-fb2787b08a5c">
-                            <properties>
-<property name="returnClass"/>
-<property name="ignoreBadInput"/>
-<property name="encoding"/>
-<property name="mimeType"/>
-<property value="org.jembi.heal.DoNothingTransformer" name="class"/>
-                            </properties>
-                        </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Translation Transformer" entity-id="86edd44f-32e2-494b-aab7-40d2bf1b1e29">
+                        <pattern name="Translation Transformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#4">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
 <property name="encoding"/>
+<property name="auxiliary;index" value="13"/>
 <property name="mimeType"/>
-<property value="org.jembi.heal.DoNothingTransformer" name="class"/>
+<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="13"/>
+<property name="class" value="org.jembi.heal.DoNothingTransformer"/>
+<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="13"/>
                             </properties>
                         </pattern>
                     </lane>
                 </compartment>
             </response>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="Deliver message to mock service provider" entity-id="1b8660d3-8b33-4c7c-bc66-350ce60ea1fb">
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Deliver message to mock service provider" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                 <properties>
-                    <property value="one-way" name="exchange-pattern"/>
-                    <property value="request-response" name="exchange-pattern"/>
-                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="auxiliary;index" value="14"/>
                     <property name="httpLabel"/>
-                    <property value="localhost" name="host"/>
-                    <property value="8004" name="port"/>
-                    <property value="#[header:OUTBOUND:path]" name="path"/>
+                    <property name="host" value="localhost"/>
+                    <property name="port" value="8004"/>
+                    <property name="path" value="#[header:OUTBOUND:path]"/>
                     <property name="method"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="auxiliary;index" value="14"/>
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
                     <property name="mimeType"/>
                     <property name="responseTimeout"/>
                     <property name="followRedirects"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
                     <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
                     <property name="user"/>
                     <property name="password"/>
+                    <property name="auxiliary;index" value="14"/>
                     <property name="contentType"/>
                     <property name="keep-alive"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
+                    <property name="auxiliary;index" value="14"/>
                 </properties>
             </endpoint>
         </lane>

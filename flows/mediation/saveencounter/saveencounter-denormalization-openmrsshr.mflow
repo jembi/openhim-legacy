@@ -1,157 +1,258 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mediation-denormalization-queryfacilities-mockserviceprovider">
-    <global-unknown entity-id="83819c26-89f2-4285-9d79-3055dfb221d5">
-        <content>&lt;context:property-placeholder xmlns:context=&quot;http://www.springframework.org/schema/context&quot; location=&quot;classpath:HIM-core.properties, classpath:HIM-core-override.properties&quot;&gt;&lt;/context:property-placeholder&gt;</content>
-    </global-unknown>
-    <flow SubFlow="false" name="mediation-denormalization-saveencounters-openmrsshrFlow">
+    <global-element name="Property Placeholder" type="http://www.springframework.org/schema/context/property-placeholder" entity-id="Property Placeholder#1">
+        <properties>
+            <property name="location" value="classpath:HIM-core.properties, classpath:HIM-core-override.properties"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="1"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="mediation-denormalization-saveencounters-openmrsshrFlow" entity-id="13fdf6c0-ad88-4727-9ac6-99b42fcfa4fa">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
+            <property name="auxiliary;index" value="2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="2"/>
+            <property name="auxiliary;index" value="2"/>
+            <property name="auxiliary;index" value="2"/>
         </properties>
-        <lane entity-id="71c06807-0694-48a4-af87-0a406c17cd5e">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Read from queue" entity-id="db791c3e-17c5-4b0e-9a4b-5f69c0cfc363">
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Read from queue" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
                 <properties>
-                    <property value="one-way" name="exchange-pattern"/>
-                    <property value="request-response" name="exchange-pattern"/>
-                    <property value="saveEncounters-De-normailization-OpenMRSSHR" name="path"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="path" value="saveEncounters-De-normailization-OpenMRSSHR"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="auxiliary;index" value="3"/>
                     <property name="address"/>
-                    <property value="10000" name="responseTimeout"/>
+                    <property name="responseTimeout" value="10000"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
-                    <property value="text/plain" name="mimeType"/>
+                    <property name="mimeType" value="text/plain"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="auxiliary;index" value="3"/>
                     <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="auxiliary;index" value="3"/>
                 </properties>
             </endpoint>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="dcd22909-d859-409a-91a9-39f81dbccfd3">
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
                 <properties>
-                    <property value="De-normalizing a save encounters transaction to OpenMRS SHR" name="message"/>
-                    <property value="INFO" name="level"/>
+                    <property name="message" value="De-normalizing a save encounters transaction to OpenMRS SHR"/>
+                    <property name="level" value="INFO"/>
                     <property name="category"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property name="auxiliary;index" value="4"/>
                 </properties>
             </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Off-ramp Transformer" entity-id="1918a3ab-6100-4a66-a552-e463cbafc567">
+            <pattern name="Off-ramp Transformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#1">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
+                    <property name="auxiliary;index" value="5"/>
                     <property name="mimeType"/>
-                    <property value="org.jembi.rhea.transformers.OpenMRSSHROfframpTransformer" name="class"/>
+                    <property name="auxiliary;index" value="5"/>
+                    <property name="auxiliary;index" value="5"/>
+                    <property name="class" value="org.jembi.rhea.transformers.OpenMRSSHROfframpTransformer"/>
+                    <property name="auxiliary;index" value="5"/>
+                    <property name="auxiliary;index" value="5"/>
+                    <property name="auxiliary;index" value="5"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Set Path Property" entity-id="44992d14-b0f7-4b33-864f-bd6d6e4a0926">
+            <pattern name="Set Path Property" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="Message Properties#1">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
+                    <property name="auxiliary;index" value="6"/>
                     <property name="mimeType"/>
+                    <property name="auxiliary;index" value="6"/>
+                    <property name="auxiliary;index" value="6"/>
                     <property name="overwrite"/>
                     <property name="scope"/>
+                    <property name="auxiliary;index" value="6"/>
+                    <property name="auxiliary;index" value="6"/>
+                    <property name="auxiliary;index" value="6"/>
+                    <property name="auxiliary;index" value="6"/>
+                    <property name="auxiliary;index" value="6"/>
+                    <property name="auxiliary;index" value="6"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
-                        <property value="#[groovy: return message.payload.buildUrlWithRequestParams();]" name="value"/>
-                        <property value="path" name="key"/>
+                        <property name="value" value="#[groovy: return message.payload.buildUrlWithRequestParams();]"/>
+                        <property name="auxiliary;wrapIn" value="7"/>
+                        <property name="auxiliary;index" value="7"/>
+                        <property name="key" value="path"/>
                     </property-collection>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" name="Add basic auth" entity-id="b307a8ac-77e0-4f64-ad96-74c07cec3ebc">
+            <pattern name="Add basic auth" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="Message Properties#2">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
+                    <property name="auxiliary;index" value="8"/>
                     <property name="mimeType"/>
+                    <property name="auxiliary;index" value="8"/>
+                    <property name="auxiliary;index" value="8"/>
                     <property name="overwrite"/>
                     <property name="scope"/>
+                    <property name="auxiliary;index" value="8"/>
+                    <property name="auxiliary;index" value="8"/>
+                    <property name="auxiliary;index" value="8"/>
+                    <property name="auxiliary;index" value="8"/>
+                    <property name="auxiliary;index" value="8"/>
+                    <property name="auxiliary;index" value="8"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
-                        <property value="${shr.auth}" name="value"/>
-                        <property value="Authorization" name="key"/>
+                        <property name="value" value="${shr.auth}"/>
+                        <property name="auxiliary;wrapIn" value="9"/>
+                        <property name="auxiliary;index" value="9"/>
+                        <property name="key" value="Authorization"/>
                     </property-collection>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="Transfor HTTPRestfulMessage to HTTP Body" entity-id="faf4c661-11cf-4106-bfd6-b57498f3c54c">
+            <pattern name="Transfor HTTPRestfulMessage to HTTP Body" type="http://www.mulesoft.org/schema/mule/core/expression-transformer" entity-id="Expression#1">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
+                    <property name="auxiliary;index" value="10"/>
                     <property name="mimeType"/>
-                    <property value="groovy" name="evaluator"/>
-                    <property value="return message.payload.body;" name="expression"/>
+                    <property name="auxiliary;index" value="10"/>
+                    <property name="auxiliary;index" value="10"/>
+                    <property name="auxiliary;index" value="10"/>
+                    <property name="evaluator" value="groovy"/>
+                    <property name="expression" value="return message.payload.body;"/>
                     <property name="custom-evaluator"/>
                     <property name="returnSourceIfNull"/>
+                    <property name="auxiliary;index" value="10"/>
+                    <property name="auxiliary;index" value="10"/>
+                    <property name="auxiliary;index" value="10"/>
                 </properties>
             </pattern>
-            <response entity-id="ce8d6aba-f16b-49b4-9169-149a9096f64d">
-                <compartment entity-id="871458d4-82bd-46f7-b801-d5bccbe23810">
-                    <lane entity-id="434c6292-2ed0-4a88-81d4-33535be3a006">
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="89449d35-c6e6-46e3-b77c-5776e3dfaada">
+            <response index="11" entity-id="response#1">
+                <compartment entity-id="compartment#1">
+                    <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
+                        <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
                             <properties>
-<property value="Recieved responce from OpenMRS SHR: #[groovy: message.toString();]]" name="message"/>
-<property value="INFO" name="level"/>
+<property name="message" value="Recieved responce from OpenMRS SHR: #[groovy: message.toString();]]"/>
+<property name="level" value="INFO"/>
 <property name="category"/>
+<property name="auxiliary;index" value="12"/>
+<property name="auxiliary;index" value="12"/>
+<property name="auxiliary;index" value="12"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="HttpResponseToRestfulHttpResponseTransformer" entity-id="0024eb9f-db65-45e0-bc58-b2f3d3e1be45">
+                        <pattern name="HttpResponseToRestfulHttpResponseTransformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#2">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
 <property name="encoding"/>
+<property name="auxiliary;index" value="13"/>
 <property name="mimeType"/>
-<property value="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer" name="class"/>
+<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="13"/>
+<property name="class" value="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer"/>
+<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="13"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Logger" entity-id="e3afe9ff-c865-4ba7-a224-fe9f7ea5f3a5">
+                        <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#3">
                             <properties>
-<property value="Responce normalization" name="message"/>
-<property value="INFO" name="level"/>
+<property name="message" value="Responce normalization"/>
+<property name="level" value="INFO"/>
 <property name="category"/>
+<property name="auxiliary;index" value="14"/>
+<property name="auxiliary;index" value="14"/>
+<property name="auxiliary;index" value="14"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="On-ramp Transformer" entity-id="1936ed00-6953-4fde-b926-b16f290510c0">
+                        <pattern name="On-ramp Transformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#3">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
 <property name="encoding"/>
+<property name="auxiliary;index" value="15"/>
 <property name="mimeType"/>
-<property value="org.jembi.heal.DoNothingTransformer" name="class"/>
+<property name="auxiliary;index" value="15"/>
+<property name="auxiliary;index" value="15"/>
+<property name="class" value="org.jembi.heal.DoNothingTransformer"/>
+<property name="auxiliary;index" value="15"/>
+<property name="auxiliary;index" value="15"/>
+<property name="auxiliary;index" value="15"/>
                             </properties>
                         </pattern>
-                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="Translation Transformer" entity-id="3d66000b-49aa-47ee-ab2b-ae5dfb807ebe">
+                        <pattern name="Translation Transformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#4">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
 <property name="encoding"/>
+<property name="auxiliary;index" value="16"/>
 <property name="mimeType"/>
-<property value="org.jembi.heal.DoNothingTransformer" name="class"/>
+<property name="auxiliary;index" value="16"/>
+<property name="auxiliary;index" value="16"/>
+<property name="class" value="org.jembi.heal.DoNothingTransformer"/>
+<property name="auxiliary;index" value="16"/>
+<property name="auxiliary;index" value="16"/>
+<property name="auxiliary;index" value="16"/>
                             </properties>
                         </pattern>
                     </lane>
                 </compartment>
             </response>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="Deliver message to mock service provider" entity-id="47070cb4-d86c-44a1-8b28-0d32cbe12420">
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Deliver message to mock service provider" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                 <properties>
-                    <property value="one-way" name="exchange-pattern"/>
-                    <property value="request-response" name="exchange-pattern"/>
-                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="auxiliary;index" value="17"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="auxiliary;index" value="17"/>
                     <property name="httpLabel"/>
-                    <property value="${shr.host}" name="host"/>
-                    <property value="${shr.port}" name="port"/>
-                    <property value="#[header:OUTBOUND:path]" name="path"/>
+                    <property name="host" value="${shr.host}"/>
+                    <property name="port" value="${shr.port}"/>
+                    <property name="path" value="#[header:OUTBOUND:path]"/>
                     <property name="method"/>
+                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="17"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="auxiliary;index" value="17"/>
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
                     <property name="mimeType"/>
-                    <property value="120000" name="responseTimeout"/>
+                    <property name="responseTimeout" value="120000"/>
                     <property name="followRedirects"/>
+                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="17"/>
                     <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
+                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="17"/>
                     <property name="user"/>
                     <property name="password"/>
-                    <property value="text/xml" name="contentType"/>
+                    <property name="auxiliary;index" value="17"/>
+                    <property name="contentType" value="text/xml"/>
                     <property name="keep-alive"/>
+                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="17"/>
+                    <property name="auxiliary;index" value="17"/>
                 </properties>
             </endpoint>
         </lane>
