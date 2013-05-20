@@ -7,14 +7,19 @@ import static org.junit.Assert.fail;
 import static org.mockito.Matchers.anyMap;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jembi.TestUtil;
 import org.jembi.rhea.orchestration.RHEAORU_R01TerminologyValidator.InvalidTerminologyException;
+import org.jembi.rhea.orchestration.RHEAORU_R01TerminologyValidator.UnknownTerminologyException;
 import org.junit.Before;
 import org.junit.Test;
+import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.module.client.MuleClient;
 
@@ -43,9 +48,25 @@ public class RHEAORU_R01TerminologyValidatorTest {
 		String oru_r01 = TestUtil.getResourceAsString("oru_r01_tstest_valid.xml");
 		try {
 			validator.validateTerminologyInORU_R01(oru_r01, mockClient);
+			verifyMockClient("LOINC", "84862-4");
+			verifyMockClient("LOINC", "72154-8");
+			verifyMockClient("LOINC", "8480-6");
+			verifyMockClient("LOINC", "11885-1");
+			verifyMockClient("LOINC", "55283-6");
+			verifyMockClient("LOINC", "29463-7");
+			verifyMockClient("LOINC", "8310-5");
+			verifyMockClient("LOINC", "11881-0");
+			verifyMockClient("LOINC", "46040-2");
 		} catch (Exception e) {
 			fail("Failed due to exception: " + e);
 		}
+	}
+	
+	private void verifyMockClient(String namespace, String code) throws MuleException {
+		Map<String, String> test = new HashMap<String, String>();
+		test.put("namespace", namespace);
+		test.put("id", code);
+		verify(mockClient).send("vm://validateterm", test, null);
 	}
 	
 	/**
@@ -93,6 +114,28 @@ public class RHEAORU_R01TerminologyValidatorTest {
 			//This is supposed to happen
 		} catch (Exception e) {
 			fail("Failed due to exception: " + e);
+		}
+	}
+	
+	/**
+	 * If the flow returns false, an exception must be thrown
+	 */
+	@Test
+	public void testValidateTerminologyInORU_R01_Failure() throws IOException, MuleException {
+		String oru_r01 = TestUtil.getResourceAsString("oru_r01_tstest_valid.xml");
+		
+		MuleClient falseClient = mock(MuleClient.class);
+		MuleMessage mockMessage = mock(MuleMessage.class);
+		when(mockMessage.getInboundProperty(eq("success"))).thenReturn("false");
+		when(falseClient.send(eq("vm://validateterm"), anyMap(), anyMap())).thenReturn(mockMessage);
+		
+		try {
+			validator.validateTerminologyInORU_R01(oru_r01, falseClient);
+			fail("Failed to throw exception UnknownTerminologyException");
+		} catch (UnknownTerminologyException ex) {
+			//This is supposed to happen
+		} catch (Exception ex) {
+			fail();
 		}
 	}
 }
