@@ -15,8 +15,8 @@
 
 		<mule.version>3.4.0</mule.version>
 		<eclipsePluginVersion>2.8</eclipsePluginVersion>
-		<jdkName>JavaSE-1.6</jdkName>
-		<jdk.version>1.6</jdk.version>
+		<jdkName>JavaSE-1.7</jdkName>
+		<jdk.version>1.7</jdk.version>
 		<junit.version>4.9</junit.version>
 	</properties>
 
