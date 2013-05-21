@@ -1,3 +1,8 @@
+$mysql_password = "Jembi#123"
+$himuser_password = "Jembi#123"
+#the location of the install files
+$source_dir = "~"
+
 # defaults for Exec
 Exec {
 	    path => ["/bin", "/sbin", "/usr/bin", "/usr/sbin", "/usr/local/bin", "/usr/local/sbin"],
@@ -23,9 +28,6 @@ package { "mysql-server":
 	ensure => latest,
 	require => Exec['apt-get update'];
 }
-
-$mysql_password = "Jembi#123"
-$himuser_password = "Jembi#123"
 
 service { "mysql":
 	enable => true,
@@ -62,11 +64,11 @@ exec { "mysql-user-privileges":
 ## Mule ESB ##
 
 file { "fetch-mule-esb":
-	command => "wget -P ~/ http://dist.codehaus.org/mule/distributions/mule-standalone-3.4.0.tar.gz",
+	command => "wget -P $source_dir/ http://dist.codehaus.org/mule/distributions/mule-standalone-3.4.0.tar.gz",
 }
 
 exec { "extract-mule-esb":
-	command => "tar -xzvf ~/mule-standalone-3.3.0.tar.gz",
+	command => "tar -xzvf $source_dir/mule-standalone-3.3.0.tar.gz",
 	require => Exec["fetch-mule-esb"]
 }
 
