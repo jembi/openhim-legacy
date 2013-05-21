@@ -12,6 +12,9 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <vm:inbound-endpoint exchange-pattern="request-response" path="getepid-openldap" responseTimeout="10000" mimeType="text/plain" doc:name="VM"/>
         <logger message="In getepid de-normalization for OpenLDAP #[groovy: message.toString()]" level="INFO" doc:name="Logger"/>
         <logger message="Length: #[groovy: message.getPayloadAsString().length()]" level="INFO" doc:name="Logger"/>
+        <message-properties-transformer doc:name="Add basic auth">
+            <add-message-property key="Authorization" value="${pr.auth}"/>
+        </message-properties-transformer>
         <response>
             <choice doc:name="Choice">
                 <when expression="message.getInboundProperty('http.status').equals('200') &amp;&amp; (message.getPayloadAsString().length() &gt; 0)" evaluator="groovy">

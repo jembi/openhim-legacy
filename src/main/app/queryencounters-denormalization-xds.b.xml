@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:https="http://www.mulesoft.org/schema/mule/https"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:wsa="http://cxf.apache.org/ws/addressing" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="EE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd 
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://cxf.apache.org/ws/addressing http://cxf.apache.org/schemas/ws-addr-conf.xsd ">
+    <context:property-placeholder xmlns:context="http://www.springframework.org/schema/context" location="classpath:HIM-core.properties, classpath:HIM-core-override.properties"></context:property-placeholder>
+    <https:connector name="HTTP_HTTPS1" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="HTTP\HTTPS">
+        <service-overrides sessionHandler="org.mule.session.NullSessionHandler"/>
+        <https:tls-client path="${ihe.keystore}" storePassword="${ihe.storepassword}"/>
+        <https:tls-key-store path="${ihe.keystore}" keyPassword="${ihe.keypassword}" storePassword="${ihe.storepassword}"/>
+    </https:connector>
+    <flow name="mediation-denormalization-queryencounters-xds.bFlow" doc:name="mediation-denormalization-queryencounters-xds.bFlow">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="queryEncounters-De-normailization-XDS.b" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
+        <logger message="De-normalizing a query encounters transaction to XDS.b registry and repository" level="INFO" doc:name="Logger"/>
+        <custom-transformer class="org.jembi.rhea.transformers.XDSRegistryStoredQuery" doc:name="Construct XDS Registry Stored Query">
+            <spring:property name="requestedAssigningAuthorityId" value="${pix.requestedAssigningAuthorityId}"/>
+        </custom-transformer>
+        <response>
+        	<logger message="Recieved response from XDS registry: #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
+	        <custom-transformer class="org.jembi.rhea.transformers.XDSRegistryStoredQueryResponse" doc:name="Process stored query response">
+                <spring:property name="xdsRegistryHost" value="${xds.registry.host}"/>
+                <spring:property name="xdsRegistryPath" value="${xds.registry.path}"/>
+                <spring:property name="xdsRegistrySecurePort" value="${xds.registry.securePort}"/>
+                <spring:property name="xdsRegistryPort" value="${xds.registry.port}"/>
+                <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthorityId}"/>
+                <spring:property name="iheSecure" value="${ihe.secure}"/>
+            </custom-transformer>
+            <component class="org.jembi.rhea.orchestration.ATNADispatchAuditMessage" doc:name="Send Mohawk Visualizer Message"/>
+	        <logger message="DocumentMap: #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
+	        <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSet" doc:name="Construct retrieve documents messages">
+                <spring:property name="configuredRepositoryUniqueId" value="${xds.repository.UniqueId}"/>
+            </custom-transformer>
+            <collection-splitter doc:name="Collection Splitter"/>
+	        <component class="org.jembi.rhea.orchestration.SetPayloadAsSessionVariable" doc:name="Set request as session property"/>
+	        <vm:outbound-endpoint exchange-pattern="request-response" doc:name="Send Retrieve Documents Request" path="queryencounter_xds_retrieve_document_setb" />
+            <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryRetrieveDocumentSetResponse" doc:name="Process retrieve documents response">
+                <spring:property name="xdsRepositoryHost" value="${xds.repository.host}"/>
+                <spring:property name="xdsRepositoryPath" value="${xds.repository.path}"/>
+                <spring:property name="xdsRepositorySecurePort" value="${xds.repository.securePort}"/>
+                <spring:property name="xdsRepositoryPort" value="${xds.repository.port}"/>
+                <spring:property name="requestedAssigningAuthority" value="${pix.requestedAssigningAuthorityId}"/>
+                <spring:property name="iheSecure" value="${ihe.secure}"/>
+            </custom-transformer>
+            <custom-aggregator failOnTimeout="true" class="org.jembi.rhea.orchestration.XDSRepositoryRetrieveDocumentSetResponseAggregator" doc:name="Custom Aggregator"/>
+            <custom-transformer class="org.jembi.rhea.transformers.XDSRepositoryResponseToRestfulHttpResponseTransformer" doc:name="Transform document list to RestfulHttpResponse" />
+        </response>
+        <cxf:jaxws-client doc:name="SOAP"  clientClass="ihe.iti.xds_b._2007.DocumentRegistryService" port="DocumentRegistry_Port_Soap12" operation="DocumentRegistry_RegistryStoredQuery">
+            <cxf:features>
+				<wsa:addressing />
+			</cxf:features>
+        </cxf:jaxws-client>
+        <logger message="The raw soap XDS registry payload: #[groovy: return message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
+        <choice doc:name="Choice">
+            <when expression="#[groovy: return ${ihe.secure};]">
+                <processor-chain doc:name="Processor Chain">
+                    <https:outbound-endpoint exchange-pattern="request-response" host="${xds.registry.host}" port="${xds.registry.securePort}" doc:name="HTTP" path="${xds.registry.path}" encoding="UTF-8" connector-ref="HTTP_HTTPS1" />
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain doc:name="Processor Chain">
+                    <http:outbound-endpoint exchange-pattern="request-response" host="${xds.registry.host}" port="${xds.registry.port}" doc:name="HTTP" path="${xds.registry.path}" encoding="UTF-8" />
+                </processor-chain>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="XDS_Retrieve_Document_Set.b_QueryFlow1" doc:name="XDS_Retrieve_Document_Set.b_QueryFlow1">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="queryencounter_xds_retrieve_document_setb" doc:name="VM"/>
+        <cxf:jaxws-client operation="DocumentRepository_RetrieveDocumentSet" clientClass="ihe.iti.xds_b._2007.DocumentRepositoryService" port="DocumentRepository_Port_Soap12" doc:name="SOAP" mtomEnabled="true">
+            <cxf:features>
+				<wsa:addressing />
+			</cxf:features>
+        </cxf:jaxws-client>
+        <logger message="The raw soap XDS repository payload: #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
+        <choice doc:name="Choice">
+            <when expression="#[groovy: return ${ihe.secure};]">
+                <processor-chain doc:name="Processor Chain">
+                    <https:outbound-endpoint exchange-pattern="request-response" host="${xds.repository.host}" port="${xds.repository.securePort}" path="${xds.repository.path}" doc:name="HTTPS" connector-ref="HTTP_HTTPS1"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain doc:name="Processor Chain">
+                    <http:outbound-endpoint exchange-pattern="request-response" host="${xds.repository.host}" port="${xds.repository.port}" path="${xds.repository.path}" doc:name="HTTP"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+        <logger message="Recieved response from XDS repository #[groovy: message.getPayloadAsString();]" level="INFO" doc:name="Logger"/>
+        <component class="org.jembi.rhea.orchestration.ATNADispatchAuditMessage" doc:name="Send Mohawk Visualizer Message"/>
+    </flow>
+</mule>
