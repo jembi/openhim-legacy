@@ -1,7 +1,7 @@
 $mysql_password = "Jembi#123"
 $himuser_password = "Jembi#123"
 #the location of the install files
-$source_dir = "~"
+$source_dir = "/home/jembi"
 
 # defaults for Exec
 Exec {
@@ -37,23 +37,27 @@ service { "mysql":
 
 #Set MySQL root password
 exec { "mysqlpass":
+	unless => "mysqladmin -uroot -p$mysql_password status",
 	command => "mysqladmin -uroot password $mysql_password",
 	require => Service["mysql"]
 }
 
 exec { "create-mysql-user":
+	unless => "mysqladmin -uhimuser -p$himuser_password status",
 	command => "mysql -uroot -p$mysql_password -e \"CREATE USER 'himuser'@'localhost' IDENTIFIED BY '$himuser_password';\"",
 	require => Exec["mysqlpass"]
 }
 
 # Create the OpenHIM mysql db
 exec { "create-openhim-db":
+	cwd => "$source_dir",
 	unless => "mysql -uroot -p$mysql_password interoperability_layer",
 	command => "mysql -uroot -p$mysql_password < create_database.sql",
 	require => [ Service["mysql"], Exec["mysqlpass"] ],
 }
 
 exec { "mysql-user-privileges":
+	unless => "mysqladmin -uhimuser -p$himuser_password status",
 	command => "mysql -uroot -p$mysql_password -e \"GRANT ALL PRIVILEGES ON interoperability_layer.* TO 'himuser'@'localhost';\"",
 	require => [ Exec["create-openhim-db"], Exec["create-openhim-db"] ]
 }
@@ -63,15 +67,19 @@ exec { "mysql-user-privileges":
 
 ## Mule ESB ##
 
-file { "fetch-mule-esb":
+exec { "fetch-mule-esb":
 	command => "wget -P $source_dir/ http://dist.codehaus.org/mule/distributions/mule-standalone-3.4.0.tar.gz",
+	creates => "$source_dir/mule-standalone-3.4.0.tar.gz",
+	timeout => 0,
 }
 
 exec { "extract-mule-esb":
-	command => "tar -xzvf $source_dir/mule-standalone-3.3.0.tar.gz",
-	require => Exec["fetch-mule-esb"]
+	cwd => "/opt",
+	command => "tar -zxf $source_dir/mule-standalone-3.4.0.tar.gz",
+	require => Exec["fetch-mule-esb"],
+	creates => "/opt/mule-standalone-3.4.0",
 }
 
-exec { "copy-HIM-mule-app":
+#exec { "copy-HIM-mule-app":
 	
-}
+#}
