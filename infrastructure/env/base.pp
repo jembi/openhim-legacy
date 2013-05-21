@@ -62,7 +62,7 @@ exec { "mysql-user-privileges":
 ## Mule ESB ##
 
 file { "fetch-mule-esb":
-	command => "wget -P ~/ file:///dist.codehaus.org/mule/distributions/mule-standalone-3.3.0.tar.gz",
+	command => "wget -P ~/ http://dist.codehaus.org/mule/distributions/mule-standalone-3.4.0.tar.gz",
 }
 
 exec { "extract-mule-esb":
