@@ -9,7 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.jembi.TestUtil;
+import org.jembi.Util;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.jembi.rhea.RestfulHttpResponse;
 import org.junit.Assert;
@@ -56,7 +56,7 @@ public class mediationSaveencounterDenormalizationXDSTest extends
 	    // OpenXDS - regenstrief
 	    payload.setPath("ws/rest/v1/patient/ECID-dc8d2234-7fce-4869-945e-97c8b7d97332/encounters");
 	    
-	    String oru_r01 = TestUtil.getResourceAsString("oru_r01.xml");
+	    String oru_r01 = Util.getResourceAsString("oru_r01.xml");
 	    payload.setBody(oru_r01);
 	    
 	    Map<String, Object> properties = null;
