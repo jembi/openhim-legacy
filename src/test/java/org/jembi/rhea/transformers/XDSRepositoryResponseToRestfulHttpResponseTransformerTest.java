@@ -10,7 +10,7 @@ import java.util.Set;
 
 import javax.activation.DataHandler;
 
-import org.jembi.TestUtil;
+import org.jembi.Util;
 import org.jembi.rhea.RestfulHttpResponse;
 import org.junit.Test;
 import org.mule.api.ExceptionPayload;
@@ -47,7 +47,7 @@ public class XDSRepositoryResponseToRestfulHttpResponseTransformerTest {
 			List<String> documentList = new ArrayList<String>();
 			String oru_r01 = null;
 			try {
-				oru_r01 = TestUtil.getResourceAsString("oru_r01.xml");
+				oru_r01 = Util.getResourceAsString("oru_r01.xml");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jembi.TestUtil;
+import org.jembi.Util;
 import org.jembi.rhea.orchestration.RHEAORU_R01TerminologyValidator.InvalidTerminologyException;
 import org.jembi.rhea.orchestration.RHEAORU_R01TerminologyValidator.UnknownTerminologyException;
 import org.junit.Before;
@@ -45,7 +45,7 @@ public class RHEAORU_R01TerminologyValidatorTest {
 	 */
 	@Test
 	public void testValidateTerminologyInORU_R01_ValidCodes() throws IOException {
-		String oru_r01 = TestUtil.getResourceAsString("oru_r01_tstest_valid.xml");
+		String oru_r01 = Util.getResourceAsString("oru_r01_tstest_valid.xml");
 		try {
 			validator.validateTerminologyInORU_R01(oru_r01, mockClient);
 			verifyMockClient("LOINC", "84862-4");
@@ -74,7 +74,7 @@ public class RHEAORU_R01TerminologyValidatorTest {
 	 */
 	@Test
 	public void testValidateTerminologyInORU_R01_InvalidCode() throws IOException {
-		String oru_r01 = TestUtil.getResourceAsString("oru_r01_tstest_invalid_code.xml");
+		String oru_r01 = Util.getResourceAsString("oru_r01_tstest_invalid_code.xml");
 		try {
 			validator.validateTerminologyInORU_R01(oru_r01, mockClient);
 			fail("Failed to throw exception due to invalid terminology");
@@ -90,7 +90,7 @@ public class RHEAORU_R01TerminologyValidatorTest {
 	 */
 	@Test
 	public void testValidateTerminologyInORU_R01_InvalidNamespace() throws IOException {
-		String oru_r01 = TestUtil.getResourceAsString("oru_r01_tstest_invalid_namespace.xml");
+		String oru_r01 = Util.getResourceAsString("oru_r01_tstest_invalid_namespace.xml");
 		try {
 			validator.validateTerminologyInORU_R01(oru_r01, mockClient);
 			fail("Failed to throw exception due to invalid namespace");
@@ -106,7 +106,7 @@ public class RHEAORU_R01TerminologyValidatorTest {
 	 */
 	@Test
 	public void testValidateTerminologyInORU_R01_InvalidORU_R01() throws IOException {
-		String oru_r01 = TestUtil.getResourceAsString("oru_r01_tstest_invalid_doc.xml");
+		String oru_r01 = Util.getResourceAsString("oru_r01_tstest_invalid_doc.xml");
 		try {
 			validator.validateTerminologyInORU_R01(oru_r01, mockClient);
 			fail("Failed to throw exception due to invalid HL7v2 document");
@@ -122,7 +122,7 @@ public class RHEAORU_R01TerminologyValidatorTest {
 	 */
 	@Test
 	public void testValidateTerminologyInORU_R01_Failure() throws IOException, MuleException {
-		String oru_r01 = TestUtil.getResourceAsString("oru_r01_tstest_valid.xml");
+		String oru_r01 = Util.getResourceAsString("oru_r01_tstest_valid.xml");
 		
 		MuleClient falseClient = mock(MuleClient.class);
 		MuleMessage mockMessage = mock(MuleMessage.class);
