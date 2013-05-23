@@ -1,7 +1,19 @@
+# Config - Please set proper passwords!
+
 $mysql_password = "Jembi#123"
 $himuser_password = "Jembi#123"
-#the location of the install files
+
+# the location of the install files
 $source_dir = "/home/jembi"
+
+$openldap_base_dn = "dc=moh,dc=gov,dc=rw"
+$openldap_root_dn = "cn=admin,dc=moh,dc=gov,dc=rw"
+# use the slappasswd utility to generate
+$openldap_rootpw = "{SSHA}yrobOdiwUl0JOU8toZeFE/C5EsCyQfEz"
+$ldap_pass = "Jembi#123"
+$ldap_ldif = "ldap-auth-pre-prod.ldif"
+
+####
 
 # defaults for Exec
 Exec {
@@ -64,6 +76,18 @@ exec { "mysql-user-privileges":
 
 ## OpenLDAP ##
 
+include openldap
+
+package { "ldap-utils":
+	ensure => latest,
+	require => [Exec['apt-get update'], Class['openldap']],
+}
+
+exec { "setup-ldap-ldif":
+	cwd => "$source_dir",
+	command => "ldapadd -c -x -D $openldap_root_dn -w $ldap_pass -f $ldap_ldif",
+	require => Package['ldap-utils']
+}
 
 ## Mule ESB ##
 
