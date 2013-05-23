@@ -1,22 +1,43 @@
 package org.jembi.rhea.flows;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.post;
+import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.jembi.TestUtil;
+import org.junit.Rule;
 import org.junit.Test;
 import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
+import org.mule.api.transport.PropertyScope;
 import org.mule.module.client.MuleClient;
 import org.mule.tck.junit4.FunctionalTestCase;
+
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 public class mediationGetecidDenormalizationOpenEMPITest extends
 FunctionalTestCase {
 	
-	private final Log log = LogFactory.getLog(this.getClass());
+	@Rule
+	public WireMockRule wireMockRule = new WireMockRule(8002);
+	
+	private void setupWebserviceStub(int httpStatus, String responseBody) {
+		stubFor(post(urlEqualTo("/openempi-admin/openempi-ws-rest/person-query-resource/findPersonById"))
+				.withHeader("Accept", equalTo("application/xml"))
+		    	.willReturn(aResponse()
+		    		.withStatus(httpStatus)
+		    		.withHeader("Content-Type", "application/xml")
+	                .withBody(responseBody)));
+	}
 	
 	@Override
 	protected void doSetUp() throws Exception {
@@ -32,12 +53,15 @@ FunctionalTestCase {
 
 	@Override
 	protected String getConfigResources() {
-		return "getecid-denormalization-openempi.xml";
+		return "src/main/app/getecid-denormalization-openempi.xml";
 	}
 	
 	@Test
-	public void testSendGetECIDOpenEMPI() throws MuleException {
-		log.info("Starting test");
+	public void testSendGetECIDOpenEMPI_validResponse() throws MuleException, IOException {
+		logger.info("Starting test");
+		
+		setupWebserviceStub(200, TestUtil.getResourceAsString("openempi-person.xml"));
+		
 	    MuleClient client = new MuleClient(muleContext);
 	    
 	    Map<String, String> idMap = new HashMap<String, String>();
@@ -46,7 +70,30 @@ FunctionalTestCase {
 	    idMap.put("idType", "NID");
 	    
 	    Map<String, Object> properties = null;
-	    MuleMessage result = client.send("vm://getecid-pix", idMap, properties);
+	    MuleMessage result = client.send("vm://getecid-openempi", idMap, properties);
+	    
+	    String success = result.getProperty("success", PropertyScope.INBOUND);
+	    assertEquals("true", success);
+	}
+	
+	@Test
+	public void testSendGetECIDOpenEMPI_invalidResponse() throws MuleException, IOException {
+		logger.info("Starting test");
+		
+		setupWebserviceStub(404, "");
+		
+	    MuleClient client = new MuleClient(muleContext);
+	    
+	    Map<String, String> idMap = new HashMap<String, String>();
+		
+	    idMap.put("id", "9876543210987654");
+	    idMap.put("idType", "NID");
+	    
+	    Map<String, Object> properties = null;
+	    MuleMessage result = client.send("vm://getecid-openempi", idMap, properties);
+	    
+	    String success = result.getProperty("success", PropertyScope.INBOUND);
+	    assertEquals("false", success);
 	}
 
 }
