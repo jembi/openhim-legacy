@@ -13,7 +13,7 @@
             <property name="ignore-resource-not-found"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="mediation-getecid-denormalization-openempiFlow1" entity-id="c92fcc00-762e-409b-b7fc-a85e35df507a">
+    <flow SubFlow="false" name="mediation-getecid-denormalization-openempiFlow1" entity-id="8eb62e3e-a488-4ab4-b597-644276472c97">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -46,10 +46,12 @@
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="message" value="In getecid de-normalization #[groovy: message.toString()]"/>
-                    <property name="category"/>
+                    <property name="category" value=""/>
                     <property name="level" value="INFO"/>
+                    <property name="updated"/>
                     <property name="auxiliary;index" value="4"/>
                 </properties>
+                <description></description>
             </pattern>
             <pattern name="Off-ramp transformer" type="http://www.mulesoft.org/schema/mule/scripting/groovyTransformer" entity-id="Groovy#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
@@ -59,17 +61,19 @@
                     <property name="encoding"/>
                     <property name="mimeType"/>
                     <property name="auxiliary;index" value="5"/>
-                    <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
-                        <property name="text" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;"/>
-                        <property name="engine" value="Groovy"/>
-                        <property name="inner-text" value="String id = message.payload.get(&quot;id&quot;);&#xA;String idType = message.payload.get(&quot;idType&quot;);&#xA;&#xA;String body = &quot;&quot;;&#xA;body += &quot;&lt;personIdentifier&gt;\n&quot;;&#xA;body += &quot;    &lt;identifier&gt;&quot; + id + &quot;&lt;/identifier&gt;\n&quot;;&#xA;body += &quot;    &lt;identifierDomain&gt;\n&quot;;&#xA;body += &quot;       &lt;universalIdentifier&gt;&quot; + idType + &quot;&lt;/universalIdentifier&gt;\n&quot;;&#xA;body += &quot;       &lt;universalIdentifierTypeCode&gt;&quot; + idType + &quot;&lt;/universalIdentifierTypeCode&gt;\n&quot;;&#xA;body += &quot;    &lt;/identifierDomain&gt;\n&quot;;&#xA;body += &quot;&lt;/personIdentifier&gt;\n&quot;;&#xA;return body;"/>
-                        <property name="auxiliary;index" value="6"/>
-                        <property name="auxiliary;wrapIn" value="6"/>
-                    </property-collection>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
                         <property name="text" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;"/>
                         <property name="engine" value="Groovy"/>
                         <property name="inner-text" value="String id = message.payload.get(&quot;id&quot;);&#xA;String idType = message.payload.get(&quot;idType&quot;);&#xA;&#xA;String body = &quot;&quot;;&#xA;body += &quot;&lt;personIdentifier&gt;\n&quot;;&#xA;body += &quot;    &lt;identifier&gt;&quot; + id + &quot;&lt;/identifier&gt;\n&quot;;&#xA;body += &quot;    &lt;identifierDomain&gt;\n&quot;;&#xA;body += &quot;       &lt;universalIdentifier&gt;&quot; + idType + &quot;&lt;/universalIdentifier&gt;\n&quot;;&#xA;body += &quot;       &lt;universalIdentifierTypeCode&gt;&quot; + idType + &quot;&lt;/universalIdentifierTypeCode&gt;\n&quot;;&#xA;body += &quot;    &lt;/identifierDomain&gt;\n&quot;;&#xA;body += &quot;&lt;/personIdentifier&gt;\n&quot;;&#xA;return body;"/>
+                        <property name="isProcessed$$$$" value="true"/>
+                        <property name="auxiliary;index" value="6"/>
+                        <property name="auxiliary;wrapIn" value="6"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
+                        <property name="text" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;"/>
+                        <property name="engine" value="Groovy"/>
+                        <property name="inner-text" value="String id = message.payload.get(&quot;id&quot;);&#xA;String idType = message.payload.get(&quot;idType&quot;);&#xA;&#xA;String body = &quot;&quot;;&#xA;body += &quot;&lt;personIdentifier&gt;\n&quot;;&#xA;body += &quot;    &lt;identifier&gt;&quot; + id + &quot;&lt;/identifier&gt;\n&quot;;&#xA;body += &quot;    &lt;identifierDomain&gt;\n&quot;;&#xA;body += &quot;       &lt;universalIdentifier&gt;&quot; + idType + &quot;&lt;/universalIdentifier&gt;\n&quot;;&#xA;body += &quot;       &lt;universalIdentifierTypeCode&gt;&quot; + idType + &quot;&lt;/universalIdentifierTypeCode&gt;\n&quot;;&#xA;body += &quot;    &lt;/identifierDomain&gt;\n&quot;;&#xA;body += &quot;&lt;/personIdentifier&gt;\n&quot;;&#xA;return body;"/>
+                        <property name="isProcessed$$$$" value="true"/>
                         <property name="auxiliary;index" value="6"/>
                         <property name="auxiliary;wrapIn" value="6"/>
                     </property-collection>
@@ -87,6 +91,7 @@
                     <property name="auxiliary;index" value="8"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
                         <property name="value" value="${openempi.sessionkey}"/>
+                        <property name="isProcessed$$$$" value="true"/>
                         <property name="key" value="OPENEMPI_SESSION_KEY"/>
                         <property name="auxiliary;index" value="9"/>
                         <property name="auxiliary;wrapIn" value="9"/>
@@ -122,21 +127,37 @@
                         <splitter index="13" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
-<property-collection name="7b34d534-e6de-4774-8622-befa6da22984">
-    <property name="choice.otherwise" value="true"/>
-    <property-collection name="choice.attributes"/>
-</property-collection>
-<property-collection name="fd7388c8-fd0a-471f-bbc3-3c069b472792">
+<property name=";INDEX" value="13"/>
+<property-collection name="d9e07a6f-7192-4294-8873-e9714b3fc8fb">
     <property name="choice.expression" value="message.getInboundProperty('http.status').equals('200')"/>
     <property-collection name="choice.attributes">
         <property name="expression" value="message.getInboundProperty('http.status').equals('200')"/>
         <property name="evaluator" value="groovy"/>
     </property-collection>
 </property-collection>
+<property-collection name="61eb5541-da9d-4a4b-823b-3a11655cf075">
+    <property name="choice.otherwise" value="true"/>
+    <property-collection name="choice.attributes"/>
+</property-collection>
                             </properties>
-                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
+                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
+<properties>
+    <property name=";INDEX" value="13"/>
+    <property-collection name="d9e07a6f-7192-4294-8873-e9714b3fc8fb">
+        <property name="choice.expression" value="message.getInboundProperty('http.status').equals('200')"/>
+        <property-collection name="choice.attributes">
+            <property name="expression" value="message.getInboundProperty('http.status').equals('200')"/>
+            <property name="evaluator" value="groovy"/>
+        </property-collection>
+    </property-collection>
+    <property-collection name="61eb5541-da9d-4a4b-823b-3a11655cf075">
+        <property name="choice.otherwise" value="true"/>
+        <property-collection name="choice.attributes"/>
+    </property-collection>
+</properties>
+                            </pattern>
                             <compartment entity-id="compartment#2">
-<lane hadOnlyOneElement="false" index="15" isChoiceOtherwiseLane="false" entity-id="fd7388c8-fd0a-471f-bbc3-3c069b472792">
+<lane hadOnlyOneElement="false" index="15" isChoiceOtherwiseLane="false" entity-id="d9e07a6f-7192-4294-8873-e9714b3fc8fb">
     <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#1">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
@@ -156,6 +177,7 @@
                         <property name="auxiliary;index" value="16"/>
                         <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
                             <property name="value" value="true"/>
+                            <property name="isProcessed$$$$" value="true"/>
                             <property name="key" value="success"/>
                             <property name="auxiliary;index" value="17"/>
                             <property name="auxiliary;wrapIn" value="17"/>
@@ -166,7 +188,7 @@
         </compartment>
     </scope>
 </lane>
-<lane hadOnlyOneElement="false" index="19" isChoiceOtherwiseLane="true" entity-id="7b34d534-e6de-4774-8622-befa6da22984">
+<lane hadOnlyOneElement="false" index="19" isChoiceOtherwiseLane="true" entity-id="61eb5541-da9d-4a4b-823b-3a11655cf075">
     <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#2">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
@@ -186,6 +208,7 @@
                         <property name="auxiliary;index" value="20"/>
                         <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
                             <property name="value" value="false"/>
+                            <property name="isProcessed$$$$" value="true"/>
                             <property name="key" value="success"/>
                             <property name="auxiliary;index" value="21"/>
                             <property name="auxiliary;wrapIn" value="21"/>
@@ -267,6 +290,7 @@
             <property name="auxiliary;index" value="26"/>
             <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
                 <property name="value" value="false"/>
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="key" value="success"/>
                 <property name="auxiliary;index" value="27"/>
                 <property name="auxiliary;wrapIn" value="27"/>

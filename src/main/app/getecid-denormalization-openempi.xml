@@ -28,7 +28,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 			level="INFO" doc:name="Logger" />
 		<scripting:transformer doc:name="Off-ramp transformer">
 			<scripting:script engine="Groovy">
-				<scripting:text><![CDATA[String id = message.payload.get("id");
+                <scripting:text><![CDATA[String id = message.payload.get("id");
 String idType = message.payload.get("idType");
 
 String body = "";
