@@ -13,7 +13,7 @@ import java.util.Map;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.jembi.TestUtil;
+import org.jembi.Util;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mule.api.MuleException;
@@ -60,7 +60,7 @@ FunctionalTestCase {
 	public void testSendGetECIDOpenEMPI_validResponse() throws MuleException, IOException {
 		logger.info("Starting test");
 		
-		setupWebserviceStub(200, TestUtil.getResourceAsString("openempi-person.xml"));
+		setupWebserviceStub(200, Util.getResourceAsString("openempi-person.xml"));
 		
 	    MuleClient client = new MuleClient(muleContext);
 	    
