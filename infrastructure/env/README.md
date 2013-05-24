@@ -16,6 +16,6 @@ Stand-alone script usage:
 	```
 *	Install puppet: `sudo apt-get install puppet`
 *	Install the example openldap puppet module (https://github.com/example42/puppet-modules/tree/master/openldap)
-	*	One option is to extract `openldap.zip` into `/etc/puppet/modules/`
+	*	On older versions of puppet, one option would be to extract `openldap.zip` into `/etc/puppet/modules/`
 *	Set the passwords in `openhim.pp`
 *	`sudo puppet apply openhim.pp`
