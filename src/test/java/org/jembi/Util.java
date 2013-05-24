@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class TestUtil {
+public class Util {
 	
 	public static String getResourceAsString(String resource) throws IOException {
-		InputStream is = TestUtil.class.getClassLoader().getResourceAsStream(resource);
+		InputStream is = Util.class.getClassLoader().getResourceAsStream(resource);
 	    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 	    String         line = null;
 	    StringBuilder  stringBuilder = new StringBuilder();
