@@ -273,6 +273,12 @@
 			<artifactId>mule-module-cxf</artifactId>
 			<version>${mule.version}</version>
 			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-expression</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.mule.modules</groupId>
@@ -323,6 +329,12 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>3.1.4.RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-expression</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.ldap</groupId>
