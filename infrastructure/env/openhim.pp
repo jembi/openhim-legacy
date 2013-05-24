@@ -68,10 +68,16 @@ exec { "create-openhim-db":
 	require => [ Service["mysql"], Exec["mysqlpass"] ],
 }
 
+exec { "update-openhim-db":
+	cwd => "$source_dir",
+	command => "cat update_database_* | mysql -uroot -p$mysql_password",
+	require => Exec["create-openhim-db"],
+}
+
 exec { "mysql-user-privileges":
 	unless => "mysqladmin -uhimuser -p$himuser_password status",
 	command => "mysql -uroot -p$mysql_password -e \"GRANT ALL PRIVILEGES ON interoperability_layer.* TO 'himuser'@'localhost';\"",
-	require => [ Exec["create-openhim-db"], Exec["create-openhim-db"] ]
+	require => Exec["update-openhim-db"],
 }
 
 ## OpenLDAP ##

@@ -5,9 +5,10 @@ Stand-alone script usage:
 *	Copy the following files to your server:
 	```
 	create_database.sql
+	update_database_*.sql
 	ldap-auth-pre-prod.ldif
 	```
-	and a copy of the OpenHIM build:
+	located in `src/main/resources`, as well as a copy of the OpenHIM build:
 	```
 	openhim-0.1.0-SNAPSHOT.zip
 	```
