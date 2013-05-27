@@ -20,6 +20,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXParseException;
 
 public class QueryPatientGetListOfOpenEMPIPersonIds implements Callable {
 	
@@ -31,31 +32,53 @@ public class QueryPatientGetListOfOpenEMPIPersonIds implements Callable {
 		
 		String openempiPeopleXml = (String) msg.getPayloadAsString();
 		
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		Document document = dbf.newDocumentBuilder().parse(new InputSource(new StringReader(openempiPeopleXml)));
-		
-		XPathFactory xpf = XPathFactory.newInstance();
-		XPath xpath = xpf.newXPath();
-		
-		XPathExpression expression = xpath.compile("/people/person/personId");
-		NodeList patientIdNodeList = (NodeList) expression.evaluate(document, XPathConstants.NODESET);
-		
-		String idListStr = "";
-		for (int i = 0 ; i < patientIdNodeList.getLength() ; i++) {
-			Node node = patientIdNodeList.item(i);
-			String id = node.getTextContent();
-			if (idListStr.isEmpty()) {
-				//idListStr = id;
-				idListStr = "personId=" + id;
-			} else {
-				//idListStr += "," + id;
-				idListStr += "&personId=" + id;
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			Document document = dbf.newDocumentBuilder().parse(new InputSource(new StringReader(openempiPeopleXml)));
+
+			XPathFactory xpf = XPathFactory.newInstance();
+			XPath xpath = xpf.newXPath();
+
+			XPathExpression expression = xpath.compile("/people/person/personId");
+			NodeList patientIdNodeList = (NodeList) expression.evaluate(document, XPathConstants.NODESET);
+
+			String idListStr = "";
+			for (int i = 0 ; i < patientIdNodeList.getLength() ; i++) {
+				Node node = patientIdNodeList.item(i);
+				String id = node.getTextContent();
+				if (idListStr.isEmpty()) {
+					//idListStr = id;
+					idListStr = "personId=" + id;
+				} else {
+					//idListStr += "," + id;
+					idListStr += "&personId=" + id;
+				}
 			}
+
+			msg.setOutboundProperty("idList", idListStr);
+
+		}
+		catch (SAXParseException s){
+			throw new InvalidOpenEMPIResponseException("Empty or invalid response from OpenEMPI");
 		}
 		
-		msg.setOutboundProperty("idList", idListStr);
-		
 		return msg;
+	}
+	
+	public static class InvalidOpenEMPIResponseException extends Exception {
+		private static final long serialVersionUID = 1L;
+
+		public InvalidOpenEMPIResponseException() {
+			super();
+		}
+		
+		public InvalidOpenEMPIResponseException(String msg) {
+			super(msg);
+		}
+		
+		public InvalidOpenEMPIResponseException(Throwable t) {
+			super(t);
+		}
 	}
 	
 }

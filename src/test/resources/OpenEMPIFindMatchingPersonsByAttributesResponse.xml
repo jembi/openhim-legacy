@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<people>
+    <person>
+        <address1>2 Boas Place</address1>
+        <address2>Sec 619</address2>
+        <city>East Lansing</city>
+        <custom1>AT</custom1>
+        <custom2>KMPL</custom2>
+        <custom3>Whit</custom3>
+        <custom4>05.1982</custom4>
+        <dateChanged>2012-05-17T13:27:14.859-04:00</dateChanged>
+        <dateCreated>2012-05-17T13:27:14.859-04:00</dateCreated>
+        <dateOfBirth>1982-05-29T00:00:00-04:00</dateOfBirth>
+        <familyName>White</familyName>
+        <givenName>Campbell</givenName>
+        <personId>45099</personId>
+        <personIdentifiers>
+            <dateCreated>2012-05-17T13:27:15.007-04:00</dateCreated>
+            <identifier>8b6b2cf0-a045-11e1-a160-005056c00008</identifier>
+            <identifierDomain>
+                <dateCreated>2012-02-10T13:44:24.755-05:00</dateCreated>
+                <identifierDomainDescription>OpenEMPI Domain</identifierDomainDescription>
+                <identifierDomainId>56</identifierDomainId>
+                <identifierDomainName>OpenEMPI Domain</identifierDomainName>
+                <namespaceIdentifier>2.16.840.1.113883.4.357</namespaceIdentifier>
+                <universalIdentifier>2.16.840.1.113883.4.357</universalIdentifier>
+                <universalIdentifierTypeCode>hl7</universalIdentifierTypeCode>
+                <userCreatedBy>
+                    <accountExpired>false</accountExpired>
+                    <accountLocked>false</accountLocked>
+                    <address>
+                        <address>2930 Oak Shadow Drive</address>
+                        <city>Herndon</city>
+                        <country>US</country>
+                        <postalCode>20171</postalCode>
+                        <province>VA</province>
+                    </address>
+                    <credentialsExpired>false</credentialsExpired>
+                    <email>odysseas@sysnetint.com</email>
+                    <enabled>true</enabled>
+                    <firstName>Odysseas</firstName>
+                    <id>1</id>
+                    <lastName>Pentakalos</lastName>
+                    <password>d033e22ae348aeb5660fc2140aec35850c4da997</password>
+                    <passwordHint>A male kitty.</passwordHint>
+                    <username>testuser</username>
+                    <website>http://www.sysnetint.com</website>
+                </userCreatedBy>
+            </identifierDomain>
+            <personIdentifierId>29699</personIdentifierId>
+            <userCreatedBy>
+                <accountExpired>false</accountExpired>
+                <accountLocked>false</accountLocked>
+                <address>
+                    <address></address>
+                    <city>Reston</city>
+                    <country>US</country>
+                    <postalCode>20191</postalCode>
+                    <province>VA</province>
+                </address>
+                <credentialsExpired>false</credentialsExpired>
+                <email>admin@sysnetint.com</email>
+                <enabled>true</enabled>
+                <firstName>Open</firstName>
+                <id>-1</id>
+                <lastName>Empi</lastName>
+                <password>d033e22ae348aeb5660fc2140aec35850c4da997</password>
+                <passwordHint>A male kitty.</passwordHint>
+                <phoneNumber></phoneNumber>
+                <username>admin</username>
+                <website>http://www.sysnetint.com</website>
+            </userCreatedBy>
+        </personIdentifiers>
+        <phoneAreaCode>433</phoneAreaCode>
+        <phoneNumber>9903143</phoneNumber>
+        <postalCode>97493</postalCode>
+        <ssn>320548522</ssn>
+        <state>IN</state>
+        <userChangedBy>
+            <accountExpired>false</accountExpired>
+            <accountLocked>false</accountLocked>
+            <address>
+                <address></address>
+                <city>Reston</city>
+                <country>US</country>
+                <postalCode>20191</postalCode>
+                <province>VA</province>
+            </address>
+            <credentialsExpired>false</credentialsExpired>
+            <email>admin@sysnetint.com</email>
+            <enabled>true</enabled>
+            <firstName>Open</firstName>
+            <id>-1</id>
+            <lastName>Empi</lastName>
+            <password>d033e22ae348aeb5660fc2140aec35850c4da997</password>
+            <passwordHint>A male kitty.</passwordHint>
+            <phoneNumber></phoneNumber>
+            <username>admin</username>
+            <website>http://www.sysnetint.com</website>
+        </userChangedBy>
+        <userCreatedBy>
+            <accountExpired>false</accountExpired>
+            <accountLocked>false</accountLocked>
+            <address>
+                <address></address>
+                <city>Reston</city>
+                <country>US</country>
+                <postalCode>20191</postalCode>
+                <province>VA</province>
+            </address>
+            <credentialsExpired>false</credentialsExpired>
+            <email>admin@sysnetint.com</email>
+            <enabled>true</enabled>
+            <firstName>Open</firstName>
+            <id>-1</id>
+            <lastName>Empi</lastName>
+            <password>d033e22ae348aeb5660fc2140aec35850c4da997</password>
+            <passwordHint>A male kitty.</passwordHint>
+            <phoneNumber></phoneNumber>
+            <username>admin</username>
+            <website>http://www.sysnetint.com</website>
+        </userCreatedBy>
+    </person>
+    <person>
+        <address1>2 Boas Place</address1>
+        <address2>Sec 619</address2>
+        <city>East Lansing</city>
+        <custom1>AT</custom1>
+        <custom2>KMPL</custom2>
+        <custom3>Whit</custom3>
+        <custom4>05.1982</custom4>
+        <dateChanged>2012-05-17T13:29:14.350-04:00</dateChanged>
+        <dateCreated>2012-05-17T13:29:14.350-04:00</dateCreated>
+        <dateOfBirth>1982-05-29T00:00:00-04:00</dateOfBirth>
+        <familyName>White</familyName>
+        <givenName>Campbell</givenName>
+        <personId>49162</personId>
+        <personIdentifiers>
+            <dateCreated>2012-05-17T13:29:14.519-04:00</dateCreated>
+            <identifier>d2a74270-a045-11e1-a160-005056c00008</identifier>
+            <identifierDomain>
+                <dateCreated>2012-02-10T13:44:24.755-05:00</dateCreated>
+                <identifierDomainDescription>OpenEMPI Domain</identifierDomainDescription>
+                <identifierDomainId>56</identifierDomainId>
+                <identifierDomainName>OpenEMPI Domain</identifierDomainName>
+                <namespaceIdentifier>2.16.840.1.113883.4.357</namespaceIdentifier>
+                <universalIdentifier>2.16.840.1.113883.4.357</universalIdentifier>
+                <universalIdentifierTypeCode>hl7</universalIdentifierTypeCode>
+                <userCreatedBy>
+                    <accountExpired>false</accountExpired>
+                    <accountLocked>false</accountLocked>
+                    <address>
+                        <address>2930 Oak Shadow Drive</address>
+                        <city>Herndon</city>
+                        <country>US</country>
+                        <postalCode>20171</postalCode>
+                        <province>VA</province>
+                    </address>
+                    <credentialsExpired>false</credentialsExpired>
+                    <email>odysseas@sysnetint.com</email>
+                    <enabled>true</enabled>
+                    <firstName>Odysseas</firstName>
+                    <id>1</id>
+                    <lastName>Pentakalos</lastName>
+                    <password>d033e22ae348aeb5660fc2140aec35850c4da997</password>
+                    <passwordHint>A male kitty.</passwordHint>
+                    <username>testuser</username>
+                    <website>http://www.sysnetint.com</website>
+                </userCreatedBy>
+            </identifierDomain>
+            <personIdentifierId>33761</personIdentifierId>
+            <userCreatedBy>
+                <accountExpired>false</accountExpired>
+                <accountLocked>false</accountLocked>
+                <address>
+                    <address></address>
+                    <city>Reston</city>
+                    <country>US</country>
+                    <postalCode>20191</postalCode>
+                    <province>VA</province>
+                </address>
+                <credentialsExpired>false</credentialsExpired>
+                <email>admin@sysnetint.com</email>
+                <enabled>true</enabled>
+                <firstName>Open</firstName>
+                <id>-1</id>
+                <lastName>Empi</lastName>
+                <password>d033e22ae348aeb5660fc2140aec35850c4da997</password>
+                <passwordHint>A male kitty.</passwordHint>
+                <phoneNumber></phoneNumber>
+                <username>admin</username>
+                <website>http://www.sysnetint.com</website>
+            </userCreatedBy>
+        </personIdentifiers>
+        <phoneAreaCode>433</phoneAreaCode>
+        <phoneNumber>9903143</phoneNumber>
+        <postalCode>97493</postalCode>
+        <ssn>320548522</ssn>
+        <state>Is</state>
+        <userChangedBy>
+            <accountExpired>false</accountExpired>
+            <accountLocked>false</accountLocked>
+            <address>
+                <address></address>
+                <city>Reston</city>
+                <country>US</country>
+                <postalCode>20191</postalCode>
+                <province>VA</province>
+            </address>
+            <credentialsExpired>false</credentialsExpired>
+            <email>admin@sysnetint.com</email>
+            <enabled>true</enabled>
+            <firstName>Open</firstName>
+            <id>-1</id>
+            <lastName>Empi</lastName>
+            <password>d033e22ae348aeb5660fc2140aec35850c4da997</password>
+            <passwordHint>A male kitty.</passwordHint>
+            <phoneNumber></phoneNumber>
+            <username>admin</username>
+            <website>http://www.sysnetint.com</website>
+        </userChangedBy>
+        <userCreatedBy>
+            <accountExpired>false</accountExpired>
+            <accountLocked>false</accountLocked>
+            <address>
+                <address></address>
+                <city>Reston</city>
+                <country>US</country>
+                <postalCode>20191</postalCode>
+                <province>VA</province>
+            </address>
+            <credentialsExpired>false</credentialsExpired>
+            <email>admin@sysnetint.com</email>
+            <enabled>true</enabled>
+            <firstName>Open</firstName>
+            <id>-1</id>
+            <lastName>Empi</lastName>
+            <password>d033e22ae348aeb5660fc2140aec35850c4da997</password>
+            <passwordHint>A male kitty.</passwordHint>
+            <phoneNumber></phoneNumber>
+            <username>admin</username>
+            <website>http://www.sysnetint.com</website>
+        </userCreatedBy>
+    </person>
+</people>
