@@ -149,42 +149,6 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 			throws MuleException, Exception, DataTypeException {
 		// Validate provider ID and location ID is correct
 		String epid = null;
-		/**
-		for (int i = 0 ; i < oru_r01.getPATIENT_RESULTReps() ; i++) {
-			ORU_R01_PATIENT_RESULT patient_RESULT = oru_r01.getPATIENT_RESULT(i);
-			OBR obr = patient_RESULT.getORDER_OBSERVATION().getOBR();
-			
-			// Validate provider ID
-			XCN orderingProvider = obr.getObr16_OrderingProvider(0);
-			String proID = orderingProvider.getIDNumber().getValue();
-			String proIDType = orderingProvider.getIdentifierTypeCode().getValue();
-			
-			Map<String, String> ProIdMap = new HashMap<String, String>();
-			ProIdMap.put("id", proID);
-			ProIdMap.put("idType", proIDType);
-			
-			MuleMessage responce = client.send("vm://getepid", ProIdMap, null, 5000);
-			
-			String respStatus = responce.getInboundProperty("http.status");
-			if (respStatus.equals("200")) {
-				epid = responce.getPayloadAsString();
-				
-				// Enrich message
-				orderingProvider.getIDNumber().setValue(epid);
-				orderingProvider.getIdentifierTypeCode().setValue("EPID");
-			}
-			
-			// Validate location ID is correct - per obr segment
-			String elid = obr.getObr20_FillerField1().getValue();
-			
-			responce = client.send("vm://", elid, null, 5000);
-			
-			respStatus = responce.getInboundProperty("http.status");
-			if (!respStatus.equals("200")) {
-				throw new Exception("Invalid location ID");
-			}
-		}
-		**/
 		PV1 pv1 = oru_r01.getPATIENT_RESULT().getPATIENT().getVISIT().getPV1();
 		String proID = pv1.getAttendingDoctor(0).getIDNumber().getValue();
 		String proIDType = pv1.getAttendingDoctor(0).getIdentifierTypeCode().getValue();
