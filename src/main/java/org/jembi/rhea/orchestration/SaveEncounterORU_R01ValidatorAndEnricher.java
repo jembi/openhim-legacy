@@ -56,28 +56,15 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 	private static boolean validateLocation = true;
 	private static boolean enrichClientDemographics = true;
 	
-	private String validateAndEnrichORU_R01(RestfulHttpRequest request, MuleContext muleContext)
+	protected String validateAndEnrichORU_R01(RestfulHttpRequest request, MuleClient client)
 			throws MuleException, EncounterEnrichmentException, ClientValidationException, ProviderValidationException, LocationValidationException {
-		MuleClient client = new MuleClient(muleContext);
-		
 		String ORU_R01_str = request.getBody();
-		
-		Parser parser = new GenericParser();
-		DefaultValidation defaultValidation = new DefaultValidation();
-		parser.setValidationContext(defaultValidation);
-		
-		Message msg;
-		try {
-			msg = parser.parse(ORU_R01_str);
-		} catch (HL7Exception ex) {
-			throw new EncounterEnrichmentException(ex);
-		}
-		
-		ORU_R01 oru_r01 = (ORU_R01) msg;
+		ORU_R01 oru_r01 = parseORU_R01(ORU_R01_str);
 		
 		String ecid = null;
 		if (validateClient) {
-			ecid = validateAndEnrichClient(request, client, oru_r01);
+			ecid = validateAndEnrichClient(client, oru_r01);
+			request.setPath("ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid + "/encounters");
 		}
 		
 		if (validateProvider) {
@@ -93,22 +80,37 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		}
 		
 		try {
-			return parser.encode(oru_r01, "XML");
+			return new GenericParser().encode(oru_r01, "XML");
 		} catch (HL7Exception ex) {
 			throw new EncounterEnrichmentException(ex);
 		}
 		
 	}
+	
+	protected ORU_R01 parseORU_R01(String ORU_R01_str) throws EncounterEnrichmentException {
+		Parser parser = new GenericParser();
+		DefaultValidation defaultValidation = new DefaultValidation();
+		parser.setValidationContext(defaultValidation);
+		
+		Message msg;
+		try {
+			msg = parser.parse(ORU_R01_str);
+		} catch (HL7Exception ex) {
+			throw new EncounterEnrichmentException("Failed to parse HL7 ORU_R01 message", ex);
+		}
+		
+		return (ORU_R01)msg;
+	}
 
-	private String validateAndEnrichClient(RestfulHttpRequest request,
-			MuleClient client, ORU_R01 oru_r01) throws ClientValidationException, MuleException, EncounterEnrichmentException {
+	protected String validateAndEnrichClient(MuleClient client, ORU_R01 oru_r01)
+			throws ClientValidationException, MuleException, EncounterEnrichmentException {
 		// Validate that one of the patient ID's is correct
 		PID pid = oru_r01.getPATIENT_RESULT().getPATIENT().getPID();
 		CX[] patientIdentifierList = pid.getPatientIdentifierList();
 		
 		String ecid = null;
 		if (patientIdentifierList.length < 1) {
-			throw new ClientValidationException("Invalid client ID");
+			throw new ClientValidationException("No patient identifiers found in ORU_R01 message");
 		}
 		
 		for (int i = 0 ; i < patientIdentifierList.length ; i++) {
@@ -144,14 +146,13 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 			} catch (DataTypeException ex) {
 				throw new EncounterEnrichmentException(ex);
 			}
-			
-			request.setPath("ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid + "/encounters");
 		}
 		
 		return ecid;
 	}
+	
 
-	private void validateAndEnrichProvider(MuleClient client, ORU_R01 oru_r01)
+	protected void validateAndEnrichProvider(MuleClient client, ORU_R01 oru_r01)
 			throws MuleException, ProviderValidationException, EncounterEnrichmentException {
 		// Validate provider ID and location ID is correct
 		String epid = null;
@@ -187,7 +188,7 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		}
 	}
 
-	private void validateAndEnrichLocation(MuleClient client, ORU_R01 oru_r01)
+	protected void validateAndEnrichLocation(MuleClient client, ORU_R01 oru_r01)
 			throws MuleException, LocationValidationException {
 		// Validate location ID is correct - sending facility
 		String elid = oru_r01.getMSH().getSendingFacility().getHd1_NamespaceID().getValue();
@@ -200,7 +201,7 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		}
 	}
 	
-	private void enrichClientDemographics(MuleClient client, ORU_R01 oru_r01, String ecid) throws MuleException, EncounterEnrichmentException {
+	protected void enrichClientDemographics(MuleClient client, ORU_R01 oru_r01, String ecid) throws MuleException, EncounterEnrichmentException {
 		PID pid = oru_r01.getPATIENT_RESULT().getPATIENT().getPID();
 		String givenName = pid.getPatientName(0).getGivenName().getValue();
 		String familyName = pid.getPatientName(0).getFamilyName().getFn1_Surname().getValue();
@@ -210,16 +211,10 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		try {
 			if ((givenName == null || givenName.isEmpty()) || (familyName == null || familyName.isEmpty()) || (gender == null || gender.isEmpty()) || (dob == null || dob.isEmpty())) {
 				// fetch client record from CR to enrich message as it is missing key values
-				RestfulHttpRequest req = new RestfulHttpRequest();
-				req.setHttpMethod(RestfulHttpRequest.HTTP_GET);
-				req.setPath("ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid);
-				MuleMessage response = client.send("vm://getPatient-De-normailization-OpenEMPI", req, null, 5000);
-				RestfulHttpResponse res = (RestfulHttpResponse) response.getPayload();
-				
-				String body = res.getBody();
+				String clientRecord = fetchClientRecord_OpenEMPI(ecid, client);
 				
 				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-				Document document = dbf.newDocumentBuilder().parse(new InputSource(new StringReader(body)));
+				Document document = dbf.newDocumentBuilder().parse(new InputSource(new StringReader(clientRecord)));
 	
 				XPathFactory xpf = XPathFactory.newInstance();
 				XPath xpath = xpf.newXPath();
@@ -270,16 +265,34 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 			throw new EncounterEnrichmentException(ex);
 		}
 	}
+	
+	/**
+	 * Fetch client record from OpenEMPI for a patient with the specified ECID
+	 * 
+	 * @return The response from OpenEMPI in XML
+	 */
+	private String fetchClientRecord_OpenEMPI(String ecid, MuleClient client) throws MuleException {
+		RestfulHttpRequest req = new RestfulHttpRequest();
+		req.setHttpMethod(RestfulHttpRequest.HTTP_GET);
+		req.setPath("ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid);
+		MuleMessage response = client.send("vm://getPatient-De-normailization-OpenEMPI", req, null, 5000);
+		RestfulHttpResponse res = (RestfulHttpResponse) response.getPayload();
+		
+		return res.getBody();
+	}
+	
 
 	@Override
 	public Object onCall(MuleEventContext eventContext) throws Exception {
 		MuleContext muleContext = eventContext.getMuleContext();
+		MuleClient client = new MuleClient(muleContext);
 		MuleMessage msg = eventContext.getMessage();
 		RestfulHttpRequest payload = (RestfulHttpRequest) msg.getPayload();
-		String newORU_R01 = validateAndEnrichORU_R01(payload, muleContext);
-		log.info("The validated and enriched save encounter message: " + newORU_R01);
+		
+		String newORU_R01 = validateAndEnrichORU_R01(payload, client);
 		payload.setBody(newORU_R01);
 		
+		log.info("The validated and enriched save encounter message: " + newORU_R01);
 		return msg;
 	}
 	
