@@ -5,7 +5,6 @@ package org.jembi.rhea.orchestration;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,8 +12,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.logging.Log;
@@ -22,6 +21,10 @@ import org.apache.commons.logging.LogFactory;
 import org.jembi.rhea.Constants;
 import org.jembi.rhea.RestfulHttpRequest;
 import org.jembi.rhea.RestfulHttpResponse;
+import org.jembi.rhea.orchestration.exceptions.ClientValidationException;
+import org.jembi.rhea.orchestration.exceptions.EncounterEnrichmentException;
+import org.jembi.rhea.orchestration.exceptions.LocationValidationException;
+import org.jembi.rhea.orchestration.exceptions.ProviderValidationException;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEventContext;
 import org.mule.api.MuleException;
@@ -33,6 +36,7 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.model.DataTypeException;
 import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.model.v25.datatype.CX;
@@ -52,7 +56,8 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 	private static boolean validateLocation = true;
 	private static boolean enrichClientDemographics = true;
 	
-	private String validateAndEnrichORU_R01(RestfulHttpRequest request, MuleContext muleContext) throws Exception {
+	private String validateAndEnrichORU_R01(RestfulHttpRequest request, MuleContext muleContext)
+			throws MuleException, EncounterEnrichmentException, ClientValidationException, ProviderValidationException, LocationValidationException {
 		MuleClient client = new MuleClient(muleContext);
 		
 		String ORU_R01_str = request.getBody();
@@ -61,57 +66,49 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		DefaultValidation defaultValidation = new DefaultValidation();
 		parser.setValidationContext(defaultValidation);
 		
-		Message msg = parser.parse(ORU_R01_str);
+		Message msg;
+		try {
+			msg = parser.parse(ORU_R01_str);
+		} catch (HL7Exception ex) {
+			throw new EncounterEnrichmentException(ex);
+		}
 		
 		ORU_R01 oru_r01 = (ORU_R01) msg;
 		
 		String ecid = null;
 		if (validateClient) {
-			try {
-				ecid = validateAndEnrichClient(request, client, oru_r01);
-			} catch (Exception e) {
-				throw new Exception("Could not validate client", e);
-			}
+			ecid = validateAndEnrichClient(request, client, oru_r01);
 		}
 		
 		if (validateProvider) {
-			try {
-				validateAndEnrichProvider(client, oru_r01);
-			} catch (Exception e) {
-				throw new Exception("Could not validate provider", e);
-			}
+			validateAndEnrichProvider(client, oru_r01);
 		}
 		
 		if (validateLocation) {
-			try {
-				validateAndEnrichLocation(client, oru_r01);
-			} catch (Exception e) {
-				throw new Exception("Could not validate location", e);
-			}
+			validateAndEnrichLocation(client, oru_r01);
 		}
 		
 		if (enrichClientDemographics) {
-			try {
-				enrichClientDemographics(client, oru_r01, ecid);
-			} catch (Exception e) {
-				throw new Exception("Could not enrich client demographics", e);
-			}
+			enrichClientDemographics(client, oru_r01, ecid);
 		}
 		
-		return parser.encode(oru_r01, "XML");
+		try {
+			return parser.encode(oru_r01, "XML");
+		} catch (HL7Exception ex) {
+			throw new EncounterEnrichmentException(ex);
+		}
 		
 	}
 
 	private String validateAndEnrichClient(RestfulHttpRequest request,
-			MuleClient client, ORU_R01 oru_r01) throws Exception,
-			MuleException, DataTypeException {
+			MuleClient client, ORU_R01 oru_r01) throws ClientValidationException, MuleException, EncounterEnrichmentException {
 		// Validate that one of the patient ID's is correct
 		PID pid = oru_r01.getPATIENT_RESULT().getPATIENT().getPID();
 		CX[] patientIdentifierList = pid.getPatientIdentifierList();
 		
 		String ecid = null;
 		if (patientIdentifierList.length < 1) {
-			throw new Exception("Invalid client ID");
+			throw new ClientValidationException("Invalid client ID");
 		}
 		
 		for (int i = 0 ; i < patientIdentifierList.length ; i++) {
@@ -122,22 +119,31 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 			idMap.put("id", id);
 			idMap.put("idType", idType);
 			
-			MuleMessage responce = client.send("vm://getecid", idMap, null, 5000);
+			MuleMessage response = client.send("vm://getecid", idMap, null, 5000);
 			
-			String success = responce.getInboundProperty("success");
+			String success = response.getInboundProperty("success");
 			if (success != null && success.equals("true")) {
-				ecid = responce.getPayloadAsString();
+				try {
+					ecid = response.getPayloadAsString();
+				} catch (Exception ex) {
+					//argh! getPayloadAsString throws exception.. bad bad bad
+					throw new ClientValidationException(ex);
+				}
 				break;
 			}
 		}
 		
 		if (ecid == null) {
-			throw new Exception("Invalid client ID");
+			throw new ClientValidationException("Invalid client ID");
 		} else {
 			// Enrich the message
 			CX id = pid.getPatientIdentifierList(pid.getPatientIdentifierListReps());
-			id.getIdentifierTypeCode().setValue("ECID");
-			id.getIDNumber().setValue(ecid);
+			try {
+				id.getIdentifierTypeCode().setValue("ECID");
+				id.getIDNumber().setValue(ecid);
+			} catch (DataTypeException ex) {
+				throw new EncounterEnrichmentException(ex);
+			}
 			
 			request.setPath("ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid + "/encounters");
 		}
@@ -146,7 +152,7 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 	}
 
 	private void validateAndEnrichProvider(MuleClient client, ORU_R01 oru_r01)
-			throws MuleException, Exception, DataTypeException {
+			throws MuleException, ProviderValidationException, EncounterEnrichmentException {
 		// Validate provider ID and location ID is correct
 		String epid = null;
 		PV1 pv1 = oru_r01.getPATIENT_RESULT().getPATIENT().getVISIT().getPV1();
@@ -157,91 +163,111 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		ProIdMap.put("id", proID);
 		ProIdMap.put("idType", proIDType);
 		
-		MuleMessage responce = client.send("vm://getepid-openldap", ProIdMap, null, 5000);
+		MuleMessage response = client.send("vm://getepid-openldap", ProIdMap, null, 5000);
 		
-		String success = responce.getInboundProperty("success");
+		String success = response.getInboundProperty("success");
 		if (success.equals("true")) {
-			epid = responce.getPayloadAsString();
+			try {
+				epid = response.getPayloadAsString();
+			} catch (Exception ex) {
+				throw new ProviderValidationException(ex);
+			}
 			
 			// Enrich message
-			pv1.getAttendingDoctor(0).getIDNumber().setValue(epid);
-			pv1.getAttendingDoctor(0).getIdentifierTypeCode().setValue(Constants.EPID_ID_TYPE);
+			try {
+				pv1.getAttendingDoctor(0).getIDNumber().setValue(epid);
+				pv1.getAttendingDoctor(0).getIdentifierTypeCode().setValue(Constants.EPID_ID_TYPE);
+			} catch (DataTypeException ex) {
+				throw new EncounterEnrichmentException(ex);
+			}
 		}
 		
 		if (epid == null) {
-			throw new Exception("Invalid provider ID");
+			throw new ProviderValidationException("Invalid provider ID");
 		}
 	}
 
 	private void validateAndEnrichLocation(MuleClient client, ORU_R01 oru_r01)
-			throws MuleException, Exception {
+			throws MuleException, LocationValidationException {
 		// Validate location ID is correct - sending facility
 		String elid = oru_r01.getMSH().getSendingFacility().getHd1_NamespaceID().getValue();
 		
-		MuleMessage responce = client.send("vm://validateFacility-resourcemap", elid, null, 5000);
+		MuleMessage response = client.send("vm://validateFacility-resourcemap", elid, null, 5000);
 		
-		String success = responce.getInboundProperty("success");
+		String success = response.getInboundProperty("success");
 		if (!success.equals("true")) {
-			throw new Exception("Invalid location ID");
+			throw new LocationValidationException("Invalid location ID");
 		}
 	}
 	
-	private void enrichClientDemographics(MuleClient client, ORU_R01 oru_r01, String ecid) throws MuleException, SAXException, IOException, ParserConfigurationException, XPathExpressionException, ParseException, DataTypeException {
+	private void enrichClientDemographics(MuleClient client, ORU_R01 oru_r01, String ecid) throws MuleException, EncounterEnrichmentException {
 		PID pid = oru_r01.getPATIENT_RESULT().getPATIENT().getPID();
 		String givenName = pid.getPatientName(0).getGivenName().getValue();
 		String familyName = pid.getPatientName(0).getFamilyName().getFn1_Surname().getValue();
 		String gender = pid.getAdministrativeSex().getValue();
 		String dob = pid.getDateTimeOfBirth().getTime().getValue();
 		
-		if ((givenName == null || givenName.isEmpty()) || (familyName == null || familyName.isEmpty()) || (gender == null || gender.isEmpty()) || (dob == null || dob.isEmpty())) {
-			// fetch client record from CR to enrich message as it is missing key values
-			RestfulHttpRequest req = new RestfulHttpRequest();
-			req.setHttpMethod(RestfulHttpRequest.HTTP_GET);
-			req.setPath("ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid);
-			MuleMessage response = client.send("vm://getPatient-De-normailization-OpenEMPI", req, null, 5000);
-			RestfulHttpResponse res = (RestfulHttpResponse) response.getPayload();
-			
-			String body = res.getBody();
-			
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			Document document = dbf.newDocumentBuilder().parse(new InputSource(new StringReader(body)));
-
-			XPathFactory xpf = XPathFactory.newInstance();
-			XPath xpath = xpf.newXPath();
-			
-			// Get given name
-			XPathExpression expression = xpath.compile("/ADT_A05/PID/PID.5/XPN.2");
-			Node givenNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String givenNameFromCR = givenNameNode.getTextContent();
-			
-			// Get family name
-			expression = xpath.compile("/ADT_A05/PID/PID.5/XPN.1/FN.1");
-			Node familyNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String familyNameFromCR = familyNameNode.getTextContent();
-			
-			// Get gender
-			expression = xpath.compile("/ADT_A05/PID/PID.8");
-			Node genderNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String genderFromCR = genderNode.getTextContent();
-			
-			// Get dob
-			expression = xpath.compile("/ADT_A05/PID/PID.7/TS.1");
-			Node dobNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-			String dobStrFromCR = dobNode.getTextContent();
-			
-			// replace the missing fields with the CR content
-			if (givenName == null || givenName.isEmpty()) {
-				pid.getPatientName(0).getGivenName().setValue(givenNameFromCR);
+		try {
+			if ((givenName == null || givenName.isEmpty()) || (familyName == null || familyName.isEmpty()) || (gender == null || gender.isEmpty()) || (dob == null || dob.isEmpty())) {
+				// fetch client record from CR to enrich message as it is missing key values
+				RestfulHttpRequest req = new RestfulHttpRequest();
+				req.setHttpMethod(RestfulHttpRequest.HTTP_GET);
+				req.setPath("ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid);
+				MuleMessage response = client.send("vm://getPatient-De-normailization-OpenEMPI", req, null, 5000);
+				RestfulHttpResponse res = (RestfulHttpResponse) response.getPayload();
+				
+				String body = res.getBody();
+				
+				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+				Document document = dbf.newDocumentBuilder().parse(new InputSource(new StringReader(body)));
+	
+				XPathFactory xpf = XPathFactory.newInstance();
+				XPath xpath = xpf.newXPath();
+				
+				// Get given name
+				XPathExpression expression = xpath.compile("/ADT_A05/PID/PID.5/XPN.2");
+				Node givenNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+				String givenNameFromCR = givenNameNode.getTextContent();
+				
+				// Get family name
+				expression = xpath.compile("/ADT_A05/PID/PID.5/XPN.1/FN.1");
+				Node familyNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+				String familyNameFromCR = familyNameNode.getTextContent();
+				
+				// Get gender
+				expression = xpath.compile("/ADT_A05/PID/PID.8");
+				Node genderNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+				String genderFromCR = genderNode.getTextContent();
+				
+				// Get dob
+				expression = xpath.compile("/ADT_A05/PID/PID.7/TS.1");
+				Node dobNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+				String dobStrFromCR = dobNode.getTextContent();
+				
+				// replace the missing fields with the CR content
+				if (givenName == null || givenName.isEmpty()) {
+					pid.getPatientName(0).getGivenName().setValue(givenNameFromCR);
+				}
+				if (familyName == null || familyName.isEmpty()) {
+					pid.getPatientName(0).getFamilyName().getFn1_Surname().setValue(familyNameFromCR);
+				}
+				if (gender == null || gender.isEmpty()) {
+					pid.getAdministrativeSex().setValue(genderFromCR);
+				}
+				if (dob == null || dob.isEmpty()) {
+					pid.getDateTimeOfBirth().getTime().setValue(dobStrFromCR);
+				}
 			}
-			if (familyName == null || familyName.isEmpty()) {
-				pid.getPatientName(0).getFamilyName().getFn1_Surname().setValue(familyNameFromCR);
-			}
-			if (gender == null || gender.isEmpty()) {
-				pid.getAdministrativeSex().setValue(genderFromCR);
-			}
-			if (dob == null || dob.isEmpty()) {
-				pid.getDateTimeOfBirth().getTime().setValue(dobStrFromCR);
-			}
+		} catch (XPathException ex) {
+			throw new EncounterEnrichmentException(ex);
+		} catch (SAXException ex) {
+			throw new EncounterEnrichmentException(ex);
+		} catch (IOException ex) {
+			throw new EncounterEnrichmentException(ex);
+		} catch (ParserConfigurationException ex) {
+			throw new EncounterEnrichmentException(ex);
+		} catch (DataTypeException ex) {
+			throw new EncounterEnrichmentException(ex);
 		}
 	}
 
