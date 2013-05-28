@@ -14,6 +14,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.logging.Log;
@@ -102,6 +103,10 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		return (ORU_R01)msg;
 	}
 
+	/**
+	 * Validate the patient against the Client Registry and enrich the message with the patient's ECID.
+	 * Each of the patient's identifiers will validate until the first valid id is found.
+	 */
 	protected String validateAndEnrichClient(MuleClient client, ORU_R01 oru_r01)
 			throws ClientValidationException, MuleException, EncounterEnrichmentException {
 		// Validate that one of the patient ID's is correct
@@ -116,23 +121,9 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		for (int i = 0 ; i < patientIdentifierList.length ; i++) {
 			String id = patientIdentifierList[i].getIDNumber().getValue();
 			String idType = patientIdentifierList[i].getIdentifierTypeCode().getValue();
+			ecid = getECID_OpenEMPI(client, idType, id);
 			
-			Map<String, String> idMap = new HashMap<String, String>();
-			idMap.put("id", id);
-			idMap.put("idType", idType);
-			
-			MuleMessage response = client.send("vm://getecid", idMap, null, 5000);
-			
-			String success = response.getInboundProperty("success");
-			if (success != null && success.equals("true")) {
-				try {
-					ecid = response.getPayloadAsString();
-				} catch (Exception ex) {
-					//argh! getPayloadAsString throws exception.. bad bad bad
-					throw new ClientValidationException(ex);
-				}
-				break;
-			}
+			if (ecid!=null) break;
 		}
 		
 		if (ecid == null) {
@@ -151,7 +142,29 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		return ecid;
 	}
 	
+	private String getECID_OpenEMPI(MuleClient client, String idType, String id) throws ClientValidationException, MuleException {
+		Map<String, String> idMap = new HashMap<String, String>();
+		idMap.put("id", id);
+		idMap.put("idType", idType);
+		
+		MuleMessage response = client.send("vm://getecid", idMap, null, 5000);
+		
+		String success = response.getInboundProperty("success");
+		if (success != null && success.equals("true")) {
+			try {
+				return response.getPayloadAsString();
+			} catch (Exception ex) {
+				//argh! getPayloadAsString throws exception.. bad bad bad
+				throw new ClientValidationException(ex);
+			}
+		}
+		
+		return null;
+	}
 
+	/**
+	 * Validate the Provider ID against the Provider Registry and enrich the message with the provider's EPID.
+	 */
 	protected void validateAndEnrichProvider(MuleClient client, ORU_R01 oru_r01)
 			throws MuleException, ProviderValidationException, EncounterEnrichmentException {
 		// Validate provider ID and location ID is correct
@@ -188,6 +201,11 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		}
 	}
 
+	/**
+	 * Validate the location id against the Facility Registry.
+	 * 
+	 * This method does not alter the ORU_R01 message.
+	 */
 	protected void validateAndEnrichLocation(MuleClient client, ORU_R01 oru_r01)
 			throws MuleException, LocationValidationException {
 		// Validate location ID is correct - sending facility
@@ -201,7 +219,11 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		}
 	}
 	
-	protected void enrichClientDemographics(MuleClient client, ORU_R01 oru_r01, String ecid) throws MuleException, EncounterEnrichmentException {
+	/**
+	 * Fetch patient demographic data from the Client Registry and enrich the ORU_R01 with any details that may be missing.
+	 * @throws ClientValidationException 
+	 */
+	protected void enrichClientDemographics(MuleClient client, ORU_R01 oru_r01, String ecid) throws MuleException, EncounterEnrichmentException, ClientValidationException {
 		PID pid = oru_r01.getPATIENT_RESULT().getPATIENT().getPID();
 		String givenName = pid.getPatientName(0).getGivenName().getValue();
 		String familyName = pid.getPatientName(0).getFamilyName().getFn1_Surname().getValue();
@@ -212,6 +234,8 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 			if ((givenName == null || givenName.isEmpty()) || (familyName == null || familyName.isEmpty()) || (gender == null || gender.isEmpty()) || (dob == null || dob.isEmpty())) {
 				// fetch client record from CR to enrich message as it is missing key values
 				String clientRecord = fetchClientRecord_OpenEMPI(ecid, client);
+				if (clientRecord==null)
+					throw new ClientValidationException();
 				
 				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 				Document document = dbf.newDocumentBuilder().parse(new InputSource(new StringReader(clientRecord)));
@@ -219,25 +243,10 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 				XPathFactory xpf = XPathFactory.newInstance();
 				XPath xpath = xpf.newXPath();
 				
-				// Get given name
-				XPathExpression expression = xpath.compile("/ADT_A05/PID/PID.5/XPN.2");
-				Node givenNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-				String givenNameFromCR = givenNameNode.getTextContent();
-				
-				// Get family name
-				expression = xpath.compile("/ADT_A05/PID/PID.5/XPN.1/FN.1");
-				Node familyNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-				String familyNameFromCR = familyNameNode.getTextContent();
-				
-				// Get gender
-				expression = xpath.compile("/ADT_A05/PID/PID.8");
-				Node genderNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-				String genderFromCR = genderNode.getTextContent();
-				
-				// Get dob
-				expression = xpath.compile("/ADT_A05/PID/PID.7/TS.1");
-				Node dobNode = (Node) expression.evaluate(document, XPathConstants.NODE);
-				String dobStrFromCR = dobNode.getTextContent();
+				String givenNameFromCR = getNodeContent(xpath, document, "/ADT_A05/PID/PID.5/XPN.2");
+				String familyNameFromCR = getNodeContent(xpath, document, "/ADT_A05/PID/PID.5/XPN.1/FN.1");
+				String genderFromCR = getNodeContent(xpath, document, "/ADT_A05/PID/PID.8");
+				String dobStrFromCR = getNodeContent(xpath, document, "/ADT_A05/PID/PID.7/TS.1");
 				
 				// replace the missing fields with the CR content
 				if (givenName == null || givenName.isEmpty()) {
@@ -266,6 +275,12 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		}
 	}
 	
+	private String getNodeContent(XPath xpath, Document document, String path) throws XPathExpressionException {
+		XPathExpression expression = xpath.compile(path);
+		Node givenNameNode = (Node) expression.evaluate(document, XPathConstants.NODE);
+		return givenNameNode.getTextContent();
+	}
+	
 	/**
 	 * Fetch client record from OpenEMPI for a patient with the specified ECID
 	 * 
@@ -277,6 +292,10 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		req.setPath("ws/rest/v1/patient/" + Constants.ECID_ID_TYPE + "-" + ecid);
 		MuleMessage response = client.send("vm://getPatient-De-normailization-OpenEMPI", req, null, 5000);
 		RestfulHttpResponse res = (RestfulHttpResponse) response.getPayload();
+		
+		String success = response.getInboundProperty("success");
+		if (success==null || !success.equals("true"))
+			return null;
 		
 		return res.getBody();
 	}

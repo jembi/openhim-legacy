@@ -19,11 +19,12 @@ import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.module.client.MuleClient;
 import ca.uhn.hl7v2.model.v25.message.ORU_R01;
+import ca.uhn.hl7v2.model.v25.segment.PID;
+import ca.uhn.hl7v2.model.v25.segment.PV1;
 
 public class SaveEncounterORU_R01ValidatorAndEnricherTest {
 
 	private String testORU_R01;
-	private ORU_R01 testORU_R01_parsed;
 	private MuleClient trueMockClient;
 	private MuleClient falseMockClient;
 	
@@ -56,7 +57,6 @@ public class SaveEncounterORU_R01ValidatorAndEnricherTest {
 	
 	@Test
 	public void testParseORU_R01() {
-		testORU_R01_parsed = null;
 		setupTest_ORU_R01();
 	}
 	
@@ -70,19 +70,17 @@ public class SaveEncounterORU_R01ValidatorAndEnricherTest {
 		}
 	}
 	
-	private void setupTest_ORU_R01() {
-		if (testORU_R01_parsed==null) {
-			try {
-				testORU_R01_parsed = new SaveEncounterORU_R01ValidatorAndEnricher().parseORU_R01(testORU_R01);
-			} catch (EncounterEnrichmentException e) {
-				fail("Failed due to exception: " + e);
-			}
+	private ORU_R01 setupTest_ORU_R01() {
+		try {
+			return new SaveEncounterORU_R01ValidatorAndEnricher().parseORU_R01(testORU_R01);
+		} catch (EncounterEnrichmentException e) {
+			fail("Failed due to exception: " + e);
 		}
+		return null;
 	}
 	
 	@Test
 	public void testValidateAndEnrichORU_R01() throws Exception {
-		setupTest_ORU_R01();
 		String expectedORU_R01 = Util.getResourceAsString("oru_r01_saveencounter_enriched.xml");
 		RestfulHttpRequest mockRequest = mock(RestfulHttpRequest.class);
 		when(mockRequest.getBody()).thenReturn(testORU_R01);
@@ -108,7 +106,6 @@ public class SaveEncounterORU_R01ValidatorAndEnricherTest {
 	
 	@Test
 	public void testValidateAndEnrichORU_R01_InvalidHL7() throws Exception {
-		setupTest_ORU_R01();
 		RestfulHttpRequest mockRequest = mock(RestfulHttpRequest.class);
 		when(mockRequest.getBody()).thenReturn("");
 		
@@ -129,8 +126,8 @@ public class SaveEncounterORU_R01ValidatorAndEnricherTest {
 	}
 	
 	@Test
-	public void testValidateAndEnrichClient_Valid() throws MuleException {
-		setupTest_ORU_R01();
+	public void testValidateAndEnrichClient() throws MuleException {
+		ORU_R01 testORU_R01_parsed = setupTest_ORU_R01();
 		try {
 			String res = new SaveEncounterORU_R01ValidatorAndEnricher().validateAndEnrichClient(trueMockClient, testORU_R01_parsed);
 			assertEquals(res, "test_ecid");
@@ -143,7 +140,7 @@ public class SaveEncounterORU_R01ValidatorAndEnricherTest {
 	
 	@Test
 	public void testValidateAndEnrichClient_Invalid() throws MuleException {
-		setupTest_ORU_R01();
+		ORU_R01 testORU_R01_parsed = setupTest_ORU_R01();
 		try {
 			new SaveEncounterORU_R01ValidatorAndEnricher().validateAndEnrichClient(falseMockClient, testORU_R01_parsed);
 			fail();
@@ -155,10 +152,14 @@ public class SaveEncounterORU_R01ValidatorAndEnricherTest {
 	}
 	
 	@Test
-	public void testValidateAndEnrichProvider_Valid() throws MuleException {
-		setupTest_ORU_R01();
+	public void testValidateAndEnrichProvider() throws MuleException {
+		ORU_R01 testORU_R01_parsed = setupTest_ORU_R01();
 		try {
 			new SaveEncounterORU_R01ValidatorAndEnricher().validateAndEnrichProvider(trueMockClient, testORU_R01_parsed);
+			
+			PV1 pv1 = testORU_R01_parsed.getPATIENT_RESULT().getPATIENT().getVISIT().getPV1();
+			assertEquals(pv1.getAttendingDoctor(0).getIDNumber().getValue(), "test_epid");
+			assertEquals(pv1.getAttendingDoctor(0).getIdentifierTypeCode().getValue(), Constants.EPID_ID_TYPE);
 		} catch (EncounterEnrichmentException e) {
 			fail("Failed due to exception: " + e);
 		} catch (ProviderValidationException e) {
@@ -168,7 +169,7 @@ public class SaveEncounterORU_R01ValidatorAndEnricherTest {
 	
 	@Test
 	public void testValidateAndEnrichProvider_Invalid() throws MuleException {
-		setupTest_ORU_R01();
+		ORU_R01 testORU_R01_parsed = setupTest_ORU_R01();
 		try {
 			new SaveEncounterORU_R01ValidatorAndEnricher().validateAndEnrichProvider(falseMockClient, testORU_R01_parsed);
 			fail();
@@ -180,8 +181,8 @@ public class SaveEncounterORU_R01ValidatorAndEnricherTest {
 	}
 	
 	@Test
-	public void testValidateAndEnrichLocation_Valid() throws MuleException {
-		setupTest_ORU_R01();
+	public void testValidateAndEnrichLocation() throws MuleException {
+		ORU_R01 testORU_R01_parsed = setupTest_ORU_R01();
 		try {
 			new SaveEncounterORU_R01ValidatorAndEnricher().validateAndEnrichLocation(trueMockClient, testORU_R01_parsed);
 		} catch (LocationValidationException e) {
@@ -191,7 +192,7 @@ public class SaveEncounterORU_R01ValidatorAndEnricherTest {
 	
 	@Test
 	public void testValidateAndEnrichLocation_Invalid() throws MuleException {
-		setupTest_ORU_R01();
+		ORU_R01 testORU_R01_parsed = setupTest_ORU_R01();
 		try {
 			new SaveEncounterORU_R01ValidatorAndEnricher().validateAndEnrichLocation(falseMockClient, testORU_R01_parsed);
 			fail();
@@ -200,4 +201,34 @@ public class SaveEncounterORU_R01ValidatorAndEnricherTest {
 		}
 	}
 
+	@Test
+	public void testEnrichClientDemographics() throws MuleException {
+		ORU_R01 testORU_R01_parsed = setupTest_ORU_R01();
+		try {
+			new SaveEncounterORU_R01ValidatorAndEnricher().enrichClientDemographics(trueMockClient, testORU_R01_parsed, "test_ecid");
+			
+			PID pid = testORU_R01_parsed.getPATIENT_RESULT().getPATIENT().getPID();
+			assertEquals(pid.getPatientName(0).getGivenName().getValue(), "Mosa");
+			assertEquals(pid.getPatientName(0).getFamilyName().getFn1_Surname().getValue(), "Patient");
+			assertEquals(pid.getAdministrativeSex().getValue(), "F");
+			assertEquals(pid.getDateTimeOfBirth().getTime().getValue(), "19860101");
+		} catch (ClientValidationException e) {
+			fail("Failed due to exception: " + e);
+		} catch (EncounterEnrichmentException e) {
+			fail("Failed due to exception: " + e);
+		}
+	}
+	
+	@Test
+	public void testEnrichClientDemographics_Invalid() throws MuleException {
+		ORU_R01 testORU_R01_parsed = setupTest_ORU_R01();
+		try {
+			new SaveEncounterORU_R01ValidatorAndEnricher().enrichClientDemographics(falseMockClient, testORU_R01_parsed, "test_ecid");
+			fail();
+		} catch (ClientValidationException e) {
+			//expected
+		} catch (EncounterEnrichmentException e) {
+			fail("Failed due to exception: " + e);
+		}
+	}
 }
