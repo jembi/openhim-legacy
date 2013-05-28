@@ -1,9 +1,7 @@
 package org.jembi.rhea.flows;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.post;
-import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+
 import static org.junit.Assert.*;
 
 import java.io.IOException;
@@ -56,7 +54,7 @@ public class mediationSaveencounterDenormalizationOpenMRSSHRTest extends Functio
 		
 		MuleMessage result = client.send("vm://saveEncounters-De-normailization-OpenMRSSHR", (Object) req, properties);
 		
-
+		verify(postRequestedFor(urlEqualTo("/openmrs/ws/rest/RHEA/patient/encounters?idType=NID&patientId=1234567890123")));
 		Assert.assertTrue(result.getPayload() instanceof RestfulHttpResponse);
 		RestfulHttpResponse resp = (RestfulHttpResponse) result.getPayload();
 	    assertEquals(201, resp.getHttpStatus());
@@ -77,7 +75,7 @@ public class mediationSaveencounterDenormalizationOpenMRSSHRTest extends Functio
 		
 		MuleMessage result = client.send("vm://saveEncounters-De-normailization-OpenMRSSHR", (Object) req, properties);
 		
-
+		verify(postRequestedFor(urlEqualTo("/openmrs/ws/rest/RHEA/patient/encounters?idType=NID&patientId=1234567890123")));
 		Assert.assertTrue(result.getPayload() instanceof RestfulHttpResponse);
 		RestfulHttpResponse resp = (RestfulHttpResponse) result.getPayload();
 	    assertEquals(404, resp.getHttpStatus());
