@@ -1,0 +1,7 @@
+HTTP/1.1 201 Created
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Set-Cookie: JSESSIONID=1l8yojhdxyuwf;Path=/openmrs
+Location: http://localhost:8080/openmrs/ws/rest/RHEA/patient/encounters?enterpriseId=1234&idType=ECID&encounterId=119
+ETag: "0d41d8cd98f00b204e9800998ecf8427e"
+Content-Length: 0
+Server: Jetty(6.1.10)
