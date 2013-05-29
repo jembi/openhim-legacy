@@ -10,6 +10,41 @@ http://www.mulesoft.org/schema/mule/test http://www.mulesoft.org/schema/mule/tes
         <async doc:name="Async">
         	<vm:outbound-endpoint exchange-pattern="one-way" path="getecidmock" responseTimeout="10000" mimeType="text/plain" doc:name="Mock Service Endpoint"/>
         </async>
-        <custom-transformer class="org.jembi.rhea.flows.mediationSaveencounterOrchestration$GetECIDMockResponse" doc:name="Java"/>
+        <custom-transformer class="org.jembi.rhea.flows.mediationSaveencounterOrchestration$GetECIDMockResponder" doc:name="Java"/>
+	</flow>
+	<flow name="testSaveencounterOrchestrationGetEPIDMock" doc:name="testSaveencounterOrchestrationGetEPIDMock">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="getepid-openldap" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
+        <async doc:name="Async">
+        	<vm:outbound-endpoint exchange-pattern="one-way" path="getepidmock" responseTimeout="10000" mimeType="text/plain" doc:name="Mock Service Endpoint"/>
+        </async>
+        <custom-transformer class="org.jembi.rhea.flows.mediationSaveencounterOrchestration$GetEPIDMockResponder" doc:name="Java"/>
+	</flow>
+	<flow name="testSaveencounterOrchestrationValidateFacilityMock" doc:name="testSaveencounterOrchestrationValidateFacilityMock">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="validateFacility-resourcemap" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
+        <async doc:name="Async">
+        	<vm:outbound-endpoint exchange-pattern="one-way" path="validatefacilitymock" responseTimeout="10000" mimeType="text/plain" doc:name="Mock Service Endpoint"/>
+        </async>
+        <custom-transformer class="org.jembi.rhea.flows.mediationSaveencounterOrchestration$ValidateFacilityMockResponder" doc:name="Java"/>
+	</flow>
+	<flow name="testSaveencounterOrchestrationGetPatientMock" doc:name="testSaveencounterOrchestrationGetPatientMock">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="getPatient-De-normailization-OpenEMPI" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
+        <async doc:name="Async">
+        	<vm:outbound-endpoint exchange-pattern="one-way" path="getpatientmock" responseTimeout="10000" mimeType="text/plain" doc:name="Mock Service Endpoint"/>
+        </async>
+        <custom-transformer class="org.jembi.rhea.flows.mediationSaveencounterOrchestration$GetPatientMockResponder" doc:name="Java"/>
+	</flow>
+	<flow name="testSaveencounterOrchestrationValidateTermMock" doc:name="testSaveencounterOrchestrationValidateTermMock">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="validateterm" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
+        <async doc:name="Async">
+        	<vm:outbound-endpoint exchange-pattern="one-way" path="validatetermmock" responseTimeout="10000" mimeType="text/plain" doc:name="Mock Service Endpoint"/>
+        </async>
+        <custom-transformer class="org.jembi.rhea.flows.mediationSaveencounterOrchestration$ValidateTermMockResponder" doc:name="Java"/>
+	</flow>
+	<flow name="testSaveencounterOrchestrationDenormalizationMock" doc:name="testSaveencounterOrchestrationDenormalizationMock">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="saveEncountersDe-NormalizationQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Read from queue"/>
+        <async doc:name="Async">
+        	<vm:outbound-endpoint exchange-pattern="one-way" path="saveEncountersDe-NormalizationQueueMock" responseTimeout="10000" mimeType="text/plain" doc:name="Mock Service Endpoint"/>
+        </async>
+        <custom-transformer class="org.jembi.rhea.flows.mediationSaveencounterOrchestration$DenormalizationResponder" doc:name="Java"/>
 	</flow>
 </mule>

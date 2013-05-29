@@ -2,6 +2,7 @@ package org.jembi.rhea.flows;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -56,34 +57,124 @@ public class mediationSaveencounterOrchestration extends
 	    MuleMessage result = client.send("vm://saveEncountersOrchestrationQueue", payload, properties);
 	    
 	    assertGetECIDRequest(client);
+	    assertGetEPIDRequest(client);
+	    assertValidateFacilityRequest(client);
+	    assertGetPatientRequest(client);
+	    assertValidateTermRequest(client);
+	    assertDenormalizationRequest(client);
 	    
 	    assertNotNull(result.getPayload());
 	    assertTrue(result.getPayload() instanceof RestfulHttpResponse);
 	    RestfulHttpResponse response = (RestfulHttpResponse) result.getPayload();
 	    assertEquals(201, response.getHttpStatus());
-	    
-	    log.info(result.getPayloadAsString());
 	}
 	
 	private void assertGetECIDRequest(MuleClient client) throws MuleException {
-	    MuleMessage msg = client.request("vm://getecidmock", 10000);
+	    assertIdRequest(client, "vm://getecidmock", "id", "3770298161", "idType", "MOH_CAAT_MARC_HI");
+	}
+	
+	private void assertGetEPIDRequest(MuleClient client) throws MuleException {
+	    assertIdRequest(client, "vm://getepidmock", "id", "3525410", "idType", "NID");
+	}
+	
+	private void assertValidateFacilityRequest(MuleClient client) throws MuleException {
+	    MuleMessage msg = client.request("vm://validatefacilitymock", 10000);
+	    assertNotNull(msg);
+	    assertNotNull(msg.getPayload());
+	    assertTrue(msg.getPayload() instanceof String);
+	    assertEquals(msg.getPayload(), "357");
+	}
+	
+	private void assertGetPatientRequest(MuleClient client) throws MuleException {
+	    MuleMessage msg = client.request("vm://getpatientmock", 10000);
+	    assertNotNull(msg);
+	    assertNotNull(msg.getPayload());
+	    assertTrue(msg.getPayload() instanceof RestfulHttpRequest);
+	    assertEquals(((RestfulHttpRequest)msg.getPayload()).getPath(), "ws/rest/v1/patient/ECID-test_ecid");
+	}
+	
+	private void assertValidateTermRequest(MuleClient client) throws MuleException {
+	    assertIdRequest(client, "vm://validatetermmock", "id", "11885-1", "namespace", "LOINC");
+	}
+	
+	private void assertDenormalizationRequest(MuleClient client) throws MuleException {
+	    MuleMessage msg = client.request("vm://saveEncountersDe-NormalizationQueueMock", 10000);
+	    assertNotNull(msg);
+	    assertNotNull(msg.getPayload());
+	    assertTrue(msg.getPayload() instanceof RestfulHttpRequest);
+	    assertEquals(((RestfulHttpRequest)msg.getPayload()).getPath(), "ws/rest/v1/patient/ECID-test_ecid/encounters");
+	}
+	
+	private void assertIdRequest(MuleClient client, String endpoint, String idKey, String id, String idTypeKey, String idType) throws MuleException {
+	    MuleMessage msg = client.request(endpoint, 10000);
 	    assertNotNull(msg);
 	    assertNotNull(msg.getPayload());
 	    assertTrue(msg.getPayload() instanceof Map);
-	    Map params = (Map)msg.getPayload();
-	    assertTrue(params.containsKey("id"));
-	    assertTrue(params.containsKey("idType"));
-	    assertEquals(params.get("id"), "3770298161");
-	    assertEquals(params.get("idType"), "MOH_CAAT_MARC_HI");
+	    @SuppressWarnings("rawtypes") Map params = (Map)msg.getPayload();
+	    assertTrue(params.containsKey(idKey));
+	    assertTrue(params.containsKey(idTypeKey));
+	    assertEquals(params.get(idKey), id);
+	    assertEquals(params.get(idTypeKey), idType);
 	}
 	
-	public static class GetECIDMockResponse extends AbstractMessageTransformer {
+	
+	public static class GetECIDMockResponder extends AbstractMessageTransformer {
 		@Override
 		public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
 			message.setOutboundProperty("success", "true");
 			message.setPayload("test_ecid");
 			return message;
 		}
-		
+	}
+	
+	public static class GetEPIDMockResponder extends AbstractMessageTransformer {
+		@Override
+		public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
+			message.setOutboundProperty("success", "true");
+			message.setPayload("test_epid");
+			return message;
+		}
+	}
+	
+	public static class ValidateFacilityMockResponder extends AbstractMessageTransformer {
+		@Override
+		public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
+			message.setOutboundProperty("success", "true");
+			return message;
+		}
+	}
+	
+	public static class GetPatientMockResponder extends AbstractMessageTransformer {
+		@Override
+		public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
+			message.setOutboundProperty("success", "true");
+			try {
+				RestfulHttpResponse response = new RestfulHttpResponse();
+				response.setBody(Util.getResourceAsString("GetPatient_denormalization_response.xml"));
+				message.setPayload(response);
+			} catch (IOException e) {
+				return null;
+			}
+			return message;
+		}
+	}
+	
+	public static class ValidateTermMockResponder extends AbstractMessageTransformer {
+		@Override
+		public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
+			message.setOutboundProperty("success", "true");
+			return message;
+		}
+	}
+	
+	public static class DenormalizationResponder extends AbstractMessageTransformer {
+		@Override
+		public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
+			message.setOutboundProperty("success", "true");
+			RestfulHttpResponse response = new RestfulHttpResponse();
+			response.setHttpStatus(201);
+			message.setPayload(response);
+			return message;
+		}
 	}
 }
