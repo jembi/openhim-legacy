@@ -121,7 +121,7 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		for (int i = 0 ; i < patientIdentifierList.length ; i++) {
 			String id = patientIdentifierList[i].getIDNumber().getValue();
 			String idType = patientIdentifierList[i].getIdentifierTypeCode().getValue();
-			ecid = getECID_OpenEMPI(client, idType, id);
+			ecid = getECID(client, idType, id);
 			
 			if (ecid!=null) break;
 		}
@@ -142,7 +142,7 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		return ecid;
 	}
 	
-	private String getECID_OpenEMPI(MuleClient client, String idType, String id) throws ClientValidationException, MuleException {
+	private String getECID(MuleClient client, String idType, String id) throws ClientValidationException, MuleException {
 		Map<String, String> idMap = new HashMap<String, String>();
 		idMap.put("id", id);
 		idMap.put("idType", idType);
