@@ -40,5 +40,13 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <add-message-property key="Authorization" value="${fr.auth}"/>
         </message-properties-transformer>
         <http:outbound-endpoint exchange-pattern="request-response" host="${fr.host}" port="${fr.port}" path="api/collections/26.rss?fosaid=#[groovy: return message.payload]" method="GET" doc:name="HTTP"/>
+		<catch-exception-strategy doc:name="Catch Exception Strategy">
+    	  <processor-chain doc:name="Processor Chain">
+ 	       <message-properties-transformer
+	          doc:name="Set transaction success">
+ 	         	<add-message-property key="success" value="false" />
+  		   </message-properties-transformer>
+	      </processor-chain>
+	    </catch-exception-strategy>  
     </flow>
 </mule>
