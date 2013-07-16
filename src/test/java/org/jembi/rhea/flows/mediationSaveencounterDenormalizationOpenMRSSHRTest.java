@@ -49,7 +49,7 @@ public class mediationSaveencounterDenormalizationOpenMRSSHRTest extends Functio
 		Map<String, Object> properties = null;
 		RestfulHttpRequest req = new RestfulHttpRequest();
 		req.setHttpMethod(RestfulHttpRequest.HTTP_POST);
-		req.setPath("openmrs/ws/rest/v1/patient/NID-1234567890123/encounters");
+		req.setPath("ws/rest/v1/patient/NID-1234567890123/encounters");
 		req.setBody(Util.getResourceAsString("oru_r01.xml"));
 		
 		MuleMessage result = client.send("vm://saveEncounters-De-normailization-OpenMRSSHR", (Object) req, properties);
@@ -70,7 +70,7 @@ public class mediationSaveencounterDenormalizationOpenMRSSHRTest extends Functio
 		Map<String, Object> properties = null;
 		RestfulHttpRequest req = new RestfulHttpRequest();
 		req.setHttpMethod(RestfulHttpRequest.HTTP_POST);
-		req.setPath("openmrs/ws/rest/v1/patient/NID-1234567890123/encounters");
+		req.setPath("ws/rest/v1/patient/NID-1234567890123/encounters");
 		req.setBody(Util.getResourceAsString("oru_r01.xml"));
 		
 		MuleMessage result = client.send("vm://saveEncounters-De-normailization-OpenMRSSHR", (Object) req, properties);

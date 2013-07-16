@@ -35,7 +35,7 @@ public class OpenMRSSHROfframpTransformerTest {
 		requestParams.put(Constants.QUERY_ENC_ELID_PARAM, "1234");
 		
 		try {
-			Map<String, String> result = transformer.buildOpenMRSSHRRequestParams("/ws/rest/v1/patient/NID-123456789/encounters", requestParams);
+			Map<String, String> result = transformer.buildOpenMRSSHRRequestParams("ws/rest/v1/patient/NID-123456789/encounters", requestParams);
 			assertMapValueEquals(result, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_ELID, "1234");
 			assertMapValueEquals(result, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_ENDDATE, "31-01-2013");
 			assertMapValueEquals(result, OpenMRSSHROfframpTransformer.OPENMRS_SHR_PARAM_NOTIFICATION_TYPE, "TEST");
@@ -56,7 +56,7 @@ public class OpenMRSSHROfframpTransformerTest {
 		requestParams.put(Constants.QUERY_ENC_ELID_PARAM, "1234");
 		
 		try {
-			transformer.buildOpenMRSSHRRequestParams("/ws/rest/v1/patient/NID123456789/encounters", requestParams);
+			transformer.buildOpenMRSSHRRequestParams("ws/rest/v1/patient/NID123456789/encounters", requestParams);
 			fail("Failed to throw exception for invalid path");
 		} catch (TransformerException e) {
 			//This is supposed to happen
@@ -66,7 +66,7 @@ public class OpenMRSSHROfframpTransformerTest {
 	@Test
 	public void testParseAndSetPatientIdParams_Valid() {
 		try {
-			testPatientIdPaths("/ws/rest/v1/patient/NID-123456789/encounters", "123456789", "NID");
+			testPatientIdPaths("ws/rest/v1/patient/NID-123456789/encounters", "123456789", "NID");
 		} catch (TransformerException ex) {
 			fail();
 		}
@@ -91,13 +91,11 @@ public class OpenMRSSHROfframpTransformerTest {
 	@Test
 	public void testGetIdStringFromPath_Valid() {
 		try {
-			assertEquals(transformer.getIdStringFromPath("/ws/rest/v1/patient/NID-123456789/encounters"), "NID-123456789");
+			assertEquals(transformer.getIdStringFromPath("ws/rest/v1/patient/NID-123456789/encounters"), "NID-123456789");
 			//ID_TYPE-ID pairs shouln't be validated, whatever's there should be returned
-			assertEquals(transformer.getIdStringFromPath("/ws/rest/v1/patient/123456789/encounters"), "123456789");
+			assertEquals(transformer.getIdStringFromPath("ws/rest/v1/patient/123456789/encounters"), "123456789");
 			//Path validation is not part of it's job description
-			assertEquals(transformer.getIdStringFromPath("/not/quite/valid/path/NID-123456789/encounters"), "NID-123456789");
-			//Still valid within this context
-			assertEquals(transformer.getIdStringFromPath("/rest/v1/patient/NID-123456789/encounters"), "encounters");
+			assertEquals(transformer.getIdStringFromPath("not/quite/valid/path/NID-123456789/encounters"), "NID-123456789");
 		} catch (TransformerException e) {
 			fail();
 		}
@@ -106,8 +104,8 @@ public class OpenMRSSHROfframpTransformerTest {
 	@Test
 	public void testGetIdStringFromPath_Invalid() {
 		testInvalidPath("_ws_rest_v1_patient_NID-123456789_encounters");
-		testInvalidPath("/ws/rest/v1/patient");
-		testInvalidPath("/ws/rest/v1/patient//encounters");
+		testInvalidPath("ws/rest/v1/patient");
+		testInvalidPath("ws/rest/v1/patient//encounters");
 		testInvalidPath("");
 	}
 	

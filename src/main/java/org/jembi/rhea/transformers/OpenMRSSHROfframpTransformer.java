@@ -104,7 +104,7 @@ public class OpenMRSSHROfframpTransformer extends AbstractMessageTransformer {
 		if (elements.length<6)
 			throw new TransformerException(this, null);
 		
-		String id_str = elements[5];
+		String id_str = elements[4];
 		if (id_str==null || id_str.isEmpty())
 			throw new TransformerException(this, null);
 		
