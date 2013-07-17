@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mediation-orchestration-queryfacilities">
-    <flow SubFlow="false" name="mediation-orchestration-savepatientFlow" entity-id="ee6478fd-b759-4c14-90ab-c832ede4f774">
+    <flow SubFlow="false" name="mediation-orchestration-savepatientFlow" entity-id="424afd96-b2fb-4c37-88ee-cc16d02028fe">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -11,7 +11,7 @@
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
             <graphicalData x="0" y="0" width="0" height="0"/>
             <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Read from queue" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
-                <graphicalData x="19" y="181" width="129" height="322"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="businessEventsLabel"/>
                     <property name="disableTransportTransformer"/>
@@ -23,14 +23,14 @@
                     <property name="encoding"/>
                     <property name="path" value="savePatientOrchestrationQueue"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="auxiliary;index" value="2"/>
                     <property name="mimeType" value="text/plain"/>
                     <property name="responseTimeout" value="10000"/>
+                    <property name="auxiliary;index" value="2"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
             <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
-                <graphicalData x="208" y="181" width="68" height="71"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="message" value="Orchestrating a save patient transaction"/>
                     <property name="category"/>
@@ -38,31 +38,28 @@
                     <property name="auxiliary;index" value="3"/>
                 </properties>
             </pattern>
-            <pattern name="Validate HL7 message" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="3429a6b3-8266-4f80-8124-54863358bd08">
-                <graphicalData x="336" y="181" width="161" height="71"/>
+            <pattern name="Validate HL7 message" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="ref" value=""/>
-                    <property name="auxiliary;erased;class" value="true"/>
-                    <property name="updated"/>
-                    <property name="class" value=""/>
-                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;2100981856">
-                        <property name="ref" value=""/>
-                        <property name="isProcessed$$$$" value="true"/>
-                    </property-collection>
-                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;980332582">
+                    <property name="class"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="org.jembi.rhea.orchestration.HL7MessageTypeValidator"/>
                         <property name="isProcessed$$$$" value="true"/>
+                        <property name="auxiliary;index" value="5"/>
+                        <property name="auxiliary;wrapIn" value="5"/>
                         <property-collection name="@http://www.mulesoft.org/schema/mule/core/property;1">
                             <property name="value" value="ADT_A05"/>
                             <property name="isProcessed$$$$" value="true"/>
                             <property name="key" value="hl7MessageType"/>
+                            <property name="auxiliary;index" value="6"/>
+                            <property name="auxiliary;wrapIn" value="6"/>
                         </property-collection>
                     </property-collection>
                 </properties>
-                <description></description>
             </pattern>
             <pattern name="Store original msg" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="Message Properties#1">
-                <graphicalData x="778" y="181" width="136" height="71"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -70,18 +67,18 @@
                     <property name="overwrite"/>
                     <property name="encoding"/>
                     <property name="mimeType"/>
-                    <property name="auxiliary;index" value="5"/>
+                    <property name="auxiliary;index" value="7"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
                         <property name="value" value="#[groovy: return message.payload.getBody();]"/>
                         <property name="isProcessed$$$$" value="true"/>
                         <property name="key" value="origMsg"/>
-                        <property name="auxiliary;index" value="6"/>
-                        <property name="auxiliary;wrapIn" value="6"/>
+                        <property name="auxiliary;index" value="8"/>
+                        <property name="auxiliary;wrapIn" value="8"/>
                     </property-collection>
                 </properties>
             </pattern>
-            <response index="7" entity-id="response#1">
-                <graphicalData x="974" y="418" width="99" height="118"/>
+            <response index="9" entity-id="response#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <compartment entity-id="compartment#1">
                     <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
                         <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
@@ -90,14 +87,14 @@
 <property name="message" value="Responce orchestration"/>
 <property name="category"/>
 <property name="level" value="INFO"/>
-<property name="auxiliary;index" value="8"/>
+<property name="auxiliary;index" value="10"/>
                             </properties>
                         </pattern>
                     </lane>
                 </compartment>
             </response>
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Send to queryPatientDemographicsDe-NormalizationQueue" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#2">
-                <graphicalData x="1133" y="181" width="414" height="71"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="businessEventsLabel"/>
                     <property name="disableTransportTransformer"/>
@@ -109,50 +106,50 @@
                     <property name="encoding"/>
                     <property name="path" value="savePatientDe-NormalizationQueue"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="auxiliary;index" value="9"/>
                     <property name="mimeType" value="text/plain"/>
                     <property name="responseTimeout" value="10000"/>
+                    <property name="auxiliary;index" value="11"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
-            <splitter index="10" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
-                <graphicalData x="1607" y="65" width="728" height="303"/>
+            <splitter index="12" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name=";INDEX" value="10"/>
-                    <property-collection name="2d1d1a9b-67b6-4f68-9640-80b6710e40a4">
-                        <property name="choice.otherwise" value="true"/>
-                        <property-collection name="choice.attributes"/>
-                    </property-collection>
-                    <property-collection name="320cf95f-eae4-4533-9962-bcacae865202">
+                    <property name=";INDEX" value="12"/>
+                    <property-collection name="7b61a324-2504-46c3-9251-dafc8aa4a6dc">
                         <property name="choice.expression" value="message.payload.getHttpStatus() == 409"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="message.payload.getHttpStatus() == 409"/>
                             <property name="evaluator" value="groovy"/>
                         </property-collection>
                     </property-collection>
+                    <property-collection name="aefb874e-57ca-421a-8250-b0942612531a">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
                 </properties>
                 <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
                     <properties>
-                        <property name=";INDEX" value="10"/>
-                        <property-collection name="2d1d1a9b-67b6-4f68-9640-80b6710e40a4">
-                            <property name="choice.otherwise" value="true"/>
-                            <property-collection name="choice.attributes"/>
-                        </property-collection>
-                        <property-collection name="320cf95f-eae4-4533-9962-bcacae865202">
+                        <property name=";INDEX" value="12"/>
+                        <property-collection name="7b61a324-2504-46c3-9251-dafc8aa4a6dc">
                             <property name="choice.expression" value="message.payload.getHttpStatus() == 409"/>
                             <property-collection name="choice.attributes">
 <property name="expression" value="message.payload.getHttpStatus() == 409"/>
 <property name="evaluator" value="groovy"/>
                             </property-collection>
                         </property-collection>
+                        <property-collection name="aefb874e-57ca-421a-8250-b0942612531a">
+                            <property name="choice.otherwise" value="true"/>
+                            <property-collection name="choice.attributes"/>
+                        </property-collection>
                     </properties>
                 </pattern>
                 <compartment entity-id="compartment#2">
-                    <lane hadOnlyOneElement="false" index="12" isChoiceOtherwiseLane="false" entity-id="320cf95f-eae4-4533-9962-bcacae865202">
+                    <lane hadOnlyOneElement="false" index="14" isChoiceOtherwiseLane="false" entity-id="7b61a324-2504-46c3-9251-dafc8aa4a6dc">
                         <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
-<property name="auxiliary;index" value="12"/>
+<property name="auxiliary;index" value="14"/>
                             </properties>
                             <compartment entity-id="compartment#3">
 <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#3">
@@ -164,7 +161,7 @@
             <property name="encoding"/>
             <property name="class" value="org.jembi.rhea.transformers.StripConflictIdsTransformer"/>
             <property name="mimeType"/>
-            <property name="auxiliary;index" value="13"/>
+            <property name="auxiliary;index" value="15"/>
         </properties>
     </pattern>
     <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Send to queryPatientDemographicsDe-NormalizationQueue" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#3">
@@ -180,9 +177,9 @@
             <property name="encoding"/>
             <property name="path" value="savePatientDe-NormalizationQueue"/>
             <property name="responseTransformer-refs"/>
-            <property name="auxiliary;index" value="14"/>
             <property name="mimeType" value="text/plain"/>
             <property name="responseTimeout" value="10000"/>
+            <property name="auxiliary;index" value="16"/>
             <property name="connector-ref"/>
         </properties>
     </endpoint>
@@ -190,11 +187,11 @@
                             </compartment>
                         </scope>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="16" isChoiceOtherwiseLane="true" entity-id="2d1d1a9b-67b6-4f68-9640-80b6710e40a4">
+                    <lane hadOnlyOneElement="false" index="18" isChoiceOtherwiseLane="true" entity-id="aefb874e-57ca-421a-8250-b0942612531a">
                         <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#2">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
-<property name="auxiliary;index" value="16"/>
+<property name="auxiliary;index" value="18"/>
                             </properties>
                             <compartment entity-id="compartment#4">
 <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#4">
@@ -204,7 +201,7 @@
             <property name="message" value="Patient saved successfully!"/>
             <property name="category"/>
             <property name="level" value="INFO"/>
-            <property name="auxiliary;index" value="17"/>
+            <property name="auxiliary;index" value="19"/>
         </properties>
     </pattern>
 </lane>
@@ -213,6 +210,35 @@
                     </lane>
                 </compartment>
             </splitter>
+            <scope name="Catch Exception Strategy" type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" entity-id="Catch Exception Strategy#1">
+                <properties>
+                    <property name="labelConfigureConditionalExecutionUsingExpression"/>
+                    <property name="when"/>
+                    <property name="enableNotifications"/>
+                    <property name="auxiliary;index" value="20"/>
+                </properties>
+                <compartment entity-id="compartment#5">
+                    <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="16ee56ca-1a48-43c3-b0b6-640f98ef11ef">
+                        <pattern name="Groovy" type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" entity-id="c020f69b-8963-4188-aafc-cb70c95a1066">
+                            <graphicalData x="254" y="567" width="68" height="71"/>
+                            <properties>
+<property name="ref" value=""/>
+<property name="text" value="//org.jembi.rhea.RestfulHttpRequest req = message.getPayload();&#xA;org.jembi.rhea.RestfulHttpResponse res = new org.jembi.rhea.RestfulHttpResponse();&#xA;//res.setOriginalRequest(req);&#xA;res.setUuid(message.getProperty(&quot;uuid&quot;, org.mule.api.transport.PropertyScope.SESSION));&#xA;res.setHttpStatus(400);&#xA;res.setBody(&quot;An exception occured while orchestrating the save encounter message&quot;);&#xA;&#xA;message = res;&#xA;&#xA;return res;"/>
+<property name="updated"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;1965151424">
+    <property name="ref" value=""/>
+    <property name="isProcessed$$$$" value="true"/>
+</property-collection>
+<property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;139006359">
+    <property name="text" value="//org.jembi.rhea.RestfulHttpRequest req = message.getPayload();&#xA;org.jembi.rhea.RestfulHttpResponse res = new org.jembi.rhea.RestfulHttpResponse();&#xA;//res.setOriginalRequest(req);&#xA;res.setUuid(message.getProperty(&quot;uuid&quot;, org.mule.api.transport.PropertyScope.SESSION));&#xA;res.setHttpStatus(400);&#xA;res.setBody(&quot;An exception occured while orchestrating the save encounter message&quot;);&#xA;&#xA;message = res;&#xA;&#xA;return res;"/>
+    <property name="isProcessed$$$$" value="true"/>
+</property-collection>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </scope>
         </lane>
     </flow>
 </mule-configuration>
