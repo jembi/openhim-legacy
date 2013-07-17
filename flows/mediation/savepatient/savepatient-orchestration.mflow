@@ -5,8 +5,8 @@
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="bussinessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
             <property name="auxiliary;index" value="1"/>
+            <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
             <graphicalData x="0" y="0" width="0" height="0"/>
@@ -46,14 +46,14 @@
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="org.jembi.rhea.orchestration.HL7MessageTypeValidator"/>
                         <property name="isProcessed$$$$" value="true"/>
-                        <property name="auxiliary;index" value="5"/>
                         <property name="auxiliary;wrapIn" value="5"/>
+                        <property name="auxiliary;index" value="5"/>
                         <property-collection name="@http://www.mulesoft.org/schema/mule/core/property;1">
                             <property name="value" value="ADT_A05"/>
                             <property name="isProcessed$$$$" value="true"/>
-                            <property name="key" value="hl7MessageType"/>
-                            <property name="auxiliary;index" value="6"/>
                             <property name="auxiliary;wrapIn" value="6"/>
+                            <property name="auxiliary;index" value="6"/>
+                            <property name="key" value="hl7MessageType"/>
                         </property-collection>
                     </property-collection>
                 </properties>
@@ -66,14 +66,14 @@
                     <property name="scope" value="session"/>
                     <property name="overwrite"/>
                     <property name="encoding"/>
-                    <property name="mimeType"/>
                     <property name="auxiliary;index" value="7"/>
+                    <property name="mimeType"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
                         <property name="value" value="#[groovy: return message.payload.getBody();]"/>
                         <property name="isProcessed$$$$" value="true"/>
-                        <property name="key" value="origMsg"/>
-                        <property name="auxiliary;index" value="8"/>
                         <property name="auxiliary;wrapIn" value="8"/>
+                        <property name="auxiliary;index" value="8"/>
+                        <property name="key" value="origMsg"/>
                     </property-collection>
                 </properties>
             </pattern>
@@ -160,8 +160,8 @@
             <property name="ignoreBadInput"/>
             <property name="encoding"/>
             <property name="class" value="org.jembi.rhea.transformers.StripConflictIdsTransformer"/>
-            <property name="mimeType"/>
             <property name="auxiliary;index" value="15"/>
+            <property name="mimeType"/>
         </properties>
     </pattern>
     <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Send to queryPatientDemographicsDe-NormalizationQueue" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#3">
@@ -223,14 +223,14 @@
                             <graphicalData x="254" y="567" width="68" height="71"/>
                             <properties>
 <property name="ref" value=""/>
-<property name="text" value="//org.jembi.rhea.RestfulHttpRequest req = message.getPayload();&#xA;org.jembi.rhea.RestfulHttpResponse res = new org.jembi.rhea.RestfulHttpResponse();&#xA;//res.setOriginalRequest(req);&#xA;res.setUuid(message.getProperty(&quot;uuid&quot;, org.mule.api.transport.PropertyScope.SESSION));&#xA;res.setHttpStatus(400);&#xA;res.setBody(&quot;An exception occured while orchestrating the save encounter message&quot;);&#xA;&#xA;message = res;&#xA;&#xA;return res;"/>
+<property name="text" value="org.jembi.rhea.RestfulHttpResponse res = new org.jembi.rhea.RestfulHttpResponse();&#xA;res.setUuid(message.getProperty(&quot;uuid&quot;, org.mule.api.transport.PropertyScope.SESSION));&#xA;res.setHttpStatus(400);&#xA;&#xA;StringWriter sw = new StringWriter();&#xA;message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));&#xA;&#xA;res.setBody(&quot;An exception occured while orchestrating the save encounter message: &quot; + sw.toString());&#xA;&#xA;message.payload = res;"/>
 <property name="updated"/>
-<property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;1965151424">
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;2122431213">
     <property name="ref" value=""/>
     <property name="isProcessed$$$$" value="true"/>
 </property-collection>
-<property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;139006359">
-    <property name="text" value="//org.jembi.rhea.RestfulHttpRequest req = message.getPayload();&#xA;org.jembi.rhea.RestfulHttpResponse res = new org.jembi.rhea.RestfulHttpResponse();&#xA;//res.setOriginalRequest(req);&#xA;res.setUuid(message.getProperty(&quot;uuid&quot;, org.mule.api.transport.PropertyScope.SESSION));&#xA;res.setHttpStatus(400);&#xA;res.setBody(&quot;An exception occured while orchestrating the save encounter message&quot;);&#xA;&#xA;message = res;&#xA;&#xA;return res;"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;797047536">
+    <property name="text" value="org.jembi.rhea.RestfulHttpResponse res = new org.jembi.rhea.RestfulHttpResponse();&#xA;res.setUuid(message.getProperty(&quot;uuid&quot;, org.mule.api.transport.PropertyScope.SESSION));&#xA;res.setHttpStatus(400);&#xA;&#xA;StringWriter sw = new StringWriter();&#xA;message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));&#xA;&#xA;res.setBody(&quot;An exception occured while orchestrating the save encounter message: &quot; + sw.toString());&#xA;&#xA;message.payload = res;"/>
     <property name="isProcessed$$$$" value="true"/>
 </property-collection>
                             </properties>

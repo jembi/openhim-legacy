@@ -36,16 +36,16 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
         </choice>
         <catch-exception-strategy doc:name="Catch Exception Strategy">
             <scripting:component doc:name="Groovy">
-                <scripting:script engine="Groovy"><![CDATA[//org.jembi.rhea.RestfulHttpRequest req = message.getPayload();
-org.jembi.rhea.RestfulHttpResponse res = new org.jembi.rhea.RestfulHttpResponse();
-//res.setOriginalRequest(req);
+                <scripting:script engine="Groovy"><![CDATA[org.jembi.rhea.RestfulHttpResponse res = new org.jembi.rhea.RestfulHttpResponse();
 res.setUuid(message.getProperty("uuid", org.mule.api.transport.PropertyScope.SESSION));
 res.setHttpStatus(400);
-res.setBody("An exception occured while orchestrating the save encounter message");
 
-message = res;
+StringWriter sw = new StringWriter();
+message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));
 
-return res;]]></scripting:script>
+res.setBody("An exception occured while orchestrating the save encounter message: " + sw.toString());
+
+message.payload = res;]]></scripting:script>
             </scripting:component>
         </catch-exception-strategy>
     </flow>
