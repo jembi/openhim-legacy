@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/webservices/lookupbyid/epid/?id_type=NID&id_number=3525410"
+    },
+    "response": {
+        "status": 200,
+        "body": "e8597a14-436f-1031-8b61-8d373bf4f88f"
+    }
+}

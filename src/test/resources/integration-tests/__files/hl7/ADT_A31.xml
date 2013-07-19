@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<ADT_A05 xmlns="urn:hl7-org:v2xml">
+    <MSH>
+        <MSH.1>|</MSH.1>
+        <MSH.2>^~\&amp;</MSH.2>
+        <MSH.7>
+            <TS.1>20120322120119.918+0200</TS.1>
+        </MSH.7>
+        <MSH.9>
+            <MSG.1>ADT</MSG.1>
+            <MSG.2>A31</MSG.2>
+            <MSG.3>ADT_A05</MSG.3>
+        </MSH.9>
+        <MSH.10>4</MSH.10>
+        <MSH.11>
+            <PT.1>T</PT.1>
+        </MSH.11>
+        <MSH.12>
+            <VID.1>2.5</VID.1>
+        </MSH.12>
+    </MSH>
+</ADT_A05>

@@ -1,0 +1,9 @@
+MSH|^~\&|RapidSMS|F316|SHR|RwandaMOH|20111108065718||ORU^R01^ORU_R01|68080|D^C|2.5^RWA|||||||||BIR
+PID|||1198270120343041^^^^NID
+PV1|1|Community Health|316||||1197370056233083|||||||||||||||||||||||||||||||||||||20111108065718
+OBR|1|||^Maternal Health Reporting
+OBX|1|CE|^Risk Code||NP||||||F
+OBX|2|TS|^Birth Date||20111108||||||F
+OBX|3|NM|^Baby Weight||3.3|k|||||F
+OBX|4|CE|^Birth Code||GI||||||F
+OBX|5|NM|^Child Number||01||||||F

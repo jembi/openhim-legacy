@@ -1,0 +1,870 @@
+<rss version="2.0" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:rm="http://resourcemap.instedd.org/api/1.0" xmlns:atom="http://www.w3.org/2005/Atom">
+   <channel>
+      <title>Rwanda Health Facility Registry</title>
+      <lastBuildDate>Wed, 03 Oct 2012 02:15:27 -0500</lastBuildDate>
+      <atom:link rel="next" href="http://107.22.185.228/api/collections/26.rss?page=2"/>
+      <item>
+         <title>AMIZERO</title>
+         <pubDate>Thu, 12 Jul 2012 11:18:50 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50457.rss</link>
+         <guid>http://107.22.185.228/api/sites/50457.rss</guid>
+         <rm:properties>
+            <rm:fosaid>524</rm:fosaid>
+            <rm:govtfosacode>530401</rm:govtfosacode>
+            <rm:type>DISP</rm:type>
+            <rm:adminunit>0208</rm:adminunit>
+            <rm:categoryCode>private</rm:categoryCode>
+            <rm:yearPopulationEstimate>2008</rm:yearPopulationEstimate>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>ANUPHIL</title>
+         <pubDate>Thu, 12 Jul 2012 11:18:50 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50458.rss</link>
+         <guid>http://107.22.185.228/api/sites/50458.rss</guid>
+         <rm:properties>
+            <rm:fosaid>525</rm:fosaid>
+            <rm:govtfosacode>531102</rm:govtfosacode>
+            <rm:type>DISP</rm:type>
+            <rm:adminunit>0208</rm:adminunit>
+            <rm:categoryCode>private</rm:categoryCode>
+            <rm:yearPopulationEstimate>2008</rm:yearPopulationEstimate>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>ARBEF</title>
+         <pubDate>Thu, 12 Jul 2012 11:22:03 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50993.rss</link>
+         <guid>http://107.22.185.228/api/sites/50993.rss</guid>
+         <geo:lat>-1.93953</geo:lat>
+         <geo:long>30.060089</geo:long>
+         <rm:properties>
+            <rm:fosaid>1104</rm:fosaid>
+            <rm:type>CLIN</rm:type>
+            <rm:adminunit>010106</rm:adminunit>
+            <rm:categoryCode>private</rm:categoryCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>AVEGA Kigali</title>
+         <pubDate>Thu, 12 Jul 2012 11:14:54 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/49986.rss</link>
+         <guid>http://107.22.185.228/api/sites/49986.rss</guid>
+         <geo:lat>-1.95858</geo:lat>
+         <geo:long>30.10683</geo:long>
+         <rm:properties>
+            <rm:fosaid>13</rm:fosaid>
+            <rm:govtfosacode>211301</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>0102</rm:adminunit>
+            <rm:categoryCode>private</rm:categoryCode>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>AVEGA RWAMAGANA</title>
+         <pubDate>Thu, 12 Jul 2012 11:18:53 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50472.rss</link>
+         <guid>http://107.22.185.228/api/sites/50472.rss</guid>
+         <geo:lat>-1.94823</geo:lat>
+         <geo:long>30.44165</geo:long>
+         <rm:properties>
+            <rm:fosaid>547</rm:fosaid>
+            <rm:govtfosacode>170601</rm:govtfosacode>
+            <rm:type>CLIN</rm:type>
+            <rm:adminunit>050106</rm:adminunit>
+            <rm:categoryCode>agree</rm:categoryCode>
+            <rm:targetPopulation>14612</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2008</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>Muhazi/kigabiro</rm:sourcePopulation>
+            <rm:fosaparentid>365</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Arusha</title>
+         <pubDate>Thu, 12 Jul 2012 11:16:38 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50179.rss</link>
+         <guid>http://107.22.185.228/api/sites/50179.rss</guid>
+         <geo:lat>-1.67394</geo:lat>
+         <geo:long>29.41208</geo:long>
+         <rm:properties>
+            <rm:fosaid>206</rm:fosaid>
+            <rm:govtfosacode>430101</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>030401</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:targetPopulation>8600</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>197</rm:cfCode>
+            <rm:fosaparentid>222</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Arusha MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:19:17 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50551.rss</link>
+         <guid>http://107.22.185.228/api/sites/50551.rss</guid>
+         <geo:lat>-1.67394</geo:lat>
+         <geo:long>29.41208</geo:long>
+         <rm:properties>
+            <rm:fosaid>662</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>030401</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>779</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Avega Rwamagana MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:22:46 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/51127.rss</link>
+         <guid>http://107.22.185.228/api/sites/51127.rss</guid>
+         <geo:lat>-1.94823</geo:lat>
+         <geo:long>30.44165</geo:long>
+         <rm:properties>
+            <rm:fosaid>1238</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>050106</rm:adminunit>
+            <rm:categoryCode></rm:categoryCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>BMC</title>
+         <pubDate>Thu, 12 Jul 2012 11:22:04 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50996.rss</link>
+         <guid>http://107.22.185.228/api/sites/50996.rss</guid>
+         <geo:lat>-1.940877</geo:lat>
+         <geo:long>30.059654</geo:long>
+         <rm:properties>
+            <rm:fosaid>1107</rm:fosaid>
+            <rm:type>CLIN</rm:type>
+            <rm:adminunit>010106</rm:adminunit>
+            <rm:categoryCode>private</rm:categoryCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>BUKOMEYE (MUKURA)</title>
+         <pubDate>Thu, 12 Jul 2012 11:19:05 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50505.rss</link>
+         <guid>http://107.22.185.228/api/sites/50505.rss</guid>
+         <rm:properties>
+            <rm:fosaid>614</rm:fosaid>
+            <rm:type>FOSACOM</rm:type>
+            <rm:adminunit>0204</rm:adminunit>
+            <rm:categoryCode>Community</rm:categoryCode>
+            <rm:fosaparentid>85</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>BUTARE CHU</title>
+         <pubDate>Thu, 12 Jul 2012 11:15:32 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50055.rss</link>
+         <guid>http://107.22.185.228/api/sites/50055.rss</guid>
+         <geo:lat>-2.61119</geo:lat>
+         <geo:long>29.73508</geo:long>
+         <rm:properties>
+            <rm:fosaid>82</rm:fosaid>
+            <rm:type>HNR</rm:type>
+            <rm:adminunit>0204</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bethsaida (Kicukiro)</title>
+         <pubDate>Thu, 12 Jul 2012 11:15:02 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50002.rss</link>
+         <guid>http://107.22.185.228/api/sites/50002.rss</guid>
+         <geo:lat>-1.97675</geo:lat>
+         <geo:long>30.11447</geo:long>
+         <rm:properties>
+            <rm:fosaid>29</rm:fosaid>
+            <rm:govtfosacode>220601</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>010306</rm:adminunit>
+            <rm:categoryCode>agree</rm:categoryCode>
+            <rm:targetPopulation>46100</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2008</rm:yearPopulationEstimate>
+            <rm:cfCode>420</rm:cfCode>
+            <rm:fosaparentid>34</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bethsaida MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:20:14 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50688.rss</link>
+         <guid>http://107.22.185.228/api/sites/50688.rss</guid>
+         <geo:lat>-1.97675</geo:lat>
+         <geo:long>30.11447</geo:long>
+         <rm:properties>
+            <rm:fosaid>799</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>010306</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>982</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bigogwe</title>
+         <pubDate>Thu, 12 Jul 2012 11:16:39 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50180.rss</link>
+         <guid>http://107.22.185.228/api/sites/50180.rss</guid>
+         <geo:lat>-1.62445</geo:lat>
+         <geo:long>29.42365</geo:long>
+         <rm:properties>
+            <rm:fosaid>207</rm:fosaid>
+            <rm:govtfosacode>430102</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>030401</rm:adminunit>
+            <rm:categoryCode>agree</rm:categoryCode>
+            <rm:targetPopulation>15550</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>196</rm:cfCode>
+            <rm:fosaparentid>222</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bigogwe MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:19:18 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50553.rss</link>
+         <guid>http://107.22.185.228/api/sites/50553.rss</guid>
+         <geo:lat>-1.62445</geo:lat>
+         <geo:long>29.42365</geo:long>
+         <rm:properties>
+            <rm:fosaid>664</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>030401</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>778</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Biguhu</title>
+         <pubDate>Thu, 12 Jul 2012 11:16:11 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50127.rss</link>
+         <guid>http://107.22.185.228/api/sites/50127.rss</guid>
+         <geo:lat>-2.22283</geo:lat>
+         <geo:long>29.48918</geo:long>
+         <rm:properties>
+            <rm:fosaid>154</rm:fosaid>
+            <rm:govtfosacode>411101</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>030111</rm:adminunit>
+            <rm:categoryCode>agree</rm:categoryCode>
+            <rm:targetPopulation>20186</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>114</rm:cfCode>
+            <rm:fosaparentid>165</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Biguhu MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:21:29 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50887.rss</link>
+         <guid>http://107.22.185.228/api/sites/50887.rss</guid>
+         <geo:lat>-2.22283</geo:lat>
+         <geo:long>29.48918</geo:long>
+         <rm:properties>
+            <rm:fosaid>998</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>030111</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>703</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bioglody</title>
+         <pubDate>Thu, 12 Jul 2012 11:22:04 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50994.rss</link>
+         <guid>http://107.22.185.228/api/sites/50994.rss</guid>
+         <geo:lat>-1.950977</geo:lat>
+         <geo:long>30.062749</geo:long>
+         <rm:properties>
+            <rm:fosaid>1105</rm:fosaid>
+            <rm:type>CLIN</rm:type>
+            <rm:adminunit>010109</rm:adminunit>
+            <rm:categoryCode>private</rm:categoryCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Biolab</title>
+         <pubDate>Thu, 12 Jul 2012 11:22:04 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50995.rss</link>
+         <guid>http://107.22.185.228/api/sites/50995.rss</guid>
+         <geo:lat>-1.947816</geo:lat>
+         <geo:long>30.058095</geo:long>
+         <rm:properties>
+            <rm:fosaid>1106</rm:fosaid>
+            <rm:type>CLIN</rm:type>
+            <rm:adminunit>010109</rm:adminunit>
+            <rm:categoryCode>private</rm:categoryCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Birambo</title>
+         <pubDate>Thu, 12 Jul 2012 11:16:11 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50128.rss</link>
+         <guid>http://107.22.185.228/api/sites/50128.rss</guid>
+         <geo:lat>-2.14473</geo:lat>
+         <geo:long>29.52205</geo:long>
+         <rm:properties>
+            <rm:fosaid>155</rm:fosaid>
+            <rm:govtfosacode>410201</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>030102</rm:adminunit>
+            <rm:categoryCode>agree</rm:categoryCode>
+            <rm:targetPopulation>17767</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>99</rm:cfCode>
+            <rm:fosaparentid>165</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Birambo MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:19:39 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50604.rss</link>
+         <guid>http://107.22.185.228/api/sites/50604.rss</guid>
+         <geo:lat>-2.14473</geo:lat>
+         <geo:long>29.52205</geo:long>
+         <rm:properties>
+            <rm:fosaid>715</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>030102</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>689</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Birehe MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:21:25 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50877.rss</link>
+         <guid>http://107.22.185.228/api/sites/50877.rss</guid>
+         <rm:properties>
+            <rm:fosaid>988</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>020710</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>740</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Birembo</title>
+         <pubDate>Thu, 12 Jul 2012 11:16:39 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50181.rss</link>
+         <guid>http://107.22.185.228/api/sites/50181.rss</guid>
+         <geo:lat>-1.69172</geo:lat>
+         <geo:long>29.52505</geo:long>
+         <rm:properties>
+            <rm:fosaid>208</rm:fosaid>
+            <rm:govtfosacode>430901</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>030409</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:targetPopulation>13671</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>190</rm:cfCode>
+            <rm:fosaparentid>222</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Birembo MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:19:18 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50554.rss</link>
+         <guid>http://107.22.185.228/api/sites/50554.rss</guid>
+         <geo:lat>-1.69172</geo:lat>
+         <geo:long>29.52505</geo:long>
+         <rm:properties>
+            <rm:fosaid>665</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>030409</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>772</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Biruyi</title>
+         <pubDate>Thu, 12 Jul 2012 11:16:23 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50150.rss</link>
+         <guid>http://107.22.185.228/api/sites/50150.rss</guid>
+         <geo:lat>-1.8516</geo:lat>
+         <geo:long>29.31639</geo:long>
+         <rm:properties>
+            <rm:fosaid>177</rm:fosaid>
+            <rm:govtfosacode>470901</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>030209</rm:adminunit>
+            <rm:categoryCode>agree</rm:categoryCode>
+            <rm:targetPopulation>12878</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>336</rm:cfCode>
+            <rm:fosaparentid>190</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Biruyi MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:20:56 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50798.rss</link>
+         <guid>http://107.22.185.228/api/sites/50798.rss</guid>
+         <geo:lat>-1.8516</geo:lat>
+         <geo:long>29.31639</geo:long>
+         <rm:properties>
+            <rm:fosaid>909</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>030209</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>905</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Biryogo</title>
+         <pubDate>Wed, 18 Jul 2012 18:43:45 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/49974.rss</link>
+         <guid>http://107.22.185.228/api/sites/49974.rss</guid>
+         <geo:lat>-1.96695</geo:lat>
+         <geo:long>30.05995</geo:long>
+         <rm:properties>
+            <rm:fosaid>1</rm:fosaid>
+            <rm:govtfosacode>230901</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>010109</rm:adminunit>
+            <rm:categoryCode>agree</rm:categoryCode>
+            <rm:targetPopulation>69332</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>428</rm:cfCode>
+            <rm:fosaparentid>8</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Biryogo MSC MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:21:20 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50862.rss</link>
+         <guid>http://107.22.185.228/api/sites/50862.rss</guid>
+         <geo:lat>-1.96695</geo:lat>
+         <geo:long>30.05995</geo:long>
+         <rm:properties>
+            <rm:fosaid>973</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>010109</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>989</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bisate</title>
+         <pubDate>Thu, 12 Jul 2012 11:17:30 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50281.rss</link>
+         <guid>http://107.22.185.228/api/sites/50281.rss</guid>
+         <geo:lat>-1.45582</geo:lat>
+         <geo:long>29.52522</geo:long>
+         <rm:properties>
+            <rm:fosaid>308</rm:fosaid>
+            <rm:govtfosacode>340701</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>040307</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:targetPopulation>15427</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>268</rm:cfCode>
+            <rm:fosaparentid>317</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bisate MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:20:19 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50700.rss</link>
+         <guid>http://107.22.185.228/api/sites/50700.rss</guid>
+         <geo:lat>-1.45582</geo:lat>
+         <geo:long>29.52522</geo:long>
+         <rm:properties>
+            <rm:fosaid>811</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>040307</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>844</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bisesero</title>
+         <pubDate>Thu, 12 Jul 2012 11:19:06 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50508.rss</link>
+         <guid>http://107.22.185.228/api/sites/50508.rss</guid>
+         <geo:lat>-2.17762</geo:lat>
+         <geo:long>29.33593</geo:long>
+         <rm:properties>
+            <rm:fosaid>617</rm:fosaid>
+            <rm:govtfosacode>411303</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>0301</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:fosaparentid>169</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bisesero (karongi) MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:22:47 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/51129.rss</link>
+         <guid>http://107.22.185.228/api/sites/51129.rss</guid>
+         <geo:lat>-2.17762</geo:lat>
+         <geo:long>29.33593</geo:long>
+         <rm:properties>
+            <rm:fosaid>1240</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>0301</rm:adminunit>
+            <rm:categoryCode></rm:categoryCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bitenga</title>
+         <pubDate>Thu, 12 Jul 2012 11:16:23 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50151.rss</link>
+         <guid>http://107.22.185.228/api/sites/50151.rss</guid>
+         <geo:lat>-1.84773</geo:lat>
+         <geo:long>29.40947</geo:long>
+         <rm:properties>
+            <rm:fosaid>178</rm:fosaid>
+            <rm:govtfosacode>471201</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>030212</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:targetPopulation>9586</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2008</rm:yearPopulationEstimate>
+            <rm:cfCode>342</rm:cfCode>
+            <rm:fosaparentid>190</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bitenga MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:21:32 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50896.rss</link>
+         <guid>http://107.22.185.228/api/sites/50896.rss</guid>
+         <geo:lat>-1.84773</geo:lat>
+         <geo:long>29.40947</geo:long>
+         <rm:properties>
+            <rm:fosaid>1007</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>030212</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>911</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bubazi</title>
+         <pubDate>Thu, 12 Jul 2012 11:16:12 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50129.rss</link>
+         <guid>http://107.22.185.228/api/sites/50129.rss</guid>
+         <geo:lat>-2.07275</geo:lat>
+         <geo:long>29.4323</geo:long>
+         <rm:properties>
+            <rm:fosaid>156</rm:fosaid>
+            <rm:govtfosacode>410901</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>030109</rm:adminunit>
+            <rm:categoryCode>agree</rm:categoryCode>
+            <rm:targetPopulation>5000</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>110</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bubazi MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:21:27 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50881.rss</link>
+         <guid>http://107.22.185.228/api/sites/50881.rss</guid>
+         <geo:lat>-2.07275</geo:lat>
+         <geo:long>29.4323</geo:long>
+         <rm:properties>
+            <rm:fosaid>992</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>030109</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>699</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bugaragara</title>
+         <pubDate>Thu, 12 Jul 2012 11:17:58 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50339.rss</link>
+         <guid>http://107.22.185.228/api/sites/50339.rss</guid>
+         <geo:lat>-1.29073</geo:lat>
+         <geo:long>30.4123</geo:long>
+         <rm:properties>
+            <rm:fosaid>366</rm:fosaid>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>050213</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:targetPopulation>19808</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>246</rm:cfCode>
+            <rm:fosaparentid>380</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bugaragara MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:21:46 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50936.rss</link>
+         <guid>http://107.22.185.228/api/sites/50936.rss</guid>
+         <geo:lat>-1.29073</geo:lat>
+         <geo:long>30.4123</geo:long>
+         <rm:properties>
+            <rm:fosaid>1047</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>050213</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>824</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bugarama (Muganza)</title>
+         <pubDate>Thu, 12 Jul 2012 11:16:54 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50210.rss</link>
+         <guid>http://107.22.185.228/api/sites/50210.rss</guid>
+         <geo:lat>-2.64302</geo:lat>
+         <geo:long>29.01127</geo:long>
+         <rm:properties>
+            <rm:fosaid>237</rm:fosaid>
+            <rm:govtfosacode>461001</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>030610</rm:adminunit>
+            <rm:categoryCode>agree</rm:categoryCode>
+            <rm:targetPopulation>51858</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>319</rm:cfCode>
+            <rm:fosaparentid>245</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bugarama (NYAMAGABE)</title>
+         <pubDate>Thu, 12 Jul 2012 11:18:46 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50444.rss</link>
+         <guid>http://107.22.185.228/api/sites/50444.rss</guid>
+         <rm:properties>
+            <rm:fosaid>495</rm:fosaid>
+            <rm:govtfosacode>550701</rm:govtfosacode>
+            <rm:type>PS</rm:type>
+            <rm:adminunit>020507</rm:adminunit>
+            <rm:categoryCode>agree</rm:categoryCode>
+            <rm:yearPopulationEstimate>2008</rm:yearPopulationEstimate>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bugarama (Rusizi) MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:22:58 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/51166.rss</link>
+         <guid>http://107.22.185.228/api/sites/51166.rss</guid>
+         <geo:lat>-2.64302</geo:lat>
+         <geo:long>29.01127</geo:long>
+         <rm:properties>
+            <rm:fosaid>1277</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>030610</rm:adminunit>
+            <rm:categoryCode></rm:categoryCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bugarura</title>
+         <pubDate>Thu, 12 Jul 2012 11:18:08 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50359.rss</link>
+         <guid>http://107.22.185.228/api/sites/50359.rss</guid>
+         <geo:lat>-1.73338</geo:lat>
+         <geo:long>30.33777</geo:long>
+         <rm:properties>
+            <rm:fosaid>386</rm:fosaid>
+            <rm:govtfosacode>121201</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>050312</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:targetPopulation>13360</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>371</rm:cfCode>
+            <rm:fosaparentid>395</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bugarura MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:21:23 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50871.rss</link>
+         <guid>http://107.22.185.228/api/sites/50871.rss</guid>
+         <geo:lat>-1.73338</geo:lat>
+         <geo:long>30.33777</geo:long>
+         <rm:properties>
+            <rm:fosaid>982</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>050312</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>939</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bugesera DP</title>
+         <pubDate>Thu, 12 Jul 2012 11:22:01 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50984.rss</link>
+         <guid>http://107.22.185.228/api/sites/50984.rss</guid>
+         <rm:properties>
+            <rm:fosaid>1095</rm:fosaid>
+            <rm:type>DP</rm:type>
+            <rm:adminunit>050713</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>496</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bugeshi</title>
+         <pubDate>Thu, 12 Jul 2012 11:22:45 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/51121.rss</link>
+         <guid>http://107.22.185.228/api/sites/51121.rss</guid>
+         <rm:properties>
+            <rm:fosaid>1232</rm:fosaid>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>030301</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:fosaparentid>199</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Buhabwa</title>
+         <pubDate>Thu, 12 Jul 2012 11:18:46 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50445.rss</link>
+         <guid>http://107.22.185.228/api/sites/50445.rss</guid>
+         <rm:properties>
+            <rm:fosaid>496</rm:fosaid>
+            <rm:govtfosacode>130601</rm:govtfosacode>
+            <rm:type>PS</rm:type>
+            <rm:adminunit>050406</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:yearPopulationEstimate>2008</rm:yearPopulationEstimate>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bukora</title>
+         <pubDate>Thu, 12 Jul 2012 11:18:24 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50392.rss</link>
+         <guid>http://107.22.185.228/api/sites/50392.rss</guid>
+         <geo:lat>-2.30888</geo:lat>
+         <geo:long>30.78652</geo:long>
+         <rm:properties>
+            <rm:fosaid>419</rm:fosaid>
+            <rm:govtfosacode>141101</rm:govtfosacode>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>050511</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:targetPopulation>21119</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>135</rm:cfCode>
+            <rm:fosaparentid>424</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bukora MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:21:17 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/50854.rss</link>
+         <guid>http://107.22.185.228/api/sites/50854.rss</guid>
+         <geo:lat>-2.30888</geo:lat>
+         <geo:long>30.78652</geo:long>
+         <rm:properties>
+            <rm:fosaid>965</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>050511</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:cfCode>721</rm:cfCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bumbogo (ex-Gikomero I)</title>
+         <pubDate>Thu, 12 Jul 2012 11:14:55 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/49988.rss</link>
+         <guid>http://107.22.185.228/api/sites/49988.rss</guid>
+         <geo:lat>-1.85982</geo:lat>
+         <geo:long>30.15383</geo:long>
+         <rm:properties>
+            <rm:fosaid>15</rm:fosaid>
+            <rm:type>CS</rm:type>
+            <rm:adminunit>010201</rm:adminunit>
+            <rm:categoryCode>public</rm:categoryCode>
+            <rm:targetPopulation>12441</rm:targetPopulation>
+            <rm:yearPopulationEstimate>2002</rm:yearPopulationEstimate>
+            <rm:sourcePopulation>National Census</rm:sourcePopulation>
+            <rm:cfCode>408</rm:cfCode>
+            <rm:fosaparentid>22</rm:fosaparentid>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+      <item>
+         <title>Bumbogo (ex-Gikomero I) MU</title>
+         <pubDate>Thu, 12 Jul 2012 11:22:47 -0500</pubDate>
+         <link>http://107.22.185.228/api/sites/51130.rss</link>
+         <guid>http://107.22.185.228/api/sites/51130.rss</guid>
+         <geo:lat>-1.85982</geo:lat>
+         <geo:long>30.15383</geo:long>
+         <rm:properties>
+            <rm:fosaid>1241</rm:fosaid>
+            <rm:type>MU</rm:type>
+            <rm:adminunit>010201</rm:adminunit>
+            <rm:categoryCode></rm:categoryCode>
+            <rm:approvalDate>2009</rm:approvalDate>
+         </rm:properties>
+      </item>
+   </channel>
+</rss>
