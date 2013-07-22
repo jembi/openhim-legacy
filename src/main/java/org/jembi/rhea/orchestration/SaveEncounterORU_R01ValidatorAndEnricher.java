@@ -293,10 +293,6 @@ public class SaveEncounterORU_R01ValidatorAndEnricher implements Callable {
 		MuleMessage response = client.send("vm://getPatient-De-normailization-OpenEMPI", req, null, 5000);
 		RestfulHttpResponse res = (RestfulHttpResponse) response.getPayload();
 		
-		String success = response.getInboundProperty("success");
-		if (success==null || !success.equals("true"))
-			return null;
-		
 		return res.getBody();
 	}
 	

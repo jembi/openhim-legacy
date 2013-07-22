@@ -50,7 +50,7 @@ public class mediationQueryEncountersDenormalizationOpenMRSSHRTest extends Funct
 		Map<String, Object> properties = null;
 		RestfulHttpRequest req = new RestfulHttpRequest();
 		req.setHttpMethod(RestfulHttpRequest.HTTP_GET);
-		req.setPath("openmrs/ws/rest/v1/patient/NID-1234567890123/encounters");
+		req.setPath("ws/rest/v1/patient/NID-1234567890123/encounters");
 		
 		MuleClient client = new MuleClient(muleContext);
 		MuleMessage result = client.send("vm://queryEncounters-De-normailization-OpenMRSSHR",(Object) req, properties);
@@ -69,7 +69,7 @@ public class mediationQueryEncountersDenormalizationOpenMRSSHRTest extends Funct
 		Map<String, Object> properties = null;
 		RestfulHttpRequest req = new RestfulHttpRequest();
 		req.setHttpMethod(RestfulHttpRequest.HTTP_GET);
-		req.setPath("openmrs/ws/rest/v1/patient/NID-1234567890123/encounters?encounter_start_date=2010-01-01T00:00:00&encounter_end_date=2010-12-31T23:59:00");
+		req.setPath("ws/rest/v1/patient/NID-1234567890123/encounters?encounter_start_date=2010-01-01T00:00:00&encounter_end_date=2010-12-31T23:59:00");
 		
 		MuleClient client = new MuleClient(muleContext);
 		MuleMessage result = client.send("vm://queryEncounters-De-normailization-OpenMRSSHR",(Object) req, properties);
@@ -89,7 +89,7 @@ public class mediationQueryEncountersDenormalizationOpenMRSSHRTest extends Funct
 		Map<String, Object> properties = null;
 		RestfulHttpRequest req = new RestfulHttpRequest();
 		req.setHttpMethod(RestfulHttpRequest.HTTP_GET);
-		req.setPath("openmrs/ws/rest/v1/patient/NID-1234567890123/encounters?encounter_start_date=2010-99-349&encounter_end_date=2010-1");
+		req.setPath("ws/rest/v1/patient/NID-1234567890123/encounters?encounter_start_date=2010-99-349&encounter_end_date=2010-1");
 		
 		MuleClient client = new MuleClient(muleContext);
 		try{
@@ -108,7 +108,7 @@ public class mediationQueryEncountersDenormalizationOpenMRSSHRTest extends Funct
 		Map<String, Object> properties = null;
 		RestfulHttpRequest req = new RestfulHttpRequest();
 		req.setHttpMethod(RestfulHttpRequest.HTTP_GET);
-		req.setPath("openmrs/ws/rest/v1/patient/NID-1234567890123/encounters");
+		req.setPath("ws/rest/v1/patient/NID-1234567890123/encounters");
 		
 		MuleClient client = new MuleClient(muleContext);
 		MuleMessage result = client.send("vm://queryEncounters-De-normailization-OpenMRSSHR",(Object) req, properties);
