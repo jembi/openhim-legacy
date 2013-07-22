@@ -28,7 +28,7 @@
   <con:entry key="Root Folder" value="/home/ryan/Programs/soapui-4.0.1/tests"/>
   <con:entry key="Save After" value="false"/>
   <con:entry key="Add Settings" value="false"/>
-  <con:entry key="Endpoint" value="https://hie.jembi.org:5000"/>
+  <con:entry key="Endpoint" value="https://localhost:5000"/>
 </xml-fragment>]]></con:setting><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.LoadTestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
   <con:entry key="Environment" value="Default"/>
   <con:entry key="TestSuite" value="&lt;all>"/>
