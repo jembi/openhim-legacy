@@ -379,8 +379,8 @@
 		    <version>1.30</version>
 		</dependency>
 		<dependency>
-			<groupId>com.fasterxml.jackson.jaxrs</groupId>
-			<artifactId>jackson-jaxrs-base</artifactId>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
 			<version>2.2.2</version>
 		</dependency>
 	</dependencies>

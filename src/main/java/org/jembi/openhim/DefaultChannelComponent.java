@@ -44,10 +44,11 @@ public class DefaultChannelComponent implements Callable {
 			throw new URLMappingNotFoundException("A URL mapping was not found for the URL: " + req.getPath());
 		}
 		
-		msg.setProperty("host", mapping.getHost(), PropertyScope.OUTBOUND);
-		msg.setProperty("port", mapping.getPort(), PropertyScope.OUTBOUND);
-		msg.setProperty("method", req.getHttpMethod(), PropertyScope.OUTBOUND);
-
+		msg.setProperty("http.host", mapping.getHost(), PropertyScope.OUTBOUND);
+		msg.setProperty("http.port", mapping.getPort(), PropertyScope.OUTBOUND);
+		msg.setProperty("http.method", req.getHttpMethod(), PropertyScope.OUTBOUND);
+		msg.setProperty("http.path", req.getPath(), PropertyScope.OUTBOUND);
+		
 		return msg;
 	}
 

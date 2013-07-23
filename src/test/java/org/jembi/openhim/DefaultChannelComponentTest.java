@@ -19,12 +19,12 @@ public class DefaultChannelComponentTest {
 		DefaultChannelComponent dcc = new DefaultChannelComponent();
 		dcc.readMappings();
 		
-		URLMapping mapping = dcc.findURLMapping("/test/sample/123");
+		URLMapping mapping = dcc.findURLMapping("test/sample/123");
 		assertNotNull(mapping);
 		assertEquals("localhost", mapping.getHost());
 		assertEquals("8080", mapping.getPort());
 		
-		mapping = dcc.findURLMapping("/test/sample2/123abc/test2");
+		mapping = dcc.findURLMapping("test/sample2/123abc/test2");
 		assertNotNull(mapping);
 		assertEquals("localhost", mapping.getHost());
 		assertEquals("8080", mapping.getPort());
@@ -35,7 +35,7 @@ public class DefaultChannelComponentTest {
 		DefaultChannelComponent dcc = new DefaultChannelComponent();
 		dcc.readMappings();
 		
-		URLMapping mapping = dcc.findURLMapping("/not/a/match");
+		URLMapping mapping = dcc.findURLMapping("not/a/match");
 		assertEquals(null, mapping);
 	}
 	
@@ -50,12 +50,12 @@ public class DefaultChannelComponentTest {
 		URLMapping mapping1 = new URLMapping();
 		mapping1.setHost("localhost");
 		mapping1.setPort("8080");
-		mapping1.setUrlPattern("/test/sample/.+");
+		mapping1.setUrlPattern("test/sample/.+");
 		
 		URLMapping mapping2 = new URLMapping();
 		mapping2.setHost("localhost");
 		mapping2.setPort("8080");
-		mapping2.setUrlPattern("/test/sample2/.+/test2");
+		mapping2.setUrlPattern("test/sample2/.+/test2");
 		
 		assertEquals(true, DefaultChannelComponent.mappings.contains(mapping1));
 		assertEquals(true, DefaultChannelComponent.mappings.contains(mapping2));

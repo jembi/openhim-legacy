@@ -1,11 +1,11 @@
 [
 	{
-		"urlPattern": "/test/sample/.+",
+		"urlPattern": "test/sample/.+",
 		"host": "localhost",
 		"port": 8080
 	},
 	{
-		"urlPattern": "/test/sample2/.+/test2",
+		"urlPattern": "test/sample2/.+/test2",
 		"host": "localhost",
 		"port": 8080
 	}
