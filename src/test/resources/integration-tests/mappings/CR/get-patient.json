@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/openempi-admin/openempi-ws-rest/person-query-resource/findPersonById"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "/xml/openempi-person.xml"
+    }
+}

@@ -32,7 +32,7 @@ public class mediationSaveencounterValidateFacilityResourceMapTest extends Funct
 	}
 	
 	@Rule
-	public WireMockRule wireMockRule = new WireMockRule(8000);
+	public WireMockRule wireMockRule = new WireMockRule(8080);
 
 	private void setupWebserviceStub(int httpStatus, String responseBody) {
 		stubFor(get(urlEqualTo("/api/collections/26.rss?fosaid=1234567890"))

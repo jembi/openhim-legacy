@@ -19,7 +19,7 @@ import com.github.tomakehurst.wiremock.junit.WireMockRule;
 public class mediationValidatetermDenormalizationApelon extends
 		FunctionalTestCase {
 	
-	@Rule public WireMockRule mockTS = new WireMockRule(8005);
+	@Rule public WireMockRule mockTS = new WireMockRule(8080);
 	
 	@Override
 	protected void doSetUp() throws Exception {

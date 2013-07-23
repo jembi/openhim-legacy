@@ -32,7 +32,7 @@ public class mediationQueryEncountersDenormalizationOpenMRSSHRTest extends Funct
 	}
 	
 	@Rule
-	public WireMockRule wireMockRule = new WireMockRule(8003);
+	public WireMockRule wireMockRule = new WireMockRule(8080);
 	
 	
 	private void setupWebserviceStub(int httpStatus, String url, String response) {

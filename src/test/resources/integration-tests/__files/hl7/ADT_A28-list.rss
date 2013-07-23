@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<rss version="2.0" xmlns:rhea="http://rw.moh.gov/rhea/1.0">
+
+<channel>
+  <title>ADT_A28 Feed</title>
+  <link>http://rw.moh.gov/rhea/1.0</link>
+  <description>RHEA HIE ADT_A28 Feed</description>
+  <item>
+    <title>ADT_A28</title>
+    <link></link>
+    <description></description>
+    <rhea:content><ADT_A05 xmlns="urn:hl7-org:v2xml">
+    <MSH>
+        <MSH.1>|</MSH.1>
+        <MSH.2>^~\&amp;</MSH.2>
+        <MSH.7>
+            <TS.1>20120322120032.479+0200</TS.1>
+        </MSH.7>
+        <MSH.9>
+            <MSG.1>ADT</MSG.1>
+            <MSG.2>A28</MSG.2>
+            <MSG.3>ADT_A05</MSG.3>
+        </MSH.9>
+        <MSH.10>2</MSH.10>
+        <MSH.11>
+            <PT.1>T</PT.1>
+        </MSH.11>
+        <MSH.12>
+            <VID.1>2.5</VID.1>
+        </MSH.12>
+    </MSH>
+</ADT_A05></rhea:content>
+  </item>
+  <item>
+    <title>ADT_A28</title>
+    <link></link>
+    <description></description>
+    <rhea:content><ADT_A05 xmlns="urn:hl7-org:v2xml">
+    <MSH>
+        <MSH.1>|</MSH.1>
+        <MSH.2>^~\&amp;</MSH.2>
+        <MSH.7>
+            <TS.1>20120322120032.479+0200</TS.1>
+        </MSH.7>
+        <MSH.9>
+            <MSG.1>ADT</MSG.1>
+            <MSG.2>A28</MSG.2>
+            <MSG.3>ADT_A05</MSG.3>
+        </MSH.9>
+        <MSH.10>2</MSH.10>
+        <MSH.11>
+            <PT.1>T</PT.1>
+        </MSH.11>
+        <MSH.12>
+            <VID.1>2.5</VID.1>
+        </MSH.12>
+    </MSH>
+</ADT_A05></rhea:content>
+  </item>
+  <item>
+    <title>ADT_A28</title>
+    <link></link>
+    <description></description>
+    <rhea:content><ADT_A05 xmlns="urn:hl7-org:v2xml">
+    <MSH>
+        <MSH.1>|</MSH.1>
+        <MSH.2>^~\&amp;</MSH.2>
+        <MSH.7>
+            <TS.1>20120322120032.479+0200</TS.1>
+        </MSH.7>
+        <MSH.9>
+            <MSG.1>ADT</MSG.1>
+            <MSG.2>A28</MSG.2>
+            <MSG.3>ADT_A05</MSG.3>
+        </MSH.9>
+        <MSH.10>2</MSH.10>
+        <MSH.11>
+            <PT.1>T</PT.1>
+        </MSH.11>
+        <MSH.12>
+            <VID.1>2.5</VID.1>
+        </MSH.12>
+    </MSH>
+</ADT_A05></rhea:content>
+  </item>
+</channel> 
+</rss>
