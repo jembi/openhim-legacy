@@ -1,0 +1,10 @@
+{
+	"request": {
+		"method": "GET",
+		"urlPattern": "/api/collections/26.rss.*"
+	},
+	"response": {
+		"status": 200,
+		"bodyFileName": "/xml/QueryFacilities.xml"
+	}
+}

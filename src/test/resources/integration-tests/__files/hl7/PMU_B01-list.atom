@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+	<id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0ac2</id>
+	<title>PMU_B01 Feed</title>
+	<updated>2003-12-13T18:30:02Z</updated>
+  
+	<entry>
+		<id>urn:uuid:1225c695-cfb8-4ebb-aaaa-90da344efa6a</id>
+		<title>PMU_B01</title>
+		<updated>2003-12-13T18:30:02Z</updated>
+		<content><![CDATA[MSH|^~\&||357||X0000|201204010945||PMU^B01^PMU_B01|001EX00166|D|2.5^RWA
+EVN||201204010940
+STF||234566688^^^^NID~23xxx488888^^^^MOH~454-7876-31^^^^Mutuelle~|Professional Surname^Professional Given Name||M|19900312||||1234-456-898^PRN^CP~4566-44-23^WPN^PH~emailAddress@group.net^NET|&1344&Main St^4B^myDistrict^MyCity^myProvince^postalCode^Rwanda^H^myCell^mySector^myvillage~^^BirthDistrict^^^birthCountry^BR||||||M^married^MRS_RTS
+PRA||OCC^My Occupaiton^OCC_RTS|OCC_GRP
+EDU|1|EdLvl^My Education Level^PEL_RTS
+CER|1|456667-222||Nursing||||||||||||||||||||20111001|||20210930||||1^Activie^CSTS_RTS
+]]></content>
+	</entry>
+	
+	<entry>
+		<id>urn:uuid:1225c695-cfb8-4ebb-aaaa-90da344efa6c</id>
+		<title>PMU_B01</title>
+		<updated>2003-12-13T18:30:02Z</updated>
+		<content><![CDATA[MSH|^~\&||357||X0000|201204010945||PMU^B01^PMU_B01|001EX00166|D|2.5^RWA
+EVN||201204010940
+STF||234566688^^^^NID~23xxx488888^^^^MOH~454-7876-31^^^^Mutuelle~|Professional Surname^Professional Given Name||M|19900312||||1234-456-898^PRN^CP~4566-44-23^WPN^PH~emailAddress@group.net^NET|&1344&Main St^4B^myDistrict^MyCity^myProvince^postalCode^Rwanda^H^myCell^mySector^myvillage~^^BirthDistrict^^^birthCountry^BR||||||M^married^MRS_RTS
+PRA||OCC^My Occupaiton^OCC_RTS|OCC_GRP
+EDU|1|EdLvl^My Education Level^PEL_RTS
+CER|1|456667-222||Nursing||||||||||||||||||||20111001|||20210930||||1^Activie^CSTS_RTS
+]]></content>
+	</entry>
+	
+	<entry>
+		<id>urn:uuid:1225c695-cfb8-4ebb-aaaa-90da344efa6b</id>
+		<title>PMU_B01</title>
+		<updated>2003-12-13T18:30:02Z</updated>
+		<content><![CDATA[MSH|^~\&||357||X0000|201204010945||PMU^B01^PMU_B01|001EX00166|D|2.5^RWA
+EVN||201204010940
+STF||234566688^^^^NID~23xxx488888^^^^MOH~454-7876-31^^^^Mutuelle~|Professional Surname^Professional Given Name||M|19900312||||1234-456-898^PRN^CP~4566-44-23^WPN^PH~emailAddress@group.net^NET|&1344&Main St^4B^myDistrict^MyCity^myProvince^postalCode^Rwanda^H^myCell^mySector^myvillage~^^BirthDistrict^^^birthCountry^BR||||||M^married^MRS_RTS
+PRA||OCC^My Occupaiton^OCC_RTS|OCC_GRP
+EDU|1|EdLvl^My Education Level^PEL_RTS
+CER|1|456667-222||Nursing||||||||||||||||||||20111001|||20210930||||1^Activie^CSTS_RTS
+]]></content>
+	</entry>
+
+</feed>

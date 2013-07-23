@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPattern": "/validate.php\\?namespaceCode=.+&conceptCode=.+"
+    },
+    "response": {
+        "status": 200,
+        "body": "<tsvalidate><result>1</result></tsvalidate>"
+    }
+}

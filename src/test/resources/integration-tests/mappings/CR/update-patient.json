@@ -1,0 +1,9 @@
+{
+    "request": {
+        "method": "PUT",
+        "url": "/openempi-admin/openempi-ws-rest/person-manager-resource/updatePerson"
+    },
+    "response": {
+        "status": 204
+    }
+}

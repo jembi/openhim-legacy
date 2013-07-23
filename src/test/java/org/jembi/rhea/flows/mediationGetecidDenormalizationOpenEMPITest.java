@@ -28,7 +28,7 @@ public class mediationGetecidDenormalizationOpenEMPITest extends
 FunctionalTestCase {
 	
 	@Rule
-	public WireMockRule wireMockRule = new WireMockRule(8002);
+	public WireMockRule wireMockRule = new WireMockRule(8080);
 	
 	private void setupWebserviceStub(int httpStatus, String responseBody) {
 		stubFor(post(urlEqualTo("/openempi-admin/openempi-ws-rest/person-query-resource/findPersonById"))

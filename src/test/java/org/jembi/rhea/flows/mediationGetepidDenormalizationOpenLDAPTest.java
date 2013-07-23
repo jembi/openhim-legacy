@@ -30,7 +30,7 @@ public class mediationGetepidDenormalizationOpenLDAPTest extends
 	private final Log log = LogFactory.getLog(this.getClass());
 	
 	@Rule
-	public WireMockRule wireMockRule = new WireMockRule(8001);
+	public WireMockRule wireMockRule = new WireMockRule(8080);
 
 	private void setupWebserviceStub(int httpStatus, String responseBody) {
 		stubFor(get(urlEqualTo("/webservices/lookupbyid/epid/?id_type=NID&id_number=1234567890123456"))
