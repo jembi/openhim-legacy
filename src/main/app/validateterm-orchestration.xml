@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+    <flow name="validateterm-orchestrationFlow1" doc:name="validateterm-orchestrationFlow1">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="validateterm" doc:name="Orchestration Queue"/>
+	    <choice doc:name="Choice">
+	        <when expression="#[groovy: return ${ts.memcached.enabled};]">
+	            <processor-chain>
+                    <component class="org.jembi.rhea.orchestration.ValidateTermCached" doc:name="Memcached"/>
+	            </processor-chain>
+	        </when>
+	        <otherwise>
+	            <processor-chain>
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="validateterm-apelon" doc:name="Apelon DTS"/>
+	            </processor-chain>
+	        </otherwise>
+	    </choice>
+    </flow>
+</mule>
