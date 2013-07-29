@@ -44,13 +44,14 @@ public class ValidateTermCached implements Callable {
 		return dispatchToDTS(client, namespace, id);
 	}
 	
-	protected MuleMessage orchestrateMemcached(MuleClient muleClient, MuleContext context, String namespace, String code) throws IOException, MuleException {
+	protected synchronized MuleMessage orchestrateMemcached(MuleClient muleClient, MuleContext context, String namespace, String code) throws IOException, MuleException {
 		MuleMessage result = null;
 		MemcachedClient client = null;
 		String key = namespace + "-" + code;
 		
 		try {
 			//TODO host from config
+			//TODO connection pooling or something similar
 			client = new MemcachedClient(new InetSocketAddress("localhost", 11211));
 			
 			Object o = client.get(key);
