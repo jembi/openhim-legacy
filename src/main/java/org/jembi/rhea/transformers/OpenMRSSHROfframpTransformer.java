@@ -47,36 +47,15 @@ public class OpenMRSSHROfframpTransformer extends AbstractMessageTransformer {
 		String notificationType = origRequestParams.get("notificationType");
 		String ELID = origRequestParams.get("ELID");
 		
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
-		
 		request.setPath("openmrs/ws/rest/RHEA/patient/encounters");
 		
 		Map<String, String> newRequestParams = new HashMap<String, String>();
 		
-		try {
-			if (startDate != null && !startDate.isEmpty()) {
-				Date date = sdf1.parse(startDate);
-				
-				// Add 1 day to the date as the SHR doesn't support timestamps
-				// thus we need to make this the next day to prevent dupes
-				Calendar c = Calendar.getInstance();
-				c.setTime(date);
-				c.add(Calendar.DATE, 1);
-				
-				startDate = sdf2.format(c.getTime());
-				
-				newRequestParams.put("dateStart", startDate);
-			}
-			
-			if (endDate != null && !startDate.isEmpty()) {
-				Date date = sdf1.parse(endDate);
-				endDate = sdf2.format(date);
-				
-				newRequestParams.put("dateEnd", endDate);
-			}
-		} catch (ParseException e) {
-			throw new TransformerException(this, e);
+		if (startDate != null) {
+			newRequestParams.put("dateStart", startDate);
+		}
+		if (endDate != null) {
+			newRequestParams.put("dateEnd", endDate);
 		}
 		
 		newRequestParams.put("patientId", patientId);
