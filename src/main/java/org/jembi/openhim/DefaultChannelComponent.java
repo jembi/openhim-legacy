@@ -20,12 +20,14 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.codec.binary.Base64;
 
 public class DefaultChannelComponent implements Callable {
 
 	protected static List<URLMapping> mappings = new ArrayList<URLMapping>();
 	
-	private static final String MAPPING_FILE = "/defaultchannel-mapping.json"; 
+	private static final String MAPPING_FILE = "/defaultchannel-mapping.json";
+	private static final String HTTP_AUTH_TYPE_BASIC = "basic";
 
 	@Override
 	public Object onCall(MuleEventContext eventContext) throws Exception {
@@ -42,6 +44,18 @@ public class DefaultChannelComponent implements Callable {
 		
 		if (mapping == null) {
 			throw new URLMappingNotFoundException("A URL mapping was not found for the URL: " + req.getPath());
+		}
+		
+		if (mapping.getAuthType() != null) {
+			if (mapping.getAuthType().equals(HTTP_AUTH_TYPE_BASIC)) {
+				String username = mapping.getUsername();
+				String password = mapping.getPassword();
+				
+				byte[] encodedBytes = Base64.encodeBase64((username + ":" + password).getBytes());
+				String authHeader = "Basic " + new String(encodedBytes);
+				
+				msg.setProperty("Authorization", authHeader, PropertyScope.OUTBOUND);
+			}
 		}
 		
 		msg.setProperty("http.host", mapping.getHost(), PropertyScope.OUTBOUND);
@@ -74,7 +88,7 @@ public class DefaultChannelComponent implements Callable {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonFactory factory = new JsonFactory();
 		InputStream is = this.getClass().getResourceAsStream(MAPPING_FILE);
-		JsonParser jp = factory.createJsonParser(is);
+		JsonParser jp = factory.createParser(is);
 
 		jp.nextToken();
 		mappings.clear();
@@ -88,6 +102,9 @@ public class DefaultChannelComponent implements Callable {
 		private String urlPattern;
 		private String host;
 		private String port;
+		private String username;
+		private String password;
+		private String authType;
 
 		@Override
 		public boolean equals(Object obj) {
@@ -102,6 +119,30 @@ public class DefaultChannelComponent implements Callable {
 				return true;
 			}
 			return false;
+		}
+		
+		public String getAuthType() {
+			return authType;
+		}
+
+		public void setAuthType(String authType) {
+			this.authType = authType;
+		}
+
+		public String getUsername() {
+			return username;
+		}
+
+		public void setUsername(String username) {
+			this.username = username;
+		}
+
+		public String getPassword() {
+			return password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
 		}
 
 		public String getUrlPattern() {
