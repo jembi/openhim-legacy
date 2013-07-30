@@ -51,8 +51,12 @@ public class OpenMRSSHROfframpTransformer extends AbstractMessageTransformer {
 		
 		Map<String, String> newRequestParams = new HashMap<String, String>();
 		
-		newRequestParams.put("dateStart", startDate);
-		newRequestParams.put("dateEnd", endDate);
+		if (startDate != null) {
+			newRequestParams.put("dateStart", startDate);
+		}
+		if (endDate != null) {
+			newRequestParams.put("dateEnd", endDate);
+		}
 		
 		newRequestParams.put("patientId", patientId);
 		newRequestParams.put("idType", idType);
