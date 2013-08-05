@@ -1,0 +1,14 @@
+{
+	"request": {
+		"url": "/test/protected",
+		"method": "GET",
+		"headers": {
+            "Authorization": {
+                "equalTo": "Basic dGVzdDpwYXNzd29yZA=="
+            }
+        }
+	},
+	"response": {
+		"status": 200
+	}
+}
