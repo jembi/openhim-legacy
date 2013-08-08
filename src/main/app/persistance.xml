@@ -2,13 +2,12 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-<mule xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" version="CE-3.4.0" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+<mule xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" version="CE-3.4.0" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
 http://www.mulesoft.org/schema/mule/jdbc http://www.mulesoft.org/schema/mule/jdbc/current/mule-jdbc.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/jdbc/current/mule-jdbc-ee.xsd">
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     <context:property-placeholder location="classpath:HIM-core.properties, classpath:HIM-core-override.properties"></context:property-placeholder>
     <spring:beans> 
         <spring:bean id="jdbcDataSource" name="jdbcDataSource" class="org.enhydra.jdbc.standard.StandardDataSource"> 
@@ -18,7 +17,7 @@ http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/
             <spring:property name="driverName" value="${db.driverName}"></spring:property>  
         </spring:bean>  
     </spring:beans>
-    <jdbc-ee:connector name="JDBCConnector" dataSource-ref="jdbcDataSource" validateConnections="true" queryTimeout="-1" pollingFrequency="0" doc:name="JDBC"></jdbc-ee:connector>
+    <jdbc:connector name="JDBCConnector" dataSource-ref="jdbcDataSource" validateConnections="true" queryTimeout="-1" pollingFrequency="0" doc:name="JDBC"></jdbc:connector>
     <flow name="message-persistanceFlow1" doc:name="message-persistanceFlow1"> 
         <vm:inbound-endpoint exchange-pattern="request-response" path="messagePersistanceQueue" responseTimeout="10000" mimeType="text/plain" doc:name="VM"></vm:inbound-endpoint>  
         <logger message="Persisting Transaction" level="INFO" doc:name="Logger"></logger>  
@@ -47,11 +46,10 @@ http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/
                 <otherwise> 
                     <processor-chain doc:name="Processor Chain"> 
                         <scripting:component doc:name="Groovy"> 
-                            <scripting:script engine="Groovy">
+                            <scripting:script engine="Groovy"> 
                                 <scripting:text><![CDATA[StringWriter sw = new StringWriter();
 message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));
-message.setOutboundProperty("stacktrace", sw.toString());]]></scripting:text>
-  
+message.setOutboundProperty("stacktrace", sw.toString());]]></scripting:text>  
                             </scripting:script>  
                         </scripting:component>  
                         <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="errorMsg2" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw error message response"> 

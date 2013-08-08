@@ -16,5 +16,13 @@
 		"authType": "basic",
 		"username": "test",
 		"password": "password"
+	},
+	{
+		"urlPattern": "api/.*",
+		"host": "localhost",
+		"port": 8080,
+		"authType": "basic",
+		"username": "test",
+		"password": "password"
 	}
 ]

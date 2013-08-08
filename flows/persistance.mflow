@@ -37,28 +37,24 @@
             <property-collection name="@http://www.springframework.org/schema/beans/property;0">
                 <property name="name" value="password"/>
                 <property name="value" value="${db.password}"/>
-                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="4"/>
                 <property name="auxiliary;wrapIn" value="4"/>
             </property-collection>
             <property-collection name="@http://www.springframework.org/schema/beans/property;1">
                 <property name="name" value="user"/>
                 <property name="value" value="${db.user}"/>
-                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="5"/>
                 <property name="auxiliary;wrapIn" value="5"/>
             </property-collection>
             <property-collection name="@http://www.springframework.org/schema/beans/property;2">
                 <property name="name" value="url"/>
                 <property name="value" value="${db.url}"/>
-                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="6"/>
                 <property name="auxiliary;wrapIn" value="6"/>
             </property-collection>
             <property-collection name="@http://www.springframework.org/schema/beans/property;3">
                 <property name="name" value="driverName"/>
                 <property name="value" value="${db.driverName}"/>
-                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="7"/>
                 <property name="auxiliary;wrapIn" value="7"/>
             </property-collection>
@@ -80,7 +76,7 @@
             <property name="dataSource-ref to JDBC DataSource" value="jdbcDataSource"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="message-persistanceFlow1" entity-id="f5229c2a-ad10-4106-9959-c08ff6c36d76">
+    <flow SubFlow="false" name="message-persistanceFlow1" entity-id="e7a97c7d-5f71-462e-836d-0b2e23b9339b">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -125,37 +121,21 @@
                         <splitter index="13" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
-<property name=";INDEX" value="13"/>
-<property-collection name="49c80a06-6aea-43f5-b938-bddcb4e5148b">
+<property-collection name="54dd87e2-2560-4759-9d3a-88b69e072b29">
+    <property name="choice.otherwise" value="true"/>
+    <property-collection name="choice.attributes"/>
+</property-collection>
+<property-collection name="f4a50a66-0788-4018-a982-815b0cb96062">
     <property name="choice.expression" value="payload instanceof org.jembi.rhea.RestfulHttpResponse"/>
     <property-collection name="choice.attributes">
         <property name="expression" value="payload instanceof org.jembi.rhea.RestfulHttpResponse"/>
         <property name="evaluator" value="groovy"/>
     </property-collection>
 </property-collection>
-<property-collection name="5fb17010-5644-478a-bece-11bec0c30317">
-    <property name="choice.otherwise" value="true"/>
-    <property-collection name="choice.attributes"/>
-</property-collection>
                             </properties>
-                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
-<properties>
-    <property name=";INDEX" value="13"/>
-    <property-collection name="49c80a06-6aea-43f5-b938-bddcb4e5148b">
-        <property name="choice.expression" value="payload instanceof org.jembi.rhea.RestfulHttpResponse"/>
-        <property-collection name="choice.attributes">
-            <property name="expression" value="payload instanceof org.jembi.rhea.RestfulHttpResponse"/>
-            <property name="evaluator" value="groovy"/>
-        </property-collection>
-    </property-collection>
-    <property-collection name="5fb17010-5644-478a-bece-11bec0c30317">
-        <property name="choice.otherwise" value="true"/>
-        <property-collection name="choice.attributes"/>
-    </property-collection>
-</properties>
-                            </pattern>
+                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
                             <compartment entity-id="compartment#2">
-<lane hadOnlyOneElement="false" index="15" isChoiceOtherwiseLane="false" entity-id="49c80a06-6aea-43f5-b938-bddcb4e5148b">
+<lane hadOnlyOneElement="false" index="15" isChoiceOtherwiseLane="false" entity-id="f4a50a66-0788-4018-a982-815b0cb96062">
     <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#1">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
@@ -166,12 +146,11 @@
                 <splitter index="16" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#3">
                     <graphicalData x="0" y="0" width="0" height="0"/>
                     <properties>
-                        <property name=";INDEX" value="16"/>
-                        <property-collection name="42dd7de6-5720-41c3-8817-bcacbe110ecb">
+                        <property-collection name="4fd912ed-c98e-4288-8c39-0134517bb7e3">
                             <property name="choice.otherwise" value="true"/>
                             <property-collection name="choice.attributes"/>
                         </property-collection>
-                        <property-collection name="a9ace338-2d1c-4156-8708-258d3e4924c3">
+                        <property-collection name="dcea4f75-49ef-4c26-8ec2-f462310fcf3f">
                             <property name="choice.expression" value="message.payload.httpStatus == 500"/>
                             <property-collection name="choice.attributes">
 <property name="expression" value="message.payload.httpStatus == 500"/>
@@ -179,24 +158,9 @@
                             </property-collection>
                         </property-collection>
                     </properties>
-                    <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#4">
-                        <properties>
-                            <property name=";INDEX" value="16"/>
-                            <property-collection name="42dd7de6-5720-41c3-8817-bcacbe110ecb">
-<property name="choice.otherwise" value="true"/>
-<property-collection name="choice.attributes"/>
-                            </property-collection>
-                            <property-collection name="a9ace338-2d1c-4156-8708-258d3e4924c3">
-<property name="choice.expression" value="message.payload.httpStatus == 500"/>
-<property-collection name="choice.attributes">
-    <property name="expression" value="message.payload.httpStatus == 500"/>
-    <property name="evaluator" value="groovy"/>
-</property-collection>
-                            </property-collection>
-                        </properties>
-                    </pattern>
+                    <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#4"/>
                     <compartment entity-id="compartment#4">
-                        <lane hadOnlyOneElement="false" index="18" isChoiceOtherwiseLane="false" entity-id="a9ace338-2d1c-4156-8708-258d3e4924c3">
+                        <lane hadOnlyOneElement="false" index="18" isChoiceOtherwiseLane="false" entity-id="dcea4f75-49ef-4c26-8ec2-f462310fcf3f">
                             <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#2">
 <graphicalData x="0" y="0" width="0" height="0"/>
 <properties>
@@ -225,7 +189,6 @@
                 <property name="connector-ref" value="JDBCConnector"/>
                 <property-collection name="@http://www.mulesoft.org/schema/mule/jdbc/query;0">
                     <property name="value" value="UPDATE transaction_log SET status='3', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"/>
-                    <property name="isProcessed$$$$" value="true"/>
                     <property name="key" value="errorMsg"/>
                     <property name="auxiliary;index" value="20"/>
                     <property name="auxiliary;wrapIn" value="20"/>
@@ -236,7 +199,7 @@
 </compartment>
                             </scope>
                         </lane>
-                        <lane hadOnlyOneElement="false" index="22" isChoiceOtherwiseLane="true" entity-id="42dd7de6-5720-41c3-8817-bcacbe110ecb">
+                        <lane hadOnlyOneElement="false" index="22" isChoiceOtherwiseLane="true" entity-id="4fd912ed-c98e-4288-8c39-0134517bb7e3">
                             <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#3">
 <graphicalData x="0" y="0" width="0" height="0"/>
 <properties>
@@ -265,7 +228,6 @@
                 <property name="connector-ref" value="JDBCConnector"/>
                 <property-collection name="@http://www.mulesoft.org/schema/mule/jdbc/query;0">
                     <property name="value" value="UPDATE transaction_log SET status='2', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"/>
-                    <property name="isProcessed$$$$" value="true"/>
                     <property name="key" value="updateMsg"/>
                     <property name="auxiliary;index" value="24"/>
                     <property name="auxiliary;wrapIn" value="24"/>
@@ -282,7 +244,7 @@
         </compartment>
     </scope>
 </lane>
-<lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="true" entity-id="5fb17010-5644-478a-bece-11bec0c30317">
+<lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="true" entity-id="54dd87e2-2560-4759-9d3a-88b69e072b29">
     <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#4">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
@@ -295,19 +257,17 @@
                     <properties>
                         <property name="script-ref"/>
                         <property name="auxiliary;index" value="27"/>
-                        <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
-                            <property name="text" value=" &#xA;                                  &#xA;                            "/>
-                            <property name="engine" value="Groovy"/>
-                            <property name="inner-text" value="StringWriter sw = new StringWriter();&#xA;message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));&#xA;message.setOutboundProperty(&quot;stacktrace&quot;, sw.toString());"/>
-                            <property name="isProcessed$$$$" value="true"/>
-                            <property name="auxiliary;index" value="28"/>
-                            <property name="auxiliary;wrapIn" value="28"/>
-                        </property-collection>
                         <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
                             <property name="text" value=" &#xA;                                  &#xA;                            "/>
                             <property name="engine" value="Groovy"/>
                             <property name="inner-text" value="StringWriter sw = new StringWriter();&#xA;message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));&#xA;message.setOutboundProperty(&quot;stacktrace&quot;, sw.toString());"/>
-                            <property name="isProcessed$$$$" value="true"/>
+                            <property name="auxiliary;index" value="28"/>
+                            <property name="auxiliary;wrapIn" value="28"/>
+                        </property-collection>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
+                            <property name="text" value=" &#xA;                                  &#xA;                            "/>
+                            <property name="engine" value="Groovy"/>
+                            <property name="inner-text" value="StringWriter sw = new StringWriter();&#xA;message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));&#xA;message.setOutboundProperty(&quot;stacktrace&quot;, sw.toString());"/>
                             <property name="auxiliary;index" value="28"/>
                             <property name="auxiliary;wrapIn" value="28"/>
                         </property-collection>
@@ -334,7 +294,6 @@
                         <property name="connector-ref" value="JDBCConnector"/>
                         <property-collection name="@http://www.mulesoft.org/schema/mule/jdbc/query;0">
                             <property name="value" value="UPDATE transaction_log SET status='3', error_description=#[groovy: return message.getExceptionPayload().getMessage();], error_stacktrace=#[header:OUTBOUND:stacktrace], responded_timestamp=now() WHERE uuid=#[header:SESSION:uuid];"/>
-                            <property name="isProcessed$$$$" value="true"/>
                             <property name="key" value="errorMsg2"/>
                             <property name="auxiliary;index" value="31"/>
                             <property name="auxiliary;wrapIn" value="31"/>
@@ -371,7 +330,6 @@
                     <property name="connector-ref" value="JDBCConnector"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/jdbc/query;0">
                         <property name="value" value="insert into transaction_log (uuid, path, request_params, body, http_method, recieved_timestamp, authorized_username, status) values (#[groovy: return message.payload.getUuid();], #[groovy: return message.payload.getPath();], #[groovy: return message.payload.getRequestParamsAsString();], #[groovy: return message.payload.getBody();], #[groovy: return message.payload.getHttpMethod();], now(), '', 1);"/>
-                        <property name="isProcessed$$$$" value="true"/>
                         <property name="key" value="insertMsg"/>
                         <property name="auxiliary;index" value="33"/>
                         <property name="auxiliary;wrapIn" value="33"/>
@@ -390,7 +348,6 @@
                     <property name="auxiliary;index" value="34"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
                         <property name="value" value="#[groovy: return message.payload.getUuid();]"/>
-                        <property name="isProcessed$$$$" value="true"/>
                         <property name="key" value="uuid"/>
                         <property name="auxiliary;index" value="35"/>
                         <property name="auxiliary;wrapIn" value="35"/>
