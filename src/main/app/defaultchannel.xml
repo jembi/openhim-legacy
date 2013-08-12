@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="CE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+    <flow name="defaultchannelFlow1" doc:name="defaultchannelFlow1">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="defaultChannel-Generic-NormalizationQueue" doc:name="VM"/>
+        <component class="org.jembi.openhim.DefaultChannelComponent" doc:name="Java"/>
+        <logger message="Routing message with path #[header:OUTBOUND:http.path] to #[header:OUTBOUND:http.host]:#[header:OUTBOUND:http.port] using HTTP method #[header:OUTBOUND:http.method]" level="INFO" doc:name="Logger"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="#[header:OUTBOUND:http.host]" port="#[header:OUTBOUND:http.port]" path="#[header:OUTBOUND:http.path]" doc:name="HTTP"/>
+        <custom-transformer class="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer" doc:name="Java"/>
+        <logger message="Returning response #[groovy: message.payload.toString();]" level="INFO" doc:name="Logger"/>
+        <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.jembi.openhim.exception.URLMappingNotFoundException)]" doc:name="Catch_Exception_Strategy">
+                <scripting:transformer doc:name="Groovy">
+                    <scripting:script engine="Groovy"><![CDATA[import org.jembi.rhea.*;
+
+RestfulHttpResponse res = new RestfulHttpResponse();
+res.setHttpStatus(500);
+res.setBody("URL Mapping could not be found for this message");
+
+return res;]]></scripting:script>
+                </scripting:transformer>
+            </catch-exception-strategy>
+            <catch-exception-strategy doc:name="Catch_Exception_Strategy">
+                <scripting:transformer doc:name="Groovy">
+                    <scripting:script engine="Groovy"><![CDATA[// re-throw the exception
+throw exception;]]></scripting:script>
+                </scripting:transformer>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    </flow>
+</mule>
