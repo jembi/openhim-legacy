@@ -24,5 +24,10 @@
 		"authType": "basic",
 		"username": "test",
 		"password": "password"
+	},
+	{
+		"urlPattern": "test/post",
+		"host": "localhost",
+		"port": 8080
 	}
 ]

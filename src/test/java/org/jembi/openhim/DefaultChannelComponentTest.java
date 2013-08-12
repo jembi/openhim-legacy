@@ -65,6 +65,11 @@ public class DefaultChannelComponentTest {
 		mapping3.setUsername("test");
 		mapping3.setPassword("password");
 		
+		URLMapping mapping4 = new URLMapping();
+		mapping4.setHost("localhost");
+		mapping4.setPort("8080");
+		mapping4.setUrlPattern("test/post");
+		
 		assertEquals(true, DefaultChannelComponent.mappings.contains(mapping1));
 		assertEquals(true, DefaultChannelComponent.mappings.contains(mapping2));
 	}
