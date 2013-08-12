@@ -45,7 +45,7 @@ public class DefaultChannelComponentTest {
 		dcc.readMappings();
 		
 		assertNotNull(DefaultChannelComponent.mappings);
-		assertEquals(3, DefaultChannelComponent.mappings.size());
+		assertEquals(4, DefaultChannelComponent.mappings.size());
 		
 		URLMapping mapping1 = new URLMapping();
 		mapping1.setHost("localhost");
@@ -64,6 +64,11 @@ public class DefaultChannelComponentTest {
 		mapping3.setAuthType("basic");
 		mapping3.setUsername("test");
 		mapping3.setPassword("password");
+		
+		URLMapping mapping4 = new URLMapping();
+		mapping4.setHost("localhost");
+		mapping4.setPort("8080");
+		mapping4.setUrlPattern("test/post");
 		
 		assertEquals(true, DefaultChannelComponent.mappings.contains(mapping1));
 		assertEquals(true, DefaultChannelComponent.mappings.contains(mapping2));

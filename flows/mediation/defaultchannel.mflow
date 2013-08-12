@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="defaultchannel">
-    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="38d7c678-b09c-487f-9f6c-508312de0294">
+    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="6d5802ec-1b8d-4966-83ad-2ddd4bd05743">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -13,90 +13,22 @@
             <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="VM" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="businessEventsLabel"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="exchange-pattern" value="request-response"/>
-                    <property name="tracking:enable-default-events"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="address"/>
+                    <property name="businessEventsLabel"/>
                     <property name="encoding"/>
                     <property name="path" value="defaultChannel-Generic-NormalizationQueue"/>
                     <property name="responseTransformer-refs"/>
+                    <property name="disableTransportTransformer"/>
                     <property name="mimeType"/>
                     <property name="responseTimeout"/>
+                    <property name="tracking:enable-default-events"/>
                     <property name="auxiliary;index" value="2"/>
+                    <property name="exchange-pattern" value="request-response"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
-            <scope name="Choice Exception Strategy" type="http://www.mulesoft.org/schema/mule/core/choice-exception-strategy" entity-id="fdce6401-0b2a-4220-87d4-bfa559161c00">
-                <compartment entity-id="102159dc-4aa6-442e-a911-e198090de0c3">
-                    <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="c586ec94-d506-460a-a034-12d78a855b3d">
-                        <scope name="Catch_Exception_Strategy" type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" entity-id="!!!4d6f20ec-7a59-4d0a-988f-186e533f6482">
-                            <graphicalData x="0" y="0" width="0" height="0"/>
-                            <properties>
-<property name="labelConfigureConditionalExecutionUsingExpression" value=""/>
-<property name="auxiliary;moved-from"/>
-<property name="updated"/>
-<property name="name" value="Catch_Exception_Strategy"/>
-<property name="when" value="#[exception.causedBy(org.jembi.openhim.exception.URLMappingNotFoundException)]"/>
-<property name="enableNotifications" value="true"/>
-                            </properties>
-                            <compartment>
-<lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="d38025cc-2ccb-4e00-91d2-2d3aa6fcf728">
-    <pattern name="Groovy" type="http://www.mulesoft.org/schema/mule/scripting/groovyTransformer" entity-id="0bd40ea6-e1d7-46d2-bb9e-399ba3241e7f">
-        <graphicalData x="0" y="0" width="0" height="0"/>
-        <properties>
-            <property name="auxiliary;erased;mimeType" value="true"/>
-            <property name="returnClass" value=""/>
-            <property name="ignoreBadInput" value="false"/>
-            <property name="text" value="import org.jembi.rhea.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
-            <property name="updated"/>
-            <property name="auxiliary;erased;encoding" value="true"/>
-            <property name="encoding" value=""/>
-            <property name="mimeType" value=""/>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;1792295845">
-                <property name="text" value="import org.jembi.rhea.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
-                <property name="isProcessed$$$$" value="true"/>
-            </property-collection>
-        </properties>
-        <description></description>
-    </pattern>
-</lane>
-                            </compartment>
-                        </scope>
-                        <scope name="Catch_Exception_Strategy" type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" entity-id="!!!ea2e83df-2bce-4363-9d7e-4a1019f31bcd">
-                            <graphicalData x="0" y="0" width="0" height="0"/>
-                            <properties>
-<property name="auxiliary;moved-from"/>
-<property name="name" value="Catch_Exception_Strategy"/>
-                            </properties>
-                            <compartment>
-<lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="f186b87a-3755-4271-89a3-43196d15af07">
-    <pattern name="Groovy" type="http://www.mulesoft.org/schema/mule/scripting/groovyTransformer" entity-id="d319fb92-be28-4ad3-ac9f-00bf5794d858">
-        <graphicalData x="0" y="0" width="0" height="0"/>
-        <properties>
-            <property name="auxiliary;erased;mimeType" value="true"/>
-            <property name="returnClass" value=""/>
-            <property name="text" value="// re-throw the exception&#xA;throw exception;"/>
-            <property name="ignoreBadInput" value="false"/>
-            <property name="updated"/>
-            <property name="auxiliary;erased;encoding" value="true"/>
-            <property name="encoding" value=""/>
-            <property name="mimeType" value=""/>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;1681531215">
-                <property name="text" value="// re-throw the exception&#xA;throw exception;"/>
-                <property name="isProcessed$$$$" value="true"/>
-            </property-collection>
-        </properties>
-        <description></description>
-    </pattern>
-</lane>
-                            </compartment>
-                        </scope>
-                    </lane>
-                </compartment>
-            </scope>
             <pattern name="Java" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
@@ -142,30 +74,105 @@
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
-            <pattern name="Java" type="http://www.mulesoft.org/schema/mule/core/custom-transformer" entity-id="da86081c-5e06-4453-a028-0f51c67f863e">
+            <pattern name="Java" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#2">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="auxiliary;erased;mimeType" value="true"/>
-                    <property name="returnClass" value=""/>
-                    <property name="ignoreBadInput" value="false"/>
-                    <property name="updated"/>
-                    <property name="auxiliary;erased;encoding" value="true"/>
-                    <property name="encoding" value=""/>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
                     <property name="class" value="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer"/>
-                    <property name="mimeType" value=""/>
+                    <property name="mimeType"/>
+                    <property name="auxiliary;index" value="6"/>
                 </properties>
-                <description></description>
             </pattern>
-            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="6b300247-cfa2-40ab-86a8-42b7b6a9adc0">
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="message" value="Returning response #[groovy: message.payload.toString();]"/>
-                    <property name="category" value=""/>
+                    <property name="category"/>
                     <property name="level" value="INFO"/>
-                    <property name="updated"/>
+                    <property name="auxiliary;index" value="7"/>
                 </properties>
-                <description></description>
             </pattern>
+            <scope name="Choice Exception Strategy" type="http://www.mulesoft.org/schema/mule/core/choice-exception-strategy" entity-id="Choice Exception Strategy#1">
+                <properties>
+                    <property name="auxiliary;index" value="8"/>
+                </properties>
+                <compartment entity-id="compartment#1">
+                    <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
+                        <scope name="Catch_Exception_Strategy" type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" entity-id="Catch Exception Strategy#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="labelConfigureConditionalExecutionUsingExpression"/>
+<property name="when" value="#[exception.causedBy(org.jembi.openhim.exception.URLMappingNotFoundException)]"/>
+<property name="enableNotifications"/>
+<property name="auxiliary;index" value="9"/>
+                            </properties>
+                            <compartment entity-id="compartment#2">
+<lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#3">
+    <pattern name="Groovy" type="http://www.mulesoft.org/schema/mule/scripting/groovyTransformer" entity-id="Groovy#1">
+        <graphicalData x="0" y="0" width="0" height="0"/>
+        <properties>
+            <property name="returnClass"/>
+            <property name="ignoreBadInput"/>
+            <property name="encoding"/>
+            <property name="mimeType"/>
+            <property name="auxiliary;index" value="10"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
+                <property name="text" value="import org.jembi.rhea.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
+                <property name="engine" value="Groovy"/>
+                <property name="auxiliary;index" value="11"/>
+                <property name="auxiliary;wrapIn" value="11"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
+                <property name="text" value="import org.jembi.rhea.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
+                <property name="engine" value="Groovy"/>
+                <property name="auxiliary;index" value="11"/>
+                <property name="auxiliary;wrapIn" value="11"/>
+            </property-collection>
+        </properties>
+    </pattern>
+</lane>
+                            </compartment>
+                        </scope>
+                        <scope name="Catch_Exception_Strategy" type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" entity-id="Catch Exception Strategy#2">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="labelConfigureConditionalExecutionUsingExpression"/>
+<property name="when"/>
+<property name="enableNotifications"/>
+<property name="auxiliary;index" value="12"/>
+                            </properties>
+                            <compartment entity-id="compartment#3">
+<lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#4">
+    <pattern name="Groovy" type="http://www.mulesoft.org/schema/mule/scripting/groovyTransformer" entity-id="Groovy#2">
+        <graphicalData x="0" y="0" width="0" height="0"/>
+        <properties>
+            <property name="returnClass"/>
+            <property name="ignoreBadInput"/>
+            <property name="encoding"/>
+            <property name="mimeType"/>
+            <property name="auxiliary;index" value="13"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
+                <property name="text" value="// re-throw the exception&#xA;throw exception;"/>
+                <property name="engine" value="Groovy"/>
+                <property name="auxiliary;index" value="14"/>
+                <property name="auxiliary;wrapIn" value="14"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
+                <property name="text" value="// re-throw the exception&#xA;throw exception;"/>
+                <property name="engine" value="Groovy"/>
+                <property name="auxiliary;index" value="14"/>
+                <property name="auxiliary;wrapIn" value="14"/>
+            </property-collection>
+        </properties>
+    </pattern>
+</lane>
+                            </compartment>
+                        </scope>
+                    </lane>
+                </compartment>
+            </scope>
         </lane>
     </flow>
     <description></description>
