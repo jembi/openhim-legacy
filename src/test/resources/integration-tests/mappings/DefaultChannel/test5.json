@@ -1,0 +1,13 @@
+{
+	"request": {
+		"url": "/test/post",
+		"method": "PUT",
+		"bodyPatterns": [
+            { "equalTo": "THIS IS A TEST PUT" }
+        ]
+	},
+	"response": {
+		"status": 200,
+		"body": "TEST PUT"
+	}
+}
