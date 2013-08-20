@@ -3,11 +3,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.jembi.rhea.transformers;
 
+import java.util.Map;
+
 import org.jembi.rhea.RestfulHttpResponse;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
-import org.mule.config.i18n.Message;
 import org.mule.transformer.AbstractMessageTransformer;
 
 public class HttpResponseToRestfulHttpResponseTransformer extends
@@ -25,6 +26,7 @@ public class HttpResponseToRestfulHttpResponseTransformer extends
 			restRes.setBody(body);
 			String uuid = msg.getProperty("uuid", PropertyScope.SESSION);
 			restRes.setUuid(uuid);
+			restRes.setHttpHeaders((Map<String, String>) msg.getProperty("http.headers", PropertyScope.INBOUND));
 		} catch (Exception e) {
 			throw new TransformerException(this, e);
 		}

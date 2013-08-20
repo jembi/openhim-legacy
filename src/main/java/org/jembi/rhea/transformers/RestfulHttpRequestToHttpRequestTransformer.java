@@ -7,16 +7,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.jembi.rhea.RestfulHttpRequest;
-import org.jembi.rhea.RestfulHttpResponse;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 
-public class RestfulHttpResponseToHttpResponseTransformer extends
+public class RestfulHttpRequestToHttpRequestTransformer extends
 		AbstractMessageTransformer {
 	
-	// http headers not to copy back
+	// http headers not to copy over
 	private List httpHeaderBlackList = Arrays.asList(new String[]
 			{
 				"Authorization",
@@ -28,19 +27,24 @@ public class RestfulHttpResponseToHttpResponseTransformer extends
 	@Override
 	public Object transformMessage(MuleMessage msg, String enc) throws TransformerException {
 		
-		RestfulHttpResponse restRes = (RestfulHttpResponse) msg.getPayload();
+		RestfulHttpRequest req = (RestfulHttpRequest) msg.getPayload();
 		
-		msg.setOutboundProperty("http.status", restRes.getHttpStatus());
-		msg.setPayload(restRes.getBody());
+		msg.setProperty("http.method", req.getHttpMethod(), PropertyScope.OUTBOUND);
+		msg.setProperty("http.path", req.getPath(), PropertyScope.OUTBOUND);
 		
-		for (String header : restRes.getHttpHeaders().keySet()) {
+		for (String header : req.getHttpHeaders().keySet()) {
 			if (!httpHeaderBlackList.contains(header)) {
-				msg.setProperty(header, restRes.getHttpHeaders().get(header), PropertyScope.OUTBOUND);
+				msg.setProperty(header, req.getHttpHeaders().get(header), PropertyScope.OUTBOUND);
 			}
 		}
 		
+		if (req.getHttpMethod().equals("PUT") || req.getHttpMethod().equals("POST")) {
+			msg.setPayload(req.getBody());
+			return msg;
+		}
+		
 		return msg;
-
+		
 	}
 
 }
