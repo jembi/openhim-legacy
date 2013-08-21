@@ -1,9 +1,0 @@
-{
-    "request": {
-        "method": "POST",
-        "url": "/ws/rest/v1/alerts"
-    },
-    "response": {
-        "status": 201
-    }
-}

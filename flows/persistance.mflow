@@ -76,7 +76,7 @@
             <property name="dataSource-ref to JDBC DataSource" value="jdbcDataSource"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="message-persistanceFlow1" entity-id="e7a97c7d-5f71-462e-836d-0b2e23b9339b">
+    <flow SubFlow="false" name="message-persistanceFlow1" entity-id="c707c2af-fda5-4456-b5c0-0e847a93e850">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -121,21 +121,21 @@
                         <splitter index="13" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
-<property-collection name="54dd87e2-2560-4759-9d3a-88b69e072b29">
+<property-collection name="e4b148d7-020c-4ffd-a51b-17c3ab003224">
     <property name="choice.otherwise" value="true"/>
     <property-collection name="choice.attributes"/>
 </property-collection>
-<property-collection name="f4a50a66-0788-4018-a982-815b0cb96062">
-    <property name="choice.expression" value="payload instanceof org.jembi.rhea.RestfulHttpResponse"/>
+<property-collection name="200a78b0-cd01-4c87-b5e2-11dab675338a">
+    <property name="choice.expression" value="payload instanceof org.jembi.openhim.RestfulHttpResponse"/>
     <property-collection name="choice.attributes">
-        <property name="expression" value="payload instanceof org.jembi.rhea.RestfulHttpResponse"/>
+        <property name="expression" value="payload instanceof org.jembi.openhim.RestfulHttpResponse"/>
         <property name="evaluator" value="groovy"/>
     </property-collection>
 </property-collection>
                             </properties>
                             <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
                             <compartment entity-id="compartment#2">
-<lane hadOnlyOneElement="false" index="15" isChoiceOtherwiseLane="false" entity-id="f4a50a66-0788-4018-a982-815b0cb96062">
+<lane hadOnlyOneElement="false" index="15" isChoiceOtherwiseLane="false" entity-id="200a78b0-cd01-4c87-b5e2-11dab675338a">
     <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#1">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
@@ -146,11 +146,11 @@
                 <splitter index="16" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#3">
                     <graphicalData x="0" y="0" width="0" height="0"/>
                     <properties>
-                        <property-collection name="4fd912ed-c98e-4288-8c39-0134517bb7e3">
+                        <property-collection name="2f8705d3-b177-4a3a-8c62-21a5cfa08dc5">
                             <property name="choice.otherwise" value="true"/>
                             <property-collection name="choice.attributes"/>
                         </property-collection>
-                        <property-collection name="dcea4f75-49ef-4c26-8ec2-f462310fcf3f">
+                        <property-collection name="f9c7eadb-411e-4113-86d9-d1a89b278953">
                             <property name="choice.expression" value="message.payload.httpStatus == 500"/>
                             <property-collection name="choice.attributes">
 <property name="expression" value="message.payload.httpStatus == 500"/>
@@ -160,7 +160,7 @@
                     </properties>
                     <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#4"/>
                     <compartment entity-id="compartment#4">
-                        <lane hadOnlyOneElement="false" index="18" isChoiceOtherwiseLane="false" entity-id="dcea4f75-49ef-4c26-8ec2-f462310fcf3f">
+                        <lane hadOnlyOneElement="false" index="18" isChoiceOtherwiseLane="false" entity-id="f9c7eadb-411e-4113-86d9-d1a89b278953">
                             <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#2">
 <graphicalData x="0" y="0" width="0" height="0"/>
 <properties>
@@ -199,7 +199,7 @@
 </compartment>
                             </scope>
                         </lane>
-                        <lane hadOnlyOneElement="false" index="22" isChoiceOtherwiseLane="true" entity-id="4fd912ed-c98e-4288-8c39-0134517bb7e3">
+                        <lane hadOnlyOneElement="false" index="22" isChoiceOtherwiseLane="true" entity-id="2f8705d3-b177-4a3a-8c62-21a5cfa08dc5">
                             <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#3">
 <graphicalData x="0" y="0" width="0" height="0"/>
 <properties>
@@ -244,7 +244,7 @@
         </compartment>
     </scope>
 </lane>
-<lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="true" entity-id="54dd87e2-2560-4759-9d3a-88b69e072b29">
+<lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="true" entity-id="e4b148d7-020c-4ffd-a51b-17c3ab003224">
     <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#4">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>

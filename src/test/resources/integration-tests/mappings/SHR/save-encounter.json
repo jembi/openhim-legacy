@@ -1,9 +1,0 @@
-{
-    "request": {
-        "method": "POST",
-        "urlPattern": "/openmrs/ws/rest/RHEA/patient/encounters.*"
-    },
-    "response": {
-        "status": 201
-    }
-}
