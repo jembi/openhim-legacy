@@ -30,7 +30,7 @@ public class RestfulHttpRequestToHttpRequestTransformer extends
 		RestfulHttpRequest req = (RestfulHttpRequest) msg.getPayload();
 		
 		msg.setProperty("http.method", req.getHttpMethod(), PropertyScope.OUTBOUND);
-		msg.setProperty("http.path", req.getPath(), PropertyScope.OUTBOUND);
+		msg.setProperty("http.path", req.buildUrlWithRequestParams(), PropertyScope.OUTBOUND);
 		
 		for (String header : req.getHttpHeaders().keySet()) {
 			if (!httpHeaderBlackList.contains(header)) {

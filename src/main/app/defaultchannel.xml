@@ -10,7 +10,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <component class="org.jembi.openhim.DefaultChannelComponent" doc:name="Default Channel config"/>
         <custom-transformer class="org.jembi.openhim.transformers.RestfulHttpRequestToHttpRequestTransformer" doc:name="Request transformer"/>
         <logger message="Routing message with path #[header:OUTBOUND:http.path] to #[header:OUTBOUND:http.host]:#[header:OUTBOUND:http.port] using HTTP method #[header:OUTBOUND:http.method] Full message: #[groovy: message.toString();]" level="INFO" doc:name="Logger"/>
-        <http:outbound-endpoint exchange-pattern="request-response" host="#[header:OUTBOUND:http.host]" port="#[header:OUTBOUND:http.port]" path="#[header:OUTBOUND:http.path]" doc:name="HTTP" method="POST"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="#[header:OUTBOUND:http.host]" port="#[header:OUTBOUND:http.port]" path="#[header:OUTBOUND:http.path]" doc:name="HTTP" method="POST" connector-ref="NoSessionConnector"/>
         <custom-transformer class="org.jembi.openhim.transformers.HttpResponseToRestfulHttpResponseTransformer" doc:name="Response transformer"/>
         <logger message="Returning response #[groovy: message.payload.toString();]" level="INFO" doc:name="Logger"/>
         <choice-exception-strategy doc:name="Choice Exception Strategy">
