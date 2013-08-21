@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="defaultchannel">
-    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="6d5802ec-1b8d-4966-83ad-2ddd4bd05743">
+    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="ae309afe-6e7e-4982-a9f2-1e6cbce0429a">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
