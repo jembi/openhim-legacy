@@ -4,6 +4,8 @@
 package org.jembi.rhea;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class RestfulHttpResponse implements Serializable {
@@ -16,6 +18,7 @@ public class RestfulHttpResponse implements Serializable {
 	
 	private int httpStatus;
 	private String body;
+	private Map<String, String> httpHeaders = new HashMap<String, String>();
 	
 	public String getUuid() {
 		return uuid;
@@ -56,10 +59,29 @@ public class RestfulHttpResponse implements Serializable {
 		sb.append("RestfulHttpResponse {\n");
 		sb.append("	httpStatus: " + httpStatus + "\n");
 		sb.append("	body: " + body + "\n");
+		
+		if (httpHeaders == null || httpHeaders.size() < 1) {
+			sb.append("	httpHeaders: null\n");
+		} else {
+			sb.append("	httpHeaders: [\n");
+			for (String key : httpHeaders.keySet()) {
+				String value = httpHeaders.get(key);
+				sb.append("		" + key + ": " + value + "\n");
+			}
+			sb.append("	]");
+		}
 
 		sb.append("}");
 
 		return sb.toString();
+	}
+
+	public Map<String, String> getHttpHeaders() {
+		return httpHeaders;
+	}
+
+	public void setHttpHeaders(Map<String, String> httpHeaders) {
+		this.httpHeaders = httpHeaders;
 	}
 
 }

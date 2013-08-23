@@ -3,6 +3,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.jembi.rhea.transformers;
 
+import java.util.Map;
+
 import org.jembi.rhea.RestfulHttpRequest;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -20,6 +22,8 @@ public class HttpRequestToRestfulHttpRequestTransformer extends
 		restMsg.setPath(url);
 		String httpMethod = (String) msg.getInboundProperty("http.method");
 		restMsg.setHttpMethod(httpMethod);
+		Map<String, String> httpHeaders = (Map<String, String>) msg.getInboundProperty("http.headers");
+		restMsg.setHttpHeaders(httpHeaders);
 		
 		try {
 			String body = msg.getPayloadAsString();
@@ -27,8 +31,7 @@ public class HttpRequestToRestfulHttpRequestTransformer extends
 				restMsg.setBody(body);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new TransformerException(this, e);
 		}
 		
 		return restMsg;

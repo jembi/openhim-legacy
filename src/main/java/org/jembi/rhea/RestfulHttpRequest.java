@@ -23,6 +23,8 @@ public class RestfulHttpRequest implements Serializable {
 
 	// automatically extracted when a url is set
 	private Map<String, String> requestParams = new HashMap<String, String>();
+	
+	private Map<String, String> httpHeaders = new HashMap<String, String>();
 
 	// HTTPMethods
 	public static String HTTP_GET = "GET";
@@ -97,6 +99,14 @@ public class RestfulHttpRequest implements Serializable {
 	public void setHttpMethod(String httpMethod) {
 		this.httpMethod = httpMethod;
 	}
+	
+	public Map<String, String> getHttpHeaders() {
+		return httpHeaders;
+	}
+
+	public void setHttpHeaders(Map<String, String> httpHeaders) {
+		this.httpHeaders = httpHeaders;
+	}
 
 	@Override
 	public String toString() {
@@ -112,6 +122,17 @@ public class RestfulHttpRequest implements Serializable {
 			sb.append("	requestParms: [\n");
 			for (String key : requestParams.keySet()) {
 				String value = requestParams.get(key);
+				sb.append("		" + key + ": " + value + "\n");
+			}
+			sb.append("	]");
+		}
+		
+		if (httpHeaders == null || httpHeaders.size() < 1) {
+			sb.append("	httpHeaders: null\n");
+		} else {
+			sb.append("	httpHeaders: [\n");
+			for (String key : httpHeaders.keySet()) {
+				String value = httpHeaders.get(key);
 				sb.append("		" + key + ": " + value + "\n");
 			}
 			sb.append("	]");
@@ -163,6 +184,8 @@ public class RestfulHttpRequest implements Serializable {
 		theClone.body = body;
 		theClone.httpMethod = httpMethod;
 		theClone.requestParams = requestParams;
+		theClone.httpHeaders = httpHeaders;
 		return theClone;
 	}
+
 }

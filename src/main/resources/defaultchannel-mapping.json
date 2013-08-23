@@ -18,15 +18,12 @@
 		"password": "password"
 	},
 	{
-		"urlPattern": "api/.*",
+		"urlPattern": "test/post",
 		"host": "localhost",
-		"port": 8080,
-		"authType": "basic",
-		"username": "test",
-		"password": "password"
+		"port": 8080
 	},
 	{
-		"urlPattern": "test/post",
+		"urlPattern": "test/headers",
 		"host": "localhost",
 		"port": 8080
 	}
