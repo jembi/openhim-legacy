@@ -23,7 +23,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <logger message="Persisting Transaction" level="INFO" doc:name="Logger"></logger>  
         <response> 
             <choice doc:name="Choice"> 
-                <when expression="payload instanceof org.jembi.rhea.RestfulHttpResponse" evaluator="groovy"> 
+                <when expression="payload instanceof org.jembi.openhim.RestfulHttpResponse" evaluator="groovy"> 
                     <processor-chain doc:name="Processor Chain"> 
                         <choice doc:name="Choice"> 
                             <when expression="message.payload.httpStatus == 500" evaluator="groovy"> 

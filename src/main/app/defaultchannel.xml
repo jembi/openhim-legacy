@@ -8,15 +8,15 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
     <flow name="defaultchannelFlow1" doc:name="defaultchannelFlow1">
         <vm:inbound-endpoint exchange-pattern="request-response" path="defaultChannel-Generic-NormalizationQueue" doc:name="VM"/>
         <component class="org.jembi.openhim.DefaultChannelComponent" doc:name="Default Channel config"/>
-        <custom-transformer class="org.jembi.rhea.transformers.RestfulHttpRequestToHttpRequestTransformer" doc:name="Request transformer"/>
+        <custom-transformer class="org.jembi.openhim.transformers.RestfulHttpRequestToHttpRequestTransformer" doc:name="Request transformer"/>
         <logger message="Routing message with path #[header:OUTBOUND:http.path] to #[header:OUTBOUND:http.host]:#[header:OUTBOUND:http.port] using HTTP method #[header:OUTBOUND:http.method] Full message: #[groovy: message.toString();]" level="INFO" doc:name="Logger"/>
-        <http:outbound-endpoint exchange-pattern="request-response" host="#[header:OUTBOUND:http.host]" port="#[header:OUTBOUND:http.port]" path="#[header:OUTBOUND:http.path]" doc:name="HTTP" method="POST"/>
-        <custom-transformer class="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer" doc:name="Response transformer"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="#[header:OUTBOUND:http.host]" port="#[header:OUTBOUND:http.port]" path="#[header:OUTBOUND:http.path]" doc:name="HTTP" method="POST" connector-ref="NoSessionConnector"/>
+        <custom-transformer class="org.jembi.openhim.transformers.HttpResponseToRestfulHttpResponseTransformer" doc:name="Response transformer"/>
         <logger message="Returning response #[groovy: message.payload.toString();]" level="INFO" doc:name="Logger"/>
         <choice-exception-strategy doc:name="Choice Exception Strategy">
             <catch-exception-strategy when="#[exception.causedBy(org.jembi.openhim.exception.URLMappingNotFoundException)]" doc:name="Catch_Exception_Strategy">
                 <scripting:transformer doc:name="Groovy">
-                    <scripting:script engine="Groovy"><![CDATA[import org.jembi.rhea.*;
+                    <scripting:script engine="Groovy"><![CDATA[import org.jembi.openhim.*;
 
 RestfulHttpResponse res = new RestfulHttpResponse();
 res.setHttpStatus(500);

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="defaultchannel">
-    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="bcd5b0db-6e87-4167-9115-d3cb990c330e">
+    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="cfcbd14d-94e3-456c-917b-874c5f9f62db">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="bussinessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
             <property name="auxiliary;index" value="1"/>
+            <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
             <graphicalData x="0" y="0" width="0" height="0"/>
@@ -23,9 +23,9 @@
                     <property name="encoding"/>
                     <property name="path" value="defaultChannel-Generic-NormalizationQueue"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="auxiliary;index" value="2"/>
                     <property name="mimeType"/>
                     <property name="responseTimeout"/>
+                    <property name="auxiliary;index" value="2"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
@@ -42,21 +42,19 @@
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
-                    <property name="class" value="org.jembi.rhea.transformers.RestfulHttpRequestToHttpRequestTransformer"/>
-                    <property name="mimeType"/>
+                    <property name="class" value="org.jembi.openhim.transformers.RestfulHttpRequestToHttpRequestTransformer"/>
                     <property name="auxiliary;index" value="4"/>
+                    <property name="mimeType"/>
                 </properties>
             </pattern>
             <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="message" value="Routing message with path #[header:OUTBOUND:http.path] to #[header:OUTBOUND:http.host]:#[header:OUTBOUND:http.port] using HTTP method #[header:OUTBOUND:http.method] Full message: #[groovy: message.toString();]"/>
-                    <property name="category" value=""/>
+                    <property name="category"/>
                     <property name="level" value="INFO"/>
-                    <property name="updated"/>
                     <property name="auxiliary;index" value="5"/>
                 </properties>
-                <description></description>
             </pattern>
             <endpoint direction="Outbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
@@ -86,7 +84,7 @@
                     <property name="address" value=""/>
                     <property name="method" value="POST"/>
                     <property name="user" value=""/>
-                    <property name="connector-ref" value=""/>
+                    <property name="connector-ref" value="NoSessionConnector"/>
                 </properties>
                 <description></description>
             </endpoint>
@@ -96,9 +94,9 @@
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
-                    <property name="class" value="org.jembi.rhea.transformers.HttpResponseToRestfulHttpResponseTransformer"/>
-                    <property name="mimeType"/>
+                    <property name="class" value="org.jembi.openhim.transformers.HttpResponseToRestfulHttpResponseTransformer"/>
                     <property name="auxiliary;index" value="7"/>
+                    <property name="mimeType"/>
                 </properties>
             </pattern>
             <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
@@ -132,21 +130,21 @@
             <property name="returnClass"/>
             <property name="ignoreBadInput"/>
             <property name="encoding"/>
-            <property name="mimeType"/>
             <property name="auxiliary;index" value="11"/>
+            <property name="mimeType"/>
             <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
-                <property name="text" value="import org.jembi.rhea.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
+                <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
                 <property name="engine" value="Groovy"/>
                 <property name="isProcessed$$$$" value="true"/>
-                <property name="auxiliary;index" value="12"/>
                 <property name="auxiliary;wrapIn" value="12"/>
+                <property name="auxiliary;index" value="12"/>
             </property-collection>
             <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
-                <property name="text" value="import org.jembi.rhea.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
+                <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
                 <property name="engine" value="Groovy"/>
                 <property name="isProcessed$$$$" value="true"/>
-                <property name="auxiliary;index" value="12"/>
                 <property name="auxiliary;wrapIn" value="12"/>
+                <property name="auxiliary;index" value="12"/>
             </property-collection>
         </properties>
     </pattern>
@@ -169,21 +167,21 @@
             <property name="returnClass"/>
             <property name="ignoreBadInput"/>
             <property name="encoding"/>
-            <property name="mimeType"/>
             <property name="auxiliary;index" value="14"/>
+            <property name="mimeType"/>
             <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
                 <property name="text" value="// re-throw the exception&#xA;throw exception;"/>
                 <property name="engine" value="Groovy"/>
                 <property name="isProcessed$$$$" value="true"/>
-                <property name="auxiliary;index" value="15"/>
                 <property name="auxiliary;wrapIn" value="15"/>
+                <property name="auxiliary;index" value="15"/>
             </property-collection>
             <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
                 <property name="text" value="// re-throw the exception&#xA;throw exception;"/>
                 <property name="engine" value="Groovy"/>
                 <property name="isProcessed$$$$" value="true"/>
-                <property name="auxiliary;index" value="15"/>
                 <property name="auxiliary;wrapIn" value="15"/>
+                <property name="auxiliary;index" value="15"/>
             </property-collection>
         </properties>
     </pattern>
