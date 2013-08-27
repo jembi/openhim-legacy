@@ -172,7 +172,12 @@ public class RestfulHttpRequest implements Serializable {
 	}
 
 	public String buildUrlWithRequestParams() {
-		return getPath() + '?' + getRequestParamsAsString();
+		String reqParams = getRequestParamsAsString();
+		if (reqParams != null && reqParams.length() > 0) {
+			return getPath() + '?' + reqParams;
+		}
+		
+		return getPath();
 	}
 	
 	
