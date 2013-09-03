@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="defaultchannel">
-    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="cfcbd14d-94e3-456c-917b-874c5f9f62db">
+    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="f47e57ae-1b23-4d6b-a509-23f30d5a6e92">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -11,7 +11,7 @@
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
             <graphicalData x="0" y="0" width="0" height="0"/>
             <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="VM" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
-                <graphicalData x="0" y="0" width="0" height="0"/>
+                <graphicalData x="19" y="72" width="68" height="173"/>
                 <properties>
                     <property name="businessEventsLabel"/>
                     <property name="disableTransportTransformer"/>
@@ -30,14 +30,14 @@
                 </properties>
             </endpoint>
             <pattern name="Default Channel config" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
-                <graphicalData x="0" y="0" width="0" height="0"/>
+                <graphicalData x="147" y="72" width="164" height="71"/>
                 <properties>
                     <property name="class" value="org.jembi.openhim.DefaultChannelComponent"/>
                     <property name="auxiliary;index" value="3"/>
                 </properties>
             </pattern>
             <pattern name="Request transformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#2">
-                <graphicalData x="0" y="0" width="0" height="0"/>
+                <graphicalData x="598" y="72" width="155" height="71"/>
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -48,7 +48,7 @@
                 </properties>
             </pattern>
             <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
-                <graphicalData x="0" y="0" width="0" height="0"/>
+                <graphicalData x="813" y="72" width="68" height="71"/>
                 <properties>
                     <property name="message" value="Routing message with path #[header:OUTBOUND:http.path] to #[header:OUTBOUND:http.host]:#[header:OUTBOUND:http.port] using HTTP method #[header:OUTBOUND:http.method] Full message: #[groovy: message.toString();]"/>
                     <property name="category"/>
@@ -57,39 +57,36 @@
                 </properties>
             </pattern>
             <endpoint direction="Outbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
-                <graphicalData x="0" y="0" width="0" height="0"/>
+                <graphicalData x="941" y="72" width="68" height="71"/>
                 <properties>
                     <property name="port" value="#[header:OUTBOUND:http.port]"/>
-                    <property name="auxiliary;erased;mimeType" value="true"/>
-                    <property name="contentType" value=""/>
-                    <property name="password" value=""/>
-                    <property name="exchange-pattern" value="request-response"/>
-                    <property name="updated"/>
-                    <property name="auxiliary;erased;encoding" value="true"/>
-                    <property name="path" value="#[header:OUTBOUND:http.path]"/>
-                    <property name="encoding" value=""/>
-                    <property name="responseTransformer-refs" value=""/>
-                    <property name="auxiliary;index" value="6"/>
-                    <property name="mimeType" value=""/>
-                    <property name="responseTimeout" value="10000"/>
-                    <property name="auxiliary;erased;contentType" value="true"/>
                     <property name="host" value="#[header:OUTBOUND:http.host]"/>
-                    <property name="followRedirects" value="false"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-                    <property name="keep-alive" value="false"/>
-                    <property name="disableTransportTransformer" value="false"/>
-                    <property name="ref" value=""/>
-                    <property name="transformer-refs" value=""/>
-                    <property name="httpLabel" value=""/>
-                    <property name="address" value=""/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="httpLabel"/>
+                    <property name="transformer-refs"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="path" value="#[header:OUTBOUND:http.path]"/>
+                    <property name="responseTransformer-refs"/>
                     <property name="method" value="POST"/>
-                    <property name="user" value=""/>
+                    <property name="user"/>
+                    <property name="auxiliary;index" value="6"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
                     <property name="connector-ref" value="NoSessionConnector"/>
                 </properties>
-                <description></description>
             </endpoint>
             <pattern name="Response transformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#3">
-                <graphicalData x="0" y="0" width="0" height="0"/>
+                <graphicalData x="1069" y="72" width="165" height="71"/>
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -100,7 +97,7 @@
                 </properties>
             </pattern>
             <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
-                <graphicalData x="0" y="0" width="0" height="0"/>
+                <graphicalData x="1294" y="72" width="68" height="71"/>
                 <properties>
                     <property name="message" value="Returning response #[groovy: message.payload.toString();]"/>
                     <property name="category"/>

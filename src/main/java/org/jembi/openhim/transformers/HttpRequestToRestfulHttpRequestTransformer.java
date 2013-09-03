@@ -12,6 +12,8 @@ import org.mule.transformer.AbstractMessageTransformer;
 
 public class HttpRequestToRestfulHttpRequestTransformer extends
 		AbstractMessageTransformer {
+	
+	public static final String OPENHIM_TX_UUID = "OPENHIM_TX_UUID";
 
 	@Override
 	public Object transformMessage(MuleMessage msg, String enc) throws TransformerException {
@@ -23,6 +25,8 @@ public class HttpRequestToRestfulHttpRequestTransformer extends
 		String httpMethod = (String) msg.getInboundProperty("http.method");
 		restMsg.setHttpMethod(httpMethod);
 		Map<String, String> httpHeaders = (Map<String, String>) msg.getInboundProperty("http.headers");
+		// set transaction uuid for outgoing http headers
+		httpHeaders.put(OPENHIM_TX_UUID, restMsg.getUuid());
 		restMsg.setHttpHeaders(httpHeaders);
 		
 		try {
