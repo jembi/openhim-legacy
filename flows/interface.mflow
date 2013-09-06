@@ -319,7 +319,7 @@
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/endpoint"/>
                     <property name="auxiliary;index" value="27"/>
                     <property name="httpLabel"/>
-                    <property name="host" value="localhost"/>
+                    <property name="host" value="0.0.0.0"/>
                     <property name="port" value="5000"/>
                     <property name="path"/>
                     <property name="method"/>
@@ -354,7 +354,7 @@
                     <property name="auxiliary;index" value="27"/>
                     <property name="auxiliary;index" value="27"/>
                     <property name="httpLabel"/>
-                    <property name="host" value="localhost"/>
+                    <property name="host" value="0.0.0.0"/>
                     <property name="port" value="5000"/>
                     <property name="path"/>
                     <property name="method"/>
@@ -504,7 +504,7 @@
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
                     <property name="auxiliary;index" value="37"/>
                     <property name="httpLabel"/>
-                    <property name="host" value="localhost"/>
+                    <property name="host" value="0.0.0.0"/>
                     <property name="port" value="5001"/>
                     <property name="path"/>
                     <property name="method"/>

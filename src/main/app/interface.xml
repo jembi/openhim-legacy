@@ -63,7 +63,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         <https:tls-key-store path="${cert.keystore}" keyPassword="${cert.keypassword}" storePassword="${cert.storepassword}"/>
     </https:connector>
     <flow name="RESTEntryPoint-HTTPS" doc:name="RESTEntryPoint-HTTPS">
-        <https:inbound-endpoint exchange-pattern="request-response" host="localhost" port="5000" connector-ref="HTTPSConnector" doc:name="HTTP">
+        <https:inbound-endpoint exchange-pattern="request-response" host="0.0.0.0" port="5000" connector-ref="HTTPSConnector" doc:name="HTTP">
         	<mule-ss:http-security-filter realm="mule-realm"/>
         </https:inbound-endpoint>
         <response>
@@ -76,7 +76,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         <vm:outbound-endpoint exchange-pattern="request-response" path="messagePersistanceQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Queue message"/>
     </flow>
     <flow name="RESTEntryPoint-HTTP" doc:name="RESTEntryPoint-HTTP">
-        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="5001" doc:name="HTTP"/>
+        <http:inbound-endpoint exchange-pattern="request-response" host="0.0.0.0" port="5001" doc:name="HTTP"/>
         <response>
             <logger message="In response" level="INFO" doc:name="Logger"/>
             <custom-transformer class="org.jembi.rhea.transformers.RestfulHttpResponseToHttpResponseTransformer" doc:name="RestfulHttpResponseToHttpResponseTransformer"/>
