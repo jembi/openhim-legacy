@@ -6,6 +6,6 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
     <flow name="saveEncounters-rapidSMSAlertsServiceFlow1" doc:name="saveEncounters-rapidSMSAlertsServiceFlow1">
         <vm:inbound-endpoint exchange-pattern="request-response" path="saveEncounters-rapidSMSAlertsService" doc:name="Encounter Queue"/>
-        <http:outbound-endpoint exchange-pattern="request-response" host="${rapidsms.alerts.host}" port="${rapidsms.alerts.port}" path="#[header:OUTBOUND:path]" doc:name="HTTP"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="${rapidsms.alerts.host}" port="${rapidsms.alerts.port}" path="/openmrs/ws/rest/RHEA/patient/encounters?patientId=123&amp;idType=NID" connector-ref="NoSessionConnector" doc:name="HTTP"/>
     </flow>
 </mule>

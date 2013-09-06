@@ -47,7 +47,7 @@
                     <property name="transformer-refs"/>
                     <property name="httpLabel"/>
                     <property name="address"/>
-                    <property name="path" value="#[header:OUTBOUND:path]"/>
+                    <property name="path" value="/openmrs/ws/rest/RHEA/patient/encounters?patientId=123&amp;idType=NID"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
                     <property name="method"/>
@@ -55,7 +55,7 @@
                     <property name="responseTimeout"/>
                     <property name="mimeType"/>
                     <property name="auxiliary;index" value="3"/>
-                    <property name="connector-ref"/>
+                    <property name="connector-ref" value="NoSessionConnector"/>
                 </properties>
             </endpoint>
         </lane>
