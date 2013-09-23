@@ -21,5 +21,10 @@
 		"urlPattern": "test/post",
 		"host": "localhost",
 		"port": 8080
+	},
+	{
+		"urlPattern": "test/headers",
+		"host": "localhost",
+		"port": 8080
 	}
 ]

@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.jembi.openhim.exception.URLMappingNotFoundException;
-import org.jembi.rhea.RestfulHttpRequest;
 import org.mule.api.MuleEventContext;
 import org.mule.api.MuleMessage;
 import org.mule.api.lifecycle.Callable;
@@ -60,8 +59,10 @@ public class DefaultChannelComponent implements Callable {
 		
 		msg.setProperty("http.host", mapping.getHost(), PropertyScope.OUTBOUND);
 		msg.setProperty("http.port", mapping.getPort(), PropertyScope.OUTBOUND);
-		msg.setProperty("http.method", req.getHttpMethod(), PropertyScope.OUTBOUND);
-		msg.setProperty("http.path", req.getPath(), PropertyScope.OUTBOUND);
+		
+		if (req.getHttpMethod().equals("PUT") || req.getHttpMethod().equals("POST")) {
+			return req.getBody();
+		}
 		
 		if (req.getHttpMethod().equals("PUT") || req.getHttpMethod().equals("POST")) {
 			return req.getBody();

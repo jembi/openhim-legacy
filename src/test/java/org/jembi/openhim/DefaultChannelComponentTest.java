@@ -45,7 +45,6 @@ public class DefaultChannelComponentTest {
 		dcc.readMappings();
 		
 		assertNotNull(DefaultChannelComponent.mappings);
-		assertEquals(4, DefaultChannelComponent.mappings.size());
 		
 		URLMapping mapping1 = new URLMapping();
 		mapping1.setHost("localhost");
