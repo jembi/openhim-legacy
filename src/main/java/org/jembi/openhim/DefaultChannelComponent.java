@@ -64,6 +64,10 @@ public class DefaultChannelComponent implements Callable {
 			return req.getBody();
 		}
 		
+		if (req.getHttpMethod().equals("PUT") || req.getHttpMethod().equals("POST")) {
+			return req.getBody();
+		}
+		
 		return msg;
 	}
 

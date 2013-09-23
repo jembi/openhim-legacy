@@ -13,19 +13,19 @@
             <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="VM" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
                 <graphicalData x="19" y="72" width="68" height="173"/>
                 <properties>
-                    <property name="businessEventsLabel"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="exchange-pattern" value="request-response"/>
-                    <property name="tracking:enable-default-events"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="address"/>
+                    <property name="businessEventsLabel"/>
                     <property name="encoding"/>
                     <property name="path" value="defaultChannel-Generic-NormalizationQueue"/>
                     <property name="responseTransformer-refs"/>
+                    <property name="disableTransportTransformer"/>
                     <property name="mimeType"/>
                     <property name="responseTimeout"/>
+                    <property name="tracking:enable-default-events"/>
                     <property name="auxiliary;index" value="2"/>
+                    <property name="exchange-pattern" value="request-response"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
