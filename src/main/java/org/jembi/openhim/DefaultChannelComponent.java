@@ -60,6 +60,10 @@ public class DefaultChannelComponent implements Callable {
 		msg.setProperty("http.host", mapping.getHost(), PropertyScope.OUTBOUND);
 		msg.setProperty("http.port", mapping.getPort(), PropertyScope.OUTBOUND);
 		
+		if (req.getHttpMethod().equals("PUT") || req.getHttpMethod().equals("POST")) {
+			return req.getBody();
+		}
+		
 		return msg;
 	}
 
