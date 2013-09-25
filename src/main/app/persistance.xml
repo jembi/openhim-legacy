@@ -2,9 +2,9 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-<mule xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" version="CE-3.4.0" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+<mule xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" version="EE-3.4.0" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
-http://www.mulesoft.org/schema/mule/jdbc http://www.mulesoft.org/schema/mule/jdbc/current/mule-jdbc.xsd
+http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
@@ -17,7 +17,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
             <spring:property name="driverName" value="${db.driverName}"></spring:property>  
         </spring:bean>  
     </spring:beans>
-    <jdbc:connector name="JDBCConnector" dataSource-ref="jdbcDataSource" validateConnections="true" queryTimeout="-1" pollingFrequency="0" doc:name="JDBC"></jdbc:connector>
+    <jdbc-ee:connector name="JDBCConnector" dataSource-ref="jdbcDataSource" validateConnections="true" queryTimeout="-1" pollingFrequency="0" doc:name="Database"></jdbc-ee:connector>
     <flow name="message-persistanceFlow1" doc:name="message-persistanceFlow1"> 
         <vm:inbound-endpoint exchange-pattern="request-response" path="messagePersistanceQueue" responseTimeout="10000" mimeType="text/plain" doc:name="VM"></vm:inbound-endpoint>  
         <logger message="Persisting Transaction" level="INFO" doc:name="Logger"></logger>  
@@ -28,40 +28,48 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
                         <choice doc:name="Choice"> 
                             <when expression="message.payload.httpStatus == 500" evaluator="groovy"> 
                                 <processor-chain doc:name="Processor Chain"> 
-                                    <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="errorMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response"> 
-                                        <jdbc:query key="errorMsg" value="UPDATE transaction_log SET status='3', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"></jdbc:query>  
-                                    </jdbc:outbound-endpoint>  
+                                    <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="errorMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response"> 
+                                        <jdbc-ee:query key="errorMsg" value="UPDATE transaction_log SET status='3', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"></jdbc-ee:query>  
+                                    </jdbc-ee:outbound-endpoint>  
                                 </processor-chain>  
                             </when>  
                             <otherwise> 
                                 <processor-chain doc:name="Processor Chain"> 
-                                    <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="updateMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response"> 
-                                        <jdbc:query key="updateMsg" value="UPDATE transaction_log SET status='2', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"></jdbc:query>  
-                                    </jdbc:outbound-endpoint>  
+                                    <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="updateMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response"> 
+                                        <jdbc-ee:query key="updateMsg" value="UPDATE transaction_log SET status='2', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"></jdbc-ee:query>  
+                                    </jdbc-ee:outbound-endpoint>  
                                 </processor-chain>  
                             </otherwise>  
                         </choice>  
                     </processor-chain>  
                 </when>  
                 <otherwise> 
-                    <processor-chain doc:name="Processor Chain"> 
+                    <processor-chain doc:name="Processor Chain">
+                        <logger message="Recieved a response that is of type RestfulHttpResponce" level="ERROR" doc:name="Logger"/> 
                         <scripting:component doc:name="Groovy"> 
-                            <scripting:script engine="Groovy"> 
-                                <scripting:text><![CDATA[StringWriter sw = new StringWriter();
-message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));
-message.setOutboundProperty("stacktrace", sw.toString());]]></scripting:text>  
+                            <scripting:script engine="Groovy">
+                                <scripting:text><![CDATA[try { 
+	StringWriter sw = new StringWriter();
+	message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));
+	message.setOutboundProperty("stacktrace", sw.toString());
+catch (Exception e) {
+	StringWriter sw = new StringWriter();
+	e.printStackTrace(new PrintWriter(sw));
+	message.setOutboundProperty("stacktrace", sw.toString());
+}]]></scripting:text>
+  
                             </scripting:script>  
                         </scripting:component>  
-                        <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="errorMsg2" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw error message response"> 
-                            <jdbc:query key="errorMsg2" value="UPDATE transaction_log SET status='3', error_description=#[groovy: return message.getExceptionPayload().getMessage();], error_stacktrace=#[header:OUTBOUND:stacktrace], responded_timestamp=now() WHERE uuid=#[header:SESSION:uuid];"></jdbc:query>  
-                        </jdbc:outbound-endpoint>  
+                        <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="errorMsg2" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw error message response"> 
+                            <jdbc-ee:query key="errorMsg2" value="UPDATE transaction_log SET status='3', error_description=#[groovy: return message.getExceptionPayload().getMessage();], error_stacktrace=#[header:OUTBOUND:stacktrace], responded_timestamp=now() WHERE uuid=#[header:SESSION:uuid];"></jdbc-ee:query>  
+                        </jdbc-ee:outbound-endpoint>  
                     </processor-chain>  
                 </otherwise>  
             </choice>  
         </response>  
-        <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="insertMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message"> 
-            <jdbc:query key="insertMsg" value="insert into transaction_log (uuid, path, request_params, body, http_method, recieved_timestamp, authorized_username, status) values (#[groovy: return message.payload.getUuid();], #[groovy: return message.payload.getPath();], #[groovy: return message.payload.getRequestParamsAsString();], #[groovy: return message.payload.getBody();], #[groovy: return message.payload.getHttpMethod();], now(), '', 1);"></jdbc:query>  
-        </jdbc:outbound-endpoint>  
+        <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="insertMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message"> 
+            <jdbc-ee:query key="insertMsg" value="insert into transaction_log (uuid, path, request_params, body, http_method, recieved_timestamp, authorized_username, status) values (#[groovy: return message.payload.getUuid();], #[groovy: return message.payload.getPath();], #[groovy: return message.payload.getRequestParamsAsString();], #[groovy: return message.payload.getBody();], #[groovy: return message.payload.getHttpMethod();], now(), '', 1);"></jdbc-ee:query>  
+        </jdbc-ee:outbound-endpoint>  
         <message-properties-transformer scope="session" doc:name="Set message uuid in session"> 
             <add-message-property key="uuid" value="#[groovy: return message.payload.getUuid();]"></add-message-property>  
         </message-properties-transformer>  

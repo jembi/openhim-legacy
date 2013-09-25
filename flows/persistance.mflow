@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="message-persistance">
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="persistance">
     <global-element name="Property Placeholder" type="http://www.springframework.org/schema/context/property-placeholder" entity-id="Property Placeholder#1">
         <properties>
             <property name="properties-ref"/>
@@ -27,40 +27,44 @@
             <property name="lazy-init"/>
             <property name="auxiliary;wrappedIn" value="beans@spring@http://www.springframework.org/schema/beans"/>
             <property name="id" value="jdbcDataSource"/>
-            <property name="primary"/>
             <property name="name" value="jdbcDataSource"/>
+            <property name="primary"/>
             <property name="autowire"/>
             <property name="destroy-method"/>
-            <property name="auxiliary;index" value="3"/>
             <property name="auxiliary;wrapIn" value="2"/>
+            <property name="auxiliary;index" value="3"/>
             <property name="depends-on"/>
             <property-collection name="@http://www.springframework.org/schema/beans/property;0">
                 <property name="name" value="password"/>
                 <property name="value" value="${db.password}"/>
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="4"/>
                 <property name="auxiliary;wrapIn" value="4"/>
             </property-collection>
             <property-collection name="@http://www.springframework.org/schema/beans/property;1">
                 <property name="name" value="user"/>
                 <property name="value" value="${db.user}"/>
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="5"/>
                 <property name="auxiliary;wrapIn" value="5"/>
             </property-collection>
             <property-collection name="@http://www.springframework.org/schema/beans/property;2">
                 <property name="name" value="url"/>
                 <property name="value" value="${db.url}"/>
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="6"/>
                 <property name="auxiliary;wrapIn" value="6"/>
             </property-collection>
             <property-collection name="@http://www.springframework.org/schema/beans/property;3">
                 <property name="name" value="driverName"/>
                 <property name="value" value="${db.driverName}"/>
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="7"/>
                 <property name="auxiliary;wrapIn" value="7"/>
             </property-collection>
         </properties>
     </global-element>
-    <global-element name="JDBC" type="org.mule.tooling.ui.modules.core.global.jdbcConnector" entity-id="JDBC#1">
+    <global-element name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/connector" entity-id="Database#1">
         <properties>
             <property name="dispatcherPoolFactory-ref"/>
             <property name="transactionPerMessage"/>
@@ -76,32 +80,32 @@
             <property name="dataSource-ref to JDBC DataSource" value="jdbcDataSource"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="message-persistanceFlow1" entity-id="c707c2af-fda5-4456-b5c0-0e847a93e850">
+    <flow SubFlow="false" name="message-persistanceFlow1" entity-id="38737cad-aecf-4d03-a83c-ee4a344b9044">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="bussinessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
             <property name="auxiliary;index" value="9"/>
+            <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
             <graphicalData x="0" y="0" width="0" height="0"/>
             <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="VM" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
+                    <property name="businessEventsLabel"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="address"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="encoding"/>
                     <property name="path" value="messagePersistanceQueue"/>
+                    <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="disableTransportTransformer"/>
                     <property name="mimeType" value="text/plain"/>
-                    <property name="responseTimeout" value="10000"/>
-                    <property name="tracking:enable-default-events"/>
                     <property name="auxiliary;index" value="10"/>
-                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="responseTimeout" value="10000"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
@@ -121,21 +125,38 @@
                         <splitter index="13" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
-<property-collection name="e4b148d7-020c-4ffd-a51b-17c3ab003224">
-    <property name="choice.otherwise" value="true"/>
-    <property-collection name="choice.attributes"/>
-</property-collection>
-<property-collection name="200a78b0-cd01-4c87-b5e2-11dab675338a">
+<property name=";INDEX" value="13"/>
+<property-collection name="1b8404f4-d92c-44d8-91aa-ab191ed5d5e5">
     <property name="choice.expression" value="payload instanceof org.jembi.openhim.RestfulHttpResponse"/>
     <property-collection name="choice.attributes">
         <property name="expression" value="payload instanceof org.jembi.openhim.RestfulHttpResponse"/>
         <property name="evaluator" value="groovy"/>
     </property-collection>
 </property-collection>
+<property-collection name="cb59ec5e-c876-4d79-9f4e-0bf3e62f0407">
+    <property name="choice.otherwise" value="true"/>
+    <property-collection name="choice.attributes"/>
+</property-collection>
                             </properties>
-                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
+                            <description></description>
+                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
+<properties>
+    <property name=";INDEX" value="13"/>
+    <property-collection name="1b8404f4-d92c-44d8-91aa-ab191ed5d5e5">
+        <property name="choice.expression" value="payload instanceof org.jembi.openhim.RestfulHttpResponse"/>
+        <property-collection name="choice.attributes">
+            <property name="expression" value="payload instanceof org.jembi.openhim.RestfulHttpResponse"/>
+            <property name="evaluator" value="groovy"/>
+        </property-collection>
+    </property-collection>
+    <property-collection name="cb59ec5e-c876-4d79-9f4e-0bf3e62f0407">
+        <property name="choice.otherwise" value="true"/>
+        <property-collection name="choice.attributes"/>
+    </property-collection>
+</properties>
+                            </pattern>
                             <compartment entity-id="compartment#2">
-<lane hadOnlyOneElement="false" index="15" isChoiceOtherwiseLane="false" entity-id="200a78b0-cd01-4c87-b5e2-11dab675338a">
+<lane hadOnlyOneElement="false" index="15" isChoiceOtherwiseLane="false" entity-id="1b8404f4-d92c-44d8-91aa-ab191ed5d5e5">
     <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#1">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
@@ -146,11 +167,12 @@
                 <splitter index="16" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#3">
                     <graphicalData x="0" y="0" width="0" height="0"/>
                     <properties>
-                        <property-collection name="2f8705d3-b177-4a3a-8c62-21a5cfa08dc5">
+                        <property name=";INDEX" value="16"/>
+                        <property-collection name="07d9879b-b4ff-4561-b575-436343d01a95">
                             <property name="choice.otherwise" value="true"/>
                             <property-collection name="choice.attributes"/>
                         </property-collection>
-                        <property-collection name="f9c7eadb-411e-4113-86d9-d1a89b278953">
+                        <property-collection name="ec2f1508-7464-4c27-9aa0-2193ff05b9a8">
                             <property name="choice.expression" value="message.payload.httpStatus == 500"/>
                             <property-collection name="choice.attributes">
 <property name="expression" value="message.payload.httpStatus == 500"/>
@@ -158,9 +180,24 @@
                             </property-collection>
                         </property-collection>
                     </properties>
-                    <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#4"/>
+                    <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#4">
+                        <properties>
+                            <property name=";INDEX" value="16"/>
+                            <property-collection name="07d9879b-b4ff-4561-b575-436343d01a95">
+<property name="choice.otherwise" value="true"/>
+<property-collection name="choice.attributes"/>
+                            </property-collection>
+                            <property-collection name="ec2f1508-7464-4c27-9aa0-2193ff05b9a8">
+<property name="choice.expression" value="message.payload.httpStatus == 500"/>
+<property-collection name="choice.attributes">
+    <property name="expression" value="message.payload.httpStatus == 500"/>
+    <property name="evaluator" value="groovy"/>
+</property-collection>
+                            </property-collection>
+                        </properties>
+                    </pattern>
                     <compartment entity-id="compartment#4">
-                        <lane hadOnlyOneElement="false" index="18" isChoiceOtherwiseLane="false" entity-id="f9c7eadb-411e-4113-86d9-d1a89b278953">
+                        <lane hadOnlyOneElement="false" index="18" isChoiceOtherwiseLane="false" entity-id="ec2f1508-7464-4c27-9aa0-2193ff05b9a8">
                             <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#2">
 <graphicalData x="0" y="0" width="0" height="0"/>
 <properties>
@@ -168,27 +205,29 @@
 </properties>
 <compartment entity-id="compartment#5">
     <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#4">
-        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Persist raw message response" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" entity-id="Database#1">
+        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Persist raw message response" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#2">
             <graphicalData x="0" y="0" width="0" height="0"/>
             <properties>
+                <property name=""/>
+                <property name="businessEventsLabel"/>
+                <property name="pollingFrequency"/>
+                <property name="queryTimeout" value="-1"/>
+                <property name="disableTransportTransformer"/>
+                <property name="exchange-pattern" value="request-response"/>
+                <property name="queryKey" value="errorMsg"/>
+                <property name="tracking:enable-default-events"/>
                 <property name="ref"/>
                 <property name="transformer-refs"/>
-                <property name="pollingFrequency"/>
                 <property name="address"/>
-                <property name="businessEventsLabel"/>
-                <property name="queryTimeout" value="-1"/>
                 <property name="encoding"/>
                 <property name="responseTransformer-refs"/>
-                <property name="disableTransportTransformer"/>
-                <property name="mimeType"/>
-                <property name="responseTimeout" value="10000"/>
-                <property name="tracking:enable-default-events"/>
-                <property name="queryKey" value="errorMsg"/>
                 <property name="auxiliary;index" value="19"/>
-                <property name="exchange-pattern" value="request-response"/>
+                <property name="responseTimeout" value="10000"/>
+                <property name="mimeType"/>
                 <property name="connector-ref" value="JDBCConnector"/>
-                <property-collection name="@http://www.mulesoft.org/schema/mule/jdbc/query;0">
+                <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
                     <property name="value" value="UPDATE transaction_log SET status='3', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"/>
+                    <property name="isProcessed$$$$" value="true"/>
                     <property name="key" value="errorMsg"/>
                     <property name="auxiliary;index" value="20"/>
                     <property name="auxiliary;wrapIn" value="20"/>
@@ -199,7 +238,7 @@
 </compartment>
                             </scope>
                         </lane>
-                        <lane hadOnlyOneElement="false" index="22" isChoiceOtherwiseLane="true" entity-id="2f8705d3-b177-4a3a-8c62-21a5cfa08dc5">
+                        <lane hadOnlyOneElement="false" index="22" isChoiceOtherwiseLane="true" entity-id="07d9879b-b4ff-4561-b575-436343d01a95">
                             <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#3">
 <graphicalData x="0" y="0" width="0" height="0"/>
 <properties>
@@ -207,27 +246,29 @@
 </properties>
 <compartment entity-id="compartment#6">
     <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#5">
-        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Persist raw message response" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" entity-id="Database#2">
+        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Persist raw message response" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#3">
             <graphicalData x="0" y="0" width="0" height="0"/>
             <properties>
+                <property name=""/>
+                <property name="businessEventsLabel"/>
+                <property name="pollingFrequency"/>
+                <property name="queryTimeout" value="-1"/>
+                <property name="disableTransportTransformer"/>
+                <property name="exchange-pattern" value="request-response"/>
+                <property name="queryKey" value="updateMsg"/>
+                <property name="tracking:enable-default-events"/>
                 <property name="ref"/>
                 <property name="transformer-refs"/>
-                <property name="pollingFrequency"/>
                 <property name="address"/>
-                <property name="businessEventsLabel"/>
-                <property name="queryTimeout" value="-1"/>
                 <property name="encoding"/>
                 <property name="responseTransformer-refs"/>
-                <property name="disableTransportTransformer"/>
-                <property name="mimeType"/>
-                <property name="responseTimeout" value="10000"/>
-                <property name="tracking:enable-default-events"/>
-                <property name="queryKey" value="updateMsg"/>
                 <property name="auxiliary;index" value="23"/>
-                <property name="exchange-pattern" value="request-response"/>
+                <property name="responseTimeout" value="10000"/>
+                <property name="mimeType"/>
                 <property name="connector-ref" value="JDBCConnector"/>
-                <property-collection name="@http://www.mulesoft.org/schema/mule/jdbc/query;0">
+                <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
                     <property name="value" value="UPDATE transaction_log SET status='2', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"/>
+                    <property name="isProcessed$$$$" value="true"/>
                     <property name="key" value="updateMsg"/>
                     <property name="auxiliary;index" value="24"/>
                     <property name="auxiliary;wrapIn" value="24"/>
@@ -244,7 +285,7 @@
         </compartment>
     </scope>
 </lane>
-<lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="true" entity-id="e4b148d7-020c-4ffd-a51b-17c3ab003224">
+<lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="true" entity-id="cb59ec5e-c876-4d79-9f4e-0bf3e62f0407">
     <scope name="Processor Chain" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#4">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
@@ -252,48 +293,58 @@
         </properties>
         <compartment entity-id="compartment#7">
             <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#6">
-                <pattern name="Groovy" type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" entity-id="Groovy#1">
+                <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="fa179f07-1a8d-4890-9a8d-59e417c40420">
                     <graphicalData x="0" y="0" width="0" height="0"/>
                     <properties>
-                        <property name="script-ref"/>
+                        <property name="message" value="Recieved a response that is of type RestfulHttpResponce"/>
+                        <property name="category" value=""/>
+                        <property name="level" value="ERROR"/>
+                        <property name="updated"/>
+                    </properties>
+                    <description></description>
+                </pattern>
+                <pattern name="Groovy" type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" entity-id="Groovy#1">
+                    <graphicalData x="459" y="608" width="68" height="71"/>
+                    <properties>
+                        <property name="ref" value=""/>
+                        <property name="updated"/>
+                        <property name="inner-text" value="try { &#xA;&#x9;StringWriter sw = new StringWriter();&#xA;&#x9;message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));&#xA;&#x9;message.setOutboundProperty(&quot;stacktrace&quot;, sw.toString());&#xA;catch (Exception e) {&#xA;&#x9;StringWriter sw = new StringWriter();&#xA;&#x9;e.printStackTrace(new PrintWriter(sw));&#xA;&#x9;message.setOutboundProperty(&quot;stacktrace&quot;, sw.toString());&#xA;}"/>
                         <property name="auxiliary;index" value="27"/>
-                        <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
-                            <property name="text" value=" &#xA;                                  &#xA;                            "/>
-                            <property name="engine" value="Groovy"/>
-                            <property name="inner-text" value="StringWriter sw = new StringWriter();&#xA;message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));&#xA;message.setOutboundProperty(&quot;stacktrace&quot;, sw.toString());"/>
-                            <property name="auxiliary;index" value="28"/>
-                            <property name="auxiliary;wrapIn" value="28"/>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;658513189">
+                            <property name="ref" value=""/>
+                            <property name="isProcessed$$$$" value="true"/>
                         </property-collection>
-                        <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
-                            <property name="text" value=" &#xA;                                  &#xA;                            "/>
-                            <property name="engine" value="Groovy"/>
-                            <property name="inner-text" value="StringWriter sw = new StringWriter();&#xA;message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));&#xA;message.setOutboundProperty(&quot;stacktrace&quot;, sw.toString());"/>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;2082486285">
+                            <property name="inner-text" value="try { &#xA;&#x9;StringWriter sw = new StringWriter();&#xA;&#x9;message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));&#xA;&#x9;message.setOutboundProperty(&quot;stacktrace&quot;, sw.toString());&#xA;catch (Exception e) {&#xA;&#x9;StringWriter sw = new StringWriter();&#xA;&#x9;e.printStackTrace(new PrintWriter(sw));&#xA;&#x9;message.setOutboundProperty(&quot;stacktrace&quot;, sw.toString());&#xA;}"/>
+                            <property name="isProcessed$$$$" value="true"/>
                             <property name="auxiliary;index" value="28"/>
-                            <property name="auxiliary;wrapIn" value="28"/>
                         </property-collection>
                     </properties>
+                    <description></description>
                 </pattern>
-                <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Persist raw error message response" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" entity-id="Database#3">
-                    <graphicalData x="0" y="0" width="0" height="0"/>
+                <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Persist raw error message response" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#4">
+                    <graphicalData x="587" y="608" width="253" height="71"/>
                     <properties>
+                        <property name=""/>
+                        <property name="businessEventsLabel"/>
+                        <property name="pollingFrequency"/>
+                        <property name="queryTimeout" value="-1"/>
+                        <property name="disableTransportTransformer"/>
+                        <property name="exchange-pattern" value="request-response"/>
+                        <property name="queryKey" value="errorMsg2"/>
+                        <property name="tracking:enable-default-events"/>
                         <property name="ref"/>
                         <property name="transformer-refs"/>
-                        <property name="pollingFrequency"/>
                         <property name="address"/>
-                        <property name="businessEventsLabel"/>
-                        <property name="queryTimeout" value="-1"/>
                         <property name="encoding"/>
                         <property name="responseTransformer-refs"/>
-                        <property name="disableTransportTransformer"/>
-                        <property name="mimeType"/>
-                        <property name="responseTimeout" value="10000"/>
-                        <property name="tracking:enable-default-events"/>
-                        <property name="queryKey" value="errorMsg2"/>
                         <property name="auxiliary;index" value="30"/>
-                        <property name="exchange-pattern" value="request-response"/>
+                        <property name="responseTimeout" value="10000"/>
+                        <property name="mimeType"/>
                         <property name="connector-ref" value="JDBCConnector"/>
-                        <property-collection name="@http://www.mulesoft.org/schema/mule/jdbc/query;0">
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
                             <property name="value" value="UPDATE transaction_log SET status='3', error_description=#[groovy: return message.getExceptionPayload().getMessage();], error_stacktrace=#[header:OUTBOUND:stacktrace], responded_timestamp=now() WHERE uuid=#[header:SESSION:uuid];"/>
+                            <property name="isProcessed$$$$" value="true"/>
                             <property name="key" value="errorMsg2"/>
                             <property name="auxiliary;index" value="31"/>
                             <property name="auxiliary;wrapIn" value="31"/>
@@ -309,27 +360,29 @@
                     </lane>
                 </compartment>
             </response>
-            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Persist raw message" type="http://www.mulesoft.org/schema/mule/jdbc/endpoint" entity-id="Database#4">
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Persist raw message" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#5">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
+                    <property name=""/>
+                    <property name="businessEventsLabel"/>
+                    <property name="pollingFrequency"/>
+                    <property name="queryTimeout" value="-1"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="queryKey" value="insertMsg"/>
+                    <property name="tracking:enable-default-events"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
-                    <property name="pollingFrequency"/>
                     <property name="address"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="queryTimeout" value="-1"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="mimeType"/>
-                    <property name="responseTimeout" value="10000"/>
-                    <property name="tracking:enable-default-events"/>
-                    <property name="queryKey" value="insertMsg"/>
                     <property name="auxiliary;index" value="32"/>
-                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="mimeType"/>
                     <property name="connector-ref" value="JDBCConnector"/>
-                    <property-collection name="@http://www.mulesoft.org/schema/mule/jdbc/query;0">
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
                         <property name="value" value="insert into transaction_log (uuid, path, request_params, body, http_method, recieved_timestamp, authorized_username, status) values (#[groovy: return message.payload.getUuid();], #[groovy: return message.payload.getPath();], #[groovy: return message.payload.getRequestParamsAsString();], #[groovy: return message.payload.getBody();], #[groovy: return message.payload.getHttpMethod();], now(), '', 1);"/>
+                        <property name="isProcessed$$$$" value="true"/>
                         <property name="key" value="insertMsg"/>
                         <property name="auxiliary;index" value="33"/>
                         <property name="auxiliary;wrapIn" value="33"/>
@@ -344,10 +397,11 @@
                     <property name="scope" value="session"/>
                     <property name="overwrite"/>
                     <property name="encoding"/>
-                    <property name="mimeType"/>
                     <property name="auxiliary;index" value="34"/>
+                    <property name="mimeType"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
                         <property name="value" value="#[groovy: return message.payload.getUuid();]"/>
+                        <property name="isProcessed$$$$" value="true"/>
                         <property name="key" value="uuid"/>
                         <property name="auxiliary;index" value="35"/>
                         <property name="auxiliary;wrapIn" value="35"/>
@@ -357,23 +411,24 @@
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="VM" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#2">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
+                    <property name="businessEventsLabel"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="address"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="encoding"/>
                     <property name="path" value="defaultChannel-Generic-NormalizationQueue"/>
+                    <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="disableTransportTransformer"/>
                     <property name="mimeType" value="text/plain"/>
-                    <property name="responseTimeout" value="10000"/>
-                    <property name="tracking:enable-default-events"/>
                     <property name="auxiliary;index" value="36"/>
-                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="responseTimeout" value="10000"/>
                     <property name="connector-ref"/>
                 </properties>
+                <description></description>
             </endpoint>
         </lane>
+        <apikit>false</apikit>
     </flow>
-    <description></description>
 </mule-configuration>
