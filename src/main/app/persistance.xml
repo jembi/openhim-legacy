@@ -52,7 +52,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	StringWriter sw = new StringWriter();
 	message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));
 	message.setOutboundProperty("stacktrace", sw.toString());
-catch (Exception e) {
+} catch (Exception e) {
 	StringWriter sw = new StringWriter();
 	e.printStackTrace(new PrintWriter(sw));
 	message.setOutboundProperty("stacktrace", sw.toString());
