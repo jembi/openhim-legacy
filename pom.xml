@@ -137,7 +137,7 @@
 					<classpathScope>compile</classpathScope>
 				</configuration>
 			</plugin>
-
+			
 		</plugins>
 	</build>
 
@@ -383,6 +383,11 @@
 			<artifactId>jackson-core</artifactId>
 			<version>2.2.2</version>
 		</dependency>
+		<dependency>
+			<groupId>eviware</groupId>
+			<artifactId>maven-soapui-plugin</artifactId>
+			<version>4.5.1</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -410,17 +415,22 @@
 			<name>CodeHaus Releases</name>
 			<url>http://repository.codehaus.org/</url>
 		</repository>
+		<repository>
+	        <id>eviwarePluginRepository</id>
+	        <url>http://www.soapui.org/repository/maven2/</url>
+	    </repository>
 	</repositories>
+	
 	<pluginRepositories>
 		<pluginRepository>
 			<id>mulesoft-release</id>
 			<name>mulesoft release repository</name>
 			<layout>default</layout>
-			<url>https://repository.mulesoft.org/releases/</url>
+			<url>http://repository.mulesoft.org/releases/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
+    
 </project>
