@@ -137,7 +137,32 @@
 					<classpathScope>compile</classpathScope>
 				</configuration>
 			</plugin>
-			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/*IntegrationTest.java</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<phase>integration-test</phase>
+						<configuration>
+							<excludes>
+								<exclude>none</exclude>
+							</excludes>
+							<includes>
+								<include>**/*IntegrationTest.java</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -374,9 +399,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>com.github.tomakehurst</groupId>
-		    <artifactId>wiremock</artifactId>
-		    <version>1.30</version>
+			<groupId>com.github.tomakehurst</groupId>
+			<artifactId>wiremock</artifactId>
+			<version>1.30</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -387,6 +412,17 @@
 			<groupId>eviware</groupId>
 			<artifactId>maven-soapui-plugin</artifactId>
 			<version>4.5.1</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>httpcore</artifactId>
+					<groupId>org.apache.httpcomponents</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>teamdev</groupId>
+			<artifactId>jxbrowser</artifactId>
+			<version>3.0</version>
 		</dependency>
 	</dependencies>
 
@@ -416,11 +452,11 @@
 			<url>http://repository.codehaus.org/</url>
 		</repository>
 		<repository>
-	        <id>eviwarePluginRepository</id>
-	        <url>http://www.soapui.org/repository/maven2/</url>
-	    </repository>
+			<id>eviwarePluginRepository</id>
+			<url>http://www.soapui.org/repository/maven2/</url>
+		</repository>
 	</repositories>
-	
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>mulesoft-release</id>
@@ -432,5 +468,5 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-    
+
 </project>

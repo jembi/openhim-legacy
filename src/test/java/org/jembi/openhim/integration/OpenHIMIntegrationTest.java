@@ -1,6 +1,7 @@
 package org.jembi.openhim.integration;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.xmlbeans.XmlException;
 import org.junit.Test;
 import org.mule.tck.junit4.FunctionalTestCase;
 
@@ -19,7 +21,7 @@ import com.eviware.soapui.model.support.PropertiesMap;
 import com.eviware.soapui.model.testsuite.TestRunner;
 import com.eviware.soapui.model.testsuite.TestRunner.Status;
 import com.eviware.soapui.model.testsuite.TestSuite;
-import com.eviware.soapui.tools.SoapUITestCaseRunner;
+import com.eviware.soapui.support.SoapUIException;
 
 public class OpenHIMIntegrationTest extends FunctionalTestCase {
 	
@@ -61,19 +63,23 @@ public class OpenHIMIntegrationTest extends FunctionalTestCase {
 	}
 
 	@Test
-	public void soapUITestRunner() throws Exception {
+	public void soapUITestRunner() {
 		
-		//WsdlProject project = new WsdlProject("src/test/resources/integration-tests/OpenHIM-integration-tests.xml"); 
-		//TestSuite testSuite = project.getTestSuiteByName("Default Channel TestSuite"); 
+		log.info("Running soapUI integration tests...");
+		
+		WsdlProject project = null;
+		try {
+			project = new WsdlProject("src/test/resources/integration-tests/OpenHIM-integration-tests.xml");
+		} catch (XmlException | IOException | SoapUIException e1) {
+			fail();
+			e1.printStackTrace();
+		}
+		
+		TestSuite testSuite = project.getTestSuiteByName("Default Channel TestSuite");
 		  
-		//TestRunner runner = testSuite.run(new PropertiesMap(), false);
+		TestRunner runner = testSuite.run(new PropertiesMap(), false);
 		
-		//assertEquals( Status.FINISHED, runner.getStatus() );
-		
-		SoapUITestCaseRunner runner2 = new SoapUITestCaseRunner(); 
-		runner2.setProjectFile("src/test/resources/integration-tests/OpenHIM-integration-tests.xml");
-		Thread.sleep(1000);
-		runner2.run();
+		assertEquals(Status.FINISHED, runner.getStatus());
 		
 	}
 
