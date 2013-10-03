@@ -29,14 +29,14 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
                             <when expression="message.payload.httpStatus == 500" evaluator="groovy"> 
                                 <processor-chain doc:name="Processor Chain"> 
                                     <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="errorMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response"> 
-                                        <jdbc:query key="errorMsg" value="UPDATE transaction_log SET status='3', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"></jdbc:query>  
+                                        <jdbc:query key="errorMsg" value="UPDATE transaction_log SET status='3', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[header:SESSION:uuid];"></jdbc:query>  
                                     </jdbc:outbound-endpoint>  
                                 </processor-chain>  
                             </when>  
                             <otherwise> 
                                 <processor-chain doc:name="Processor Chain"> 
                                     <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="updateMsg" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw message response"> 
-                                        <jdbc:query key="updateMsg" value="UPDATE transaction_log SET status='2', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[groovy: return message.payload.getUuid();];"></jdbc:query>  
+                                        <jdbc:query key="updateMsg" value="UPDATE transaction_log SET status='2', responded_timestamp=now(), resp_body=#[groovy: return message.payload.getBody();], resp_status=#[groovy: return message.payload.getHttpStatus();] WHERE uuid=#[header:SESSION:uuid];"></jdbc:query>  
                                     </jdbc:outbound-endpoint>  
                                 </processor-chain>  
                             </otherwise>  
@@ -45,13 +45,22 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
                 </when>  
                 <otherwise> 
                     <processor-chain doc:name="Processor Chain"> 
+                        <logger message="Recieved a response that is of type RestfulHttpResponce" level="ERROR" doc:name="Logger"></logger>  
                         <scripting:component doc:name="Groovy"> 
-                            <scripting:script engine="Groovy"> 
-                                <scripting:text><![CDATA[StringWriter sw = new StringWriter();
-message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));
-message.setOutboundProperty("stacktrace", sw.toString());]]></scripting:text>  
+                            <scripting:script engine="Groovy">
+                                <scripting:text><![CDATA[try { 
+	StringWriter sw = new StringWriter();
+	message.getExceptionPayload().getException().printStackTrace(new PrintWriter(sw));
+	message.setOutboundProperty("stacktrace", sw.toString());
+} catch (Exception e) {
+	StringWriter sw = new StringWriter();
+	e.printStackTrace(new PrintWriter(sw));
+	message.setOutboundProperty("stacktrace", sw.toString());
+}]]></scripting:text>
+  
                             </scripting:script>  
-                        </scripting:component>  
+                        </scripting:component>
+                        <logger message="The message session id: #[header:SESSION:uuid]" level="INFO" doc:name="Logger"/>  
                         <jdbc:outbound-endpoint exchange-pattern="request-response" queryKey="errorMsg2" responseTimeout="10000" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Persist raw error message response"> 
                             <jdbc:query key="errorMsg2" value="UPDATE transaction_log SET status='3', error_description=#[groovy: return message.getExceptionPayload().getMessage();], error_stacktrace=#[header:OUTBOUND:stacktrace], responded_timestamp=now() WHERE uuid=#[header:SESSION:uuid];"></jdbc:query>  
                         </jdbc:outbound-endpoint>  

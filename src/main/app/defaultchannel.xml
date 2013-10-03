@@ -15,6 +15,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <logger message="Returning response #[groovy: message.payload.toString();]" level="INFO" doc:name="Logger"/>
         <choice-exception-strategy doc:name="Choice Exception Strategy">
             <catch-exception-strategy when="#[exception.causedBy(org.jembi.openhim.exception.URLMappingNotFoundException)]" doc:name="Catch_Exception_Strategy">
+                <logger message="URL Mapping could not be found for this message" level="ERROR" doc:name="Logger"/>
                 <scripting:transformer doc:name="Groovy">
                     <scripting:script engine="Groovy"><![CDATA[import org.jembi.openhim.*;
 
@@ -26,9 +27,15 @@ return res;]]></scripting:script>
                 </scripting:transformer>
             </catch-exception-strategy>
             <catch-exception-strategy doc:name="Catch_Exception_Strategy">
+                <logger message="Exception occured in default channel #[groovy: exception.getMessage();]" level="ERROR" doc:name="Logger"/>
                 <scripting:transformer doc:name="Groovy">
-                    <scripting:script engine="Groovy"><![CDATA[// re-throw the exception
-throw exception;]]></scripting:script>
+                    <scripting:script engine="Groovy"><![CDATA[import org.jembi.openhim.*;
+
+RestfulHttpResponse res = new RestfulHttpResponse();
+res.setHttpStatus(500);
+res.setBody("A server error occured: " + exception.getMessage());
+
+return res;]]></scripting:script>
                 </scripting:transformer>
             </catch-exception-strategy>
         </choice-exception-strategy>
