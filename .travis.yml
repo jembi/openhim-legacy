@@ -1,6 +1,6 @@
 language: java
 
-script: mvn integration-test
+# script: mvn integration-test
 
 # whitelist
 branches:
