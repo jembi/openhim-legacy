@@ -2,14 +2,13 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:https="http://www.mulesoft.org/schema/mule/https" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:mule-ss="http://www.mulesoft.org/schema/mule/spring-security" xmlns:ss="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.2.1" xsi:schemaLocation="
-http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
-http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd 
-http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
-http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
-http://www.mulesoft.org/schema/mule/spring-security http://www.mulesoft.org/schema/mule/spring-security/3.1/mule-spring-security.xsd 
-http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd ">
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:https="http://www.mulesoft.org/schema/mule/https" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:mule-ss="http://www.mulesoft.org/schema/mule/spring-security" xmlns:ss="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.4.0" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/spring-security http://www.mulesoft.org/schema/mule/spring-security/3.1/mule-spring-security.xsd
+http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
     <mule-ss:security-manager>  
         <!-- <mule-ss:delegate-security-provider name="memory-provider" delegate-ref="authenticationManager"/> -->
         <mule-ss:delegate-security-provider name="spring-security-ldap" delegate-ref="authenticationManager"/>
@@ -59,30 +58,27 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         -->
     </spring:beans>
     
-    <https:connector name="HTTPSConnector" cookieSpec="netscape" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" proxyHostname="localhost" proxyPort="80" doc:name="HTTPSConnector">
+    <https:connector name="HTTPSConnector" cookieSpec="netscape" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" proxyHostname="localhost"  doc:name="HTTP\HTTPS">
         <https:tls-key-store path="${cert.keystore}" keyPassword="${cert.keypassword}" storePassword="${cert.storepassword}"/>
     </https:connector>
-    <http:connector name="NoSessionConnector" doc:name="HTTP\HTTPS">
-        <service-overrides sessionHandler="org.mule.session.NullSessionHandler"/>
-    </http:connector>
     <flow name="RESTEntryPoint-HTTPS" doc:name="RESTEntryPoint-HTTPS">
-        <https:inbound-endpoint exchange-pattern="request-response" host="localhost" port="5000" connector-ref="HTTPSConnector" doc:name="HTTP">
+        <https:inbound-endpoint exchange-pattern="request-response" host="0.0.0.0" port="5000" connector-ref="HTTPSConnector" doc:name="HTTP">
         	<mule-ss:http-security-filter realm="mule-realm"/>
         </https:inbound-endpoint>
         <response>
-            <custom-transformer class="org.jembi.rhea.transformers.RestfulHttpResponseToHttpResponseTransformer" doc:name="RestfulHttpResponseToHttpResponseTransformer"/>
+            <custom-transformer class="org.jembi.openhim.transformers.RestfulHttpResponseToHttpResponseTransformer" doc:name="RestfulHttpResponseToHttpResponseTransformer"/>
             <logger message="Transaction responce sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Logger"/>
         </response>
         <logger message="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Log raw message"/>
-        <custom-transformer class="org.jembi.rhea.transformers.HttpRequestToRestfulHttpRequestTransformer" doc:name="HttpRequestToRestfulHttpRequestTransformer"/>
+        <custom-transformer class="org.jembi.openhim.transformers.HttpRequestToRestfulHttpRequestTransformer" doc:name="HttpRequestToRestfulHttpRequestTransformer"/>
         <logger message="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]" level="INFO" doc:name="Log Structured Message"/>
         <vm:outbound-endpoint exchange-pattern="request-response" path="messagePersistanceQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Queue message"/>
     </flow>
     <flow name="RESTEntryPoint-HTTP" doc:name="RESTEntryPoint-HTTP">
-        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="5001" doc:name="HTTP"/>
+        <http:inbound-endpoint exchange-pattern="request-response" host="0.0.0.0" port="5001" doc:name="HTTP"/>
         <response>
             <logger message="In response" level="INFO" doc:name="Logger"/>
-            <custom-transformer class="org.jembi.rhea.transformers.RestfulHttpResponseToHttpResponseTransformer" doc:name="RestfulHttpResponseToHttpResponseTransformer"/>
+            <custom-transformer class="org.jembi.openhim.transformers.RestfulHttpResponseToHttpResponseTransformer" doc:name="RestfulHttpResponseToHttpResponseTransformer"/>
             <logger message="Transaction responce sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Logger"/>
         </response>
         <logger message="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Log raw message"/>
@@ -93,7 +89,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
                 <message-property-filter pattern="http.request.path=/ws/rest/v1/facilities" caseSensitive="true" scope="inbound"/>
             </or-filter>
         </and-filter>
-        <custom-transformer class="org.jembi.rhea.transformers.HttpRequestToRestfulHttpRequestTransformer" doc:name="HttpRequestToRestfulHttpRequestTransformer"/>
+        <custom-transformer class="org.jembi.openhim.transformers.HttpRequestToRestfulHttpRequestTransformer" doc:name="HttpRequestToRestfulHttpRequestTransformer"/>
         <logger message="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]" level="INFO" doc:name="Log Structured Message"/>
         <vm:outbound-endpoint exchange-pattern="request-response" path="messagePersistanceQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Queue message"/>
     </flow>

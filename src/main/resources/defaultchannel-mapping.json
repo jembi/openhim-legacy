@@ -1,0 +1,30 @@
+[
+	{
+		"urlPattern": "test/sample/.+",
+		"host": "localhost",
+		"port": 8080
+	},
+	{
+		"urlPattern": "test/sample2/.+/test2",
+		"host": "localhost",
+		"port": 8080
+	},
+	{
+		"urlPattern": "test/protected",
+		"host": "localhost",
+		"port": 8080,
+		"authType": "basic",
+		"username": "test",
+		"password": "password"
+	},
+	{
+		"urlPattern": "test/post",
+		"host": "localhost",
+		"port": 8080
+	},
+	{
+		"urlPattern": "test/headers",
+		"host": "localhost",
+		"port": 8080
+	}
+]

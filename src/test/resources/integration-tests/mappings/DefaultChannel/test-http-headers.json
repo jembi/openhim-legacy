@@ -1,0 +1,23 @@
+{
+	"request": {
+		"url": "/test/headers",
+		"method": "POST",
+		"bodyPatterns": [
+            { "equalTo": "THIS IS A TEST POST" }
+        ],
+        "headers": {
+            "TEST_HEADER": {
+                "equalTo": "TEST_VALUE"
+            },
+            "OPENHIM_TX_UUID": {
+                "matches": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+            }
+        }
+	},
+	"response": {
+		"status": 200,
+		"headers": {
+        	"Content-Type": "plain/test"
+        }
+	}
+}
