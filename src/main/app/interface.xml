@@ -10,7 +10,6 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 http://www.mulesoft.org/schema/mule/spring-security http://www.mulesoft.org/schema/mule/spring-security/3.1/mule-spring-security.xsd
 http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
     <mule-ss:security-manager>  
-        <!-- <mule-ss:delegate-security-provider name="memory-provider" delegate-ref="authenticationManager"/> -->
         <mule-ss:delegate-security-provider name="spring-security-ldap" delegate-ref="authenticationManager"/>
     </mule-ss:security-manager>
     
@@ -47,19 +46,11 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 	      	</spring:property>
 	   </spring:bean>
     	
-    	<!--
-        <ss:authentication-manager alias="authenticationManager">  
-            <ss:authentication-provider> 
-                <ss:user-service id="userService"> 
-                    <ss:user name="${him.interface.user}" password="${him.interface.password}" authorities="ROLE_ADMIN"/> 
-                </ss:user-service> 
-            </ss:authentication-provider> 
-        </ss:authentication-manager>
-        -->
     </spring:beans>
     
     <https:connector name="HTTPSConnector" cookieSpec="netscape" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" proxyHostname="localhost"  doc:name="HTTP\HTTPS">
         <https:tls-key-store path="${cert.keystore}" keyPassword="${cert.keypassword}" storePassword="${cert.storepassword}"/>
+        <https:tls-server path="${cert.truststore}" storePassword="${cert.truststore.password}" requireClientAuthentication="${cert.client.auth}"/>
     </https:connector>
     <flow name="RESTEntryPoint-HTTPS" doc:name="RESTEntryPoint-HTTPS">
         <https:inbound-endpoint exchange-pattern="request-response" host="0.0.0.0" port="5000" connector-ref="HTTPSConnector" doc:name="HTTP">
@@ -70,25 +61,6 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
             <logger message="Transaction responce sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Logger"/>
         </response>
         <logger message="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Log raw message"/>
-        <custom-transformer class="org.jembi.openhim.transformers.HttpRequestToRestfulHttpRequestTransformer" doc:name="HttpRequestToRestfulHttpRequestTransformer"/>
-        <logger message="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]" level="INFO" doc:name="Log Structured Message"/>
-        <vm:outbound-endpoint exchange-pattern="request-response" path="messagePersistanceQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Queue message"/>
-    </flow>
-    <flow name="RESTEntryPoint-HTTP" doc:name="RESTEntryPoint-HTTP">
-        <http:inbound-endpoint exchange-pattern="request-response" host="0.0.0.0" port="5001" doc:name="HTTP"/>
-        <response>
-            <logger message="In response" level="INFO" doc:name="Logger"/>
-            <custom-transformer class="org.jembi.openhim.transformers.RestfulHttpResponseToHttpResponseTransformer" doc:name="RestfulHttpResponseToHttpResponseTransformer"/>
-            <logger message="Transaction responce sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Logger"/>
-        </response>
-        <logger message="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Log raw message"/>
-        <and-filter doc:name="Filter out protected endpoints">
-            <message-property-filter pattern="http.method=GET" caseSensitive="true" scope="inbound"/>
-            <or-filter>
-                <expression-filter evaluator="groovy" expression="message.getInboundProperty('http.request.path').contains('/ws/rest/v1/facility/')"/>
-                <message-property-filter pattern="http.request.path=/ws/rest/v1/facilities" caseSensitive="true" scope="inbound"/>
-            </or-filter>
-        </and-filter>
         <custom-transformer class="org.jembi.openhim.transformers.HttpRequestToRestfulHttpRequestTransformer" doc:name="HttpRequestToRestfulHttpRequestTransformer"/>
         <logger message="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]" level="INFO" doc:name="Log Structured Message"/>
         <vm:outbound-endpoint exchange-pattern="request-response" path="messagePersistanceQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Queue message"/>

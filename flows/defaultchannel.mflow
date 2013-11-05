@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="defaultchannel">
-    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="fee1dd92-6c78-489c-817f-d129539e33dd">
+    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="a47d7a9c-b14e-4816-8fa7-8e123d3d1b9a">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
+            <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
             <property name="auxiliary;index" value="1"/>
+            <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
             <graphicalData x="0" y="0" width="0" height="0"/>
@@ -23,9 +24,9 @@
                     <property name="path" value="defaultChannel-Generic-NormalizationQueue"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="mimeType"/>
                     <property name="auxiliary;index" value="2"/>
                     <property name="responseTimeout"/>
+                    <property name="mimeType"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
@@ -43,8 +44,8 @@
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
                     <property name="class" value="org.jembi.openhim.transformers.RestfulHttpRequestToHttpRequestTransformer"/>
-                    <property name="mimeType"/>
                     <property name="auxiliary;index" value="4"/>
+                    <property name="mimeType"/>
                 </properties>
             </pattern>
             <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
@@ -71,17 +72,17 @@
                     <property name="exchange-pattern" value="request-response"/>
                     <property name="tracking:enable-default-events"/>
                     <property name="ref"/>
-                    <property name="httpLabel"/>
                     <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
                     <property name="address"/>
-                    <property name="encoding"/>
                     <property name="path" value="#[header:OUTBOUND:http.path]"/>
+                    <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
                     <property name="method" value="POST"/>
                     <property name="user"/>
-                    <property name="mimeType"/>
-                    <property name="responseTimeout"/>
                     <property name="auxiliary;index" value="6"/>
+                    <property name="responseTimeout" value="60000"/>
+                    <property name="mimeType"/>
                     <property name="connector-ref" value="NoSessionConnector"/>
                 </properties>
             </endpoint>
@@ -92,8 +93,8 @@
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
                     <property name="class" value="org.jembi.openhim.transformers.HttpResponseToRestfulHttpResponseTransformer"/>
-                    <property name="mimeType"/>
                     <property name="auxiliary;index" value="7"/>
+                    <property name="mimeType"/>
                 </properties>
             </pattern>
             <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
@@ -121,39 +122,35 @@
                             </properties>
                             <compartment entity-id="compartment#2">
 <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#3">
-    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="82e79f2f-4368-45e4-a523-4d1c64b8462b">
+    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#3">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
             <property name="message" value="URL Mapping could not be found for this message"/>
-            <property name="category" value=""/>
+            <property name="category"/>
             <property name="level" value="ERROR"/>
-            <property name="updated"/>
+            <property name="auxiliary;index" value="11"/>
         </properties>
         <description></description>
     </pattern>
     <pattern name="Groovy" type="http://www.mulesoft.org/schema/mule/scripting/groovyTransformer" entity-id="Groovy#1">
-        <graphicalData x="38" y="358" width="68" height="71"/>
+        <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
-            <property name="returnClass"/>
-            <property name="ignoreBadInput"/>
-            <property name="encoding"/>
-            <property name="mimeType"/>
-            <property name="auxiliary;index" value="11"/>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
+            <property name="auxiliary;erased;mimeType" value="true"/>
+            <property name="returnClass" value=""/>
+            <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
+            <property name="ignoreBadInput" value="false"/>
+            <property name="updated"/>
+            <property name="auxiliary;erased;encoding" value="true"/>
+            <property name="encoding" value=""/>
+            <property name="auxiliary;index" value="12"/>
+            <property name="mimeType" value=""/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;97587613">
                 <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
-                <property name="engine" value="Groovy"/>
                 <property name="isProcessed$$$$" value="true"/>
-                <property name="auxiliary;wrapIn" value="12"/>
-                <property name="auxiliary;index" value="12"/>
-            </property-collection>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
-                <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
-                <property name="engine" value="Groovy"/>
-                <property name="isProcessed$$$$" value="true"/>
-                <property name="auxiliary;wrapIn" value="12"/>
-                <property name="auxiliary;index" value="12"/>
+                <property name="auxiliary;index" value="13"/>
             </property-collection>
         </properties>
+        <description></description>
     </pattern>
 </lane>
                             </compartment>
@@ -164,39 +161,42 @@
 <property name="labelConfigureConditionalExecutionUsingExpression"/>
 <property name="when"/>
 <property name="enableNotifications"/>
-<property name="auxiliary;index" value="13"/>
+<property name="auxiliary;index" value="14"/>
                             </properties>
                             <compartment entity-id="compartment#3">
 <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#4">
-    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="7e12d456-240e-4b9d-8ad5-afb38dd003ff">
+    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#4">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
             <property name="message" value="Exception occured in default channel #[groovy: exception.getMessage();]"/>
-            <property name="category" value=""/>
+            <property name="category"/>
             <property name="level" value="ERROR"/>
-            <property name="updated"/>
+            <property name="auxiliary;index" value="15"/>
         </properties>
-        <description></description>
     </pattern>
     <pattern name="Groovy" type="http://www.mulesoft.org/schema/mule/scripting/groovyTransformer" entity-id="Groovy#2">
-        <graphicalData x="38" y="481" width="68" height="71"/>
+        <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
-            <property name="auxiliary;erased;mimeType" value="true"/>
-            <property name="returnClass" value=""/>
-            <property name="ignoreBadInput" value="false"/>
-            <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;A server error occured: &quot; + exception.getMessage());&#xA;&#xA;return res;"/>
-            <property name="updated"/>
-            <property name="auxiliary;erased;encoding" value="true"/>
-            <property name="encoding" value=""/>
-            <property name="mimeType" value=""/>
-            <property name="auxiliary;index" value="14"/>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;885850037">
+            <property name="returnClass"/>
+            <property name="ignoreBadInput"/>
+            <property name="encoding"/>
+            <property name="auxiliary;index" value="16"/>
+            <property name="mimeType"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
                 <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;A server error occured: &quot; + exception.getMessage());&#xA;&#xA;return res;"/>
+                <property name="engine" value="Groovy"/>
                 <property name="isProcessed$$$$" value="true"/>
-                <property name="auxiliary;index" value="15"/>
+                <property name="auxiliary;index" value="17"/>
+                <property name="auxiliary;wrapIn" value="17"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
+                <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;A server error occured: &quot; + exception.getMessage());&#xA;&#xA;return res;"/>
+                <property name="engine" value="Groovy"/>
+                <property name="isProcessed$$$$" value="true"/>
+                <property name="auxiliary;index" value="17"/>
+                <property name="auxiliary;wrapIn" value="17"/>
             </property-collection>
         </properties>
-        <description></description>
     </pattern>
 </lane>
                             </compartment>
@@ -205,7 +205,5 @@
                 </compartment>
             </scope>
         </lane>
-        <apikit>false</apikit>
     </flow>
-    <description></description>
 </mule-configuration>
