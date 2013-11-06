@@ -60,7 +60,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
             <logger message="Transaction responce sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Logger"/>
         </response>
         <choice>
-       		<when expression="!${cert.client.auth}" evaluator="groovy">
+       		<when expression="${interface.enable.basicauth}" evaluator="groovy">
        			<mule-ss:http-security-filter realm="mule-realm"/>
        		</when>
        		<otherwise>

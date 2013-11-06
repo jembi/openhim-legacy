@@ -202,7 +202,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="RESTEntryPoint-HTTPS" entity-id="f7bc2ae4-2ccf-4d6b-ba27-e6fa5603cc54">
+    <flow SubFlow="false" name="RESTEntryPoint-HTTPS" entity-id="0eb15467-7e33-4f4e-a757-a3caad6c4d2f">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -273,27 +273,27 @@
             <splitter index="32" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property-collection name="f2f48f88-0cdb-4b58-ae07-f37a753ea935">
+                    <property-collection name="055db50c-72f5-4298-913a-5ff430138fa1">
                         <property name="choice.otherwise" value="true"/>
                         <property-collection name="choice.attributes"/>
                     </property-collection>
-                    <property-collection name="d3ca76af-6245-4b8b-8b7c-3900c943ace3">
-                        <property name="choice.expression" value="!${cert.client.auth}"/>
+                    <property-collection name="16457336-c174-4139-b2f5-82d15116e367">
+                        <property name="choice.expression" value="${interface.enable.basicauth}"/>
                         <property-collection name="choice.attributes">
-                            <property name="expression" value="!${cert.client.auth}"/>
+                            <property name="expression" value="${interface.enable.basicauth}"/>
                             <property name="evaluator" value="groovy"/>
                         </property-collection>
                     </property-collection>
                 </properties>
                 <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
                 <compartment entity-id="compartment#2">
-                    <lane hadOnlyOneElement="false" index="34" isChoiceOtherwiseLane="false" entity-id="d3ca76af-6245-4b8b-8b7c-3900c943ace3">
+                    <lane hadOnlyOneElement="false" index="34" isChoiceOtherwiseLane="false" entity-id="16457336-c174-4139-b2f5-82d15116e367">
                         <unknown description="false" index="34" entity-id="unknown#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <content>&lt;mule-ss:http-security-filter xmlns:mule-ss=&quot;http://www.mulesoft.org/schema/mule/spring-security&quot; realm=&quot;mule-realm&quot;/&gt;</content>
                         </unknown>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="36" isChoiceOtherwiseLane="true" entity-id="f2f48f88-0cdb-4b58-ae07-f37a753ea935">
+                    <lane hadOnlyOneElement="false" index="36" isChoiceOtherwiseLane="true" entity-id="055db50c-72f5-4298-913a-5ff430138fa1">
                         <pattern name="Log message" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
