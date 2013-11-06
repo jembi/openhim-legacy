@@ -54,12 +54,19 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
     </https:connector>
     <flow name="RESTEntryPoint-HTTPS" doc:name="RESTEntryPoint-HTTPS">
         <https:inbound-endpoint exchange-pattern="request-response" host="0.0.0.0" port="5000" connector-ref="HTTPSConnector" doc:name="HTTP">
-        	<mule-ss:http-security-filter realm="mule-realm"/>
         </https:inbound-endpoint>
         <response>
             <custom-transformer class="org.jembi.openhim.transformers.RestfulHttpResponseToHttpResponseTransformer" doc:name="RestfulHttpResponseToHttpResponseTransformer"/>
             <logger message="Transaction responce sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Logger"/>
         </response>
+        <choice>
+       		<when expression="!${cert.client.auth}" evaluator="groovy">
+       			<mule-ss:http-security-filter realm="mule-realm"/>
+       		</when>
+       		<otherwise>
+       			<logger message="Mutual TLS auth is enabled, no basic auth details required" level="INFO" doc:name="Log message"/>
+       		</otherwise>
+       	</choice>
         <logger message="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Log raw message"/>
         <custom-transformer class="org.jembi.openhim.transformers.HttpRequestToRestfulHttpRequestTransformer" doc:name="HttpRequestToRestfulHttpRequestTransformer"/>
         <logger message="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]" level="INFO" doc:name="Log Structured Message"/>

@@ -202,7 +202,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="RESTEntryPoint-HTTPS" entity-id="ab5cfc9a-cdf2-4540-9265-2b2c1964017a">
+    <flow SubFlow="false" name="RESTEntryPoint-HTTPS" entity-id="f7bc2ae4-2ccf-4d6b-ba27-e6fa5603cc54">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -243,7 +243,7 @@
                     <property name="connector-ref" value="HTTPSConnector"/>
                 </properties>
             </endpoint>
-            <response index="30" entity-id="response#1">
+            <response index="29" entity-id="response#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <compartment entity-id="compartment#1">
                     <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
@@ -254,7 +254,7 @@
 <property name="ignoreBadInput"/>
 <property name="encoding"/>
 <property name="class" value="org.jembi.openhim.transformers.RestfulHttpResponseToHttpResponseTransformer"/>
-<property name="auxiliary;index" value="31"/>
+<property name="auxiliary;index" value="30"/>
 <property name="mimeType"/>
                             </properties>
                         </pattern>
@@ -264,19 +264,55 @@
 <property name="message" value="Transaction responce sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]"/>
 <property name="category"/>
 <property name="level" value="INFO"/>
-<property name="auxiliary;index" value="32"/>
+<property name="auxiliary;index" value="31"/>
                             </properties>
                         </pattern>
                     </lane>
                 </compartment>
             </response>
-            <pattern name="Log raw message" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
+            <splitter index="32" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property-collection name="f2f48f88-0cdb-4b58-ae07-f37a753ea935">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                    <property-collection name="d3ca76af-6245-4b8b-8b7c-3900c943ace3">
+                        <property name="choice.expression" value="!${cert.client.auth}"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value="!${cert.client.auth}"/>
+                            <property name="evaluator" value="groovy"/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
+                <compartment entity-id="compartment#2">
+                    <lane hadOnlyOneElement="false" index="34" isChoiceOtherwiseLane="false" entity-id="d3ca76af-6245-4b8b-8b7c-3900c943ace3">
+                        <unknown description="false" index="34" entity-id="unknown#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <content>&lt;mule-ss:http-security-filter xmlns:mule-ss=&quot;http://www.mulesoft.org/schema/mule/spring-security&quot; realm=&quot;mule-realm&quot;/&gt;</content>
+                        </unknown>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="36" isChoiceOtherwiseLane="true" entity-id="f2f48f88-0cdb-4b58-ae07-f37a753ea935">
+                        <pattern name="Log message" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="message" value="Mutual TLS auth is enabled, no basic auth details required"/>
+<property name="category"/>
+<property name="level" value="INFO"/>
+<property name="auxiliary;index" value="36"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </splitter>
+            <pattern name="Log raw message" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#3">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="message" value="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]"/>
                     <property name="category"/>
                     <property name="level" value="INFO"/>
-                    <property name="auxiliary;index" value="33"/>
+                    <property name="auxiliary;index" value="37"/>
                 </properties>
             </pattern>
             <pattern name="HttpRequestToRestfulHttpRequestTransformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#2">
@@ -286,17 +322,17 @@
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
                     <property name="class" value="org.jembi.openhim.transformers.HttpRequestToRestfulHttpRequestTransformer"/>
-                    <property name="auxiliary;index" value="34"/>
+                    <property name="auxiliary;index" value="38"/>
                     <property name="mimeType"/>
                 </properties>
             </pattern>
-            <pattern name="Log Structured Message" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#3">
+            <pattern name="Log Structured Message" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#4">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="message" value="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]"/>
                     <property name="category"/>
                     <property name="level" value="INFO"/>
-                    <property name="auxiliary;index" value="35"/>
+                    <property name="auxiliary;index" value="39"/>
                 </properties>
             </pattern>
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Queue message" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
@@ -312,7 +348,7 @@
                     <property name="path" value="messagePersistanceQueue"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="auxiliary;index" value="36"/>
+                    <property name="auxiliary;index" value="40"/>
                     <property name="responseTimeout" value="10000"/>
                     <property name="mimeType" value="text/plain"/>
                     <property name="connector-ref"/>
