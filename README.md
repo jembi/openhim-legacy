@@ -7,6 +7,8 @@ OpenHIM is an open source Health Information Mediator built to facilitate intero
 
 It was developed for the Rwandan Health Infromation Exchange however, it was designed and intended to be used in re-used other settings. For more details about how the OpenHIM is used in the Rwandan Health Information exchange, see https://jembiprojects.jira.com/wiki/pages/viewpage.action?pageId=10289633
 
+For additional information and documentation please see the [OpenHIM wiki pages](https://github.com/jembi/openhim/wiki).
+
 Setup
 =====
 
