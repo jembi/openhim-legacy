@@ -17,6 +17,7 @@ public class RestfulHttpRequest implements Serializable {
 	
 	private String uuid = UUID.randomUUID().toString();
 	
+	private Scheme scheme = Scheme.HTTPS;
 	private String path;
 	private String body = "";
 	private String httpMethod;
@@ -31,6 +32,8 @@ public class RestfulHttpRequest implements Serializable {
 	public static String HTTP_POST = "POST";
 	public static String HTTP_PUT = "PUT";
 	public static String HTTP_DELETE = "DELETE";
+	
+	public static enum Scheme { HTTP, HTTPS }
 	
 	public String getUuid() {
 		return uuid;
@@ -108,11 +111,20 @@ public class RestfulHttpRequest implements Serializable {
 		this.httpHeaders = httpHeaders;
 	}
 
+	public Scheme getScheme() {
+		return scheme;
+	}
+
+	public void setScheme(Scheme scheme) {
+		this.scheme = scheme;
+	}
+
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 
 		sb.append("RestfulHttpRequest {\n");
+		sb.append("	scheme: " + (scheme.equals(Scheme.HTTP) ? "http" : "https") + "\n");
 		sb.append("	path: " + path + "\n");
 		sb.append("	body: " + body + "\n");
 
@@ -190,6 +202,7 @@ public class RestfulHttpRequest implements Serializable {
 		theClone.httpMethod = httpMethod;
 		theClone.requestParams = requestParams;
 		theClone.httpHeaders = httpHeaders;
+		theClone.scheme = scheme;
 		return theClone;
 	}
 

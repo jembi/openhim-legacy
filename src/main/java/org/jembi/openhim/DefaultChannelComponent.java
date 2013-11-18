@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jembi.openhim.RestfulHttpRequest.Scheme;
 import org.jembi.openhim.exception.URLMappingNotFoundException;
 import org.mule.api.MuleEventContext;
 import org.mule.api.MuleMessage;
@@ -39,7 +40,7 @@ public class DefaultChannelComponent implements Callable {
 		RestfulHttpRequest req = (RestfulHttpRequest) msg.getPayload();
 		String actualPath = req.getPath();
 
-		URLMapping mapping = findURLMapping(actualPath);
+		URLMapping mapping = findURLMapping(req.getScheme(), actualPath);
 		
 		if (mapping == null) {
 			throw new URLMappingNotFoundException("A URL mapping was not found for the URL: " + req.getPath());
@@ -63,8 +64,12 @@ public class DefaultChannelComponent implements Callable {
 		return msg;
 	}
 
-	protected URLMapping findURLMapping(String actualPath) {
+	protected URLMapping findURLMapping(Scheme scheme, String actualPath) {
 		for (URLMapping mapping : mappings) {
+			if (scheme.equals(Scheme.HTTP) && !"true".equalsIgnoreCase(mapping.getAllowUnsecured())) {
+				continue;
+			}
+
 			String urlPattern = mapping.getUrlPattern();
 
 			Pattern p = Pattern.compile(urlPattern);
@@ -102,6 +107,7 @@ public class DefaultChannelComponent implements Callable {
 		private String username;
 		private String password;
 		private String authType;
+		private String allowUnsecured;
 
 		@Override
 		public boolean equals(Object obj) {
@@ -164,6 +170,14 @@ public class DefaultChannelComponent implements Callable {
 
 		public void setPort(String port) {
 			this.port = port;
+		}
+
+		public String getAllowUnsecured() {
+			return allowUnsecured;
+		}
+
+		public void setAllowUnsecured(String allowUnsecured) {
+			this.allowUnsecured = allowUnsecured;
 		}
 	}
 

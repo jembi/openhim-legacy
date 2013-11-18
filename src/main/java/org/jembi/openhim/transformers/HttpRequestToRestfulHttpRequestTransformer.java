@@ -6,6 +6,7 @@ package org.jembi.openhim.transformers;
 import java.util.Map;
 
 import org.jembi.openhim.RestfulHttpRequest;
+import org.jembi.openhim.RestfulHttpRequest.Scheme;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
@@ -15,6 +16,7 @@ public class HttpRequestToRestfulHttpRequestTransformer extends
 	
 	public static final String OPENHIM_TX_UUID = "OPENHIM_TX_UUID";
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object transformMessage(MuleMessage msg, String enc) throws TransformerException {
 		
@@ -38,7 +40,12 @@ public class HttpRequestToRestfulHttpRequestTransformer extends
 			throw new TransformerException(this, e);
 		}
 		
+		String scheme = ((String)msg.getInboundProperty("http.context.uri")).split(":")[0];
+		if ("https".equals(scheme))
+			restMsg.setScheme(Scheme.HTTPS);
+		else if ("http".equals(scheme))
+			restMsg.setScheme(Scheme.HTTP);
+		
 		return restMsg;
 	}
-
 }
