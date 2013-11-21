@@ -26,5 +26,26 @@
 		"urlPattern": "test/headers",
 		"host": "localhost",
 		"port": 8080
+	},
+	{
+		"urlPattern": "test/unsecure",
+		"host": "localhost",
+		"port": 8080,
+		"allowUnsecured": "true"
+	},
+	{
+		"urlPattern": "test/secure",
+		"host": "localhost",
+		"port": 8080,
+		"allowUnsecured": "false"
+	},
+	{
+		"urlPattern": "test/unsecure2",
+		"host": "localhost",
+		"port": 8080,
+		"authType": "basic",
+		"username": "test",
+		"password": "password",
+		"allowUnsecured": "true"
 	}
 ]
