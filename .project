@@ -9,9 +9,13 @@
     <buildCommand>
       <name>org.mule.tooling.core.muleBuilder</name>
     </buildCommand>
+    <buildCommand>
+      <name>org.mule.tooling.maven.mavenBuilder</name>
+    </buildCommand>
   </buildSpec>
   <natures>
     <nature>org.eclipse.jdt.core.javanature</nature>
     <nature>org.mule.tooling.core.muleNature</nature>
+    <nature>org.mule.tooling.maven.mavenNature</nature>
   </natures>
 </projectDescription>

@@ -2,3 +2,4 @@
 /soapui-errors.log
 /soapui.log
 /run-integration-tests-ryan.sh
+/run-unsecured-channel-tests-ryan.sh

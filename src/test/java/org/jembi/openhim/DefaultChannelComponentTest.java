@@ -2,11 +2,11 @@ package org.jembi.openhim;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
 import org.jembi.openhim.DefaultChannelComponent.URLMapping;
+import org.jembi.openhim.RestfulHttpRequest.Scheme;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -19,12 +19,12 @@ public class DefaultChannelComponentTest {
 		DefaultChannelComponent dcc = new DefaultChannelComponent();
 		dcc.readMappings();
 		
-		URLMapping mapping = dcc.findURLMapping("test/sample/123");
+		URLMapping mapping = dcc.findURLMapping(Scheme.HTTPS, "test/sample/123");
 		assertNotNull(mapping);
 		assertEquals("localhost", mapping.getHost());
 		assertEquals("8080", mapping.getPort());
 		
-		mapping = dcc.findURLMapping("test/sample2/123abc/test2");
+		mapping = dcc.findURLMapping(Scheme.HTTPS, "test/sample2/123abc/test2");
 		assertNotNull(mapping);
 		assertEquals("localhost", mapping.getHost());
 		assertEquals("8080", mapping.getPort());
@@ -35,7 +35,7 @@ public class DefaultChannelComponentTest {
 		DefaultChannelComponent dcc = new DefaultChannelComponent();
 		dcc.readMappings();
 		
-		URLMapping mapping = dcc.findURLMapping("not/a/match");
+		URLMapping mapping = dcc.findURLMapping(Scheme.HTTPS, "not/a/match");
 		assertEquals(null, mapping);
 	}
 	
@@ -73,4 +73,32 @@ public class DefaultChannelComponentTest {
 		assertEquals(true, DefaultChannelComponent.mappings.contains(mapping2));
 	}
 
+	@Test
+	public void test_findUnsecureURLMapping_match() throws JsonParseException, JsonMappingException, IOException {
+		DefaultChannelComponent dcc = new DefaultChannelComponent();
+		dcc.readMappings();
+
+		URLMapping mapping = dcc.findURLMapping(Scheme.HTTP, "test/unsecure");
+		assertNotNull(mapping);
+		assertEquals("localhost", mapping.getHost());
+		assertEquals("8080", mapping.getPort());
+
+		URLMapping mapping2 = dcc.findURLMapping(Scheme.HTTP, "test/unsecure2");
+		assertNotNull(mapping2);
+		assertEquals("localhost", mapping2.getHost());
+		assertEquals("8080", mapping2.getPort());
+	}
+
+	@Test
+	public void test_shouldNotFindUnallowed() throws JsonParseException, JsonMappingException, IOException {
+		DefaultChannelComponent dcc = new DefaultChannelComponent();
+		dcc.readMappings();
+
+		URLMapping mapping = dcc.findURLMapping(Scheme.HTTP, "test/secure");
+		assertEquals(null, mapping);
+
+		//secure by default
+		URLMapping mapping2 = dcc.findURLMapping(Scheme.HTTP, "test/sample/123");
+		assertEquals(null, mapping2);
+	}
 }
