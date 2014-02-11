@@ -14,7 +14,7 @@ Setup
 
 The HIM is developed as a Mule ESB application so we need MuleStudio to work with the project. You can download it here: http://www.mulesoft.org/download-mule-esb-community-edition. If you are new to MuleStudio I would suggest going over some of the getting started documentation and do some of the tutorials: http://www.mulesoft.org/documentation/display/MULE3START/Home.
 
-Next, you will want to import this git repo into MuleStudio. There is some good documentation on how to accomblish this on the Mule wiki: http://www.mulesoft.org/documentation/display/MULE3STUDIO/Using+Git+with+Studio
+Next, you will want to import this git repo into MuleStudio. There is some good documentation on how to accomblish this on the Mule wiki: http://www.mulesoft.org/documentation/display/33X/Using+Git+with+Studio, but use this repository instead: http://download.eclipse.org/releases/juno/ 
 
 Once, you have the application imported you will need to configure 2 things for the HIM to function.
 
