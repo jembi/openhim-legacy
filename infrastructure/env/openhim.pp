@@ -112,7 +112,7 @@ exec { "extract-mule-esb":
 
 exec { "copy-HIM-mule-app":
 	cwd => "/opt/mule-standalone-3.4.0/apps",
-	command => "cp $source_dir/openhim-0.1.0-SNAPSHOT.zip ./",
+	command => "cp $source_dir/openhim-2.1.0.zip ./",
 	creates => "/opt/mule-standalone-3.4.0/apps/openhim-0.1.0-SNAPSHOT.zip",
 	require => Exec["extract-mule-esb"],
 }
