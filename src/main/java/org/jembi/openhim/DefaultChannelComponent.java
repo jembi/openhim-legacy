@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.jembi.openhim.RestfulHttpRequest.Scheme;
+import org.jembi.openhim.exception.DefaultChannelInvalidConfigException;
 import org.jembi.openhim.exception.URLMappingNotFoundException;
 import org.mule.api.MuleEventContext;
 import org.mule.api.MuleMessage;
@@ -46,23 +47,69 @@ public class DefaultChannelComponent implements Callable {
 			throw new URLMappingNotFoundException("A URL mapping was not found for the URL: " + req.getPath());
 		}
 		
-		if (mapping.getAuthType() != null) {
-			if (mapping.getAuthType().equals(HTTP_AUTH_TYPE_BASIC)) {
-				String username = mapping.getUsername();
-				String password = mapping.getPassword();
-				
-				byte[] encodedBytes = Base64.encodeBase64((username + ":" + password).getBytes());
-				String authHeader = "Basic " + new String(encodedBytes);
-				
-				msg.setProperty("Authorization", authHeader, PropertyScope.OUTBOUND);
-			}
-		}
-		
-		msg.setProperty("http.host", mapping.getHost(), PropertyScope.OUTBOUND);
-		msg.setProperty("http.port", mapping.getPort(), PropertyScope.OUTBOUND);
+		setMessagePropertiesFromMapping(req, msg, mapping);
 		
 		return msg;
 	}
+	
+	protected void setMessagePropertiesFromMapping(RestfulHttpRequest request, MuleMessage msg, URLMapping mapping) throws DefaultChannelInvalidConfigException {
+		msg.setProperty("http.host", mapping.getHost(), PropertyScope.OUTBOUND);
+		msg.setProperty("http.port", mapping.getPort(), PropertyScope.OUTBOUND);
+
+		if (mapping.getAuthType() != null) {
+			if (mapping.getAuthType().equals(HTTP_AUTH_TYPE_BASIC)) {
+				setBasicAuthProperty(msg, mapping);
+			}
+		}
+		
+		if (mapping.getPath()!=null || mapping.getPathTransform()!=null) {
+			setRequestPath(request, mapping);
+		}
+		msg.setProperty("path", request.buildUrlWithRequestParams(), PropertyScope.OUTBOUND);
+	}
+	
+	private void setBasicAuthProperty(MuleMessage msg, URLMapping mapping) {
+		String username = mapping.getUsername();
+		String password = mapping.getPassword();
+				
+		byte[] encodedBytes = Base64.encodeBase64((username + ":" + password).getBytes());
+		String authHeader = "Basic " + new String(encodedBytes);
+				
+		msg.setProperty("Authorization", authHeader, PropertyScope.OUTBOUND);
+	}
+	
+	private void setRequestPath(RestfulHttpRequest request, URLMapping mapping) throws DefaultChannelInvalidConfigException {
+		if (mapping.getPath()!=null && mapping.getPathTransform()!=null) {
+			throw new DefaultChannelInvalidConfigException("Cannot specify both path and pathTransform");
+		}
+		
+		String path = null;
+		
+		if (mapping.getPathTransform()!=null) {
+			path = transformPath(request.getPath(), mapping.getPathTransform());
+		} else {
+			path = mapping.getPath();
+		}
+
+		request.setPath(path);
+	}
+	
+	private String transformPath(String path, String sPattern) throws DefaultChannelInvalidConfigException {
+		//replace all \/'s with a temporary ~ so that we don't split on those
+		String pattern = sPattern.replaceAll("\\\\/", "~");
+		String[] sub = pattern.split("/");
+
+		if (sub.length<2 || !sub[0].equals("s")) {
+			throw new DefaultChannelInvalidConfigException("Malformed pathTransform expression. Expected \"s/from/to\"");
+		}
+			
+		String from = sub[1].replaceAll("~", "/");
+		String to = (sub.length>2) ? sub[2] : "";
+		to = to.replaceAll("~", "/");
+
+		return path.replaceAll(from, to);
+	}
+		
 
 	protected URLMapping findURLMapping(Scheme scheme, String actualPath) {
 		for (URLMapping mapping : mappings) {
@@ -108,6 +155,8 @@ public class DefaultChannelComponent implements Callable {
 		private String password;
 		private String authType;
 		private String allowUnsecured;
+		private String path;
+		private String pathTransform;
 
 		@Override
 		public boolean equals(Object obj) {
@@ -178,6 +227,22 @@ public class DefaultChannelComponent implements Callable {
 
 		public void setAllowUnsecured(String allowUnsecured) {
 			this.allowUnsecured = allowUnsecured;
+		}
+
+		public String getPath() {
+			return path;
+		}
+
+		public void setPath(String path) {
+			this.path = path;
+		}
+
+		public String getPathTransform() {
+			return pathTransform;
+		}
+
+		public void setPathTransform(String pathTransform) {
+			this.pathTransform = pathTransform;
 		}
 	}
 

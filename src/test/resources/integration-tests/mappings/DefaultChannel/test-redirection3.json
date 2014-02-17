@@ -1,0 +1,9 @@
+{
+	"request": {
+		"urlPattern": "/redirection2/.+",
+		"method": "GET"
+	},
+	"response": {
+		"status": 200
+	}
+}
