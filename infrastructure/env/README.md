@@ -14,7 +14,7 @@ Stand-alone script usage:
 	located in `src/main/resources`, as well as a copy of the OpenHIM build:
 	
 	```
-	openhim-2.1.0.zip   (download from the releases page of the openHIM GIT repository)
+	openhim-2.2.0.zip   (download from the releases page of the openHIM GIT repository)
 	```
 *	Install puppet: `sudo apt-get install puppet`
 *	Install the example openldap puppet module (https://github.com/example42/puppet-modules/tree/master/openldap)
