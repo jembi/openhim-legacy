@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="defaultchannel">
-    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="c11d77a4-fad6-4be7-9a73-10fba6c5c8e8">
+    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="df4fa734-d4c2-4020-9b2d-ae86c9754c0c">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -51,7 +51,7 @@
             <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="message" value="Routing message with path #[header:OUTBOUND:http.path] to #[header:OUTBOUND:http.host]:#[header:OUTBOUND:http.port] using HTTP method #[header:OUTBOUND:http.method] Full message: #[groovy: message.toString();]"/>
+                    <property name="message" value="Routing message with path #[header:OUTBOUND:path] to #[header:OUTBOUND:http.host]:#[header:OUTBOUND:http.port] using HTTP method #[header:OUTBOUND:http.method] Full message: #[groovy: message.toString();]"/>
                     <property name="category"/>
                     <property name="level" value="INFO"/>
                     <property name="auxiliary;index" value="5"/>
@@ -75,7 +75,7 @@
                     <property name="transformer-refs"/>
                     <property name="httpLabel"/>
                     <property name="address"/>
-                    <property name="path" value="#[header:OUTBOUND:http.path]"/>
+                    <property name="path" value="#[header:OUTBOUND:path]"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
                     <property name="method" value="POST"/>
