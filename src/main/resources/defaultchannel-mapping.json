@@ -47,5 +47,23 @@
 		"username": "test",
 		"password": "password",
 		"allowUnsecured": "true"
+	},
+	{
+		"urlPattern": "test/path/redirection",
+		"path": "redirected",
+		"host": "localhost",
+		"port": 8080
+	},
+	{
+		"urlPattern": "test/redirection/.+",
+		"pathTransform": "s/foo/bar",
+		"host": "localhost",
+		"port": 8080
+	},
+	{
+		"urlPattern": "test/redirection2/.+",
+		"pathTransform": "s/test\\//",
+		"host": "localhost",
+		"port": 8080
 	}
 ]

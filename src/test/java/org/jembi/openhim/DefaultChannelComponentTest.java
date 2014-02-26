@@ -1,13 +1,16 @@
 package org.jembi.openhim;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 
 import org.jembi.openhim.DefaultChannelComponent.URLMapping;
 import org.jembi.openhim.RestfulHttpRequest.Scheme;
+import org.jembi.openhim.exception.DefaultChannelInvalidConfigException;
 import org.junit.Test;
+import org.mule.api.MuleMessage;
+import org.mule.api.transport.PropertyScope;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -100,5 +103,50 @@ public class DefaultChannelComponentTest {
 		//secure by default
 		URLMapping mapping2 = dcc.findURLMapping(Scheme.HTTP, "test/sample/123");
 		assertEquals(null, mapping2);
+	}
+	
+	@Test
+	public void test_pathRedirection_pathConstant() throws DefaultChannelInvalidConfigException, JsonParseException, JsonMappingException, IOException {
+		test_pathRedirection("test/path/redirection", "redirected");
+	}
+
+	@Test
+	public void test_pathRedirection_transform() throws DefaultChannelInvalidConfigException, JsonParseException, JsonMappingException, IOException {
+		test_pathRedirection("test/redirection/foo", "test/redirection/bar");
+		test_pathRedirection("test/redirection2/123", "redirection2/123");
+	}
+	
+	private void test_pathRedirection(String path, String targetPath) throws JsonParseException, JsonMappingException, IOException, DefaultChannelInvalidConfigException {
+		DefaultChannelComponent dcc = new DefaultChannelComponent();
+		dcc.readMappings();
+
+		URLMapping mapping = dcc.findURLMapping(Scheme.HTTPS, path);
+		MuleMessage mockMsg = mock(MuleMessage.class);
+		RestfulHttpRequest req = new RestfulHttpRequest();
+		req.setPath(path);
+		
+		dcc.setMessagePropertiesFromMapping(req, mockMsg, mapping);
+		verify(mockMsg).setProperty(eq("http.host"), eq("localhost"), eq(PropertyScope.OUTBOUND));
+		verify(mockMsg).setProperty(eq("http.port"), eq("8080"), eq(PropertyScope.OUTBOUND));
+		verify(mockMsg).setProperty(eq("path"), eq(targetPath), eq(PropertyScope.OUTBOUND));
+	}
+	
+
+	@Test
+	public void test_pathRedirection_invalid() throws DefaultChannelInvalidConfigException, JsonParseException, JsonMappingException, IOException {
+		//cannot specify both path and pathTransform
+		
+		try {
+			DefaultChannelComponent dcc = new DefaultChannelComponent();
+			MuleMessage mockMsg = mock(MuleMessage.class);
+			URLMapping mapping = mock(URLMapping.class);
+
+			when(mapping.getPath()).thenReturn("path");
+			when(mapping.getPathTransform()).thenReturn("pathTransform");
+			dcc.setMessagePropertiesFromMapping(new RestfulHttpRequest(), mockMsg, mapping);
+			fail();
+		} catch (DefaultChannelInvalidConfigException ex) {
+			//expected
+		}
 	}
 }
