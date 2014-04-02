@@ -15,7 +15,7 @@ import org.mule.api.transport.PropertyScope;
 public class RestfulHttpRequestToHttpRequestTransformerTest {
 	
 	private MuleMessage msg;
-	private Map<String, String> sampleHttpHeaders;
+	private Map<String, Object> sampleHttpHeaders;
 	
 	public RestfulHttpRequestToHttpRequestTransformerTest() {
 		this.sampleHttpHeaders = new HashMap();
@@ -23,7 +23,7 @@ public class RestfulHttpRequestToHttpRequestTransformerTest {
 		this.sampleHttpHeaders.put("Content-Type", "application/xml");
 	}
 	
-	private void setupMocks(String body, String uuid, Map<String, String> httpHeaders, String httpMethod, String path) throws Exception {
+	private void setupMocks(String body, String uuid, Map<String, Object> httpHeaders, String httpMethod, String path) throws Exception {
 		
 		RestfulHttpRequest req = new RestfulHttpRequest();
 		req.setHttpMethod(httpMethod);
@@ -64,7 +64,7 @@ public class RestfulHttpRequestToHttpRequestTransformerTest {
 		
 	}
 	
-	private MuleMessage executeTestCase(String body, String uuid, Map<String, String> httpHeaders, String httpMethod, String path) throws Exception {
+	private MuleMessage executeTestCase(String body, String uuid, Map<String, Object> httpHeaders, String httpMethod, String path) throws Exception {
 		setupMocks(body, uuid, httpHeaders, httpMethod, path);
 		RestfulHttpRequestToHttpRequestTransformer trans = new RestfulHttpRequestToHttpRequestTransformer();
 		MuleMessage msg = (MuleMessage) trans.transformMessage(this.msg, "UTF-8");

@@ -26,7 +26,7 @@ public class HttpResponseToRestfulHttpResponseTransformer extends
 			restRes.setBody(body);
 			String uuid = msg.getProperty("uuid", PropertyScope.SESSION);
 			restRes.setUuid(uuid);
-			restRes.setHttpHeaders((Map<String, String>) msg.getProperty("http.headers", PropertyScope.INBOUND));
+			restRes.setHttpHeaders((Map<String, Object>) msg.getProperty("http.headers", PropertyScope.INBOUND));
 		} catch (Exception e) {
 			throw new TransformerException(this, e);
 		}
