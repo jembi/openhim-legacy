@@ -25,7 +25,7 @@ public class RestfulHttpRequest implements Serializable {
 	// automatically extracted when a url is set
 	private Map<String, String> requestParams = new HashMap<String, String>();
 	
-	private Map<String, String> httpHeaders = new HashMap<String, String>();
+	private Map<String, Object> httpHeaders = new HashMap<String, Object>();
 
 	// HTTPMethods
 	public static String HTTP_GET = "GET";
@@ -103,11 +103,11 @@ public class RestfulHttpRequest implements Serializable {
 		this.httpMethod = httpMethod;
 	}
 	
-	public Map<String, String> getHttpHeaders() {
+	public Map<String, Object> getHttpHeaders() {
 		return httpHeaders;
 	}
 
-	public void setHttpHeaders(Map<String, String> httpHeaders) {
+	public void setHttpHeaders(Map<String, Object> httpHeaders) {
 		this.httpHeaders = httpHeaders;
 	}
 
@@ -143,8 +143,8 @@ public class RestfulHttpRequest implements Serializable {
 			sb.append("	httpHeaders: null\n");
 		} else {
 			sb.append("	httpHeaders: [\n");
-			for (String key : httpHeaders.keySet()) {
-				String value = httpHeaders.get(key);
+			for (Object key : httpHeaders.keySet()) {
+				Object value = httpHeaders.get(key);
 				sb.append("		" + key + ": " + value + "\n");
 			}
 			sb.append("	]");

@@ -18,7 +18,7 @@ public class RestfulHttpResponse implements Serializable {
 	
 	private int httpStatus;
 	private String body;
-	private Map<String, String> httpHeaders = new HashMap<String, String>();
+	private Map<String, Object> httpHeaders = new HashMap<String, Object>();
 	
 	public String getUuid() {
 		return uuid;
@@ -64,8 +64,8 @@ public class RestfulHttpResponse implements Serializable {
 			sb.append("	httpHeaders: null\n");
 		} else {
 			sb.append("	httpHeaders: [\n");
-			for (String key : httpHeaders.keySet()) {
-				String value = httpHeaders.get(key);
+			for (Object key : httpHeaders.keySet()) {
+				Object value = httpHeaders.get(key);
 				sb.append("		" + key + ": " + value + "\n");
 			}
 			sb.append("	]");
@@ -76,11 +76,11 @@ public class RestfulHttpResponse implements Serializable {
 		return sb.toString();
 	}
 
-	public Map<String, String> getHttpHeaders() {
+	public Map<String, Object> getHttpHeaders() {
 		return httpHeaders;
 	}
 
-	public void setHttpHeaders(Map<String, String> httpHeaders) {
+	public void setHttpHeaders(Map<String, Object> httpHeaders) {
 		this.httpHeaders = httpHeaders;
 	}
 
