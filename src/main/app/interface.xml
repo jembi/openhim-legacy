@@ -58,6 +58,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         <response>
             <custom-transformer class="org.jembi.openhim.transformers.RestfulHttpResponseToHttpResponseTransformer" doc:name="RestfulHttpResponseToHttpResponseTransformer"/>
             <logger message="Transaction response sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Logger"/>
+            <http:response-builder status="#[header:OUTBOUND:http.status]" doc:name="HTTP Response Builder"/>
         </response>
         <choice>
        		<when expression="${interface.enable.basicauth}" evaluator="groovy">
@@ -77,6 +78,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         <response>
             <custom-transformer class="org.jembi.openhim.transformers.RestfulHttpResponseToHttpResponseTransformer" doc:name="RestfulHttpResponseToHttpResponseTransformer"/>
             <logger message="Transaction response sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Logger"/>
+            <http:response-builder status="#[header:OUTBOUND:http.status]" doc:name="HTTP Response Builder"/>
         </response>
         <logger message="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="INFO" doc:name="Log raw message"/>
         <custom-transformer class="org.jembi.openhim.transformers.HttpRequestToRestfulHttpRequestTransformer" doc:name="HttpRequestToRestfulHttpRequestTransformer"/>
