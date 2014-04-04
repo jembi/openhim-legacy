@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="defaultchannel">
-    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="df4fa734-d4c2-4020-9b2d-ae86c9754c0c">
+    <flow SubFlow="false" name="defaultchannelFlow1" entity-id="53bb3617-def3-4b22-9dc5-674baf6057bc">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -33,9 +33,16 @@
             <pattern name="Default Channel config" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
+                    <property name="ref" value=""/>
+                    <property name="updated"/>
                     <property name="class" value="org.jembi.openhim.DefaultChannelComponent"/>
                     <property name="auxiliary;index" value="3"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;280262855">
+                        <property name="ref" value=""/>
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
                 </properties>
+                <description></description>
             </pattern>
             <pattern name="Request transformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#2">
                 <graphicalData x="0" y="0" width="0" height="0"/>
@@ -47,15 +54,18 @@
                     <property name="auxiliary;index" value="4"/>
                     <property name="mimeType"/>
                 </properties>
+                <description></description>
             </pattern>
             <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="message" value="Routing message with path #[header:OUTBOUND:path] to #[header:OUTBOUND:http.host]:#[header:OUTBOUND:http.port] using HTTP method #[header:OUTBOUND:http.method] Full message: #[groovy: message.toString();]"/>
-                    <property name="category"/>
+                    <property name="message" value="Routing message with path #[header:OUTBOUND:path] to #[header:OUTBOUND:http.host]:#[header:OUTBOUND:http.port] using HTTP method #[header:OUTBOUND:http.method]"/>
+                    <property name="category" value=""/>
                     <property name="level" value="INFO"/>
+                    <property name="updated"/>
                     <property name="auxiliary;index" value="5"/>
                 </properties>
+                <description></description>
             </pattern>
             <endpoint direction="Outbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
@@ -101,10 +111,12 @@
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="message" value="Returning response #[groovy: message.payload.toString();]"/>
-                    <property name="category"/>
-                    <property name="level" value="INFO"/>
+                    <property name="category" value=""/>
+                    <property name="level" value="DEBUG"/>
+                    <property name="updated"/>
                     <property name="auxiliary;index" value="8"/>
                 </properties>
+                <description></description>
             </pattern>
             <scope name="Choice Exception Strategy" type="http://www.mulesoft.org/schema/mule/core/choice-exception-strategy" entity-id="Choice Exception Strategy#1">
                 <properties>
@@ -139,15 +151,17 @@
             <property name="encoding"/>
             <property name="auxiliary;index" value="12"/>
             <property name="mimeType"/>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
-                <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
-                <property name="engine" value="Groovy"/>
-                <property name="auxiliary;index" value="13"/>
-                <property name="auxiliary;wrapIn" value="13"/>
-            </property-collection>
             <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
                 <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
                 <property name="engine" value="Groovy"/>
+                <property name="isProcessed$$$$" value="true"/>
+                <property name="auxiliary;index" value="13"/>
+                <property name="auxiliary;wrapIn" value="13"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
+                <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;URL Mapping could not be found for this message&quot;);&#xA;&#xA;return res;"/>
+                <property name="engine" value="Groovy"/>
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="13"/>
                 <property name="auxiliary;wrapIn" value="13"/>
             </property-collection>
@@ -183,15 +197,17 @@
             <property name="encoding"/>
             <property name="auxiliary;index" value="16"/>
             <property name="mimeType"/>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
-                <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;A server error occured: &quot; + exception.getMessage());&#xA;&#xA;return res;"/>
-                <property name="engine" value="Groovy"/>
-                <property name="auxiliary;index" value="17"/>
-                <property name="auxiliary;wrapIn" value="17"/>
-            </property-collection>
             <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
                 <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;A server error occured: &quot; + exception.getMessage());&#xA;&#xA;return res;"/>
                 <property name="engine" value="Groovy"/>
+                <property name="isProcessed$$$$" value="true"/>
+                <property name="auxiliary;index" value="17"/>
+                <property name="auxiliary;wrapIn" value="17"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
+                <property name="text" value="import org.jembi.openhim.*;&#xA;&#xA;RestfulHttpResponse res = new RestfulHttpResponse();&#xA;res.setHttpStatus(500);&#xA;res.setBody(&quot;A server error occured: &quot; + exception.getMessage());&#xA;&#xA;return res;"/>
+                <property name="engine" value="Groovy"/>
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="17"/>
                 <property name="auxiliary;wrapIn" value="17"/>
             </property-collection>

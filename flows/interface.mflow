@@ -28,18 +28,21 @@
             <property name="depends-on"/>
             <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;0">
                 <property name="value" value="${ldap.url}"/>
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="5"/>
                 <property name="auxiliary;wrapIn" value="5"/>
             </property-collection>
             <property-collection name="@http://www.springframework.org/schema/beans/property;1">
                 <property name="name" value="userDn"/>
                 <property name="value" value="${ldap.admin.userdn}"/>
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="6"/>
                 <property name="auxiliary;wrapIn" value="6"/>
             </property-collection>
             <property-collection name="@http://www.springframework.org/schema/beans/property;2">
                 <property name="name" value="password"/>
                 <property name="value" value="${ldap.admin.password}"/>
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="7"/>
                 <property name="auxiliary;wrapIn" value="7"/>
             </property-collection>
@@ -67,27 +70,33 @@
             <property name="auxiliary;index" value="8"/>
             <property name="depends-on"/>
             <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;0">
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="9"/>
                 <property name="auxiliary;wrapIn" value="9"/>
                 <property-collection name="@http://www.springframework.org/schema/beans/bean;1">
                     <property name="id" value="BindAuthenticatorBean"/>
                     <property name="class" value="org.springframework.security.ldap.authentication.BindAuthenticator"/>
+                    <property name="isProcessed$$$$" value="true"/>
                     <property name="auxiliary;index" value="10"/>
                     <property name="auxiliary;wrapIn" value="10"/>
                     <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;1">
                         <property name="ref" value="contextSource"/>
+                        <property name="isProcessed$$$$" value="true"/>
                         <property name="auxiliary;index" value="11"/>
                         <property name="auxiliary;wrapIn" value="11"/>
                     </property-collection>
                     <property-collection name="@http://www.springframework.org/schema/beans/property;2">
                         <property name="name" value="userDnPatterns"/>
+                        <property name="isProcessed$$$$" value="true"/>
                         <property name="auxiliary;index" value="12"/>
                         <property name="auxiliary;wrapIn" value="12"/>
                         <property-collection name="@http://www.springframework.org/schema/beans/list;1">
+                            <property name="isProcessed$$$$" value="true"/>
                             <property name="auxiliary;index" value="13"/>
                             <property name="auxiliary;wrapIn" value="13"/>
                             <property-collection name="@http://www.springframework.org/schema/beans/value;1">
 <property name="" value="uid={0},ou=himusers"/>
+<property name="isProcessed$$$$" value="true"/>
 <property name="auxiliary;index" value="14"/>
 <property name="auxiliary;wrapIn" value="14"/>
                             </property-collection>
@@ -96,26 +105,31 @@
                 </property-collection>
             </property-collection>
             <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;1">
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="15"/>
                 <property name="auxiliary;wrapIn" value="15"/>
                 <property-collection name="@http://www.springframework.org/schema/beans/bean;1">
                     <property name="id" value="DefaultLdapAuthoritiesPopulatorBean"/>
                     <property name="class" value="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator"/>
+                    <property name="isProcessed$$$$" value="true"/>
                     <property name="auxiliary;index" value="16"/>
                     <property name="auxiliary;wrapIn" value="16"/>
-                    <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;2">
-                        <property name="value" value="ou=groups"/>
-                        <property name="auxiliary;index" value="18"/>
-                        <property name="auxiliary;wrapIn" value="18"/>
-                    </property-collection>
                     <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;1">
                         <property name="ref" value="contextSource"/>
+                        <property name="isProcessed$$$$" value="true"/>
                         <property name="auxiliary;index" value="17"/>
                         <property name="auxiliary;wrapIn" value="17"/>
+                    </property-collection>
+                    <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;2">
+                        <property name="value" value="ou=groups"/>
+                        <property name="isProcessed$$$$" value="true"/>
+                        <property name="auxiliary;index" value="18"/>
+                        <property name="auxiliary;wrapIn" value="18"/>
                     </property-collection>
                     <property-collection name="@http://www.springframework.org/schema/beans/property;3">
                         <property name="name" value="groupRoleAttribute"/>
                         <property name="value" value="ou"/>
+                        <property name="isProcessed$$$$" value="true"/>
                         <property name="auxiliary;index" value="19"/>
                         <property name="auxiliary;wrapIn" value="19"/>
                     </property-collection>
@@ -146,12 +160,15 @@
             <property name="depends-on"/>
             <property-collection name="@http://www.springframework.org/schema/beans/property;0">
                 <property name="name" value="providers"/>
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="21"/>
                 <property name="auxiliary;wrapIn" value="21"/>
                 <property-collection name="@http://www.springframework.org/schema/beans/list;1">
+                    <property name="isProcessed$$$$" value="true"/>
                     <property name="auxiliary;index" value="22"/>
                     <property name="auxiliary;wrapIn" value="22"/>
                     <property-collection name="@http://www.springframework.org/schema/beans/ref;1">
+                        <property name="isProcessed$$$$" value="true"/>
                         <property name="local" value="authenticationProvider"/>
                         <property name="auxiliary;index" value="23"/>
                         <property name="auxiliary;wrapIn" value="23"/>
@@ -189,6 +206,7 @@
             <property-collection name="@http://www.mulesoft.org/schema/mule/https/tls-key-store;0">
                 <property name="path" value="${cert.keystore}"/>
                 <property name="storePassword" value="${cert.storepassword}"/>
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="keyPassword" value="${cert.keypassword}"/>
                 <property name="auxiliary;index" value="25"/>
                 <property name="auxiliary;wrapIn" value="25"/>
@@ -197,20 +215,29 @@
                 <property name="path" value="${cert.truststore}"/>
                 <property name="storePassword" value="${cert.truststore.password}"/>
                 <property name="requireClientAuthentication" value="${cert.client.auth}"/>
+                <property name="isProcessed$$$$" value="true"/>
                 <property name="auxiliary;index" value="26"/>
                 <property name="auxiliary;wrapIn" value="26"/>
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="RESTEntryPoint-HTTPS" entity-id="74e8a5d0-4f1d-445a-8e49-c6849f641399">
+    <flow SubFlow="false" name="RESTEntryPoint-HTTPS" entity-id="fbe48be8-dcc4-4017-a25d-085b39cdcefa">
         <properties>
-            <property name="processingStrategy"/>
-            <property name="processingStrategy2"/>
-            <property name="initialState"/>
-            <property name="bussinessEventsLabel"/>
+            <property name="id" value=""/>
+            <property name="updated"/>
+            <property name="auxiliary;erased;initialState" value="true"/>
+            <property name="initialState" value=""/>
+            <property name="processingStrategy2" value=""/>
+            <property name="bussinessEventsLabel" value=""/>
             <property name="auxiliary;index" value="27"/>
-            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;erased;processingStrategy2" value="true"/>
+            <property name="tracking:enable-default-events" value="false"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/tracking/transaction;1569273021">
+                <property name="id" value=""/>
+                <property name="isProcessed$$$$" value="true"/>
+            </property-collection>
         </properties>
+        <description></description>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
             <graphicalData x="0" y="0" width="0" height="0"/>
             <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
@@ -263,7 +290,7 @@
                             <properties>
 <property name="message" value="Transaction response sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]"/>
 <property name="category"/>
-<property name="level" value="INFO"/>
+<property name="level" value="DEBUG"/>
 <property name="auxiliary;index" value="31"/>
                             </properties>
                         </pattern>
@@ -273,27 +300,43 @@
             <splitter index="32" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property-collection name="f36e3d63-4510-465a-a7be-15e80c059129">
+                    <property name=";INDEX" value="32"/>
+                    <property-collection name="294bf778-f9ea-46b2-816e-20cf8e092856">
                         <property name="choice.expression" value="${interface.enable.basicauth}"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="${interface.enable.basicauth}"/>
                             <property name="evaluator" value="groovy"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="4094e926-93fd-4906-a036-e05d01ce7928">
+                    <property-collection name="cea23fd7-c51f-479d-bf9e-36c0631ff84f">
                         <property name="choice.otherwise" value="true"/>
                         <property-collection name="choice.attributes"/>
                     </property-collection>
                 </properties>
-                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
+                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
+                    <properties>
+                        <property name=";INDEX" value="32"/>
+                        <property-collection name="294bf778-f9ea-46b2-816e-20cf8e092856">
+                            <property name="choice.expression" value="${interface.enable.basicauth}"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="${interface.enable.basicauth}"/>
+<property name="evaluator" value="groovy"/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="cea23fd7-c51f-479d-bf9e-36c0631ff84f">
+                            <property name="choice.otherwise" value="true"/>
+                            <property-collection name="choice.attributes"/>
+                        </property-collection>
+                    </properties>
+                </pattern>
                 <compartment entity-id="compartment#2">
-                    <lane hadOnlyOneElement="false" index="34" isChoiceOtherwiseLane="false" entity-id="f36e3d63-4510-465a-a7be-15e80c059129">
+                    <lane hadOnlyOneElement="false" index="34" isChoiceOtherwiseLane="false" entity-id="294bf778-f9ea-46b2-816e-20cf8e092856">
                         <unknown description="false" index="34" entity-id="unknown#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <content>&lt;mule-ss:http-security-filter xmlns:mule-ss=&quot;http://www.mulesoft.org/schema/mule/spring-security&quot; realm=&quot;mule-realm&quot;/&gt;</content>
                         </unknown>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="36" isChoiceOtherwiseLane="true" entity-id="4094e926-93fd-4906-a036-e05d01ce7928">
+                    <lane hadOnlyOneElement="false" index="36" isChoiceOtherwiseLane="true" entity-id="cea23fd7-c51f-479d-bf9e-36c0631ff84f">
                         <pattern name="Log message" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
@@ -311,7 +354,7 @@
                 <properties>
                     <property name="message" value="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]"/>
                     <property name="category"/>
-                    <property name="level" value="INFO"/>
+                    <property name="level" value="DEBUG"/>
                     <property name="auxiliary;index" value="37"/>
                 </properties>
             </pattern>
@@ -331,9 +374,20 @@
                 <properties>
                     <property name="message" value="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]"/>
                     <property name="category"/>
-                    <property name="level" value="INFO"/>
+                    <property name="level" value="DEBUG"/>
                     <property name="auxiliary;index" value="39"/>
                 </properties>
+            </pattern>
+            <pattern name="Log" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#5">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="message" value="(HTTPS) Received message on path #[groovy: message.payload.buildUrlWithRequestParams();]"/>
+                    <property name="category" value=""/>
+                    <property name="level" value="INFO"/>
+                    <property name="updated"/>
+                    <property name="auxiliary;index" value="40"/>
+                </properties>
+                <description></description>
             </pattern>
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Queue message" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
@@ -348,7 +402,7 @@
                     <property name="path" value="messagePersistanceQueue"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="auxiliary;index" value="40"/>
+                    <property name="auxiliary;index" value="41"/>
                     <property name="responseTimeout" value="10000"/>
                     <property name="mimeType" value="text/plain"/>
                     <property name="connector-ref"/>
@@ -356,13 +410,13 @@
             </endpoint>
         </lane>
     </flow>
-    <flow SubFlow="false" name="RESTEntryPoint-HTTP" entity-id="ead064f8-9a78-48d9-89e6-0dc76a86cad2">
+    <flow SubFlow="false" name="RESTEntryPoint-HTTP" entity-id="190ddc7b-07fb-442c-84f9-7a80493e1434">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="41"/>
+            <property name="auxiliary;index" value="42"/>
             <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#3">
@@ -390,13 +444,13 @@
                     <property name="responseTransformer-refs"/>
                     <property name="method"/>
                     <property name="user"/>
-                    <property name="auxiliary;index" value="42"/>
+                    <property name="auxiliary;index" value="43"/>
                     <property name="responseTimeout"/>
                     <property name="mimeType"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
-            <response index="43" entity-id="response#2">
+            <response index="44" entity-id="response#2">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <compartment entity-id="compartment#3">
                     <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#4">
@@ -407,29 +461,29 @@
 <property name="ignoreBadInput"/>
 <property name="encoding"/>
 <property name="class" value="org.jembi.openhim.transformers.RestfulHttpResponseToHttpResponseTransformer"/>
-<property name="auxiliary;index" value="44"/>
+<property name="auxiliary;index" value="45"/>
 <property name="mimeType"/>
                             </properties>
                         </pattern>
-                        <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#5">
+                        <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#6">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
 <property name="message" value="Transaction response sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]"/>
 <property name="category"/>
-<property name="level" value="INFO"/>
-<property name="auxiliary;index" value="45"/>
+<property name="level" value="DEBUG"/>
+<property name="auxiliary;index" value="46"/>
                             </properties>
                         </pattern>
                     </lane>
                 </compartment>
             </response>
-            <pattern name="Log raw message" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#6">
+            <pattern name="Log raw message" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#7">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="message" value="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]"/>
                     <property name="category"/>
-                    <property name="level" value="INFO"/>
-                    <property name="auxiliary;index" value="46"/>
+                    <property name="level" value="DEBUG"/>
+                    <property name="auxiliary;index" value="47"/>
                 </properties>
             </pattern>
             <pattern name="HttpRequestToRestfulHttpRequestTransformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#4">
@@ -439,18 +493,29 @@
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
                     <property name="class" value="org.jembi.openhim.transformers.HttpRequestToRestfulHttpRequestTransformer"/>
-                    <property name="auxiliary;index" value="47"/>
+                    <property name="auxiliary;index" value="48"/>
                     <property name="mimeType"/>
                 </properties>
             </pattern>
-            <pattern name="Log Structured Message" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#7">
+            <pattern name="Log Structured Message" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#8">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="message" value="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]"/>
                     <property name="category"/>
-                    <property name="level" value="INFO"/>
-                    <property name="auxiliary;index" value="48"/>
+                    <property name="level" value="DEBUG"/>
+                    <property name="auxiliary;index" value="49"/>
                 </properties>
+            </pattern>
+            <pattern name="Log" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#9">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="message" value="(HTTP) Received message on path: #[groovy: message.payload.buildUrlWithRequestParams();]"/>
+                    <property name="category" value=""/>
+                    <property name="level" value="INFO"/>
+                    <property name="updated"/>
+                    <property name="auxiliary;index" value="50"/>
+                </properties>
+                <description></description>
             </pattern>
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Queue message" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#2">
                 <graphicalData x="0" y="0" width="0" height="0"/>
@@ -465,7 +530,7 @@
                     <property name="path" value="messagePersistanceQueue"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="auxiliary;index" value="49"/>
+                    <property name="auxiliary;index" value="51"/>
                     <property name="responseTimeout" value="10000"/>
                     <property name="mimeType" value="text/plain"/>
                     <property name="connector-ref"/>
