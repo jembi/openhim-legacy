@@ -68,10 +68,10 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
        			<logger message="Mutual TLS auth is enabled, no basic auth details required" level="INFO" doc:name="Log message"/>
        		</otherwise>
        	</choice>
-        <logger message="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="DEBUG" doc:name="Log raw message"/>
+        <logger message="Message received at entry point #[header:INBOUND:http.context.uri]#[header:INBOUND:http.request]" level="INFO" doc:name="Log"/>
+        <logger message="Message payload #[groovy:return message.payload.toString();]" level="DEBUG" doc:name="Log raw message"/>
         <custom-transformer class="org.jembi.openhim.transformers.HttpRequestToRestfulHttpRequestTransformer" doc:name="HttpRequestToRestfulHttpRequestTransformer"/>
         <logger message="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]" level="DEBUG" doc:name="Log Structured Message"/>
-        <logger message="(HTTPS) Received message on path #[groovy: message.payload.buildUrlWithRequestParams();]" level="INFO" doc:name="Log"/>
         <vm:outbound-endpoint exchange-pattern="request-response" path="messagePersistanceQueue" responseTimeout="10000" mimeType="text/plain" doc:name="Queue message"/>
     </flow>
     <flow name="RESTEntryPoint-HTTP" doc:name="RESTEntryPoint-HTTP">
@@ -80,7 +80,8 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
             <custom-transformer class="org.jembi.openhim.transformers.RestfulHttpResponseToHttpResponseTransformer" doc:name="RestfulHttpResponseToHttpResponseTransformer"/>
             <logger message="Transaction response sent from entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="DEBUG" doc:name="Logger"/>
         </response>
-        <logger message="Message recieved at entry point: #[groovy:return message.toString();] with payload #[groovy:return message.payload.toString();]" level="DEBUG" doc:name="Log raw message"/>
+        <logger message="Message received at entry point #[header:INBOUND:http.context.uri]#[header:INBOUND:http.request]" level="INFO" doc:name="Log"/>
+        <logger message="Message payload #[groovy:return message.payload.toString();]" level="DEBUG" doc:name="Log raw message"/>
         <custom-transformer class="org.jembi.openhim.transformers.HttpRequestToRestfulHttpRequestTransformer" doc:name="HttpRequestToRestfulHttpRequestTransformer"/>
         <logger message="Structured message: #[groovy: message.payload.toString();] Full Message: #[groovy: message.toString();]" level="DEBUG" doc:name="Log Structured Message"/>
         <logger message="(HTTP) Received message on path: #[groovy: message.payload.buildUrlWithRequestParams();]" level="INFO" doc:name="Log"/>
