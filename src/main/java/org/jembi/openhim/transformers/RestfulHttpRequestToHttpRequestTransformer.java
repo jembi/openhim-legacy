@@ -42,7 +42,7 @@ public class RestfulHttpRequestToHttpRequestTransformer extends
 		if (auth!=null && !auth.isEmpty()) {
 			msg.setProperty("Authorization", auth, PropertyScope.OUTBOUND);
 		} else {
-			msg.setProperty("Authorization", null, PropertyScope.OUTBOUND);
+			msg.removeProperty("Authorization", PropertyScope.OUTBOUND);
 		}
 		
 		if (req.getHttpMethod().equals("PUT") || req.getHttpMethod().equals("POST")) {
