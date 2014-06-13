@@ -26,7 +26,7 @@ public class HttpRequestToRestfulHttpRequestTransformer extends
 		restMsg.setPath(url);
 		String httpMethod = (String) msg.getInboundProperty("http.method");
 		restMsg.setHttpMethod(httpMethod);
-		Map<String, String> httpHeaders = (Map<String, String>) msg.getInboundProperty("http.headers");
+		Map<String, Object> httpHeaders = (Map<String, Object>) msg.getInboundProperty("http.headers");
 		// set transaction uuid for outgoing http headers
 		httpHeaders.put(OPENHIM_TX_UUID, restMsg.getUuid());
 		restMsg.setHttpHeaders(httpHeaders);

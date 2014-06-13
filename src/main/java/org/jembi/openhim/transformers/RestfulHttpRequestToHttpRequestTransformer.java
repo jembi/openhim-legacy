@@ -37,6 +37,13 @@ public class RestfulHttpRequestToHttpRequestTransformer extends
 				msg.setProperty(header, req.getHttpHeaders().get(header), PropertyScope.OUTBOUND);
 			}
 		}
+
+		String auth = msg.getProperty("http.auth", PropertyScope.OUTBOUND);
+		if (auth!=null && !auth.isEmpty()) {
+			msg.setProperty("Authorization", auth, PropertyScope.OUTBOUND);
+		} else {
+			msg.removeProperty("Authorization", PropertyScope.OUTBOUND);
+		}
 		
 		if (req.getHttpMethod().equals("PUT") || req.getHttpMethod().equals("POST")) {
 			msg.setPayload(req.getBody());

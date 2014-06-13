@@ -75,7 +75,7 @@ public class DefaultChannelComponent implements Callable {
 		byte[] encodedBytes = Base64.encodeBase64((username + ":" + password).getBytes());
 		String authHeader = "Basic " + new String(encodedBytes);
 				
-		msg.setProperty("Authorization", authHeader, PropertyScope.OUTBOUND);
+		msg.setProperty("http.auth", authHeader, PropertyScope.OUTBOUND);
 	}
 	
 	private void setRequestPath(RestfulHttpRequest request, URLMapping mapping) throws DefaultChannelInvalidConfigException {
