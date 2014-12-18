@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/jembi/openhim.png?branch=develop)](https://travis-ci.org/jembi/openhim)
+[![Build Status](https://travis-ci.org/jembi/openhim-legacy.png?branch=develop)](https://travis-ci.org/jembi/openhim-legacy)
 
-:warning: **This project is no longer being supported. It has been superceded by a new and imporved tool that is written using [Node.js](http://nodejs.org/). It is now much simpler to configure routes dynamically and it should have some nice performance improvements.** You can find the new project here: https://github.com/jembi/openhim-core-js. There is also an advanced administration console that is used to configure the server. This can be found here: https://github.com/jembi/openhim-console.
+:warning: **This project is no longer being supported. It has been superceded by a new and improved tool that is written using [Node.js](http://nodejs.org/). It is now much simpler to configure routes dynamically and it should have some nice performance improvements.** You can find the new project here: https://github.com/jembi/openhim-core-js. There is also an advanced administration console that is used to configure the server. This can be found here: https://github.com/jembi/openhim-console.
 
 OpenHIM
 =======
